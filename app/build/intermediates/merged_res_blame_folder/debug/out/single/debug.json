@@ -1,0 +1,2810 @@
+[
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/menu_menu_rr.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/menu/menu_rr.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-mdpi_ic_nav_loc.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-mdpi/ic_nav_loc.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xxhdpi_btn_access.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xxhdpi/btn_access.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout-1080x720_activity_reader_details.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout-1080x720/activity_reader_details.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/mipmap-mdpi_app_icon.png.flat",
+        "source": "com.zebra.demo.app-main-35:/mipmap-mdpi/app_icon.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_activity_symbologies.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/activity_symbologies.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-mdpi_btn_inv1.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-mdpi/btn_inv1.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout-720x480_content_update_firmware.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout-720x480/content_update_firmware.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-hdpi_btn_locate1.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-hdpi/btn_locate1.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_padding_view.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/padding_view.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-hdpi_ic_nav_loc.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-hdpi/ic_nav_loc.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_app_bar_idc.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/app_bar_idc.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_drawer_header_scanner.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/drawer_header_scanner.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xhdpi_ic_reset_factory.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xhdpi/ic_reset_factory.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/navigation_nav_graph2.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/navigation/nav_graph2.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-hdpi_ic_drawer.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-hdpi/ic_drawer.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_fragment_profile.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/fragment_profile.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xhdpi_battery_50_75.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xhdpi/battery_50_75.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-anydpi_ic_btn_clear.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-anydpi/ic_btn_clear.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_custom_password.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/custom_password.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xhdpi_ic_btn_add.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xhdpi/ic_btn_add.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xxhdpi_ic_btn_clear.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xxhdpi/ic_btn_clear.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_dl_save.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/dl_save.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout-1080x720_fragment_rr.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout-1080x720/fragment_rr.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_bg_spinner_keyremap.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/bg_spinner_keyremap.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-hdpi_btn_access1.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-hdpi/btn_access1.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_app_bar_update_firmware.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/app_bar_update_firmware.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_factoryreset_fragment.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/factoryreset_fragment.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_fragment_camera_scan.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/fragment_camera_scan.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xhdpi_ic_export_config.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xhdpi/ic_export_config.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_ic_nav_rr.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/ic_nav_rr.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout-1080x720_activity_active_scanner.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout-1080x720/activity_active_scanner.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xxhdpi_battery_0.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xxhdpi/battery_0.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-mdpi_ic_battery_0.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-mdpi/ic_battery_0.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-mdpi_battery_50_75.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-mdpi/battery_50_75.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/menu_menu_main.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/menu/menu_main.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xhdpi_ic_nav_inv.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xhdpi/ic_nav_inv.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_battery_half.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/battery_half.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_fragment_antenna_settings.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/fragment_antenna_settings.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_dis_main_menu.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/dis_main_menu.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/mipmap-xxhdpi_ic_launcher_foreground.png.flat",
+        "source": "com.zebra.demo.app-main-35:/mipmap-xxhdpi/ic_launcher_foreground.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_content_sample_barcodes.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/content_sample_barcodes.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_batt_icon.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/batt_icon.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout-1080x720_content_asset_information.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout-1080x720/content_asset_information.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-mdpi_ic_nav_filter.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-mdpi/ic_nav_filter.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_app_bar_battery_statistics.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/app_bar_battery_statistics.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_readers_list_item.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/readers_list_item.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xxhdpi_btn_locate.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xxhdpi/btn_locate.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_fragment_inventory_settings.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/fragment_inventory_settings.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xhdpi_dpo_75_100.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xhdpi/dpo_75_100.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/mipmap-xxxhdpi_ic_supportedscanners.png.flat",
+        "source": "com.zebra.demo.app-main-35:/mipmap-xxxhdpi/ic_supportedscanners.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-hdpi_ic_reset_factory.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-hdpi/ic_reset_factory.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_connected_reader_background.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/connected_reader_background.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_activity_key_remap.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/activity_key_remap.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xhdpi_ic_nav_filter.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xhdpi/ic_nav_filter.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xxhdpi_ic_list_profiles.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xxhdpi/ic_list_profiles.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_fragment_dpo.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/fragment_dpo.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xxhdpi_ic_action_about.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xxhdpi/ic_action_about.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/mipmap-xhdpi_app_icon.png.flat",
+        "source": "com.zebra.demo.app-main-35:/mipmap-xhdpi/app_icon.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xxxhdpi_ic_export_config.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xxxhdpi/ic_export_config.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_ic_rfid_sled_round.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/ic_rfid_sled_round.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-hdpi_battery_25_50.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-hdpi/battery_25_50.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xxxhdpi_loggingicon.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xxxhdpi/loggingicon.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_app_icon.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/app_icon.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/xml_device_filter.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/xml/device_filter.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-mdpi_ic_list_profiles.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-mdpi/ic_list_profiles.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_content_beeper_actions.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/content_beeper_actions.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_ic_barcode_tab.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/ic_barcode_tab.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout-720x480_dis_main_menu.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout-720x480/dis_main_menu.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_activity_home_drawer.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/activity_home_drawer.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_multi_tag_locate_list_item.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/multi_tag_locate_list_item.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/mipmap-xhdpi_ic_action_next_item.png.flat",
+        "source": "com.zebra.demo.app-main-35:/mipmap-xhdpi/ic_action_next_item.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_upc.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/upc.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xhdpi_ic_action_refresh.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xhdpi/ic_action_refresh.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_tab_info.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/tab_info.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_ic_launcher.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/ic_launcher.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-mdpi_ic_btn_reset.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-mdpi/ic_btn_reset.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_actionbar_home.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/actionbar_home.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-hdpi_btn_sett1.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-hdpi/btn_sett1.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_connection_help_cs4070.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/connection_help_cs4070.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_ic_wifi.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/ic_wifi.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_battery_full.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/battery_full.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_drawer_list_item.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/drawer_list_item.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_activity_reader_details.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/activity_reader_details.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/mipmap-xxxhdpi_ic_launcher_round.png.flat",
+        "source": "com.zebra.demo.app-main-35:/mipmap-xxxhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/mipmap-xxhdpi_ic_supportedscanners.png.flat",
+        "source": "com.zebra.demo.app-main-35:/mipmap-xxhdpi/ic_supportedscanners.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xxhdpi_btn_filter.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xxhdpi/btn_filter.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_ic_clear.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/ic_clear.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_content_symbologies.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/content_symbologies.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_app_bar_beeper_actions.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/app_bar_beeper_actions.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xxhdpi_dpo_75_100.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xxhdpi/dpo_75_100.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_custom_dialog.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/custom_dialog.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-mdpi_ic_nav_rr.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-mdpi/ic_nav_rr.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-mdpi_action_search.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-mdpi/action_search.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_paired_reader_listbackground.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/paired_reader_listbackground.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-mdpi_ic_nav_access.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-mdpi/ic_nav_access.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xxhdpi_settings_antenna.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xxhdpi/settings_antenna.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_ic_arrow_down.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/ic_arrow_down.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xxhdpi_profiles.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xxhdpi/profiles.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/mipmap-hdpi_ic_action_new.png.flat",
+        "source": "com.zebra.demo.app-main-35:/mipmap-hdpi/ic_action_new.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xxhdpi_ic_stat_notify_msg.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xxhdpi/ic_stat_notify_msg.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_app_bar_activescanner.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/app_bar_activescanner.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/mipmap-xxhdpi_ic_action_about.png.flat",
+        "source": "com.zebra.demo.app-main-35:/mipmap-xxhdpi/ic_action_about.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xxhdpi_title_antn.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xxhdpi/title_antn.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_ic_tap_and_pair.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/ic_tap_and_pair.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_dialog_plugin_path_change.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/dialog_plugin_path_change.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xxhdpi_settings_regulatory.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xxhdpi/settings_regulatory.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_app_bar_vibration_feedback.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/app_bar_vibration_feedback.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xxhdpi_settings_management.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xxhdpi/settings_management.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_dialog_pair_operations_help.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/dialog_pair_operations_help.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_logger_fragment.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/logger_fragment.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_ic_report.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/ic_report.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-mdpi_dpo_50_75.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-mdpi/dpo_50_75.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_discover_activity_layout.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/discover_activity_layout.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_app_bar_led_control.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/app_bar_led_control.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/raw_configparams.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/raw/configparams.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_content_vibration_feedback.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/content_vibration_feedback.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_ic_wifi_lock.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/ic_wifi_lock.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_ic_disabled.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/ic_disabled.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xhdpi_ic_action_about.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xhdpi/ic_action_about.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_app_icon_medium.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/app_icon_medium.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_layout_wifipassword.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/layout_wifipassword.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xxhdpi_btn_inv.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xxhdpi/btn_inv.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xhdpi_ic_nav_access.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xhdpi/ic_nav_access.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xxhdpi_app_icon.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xxhdpi/app_icon.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xxxhdpi_ic_logging.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xxxhdpi/ic_logging.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_fragment_pre_filter_simple_content.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/fragment_pre_filter_simple_content.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-mdpi_ic_report.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-mdpi/ic_report.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xxxhdpi_ic_btn_reset.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xxxhdpi/ic_btn_reset.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_ic_battery_statics.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/ic_battery_statics.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_activity_scan_speed_analytics.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/activity_scan_speed_analytics.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xxhdpi_battery_25_50.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xxhdpi/battery_25_50.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_app_bar_scale.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/app_bar_scale.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-mdpi_ic_nav_sett.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-mdpi/ic_nav_sett.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_rounded_rect_background.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/rounded_rect_background.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_ic_btn_reset.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/ic_btn_reset.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_btn_rr.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/btn_rr.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_background.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/background.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/xml_nfc_tech_filter.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/xml/nfc_tech_filter.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-hdpi_btn_sett.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-hdpi/btn_sett.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_ic_disabled_1.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/ic_disabled_1.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_ic_action_help.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/ic_action_help.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-mdpi_ic_action_about.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-mdpi/ic_action_about.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xhdpi_btn_locate1.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xhdpi/btn_locate1.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_zebra_logo_white_small.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/zebra_logo_white_small.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xxhdpi_battery_0_25.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xxhdpi/battery_0_25.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-hdpi_bc_icon.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-hdpi/bc_icon.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_list_available_device_layout.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/list_available_device_layout.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_tab_barcode.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/tab_barcode.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_ic_logging.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/ic_logging.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_activity_beeper_settings.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/activity_beeper_settings.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_activity_main.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/activity_main.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xhdpi_action_search.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xhdpi/action_search.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_dl_ststp.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/dl_ststp.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_fragment_advancedoptionitem_list.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/fragment_advancedoptionitem_list.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_activity_search_results.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/activity_search_results.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-hdpi_ic_btn_clear.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-hdpi/ic_btn_clear.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_activity_supported_scanners.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/activity_supported_scanners.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_btn_sett.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/btn_sett.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/menu_connected_options_menu.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/menu/connected_options_menu.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_fragment_second.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/fragment_second.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_btn_inv.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/btn_inv.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xxhdpi_ic_nav_sett.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xxhdpi/ic_nav_sett.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_activity_active_scanner.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/activity_active_scanner.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xhdpi_ic_btn_clear.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xhdpi/ic_btn_clear.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-mdpi_ic_action_new.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-mdpi/ic_action_new.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_ic_wifi_0.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/ic_wifi_0.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xhdpi_ic_nav_rr.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xhdpi/ic_nav_rr.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_activity_static_ipconfig.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/activity_static_ipconfig.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/menu_menu_scan_settings.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/menu/menu_scan_settings.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_ic_action_refresh.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/ic_action_refresh.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xxhdpi_settings_tag_reporting.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xxhdpi/settings_tag_reporting.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xxhdpi_title_rdl.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xxhdpi/title_rdl.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/menu_home.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/menu/home.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_white_divider.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/white_divider.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_activity_pairing_instructions_rfd8500.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/activity_pairing_instructions_rfd8500.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_ic_btn_add.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/ic_btn_add.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_dialog_rename_reader.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/dialog_rename_reader.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-hdpi_ic_play_stop.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-hdpi/ic_play_stop.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_fragment_about.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/fragment_about.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_title_text_and_image.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/title_text_and_image.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/menu_disactivity_home_drawer.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/menu/disactivity_home_drawer.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_fragment_readers_list.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/fragment_readers_list.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xhdpi_ic_action_new.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xhdpi/ic_action_new.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xxhdpi_ic_nav_inv.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xxhdpi/ic_nav_inv.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xxhdpi_ic_btn_add.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xxhdpi/ic_btn_add.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xxxhdpi_ic_serial_connection.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xxxhdpi/ic_serial_connection.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_connected_reader.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/connected_reader.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xxhdpi_title_dpo_disabled.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xxhdpi/title_dpo_disabled.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/mipmap-xxxhdpi_app_icon.png.flat",
+        "source": "com.zebra.demo.app-main-35:/mipmap-xxxhdpi/app_icon.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout-1080x720_dis_main_menu.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout-1080x720/dis_main_menu.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_fragment_app_home.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/fragment_app_home.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/mipmap-xxhdpi_ic_action_new.png.flat",
+        "source": "com.zebra.demo.app-main-35:/mipmap-xxhdpi/ic_action_new.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/mipmap-mdpi_ic_launcher.png.flat",
+        "source": "com.zebra.demo.app-main-35:/mipmap-mdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-mdpi_battery_25_50.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-mdpi/battery_25_50.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_drawer_header_app_home.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/drawer_header_app_home.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-hdpi_ic_serial_connection.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-hdpi/ic_serial_connection.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_dialog_plugin_scanner_mismatch.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/dialog_plugin_scanner_mismatch.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xxhdpi_title_singl.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xxhdpi/title_singl.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-hdpi_ic_nav_sett.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-hdpi/ic_nav_sett.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-hdpi_ic_nav_filter.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-hdpi/ic_nav_filter.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/mipmap-xhdpi_ic_launcher_foreground.png.flat",
+        "source": "com.zebra.demo.app-main-35:/mipmap-xhdpi/ic_launcher_foreground.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-mdpi_drawer_shadow.9.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-mdpi/drawer_shadow.9.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_dialog_multiple_snapi_scanners.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/dialog_multiple_snapi_scanners.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-mdpi_ic_forward.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-mdpi/ic_forward.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_content_network_ipconfig.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/content_network_ipconfig.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_ic_action_bluetooth.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/ic_action_bluetooth.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/mipmap-hdpi_ic_action_barcode.png.flat",
+        "source": "com.zebra.demo.app-main-35:/mipmap-hdpi/ic_action_barcode.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xhdpi_battery_25_50.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xhdpi/battery_25_50.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_nav_about.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/nav_about.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_home_layout.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/home_layout.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_custom_notification.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/custom_notification.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_fragment_advancedoptionitem.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/fragment_advancedoptionitem.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_content_ssa_set_symbology.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/content_ssa_set_symbology.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_custom_spinner_layout.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/custom_spinner_layout.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_ic_reader_details.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/ic_reader_details.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_app_bar_home.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/app_bar_home.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xhdpi_ic_battery_0.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xhdpi/ic_battery_0.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_ic_wifi_4.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/ic_wifi_4.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_title_divider.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/title_divider.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_selected_scanners_layout.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/selected_scanners_layout.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_fragment_single_tag_locate.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/fragment_single_tag_locate.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_activity_scanners.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/activity_scanners.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-hdpi_ic_action_new.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-hdpi/ic_action_new.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_activity_update_firmware.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/activity_update_firmware.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/mipmap-xhdpi_ic_action_refresh.png.flat",
+        "source": "com.zebra.demo.app-main-35:/mipmap-xhdpi/ic_action_refresh.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xxhdpi_drawer_shadow.9.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xxhdpi/drawer_shadow.9.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xxhdpi_btn_sett1.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xxhdpi/btn_sett1.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_autocomplete_tag.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/autocomplete_tag.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_right_black.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/right_black.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_ic_wifi_full.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/ic_wifi_full.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_dialog_fw_progress.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/dialog_fw_progress.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-hdpi_dpo_50_75.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-hdpi/dpo_50_75.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-hdpi_btn_rr.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-hdpi/btn_rr.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_sled_battery_level.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/sled_battery_level.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_matching_progress_view.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/matching_progress_view.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-mdpi_ic_baseline_arrow_drop_down_24.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-mdpi/ic_baseline_arrow_drop_down_24.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_activity_available_scanner.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/activity_available_scanner.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_fragment_profile_list.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/fragment_profile_list.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xxhdpi_battery_4.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xxhdpi/battery_4.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_kludge_button.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/kludge_button.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_ic_action_forward.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/ic_action_forward.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_fragment_inventory.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/fragment_inventory.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/mipmap-hdpi_app_icon.png.flat",
+        "source": "com.zebra.demo.app-main-35:/mipmap-hdpi/app_icon.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_selector_reader_list_button.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/selector_reader_list_button.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_fragment_access_operations_kill.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/fragment_access_operations_kill.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_manage_device_activity.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/manage_device_activity.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_spinner_small_font.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/spinner_small_font.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_fragment_locationing.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/fragment_locationing.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_dialog_firmware_not_support_ssa.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/dialog_firmware_not_support_ssa.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xxhdpi_settings_save_configuration.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xxhdpi/settings_save_configuration.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_right.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/right.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/menu_common_menu.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/menu/common_menu.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_fragment_pair_device.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/fragment_pair_device.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/mipmap-mdpi_ic_supportedscanners.png.flat",
+        "source": "com.zebra.demo.app-main-35:/mipmap-mdpi/ic_supportedscanners.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_home_layout_new.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/home_layout_new.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_activity_battery_statistics.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/activity_battery_statistics.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_battery_items.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/battery_items.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_ic_firmware_update.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/ic_firmware_update.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_btn_filters1.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/btn_filters1.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_ic_no_camera.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/ic_no_camera.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xhdpi_btn_sett1.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xhdpi/btn_sett1.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xhdpi_battery_75_100.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xhdpi/battery_75_100.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_fragment_navigation_drawer.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/fragment_navigation_drawer.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_nav_connection_help_white.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/nav_connection_help_white.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_fragment_wifi.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/fragment_wifi.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xhdpi_dpo_25_50.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xhdpi/dpo_25_50.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_connection_help_li4278.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/connection_help_li4278.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_border.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/border.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_profile_divider.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/profile_divider.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_dl_rr.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/dl_rr.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xhdpi_drawer_shadow.9.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xhdpi/drawer_shadow.9.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_back.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/back.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_ic_standard.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/ic_standard.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/mipmap-mdpi_ic_action_refresh.png.flat",
+        "source": "com.zebra.demo.app-main-35:/mipmap-mdpi/ic_action_refresh.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_full_divider.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/full_divider.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xxhdpi_ic_action_cast.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xxhdpi/ic_action_cast.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_scanners_list_item.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/scanners_list_item.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout-720x480_activity_active_scanner.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout-720x480/activity_active_scanner.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_fragment_access_operations_lock.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/fragment_access_operations_lock.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_ic_action_settings.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/ic_action_settings.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_gs1_data_bar.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/gs1_data_bar.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_fragment_mainsettings.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/fragment_mainsettings.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xxhdpi_ic_forward.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xxhdpi/ic_forward.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_button_default.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/button_default.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_zebra_logo_white.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/zebra_logo_white.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_fragment_scan_main_settings.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/fragment_scan_main_settings.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-hdpi_btn_access.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-hdpi/btn_access.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xhdpi_ic_logging.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xhdpi/ic_logging.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xxhdpi_battery_3.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xxhdpi/battery_3.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_content_battery_statistics.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/content_battery_statistics.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_fragment_pre_filter_content.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/fragment_pre_filter_content.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/menu_menu_rfid_settings.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/menu/menu_rfid_settings.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/menu_manage_device_drawer.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/menu/manage_device_drawer.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_readers_pair_connect.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/readers_pair_connect.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xxhdpi_dpo_0_25.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xxhdpi/dpo_0_25.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_activity_base_receiver.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/activity_base_receiver.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/mipmap-hdpi_ic_launcher.png.flat",
+        "source": "com.zebra.demo.app-main-35:/mipmap-hdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_app_bar_ssa_set_symbology.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/app_bar_ssa_set_symbology.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_dialog_fw_rebooting.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/dialog_fw_rebooting.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_inventory_list_item.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/inventory_list_item.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-mdpi_btn_sett1.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-mdpi/btn_sett1.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_battery_level.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/battery_level.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-hdpi_side_nav_bar.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-hdpi/side_nav_bar.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xxhdpi_settings_led.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xxhdpi/settings_led.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xxhdpi_settings_singulation_control.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xxhdpi/settings_singulation_control.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_fragment_manage.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/fragment_manage.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_noimage_fargment.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/noimage_fargment.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/mipmap-xxhdpi_ic_action_next_item.png.flat",
+        "source": "com.zebra.demo.app-main-35:/mipmap-xxhdpi/ic_action_next_item.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_button_color.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/button_color.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_button_disabled.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/button_disabled.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout-1080x720_content_update_firmware.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout-1080x720/content_update_firmware.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_activity_home_scanner.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/activity_home_scanner.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_ic_rfid_reader.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/ic_rfid_reader.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-hdpi_btn_inv.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-hdpi/btn_inv.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xhdpi_dpo_50_75.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xhdpi/dpo_50_75.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xxhdpi_title_save.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xxhdpi/title_save.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-hdpi_ic_btn_reset.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-hdpi/ic_btn_reset.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_child_bttery_items.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/child_bttery_items.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_ic_clear_list.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/ic_clear_list.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_ic_wifi_3.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/ic_wifi_3.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_bottomsheet_background.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/bottomsheet_background.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_fragment_connection_settings.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/fragment_connection_settings.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xxhdpi_battery_10.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xxhdpi/battery_10.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/mipmap-mdpi_ic_action_new.png.flat",
+        "source": "com.zebra.demo.app-main-35:/mipmap-mdpi/ic_action_new.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_fragment_start_stop_triggers.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/fragment_start_stop_triggers.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_dl_beep.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/dl_beep.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/menu_menu_readers_list.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/menu/menu_readers_list.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-mdpi_dpo_25_50.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-mdpi/dpo_25_50.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/menu_menu_connection_help.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/menu/menu_connection_help.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/menu_menu_scan.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/menu/menu_scan.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-hdpi_ic_logging.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-hdpi/ic_logging.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xhdpi_ic_btn_reset.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xhdpi/ic_btn_reset.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-hdpi_ic_export_config.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-hdpi/ic_export_config.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-hdpi_battery_0_25.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-hdpi/battery_0_25.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_ic_sample_barcode.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/ic_sample_barcode.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout-720x480_activity_reader_details.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout-720x480/activity_reader_details.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_nav_app_settings.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/nav_app_settings.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xhdpi_battery_0_25.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xhdpi/battery_0_25.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_ic_connect.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/ic_connect.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_ic_disconnect.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/ic_disconnect.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/mipmap-xxhdpi_ic_launcher_round.png.flat",
+        "source": "com.zebra.demo.app-main-35:/mipmap-xxhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xxhdpi_battery_2.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xxhdpi/battery_2.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/mipmap-hdpi_ic_launcher_foreground.png.flat",
+        "source": "com.zebra.demo.app-main-35:/mipmap-hdpi/ic_launcher_foreground.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_app_bar_main.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/app_bar_main.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_ic_action_new.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/ic_action_new.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_activity_about.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/activity_about.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_activity_ssa_set_symbology.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/activity_ssa_set_symbology.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xxhdpi_dpo_50_75.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xxhdpi/dpo_50_75.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_fragment_beeper.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/fragment_beeper.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_fragment_tag_reporting.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/fragment_tag_reporting.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_scanactivity_main.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/scanactivity_main.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/mipmap-hdpi_ic_action_about.png.flat",
+        "source": "com.zebra.demo.app-main-35:/mipmap-hdpi/ic_action_about.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_dl_dpo_disabled.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/dl_dpo_disabled.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/mipmap-anydpi-v26/ic_launcher.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_paired_reader_list.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/paired_reader_list.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_qrcode.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/qrcode.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-mdpi_ic_btn_add.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-mdpi/ic_btn_add.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_fragment_barcode_fargment.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/fragment_barcode_fargment.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_dialog_bt_address.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/dialog_bt_address.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_btn_access.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/btn_access.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xxxhdpi_ic_forward.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xxxhdpi/ic_forward.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/mipmap-mdpi_ic_launcher_foreground.png.flat",
+        "source": "com.zebra.demo.app-main-35:/mipmap-mdpi/ic_launcher_foreground.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xxhdpi_ic_btn_reset.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xxhdpi/ic_btn_reset.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_app_bar_symbologies.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/app_bar_symbologies.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-mdpi_ic_btn_clear.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-mdpi/ic_btn_clear.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout-1080x720_activity_assertinfo.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout-1080x720/activity_assertinfo.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xxhdpi_settings_readers_list.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xxhdpi/settings_readers_list.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_ic_action_usb.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/ic_action_usb.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_toast_layout.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/toast_layout.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_bordered_rect_background.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/bordered_rect_background.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_divider.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/divider.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/mipmap-xxhdpi_app_icon.png.flat",
+        "source": "com.zebra.demo.app-main-35:/mipmap-xxhdpi/app_icon.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_bt.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/bt.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xxhdpi_ic_serial_connection.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xxhdpi/ic_serial_connection.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-mdpi_battery_75_100.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-mdpi/battery_75_100.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_ic_reset_factory.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/ic_reset_factory.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_content_led_control.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/content_led_control.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xxhdpi_ic_logging.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xxhdpi/ic_logging.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xxhdpi_title_beep.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xxhdpi/title_beep.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/mipmap-xxhdpi_ic_launcher.png.flat",
+        "source": "com.zebra.demo.app-main-35:/mipmap-xxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_splash_small.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/splash_small.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/mipmap-hdpi_ic_action_refresh.png.flat",
+        "source": "com.zebra.demo.app-main-35:/mipmap-hdpi/ic_action_refresh.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_battery_very_low.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/battery_very_low.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xxhdpi_settings_rfid_accessory.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xxhdpi/settings_rfid_accessory.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_side_nav_bar.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/side_nav_bar.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/mipmap-mdpi_ic_launcher_round.png.flat",
+        "source": "com.zebra.demo.app-main-35:/mipmap-mdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xhdpi_toast_background.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xhdpi/toast_background.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-hdpi_btn_locate2.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-hdpi/btn_locate2.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/menu_activity_main_drawer.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/menu/activity_main_drawer.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_fragment_reader_wifi_settings.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/fragment_reader_wifi_settings.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xhdpi_btn_rr1.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xhdpi/btn_rr1.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_dl_reg.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/dl_reg.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_content_app_home.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/content_app_home.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-mdpi_btn_rr1.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-mdpi/btn_rr1.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/menu_activity_home_drawer.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/menu/activity_home_drawer.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xhdpi_ic_serial_connection.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xhdpi/ic_serial_connection.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_ic_rfid_sled.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/ic_rfid_sled.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xxhdpi_ic_report.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xxhdpi/ic_report.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_ic_menu_options.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/ic_menu_options.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_btn_filter.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/btn_filter.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_ic_launcher_background.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/ic_launcher_background.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_btn_locate.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/btn_locate.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-hdpi_dpo_0_25.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-hdpi/dpo_0_25.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_barcode_read_area.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/barcode_read_area.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_activity_image.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/activity_image.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_ic_export_config.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/ic_export_config.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xxhdpi_btn_filter1.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xxhdpi/btn_filter1.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/mipmap-xhdpi_ic_action_about.png.flat",
+        "source": "com.zebra.demo.app-main-35:/mipmap-xhdpi/ic_action_about.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xxhdpi_title_sett.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xxhdpi/title_sett.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_fragment_advanced.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/fragment_advanced.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_ic_battery_statistics.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/ic_battery_statistics.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_ic_nav_inv.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/ic_nav_inv.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_ic_reader_wifi_settings.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/ic_reader_wifi_settings.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_data_matrix.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/data_matrix.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xxhdpi_battery_1.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xxhdpi/battery_1.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_activity_splash_screen.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/activity_splash_screen.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_activity_settings_detail.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/activity_settings_detail.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_content_app_home2.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/content_app_home2.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_activity_help.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/activity_help.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xxhdpi_bc_icon.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xxhdpi/bc_icon.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_ic_lock.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/ic_lock.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xxhdpi_ic_battery_0.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xxhdpi/ic_battery_0.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-hdpi_battery_75_100.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-hdpi/battery_75_100.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_content_main.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/content_main.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xhdpi_ic_nav_loc.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xhdpi/ic_nav_loc.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_bc_icon.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/bc_icon.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_fragment_regulatory_settings.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/fragment_regulatory_settings.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-hdpi_ic_nav_inv.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-hdpi/ic_nav_inv.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xxhdpi_ic_nav_filter.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xxhdpi/ic_nav_filter.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xxhdpi_ic_nav_access.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xxhdpi/ic_nav_access.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/mipmap-xxhdpi_barcode.png.flat",
+        "source": "com.zebra.demo.app-main-35:/mipmap-xxhdpi/barcode.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_activity_beeper_actions.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/activity_beeper_actions.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_locationing.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/locationing.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xxxhdpi_ic_report.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xxxhdpi/ic_report.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/navigation_nav_graph.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/navigation/nav_graph.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xxhdpi_ic_nav_rr.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xxhdpi/ic_nav_rr.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-hdpi_ic_btn_add.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-hdpi/ic_btn_add.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_dialog_rfd8500_firmware_help.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/dialog_rfd8500_firmware_help.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_ic_autoresync.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/ic_autoresync.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_dialog_password.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/dialog_password.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_activity_notifications.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/activity_notifications.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_dl_about.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/dl_about.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xxhdpi_settings_beeper.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xxhdpi/settings_beeper.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_dialog_get_bt_address.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/dialog_get_bt_address.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_ic_forward.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/ic_forward.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_list_barcode_layout.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/list_barcode_layout.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_ic_play_stop.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/ic_play_stop.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-mdpi_ic_nav_inv.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-mdpi/ic_nav_inv.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_dl_antn.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/dl_antn.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-hdpi_dpo_25_50.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-hdpi/dpo_25_50.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_battery_good.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/battery_good.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/menu_scanners.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/menu/scanners.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xxhdpi_title_batt.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xxhdpi/title_batt.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_dialog_opmode_not_support_ssa.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/dialog_opmode_not_support_ssa.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xxhdpi_ic_action_new.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xxhdpi/ic_action_new.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_dl_access.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/dl_access.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_scrollbar.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/scrollbar.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_content_scale.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/content_scale.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_battery_low.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/battery_low.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_ic_add_newreaders.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/ic_add_newreaders.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_fragment_first.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/fragment_first.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_ic_menu.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/ic_menu.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_nav_available_scanners.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/nav_available_scanners.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_action_battery_level.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/action_battery_level.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_drawer_list_sub_item.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/drawer_list_sub_item.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_ic_nav_sett.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/ic_nav_sett.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-mdpi_ic_play_stop.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-mdpi/ic_play_stop.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xxhdpi_title_tags.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xxhdpi/title_tags.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-mdpi_dpo_0_25.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-mdpi/dpo_0_25.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_content_image.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/content_image.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_activity_assertinfo.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/activity_assertinfo.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xxhdpi_settings_readers_list_white.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xxhdpi/settings_readers_list_white.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/mipmap-mdpi_ic_action_next_item.png.flat",
+        "source": "com.zebra.demo.app-main-35:/mipmap-mdpi/ic_action_next_item.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-hdpi_ic_battery_0.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-hdpi/ic_battery_0.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-mdpi_ic_drawer.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-mdpi/ic_drawer.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_fragment_settings.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/fragment_settings.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_btn_back.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/btn_back.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-hdpi_ic_launcher.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-hdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/mipmap-xhdpi_ic_action_new.png.flat",
+        "source": "com.zebra.demo.app-main-35:/mipmap-xhdpi/ic_action_new.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_dialog_launch_instructions.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/dialog_launch_instructions.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_fragment_pre_filter2_content.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/fragment_pre_filter2_content.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_drawer_header_rfid.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/drawer_header_rfid.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_activity_connection_help2.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/activity_connection_help2.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_selector_reader_list.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/selector_reader_list.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_ic_wifi_1.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/ic_wifi_1.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xxhdpi_dpo_25_50.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xxhdpi/dpo_25_50.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xhdpi_ic_play_stop.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xhdpi/ic_play_stop.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_fragment_access_operations.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/fragment_access_operations.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_content_scan_speed_analytics.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/content_scan_speed_analytics.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_activity_barcode_configuration.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/activity_barcode_configuration.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_wifi_bottom_sheet_layout.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/wifi_bottom_sheet_layout.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/mipmap-xxxhdpi_ic_launcher_foreground.png.flat",
+        "source": "com.zebra.demo.app-main-35:/mipmap-xxxhdpi/ic_launcher_foreground.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_app_bar_sample_barcodes.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/app_bar_sample_barcodes.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_fragment_save_configurations.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/fragment_save_configurations.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-hdpi_nav_pair_new_bt_scanner.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-hdpi/nav_pair_new_bt_scanner.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-mdpi_btn_locate1.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-mdpi/btn_locate1.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_ic_rename_reader.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/ic_rename_reader.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_fragment_usb_mifi.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/fragment_usb_mifi.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_ic_unpair.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/ic_unpair.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_dl_rdl.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/dl_rdl.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/menu_menu_app_home.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/menu/menu_app_home.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_app_bar_image.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/app_bar_image.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_dl_singl.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/dl_singl.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/menu_menu_locate_tag.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/menu/menu_locate_tag.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xhdpi_ic_nav_sett.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xhdpi/ic_nav_sett.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xxhdpi_btn_rr1.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xxhdpi/btn_rr1.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_activity_keymap_select.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/activity_keymap_select.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_rectangle_background.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/rectangle_background.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_radioreset_fragment.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/radioreset_fragment.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_ic_discover_device.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/ic_discover_device.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_fragment_rr.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/fragment_rr.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xxhdpi_ic_export_config.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xxhdpi/ic_export_config.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/mipmap-hdpi_ic_action_next_item.png.flat",
+        "source": "com.zebra.demo.app-main-35:/mipmap-hdpi/ic_action_next_item.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_ic_scan_and_pair.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/ic_scan_and_pair.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xxxhdpi_ic_btn_add.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xxxhdpi/ic_btn_add.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xxhdpi_battery_5.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xxhdpi/battery_5.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_activity_settings.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/activity_settings.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_dialog_no_plugin.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/dialog_no_plugin.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_fragment_scan_barcode_and_pair.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/fragment_scan_barcode_and_pair.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout-720x480_activity_update_firmware.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout-720x480/activity_update_firmware.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xhdpi_btn_inv1.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xhdpi/btn_inv1.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-mdpi_ic_serial_connection.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-mdpi/ic_serial_connection.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-hdpi_dpo_75_100.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-hdpi/dpo_75_100.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_fragment_battery_stats.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/fragment_battery_stats.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_ic_battery.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/ic_battery.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-hdpi_ic_report.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-hdpi/ic_report.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_activity_pair_new_scanner.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/activity_pair_new_scanner.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_fragment_battery.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/fragment_battery.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_dl_filters.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/dl_filters.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-mdpi_dpo_75_100.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-mdpi/dpo_75_100.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/mipmap-anydpi-v26/ic_launcher_round.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/menu_menu_inventory.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/menu/menu_inventory.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_connection_help_rfd8500.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/connection_help_rfd8500.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_spinner_layout.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/spinner_layout.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_ic_wifi_nw.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/ic_wifi_nw.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xhdpi_ic_action_cast.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xhdpi/ic_action_cast.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xxhdpi_battery_6.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xxhdpi/battery_6.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xhdpi_bc_icon.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xhdpi/bc_icon.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-mdpi_ic_reset_factory.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-mdpi/ic_reset_factory.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_error_red.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/error_red.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_dialog_firmware_help.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/dialog_firmware_help.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xxhdpi_btn_sett.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xxhdpi/btn_sett.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_activity_idc.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/activity_idc.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_activity_scale.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/activity_scale.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_ic_premium_plus.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/ic_premium_plus.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_ic_app_white.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/ic_app_white.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_code_128.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/code_128.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-hdpi_ic_forward.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-hdpi/ic_forward.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xhdpi_ic_list_profiles.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xhdpi/ic_list_profiles.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_dialog_paired_list.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/dialog_paired_list.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_activity_decode_image.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/activity_decode_image.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_content_activescanner.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/content_activescanner.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-mdpi_ic_launcher.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-mdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_dl_inv.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/dl_inv.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_dialog_taglistmatchmode_path.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/dialog_taglistmatchmode_path.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_no_image.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/no_image.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-hdpi_ic_action_cast.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-hdpi/ic_action_cast.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xxhdpi_battery_7.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xxhdpi/battery_7.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_dialog_fw_reconnect_scanner.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/dialog_fw_reconnect_scanner.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_ic_action_bluetooth_connected.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/ic_action_bluetooth_connected.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xhdpi_dpo_0_25.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xhdpi/dpo_0_25.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-mdpi_ic_export_config.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-mdpi/ic_export_config.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_fragment_multitag_locate.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/fragment_multitag_locate.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-hdpi_ic_action_refresh.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-hdpi/ic_action_refresh.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-hdpi_ic_list_profiles.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-hdpi/ic_list_profiles.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/menu_firmware.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/menu/firmware.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_activity_vibration_feedback.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/activity_vibration_feedback.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/menu_splash_screen.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/menu/splash_screen.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-hdpi_btn_locate.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-hdpi/btn_locate.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_dialog_ssa_resetting.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/dialog_ssa_resetting.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-hdpi_btn_filter1.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-hdpi/btn_filter1.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_list_separator.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/list_separator.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-mdpi_ic_action_cast.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-mdpi/ic_action_cast.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xxhdpi_title_strstp.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xxhdpi/title_strstp.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_ic_baseline_arrow_drop_down_24.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/ic_baseline_arrow_drop_down_24.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xxhdpi_ic_action_refresh.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xxhdpi/ic_action_refresh.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_app_bar_scan_speed_analytics.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/app_bar_scan_speed_analytics.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_led.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/led.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xxhdpi_btn_locate1.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xxhdpi/btn_locate1.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_nav_header_main.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/nav_header_main.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_ic_nav_access.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/ic_nav_access.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xxhdpi_btn_rr.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xxhdpi/btn_rr.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_app_bar_network_ipconfig.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/app_bar_network_ipconfig.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-hdpi_btn_inv1.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-hdpi/btn_inv1.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xhdpi_btn_filter1.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xhdpi/btn_filter1.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_activity_pairing_instructions_all.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/activity_pairing_instructions_all.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_app_icon_small.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/app_icon_small.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_other_wifi_networks.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/other_wifi_networks.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-mdpi_ic_action_refresh.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-mdpi/ic_action_refresh.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xxhdpi_ic_reset_factory.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xxhdpi/ic_reset_factory.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_dl_batt.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/dl_batt.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xhdpi_ic_forward.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xhdpi/ic_forward.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/xml_searchable.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/xml/searchable.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_saved_wifi_network.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/saved_wifi_network.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_content_asset_information.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/content_asset_information.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_tick.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/tick.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_list_home_layout.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/list_home_layout.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xhdpi_battery_critical.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xhdpi/battery_critical.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "com.zebra.demo.app-main-35:/mipmap-xxxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/menu_menu_advanced_option.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/menu/menu_advanced_option.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_activity_led.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/activity_led.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_dl_tag.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/dl_tag.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_nav_find_cabled_scanners.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/nav_find_cabled_scanners.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_ic_enabled.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/ic_enabled.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xxhdpi_battery_50_75.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xxhdpi/battery_50_75.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xxhdpi_btn_access1.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xxhdpi/btn_access1.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_ic_action_next_item.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/ic_action_next_item.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xxhdpi_battery_9.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xxhdpi/battery_9.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout-720x480_fragment_rr.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout-720x480/fragment_rr.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_connected_wifi_network.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/connected_wifi_network.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/menu_menu_devicepair.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/menu/menu_devicepair.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/mipmap-xxhdpi_ic_action_refresh.png.flat",
+        "source": "com.zebra.demo.app-main-35:/mipmap-xxhdpi/ic_action_refresh.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/mipmap-mdpi_ic_action_about.png.flat",
+        "source": "com.zebra.demo.app-main-35:/mipmap-mdpi/ic_action_about.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_ic_tab_settings.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/ic_tab_settings.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_wifi_signal_level.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/wifi_signal_level.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/mipmap-hdpi_ic_supportedscanners.png.flat",
+        "source": "com.zebra.demo.app-main-35:/mipmap-hdpi/ic_supportedscanners.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_wifi_menu.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/wifi_menu.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xxhdpi_settings_battery.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xxhdpi/settings_battery.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_app_bar_activity_help.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/app_bar_activity_help.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_dialog_multiple_dat_files.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/dialog_multiple_dat_files.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_ic_nav_loc.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/ic_nav_loc.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xxhdpi_ic_nav_loc.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xxhdpi/ic_nav_loc.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_activity_sample_barcodes.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/activity_sample_barcodes.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_ic_premium.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/ic_premium.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/mipmap-xhdpi_ic_launcher_round.png.flat",
+        "source": "com.zebra.demo.app-main-35:/mipmap-xhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_fragment_locate_tag.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/fragment_locate_tag.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xxhdpi_ic_play_stop.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xxhdpi/ic_play_stop.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xhdpi_btn_access1.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xhdpi/btn_access1.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_ic_barcode_scan.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/ic_barcode_scan.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_ic_tab_rfid.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/ic_tab_rfid.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/menu_search_results.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/menu/search_results.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-mdpi_ic_logging.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-mdpi/ic_logging.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_splash.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/splash.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xhdpi_ic_drawer.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xhdpi/ic_drawer.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_setting_list.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/setting_list.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xxhdpi_title_reg.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xxhdpi/title_reg.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-mdpi_btn_access1.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-mdpi/btn_access1.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_normal_divider.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/normal_divider.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout-720x480_activity_assertinfo.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout-720x480/activity_assertinfo.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_fragment_no_nfc.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/fragment_no_nfc.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_ic_rfid_tab.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/ic_rfid_tab.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_home_layout_scanner.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/home_layout_scanner.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xxhdpi_settings_start_stop_triggers.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xxhdpi/settings_start_stop_triggers.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_fragment_singulation_control.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/fragment_singulation_control.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_readers_list_green_background.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/readers_list_green_background.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_nav_pair_new_bt_scanner.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/nav_pair_new_bt_scanner.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/mipmap-xhdpi_ic_supportedscanners.png.flat",
+        "source": "com.zebra.demo.app-main-35:/mipmap-xhdpi/ic_supportedscanners.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_fragment_led.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/fragment_led.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_dl_loc.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/dl_loc.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_empersized_button_color.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/empersized_button_color.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-hdpi_drawer_shadow.9.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-hdpi/drawer_shadow.9.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_inv_list_background.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/inv_list_background.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/menu_drawer_home.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/menu/drawer_home.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-mdpi_battery_0_25.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-mdpi/battery_0_25.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xxhdpi_battery_75_100.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xxhdpi/battery_75_100.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/menu_no_items.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/menu/no_items.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_dl_dpo_enabled.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/dl_dpo_enabled.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_content_idc.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/content_idc.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_content_update_firmware.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/content_update_firmware.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_ic_save.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/ic_save.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-hdpi_ic_nav_access.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-hdpi/ic_nav_access.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-hdpi_action_search.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-hdpi/action_search.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/menu_menu_home.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/menu/menu_home.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout-1080x720_activity_update_firmware.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout-1080x720/activity_update_firmware.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_content_home.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/content_home.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_scan_pair_readers_list.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/scan_pair_readers_list.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/menu_activity_integrated_drawer.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/menu/activity_integrated_drawer.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xxhdpi_ic_drawer.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xxhdpi/ic_drawer.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-hdpi_ic_action_about.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-hdpi/ic_action_about.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-mdpi_btn_filter1.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-mdpi/btn_filter1.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-hdpi_ic_nav_rr.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-hdpi/ic_nav_rr.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_activity_find_cabled_scanner.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/activity_find_cabled_scanner.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_fragment_charge_terminal.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/fragment_charge_terminal.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_ic_action_about.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/ic_action_about.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout-720x480_content_asset_information.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout-720x480/content_asset_information.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xxhdpi_battery_8.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xxhdpi/battery_8.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-hdpi_battery_50_75.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-hdpi/battery_50_75.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_tab_settings.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/tab_settings.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/mipmap-hdpi_ic_launcher_round.png.flat",
+        "source": "com.zebra.demo.app-main-35:/mipmap-hdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/menu_wifi_connect_menu.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/menu/wifi_connect_menu.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xxxhdpi_ic_reset_factory.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xxxhdpi/ic_reset_factory.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xxhdpi_ic_launcher.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_fragment_scan_pair.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/fragment_scan_pair.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_app_bar_asset_info.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/app_bar_asset_info.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_dl_sett.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/dl_sett.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_ic_hamburger.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/ic_hamburger.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xxhdpi_title_dpo_enabled.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xxhdpi/title_dpo_enabled.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/mipmap-xhdpi_ic_launcher.png.flat",
+        "source": "com.zebra.demo.app-main-35:/mipmap-xhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_nav_connection_help.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/nav_connection_help.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xxhdpi_btn_inv1.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xxhdpi/btn_inv1.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-hdpi_btn_filter.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-hdpi/btn_filter.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xhdpi_ic_launcher.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_date_time_picker.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/date_time_picker.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/menu_options_menu.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/menu/options_menu.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-xhdpi_ic_report.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-xhdpi/ic_report.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_nav_list_layout.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/nav_list_layout.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_fragment_access_operations_read_write.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/fragment_access_operations_read_write.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_ic_rfid.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/ic_rfid.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/layout_fragment_pre_filter.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/layout/fragment_pre_filter.xml"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable-hdpi_btn_rr1.png.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable-hdpi/btn_rr1.png"
+    },
+    {
+        "merged": "com.zebra.demo.app-merged_res-33:/drawable_action_battery_dpo_level.xml.flat",
+        "source": "com.zebra.demo.app-main-35:/drawable/action_battery_dpo_level.xml"
+    }
+]

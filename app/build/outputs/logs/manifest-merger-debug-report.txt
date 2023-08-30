@@ -1,0 +1,1060 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:2:1-391:12
+INJECTED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:2:1-391:12
+INJECTED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:2:1-391:12
+INJECTED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:2:1-391:12
+MERGED from [:RFIDAPI3Library] /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/RFIDAPI3Library/build/.transforms/dbf74893041742b7b756b048f86901ee/transformed/jetified-API3_LIB-release/AndroidManifest.xml:2:1-20:12
+MERGED from [androidx.navigation:navigation-ui:2.3.5] /Users/shseo/.gradle/caches/transforms-3/16b85a63215e8c461bdf1e29574b5f81/transformed/navigation-ui-2.3.5/AndroidManifest.xml:17:1-24:12
+MERGED from [com.google.android.material:material:1.4.0] /Users/shseo/.gradle/caches/transforms-3/d617f4a6bfa7657111cc9ae5bd712183/transformed/material-1.4.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.constraintlayout:constraintlayout:2.0.4] /Users/shseo/.gradle/caches/transforms-3/b6c4b20bf7666df66cf6bd439f65a122/transformed/constraintlayout-2.0.4/AndroidManifest.xml:2:1-11:12
+MERGED from [androidx.camera:camera-view:1.0.0-alpha21] /Users/shseo/.gradle/caches/transforms-3/3353ac22dbdc2b9ec25eba64cad5ffcf/transformed/jetified-camera-view-1.0.0-alpha21/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.appcompat:appcompat:1.3.0] /Users/shseo/.gradle/caches/transforms-3/867c7d4cf9d43809c9097bbf49606663/transformed/appcompat-1.3.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.legacy:legacy-support-v4:1.0.0] /Users/shseo/.gradle/caches/transforms-3/30b8f2637904b674b580036218a221b1/transformed/legacy-support-v4-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [com.github.PhilJay:MPAndroidChart:v3.1.0] /Users/shseo/.gradle/caches/transforms-3/9dc122949759198875203ab4ba2df8c2/transformed/jetified-MPAndroidChart-v3.1.0/AndroidManifest.xml:2:1-20:12
+MERGED from [com.github.chrisbanes:PhotoView:2.0.0] /Users/shseo/.gradle/caches/transforms-3/6f49f931c87fe90320a0ec59982081a5/transformed/jetified-PhotoView-2.0.0/AndroidManifest.xml:2:1-12:12
+MERGED from [androidx.navigation:navigation-fragment:2.3.5] /Users/shseo/.gradle/caches/transforms-3/3e6b27ed73e2f0ee803b4ac001870896/transformed/navigation-fragment-2.3.5/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.viewpager2:viewpager2:1.0.0] /Users/shseo/.gradle/caches/transforms-3/8f32d40ba0d4e296391c2672743cbf7a/transformed/jetified-viewpager2-1.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.recyclerview:recyclerview:1.2.1] /Users/shseo/.gradle/caches/transforms-3/31b0683d667dedb9b85ea804d85b77a5/transformed/recyclerview-1.2.1/AndroidManifest.xml:17:1-24:12
+MERGED from [com.google.android.gms:play-services-location:18.0.0] /Users/shseo/.gradle/caches/transforms-3/e8117eb1090b393b95133bdd9d5e4f97/transformed/jetified-play-services-location-18.0.0/AndroidManifest.xml:2:1-9:12
+MERGED from [androidx.camera:camera-camera2:1.1.0-alpha08] /Users/shseo/.gradle/caches/transforms-3/e2302ccd9d3c9e0a4c5c4fdab3a06ec2/transformed/jetified-camera-camera2-1.1.0-alpha08/AndroidManifest.xml:17:1-38:12
+MERGED from [androidx.camera:camera-lifecycle:1.1.0-alpha01] /Users/shseo/.gradle/caches/transforms-3/0bcf0fd8a33e6eaebab40581bf956fb9/transformed/jetified-camera-lifecycle-1.1.0-alpha01/AndroidManifest.xml:17:1-24:12
+MERGED from [com.google.android.gms:play-services-mlkit-barcode-scanning:18.0.0] /Users/shseo/.gradle/caches/transforms-3/b5e4e76cfaa9dd6925fa1629b30585e9/transformed/jetified-play-services-mlkit-barcode-scanning-18.0.0/AndroidManifest.xml:2:1-18:12
+MERGED from [com.google.mlkit:barcode-scanning-common:17.0.0] /Users/shseo/.gradle/caches/transforms-3/b4b620e13457ee8099d3b79de7c2c292/transformed/jetified-barcode-scanning-common-17.0.0/AndroidManifest.xml:2:1-7:12
+MERGED from [com.google.mlkit:vision-common:17.0.0] /Users/shseo/.gradle/caches/transforms-3/4e75999606bfb558840d4572a0b28032/transformed/jetified-vision-common-17.0.0/AndroidManifest.xml:2:1-18:12
+MERGED from [com.google.mlkit:common:18.0.0] /Users/shseo/.gradle/caches/transforms-3/5669f9f558c2367fefc1181dece5e9b2/transformed/jetified-common-18.0.0/AndroidManifest.xml:2:1-26:12
+MERGED from [com.google.android.gms:play-services-base:18.0.1] /Users/shseo/.gradle/caches/transforms-3/25d6436db3863a9e80542c647b38f6ec/transformed/jetified-play-services-base-18.0.1/AndroidManifest.xml:16:1-24:12
+MERGED from [com.google.android.gms:play-services-places-placereport:17.0.0] /Users/shseo/.gradle/caches/transforms-3/4e51709033c6421fa7d10302b853326e/transformed/jetified-play-services-places-placereport-17.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [com.google.mlkit:vision-interfaces:16.0.0] /Users/shseo/.gradle/caches/transforms-3/91ae5845a9f0fceb86e9ee3b8fa4b5ef/transformed/jetified-vision-interfaces-16.0.0/AndroidManifest.xml:2:1-7:12
+MERGED from [com.google.android.gms:play-services-tasks:18.0.1] /Users/shseo/.gradle/caches/transforms-3/6bcfe844bfb257abf74369e84350788e/transformed/jetified-play-services-tasks-18.0.1/AndroidManifest.xml:2:1-6:12
+MERGED from [com.google.android.gms:play-services-basement:18.0.0] /Users/shseo/.gradle/caches/transforms-3/4cd01b2c46f9da47b1f740062690459e/transformed/jetified-play-services-basement-18.0.0/AndroidManifest.xml:16:1-26:12
+MERGED from [androidx.fragment:fragment:1.3.4] /Users/shseo/.gradle/caches/transforms-3/84fcbb5275aa04a87cd944ba181f9077/transformed/fragment-1.3.4/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.navigation:navigation-runtime:2.3.5] /Users/shseo/.gradle/caches/transforms-3/033eb3dfb38fd957b97b9217541d9e69/transformed/navigation-runtime-2.3.5/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.activity:activity:1.2.3] /Users/shseo/.gradle/caches/transforms-3/0c1e257d7df85caf09eaed9fe4323d09/transformed/jetified-activity-1.2.3/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.appcompat:appcompat-resources:1.3.0] /Users/shseo/.gradle/caches/transforms-3/98b716d025ce960ad5ece247d162e3c6/transformed/jetified-appcompat-resources-1.3.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] /Users/shseo/.gradle/caches/transforms-3/790324d083913331f08cd18429dc788a/transformed/legacy-support-core-ui-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] /Users/shseo/.gradle/caches/transforms-3/f9b34dd8446ee3f2d22ff5c9aa1ddd55/transformed/coordinatorlayout-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] /Users/shseo/.gradle/caches/transforms-3/b3cd99cf2e0e03d5025ddb5d58c77d44/transformed/dynamicanimation-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /Users/shseo/.gradle/caches/transforms-3/ac9e604079ef922b199a1d3e203786a1/transformed/vectordrawable-animated-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /Users/shseo/.gradle/caches/transforms-3/bf68305dc9c5839d32559c1f6c059450/transformed/vectordrawable-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.media:media:1.0.0] /Users/shseo/.gradle/caches/transforms-3/c6a872c6a8be0374384ae067789f1ada/transformed/media-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /Users/shseo/.gradle/caches/transforms-3/1f4ae95442efc856dbcf810dcbc5c33a/transformed/legacy-support-core-utils-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.drawerlayout:drawerlayout:1.1.1] /Users/shseo/.gradle/caches/transforms-3/2ef1078dd66e49522ce367ecc6568f03/transformed/drawerlayout-1.1.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.transition:transition:1.3.0] /Users/shseo/.gradle/caches/transforms-3/423febbd8281e21ce7796d1294729b54/transformed/transition-1.3.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/shseo/.gradle/caches/transforms-3/6e5252d7c8c23f76ff7385e16c5899d4/transformed/viewpager-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] /Users/shseo/.gradle/caches/transforms-3/fbf023a6f2e78a20acca36a3cf00006e/transformed/slidingpanelayout-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.customview:customview:1.1.0] /Users/shseo/.gradle/caches/transforms-3/8ffce7d153700d52c18418dab4a16e32/transformed/customview-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.camera:camera-core:1.1.0-alpha08] /Users/shseo/.gradle/caches/transforms-3/243e4df5ba3a042e4cefde2b1ea3805d/transformed/jetified-camera-core-1.1.0-alpha08/AndroidManifest.xml:17:1-38:12
+MERGED from [androidx.loader:loader:1.0.0] /Users/shseo/.gradle/caches/transforms-3/1b8ddc3d793612902b8d69a4da328d7d/transformed/loader-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] /Users/shseo/.gradle/caches/transforms-3/7100da697e7c96890fe58dab8cd7ff87/transformed/swiperefreshlayout-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] /Users/shseo/.gradle/caches/transforms-3/4da4fd7fe5577a7430722fc6b2d85fc8/transformed/asynclayoutinflater-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.navigation:navigation-common:2.3.5] /Users/shseo/.gradle/caches/transforms-3/141175e8d6356a1ecd82244a2d2e6d84/transformed/navigation-common-2.3.5/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.core:core:1.5.0] /Users/shseo/.gradle/caches/transforms-3/18b1bc7c8abf3f1dcf65da443449ace5/transformed/core-1.5.0/AndroidManifest.xml:17:1-26:12
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /Users/shseo/.gradle/caches/transforms-3/43fd59b96b36cc166914f959d88306cc/transformed/cursoradapter-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.3.1] /Users/shseo/.gradle/caches/transforms-3/1e3fcd0a009ffbee11e2df82b6b5220c/transformed/jetified-lifecycle-viewmodel-savedstate-2.3.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.savedstate:savedstate:1.1.0] /Users/shseo/.gradle/caches/transforms-3/e385e4d124ec1a929ad3ee9751689eea/transformed/jetified-savedstate-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.3.1] /Users/shseo/.gradle/caches/transforms-3/abc4538191c967b298a8a8ea61324ceb/transformed/lifecycle-runtime-2.3.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.3.1] /Users/shseo/.gradle/caches/transforms-3/ff054b1363ff48662b2e55e145adec45/transformed/lifecycle-viewmodel-2.3.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.cardview:cardview:1.0.0] /Users/shseo/.gradle/caches/transforms-3/2d61a5ee25225848f7a0f61628c69724/transformed/cardview-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [com.google.android.datatransport:transport-backend-cct:2.3.3] /Users/shseo/.gradle/caches/transforms-3/9dc02be42ca7d4a4e2d96f1fbcd0c5e1/transformed/jetified-transport-backend-cct-2.3.3/AndroidManifest.xml:15:1-38:12
+MERGED from [com.google.android.datatransport:transport-runtime:2.2.6] /Users/shseo/.gradle/caches/transforms-3/95e84a6f63494c3347ceadea00443f4d/transformed/jetified-transport-runtime-2.2.6/AndroidManifest.xml:15:1-41:12
+MERGED from [com.google.android.datatransport:transport-api:2.2.1] /Users/shseo/.gradle/caches/transforms-3/00ce49cb68e875b22d9f010bab285914/transformed/jetified-transport-api-2.2.1/AndroidManifest.xml:15:1-22:12
+MERGED from [com.google.firebase:firebase-components:16.1.0] /Users/shseo/.gradle/caches/transforms-3/899bcbf8b8fc4ce9a7de584d87958ed9/transformed/jetified-firebase-components-16.1.0/AndroidManifest.xml:15:1-23:12
+MERGED from [com.google.firebase:firebase-encoders-json:17.1.0] /Users/shseo/.gradle/caches/transforms-3/96d6c295f8bceb0fe2229666697d1456/transformed/jetified-firebase-encoders-json-17.1.0/AndroidManifest.xml:15:1-23:12
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/shseo/.gradle/caches/transforms-3/0153f342ac57307b30aa2cd6dc7ef636/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:17:1-27:12
+MERGED from [androidx.tracing:tracing:1.0.0] /Users/shseo/.gradle/caches/transforms-3/6a573aa0f3aaa65be7de6578dead28c9/transformed/jetified-tracing-1.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.1.0] /Users/shseo/.gradle/caches/transforms-3/6ce64167886054bf89656e600085ab8e/transformed/lifecycle-livedata-2.1.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.3.1] /Users/shseo/.gradle/caches/transforms-3/7b79e7ab66bb407154b88755d6695de1/transformed/lifecycle-livedata-core-2.3.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.arch.core:core-runtime:2.1.0] /Users/shseo/.gradle/caches/transforms-3/667f72a93c6385e1412b3cac377b218d/transformed/core-runtime-2.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.documentfile:documentfile:1.0.0] /Users/shseo/.gradle/caches/transforms-3/f1c873b3c7a3fcb5ebe80f046d0badfe/transformed/documentfile-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /Users/shseo/.gradle/caches/transforms-3/fd2355dbdb5b4415ba4e2441ae3d0287/transformed/localbroadcastmanager-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.print:print:1.0.0] /Users/shseo/.gradle/caches/transforms-3/93a674d3f96c22e0c9098cfcfc69f084/transformed/print-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/shseo/.gradle/caches/transforms-3/7a03a1bb3a976351da308913d330a1be/transformed/interpolator-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.exifinterface:exifinterface:1.3.2] /Users/shseo/.gradle/caches/transforms-3/dfa027857b93606e2d20a01973c9e52b/transformed/exifinterface-1.3.2/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.annotation:annotation-experimental:1.1.0] /Users/shseo/.gradle/caches/transforms-3/ff24357d6b6f09c42ce0b631b477929d/transformed/jetified-annotation-experimental-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [com.google.android.odml:image:1.0.0-beta1] /Users/shseo/.gradle/caches/transforms-3/d9bdfbc48b9868a48ecdb23ad61f9b0d/transformed/jetified-image-1.0.0-beta1/AndroidManifest.xml:2:1-9:12
+INJECTED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:2:1-391:12
+INJECTED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:2:1-391:12
+INJECTED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:2:1-391:12
+	package
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:4:5-29
+		INJECTED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml
+		INJECTED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml
+	android:versionName
+		INJECTED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:2:1-391:12
+		INJECTED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml
+	xmlns:tools
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:3:5-51
+	android:versionCode
+		INJECTED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:2:1-391:12
+		INJECTED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:2:11-69
+uses-permission#android.permission.BLUETOOTH
+ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:7:5-68
+MERGED from [:RFIDAPI3Library] /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/RFIDAPI3Library/build/.transforms/dbf74893041742b7b756b048f86901ee/transformed/jetified-API3_LIB-release/AndroidManifest.xml:11:5-68
+MERGED from [:RFIDAPI3Library] /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/RFIDAPI3Library/build/.transforms/dbf74893041742b7b756b048f86901ee/transformed/jetified-API3_LIB-release/AndroidManifest.xml:11:5-68
+	android:name
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:7:22-65
+uses-permission#android.permission.BLUETOOTH_ADMIN
+ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:8:5-74
+MERGED from [:RFIDAPI3Library] /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/RFIDAPI3Library/build/.transforms/dbf74893041742b7b756b048f86901ee/transformed/jetified-API3_LIB-release/AndroidManifest.xml:12:5-74
+MERGED from [:RFIDAPI3Library] /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/RFIDAPI3Library/build/.transforms/dbf74893041742b7b756b048f86901ee/transformed/jetified-API3_LIB-release/AndroidManifest.xml:12:5-74
+	android:name
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:8:22-71
+uses-permission#android.permission.BLUETOOTH_CONNECT
+ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:9:5-76
+	android:name
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:9:22-73
+uses-permission#android.permission.BLUETOOTH_SCAN
+ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:10:5-73
+	android:name
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:10:22-70
+uses-permission#android.permission.BLUETOOTH_ADVERTISE
+ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:11:5-78
+	android:name
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:11:22-75
+uses-permission#android.permission.INTERNET
+ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:13:5-67
+MERGED from [com.google.android.datatransport:transport-backend-cct:2.3.3] /Users/shseo/.gradle/caches/transforms-3/9dc02be42ca7d4a4e2d96f1fbcd0c5e1/transformed/jetified-transport-backend-cct-2.3.3/AndroidManifest.xml:26:5-67
+MERGED from [com.google.android.datatransport:transport-backend-cct:2.3.3] /Users/shseo/.gradle/caches/transforms-3/9dc02be42ca7d4a4e2d96f1fbcd0c5e1/transformed/jetified-transport-backend-cct-2.3.3/AndroidManifest.xml:26:5-67
+	android:name
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:13:22-64
+uses-permission#android.permission.POST_NOTIFICATIONS
+ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:15:5-77
+	android:name
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:15:22-74
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:16:5-17:37
+	android:maxSdkVersion
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:17:9-35
+	android:name
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:16:22-78
+uses-permission#android.permission.READ_EXTERNAL_STORAGE
+ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:18:5-80
+	android:name
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:18:22-77
+uses-permission#android.permission.ACCESS_COARSE_LOCATION
+ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:19:5-81
+MERGED from [:RFIDAPI3Library] /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/RFIDAPI3Library/build/.transforms/dbf74893041742b7b756b048f86901ee/transformed/jetified-API3_LIB-release/AndroidManifest.xml:13:5-81
+MERGED from [:RFIDAPI3Library] /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/RFIDAPI3Library/build/.transforms/dbf74893041742b7b756b048f86901ee/transformed/jetified-API3_LIB-release/AndroidManifest.xml:13:5-81
+	android:name
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:19:22-78
+uses-permission#android.permission.ACCESS_FINE_LOCATION
+ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:20:5-79
+MERGED from [:RFIDAPI3Library] /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/RFIDAPI3Library/build/.transforms/dbf74893041742b7b756b048f86901ee/transformed/jetified-API3_LIB-release/AndroidManifest.xml:14:5-79
+MERGED from [:RFIDAPI3Library] /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/RFIDAPI3Library/build/.transforms/dbf74893041742b7b756b048f86901ee/transformed/jetified-API3_LIB-release/AndroidManifest.xml:14:5-79
+	android:name
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:20:22-76
+uses-permission#android.permission.BLUETOOTH_PRIVILEGED
+ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:21:5-23:47
+	tools:ignore
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:23:9-44
+	android:name
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:22:9-63
+uses-permission#android.permission.CHANGE_WIFI_STATE
+ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:25:5-75
+	android:name
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:25:22-73
+uses-permission#android.permission.ACCESS_WIFI_STATE
+ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:26:5-75
+	android:name
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:26:22-73
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:27:5-78
+MERGED from [com.google.android.datatransport:transport-backend-cct:2.3.3] /Users/shseo/.gradle/caches/transforms-3/9dc02be42ca7d4a4e2d96f1fbcd0c5e1/transformed/jetified-transport-backend-cct-2.3.3/AndroidManifest.xml:25:5-79
+MERGED from [com.google.android.datatransport:transport-backend-cct:2.3.3] /Users/shseo/.gradle/caches/transforms-3/9dc02be42ca7d4a4e2d96f1fbcd0c5e1/transformed/jetified-transport-backend-cct-2.3.3/AndroidManifest.xml:25:5-79
+MERGED from [com.google.android.datatransport:transport-runtime:2.2.6] /Users/shseo/.gradle/caches/transforms-3/95e84a6f63494c3347ceadea00443f4d/transformed/jetified-transport-runtime-2.2.6/AndroidManifest.xml:22:5-79
+MERGED from [com.google.android.datatransport:transport-runtime:2.2.6] /Users/shseo/.gradle/caches/transforms-3/95e84a6f63494c3347ceadea00443f4d/transformed/jetified-transport-runtime-2.2.6/AndroidManifest.xml:22:5-79
+	android:name
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:27:22-76
+uses-permission#android.permission.CHANGE_NETWORK_STATE
+ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:28:5-78
+	android:name
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:28:22-76
+uses-permission#android.Manifest.permission.NETWORK_SETTINGS
+ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:30:5-83
+	android:name
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:30:22-81
+uses-permission#android.permission.NFC
+ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:32:5-62
+	android:name
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:32:22-59
+uses-feature#android.hardware.nfc
+ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:33:5-81
+	android:required
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:33:55-78
+	android:name
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:33:19-54
+uses-feature#android.hardware.camera
+ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:34:5-60
+	android:name
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:34:19-57
+uses-permission#android.permission.CAMERA
+ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:35:5-65
+	android:name
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:35:22-62
+application
+ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:37:5-389:19
+MERGED from [:RFIDAPI3Library] /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/RFIDAPI3Library/build/.transforms/dbf74893041742b7b756b048f86901ee/transformed/jetified-API3_LIB-release/AndroidManifest.xml:16:5-18:44
+MERGED from [:RFIDAPI3Library] /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/RFIDAPI3Library/build/.transforms/dbf74893041742b7b756b048f86901ee/transformed/jetified-API3_LIB-release/AndroidManifest.xml:16:5-18:44
+MERGED from [com.google.android.material:material:1.4.0] /Users/shseo/.gradle/caches/transforms-3/d617f4a6bfa7657111cc9ae5bd712183/transformed/material-1.4.0/AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.material:material:1.4.0] /Users/shseo/.gradle/caches/transforms-3/d617f4a6bfa7657111cc9ae5bd712183/transformed/material-1.4.0/AndroidManifest.xml:22:5-20
+MERGED from [androidx.constraintlayout:constraintlayout:2.0.4] /Users/shseo/.gradle/caches/transforms-3/b6c4b20bf7666df66cf6bd439f65a122/transformed/constraintlayout-2.0.4/AndroidManifest.xml:9:5-20
+MERGED from [androidx.constraintlayout:constraintlayout:2.0.4] /Users/shseo/.gradle/caches/transforms-3/b6c4b20bf7666df66cf6bd439f65a122/transformed/constraintlayout-2.0.4/AndroidManifest.xml:9:5-20
+MERGED from [com.google.android.gms:play-services-location:18.0.0] /Users/shseo/.gradle/caches/transforms-3/e8117eb1090b393b95133bdd9d5e4f97/transformed/jetified-play-services-location-18.0.0/AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-location:18.0.0] /Users/shseo/.gradle/caches/transforms-3/e8117eb1090b393b95133bdd9d5e4f97/transformed/jetified-play-services-location-18.0.0/AndroidManifest.xml:7:5-20
+MERGED from [androidx.camera:camera-camera2:1.1.0-alpha08] /Users/shseo/.gradle/caches/transforms-3/e2302ccd9d3c9e0a4c5c4fdab3a06ec2/transformed/jetified-camera-camera2-1.1.0-alpha08/AndroidManifest.xml:25:5-36:19
+MERGED from [androidx.camera:camera-camera2:1.1.0-alpha08] /Users/shseo/.gradle/caches/transforms-3/e2302ccd9d3c9e0a4c5c4fdab3a06ec2/transformed/jetified-camera-camera2-1.1.0-alpha08/AndroidManifest.xml:25:5-36:19
+MERGED from [com.google.android.gms:play-services-mlkit-barcode-scanning:18.0.0] /Users/shseo/.gradle/caches/transforms-3/b5e4e76cfaa9dd6925fa1629b30585e9/transformed/jetified-play-services-mlkit-barcode-scanning-18.0.0/AndroidManifest.xml:8:5-16:19
+MERGED from [com.google.android.gms:play-services-mlkit-barcode-scanning:18.0.0] /Users/shseo/.gradle/caches/transforms-3/b5e4e76cfaa9dd6925fa1629b30585e9/transformed/jetified-play-services-mlkit-barcode-scanning-18.0.0/AndroidManifest.xml:8:5-16:19
+MERGED from [com.google.mlkit:vision-common:17.0.0] /Users/shseo/.gradle/caches/transforms-3/4e75999606bfb558840d4572a0b28032/transformed/jetified-vision-common-17.0.0/AndroidManifest.xml:8:5-16:19
+MERGED from [com.google.mlkit:vision-common:17.0.0] /Users/shseo/.gradle/caches/transforms-3/4e75999606bfb558840d4572a0b28032/transformed/jetified-vision-common-17.0.0/AndroidManifest.xml:8:5-16:19
+MERGED from [com.google.mlkit:common:18.0.0] /Users/shseo/.gradle/caches/transforms-3/5669f9f558c2367fefc1181dece5e9b2/transformed/jetified-common-18.0.0/AndroidManifest.xml:8:5-24:19
+MERGED from [com.google.mlkit:common:18.0.0] /Users/shseo/.gradle/caches/transforms-3/5669f9f558c2367fefc1181dece5e9b2/transformed/jetified-common-18.0.0/AndroidManifest.xml:8:5-24:19
+MERGED from [com.google.android.gms:play-services-base:18.0.1] /Users/shseo/.gradle/caches/transforms-3/25d6436db3863a9e80542c647b38f6ec/transformed/jetified-play-services-base-18.0.1/AndroidManifest.xml:19:5-23:19
+MERGED from [com.google.android.gms:play-services-base:18.0.1] /Users/shseo/.gradle/caches/transforms-3/25d6436db3863a9e80542c647b38f6ec/transformed/jetified-play-services-base-18.0.1/AndroidManifest.xml:19:5-23:19
+MERGED from [com.google.android.gms:play-services-places-placereport:17.0.0] /Users/shseo/.gradle/caches/transforms-3/4e51709033c6421fa7d10302b853326e/transformed/jetified-play-services-places-placereport-17.0.0/AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-places-placereport:17.0.0] /Users/shseo/.gradle/caches/transforms-3/4e51709033c6421fa7d10302b853326e/transformed/jetified-play-services-places-placereport-17.0.0/AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-tasks:18.0.1] /Users/shseo/.gradle/caches/transforms-3/6bcfe844bfb257abf74369e84350788e/transformed/jetified-play-services-tasks-18.0.1/AndroidManifest.xml:5:5-20
+MERGED from [com.google.android.gms:play-services-tasks:18.0.1] /Users/shseo/.gradle/caches/transforms-3/6bcfe844bfb257abf74369e84350788e/transformed/jetified-play-services-tasks-18.0.1/AndroidManifest.xml:5:5-20
+MERGED from [com.google.android.gms:play-services-basement:18.0.0] /Users/shseo/.gradle/caches/transforms-3/4cd01b2c46f9da47b1f740062690459e/transformed/jetified-play-services-basement-18.0.0/AndroidManifest.xml:20:5-24:19
+MERGED from [com.google.android.gms:play-services-basement:18.0.0] /Users/shseo/.gradle/caches/transforms-3/4cd01b2c46f9da47b1f740062690459e/transformed/jetified-play-services-basement-18.0.0/AndroidManifest.xml:20:5-24:19
+MERGED from [androidx.camera:camera-core:1.1.0-alpha08] /Users/shseo/.gradle/caches/transforms-3/243e4df5ba3a042e4cefde2b1ea3805d/transformed/jetified-camera-core-1.1.0-alpha08/AndroidManifest.xml:25:5-36:19
+MERGED from [androidx.camera:camera-core:1.1.0-alpha08] /Users/shseo/.gradle/caches/transforms-3/243e4df5ba3a042e4cefde2b1ea3805d/transformed/jetified-camera-core-1.1.0-alpha08/AndroidManifest.xml:25:5-36:19
+MERGED from [androidx.core:core:1.5.0] /Users/shseo/.gradle/caches/transforms-3/18b1bc7c8abf3f1dcf65da443449ace5/transformed/core-1.5.0/AndroidManifest.xml:24:5-89
+MERGED from [androidx.core:core:1.5.0] /Users/shseo/.gradle/caches/transforms-3/18b1bc7c8abf3f1dcf65da443449ace5/transformed/core-1.5.0/AndroidManifest.xml:24:5-89
+MERGED from [com.google.android.datatransport:transport-backend-cct:2.3.3] /Users/shseo/.gradle/caches/transforms-3/9dc02be42ca7d4a4e2d96f1fbcd0c5e1/transformed/jetified-transport-backend-cct-2.3.3/AndroidManifest.xml:28:5-36:19
+MERGED from [com.google.android.datatransport:transport-backend-cct:2.3.3] /Users/shseo/.gradle/caches/transforms-3/9dc02be42ca7d4a4e2d96f1fbcd0c5e1/transformed/jetified-transport-backend-cct-2.3.3/AndroidManifest.xml:28:5-36:19
+MERGED from [com.google.android.datatransport:transport-runtime:2.2.6] /Users/shseo/.gradle/caches/transforms-3/95e84a6f63494c3347ceadea00443f4d/transformed/jetified-transport-runtime-2.2.6/AndroidManifest.xml:25:5-39:19
+MERGED from [com.google.android.datatransport:transport-runtime:2.2.6] /Users/shseo/.gradle/caches/transforms-3/95e84a6f63494c3347ceadea00443f4d/transformed/jetified-transport-runtime-2.2.6/AndroidManifest.xml:25:5-39:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/shseo/.gradle/caches/transforms-3/0153f342ac57307b30aa2cd6dc7ef636/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:24:5-25:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/shseo/.gradle/caches/transforms-3/0153f342ac57307b30aa2cd6dc7ef636/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:24:5-25:19
+MERGED from [com.google.android.odml:image:1.0.0-beta1] /Users/shseo/.gradle/caches/transforms-3/d9bdfbc48b9868a48ecdb23ad61f9b0d/transformed/jetified-image-1.0.0-beta1/AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.odml:image:1.0.0-beta1] /Users/shseo/.gradle/caches/transforms-3/d9bdfbc48b9868a48ecdb23ad61f9b0d/transformed/jetified-image-1.0.0-beta1/AndroidManifest.xml:7:5-20
+	android:requestLegacyExternalStorage
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:43:9-52
+	android:label
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:42:9-41
+	android:appComponentFactory
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:40:9-77
+		REJECTED from [androidx.core:core:1.5.0] /Users/shseo/.gradle/caches/transforms-3/18b1bc7c8abf3f1dcf65da443449ace5/transformed/core-1.5.0/AndroidManifest.xml:24:18-86
+	android:resizeableActivity
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:44:9-43
+	android:icon
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:41:9-43
+	android:allowBackup
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:39:9-36
+		REJECTED from [:RFIDAPI3Library] /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/RFIDAPI3Library/build/.transforms/dbf74893041742b7b756b048f86901ee/transformed/jetified-API3_LIB-release/AndroidManifest.xml:17:9-35
+	android:theme
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:45:9-40
+	tools:replace
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:46:9-73
+	android:name
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:38:9-48
+activity#com.zebra.demo.ManageDeviceActivity
+ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:48:9-50:52
+	android:screenOrientation
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:50:13-49
+	android:name
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:49:13-49
+activity#com.zebra.demo.scanner.activities.NavigationHelpActivity
+ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:51:9-56:59
+	android:screenOrientation
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:55:13-49
+	android:parentActivityName
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:54:13-83
+	android:label
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:53:13-67
+	android:theme
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:56:13-56
+	android:name
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:52:13-70
+activity#com.zebra.demo.DeviceDiscoverActivity
+ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:57:9-70:20
+	android:screenOrientation
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:61:13-49
+	android:label
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:60:13-45
+	android:windowSoftInputMode
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:63:13-55
+	android:exported
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:64:13-36
+	android:configChanges
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:59:13-72
+	android:theme
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:62:13-56
+	android:name
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:58:13-51
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:65:13-69:29
+action#android.intent.action.MAIN
+ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:66:17-69
+	android:name
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:66:25-66
+category#android.intent.category.LAUNCHER
+ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:68:17-77
+	android:name
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:68:27-74
+activity#com.zebra.demo.rfidreader.settings.SettingsDetailActivity
+ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:71:9-77:58
+	android:screenOrientation
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:76:13-49
+	android:label
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:73:13-67
+	android:launchMode
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:74:13-44
+	android:windowSoftInputMode
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:77:13-55
+	android:resizeableActivity
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:75:13-47
+	android:name
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:72:13-71
+service#com.zebra.demo.rfidreader.notifications.NotificationsService
+ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:79:9-81:40
+	android:exported
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:81:13-37
+	android:name
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:80:13-74
+receiver#com.zebra.demo.rfidreader.notifications.NotificationsReceiver
+ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:83:9-100:20
+	android:enabled
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:85:13-35
+	android:exported
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:86:13-37
+	android:name
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:84:13-75
+intent-filter#action:name:com.rfidreader.NFC.outofrange+action:name:com.rfidreader.available+action:name:com.rfidreader.battery.charging+action:name:com.rfidreader.battery.critical+action:name:com.rfidreader.battery.low+action:name:com.rfidreader.conn.failed+action:name:com.rfidreader.connected+action:name:com.rfidreader.disconnected+action:name:com.rfidreader.status.received
+ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:87:13-99:29
+action#com.rfidreader.battery.low
+ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:90:17-69
+	android:name
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:90:25-66
+action#com.rfidreader.battery.critical
+ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:91:17-74
+	android:name
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:91:25-71
+action#com.rfidreader.battery.charging
+ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:92:17-74
+	android:name
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:92:25-71
+action#com.rfidreader.disconnected
+ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:93:17-70
+	android:name
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:93:25-67
+action#com.rfidreader.connected
+ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:94:17-67
+	android:name
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:94:25-64
+action#com.rfidreader.available
+ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:95:17-67
+	android:name
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:95:25-64
+action#com.rfidreader.status.received
+ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:96:17-73
+	android:name
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:96:25-70
+action#com.rfidreader.conn.failed
+ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:97:17-69
+	android:name
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:97:25-66
+action#com.rfidreader.NFC.outofrange
+ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:98:17-72
+	android:name
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:98:25-69
+activity#com.zebra.demo.scanner.activities.ScannerHomeActivity
+ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:102:9-108:64
+	android:screenOrientation
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:107:13-49
+	android:label
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:105:13-50
+	android:launchMode
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:106:13-44
+	android:configChanges
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:104:13-59
+	android:theme
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:108:13-61
+	android:name
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:103:13-67
+activity#com.zebra.demo.scanner.activities.PairNewScannerActivity
+ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:109:9-115:52
+	android:screenOrientation
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:115:13-49
+	android:parentActivityName
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:114:13-78
+	android:label
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:112:13-58
+	android:launchMode
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:113:13-44
+	android:configChanges
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:111:13-59
+	android:name
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:110:13-70
+activity#com.zebra.demo.scanner.activities.SplashScreenActivity
+ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:116:9-119:69
+	android:label
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:118:13-56
+	android:theme
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:119:13-66
+	android:name
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:117:13-68
+activity#com.zebra.demo.scanner.activities.AboutActivity
+ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:120:9-125:52
+	android:screenOrientation
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:125:13-49
+	android:parentActivityName
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:124:13-78
+	android:label
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:123:13-57
+	android:configChanges
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:122:13-59
+	android:name
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:121:13-61
+activity#com.zebra.demo.scanner.activities.ScannersActivity
+ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:126:9-132:52
+	android:screenOrientation
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:132:13-49
+	android:parentActivityName
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:131:13-78
+	android:label
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:129:13-60
+	android:launchMode
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:130:13-44
+	android:configChanges
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:128:13-59
+	android:name
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:127:13-64
+activity#com.zebra.demo.scanner.activities.ConnectionHelpActivity2
+ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:133:9-138:52
+	android:screenOrientation
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:138:13-49
+	android:parentActivityName
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:137:13-78
+	android:label
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:136:13-74
+	android:configChanges
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:135:13-59
+	android:name
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:134:13-71
+activity#com.zebra.demo.scanner.activities.SettingsActivity
+ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:139:9-144:52
+	android:screenOrientation
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:144:13-49
+	android:parentActivityName
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:143:13-78
+	android:label
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:142:13-60
+	android:configChanges
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:141:13-59
+	android:name
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:140:13-64
+activity#com.zebra.demo.scanner.activities.NotificationsActivity
+ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:145:9-150:52
+	android:screenOrientation
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:150:13-49
+	android:parentActivityName
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:149:13-78
+	android:label
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:148:13-65
+	android:configChanges
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:147:13-59
+	android:name
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:146:13-69
+activity#com.zebra.demo.scanner.activities.BaseActivity
+ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:151:9-155:52
+	android:screenOrientation
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:155:13-49
+	android:label
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:154:13-56
+	android:configChanges
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:153:13-59
+	android:name
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:152:13-60
+receiver#com.zebra.demo.scanner.receivers.NotificationsReceiver
+ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:157:9-172:20
+	android:enabled
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:159:13-35
+	android:exported
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:160:13-37
+	android:name
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:158:13-68
+intent-filter#action:name:com.zebra.scannercontrol.available+action:name:com.zebra.scannercontrol.barcode.received+action:name:com.zebra.scannercontrol.conn.failed+action:name:com.zebra.scannercontrol.connected+action:name:com.zebra.scannercontrol.disconnected+action:name:com.zebra.scannercontrol.image.received+action:name:com.zebra.scannercontrol.video.received
+ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:161:13-171:29
+action#com.zebra.scannercontrol.connected
+ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:164:17-77
+	android:name
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:164:25-74
+action#com.zebra.scannercontrol.disconnected
+ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:165:17-80
+	android:name
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:165:25-77
+action#com.zebra.scannercontrol.available
+ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:166:17-77
+	android:name
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:166:25-74
+action#com.zebra.scannercontrol.conn.failed
+ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:167:17-79
+	android:name
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:167:25-76
+action#com.zebra.scannercontrol.barcode.received
+ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:168:17-84
+	android:name
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:168:25-81
+action#com.zebra.scannercontrol.image.received
+ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:169:17-82
+	android:name
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:169:25-79
+action#com.zebra.scannercontrol.video.received
+ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:170:17-82
+	android:name
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:170:25-79
+activity#com.zebra.demo.ActiveDeviceActivity
+ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:174:9-187:20
+	android:screenOrientation
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:179:13-49
+	android:label
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:177:13-66
+	android:launchMode
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:178:13-44
+	android:exported
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:181:13-36
+	android:configChanges
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:176:13-69
+	android:theme
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:180:13-56
+	android:name
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:175:13-49
+intent-filter#action:name:ActiveDeviceActivity+category:name:android.intent.category.DEFAULT
+ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:182:13-186:29
+action#ActiveDeviceActivity
+ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:183:17-63
+	android:name
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:183:25-60
+category#android.intent.category.DEFAULT
+ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:185:17-76
+	android:name
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:185:27-73
+activity#com.zebra.demo.scanner.activities.ActiveScannerActivity
+ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:188:9-201:20
+	android:screenOrientation
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:193:13-49
+	android:label
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:191:13-66
+	android:launchMode
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:192:13-44
+	android:exported
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:195:13-36
+	android:configChanges
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:190:13-59
+	android:theme
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:194:13-56
+	android:name
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:189:13-69
+intent-filter#action:name:activities.ActiveScannerActivity+category:name:android.intent.category.DEFAULT
+ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:196:13-200:29
+action#activities.ActiveScannerActivity
+ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:197:17-75
+	android:name
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:197:25-72
+activity#com.zebra.demo.scanner.activities.BeeperActionsActivity
+ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:202:9-212:20
+	android:screenOrientation
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:207:13-49
+	android:parentActivityName
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:206:13-83
+	android:label
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:205:13-66
+	android:configChanges
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:204:13-59
+	android:theme
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:208:13-56
+	android:name
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:203:13-69
+meta-data#android.support.PARENT_ACTIVITY
+ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:209:13-211:77
+	android:value
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:211:17-74
+	android:name
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:210:17-63
+activity#com.zebra.demo.scanner.activities.LEDActivity
+ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:213:9-223:20
+	android:screenOrientation
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:218:13-49
+	android:parentActivityName
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:217:13-83
+	android:label
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:216:13-66
+	android:configChanges
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:215:13-59
+	android:theme
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:219:13-56
+	android:name
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:214:13-59
+activity#com.zebra.demo.scanner.activities.SymbologiesActivity
+ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:224:9-234:20
+	android:screenOrientation
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:229:13-49
+	android:parentActivityName
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:228:13-83
+	android:label
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:227:13-66
+	android:configChanges
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:226:13-59
+	android:theme
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:230:13-56
+	android:name
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:225:13-67
+activity#com.zebra.demo.scanner.activities.BeeperSettingsActivity
+ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:235:9-244:20
+	android:screenOrientation
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:240:13-49
+	android:parentActivityName
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:239:13-83
+	android:label
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:238:13-66
+	android:configChanges
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:237:13-59
+	android:name
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:236:13-70
+activity#com.zebra.demo.scanner.activities.AvailableScannerActivity
+ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:245:9-254:20
+	android:screenOrientation
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:250:13-49
+	android:parentActivityName
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:249:13-78
+	android:label
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:248:13-69
+	android:configChanges
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:247:13-59
+	android:name
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:246:13-72
+activity#com.zebra.demo.scanner.activities.VibrationFeedback
+ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:255:9-265:20
+	android:screenOrientation
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:260:13-49
+	android:parentActivityName
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:259:13-83
+	android:label
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:258:13-66
+	android:configChanges
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:257:13-59
+	android:theme
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:261:13-56
+	android:name
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:256:13-65
+activity#com.zebra.demo.scanner.activities.BatteryStatistics
+ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:266:9-276:20
+	android:screenOrientation
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:271:13-49
+	android:parentActivityName
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:270:13-83
+	android:label
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:269:13-66
+	android:configChanges
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:268:13-59
+	android:theme
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:272:13-56
+	android:name
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:267:13-65
+activity#com.zebra.demo.scanner.activities.SupportedScanners
+ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:277:9-286:20
+	android:screenOrientation
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:282:13-49
+	android:parentActivityName
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:281:13-85
+	android:label
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:280:13-70
+	android:configChanges
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:279:13-59
+	android:name
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:278:13-65
+activity#com.zebra.demo.scanner.activities.PairingInstructionsAll
+ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:287:9-296:20
+	android:screenOrientation
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:292:13-49
+	android:parentActivityName
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:291:13-85
+	android:label
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:290:13-76
+	android:configChanges
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:289:13-59
+	android:name
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:288:13-70
+activity#com.zebra.demo.scanner.activities.PairingInstructionsRFD8500
+ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:297:9-306:20
+	android:screenOrientation
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:302:13-49
+	android:parentActivityName
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:301:13-85
+	android:label
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:300:13-80
+	android:configChanges
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:299:13-59
+	android:name
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:298:13-74
+activity#com.zebra.demo.scanner.activities.FindCabledScanner
+ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:307:9-316:20
+	android:screenOrientation
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:312:13-49
+	android:parentActivityName
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:311:13-78
+	android:label
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:310:13-71
+	android:configChanges
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:309:13-59
+	android:name
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:308:13-65
+activity#com.zebra.demo.scanner.activities.SampleBarcodes
+ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:317:9-327:20
+	android:screenOrientation
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:322:13-49
+	android:parentActivityName
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:321:13-83
+	android:label
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:320:13-66
+	android:configChanges
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:319:13-59
+	android:theme
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:323:13-56
+	android:name
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:318:13-62
+activity#com.zebra.demo.scanner.activities.SsaSetSymbologyActivity
+ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:328:9-339:20
+	android:screenOrientation
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:334:13-49
+	android:parentActivityName
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:333:13-83
+	android:label
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:331:13-66
+	android:noHistory
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:332:13-37
+	android:configChanges
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:330:13-59
+	android:theme
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:335:13-56
+	android:name
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:329:13-71
+activity#com.zebra.demo.scanner.activities.ScanSpeedAnalyticsActivity
+ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:340:9-350:20
+	android:screenOrientation
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:345:13-49
+	android:parentActivityName
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:344:13-83
+	android:label
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:343:13-66
+	android:configChanges
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:342:13-59
+	android:theme
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:346:13-56
+	android:name
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:341:13-74
+activity#com.zebra.demo.scanner.activities.ImageActivity
+ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:351:9-361:20
+	android:screenOrientation
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:356:13-49
+	android:parentActivityName
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:355:13-83
+	android:label
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:354:13-66
+	android:configChanges
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:353:13-59
+	android:theme
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:357:13-56
+	android:name
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:352:13-61
+activity#com.zebra.demo.scanner.activities.IntelligentImageCaptureActivity
+ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:362:9-372:20
+	android:screenOrientation
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:367:13-49
+	android:parentActivityName
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:366:13-83
+	android:label
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:365:13-66
+	android:configChanges
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:364:13-59
+	android:theme
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:368:13-56
+	android:name
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:363:13-79
+activity#com.zebra.demo.scanner.activities.ScaleActivity
+ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:373:9-383:20
+	android:screenOrientation
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:378:13-49
+	android:parentActivityName
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:377:13-83
+	android:label
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:376:13-66
+	android:configChanges
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:375:13-59
+	android:theme
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:379:13-56
+	android:name
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:374:13-61
+activity#com.zebra.demo.scanner.activities.DecodeImageActivity
+ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:384:9-388:59
+	android:screenOrientation
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:387:13-49
+	android:configChanges
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:386:13-59
+	android:theme
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:388:13-56
+	android:name
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml:385:13-67
+uses-sdk
+INJECTED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml
+INJECTED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml
+MERGED from [:RFIDAPI3Library] /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/RFIDAPI3Library/build/.transforms/dbf74893041742b7b756b048f86901ee/transformed/jetified-API3_LIB-release/AndroidManifest.xml:7:5-9:41
+MERGED from [:RFIDAPI3Library] /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/RFIDAPI3Library/build/.transforms/dbf74893041742b7b756b048f86901ee/transformed/jetified-API3_LIB-release/AndroidManifest.xml:7:5-9:41
+MERGED from [androidx.navigation:navigation-ui:2.3.5] /Users/shseo/.gradle/caches/transforms-3/16b85a63215e8c461bdf1e29574b5f81/transformed/navigation-ui-2.3.5/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.navigation:navigation-ui:2.3.5] /Users/shseo/.gradle/caches/transforms-3/16b85a63215e8c461bdf1e29574b5f81/transformed/navigation-ui-2.3.5/AndroidManifest.xml:20:5-22:41
+MERGED from [com.google.android.material:material:1.4.0] /Users/shseo/.gradle/caches/transforms-3/d617f4a6bfa7657111cc9ae5bd712183/transformed/material-1.4.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.material:material:1.4.0] /Users/shseo/.gradle/caches/transforms-3/d617f4a6bfa7657111cc9ae5bd712183/transformed/material-1.4.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.constraintlayout:constraintlayout:2.0.4] /Users/shseo/.gradle/caches/transforms-3/b6c4b20bf7666df66cf6bd439f65a122/transformed/constraintlayout-2.0.4/AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.constraintlayout:constraintlayout:2.0.4] /Users/shseo/.gradle/caches/transforms-3/b6c4b20bf7666df66cf6bd439f65a122/transformed/constraintlayout-2.0.4/AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.camera:camera-view:1.0.0-alpha21] /Users/shseo/.gradle/caches/transforms-3/3353ac22dbdc2b9ec25eba64cad5ffcf/transformed/jetified-camera-view-1.0.0-alpha21/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.camera:camera-view:1.0.0-alpha21] /Users/shseo/.gradle/caches/transforms-3/3353ac22dbdc2b9ec25eba64cad5ffcf/transformed/jetified-camera-view-1.0.0-alpha21/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.appcompat:appcompat:1.3.0] /Users/shseo/.gradle/caches/transforms-3/867c7d4cf9d43809c9097bbf49606663/transformed/appcompat-1.3.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.appcompat:appcompat:1.3.0] /Users/shseo/.gradle/caches/transforms-3/867c7d4cf9d43809c9097bbf49606663/transformed/appcompat-1.3.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.legacy:legacy-support-v4:1.0.0] /Users/shseo/.gradle/caches/transforms-3/30b8f2637904b674b580036218a221b1/transformed/legacy-support-v4-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-v4:1.0.0] /Users/shseo/.gradle/caches/transforms-3/30b8f2637904b674b580036218a221b1/transformed/legacy-support-v4-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.github.PhilJay:MPAndroidChart:v3.1.0] /Users/shseo/.gradle/caches/transforms-3/9dc122949759198875203ab4ba2df8c2/transformed/jetified-MPAndroidChart-v3.1.0/AndroidManifest.xml:16:5-18:41
+MERGED from [com.github.PhilJay:MPAndroidChart:v3.1.0] /Users/shseo/.gradle/caches/transforms-3/9dc122949759198875203ab4ba2df8c2/transformed/jetified-MPAndroidChart-v3.1.0/AndroidManifest.xml:16:5-18:41
+MERGED from [com.github.chrisbanes:PhotoView:2.0.0] /Users/shseo/.gradle/caches/transforms-3/6f49f931c87fe90320a0ec59982081a5/transformed/jetified-PhotoView-2.0.0/AndroidManifest.xml:8:5-10:41
+MERGED from [com.github.chrisbanes:PhotoView:2.0.0] /Users/shseo/.gradle/caches/transforms-3/6f49f931c87fe90320a0ec59982081a5/transformed/jetified-PhotoView-2.0.0/AndroidManifest.xml:8:5-10:41
+MERGED from [androidx.navigation:navigation-fragment:2.3.5] /Users/shseo/.gradle/caches/transforms-3/3e6b27ed73e2f0ee803b4ac001870896/transformed/navigation-fragment-2.3.5/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.navigation:navigation-fragment:2.3.5] /Users/shseo/.gradle/caches/transforms-3/3e6b27ed73e2f0ee803b4ac001870896/transformed/navigation-fragment-2.3.5/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.viewpager2:viewpager2:1.0.0] /Users/shseo/.gradle/caches/transforms-3/8f32d40ba0d4e296391c2672743cbf7a/transformed/jetified-viewpager2-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.viewpager2:viewpager2:1.0.0] /Users/shseo/.gradle/caches/transforms-3/8f32d40ba0d4e296391c2672743cbf7a/transformed/jetified-viewpager2-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.recyclerview:recyclerview:1.2.1] /Users/shseo/.gradle/caches/transforms-3/31b0683d667dedb9b85ea804d85b77a5/transformed/recyclerview-1.2.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.recyclerview:recyclerview:1.2.1] /Users/shseo/.gradle/caches/transforms-3/31b0683d667dedb9b85ea804d85b77a5/transformed/recyclerview-1.2.1/AndroidManifest.xml:20:5-22:41
+MERGED from [com.google.android.gms:play-services-location:18.0.0] /Users/shseo/.gradle/caches/transforms-3/e8117eb1090b393b95133bdd9d5e4f97/transformed/jetified-play-services-location-18.0.0/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-location:18.0.0] /Users/shseo/.gradle/caches/transforms-3/e8117eb1090b393b95133bdd9d5e4f97/transformed/jetified-play-services-location-18.0.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.camera:camera-camera2:1.1.0-alpha08] /Users/shseo/.gradle/caches/transforms-3/e2302ccd9d3c9e0a4c5c4fdab3a06ec2/transformed/jetified-camera-camera2-1.1.0-alpha08/AndroidManifest.xml:21:5-23:41
+MERGED from [androidx.camera:camera-camera2:1.1.0-alpha08] /Users/shseo/.gradle/caches/transforms-3/e2302ccd9d3c9e0a4c5c4fdab3a06ec2/transformed/jetified-camera-camera2-1.1.0-alpha08/AndroidManifest.xml:21:5-23:41
+MERGED from [androidx.camera:camera-lifecycle:1.1.0-alpha01] /Users/shseo/.gradle/caches/transforms-3/0bcf0fd8a33e6eaebab40581bf956fb9/transformed/jetified-camera-lifecycle-1.1.0-alpha01/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.camera:camera-lifecycle:1.1.0-alpha01] /Users/shseo/.gradle/caches/transforms-3/0bcf0fd8a33e6eaebab40581bf956fb9/transformed/jetified-camera-lifecycle-1.1.0-alpha01/AndroidManifest.xml:20:5-22:41
+MERGED from [com.google.android.gms:play-services-mlkit-barcode-scanning:18.0.0] /Users/shseo/.gradle/caches/transforms-3/b5e4e76cfaa9dd6925fa1629b30585e9/transformed/jetified-play-services-mlkit-barcode-scanning-18.0.0/AndroidManifest.xml:6:5-44
+MERGED from [com.google.android.gms:play-services-mlkit-barcode-scanning:18.0.0] /Users/shseo/.gradle/caches/transforms-3/b5e4e76cfaa9dd6925fa1629b30585e9/transformed/jetified-play-services-mlkit-barcode-scanning-18.0.0/AndroidManifest.xml:6:5-44
+MERGED from [com.google.mlkit:barcode-scanning-common:17.0.0] /Users/shseo/.gradle/caches/transforms-3/b4b620e13457ee8099d3b79de7c2c292/transformed/jetified-barcode-scanning-common-17.0.0/AndroidManifest.xml:5:5-44
+MERGED from [com.google.mlkit:barcode-scanning-common:17.0.0] /Users/shseo/.gradle/caches/transforms-3/b4b620e13457ee8099d3b79de7c2c292/transformed/jetified-barcode-scanning-common-17.0.0/AndroidManifest.xml:5:5-44
+MERGED from [com.google.mlkit:vision-common:17.0.0] /Users/shseo/.gradle/caches/transforms-3/4e75999606bfb558840d4572a0b28032/transformed/jetified-vision-common-17.0.0/AndroidManifest.xml:6:5-44
+MERGED from [com.google.mlkit:vision-common:17.0.0] /Users/shseo/.gradle/caches/transforms-3/4e75999606bfb558840d4572a0b28032/transformed/jetified-vision-common-17.0.0/AndroidManifest.xml:6:5-44
+MERGED from [com.google.mlkit:common:18.0.0] /Users/shseo/.gradle/caches/transforms-3/5669f9f558c2367fefc1181dece5e9b2/transformed/jetified-common-18.0.0/AndroidManifest.xml:6:5-44
+MERGED from [com.google.mlkit:common:18.0.0] /Users/shseo/.gradle/caches/transforms-3/5669f9f558c2367fefc1181dece5e9b2/transformed/jetified-common-18.0.0/AndroidManifest.xml:6:5-44
+MERGED from [com.google.android.gms:play-services-base:18.0.1] /Users/shseo/.gradle/caches/transforms-3/25d6436db3863a9e80542c647b38f6ec/transformed/jetified-play-services-base-18.0.1/AndroidManifest.xml:18:5-43
+MERGED from [com.google.android.gms:play-services-base:18.0.1] /Users/shseo/.gradle/caches/transforms-3/25d6436db3863a9e80542c647b38f6ec/transformed/jetified-play-services-base-18.0.1/AndroidManifest.xml:18:5-43
+MERGED from [com.google.android.gms:play-services-places-placereport:17.0.0] /Users/shseo/.gradle/caches/transforms-3/4e51709033c6421fa7d10302b853326e/transformed/jetified-play-services-places-placereport-17.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-places-placereport:17.0.0] /Users/shseo/.gradle/caches/transforms-3/4e51709033c6421fa7d10302b853326e/transformed/jetified-play-services-places-placereport-17.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.mlkit:vision-interfaces:16.0.0] /Users/shseo/.gradle/caches/transforms-3/91ae5845a9f0fceb86e9ee3b8fa4b5ef/transformed/jetified-vision-interfaces-16.0.0/AndroidManifest.xml:5:5-44
+MERGED from [com.google.mlkit:vision-interfaces:16.0.0] /Users/shseo/.gradle/caches/transforms-3/91ae5845a9f0fceb86e9ee3b8fa4b5ef/transformed/jetified-vision-interfaces-16.0.0/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-tasks:18.0.1] /Users/shseo/.gradle/caches/transforms-3/6bcfe844bfb257abf74369e84350788e/transformed/jetified-play-services-tasks-18.0.1/AndroidManifest.xml:4:5-43
+MERGED from [com.google.android.gms:play-services-tasks:18.0.1] /Users/shseo/.gradle/caches/transforms-3/6bcfe844bfb257abf74369e84350788e/transformed/jetified-play-services-tasks-18.0.1/AndroidManifest.xml:4:5-43
+MERGED from [com.google.android.gms:play-services-basement:18.0.0] /Users/shseo/.gradle/caches/transforms-3/4cd01b2c46f9da47b1f740062690459e/transformed/jetified-play-services-basement-18.0.0/AndroidManifest.xml:18:5-43
+MERGED from [com.google.android.gms:play-services-basement:18.0.0] /Users/shseo/.gradle/caches/transforms-3/4cd01b2c46f9da47b1f740062690459e/transformed/jetified-play-services-basement-18.0.0/AndroidManifest.xml:18:5-43
+MERGED from [androidx.fragment:fragment:1.3.4] /Users/shseo/.gradle/caches/transforms-3/84fcbb5275aa04a87cd944ba181f9077/transformed/fragment-1.3.4/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.fragment:fragment:1.3.4] /Users/shseo/.gradle/caches/transforms-3/84fcbb5275aa04a87cd944ba181f9077/transformed/fragment-1.3.4/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.navigation:navigation-runtime:2.3.5] /Users/shseo/.gradle/caches/transforms-3/033eb3dfb38fd957b97b9217541d9e69/transformed/navigation-runtime-2.3.5/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.navigation:navigation-runtime:2.3.5] /Users/shseo/.gradle/caches/transforms-3/033eb3dfb38fd957b97b9217541d9e69/transformed/navigation-runtime-2.3.5/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.activity:activity:1.2.3] /Users/shseo/.gradle/caches/transforms-3/0c1e257d7df85caf09eaed9fe4323d09/transformed/jetified-activity-1.2.3/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.activity:activity:1.2.3] /Users/shseo/.gradle/caches/transforms-3/0c1e257d7df85caf09eaed9fe4323d09/transformed/jetified-activity-1.2.3/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.appcompat:appcompat-resources:1.3.0] /Users/shseo/.gradle/caches/transforms-3/98b716d025ce960ad5ece247d162e3c6/transformed/jetified-appcompat-resources-1.3.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.appcompat:appcompat-resources:1.3.0] /Users/shseo/.gradle/caches/transforms-3/98b716d025ce960ad5ece247d162e3c6/transformed/jetified-appcompat-resources-1.3.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] /Users/shseo/.gradle/caches/transforms-3/790324d083913331f08cd18429dc788a/transformed/legacy-support-core-ui-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] /Users/shseo/.gradle/caches/transforms-3/790324d083913331f08cd18429dc788a/transformed/legacy-support-core-ui-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] /Users/shseo/.gradle/caches/transforms-3/f9b34dd8446ee3f2d22ff5c9aa1ddd55/transformed/coordinatorlayout-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] /Users/shseo/.gradle/caches/transforms-3/f9b34dd8446ee3f2d22ff5c9aa1ddd55/transformed/coordinatorlayout-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] /Users/shseo/.gradle/caches/transforms-3/b3cd99cf2e0e03d5025ddb5d58c77d44/transformed/dynamicanimation-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] /Users/shseo/.gradle/caches/transforms-3/b3cd99cf2e0e03d5025ddb5d58c77d44/transformed/dynamicanimation-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /Users/shseo/.gradle/caches/transforms-3/ac9e604079ef922b199a1d3e203786a1/transformed/vectordrawable-animated-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /Users/shseo/.gradle/caches/transforms-3/ac9e604079ef922b199a1d3e203786a1/transformed/vectordrawable-animated-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /Users/shseo/.gradle/caches/transforms-3/bf68305dc9c5839d32559c1f6c059450/transformed/vectordrawable-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /Users/shseo/.gradle/caches/transforms-3/bf68305dc9c5839d32559c1f6c059450/transformed/vectordrawable-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.media:media:1.0.0] /Users/shseo/.gradle/caches/transforms-3/c6a872c6a8be0374384ae067789f1ada/transformed/media-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.media:media:1.0.0] /Users/shseo/.gradle/caches/transforms-3/c6a872c6a8be0374384ae067789f1ada/transformed/media-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /Users/shseo/.gradle/caches/transforms-3/1f4ae95442efc856dbcf810dcbc5c33a/transformed/legacy-support-core-utils-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /Users/shseo/.gradle/caches/transforms-3/1f4ae95442efc856dbcf810dcbc5c33a/transformed/legacy-support-core-utils-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.drawerlayout:drawerlayout:1.1.1] /Users/shseo/.gradle/caches/transforms-3/2ef1078dd66e49522ce367ecc6568f03/transformed/drawerlayout-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.drawerlayout:drawerlayout:1.1.1] /Users/shseo/.gradle/caches/transforms-3/2ef1078dd66e49522ce367ecc6568f03/transformed/drawerlayout-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.transition:transition:1.3.0] /Users/shseo/.gradle/caches/transforms-3/423febbd8281e21ce7796d1294729b54/transformed/transition-1.3.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.transition:transition:1.3.0] /Users/shseo/.gradle/caches/transforms-3/423febbd8281e21ce7796d1294729b54/transformed/transition-1.3.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/shseo/.gradle/caches/transforms-3/6e5252d7c8c23f76ff7385e16c5899d4/transformed/viewpager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/shseo/.gradle/caches/transforms-3/6e5252d7c8c23f76ff7385e16c5899d4/transformed/viewpager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] /Users/shseo/.gradle/caches/transforms-3/fbf023a6f2e78a20acca36a3cf00006e/transformed/slidingpanelayout-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] /Users/shseo/.gradle/caches/transforms-3/fbf023a6f2e78a20acca36a3cf00006e/transformed/slidingpanelayout-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview:1.1.0] /Users/shseo/.gradle/caches/transforms-3/8ffce7d153700d52c18418dab4a16e32/transformed/customview-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.customview:customview:1.1.0] /Users/shseo/.gradle/caches/transforms-3/8ffce7d153700d52c18418dab4a16e32/transformed/customview-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.camera:camera-core:1.1.0-alpha08] /Users/shseo/.gradle/caches/transforms-3/243e4df5ba3a042e4cefde2b1ea3805d/transformed/jetified-camera-core-1.1.0-alpha08/AndroidManifest.xml:21:5-23:41
+MERGED from [androidx.camera:camera-core:1.1.0-alpha08] /Users/shseo/.gradle/caches/transforms-3/243e4df5ba3a042e4cefde2b1ea3805d/transformed/jetified-camera-core-1.1.0-alpha08/AndroidManifest.xml:21:5-23:41
+MERGED from [androidx.loader:loader:1.0.0] /Users/shseo/.gradle/caches/transforms-3/1b8ddc3d793612902b8d69a4da328d7d/transformed/loader-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] /Users/shseo/.gradle/caches/transforms-3/1b8ddc3d793612902b8d69a4da328d7d/transformed/loader-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] /Users/shseo/.gradle/caches/transforms-3/7100da697e7c96890fe58dab8cd7ff87/transformed/swiperefreshlayout-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] /Users/shseo/.gradle/caches/transforms-3/7100da697e7c96890fe58dab8cd7ff87/transformed/swiperefreshlayout-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] /Users/shseo/.gradle/caches/transforms-3/4da4fd7fe5577a7430722fc6b2d85fc8/transformed/asynclayoutinflater-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] /Users/shseo/.gradle/caches/transforms-3/4da4fd7fe5577a7430722fc6b2d85fc8/transformed/asynclayoutinflater-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.navigation:navigation-common:2.3.5] /Users/shseo/.gradle/caches/transforms-3/141175e8d6356a1ecd82244a2d2e6d84/transformed/navigation-common-2.3.5/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.navigation:navigation-common:2.3.5] /Users/shseo/.gradle/caches/transforms-3/141175e8d6356a1ecd82244a2d2e6d84/transformed/navigation-common-2.3.5/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.core:core:1.5.0] /Users/shseo/.gradle/caches/transforms-3/18b1bc7c8abf3f1dcf65da443449ace5/transformed/core-1.5.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.core:core:1.5.0] /Users/shseo/.gradle/caches/transforms-3/18b1bc7c8abf3f1dcf65da443449ace5/transformed/core-1.5.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /Users/shseo/.gradle/caches/transforms-3/43fd59b96b36cc166914f959d88306cc/transformed/cursoradapter-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /Users/shseo/.gradle/caches/transforms-3/43fd59b96b36cc166914f959d88306cc/transformed/cursoradapter-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.3.1] /Users/shseo/.gradle/caches/transforms-3/1e3fcd0a009ffbee11e2df82b6b5220c/transformed/jetified-lifecycle-viewmodel-savedstate-2.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.3.1] /Users/shseo/.gradle/caches/transforms-3/1e3fcd0a009ffbee11e2df82b6b5220c/transformed/jetified-lifecycle-viewmodel-savedstate-2.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.savedstate:savedstate:1.1.0] /Users/shseo/.gradle/caches/transforms-3/e385e4d124ec1a929ad3ee9751689eea/transformed/jetified-savedstate-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.savedstate:savedstate:1.1.0] /Users/shseo/.gradle/caches/transforms-3/e385e4d124ec1a929ad3ee9751689eea/transformed/jetified-savedstate-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.3.1] /Users/shseo/.gradle/caches/transforms-3/abc4538191c967b298a8a8ea61324ceb/transformed/lifecycle-runtime-2.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.3.1] /Users/shseo/.gradle/caches/transforms-3/abc4538191c967b298a8a8ea61324ceb/transformed/lifecycle-runtime-2.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.3.1] /Users/shseo/.gradle/caches/transforms-3/ff054b1363ff48662b2e55e145adec45/transformed/lifecycle-viewmodel-2.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.3.1] /Users/shseo/.gradle/caches/transforms-3/ff054b1363ff48662b2e55e145adec45/transformed/lifecycle-viewmodel-2.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.cardview:cardview:1.0.0] /Users/shseo/.gradle/caches/transforms-3/2d61a5ee25225848f7a0f61628c69724/transformed/cardview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.cardview:cardview:1.0.0] /Users/shseo/.gradle/caches/transforms-3/2d61a5ee25225848f7a0f61628c69724/transformed/cardview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.datatransport:transport-backend-cct:2.3.3] /Users/shseo/.gradle/caches/transforms-3/9dc02be42ca7d4a4e2d96f1fbcd0c5e1/transformed/jetified-transport-backend-cct-2.3.3/AndroidManifest.xml:19:5-21:41
+MERGED from [com.google.android.datatransport:transport-backend-cct:2.3.3] /Users/shseo/.gradle/caches/transforms-3/9dc02be42ca7d4a4e2d96f1fbcd0c5e1/transformed/jetified-transport-backend-cct-2.3.3/AndroidManifest.xml:19:5-21:41
+MERGED from [com.google.android.datatransport:transport-runtime:2.2.6] /Users/shseo/.gradle/caches/transforms-3/95e84a6f63494c3347ceadea00443f4d/transformed/jetified-transport-runtime-2.2.6/AndroidManifest.xml:18:5-20:41
+MERGED from [com.google.android.datatransport:transport-runtime:2.2.6] /Users/shseo/.gradle/caches/transforms-3/95e84a6f63494c3347ceadea00443f4d/transformed/jetified-transport-runtime-2.2.6/AndroidManifest.xml:18:5-20:41
+MERGED from [com.google.android.datatransport:transport-api:2.2.1] /Users/shseo/.gradle/caches/transforms-3/00ce49cb68e875b22d9f010bab285914/transformed/jetified-transport-api-2.2.1/AndroidManifest.xml:18:5-20:41
+MERGED from [com.google.android.datatransport:transport-api:2.2.1] /Users/shseo/.gradle/caches/transforms-3/00ce49cb68e875b22d9f010bab285914/transformed/jetified-transport-api-2.2.1/AndroidManifest.xml:18:5-20:41
+MERGED from [com.google.firebase:firebase-components:16.1.0] /Users/shseo/.gradle/caches/transforms-3/899bcbf8b8fc4ce9a7de584d87958ed9/transformed/jetified-firebase-components-16.1.0/AndroidManifest.xml:19:5-21:41
+MERGED from [com.google.firebase:firebase-components:16.1.0] /Users/shseo/.gradle/caches/transforms-3/899bcbf8b8fc4ce9a7de584d87958ed9/transformed/jetified-firebase-components-16.1.0/AndroidManifest.xml:19:5-21:41
+MERGED from [com.google.firebase:firebase-encoders-json:17.1.0] /Users/shseo/.gradle/caches/transforms-3/96d6c295f8bceb0fe2229666697d1456/transformed/jetified-firebase-encoders-json-17.1.0/AndroidManifest.xml:19:5-21:41
+MERGED from [com.google.firebase:firebase-encoders-json:17.1.0] /Users/shseo/.gradle/caches/transforms-3/96d6c295f8bceb0fe2229666697d1456/transformed/jetified-firebase-encoders-json-17.1.0/AndroidManifest.xml:19:5-21:41
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/shseo/.gradle/caches/transforms-3/0153f342ac57307b30aa2cd6dc7ef636/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/shseo/.gradle/caches/transforms-3/0153f342ac57307b30aa2cd6dc7ef636/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.tracing:tracing:1.0.0] /Users/shseo/.gradle/caches/transforms-3/6a573aa0f3aaa65be7de6578dead28c9/transformed/jetified-tracing-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.tracing:tracing:1.0.0] /Users/shseo/.gradle/caches/transforms-3/6a573aa0f3aaa65be7de6578dead28c9/transformed/jetified-tracing-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.1.0] /Users/shseo/.gradle/caches/transforms-3/6ce64167886054bf89656e600085ab8e/transformed/lifecycle-livedata-2.1.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.1.0] /Users/shseo/.gradle/caches/transforms-3/6ce64167886054bf89656e600085ab8e/transformed/lifecycle-livedata-2.1.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.3.1] /Users/shseo/.gradle/caches/transforms-3/7b79e7ab66bb407154b88755d6695de1/transformed/lifecycle-livedata-core-2.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.3.1] /Users/shseo/.gradle/caches/transforms-3/7b79e7ab66bb407154b88755d6695de1/transformed/lifecycle-livedata-core-2.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.arch.core:core-runtime:2.1.0] /Users/shseo/.gradle/caches/transforms-3/667f72a93c6385e1412b3cac377b218d/transformed/core-runtime-2.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.arch.core:core-runtime:2.1.0] /Users/shseo/.gradle/caches/transforms-3/667f72a93c6385e1412b3cac377b218d/transformed/core-runtime-2.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.documentfile:documentfile:1.0.0] /Users/shseo/.gradle/caches/transforms-3/f1c873b3c7a3fcb5ebe80f046d0badfe/transformed/documentfile-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.documentfile:documentfile:1.0.0] /Users/shseo/.gradle/caches/transforms-3/f1c873b3c7a3fcb5ebe80f046d0badfe/transformed/documentfile-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /Users/shseo/.gradle/caches/transforms-3/fd2355dbdb5b4415ba4e2441ae3d0287/transformed/localbroadcastmanager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /Users/shseo/.gradle/caches/transforms-3/fd2355dbdb5b4415ba4e2441ae3d0287/transformed/localbroadcastmanager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.print:print:1.0.0] /Users/shseo/.gradle/caches/transforms-3/93a674d3f96c22e0c9098cfcfc69f084/transformed/print-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.print:print:1.0.0] /Users/shseo/.gradle/caches/transforms-3/93a674d3f96c22e0c9098cfcfc69f084/transformed/print-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/shseo/.gradle/caches/transforms-3/7a03a1bb3a976351da308913d330a1be/transformed/interpolator-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/shseo/.gradle/caches/transforms-3/7a03a1bb3a976351da308913d330a1be/transformed/interpolator-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.exifinterface:exifinterface:1.3.2] /Users/shseo/.gradle/caches/transforms-3/dfa027857b93606e2d20a01973c9e52b/transformed/exifinterface-1.3.2/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.exifinterface:exifinterface:1.3.2] /Users/shseo/.gradle/caches/transforms-3/dfa027857b93606e2d20a01973c9e52b/transformed/exifinterface-1.3.2/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.annotation:annotation-experimental:1.1.0] /Users/shseo/.gradle/caches/transforms-3/ff24357d6b6f09c42ce0b631b477929d/transformed/jetified-annotation-experimental-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.annotation:annotation-experimental:1.1.0] /Users/shseo/.gradle/caches/transforms-3/ff24357d6b6f09c42ce0b631b477929d/transformed/jetified-annotation-experimental-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [com.google.android.odml:image:1.0.0-beta1] /Users/shseo/.gradle/caches/transforms-3/d9bdfbc48b9868a48ecdb23ad61f9b0d/transformed/jetified-image-1.0.0-beta1/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.odml:image:1.0.0-beta1] /Users/shseo/.gradle/caches/transforms-3/d9bdfbc48b9868a48ecdb23ad61f9b0d/transformed/jetified-image-1.0.0-beta1/AndroidManifest.xml:5:5-44
+INJECTED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml
+INJECTED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml
+		INJECTED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml
+		ADDED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml
+		INJECTED from /Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/AndroidManifest.xml
+service#androidx.camera.core.impl.MetadataHolderService
+ADDED from [androidx.camera:camera-camera2:1.1.0-alpha08] /Users/shseo/.gradle/caches/transforms-3/e2302ccd9d3c9e0a4c5c4fdab3a06ec2/transformed/jetified-camera-camera2-1.1.0-alpha08/AndroidManifest.xml:26:9-35:19
+MERGED from [androidx.camera:camera-core:1.1.0-alpha08] /Users/shseo/.gradle/caches/transforms-3/243e4df5ba3a042e4cefde2b1ea3805d/transformed/jetified-camera-core-1.1.0-alpha08/AndroidManifest.xml:31:9-35:45
+MERGED from [androidx.camera:camera-core:1.1.0-alpha08] /Users/shseo/.gradle/caches/transforms-3/243e4df5ba3a042e4cefde2b1ea3805d/transformed/jetified-camera-core-1.1.0-alpha08/AndroidManifest.xml:31:9-35:45
+	tools:node
+		ADDED from [androidx.camera:camera-camera2:1.1.0-alpha08] /Users/shseo/.gradle/caches/transforms-3/e2302ccd9d3c9e0a4c5c4fdab3a06ec2/transformed/jetified-camera-camera2-1.1.0-alpha08/AndroidManifest.xml:31:13-31
+	android:enabled
+		ADDED from [androidx.camera:camera-camera2:1.1.0-alpha08] /Users/shseo/.gradle/caches/transforms-3/e2302ccd9d3c9e0a4c5c4fdab3a06ec2/transformed/jetified-camera-camera2-1.1.0-alpha08/AndroidManifest.xml:28:13-36
+	android:exported
+		ADDED from [androidx.camera:camera-camera2:1.1.0-alpha08] /Users/shseo/.gradle/caches/transforms-3/e2302ccd9d3c9e0a4c5c4fdab3a06ec2/transformed/jetified-camera-camera2-1.1.0-alpha08/AndroidManifest.xml:29:13-37
+	tools:ignore
+		ADDED from [androidx.camera:camera-camera2:1.1.0-alpha08] /Users/shseo/.gradle/caches/transforms-3/e2302ccd9d3c9e0a4c5c4fdab3a06ec2/transformed/jetified-camera-camera2-1.1.0-alpha08/AndroidManifest.xml:30:13-42
+	android:name
+		ADDED from [androidx.camera:camera-camera2:1.1.0-alpha08] /Users/shseo/.gradle/caches/transforms-3/e2302ccd9d3c9e0a4c5c4fdab3a06ec2/transformed/jetified-camera-camera2-1.1.0-alpha08/AndroidManifest.xml:27:13-75
+meta-data#androidx.camera.core.impl.MetadataHolderService.DEFAULT_CONFIG_PROVIDER
+ADDED from [androidx.camera:camera-camera2:1.1.0-alpha08] /Users/shseo/.gradle/caches/transforms-3/e2302ccd9d3c9e0a4c5c4fdab3a06ec2/transformed/jetified-camera-camera2-1.1.0-alpha08/AndroidManifest.xml:32:13-34:89
+	android:value
+		ADDED from [androidx.camera:camera-camera2:1.1.0-alpha08] /Users/shseo/.gradle/caches/transforms-3/e2302ccd9d3c9e0a4c5c4fdab3a06ec2/transformed/jetified-camera-camera2-1.1.0-alpha08/AndroidManifest.xml:34:17-86
+	android:name
+		ADDED from [androidx.camera:camera-camera2:1.1.0-alpha08] /Users/shseo/.gradle/caches/transforms-3/e2302ccd9d3c9e0a4c5c4fdab3a06ec2/transformed/jetified-camera-camera2-1.1.0-alpha08/AndroidManifest.xml:33:17-103
+service#com.google.mlkit.common.internal.MlKitComponentDiscoveryService
+ADDED from [com.google.android.gms:play-services-mlkit-barcode-scanning:18.0.0] /Users/shseo/.gradle/caches/transforms-3/b5e4e76cfaa9dd6925fa1629b30585e9/transformed/jetified-play-services-mlkit-barcode-scanning-18.0.0/AndroidManifest.xml:9:9-15:19
+MERGED from [com.google.mlkit:vision-common:17.0.0] /Users/shseo/.gradle/caches/transforms-3/4e75999606bfb558840d4572a0b28032/transformed/jetified-vision-common-17.0.0/AndroidManifest.xml:9:9-15:19
+MERGED from [com.google.mlkit:vision-common:17.0.0] /Users/shseo/.gradle/caches/transforms-3/4e75999606bfb558840d4572a0b28032/transformed/jetified-vision-common-17.0.0/AndroidManifest.xml:9:9-15:19
+MERGED from [com.google.mlkit:common:18.0.0] /Users/shseo/.gradle/caches/transforms-3/5669f9f558c2367fefc1181dece5e9b2/transformed/jetified-common-18.0.0/AndroidManifest.xml:15:9-23:19
+MERGED from [com.google.mlkit:common:18.0.0] /Users/shseo/.gradle/caches/transforms-3/5669f9f558c2367fefc1181dece5e9b2/transformed/jetified-common-18.0.0/AndroidManifest.xml:15:9-23:19
+	android:exported
+		ADDED from [com.google.android.gms:play-services-mlkit-barcode-scanning:18.0.0] /Users/shseo/.gradle/caches/transforms-3/b5e4e76cfaa9dd6925fa1629b30585e9/transformed/jetified-play-services-mlkit-barcode-scanning-18.0.0/AndroidManifest.xml:11:13-37
+	tools:targetApi
+		ADDED from [com.google.mlkit:common:18.0.0] /Users/shseo/.gradle/caches/transforms-3/5669f9f558c2367fefc1181dece5e9b2/transformed/jetified-common-18.0.0/AndroidManifest.xml:19:13-32
+	android:directBootAware
+		ADDED from [com.google.mlkit:common:18.0.0] /Users/shseo/.gradle/caches/transforms-3/5669f9f558c2367fefc1181dece5e9b2/transformed/jetified-common-18.0.0/AndroidManifest.xml:17:13-43
+	android:name
+		ADDED from [com.google.android.gms:play-services-mlkit-barcode-scanning:18.0.0] /Users/shseo/.gradle/caches/transforms-3/b5e4e76cfaa9dd6925fa1629b30585e9/transformed/jetified-play-services-mlkit-barcode-scanning-18.0.0/AndroidManifest.xml:10:13-91
+meta-data#com.google.firebase.components:com.google.mlkit.vision.barcode.internal.BarcodeRegistrar
+ADDED from [com.google.android.gms:play-services-mlkit-barcode-scanning:18.0.0] /Users/shseo/.gradle/caches/transforms-3/b5e4e76cfaa9dd6925fa1629b30585e9/transformed/jetified-play-services-mlkit-barcode-scanning-18.0.0/AndroidManifest.xml:12:13-14:85
+	android:value
+		ADDED from [com.google.android.gms:play-services-mlkit-barcode-scanning:18.0.0] /Users/shseo/.gradle/caches/transforms-3/b5e4e76cfaa9dd6925fa1629b30585e9/transformed/jetified-play-services-mlkit-barcode-scanning-18.0.0/AndroidManifest.xml:14:17-82
+	android:name
+		ADDED from [com.google.android.gms:play-services-mlkit-barcode-scanning:18.0.0] /Users/shseo/.gradle/caches/transforms-3/b5e4e76cfaa9dd6925fa1629b30585e9/transformed/jetified-play-services-mlkit-barcode-scanning-18.0.0/AndroidManifest.xml:13:17-120
+meta-data#com.google.firebase.components:com.google.mlkit.vision.common.internal.VisionCommonRegistrar
+ADDED from [com.google.mlkit:vision-common:17.0.0] /Users/shseo/.gradle/caches/transforms-3/4e75999606bfb558840d4572a0b28032/transformed/jetified-vision-common-17.0.0/AndroidManifest.xml:12:13-14:85
+	android:value
+		ADDED from [com.google.mlkit:vision-common:17.0.0] /Users/shseo/.gradle/caches/transforms-3/4e75999606bfb558840d4572a0b28032/transformed/jetified-vision-common-17.0.0/AndroidManifest.xml:14:17-82
+	android:name
+		ADDED from [com.google.mlkit:vision-common:17.0.0] /Users/shseo/.gradle/caches/transforms-3/4e75999606bfb558840d4572a0b28032/transformed/jetified-vision-common-17.0.0/AndroidManifest.xml:13:17-124
+provider#com.google.mlkit.common.internal.MlKitInitProvider
+ADDED from [com.google.mlkit:common:18.0.0] /Users/shseo/.gradle/caches/transforms-3/5669f9f558c2367fefc1181dece5e9b2/transformed/jetified-common-18.0.0/AndroidManifest.xml:9:9-13:38
+	android:authorities
+		ADDED from [com.google.mlkit:common:18.0.0] /Users/shseo/.gradle/caches/transforms-3/5669f9f558c2367fefc1181dece5e9b2/transformed/jetified-common-18.0.0/AndroidManifest.xml:11:13-69
+	android:exported
+		ADDED from [com.google.mlkit:common:18.0.0] /Users/shseo/.gradle/caches/transforms-3/5669f9f558c2367fefc1181dece5e9b2/transformed/jetified-common-18.0.0/AndroidManifest.xml:12:13-37
+	android:initOrder
+		ADDED from [com.google.mlkit:common:18.0.0] /Users/shseo/.gradle/caches/transforms-3/5669f9f558c2367fefc1181dece5e9b2/transformed/jetified-common-18.0.0/AndroidManifest.xml:13:13-35
+	android:name
+		ADDED from [com.google.mlkit:common:18.0.0] /Users/shseo/.gradle/caches/transforms-3/5669f9f558c2367fefc1181dece5e9b2/transformed/jetified-common-18.0.0/AndroidManifest.xml:10:13-78
+meta-data#com.google.firebase.components:com.google.mlkit.common.internal.CommonComponentRegistrar
+ADDED from [com.google.mlkit:common:18.0.0] /Users/shseo/.gradle/caches/transforms-3/5669f9f558c2367fefc1181dece5e9b2/transformed/jetified-common-18.0.0/AndroidManifest.xml:20:13-22:85
+	android:value
+		ADDED from [com.google.mlkit:common:18.0.0] /Users/shseo/.gradle/caches/transforms-3/5669f9f558c2367fefc1181dece5e9b2/transformed/jetified-common-18.0.0/AndroidManifest.xml:22:17-82
+	android:name
+		ADDED from [com.google.mlkit:common:18.0.0] /Users/shseo/.gradle/caches/transforms-3/5669f9f558c2367fefc1181dece5e9b2/transformed/jetified-common-18.0.0/AndroidManifest.xml:21:17-120
+activity#com.google.android.gms.common.api.GoogleApiActivity
+ADDED from [com.google.android.gms:play-services-base:18.0.1] /Users/shseo/.gradle/caches/transforms-3/25d6436db3863a9e80542c647b38f6ec/transformed/jetified-play-services-base-18.0.1/AndroidManifest.xml:20:9-22:45
+	android:exported
+		ADDED from [com.google.android.gms:play-services-base:18.0.1] /Users/shseo/.gradle/caches/transforms-3/25d6436db3863a9e80542c647b38f6ec/transformed/jetified-play-services-base-18.0.1/AndroidManifest.xml:22:19-43
+	android:theme
+		ADDED from [com.google.android.gms:play-services-base:18.0.1] /Users/shseo/.gradle/caches/transforms-3/25d6436db3863a9e80542c647b38f6ec/transformed/jetified-play-services-base-18.0.1/AndroidManifest.xml:21:19-78
+	android:name
+		ADDED from [com.google.android.gms:play-services-base:18.0.1] /Users/shseo/.gradle/caches/transforms-3/25d6436db3863a9e80542c647b38f6ec/transformed/jetified-play-services-base-18.0.1/AndroidManifest.xml:20:19-85
+meta-data#com.google.android.gms.version
+ADDED from [com.google.android.gms:play-services-basement:18.0.0] /Users/shseo/.gradle/caches/transforms-3/4cd01b2c46f9da47b1f740062690459e/transformed/jetified-play-services-basement-18.0.0/AndroidManifest.xml:21:9-23:69
+	android:value
+		ADDED from [com.google.android.gms:play-services-basement:18.0.0] /Users/shseo/.gradle/caches/transforms-3/4cd01b2c46f9da47b1f740062690459e/transformed/jetified-play-services-basement-18.0.0/AndroidManifest.xml:23:13-66
+	android:name
+		ADDED from [com.google.android.gms:play-services-basement:18.0.0] /Users/shseo/.gradle/caches/transforms-3/4cd01b2c46f9da47b1f740062690459e/transformed/jetified-play-services-basement-18.0.0/AndroidManifest.xml:22:13-58
+service#com.google.android.datatransport.runtime.backends.TransportBackendDiscovery
+ADDED from [com.google.android.datatransport:transport-backend-cct:2.3.3] /Users/shseo/.gradle/caches/transforms-3/9dc02be42ca7d4a4e2d96f1fbcd0c5e1/transformed/jetified-transport-backend-cct-2.3.3/AndroidManifest.xml:29:9-35:19
+MERGED from [com.google.android.datatransport:transport-runtime:2.2.6] /Users/shseo/.gradle/caches/transforms-3/95e84a6f63494c3347ceadea00443f4d/transformed/jetified-transport-runtime-2.2.6/AndroidManifest.xml:36:9-38:40
+MERGED from [com.google.android.datatransport:transport-runtime:2.2.6] /Users/shseo/.gradle/caches/transforms-3/95e84a6f63494c3347ceadea00443f4d/transformed/jetified-transport-runtime-2.2.6/AndroidManifest.xml:36:9-38:40
+	android:exported
+		ADDED from [com.google.android.datatransport:transport-backend-cct:2.3.3] /Users/shseo/.gradle/caches/transforms-3/9dc02be42ca7d4a4e2d96f1fbcd0c5e1/transformed/jetified-transport-backend-cct-2.3.3/AndroidManifest.xml:31:13-37
+	android:name
+		ADDED from [com.google.android.datatransport:transport-backend-cct:2.3.3] /Users/shseo/.gradle/caches/transforms-3/9dc02be42ca7d4a4e2d96f1fbcd0c5e1/transformed/jetified-transport-backend-cct-2.3.3/AndroidManifest.xml:30:13-103
+meta-data#backend:com.google.android.datatransport.cct.CctBackendFactory
+ADDED from [com.google.android.datatransport:transport-backend-cct:2.3.3] /Users/shseo/.gradle/caches/transforms-3/9dc02be42ca7d4a4e2d96f1fbcd0c5e1/transformed/jetified-transport-backend-cct-2.3.3/AndroidManifest.xml:32:13-34:39
+	android:value
+		ADDED from [com.google.android.datatransport:transport-backend-cct:2.3.3] /Users/shseo/.gradle/caches/transforms-3/9dc02be42ca7d4a4e2d96f1fbcd0c5e1/transformed/jetified-transport-backend-cct-2.3.3/AndroidManifest.xml:34:17-36
+	android:name
+		ADDED from [com.google.android.datatransport:transport-backend-cct:2.3.3] /Users/shseo/.gradle/caches/transforms-3/9dc02be42ca7d4a4e2d96f1fbcd0c5e1/transformed/jetified-transport-backend-cct-2.3.3/AndroidManifest.xml:33:17-94
+service#com.google.android.datatransport.runtime.scheduling.jobscheduling.JobInfoSchedulerService
+ADDED from [com.google.android.datatransport:transport-runtime:2.2.6] /Users/shseo/.gradle/caches/transforms-3/95e84a6f63494c3347ceadea00443f4d/transformed/jetified-transport-runtime-2.2.6/AndroidManifest.xml:26:9-30:19
+	android:exported
+		ADDED from [com.google.android.datatransport:transport-runtime:2.2.6] /Users/shseo/.gradle/caches/transforms-3/95e84a6f63494c3347ceadea00443f4d/transformed/jetified-transport-runtime-2.2.6/AndroidManifest.xml:28:13-37
+	android:permission
+		ADDED from [com.google.android.datatransport:transport-runtime:2.2.6] /Users/shseo/.gradle/caches/transforms-3/95e84a6f63494c3347ceadea00443f4d/transformed/jetified-transport-runtime-2.2.6/AndroidManifest.xml:29:13-69
+	android:name
+		ADDED from [com.google.android.datatransport:transport-runtime:2.2.6] /Users/shseo/.gradle/caches/transforms-3/95e84a6f63494c3347ceadea00443f4d/transformed/jetified-transport-runtime-2.2.6/AndroidManifest.xml:27:13-117
+receiver#com.google.android.datatransport.runtime.scheduling.jobscheduling.AlarmManagerSchedulerBroadcastReceiver
+ADDED from [com.google.android.datatransport:transport-runtime:2.2.6] /Users/shseo/.gradle/caches/transforms-3/95e84a6f63494c3347ceadea00443f4d/transformed/jetified-transport-runtime-2.2.6/AndroidManifest.xml:32:9-34:40
+	android:exported
+		ADDED from [com.google.android.datatransport:transport-runtime:2.2.6] /Users/shseo/.gradle/caches/transforms-3/95e84a6f63494c3347ceadea00443f4d/transformed/jetified-transport-runtime-2.2.6/AndroidManifest.xml:34:13-37
+	android:name
+		ADDED from [com.google.android.datatransport:transport-runtime:2.2.6] /Users/shseo/.gradle/caches/transforms-3/95e84a6f63494c3347ceadea00443f4d/transformed/jetified-transport-runtime-2.2.6/AndroidManifest.xml:33:13-132

@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger version="3"><dataSet config="main" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/main/jniLibs"/></dataSet><dataSet config="debug" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/안드로이드 프로젝트/app/src/debug/jniLibs"/></dataSet></merger>

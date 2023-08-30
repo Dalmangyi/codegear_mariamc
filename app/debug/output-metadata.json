@@ -1,0 +1,20 @@
+{
+  "version": 3,
+  "artifactType": {
+    "type": "APK",
+    "kind": "Directory"
+  },
+  "applicationId": "com.zebra.rfidreaderAPI.demo",
+  "variantName": "debug",
+  "elements": [
+    {
+      "type": "SINGLE",
+      "filters": [],
+      "attributes": [],
+      "versionCode": 116,
+      "versionName": "1.0.2.116",
+      "outputFile": "123_RFID_Mobile-1.0.2.116.apk"
+    }
+  ],
+  "elementType": "File"
+}
