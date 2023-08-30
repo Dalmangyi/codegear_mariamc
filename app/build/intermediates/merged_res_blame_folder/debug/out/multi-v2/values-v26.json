@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.zebra.demo.app-mergeDebugResources-31:/values-v26/values-v26.xml",
+            "outputFile": "com.zebra.demo.app-mergeDebugResources-30:/values-v26/values-v26.xml",
             "map": [
                 {
-                    "source": "/Users/shseo/.gradle/caches/transforms-3/867c7d4cf9d43809c9097bbf49606663/transformed/appcompat-1.3.0/res/values-v26/values-v26.xml",
+                    "source": "/Users/shseo/.gradle/caches/transforms-3/f526654ed9bf193c4d70601693f40f19/transformed/appcompat-1.3.0/res/values-v26/values-v26.xml",
                     "from": {
                         "startLines": "2,3,4,8,12,16",
                         "startColumns": "4,4,4,4,4,4",

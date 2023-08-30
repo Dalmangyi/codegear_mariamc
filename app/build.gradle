@@ -55,6 +55,7 @@ android {
         targetCompatibility = 1.8
     }
     buildToolsVersion '30.0.3'
+    namespace 'com.zebra.demo'
 
 }
 dependencies {

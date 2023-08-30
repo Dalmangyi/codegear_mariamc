@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.zebra.demo.app-mergeDebugResources-31:/values-w320dp-land-v13/values-w320dp-land-v13.xml",
+            "outputFile": "com.zebra.demo.app-mergeDebugResources-30:/values-w320dp-land-v13/values-w320dp-land-v13.xml",
             "map": [
                 {
-                    "source": "/Users/shseo/.gradle/caches/transforms-3/d617f4a6bfa7657111cc9ae5bd712183/transformed/material-1.4.0/res/values-w320dp-land-v13/values-w320dp-land-v13.xml",
+                    "source": "/Users/shseo/.gradle/caches/transforms-3/45f4e37d9e6990b72f34141bedb79e76/transformed/material-1.4.0/res/values-w320dp-land-v13/values-w320dp-land-v13.xml",
                     "from": {
                         "startLines": "2,3",
                         "startColumns": "4,4",
