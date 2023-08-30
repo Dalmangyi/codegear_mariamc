@@ -29,6 +29,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -1023,7 +1024,7 @@ public class InitReadersListFragment extends Fragment implements IRFIDConnectTas
         } catch (OperationFailureException e) {
             if( e!= null && e.getStackTrace().length>0){ Log.e(TAG, e.getStackTrace()[0].toString()); }
         }
-        deviceConnectTask = new DeviceConnectTask(getActivity(), readerDevice, "Connecting with " + readerDevice.getName(), password, handlers);
+        deviceConnectTask = new DeviceConnectTask((AppCompatActivity) getActivity(), readerDevice, "Connecting with " + readerDevice.getName(), password, handlers);
 
         deviceConnectTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
@@ -1109,10 +1110,10 @@ public class InitReadersListFragment extends Fragment implements IRFIDConnectTas
                 RFIDController.is_connection_requested = true;
                 mConnectionProgress = true;
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-                    deviceConnectTask = new DeviceConnectTask(getActivity(), readerDevice, "Connecting with " + readerDevice.getName(), getReaderPassword(readerDevice.getName()), handlers);
+                    deviceConnectTask = new DeviceConnectTask((AppCompatActivity) getActivity(), readerDevice, "Connecting with " + readerDevice.getName(), getReaderPassword(readerDevice.getName()), handlers);
                     deviceConnectTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
                 } else {
-                    deviceConnectTask = new DeviceConnectTask(getActivity(), readerDevice, "Connecting with " + readerDevice.getName(), getReaderPassword(readerDevice.getName()), handlers);
+                    deviceConnectTask = new DeviceConnectTask((AppCompatActivity) getActivity(), readerDevice, "Connecting with " + readerDevice.getName(), getReaderPassword(readerDevice.getName()), handlers);
                     deviceConnectTask.execute();
                 }
                 return;
@@ -1135,7 +1136,7 @@ public class InitReadersListFragment extends Fragment implements IRFIDConnectTas
                 Application.scanPair = new ScanPair();
 
             }
-            Application.scanPair.Init(getActivity(), scanAndPairFragment);
+            Application.scanPair.Init((AppCompatActivity) getActivity(), scanAndPairFragment);
             scanAndPairFragment = ScanAndPairFragment.newInstance();
             btConnection = new BluetoothHandler();
             btConnection.init(getActivity(),Application.scanPair);
@@ -1156,7 +1157,7 @@ public class InitReadersListFragment extends Fragment implements IRFIDConnectTas
                 Application.scanPair = new ScanPair();
 
             }
-            Application.scanPair.Init(getActivity(), scanAndPairFragment);
+            Application.scanPair.Init((AppCompatActivity) getActivity(), scanAndPairFragment);
             scanAndPairFragment = ScanAndPairFragment.newInstance();
             btConnection = new BluetoothHandler();
             btConnection.init(getActivity(),Application.scanPair);

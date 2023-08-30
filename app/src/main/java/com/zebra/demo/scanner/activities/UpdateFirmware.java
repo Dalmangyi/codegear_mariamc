@@ -197,7 +197,7 @@ public class UpdateFirmware extends Fragment implements  NavigationView.OnNaviga
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         if((getActivity() != null) && (viewCreated == false )) {
-            initview(getActivity());
+            initview((AppCompatActivity) getActivity());
             viewCreated = true;
         }
     }

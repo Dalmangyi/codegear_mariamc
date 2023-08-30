@@ -21,6 +21,8 @@
     <item name="inactive_text" type="color">#7E868C</item>
     <item name="light_blue" type="color">#e3f2fd</item>
     <item name="slowestDecodeImage_background" type="color">#F1F1F1</item>
+    <color name="save_config_background">#B2B2B2</color>
+    <color name="button_font_background">#CC000000</color>
     <color name="txt_background">#FF0000FF</color>
     <color name="blue">#007CB0</color>
     <color name="transparent_blue">#25007CB0</color>

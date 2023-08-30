@@ -39,6 +39,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.MenuItemCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -1125,7 +1126,7 @@ public class RFIDReadersListFragment extends Fragment implements IRFIDConnectTas
         } catch (OperationFailureException e) {
            Log.d(TAG,  "Returned SDK Exception");
         }
-        deviceConnectTask = new DeviceConnectTask(getActivity(), readerDevice, "Connecting with " + readerDevice.getName(),
+        deviceConnectTask = new DeviceConnectTask((AppCompatActivity) getActivity(), readerDevice, "Connecting with " + readerDevice.getName(),
                 password,
                 handlers);
 
@@ -1222,12 +1223,12 @@ public class RFIDReadersListFragment extends Fragment implements IRFIDConnectTas
                 RFIDController.is_connection_requested = true;
                 mConnectionProgress = true;
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-                    deviceConnectTask = new DeviceConnectTask(getActivity(), readerDevice, "Connecting with " + readerDevice.getName(),
+                    deviceConnectTask = new DeviceConnectTask((AppCompatActivity) getActivity(), readerDevice, "Connecting with " + readerDevice.getName(),
                             getReaderPassword(readerDevice.getName()),
                             handlers);
                     deviceConnectTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
                 } else {
-                    deviceConnectTask = new DeviceConnectTask(getActivity(), readerDevice, "Connecting with " + readerDevice.getName(),
+                    deviceConnectTask = new DeviceConnectTask((AppCompatActivity) getActivity(), readerDevice, "Connecting with " + readerDevice.getName(),
                             getReaderPassword(readerDevice.getName()),
                             handlers);
                     deviceConnectTask.execute();
@@ -1244,7 +1245,7 @@ public class RFIDReadersListFragment extends Fragment implements IRFIDConnectTas
         if(transportType.equals("BLUETOOTH")) {
             scanPair = new ScanPair();
             scanAndPairFragment = ScanAndPairFragment.newInstance();
-            scanPair.Init(getActivity(),scanAndPairFragment);
+            scanPair.Init((AppCompatActivity) getActivity(),scanAndPairFragment);
             btConnection = new BluetoothHandler();
             btConnection.init(getActivity(),scanPair);
             ReaderDevice readerDevice = readersList.get(position);

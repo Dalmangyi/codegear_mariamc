@@ -14,6 +14,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.zebra.demo.ActiveDeviceActivity;
@@ -161,7 +162,7 @@ public class BarcodeFargment extends Fragment{
         }*/
         barcodesList = (ListView) getActivity().findViewById(R.id.barcodesList);
         if(barcodeAdapter == null) {
-            barcodeAdapter = new BarcodeListAdapter(getActivity(), barcodes);
+            barcodeAdapter = new BarcodeListAdapter((AppCompatActivity) getActivity(), barcodes);
         }
 
         barcodesList.setAdapter(barcodeAdapter);

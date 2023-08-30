@@ -115,7 +115,7 @@
     <style name="style_button_font">
         <item name="android:textAppearance">?android:attr/textAppearanceLarge</item>
         <item name="android:textColor">@android:color/primary_text_dark</item>
-        <item name="background">#CC000000</item>
+        <item name="background">@color/button_font_background</item>
     </style>
 
     <style name="style_pwd_dialog_button_font" parent="style_button_font">
@@ -163,7 +163,7 @@
     <style name="save_config_background">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="background">#B2B2B2</item>
+        <item name="background">@color/save_config_background</item>
         <item name="android:paddingTop">20dp</item>
         <item name="android:paddingBottom">5dp</item>
         <item name="android:paddingLeft">@dimen/default_left_padding</item>

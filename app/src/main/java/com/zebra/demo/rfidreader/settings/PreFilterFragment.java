@@ -938,7 +938,7 @@ public class PreFilterFragment extends BackPressedFragment {
 
         @Override
         protected void onPreExecute() {
-            activity = getActivity();
+            activity = (AppCompatActivity) getActivity();
             progressDialog = new CustomProgressDialog(activity, getString(R.string.pre_filter));
             activity.runOnUiThread(new Runnable() {
                 @Override

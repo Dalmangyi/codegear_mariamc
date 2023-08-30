@@ -202,7 +202,7 @@ public class CameraScanFragment extends Fragment {
                                 Application.scanPair = new ScanPair();
 
                             }
-                            Application.scanPair.Init(getActivity(), this);
+                            Application.scanPair.Init((AppCompatActivity) getActivity(), this);
                             if (scannedFormat == Barcode.FORMAT_DATA_MATRIX) {
                                 if (Objects.requireNonNull(barcode.getRawValue()).startsWith("P")) {
                                     Application.scanPair.barcodeDeviceNameConnect(barcode.getRawValue().substring(1));
@@ -250,7 +250,7 @@ public class CameraScanFragment extends Fragment {
 
     public void connectDevice(String rdDevice, boolean b) {
         Toast.makeText(getContext(), "Device ready to connect:" + rdDevice, Toast.LENGTH_SHORT).show();
-        AppCompatActivity activity = getActivity();
+        AppCompatActivity activity = (AppCompatActivity) getActivity();
         if (activity instanceof DeviceDiscoverActivity) {
             Fragment fragment = InitReadersListFragment.getInstance();
             ((DeviceDiscoverActivity) getActivity()).switchToFragment(fragment);

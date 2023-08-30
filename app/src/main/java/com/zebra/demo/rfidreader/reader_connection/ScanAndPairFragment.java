@@ -151,7 +151,7 @@ public class ScanAndPairFragment extends DialogFragment implements GoogleApiClie
             Application.scanPair = new ScanPair();
 
         }
-        Application.scanPair.Init(getActivity(), this);
+        Application.scanPair.Init((AppCompatActivity) getActivity(), this);
         // UI
         scanCode = view.findViewById(R.id.editText);
         // scanCode.addTextChangedListener(scanTextWatcher);
@@ -293,7 +293,7 @@ public class ScanAndPairFragment extends DialogFragment implements GoogleApiClie
         super.onResume();
         Application.scanPair.onResume();
         enableScanner();
-        setupForegroundDispatch(getActivity(), mNfcAdapter);
+        setupForegroundDispatch((AppCompatActivity) getActivity(), mNfcAdapter);
 
            if( editText.getVisibility() == View.GONE && isVisible()) {
                     if (getActivity() instanceof DeviceDiscoverActivity) {
@@ -322,7 +322,7 @@ public class ScanAndPairFragment extends DialogFragment implements GoogleApiClie
         super.onPause();
         Application.scanPair.onPause();
         //disableScanner();
-        stopForegroundDispatch(getActivity(), mNfcAdapter);
+        stopForegroundDispatch((AppCompatActivity) getActivity(), mNfcAdapter);
     }
 
     @Override
@@ -401,7 +401,7 @@ public class ScanAndPairFragment extends DialogFragment implements GoogleApiClie
 
     public void connectDevice(String rdDevice, boolean b) {
         Toast.makeText(getContext(), "Device ready to connect:" + rdDevice, Toast.LENGTH_SHORT).show();
-        AppCompatActivity activity = getActivity();
+        AppCompatActivity activity = (AppCompatActivity) getActivity();
         if(activity instanceof DeviceDiscoverActivity){
             Fragment fragment = InitReadersListFragment.getInstance();
             ((DeviceDiscoverActivity) getActivity()).switchToFragment(fragment);
