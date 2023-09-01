@@ -81,7 +81,8 @@ public class PairOperationsFragment extends Fragment {
                 {
                     Fragment fragment = InitReadersListFragment.getInstance();
                     ((DeviceDiscoverActivity) getActivity()).switchToFragment(fragment);
-                }else if(className.equals("com.codegear.mariamc_rfid.ActiveDeviceActivity"))
+                }
+                else if(className.equals("com.codegear.mariamc_rfid.ActiveDeviceActivity"))
                     ((ActiveDeviceActivity) getActivity()).loadNextFragment(READER_LIST_TAB);
                 return true;
 

@@ -32,8 +32,8 @@ import java.util.HashMap;
  */
 public class PairOperationAdapter extends FragmentStatePagerAdapter {
     private static final int NO_OF_TABS = 4;
-    String[] tabs = {"Tap ", "Scan ", "Barcode", "Camera"};
-    int[] icons = {R.drawable.ic_tap_and_pair ,R.drawable.ic_scan_and_pair,R.drawable.ic_sample_barcode, R.drawable.ic_scan_and_pair};
+    String[] tabs = {"Tap", "Scan", "Barcode", "Camera"};
+    int[] icons = {R.drawable.ic_tap_and_pair, R.drawable.ic_scan_and_pair, R.drawable.ic_sample_barcode, R.drawable.ic_scan_and_pair};
     Context mContext;
     //Map to hold the references for currently active fragments so that we can acess them
     private HashMap<Integer, Fragment> currentlyActiveFragments;
@@ -43,9 +43,9 @@ public class PairOperationAdapter extends FragmentStatePagerAdapter {
      *
      * @param fm - FragmentManager instance to be used for handling fragments
      */
-    public PairOperationAdapter(Context ctx , FragmentManager fm) {
+    public PairOperationAdapter(Context ctx, FragmentManager fm) {
         super(fm);
-        this.mContext =ctx;
+        this.mContext = ctx;
 
     }
 
@@ -59,16 +59,11 @@ public class PairOperationAdapter extends FragmentStatePagerAdapter {
 
         switch (index) {
             case 0:
-               // if(RFIDController.mConnectedReader.ReaderCapabilities.getModelName().contains("RFD8500")== true) {
-                //    fragment = NoNfcFragment.newInstance();
-                //} else
-                {
-                    Log.d(getClass().getSimpleName(), "1st Tab Selected");
-                    fragment = ScanAndPairFragment.newInstance();
-                    Bundle nfc_scan = new Bundle();
-                    nfc_scan.putBoolean("nfc_pair", true);
-                    fragment.setArguments(nfc_scan);
-                }
+                Log.d(getClass().getSimpleName(), "1st Tab Selected");
+                fragment = ScanAndPairFragment.newInstance();
+                Bundle nfc_scan = new Bundle();
+                nfc_scan.putBoolean("nfc_pair", true);
+                fragment.setArguments(nfc_scan);
                 break;
             case 1:
                 Log.d(getClass().getSimpleName(), "2nd Tab Selected");
@@ -78,7 +73,7 @@ public class PairOperationAdapter extends FragmentStatePagerAdapter {
                 fragment.setArguments(bt_scan);
                 break;
             case 2:
-                    fragment = ScanBarcodeAndPairFragment.newInstance();
+                fragment = ScanBarcodeAndPairFragment.newInstance();
                 break;
             case 3:
                 fragment = CameraScanFragment.newInstance();
@@ -103,8 +98,7 @@ public class PairOperationAdapter extends FragmentStatePagerAdapter {
     public Fragment getFragment(int key) {
         if (currentlyActiveFragments != null) {
             return currentlyActiveFragments.get(key);
-        }
-        else {
+        } else {
             return null;
         }
     }
@@ -131,21 +125,20 @@ public class PairOperationAdapter extends FragmentStatePagerAdapter {
     @Nullable
     @Override
     public CharSequence getPageTitle(int position) {
-        String title=tabs[position];
-        int resId= icons[position];
-        Drawable titleIcon = ContextCompat.getDrawable(mContext,resId);
-        titleIcon.setBounds(0,0,titleIcon.getIntrinsicWidth(),titleIcon.getIntrinsicHeight());
-        SpannableString spannable = new SpannableString("  "+title);
+        String title = tabs[position];
+        int resId = icons[position];
+        Drawable titleIcon = ContextCompat.getDrawable(mContext, resId);
+        titleIcon.setBounds(0, 0, titleIcon.getIntrinsicWidth(), titleIcon.getIntrinsicHeight());
+        SpannableString spannable = new SpannableString("  " + title);
         ImageSpan imageSpan = new ImageSpan(titleIcon, ImageSpan.ALIGN_BOTTOM);
-        spannable.setSpan(new RelativeSizeSpan((float) 0.74),2 ,title.length()+2,  Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        spannable.setSpan(new ForegroundColorSpan(R.color.black_overlay), 0, title.length()+2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        spannable.setSpan(imageSpan, 0,1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spannable.setSpan(new RelativeSizeSpan((float) 0.74), 2, title.length() + 2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spannable.setSpan(new ForegroundColorSpan(R.color.black_overlay), 0, title.length() + 2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spannable.setSpan(imageSpan, 0, 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         return spannable;
 
 
-       // return tabs[position];
+        // return tabs[position];
     }
-
 
 }
 

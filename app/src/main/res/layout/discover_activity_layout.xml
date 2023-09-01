@@ -88,7 +88,7 @@
                 android:id="@+id/disconnect_btn"
                 android:layout_marginRight="@dimen/margin"
                 android:text="@string/disconnectrfid"
-                android:backgroundTint="@color/blue"
+                android:backgroundTint="@color/colorPrimary"
                 android:layout_marginBottom="@dimen/margin"
                 />
         </RelativeLayout>
