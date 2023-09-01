@@ -12,19 +12,18 @@
         app:showAsAction="always"
         android:visible="false"/>
 
-
-
     <item
         android:id="@+id/action_readerlist"
         android:icon="@drawable/btn_filter1"
         android:title="@string/home_filter"
         app:showAsAction="always"
         android:visible="false"/>
+
     <item android:id="@+id/scan_and_pair_help"
         android:title="@string/scan_and_pair_help"
         android:orderInCategory="100"
         app:showAsAction="always"
-        android:icon="@drawable/nav_connection_help_white"/>
-
+        android:icon="@drawable/nav_connection_help_white"
+        android:visible="false"/>
 
 </menu>

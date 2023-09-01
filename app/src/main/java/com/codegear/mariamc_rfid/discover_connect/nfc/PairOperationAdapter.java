@@ -31,9 +31,12 @@ import java.util.HashMap;
  * Class to handle the details about pair operations(No of Tabs, Class acting as UI for the tabs) etc..
  */
 public class PairOperationAdapter extends FragmentStatePagerAdapter {
-    private static final int NO_OF_TABS = 4;
-    String[] tabs = {"Tap", "Scan", "Barcode", "Camera"};
-    int[] icons = {R.drawable.ic_tap_and_pair, R.drawable.ic_scan_and_pair, R.drawable.ic_sample_barcode, R.drawable.ic_scan_and_pair};
+    //private static final int NO_OF_TABS = 4;
+    //String[] tabs = {"Tap", "직접 입력", "Barcode", "카메라 스캔"};
+    //int[] icons = {R.drawable.ic_tap_and_pair, R.drawable.ic_scan_and_pair, R.drawable.ic_sample_barcode, R.drawable.ic_scan_and_pair};
+    private static final int NO_OF_TABS = 2;
+    String[] tabs = {"직접 입력", "스캔 등록"};
+    int[] icons = {R.drawable.ic_tap_and_pair, R.drawable.ic_scan_and_pair};
     Context mContext;
     //Map to hold the references for currently active fragments so that we can acess them
     private HashMap<Integer, Fragment> currentlyActiveFragments;
@@ -59,23 +62,24 @@ public class PairOperationAdapter extends FragmentStatePagerAdapter {
 
         switch (index) {
             case 0:
-                Log.d(getClass().getSimpleName(), "1st Tab Selected");
-                fragment = ScanAndPairFragment.newInstance();
-                Bundle nfc_scan = new Bundle();
-                nfc_scan.putBoolean("nfc_pair", true);
-                fragment.setArguments(nfc_scan);
-                break;
-            case 1:
+//                Log.d(getClass().getSimpleName(), "1st Tab Selected");
+//                fragment = ScanAndPairFragment.newInstance();
+//                Bundle nfc_scan = new Bundle();
+//                nfc_scan.putBoolean("nfc_pair", true);
+//                fragment.setArguments(nfc_scan);
+//                break;
+//            case 1:
                 Log.d(getClass().getSimpleName(), "2nd Tab Selected");
                 fragment = ScanAndPairFragment.newInstance();
                 Bundle bt_scan = new Bundle();
                 bt_scan.putBoolean("bt_pair", true);
                 fragment.setArguments(bt_scan);
                 break;
-            case 2:
-                fragment = ScanBarcodeAndPairFragment.newInstance();
-                break;
-            case 3:
+//            case 2:
+//                fragment = ScanBarcodeAndPairFragment.newInstance();
+//                break;
+//            case 3:
+            case 1:
                 fragment = CameraScanFragment.newInstance();
                 break;
             default:

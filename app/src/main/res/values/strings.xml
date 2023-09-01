@@ -790,8 +790,13 @@
     <string name="disconnectrfid">Disconnect RFIDXX</string>
     <string name="serial_no">Show Serial No.</string>
     <string name="readermodel">MODEL: %1$s</string>
+    <string name="device_register">장치 등록</string>
     <string name="RFID">RFID</string>
-    <string name="SCAN">SCAN</string>
+    <string name="SCAN">스캔 등록</string>
+    <string name="scan_barcode_or_enter_value">장치의 시리얼코드 또는 블루투스 맥주소를 입력해 주세요.</string>
+    <string name="start_PAIR">페어링 시작</string>
+    <string name="un_PAIR">선택된 기기 페어링 종료하기</string>
+    <string name="Paired_Readers">페어링 된 기기 목록</string>
     <string name="generalSettings">General</string>
     <string name="serialno">SERIAL: %1$s</string>
     <string name="no_nfc_support">NFC Not Supported on this device model</string>

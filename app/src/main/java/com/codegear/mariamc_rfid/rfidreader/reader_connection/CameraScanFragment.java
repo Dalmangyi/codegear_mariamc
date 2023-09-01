@@ -81,8 +81,7 @@ public class CameraScanFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_camera_scan, container, false);
 
@@ -96,7 +95,7 @@ public class CameraScanFragment extends Fragment {
                 layoutScanButton.setVisibility(View.GONE);
                 layoutCamera.setVisibility(View.VISIBLE);
                 setupCamera(view);
-            }else{
+            } else {
                 Toast.makeText(requireActivity(), "Camera not found, this feature not supported", Toast.LENGTH_SHORT).show();
             }
 
@@ -104,10 +103,10 @@ public class CameraScanFragment extends Fragment {
         view.setFocusableInTouchMode(true);
         view.requestFocus();
         view.setOnKeyListener((v, keyCode, event) -> {
-            if( keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
-               if(cameraProvider != null){
-                   cameraProvider.unbindAll();
-               }
+            if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
+                if (cameraProvider != null) {
+                    cameraProvider.unbindAll();
+                }
             }
             return false;
         });
@@ -206,10 +205,10 @@ public class CameraScanFragment extends Fragment {
                             if (scannedFormat == Barcode.FORMAT_DATA_MATRIX) {
                                 if (Objects.requireNonNull(barcode.getRawValue()).startsWith("P")) {
                                     Application.scanPair.barcodeDeviceNameConnect(barcode.getRawValue().substring(1));
-                                }else if(barcode.getRawValue().length() == Defines.BT_ADDRESS_LENGTH){
+                                } else if (barcode.getRawValue().length() == Defines.BT_ADDRESS_LENGTH) {
                                     Application.scanPair.barcodeDeviceNameConnect(barcode.getRawValue());
-                                }else{
-                                    Toast.makeText(getActivity(), barcode.getRawValue() +" is not valid BT address",Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(getActivity(), barcode.getRawValue() + " is not valid BT address", Toast.LENGTH_SHORT).show();
                                 }
                             } else {
                                 Application.scanPair.barcodeDeviceNameConnect(barcode.getRawValue());
@@ -229,7 +228,7 @@ public class CameraScanFragment extends Fragment {
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Log.d("test" , e.toString());
+                Log.d("test", e.toString());
                 layoutScanButton.setVisibility(View.VISIBLE);
                 layoutCamera.setVisibility(View.GONE);
                 cameraProvider.unbindAll();
@@ -294,7 +293,7 @@ public class CameraScanFragment extends Fragment {
 
     @Override
     public void onDestroyView() {
-        if(cameraProvider != null) {
+        if (cameraProvider != null) {
             cameraProvider.unbindAll();
         }
         super.onDestroyView();

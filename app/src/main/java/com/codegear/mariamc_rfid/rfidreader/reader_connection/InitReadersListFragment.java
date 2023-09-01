@@ -190,11 +190,7 @@ public class InitReadersListFragment extends Fragment implements IRFIDConnectTas
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-
-
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_readers_list, container, false);
     }
 
@@ -224,7 +220,7 @@ public class InitReadersListFragment extends Fragment implements IRFIDConnectTas
 
         loadPairedDevices(null, false);
 
-        fabPairReader =(ExtendedFloatingActionButton) getActivity().findViewById(R.id.fab_pair_reader);
+        fabPairReader = (ExtendedFloatingActionButton) getActivity().findViewById(R.id.fab_pair_reader);
 /*        if(getArguments().getBoolean("launch_app_home", false)) {
             fabPairReader.setVisibility(View.VISIBLE);
         }*/

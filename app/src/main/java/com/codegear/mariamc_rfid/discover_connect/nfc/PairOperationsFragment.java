@@ -77,8 +77,7 @@ public class PairOperationsFragment extends Fragment {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 String className = getActivity().getClass().getName();
-                if(className.equals("com.codegear.mariamc_rfid.DeviceDiscoverActivity"))
-                {
+                if(className.equals("com.codegear.mariamc_rfid.DeviceDiscoverActivity")) {
                     Fragment fragment = InitReadersListFragment.getInstance();
                     ((DeviceDiscoverActivity) getActivity()).switchToFragment(fragment);
                 }
@@ -95,9 +94,7 @@ public class PairOperationsFragment extends Fragment {
         switch (item.getItemId()) {
             case R.id.scan_and_pair_help:
             {
-
                 scan_and_pair_help = new Dialog(getActivity());
-
                 scan_and_pair_help.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 scan_and_pair_help.setContentView(R.layout.dialog_pair_operations_help);
                 scan_and_pair_help.setCancelable(false);
@@ -117,12 +114,6 @@ public class PairOperationsFragment extends Fragment {
                     BarcodePairLayout.setVisibility(View.VISIBLE);
                 }
 
-
-
-                  /*  TextView textView = (TextView) scan_and_pair_help.findViewById(R.id.url);
-                    if (textView != null) {
-                        textView.setMovementMethod(LinkMovementMethod.getInstance());
-                    }*/
 
                 TextView declineButton = (TextView) scan_and_pair_help.findViewById(R.id.btn_ok);
                 // if decline button is clicked, close the custom dialog
@@ -169,20 +160,23 @@ public class PairOperationsFragment extends Fragment {
         tabLayout.setupWithViewPager(viewPager);
         viewPager.setCurrentItem(1);
 
-       // viewPager.setOffscreenPageLimit(1);
+        // viewPager.setOffscreenPageLimit(1);
         mAdapter.notifyDataSetChanged();
 
+
+
+        ((DeviceDiscoverActivity) getActivity()).setActionBarTitle(getResources().getString(R.string.device_register));
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
 
-                if(isResumed()) {
-                    if (getActivity() instanceof DeviceDiscoverActivity)
-                        ((DeviceDiscoverActivity) getActivity()).setActionBarTitle(mAdapter.getPageTitle(tab.getPosition()).toString());
-                    if (getActivity() instanceof ActiveDeviceActivity)
-                        ((ActiveDeviceActivity) getActivity()).setActionBarTitle(mAdapter.getPageTitle(tab.getPosition()).toString());
-                }
+//                if(isResumed()) {
+//                    if (getActivity() instanceof DeviceDiscoverActivity)
+//                        ((DeviceDiscoverActivity) getActivity()).setActionBarTitle(mAdapter.getPageTitle(tab.getPosition()).toString());
+//                    if (getActivity() instanceof ActiveDeviceActivity)
+//                        ((ActiveDeviceActivity) getActivity()).setActionBarTitle(mAdapter.getPageTitle(tab.getPosition()).toString());
+//                }
             }
 
             @Override

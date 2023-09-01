@@ -126,8 +126,7 @@ public class DeviceDiscoverActivity extends BaseActivity implements Readers.RFID
         mDeviceDiscoverActivity = this;
         mSavedInstanceState = savedInstanceState;
         //setContentView(R.layout.activity_settings_detail);
-        if(mConnectedReader != null )
-        {
+        if(mConnectedReader != null ) {
             Log.d(TAG, "There is no way you can come here ");
         }
         setContentView(R.layout.discover_activity_layout);
@@ -138,7 +137,8 @@ public class DeviceDiscoverActivity extends BaseActivity implements Readers.RFID
         getSupportActionBar().setTitle(getResources().getString(R.string.title_empty_readers));
         mDrawerLayout = (DrawerLayout) findViewById(R.id.discover_drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, mDrawerLayout,toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        this, mDrawerLayout,toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close
+        );
         iv_batteryLevel = (ImageView) findViewById(R.id.disbatteryLevel);
         battery_percentage = (TextView) findViewById(R.id.battery_percentage);
         btn_disconnect = findViewById(R.id.disconnect_btn);
@@ -487,7 +487,7 @@ public class DeviceDiscoverActivity extends BaseActivity implements Readers.RFID
         }*/
         Fragment currentFragment = getSupportFragmentManager().findFragmentByTag(TAG_CONTENT_FRAGMENT);
         if (currentFragment != null && (currentFragment instanceof PairOperationsFragment) || currentFragment instanceof ReaderDetailsFragment){
-            setActionBarTitle("Readers");
+            setActionBarTitle(getResources().getString(R.string.title_empty_readers));
             Fragment fragment = InitReadersListFragment.getInstance();
             if (fragment != null) {
                 switchToFragment(fragment);
