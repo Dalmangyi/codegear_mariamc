@@ -3,7 +3,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:fillViewport="true"
-    tools:context=".rfidreader.settings.StartStopTriggersFragment">
+    tools:context="com.codegear.mariamc_rfid.rfidreader.settings.StartStopTriggersFragment">
 
     <LinearLayout
         style="@style/base_layout_style"

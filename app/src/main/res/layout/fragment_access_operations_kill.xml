@@ -3,7 +3,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:fillViewport="true"
-    tools:context=".rfidreader.access_operations.AccessOperationsKillFragment">
+    tools:context="com.codegear.mariamc_rfid.rfidreader.access_operations.AccessOperationsKillFragment">
 
 <LinearLayout
     style="@style/base_layout_style"

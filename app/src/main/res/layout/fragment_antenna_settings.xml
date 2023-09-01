@@ -3,7 +3,7 @@
     style="@style/base_layout_style"
     android:orientation="vertical"
     android:focusableInTouchMode="true"
-    tools:context=".rfidreader.settings.AntennaSettingsFragment">
+    tools:context="com.codegear.mariamc_rfid.rfidreader.settings.AntennaSettingsFragment">
 
     <TableRow
         android:id="@+id/singulationControlRow1"

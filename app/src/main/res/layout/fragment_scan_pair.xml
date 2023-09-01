@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@android:color/white"
-    tools:context=".rfidreader.reader_connection.ScanAndPairFragment">
+    tools:context="com.codegear.mariamc_rfid.rfidreader.reader_connection.ScanAndPairFragment">
 
 <!--    <androidx.appcompat.widget.Toolbar
         android:id="@+id/my_toolbar"

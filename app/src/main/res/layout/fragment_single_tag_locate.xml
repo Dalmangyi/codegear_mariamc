@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/rr_base_layout_style"
     android:orientation="vertical"
-    tools:context="com.zebra.demo.rfidreader.locate_tag.SingleTagLocateFragment">
+    tools:context="com.zebra.demo.com.codegear.demo.rfidreader.locate_tag.SingleTagLocateFragment">
 
     <include
         android:id="@+id/lt_et_epc"
@@ -22,7 +22,7 @@
         android:paddingLeft="10dp"
         android:paddingRight="10dp">
 
-        <com.zebra.demo.rfidreader.locate_tag.RangeGraph
+        <com.codegear.mariamc_rfid.rfidreader.locate_tag.RangeGraph
             android:id="@+id/locationBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

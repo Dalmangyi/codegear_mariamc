@@ -11,7 +11,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:background="@android:color/white"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".rfidreader.reader_connection.ScanBarcodeAndPairFragment">
+    tools:context="com.codegear.mariamc_rfid.rfidreader.reader_connection.ScanBarcodeAndPairFragment">
 
     <TextView
         style="@style/roboto_medium_16dp"

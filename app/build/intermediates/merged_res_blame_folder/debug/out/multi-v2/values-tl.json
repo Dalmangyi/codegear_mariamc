@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.zebra.demo.app-mergeDebugResources-30:/values-tl/values-tl.xml",
+            "outputFile": "com.codegear.mariamc_rfid.app-mergeDebugResources-30:/values-tl/values-tl.xml",
             "map": [
                 {
                     "source": "/Users/shseo/.gradle/caches/transforms-3/7340deedde59e490b38b48acdc8d4d8e/transformed/navigation-ui-2.3.5/res/values-tl/values-tl.xml",

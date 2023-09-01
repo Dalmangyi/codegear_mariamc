@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:layout_marginTop="@dimen/margin"
     android:layout_marginLeft="@dimen/margin"
-    tools:context=".wifi.ReaderWifiSettingsFragment">
+    tools:context="com.codegear.mariamc_rfid.wifi.ReaderWifiSettingsFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"

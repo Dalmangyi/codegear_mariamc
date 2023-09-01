@@ -83,8 +83,8 @@
 39
 40    <application
 40-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:36:5-388:19
-41        android:name="com.zebra.demo.application.Application"
-41-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:37:9-48
+41        android:name="com.codegear.mariamc_rfid.application.Application"
+41-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:37:9-73
 42        android:allowBackup="false"
 42-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:38:9-36
 43        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
@@ -104,26 +104,26 @@
 51-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:44:9-40
 52        <activity
 52-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:47:9-49:52
-53            android:name="com.zebra.demo.ManageDeviceActivity"
-53-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:48:13-49
+53            android:name="com.codegear.mariamc_rfid.ManageDeviceActivity"
+53-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:48:13-74
 54            android:screenOrientation="portrait" />
 54-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:49:13-49
 55        <activity
 55-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:50:9-55:59
-56            android:name="com.zebra.demo.scanner.activities.NavigationHelpActivity"
-56-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:51:13-70
+56            android:name="com.codegear.mariamc_rfid.scanner.activities.NavigationHelpActivity"
+56-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:51:13-95
 57            android:label="@string/title_activity_navigation_help"
 57-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:52:13-67
-58            android:parentActivityName="com.zebra.demo.scanner.activities.ActiveScannerActivity"
-58-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:53:13-83
+58            android:parentActivityName="com.codegear.mariamc_rfid.scanner.activities.ActiveScannerActivity"
+58-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:53:13-108
 59            android:screenOrientation="portrait"
 59-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:54:13-49
 60            android:theme="@style/AppTheme.NoActionBar" />
 60-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:55:13-56
 61        <activity
 61-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:56:9-69:20
-62            android:name="com.zebra.demo.DeviceDiscoverActivity"
-62-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:57:13-51
+62            android:name="com.codegear.mariamc_rfid.DeviceDiscoverActivity"
+62-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:57:13-76
 63            android:configChanges="keyboardHidden|screenSize|fontScale"
 63-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:58:13-72
 64            android:exported="true"
@@ -149,8 +149,8 @@
 74        </activity>
 75        <activity
 75-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:70:9-76:58
-76            android:name="com.zebra.demo.rfidreader.settings.SettingsDetailActivity"
-76-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:71:13-71
+76            android:name="com.codegear.mariamc_rfid.rfidreader.settings.SettingsDetailActivity"
+76-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:71:13-96
 77            android:label="@string/title_activity_settings_detail"
 77-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:72:13-67
 78            android:launchMode="singleTask"
@@ -164,15 +164,15 @@
 82
 83        <service
 83-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:78:9-80:40
-84            android:name="com.zebra.demo.rfidreader.notifications.NotificationsService"
-84-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:79:13-74
+84            android:name="com.codegear.mariamc_rfid.rfidreader.notifications.NotificationsService"
+84-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:79:13-99
 85            android:exported="false" />
 85-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:80:13-37
 86
 87        <receiver
 87-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:82:9-99:20
-88            android:name="com.zebra.demo.rfidreader.notifications.NotificationsReceiver"
-88-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:83:13-75
+88            android:name="com.codegear.mariamc_rfid.rfidreader.notifications.NotificationsReceiver"
+88-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:83:13-100
 89            android:enabled="true"
 89-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:84:13-35
 90            android:exported="false" >
@@ -213,8 +213,8 @@
 105
 106        <activity
 106-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:101:9-107:64
-107            android:name="com.zebra.demo.scanner.activities.ScannerHomeActivity"
-107-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:102:13-67
+107            android:name="com.codegear.mariamc_rfid.scanner.activities.ScannerHomeActivity"
+107-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:102:13-92
 108            android:configChanges="orientation|screenSize"
 108-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:103:13-59
 109            android:label="@string/scanner_title"
@@ -227,92 +227,92 @@
 112-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:107:13-61
 113        <activity
 113-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:108:9-114:52
-114            android:name="com.zebra.demo.scanner.activities.PairNewScannerActivity"
-114-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:109:13-70
+114            android:name="com.codegear.mariamc_rfid.scanner.activities.PairNewScannerActivity"
+114-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:109:13-95
 115            android:configChanges="orientation|screenSize"
 115-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:110:13-59
 116            android:label="@string/pairing_barcode_title"
 116-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:111:13-58
 117            android:launchMode="singleTask"
 117-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:112:13-44
-118            android:parentActivityName="com.zebra.demo.scanner.activities.ScannersActivity"
-118-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:113:13-78
+118            android:parentActivityName="com.codegear.mariamc_rfid.scanner.activities.ScannersActivity"
+118-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:113:13-103
 119            android:screenOrientation="portrait" />
 119-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:114:13-49
 120        <activity
 120-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:115:9-118:69
-121            android:name="com.zebra.demo.scanner.activities.SplashScreenActivity"
-121-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:116:13-68
+121            android:name="com.codegear.mariamc_rfid.scanner.activities.SplashScreenActivity"
+121-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:116:13-93
 122            android:label="@string/title_activity_home"
 122-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:117:13-56
 123            android:theme="@android:style/Theme.Black.NoTitleBar" />
 123-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:118:13-66
 124        <activity
 124-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:119:9-124:52
-125            android:name="com.zebra.demo.scanner.activities.AboutActivity"
-125-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:120:13-61
+125            android:name="com.codegear.mariamc_rfid.scanner.activities.AboutActivity"
+125-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:120:13-86
 126            android:configChanges="orientation|screenSize"
 126-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:121:13-59
 127            android:label="@string/title_activity_about"
 127-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:122:13-57
-128            android:parentActivityName="com.zebra.demo.scanner.activities.ScannersActivity"
-128-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:123:13-78
+128            android:parentActivityName="com.codegear.mariamc_rfid.scanner.activities.ScannersActivity"
+128-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:123:13-103
 129            android:screenOrientation="portrait" />
 129-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:124:13-49
 130        <activity
 130-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:125:9-131:52
-131            android:name="com.zebra.demo.scanner.activities.ScannersActivity"
-131-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:126:13-64
+131            android:name="com.codegear.mariamc_rfid.scanner.activities.ScannersActivity"
+131-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:126:13-89
 132            android:configChanges="orientation|screenSize"
 132-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:127:13-59
 133            android:label="@string/title_activity_scanners"
 133-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:128:13-60
 134            android:launchMode="singleTask"
 134-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:129:13-44
-135            android:parentActivityName="com.zebra.demo.scanner.activities.ScannersActivity"
-135-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:130:13-78
+135            android:parentActivityName="com.codegear.mariamc_rfid.scanner.activities.ScannersActivity"
+135-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:130:13-103
 136            android:screenOrientation="portrait" />
 136-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:131:13-49
 137        <activity
 137-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:132:9-137:52
-138            android:name="com.zebra.demo.scanner.activities.ConnectionHelpActivity2"
-138-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:133:13-71
+138            android:name="com.codegear.mariamc_rfid.scanner.activities.ConnectionHelpActivity2"
+138-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:133:13-96
 139            android:configChanges="orientation|screenSize"
 139-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:134:13-59
 140            android:label="@string/title_activity_scanner_configurations"
 140-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:135:13-74
-141            android:parentActivityName="com.zebra.demo.scanner.activities.ScannersActivity"
-141-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:136:13-78
+141            android:parentActivityName="com.codegear.mariamc_rfid.scanner.activities.ScannersActivity"
+141-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:136:13-103
 142            android:screenOrientation="portrait" />
 142-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:137:13-49
 143        <activity
 143-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:138:9-143:52
-144            android:name="com.zebra.demo.scanner.activities.SettingsActivity"
-144-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:139:13-64
+144            android:name="com.codegear.mariamc_rfid.scanner.activities.SettingsActivity"
+144-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:139:13-89
 145            android:configChanges="orientation|screenSize"
 145-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:140:13-59
 146            android:label="@string/title_activity_settings"
 146-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:141:13-60
-147            android:parentActivityName="com.zebra.demo.scanner.activities.ScannersActivity"
-147-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:142:13-78
+147            android:parentActivityName="com.codegear.mariamc_rfid.scanner.activities.ScannersActivity"
+147-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:142:13-103
 148            android:screenOrientation="portrait" />
 148-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:143:13-49
 149        <activity
 149-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:144:9-149:52
-150            android:name="com.zebra.demo.scanner.activities.NotificationsActivity"
-150-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:145:13-69
+150            android:name="com.codegear.mariamc_rfid.scanner.activities.NotificationsActivity"
+150-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:145:13-94
 151            android:configChanges="orientation|screenSize"
 151-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:146:13-59
 152            android:label="@string/title_activity_notifications"
 152-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:147:13-65
-153            android:parentActivityName="com.zebra.demo.scanner.activities.SettingsActivity"
-153-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:148:13-78
+153            android:parentActivityName="com.codegear.mariamc_rfid.scanner.activities.SettingsActivity"
+153-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:148:13-103
 154            android:screenOrientation="portrait" />
 154-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:149:13-49
 155        <activity
 155-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:150:9-154:52
-156            android:name="com.zebra.demo.scanner.activities.BaseActivity"
-156-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:151:13-60
+156            android:name="com.codegear.mariamc_rfid.scanner.activities.BaseActivity"
+156-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:151:13-85
 157            android:configChanges="orientation|screenSize"
 157-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:152:13-59
 158            android:label="@string/title_activity_base"
@@ -322,8 +322,8 @@
 160
 161        <receiver
 161-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:156:9-171:20
-162            android:name="com.zebra.demo.scanner.receivers.NotificationsReceiver"
-162-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:157:13-68
+162            android:name="com.codegear.mariamc_rfid.scanner.receivers.NotificationsReceiver"
+162-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:157:13-93
 163            android:enabled="true"
 163-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:158:13-35
 164            android:exported="false" >
@@ -358,8 +358,8 @@
 177
 178        <activity
 178-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:173:9-186:20
-179            android:name="com.zebra.demo.ActiveDeviceActivity"
-179-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:174:13-49
+179            android:name="com.codegear.mariamc_rfid.ActiveDeviceActivity"
+179-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:174:13-74
 180            android:configChanges="orientation|screenSize|fontScale"
 180-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:175:13-69
 181            android:exported="true"
@@ -385,8 +385,8 @@
 191        </activity>
 192        <activity
 192-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:187:9-200:20
-193            android:name="com.zebra.demo.scanner.activities.ActiveScannerActivity"
-193-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:188:13-69
+193            android:name="com.codegear.mariamc_rfid.scanner.activities.ActiveScannerActivity"
+193-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:188:13-94
 194            android:configChanges="orientation|screenSize"
 194-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:189:13-59
 195            android:exported="true"
@@ -412,355 +412,355 @@
 205        </activity>
 206        <activity
 206-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:201:9-211:20
-207            android:name="com.zebra.demo.scanner.activities.BeeperActionsActivity"
-207-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:202:13-69
+207            android:name="com.codegear.mariamc_rfid.scanner.activities.BeeperActionsActivity"
+207-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:202:13-94
 208            android:configChanges="orientation|screenSize"
 208-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:203:13-59
 209            android:label="@string/title_activity_active_scanner"
 209-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:204:13-66
-210            android:parentActivityName="com.zebra.demo.scanner.activities.ActiveScannerActivity"
-210-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:205:13-83
+210            android:parentActivityName="com.codegear.mariamc_rfid.scanner.activities.ActiveScannerActivity"
+210-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:205:13-108
 211            android:screenOrientation="portrait"
 211-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:206:13-49
 212            android:theme="@style/AppTheme.NoActionBar" >
 212-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:207:13-56
 213            <meta-data
-213-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:208:13-210:77
+213-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:208:13-210:102
 214                android:name="android.support.PARENT_ACTIVITY"
 214-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:209:17-63
-215                android:value=".scanner.activities.ActiveScannerActivity" />
-215-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:210:17-74
+215                android:value="com.codegear.mariamc_rfid.scanner.activities.ActiveScannerActivity" />
+215-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:210:17-99
 216        </activity>
 217        <activity
 217-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:212:9-222:20
-218            android:name="com.zebra.demo.scanner.activities.LEDActivity"
-218-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:213:13-59
+218            android:name="com.codegear.mariamc_rfid.scanner.activities.LEDActivity"
+218-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:213:13-84
 219            android:configChanges="orientation|screenSize"
 219-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:214:13-59
 220            android:label="@string/title_activity_active_scanner"
 220-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:215:13-66
-221            android:parentActivityName="com.zebra.demo.scanner.activities.ActiveScannerActivity"
-221-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:216:13-83
+221            android:parentActivityName="com.codegear.mariamc_rfid.scanner.activities.ActiveScannerActivity"
+221-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:216:13-108
 222            android:screenOrientation="portrait"
 222-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:217:13-49
 223            android:theme="@style/AppTheme.NoActionBar" >
 223-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:218:13-56
 224            <meta-data
-224-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:208:13-210:77
+224-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:208:13-210:102
 225                android:name="android.support.PARENT_ACTIVITY"
 225-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:209:17-63
-226                android:value=".scanner.activities.ActiveScannerActivity" />
-226-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:210:17-74
+226                android:value="com.codegear.mariamc_rfid.scanner.activities.ActiveScannerActivity" />
+226-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:210:17-99
 227        </activity>
 228        <activity
 228-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:223:9-233:20
-229            android:name="com.zebra.demo.scanner.activities.SymbologiesActivity"
-229-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:224:13-67
+229            android:name="com.codegear.mariamc_rfid.scanner.activities.SymbologiesActivity"
+229-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:224:13-92
 230            android:configChanges="orientation|screenSize"
 230-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:225:13-59
 231            android:label="@string/title_activity_active_scanner"
 231-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:226:13-66
-232            android:parentActivityName="com.zebra.demo.scanner.activities.ActiveScannerActivity"
-232-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:227:13-83
+232            android:parentActivityName="com.codegear.mariamc_rfid.scanner.activities.ActiveScannerActivity"
+232-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:227:13-108
 233            android:screenOrientation="portrait"
 233-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:228:13-49
 234            android:theme="@style/AppTheme.NoActionBar" >
 234-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:229:13-56
 235            <meta-data
-235-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:208:13-210:77
+235-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:208:13-210:102
 236                android:name="android.support.PARENT_ACTIVITY"
 236-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:209:17-63
-237                android:value=".scanner.activities.ActiveScannerActivity" />
-237-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:210:17-74
+237                android:value="com.codegear.mariamc_rfid.scanner.activities.ActiveScannerActivity" />
+237-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:210:17-99
 238        </activity>
 239        <activity
 239-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:234:9-243:20
-240            android:name="com.zebra.demo.scanner.activities.BeeperSettingsActivity"
-240-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:235:13-70
+240            android:name="com.codegear.mariamc_rfid.scanner.activities.BeeperSettingsActivity"
+240-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:235:13-95
 241            android:configChanges="orientation|screenSize"
 241-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:236:13-59
 242            android:label="@string/title_activity_active_scanner"
 242-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:237:13-66
-243            android:parentActivityName="com.zebra.demo.scanner.activities.ActiveScannerActivity"
-243-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:238:13-83
+243            android:parentActivityName="com.codegear.mariamc_rfid.scanner.activities.ActiveScannerActivity"
+243-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:238:13-108
 244            android:screenOrientation="portrait" >
 244-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:239:13-49
 245            <meta-data
-245-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:208:13-210:77
+245-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:208:13-210:102
 246                android:name="android.support.PARENT_ACTIVITY"
 246-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:209:17-63
-247                android:value=".scanner.activities.ActiveScannerActivity" />
-247-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:210:17-74
+247                android:value="com.codegear.mariamc_rfid.scanner.activities.ActiveScannerActivity" />
+247-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:210:17-99
 248        </activity>
 249        <activity
 249-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:244:9-253:20
-250            android:name="com.zebra.demo.scanner.activities.AvailableScannerActivity"
-250-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:245:13-72
+250            android:name="com.codegear.mariamc_rfid.scanner.activities.AvailableScannerActivity"
+250-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:245:13-97
 251            android:configChanges="orientation|screenSize"
 251-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:246:13-59
 252            android:label="@string/title_activity_available_scanner"
 252-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:247:13-69
-253            android:parentActivityName="com.zebra.demo.scanner.activities.ScannersActivity"
-253-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:248:13-78
+253            android:parentActivityName="com.codegear.mariamc_rfid.scanner.activities.ScannersActivity"
+253-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:248:13-103
 254            android:screenOrientation="portrait" >
 254-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:249:13-49
 255            <meta-data
-255-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:208:13-210:77
+255-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:208:13-210:102
 256                android:name="android.support.PARENT_ACTIVITY"
 256-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:209:17-63
-257                android:value=".scanner.activities.ScannersActivity" />
-257-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:210:17-74
+257                android:value="com.codegear.mariamc_rfid.scanner.activities.ScannersActivity" />
+257-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:210:17-99
 258        </activity>
 259        <activity
 259-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:254:9-264:20
-260            android:name="com.zebra.demo.scanner.activities.VibrationFeedback"
-260-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:255:13-65
+260            android:name="com.codegear.mariamc_rfid.scanner.activities.VibrationFeedback"
+260-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:255:13-90
 261            android:configChanges="orientation|screenSize"
 261-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:256:13-59
 262            android:label="@string/title_activity_active_scanner"
 262-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:257:13-66
-263            android:parentActivityName="com.zebra.demo.scanner.activities.ActiveScannerActivity"
-263-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:258:13-83
+263            android:parentActivityName="com.codegear.mariamc_rfid.scanner.activities.ActiveScannerActivity"
+263-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:258:13-108
 264            android:screenOrientation="portrait"
 264-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:259:13-49
 265            android:theme="@style/AppTheme.NoActionBar" >
 265-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:260:13-56
 266            <meta-data
-266-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:208:13-210:77
+266-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:208:13-210:102
 267                android:name="android.support.PARENT_ACTIVITY"
 267-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:209:17-63
-268                android:value=".scanner.activities.ActiveScannerActivity" />
-268-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:210:17-74
+268                android:value="com.codegear.mariamc_rfid.scanner.activities.ActiveScannerActivity" />
+268-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:210:17-99
 269        </activity>
 270        <activity
 270-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:265:9-275:20
-271            android:name="com.zebra.demo.scanner.activities.BatteryStatistics"
-271-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:266:13-65
+271            android:name="com.codegear.mariamc_rfid.scanner.activities.BatteryStatistics"
+271-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:266:13-90
 272            android:configChanges="orientation|screenSize"
 272-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:267:13-59
 273            android:label="@string/title_activity_active_scanner"
 273-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:268:13-66
-274            android:parentActivityName="com.zebra.demo.scanner.activities.ActiveScannerActivity"
-274-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:269:13-83
+274            android:parentActivityName="com.codegear.mariamc_rfid.scanner.activities.ActiveScannerActivity"
+274-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:269:13-108
 275            android:screenOrientation="portrait"
 275-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:270:13-49
 276            android:theme="@style/AppTheme.NoActionBar" >
 276-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:271:13-56
 277            <meta-data
-277-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:208:13-210:77
+277-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:208:13-210:102
 278                android:name="android.support.PARENT_ACTIVITY"
 278-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:209:17-63
-279                android:value=".scanner.activities.ActiveScannerActivity" />
-279-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:210:17-74
+279                android:value="com.codegear.mariamc_rfid.scanner.activities.ActiveScannerActivity" />
+279-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:210:17-99
 280        </activity>
 281        <activity
 281-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:276:9-285:20
-282            android:name="com.zebra.demo.scanner.activities.SupportedScanners"
-282-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:277:13-65
+282            android:name="com.codegear.mariamc_rfid.scanner.activities.SupportedScanners"
+282-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:277:13-90
 283            android:configChanges="orientation|screenSize"
 283-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:278:13-59
 284            android:label="@string/title_activity_supported_scanners"
 284-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:279:13-70
-285            android:parentActivityName="com.zebra.demo.scanner.activities.ConnectionHelpActivity2"
-285-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:280:13-85
+285            android:parentActivityName="com.codegear.mariamc_rfid.scanner.activities.ConnectionHelpActivity2"
+285-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:280:13-110
 286            android:screenOrientation="portrait" >
 286-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:281:13-49
 287            <meta-data
-287-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:208:13-210:77
+287-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:208:13-210:102
 288                android:name="android.support.PARENT_ACTIVITY"
 288-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:209:17-63
-289                android:value=".scanner.activities.ConnectionHelpActivity2" />
-289-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:210:17-74
+289                android:value="com.codegear.mariamc_rfid.scanner.activities.ConnectionHelpActivity2" />
+289-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:210:17-99
 290        </activity>
 291        <activity
 291-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:286:9-295:20
-292            android:name="com.zebra.demo.scanner.activities.PairingInstructionsAll"
-292-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:287:13-70
+292            android:name="com.codegear.mariamc_rfid.scanner.activities.PairingInstructionsAll"
+292-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:287:13-95
 293            android:configChanges="orientation|screenSize"
 293-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:288:13-59
 294            android:label="@string/title_activity_pairing_instructions_all"
 294-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:289:13-76
-295            android:parentActivityName="com.zebra.demo.scanner.activities.ConnectionHelpActivity2"
-295-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:290:13-85
+295            android:parentActivityName="com.codegear.mariamc_rfid.scanner.activities.ConnectionHelpActivity2"
+295-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:290:13-110
 296            android:screenOrientation="portrait" >
 296-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:291:13-49
 297            <meta-data
-297-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:208:13-210:77
+297-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:208:13-210:102
 298                android:name="android.support.PARENT_ACTIVITY"
 298-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:209:17-63
-299                android:value=".scanner.activities.ConnectionHelpActivity2" />
-299-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:210:17-74
+299                android:value="com.codegear.mariamc_rfid.scanner.activities.ConnectionHelpActivity2" />
+299-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:210:17-99
 300        </activity>
 301        <activity
 301-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:296:9-305:20
-302            android:name="com.zebra.demo.scanner.activities.PairingInstructionsRFD8500"
-302-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:297:13-74
+302            android:name="com.codegear.mariamc_rfid.scanner.activities.PairingInstructionsRFD8500"
+302-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:297:13-99
 303            android:configChanges="orientation|screenSize"
 303-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:298:13-59
 304            android:label="@string/title_activity_pairing_instructions_rfd8500"
 304-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:299:13-80
-305            android:parentActivityName="com.zebra.demo.scanner.activities.ConnectionHelpActivity2"
-305-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:300:13-85
+305            android:parentActivityName="com.codegear.mariamc_rfid.scanner.activities.ConnectionHelpActivity2"
+305-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:300:13-110
 306            android:screenOrientation="portrait" >
 306-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:301:13-49
 307            <meta-data
-307-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:208:13-210:77
+307-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:208:13-210:102
 308                android:name="android.support.PARENT_ACTIVITY"
 308-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:209:17-63
-309                android:value=".scanner.activities.ConnectionHelpActivity2" />
-309-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:210:17-74
+309                android:value="com.codegear.mariamc_rfid.scanner.activities.ConnectionHelpActivity2" />
+309-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:210:17-99
 310        </activity>
 311        <activity
 311-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:306:9-315:20
-312            android:name="com.zebra.demo.scanner.activities.FindCabledScanner"
-312-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:307:13-65
+312            android:name="com.codegear.mariamc_rfid.scanner.activities.FindCabledScanner"
+312-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:307:13-90
 313            android:configChanges="orientation|screenSize"
 313-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:308:13-59
 314            android:label="@string/title_activity_find_cabled_scanner"
 314-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:309:13-71
-315            android:parentActivityName="com.zebra.demo.scanner.activities.ScannersActivity"
-315-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:310:13-78
+315            android:parentActivityName="com.codegear.mariamc_rfid.scanner.activities.ScannersActivity"
+315-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:310:13-103
 316            android:screenOrientation="portrait" >
 316-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:311:13-49
 317            <meta-data
-317-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:208:13-210:77
+317-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:208:13-210:102
 318                android:name="android.support.PARENT_ACTIVITY"
 318-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:209:17-63
-319                android:value=".scanner.activities.ScannersActivity" />
-319-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:210:17-74
+319                android:value="com.codegear.mariamc_rfid.scanner.activities.ScannersActivity" />
+319-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:210:17-99
 320        </activity>
 321        <activity
 321-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:316:9-326:20
-322            android:name="com.zebra.demo.scanner.activities.SampleBarcodes"
-322-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:317:13-62
+322            android:name="com.codegear.mariamc_rfid.scanner.activities.SampleBarcodes"
+322-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:317:13-87
 323            android:configChanges="orientation|screenSize"
 323-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:318:13-59
 324            android:label="@string/title_activity_active_scanner"
 324-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:319:13-66
-325            android:parentActivityName="com.zebra.demo.scanner.activities.ActiveScannerActivity"
-325-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:320:13-83
+325            android:parentActivityName="com.codegear.mariamc_rfid.scanner.activities.ActiveScannerActivity"
+325-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:320:13-108
 326            android:screenOrientation="portrait"
 326-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:321:13-49
 327            android:theme="@style/AppTheme.NoActionBar" >
 327-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:322:13-56
 328            <meta-data
-328-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:208:13-210:77
+328-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:208:13-210:102
 329                android:name="android.support.PARENT_ACTIVITY"
 329-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:209:17-63
-330                android:value=".scanner.activities.ActiveScannerActivity" />
-330-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:210:17-74
+330                android:value="com.codegear.mariamc_rfid.scanner.activities.ActiveScannerActivity" />
+330-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:210:17-99
 331        </activity>
 332        <activity
 332-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:327:9-338:20
-333            android:name="com.zebra.demo.scanner.activities.SsaSetSymbologyActivity"
-333-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:328:13-71
+333            android:name="com.codegear.mariamc_rfid.scanner.activities.SsaSetSymbologyActivity"
+333-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:328:13-96
 334            android:configChanges="orientation|screenSize"
 334-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:329:13-59
 335            android:label="@string/title_activity_active_scanner"
 335-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:330:13-66
 336            android:noHistory="true"
 336-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:331:13-37
-337            android:parentActivityName="com.zebra.demo.scanner.activities.ActiveScannerActivity"
-337-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:332:13-83
+337            android:parentActivityName="com.codegear.mariamc_rfid.scanner.activities.ActiveScannerActivity"
+337-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:332:13-108
 338            android:screenOrientation="portrait"
 338-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:333:13-49
 339            android:theme="@style/AppTheme.NoActionBar" >
 339-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:334:13-56
 340            <meta-data
-340-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:208:13-210:77
+340-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:208:13-210:102
 341                android:name="android.support.PARENT_ACTIVITY"
 341-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:209:17-63
-342                android:value=".scanner.activities.ActiveScannerActivity" />
-342-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:210:17-74
+342                android:value="com.codegear.mariamc_rfid.scanner.activities.ActiveScannerActivity" />
+342-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:210:17-99
 343        </activity>
 344        <activity
 344-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:339:9-349:20
-345            android:name="com.zebra.demo.scanner.activities.ScanSpeedAnalyticsActivity"
-345-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:340:13-74
+345            android:name="com.codegear.mariamc_rfid.scanner.activities.ScanSpeedAnalyticsActivity"
+345-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:340:13-99
 346            android:configChanges="orientation|screenSize"
 346-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:341:13-59
 347            android:label="@string/title_activity_active_scanner"
 347-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:342:13-66
-348            android:parentActivityName="com.zebra.demo.scanner.activities.ActiveScannerActivity"
-348-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:343:13-83
+348            android:parentActivityName="com.codegear.mariamc_rfid.scanner.activities.ActiveScannerActivity"
+348-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:343:13-108
 349            android:screenOrientation="portrait"
 349-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:344:13-49
 350            android:theme="@style/AppTheme.NoActionBar" >
 350-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:345:13-56
 351            <meta-data
-351-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:208:13-210:77
+351-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:208:13-210:102
 352                android:name="android.support.PARENT_ACTIVITY"
 352-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:209:17-63
-353                android:value=".scanner.activities.ActiveScannerActivity" />
-353-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:210:17-74
+353                android:value="com.codegear.mariamc_rfid.scanner.activities.ActiveScannerActivity" />
+353-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:210:17-99
 354        </activity>
 355        <activity
 355-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:350:9-360:20
-356            android:name="com.zebra.demo.scanner.activities.ImageActivity"
-356-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:351:13-61
+356            android:name="com.codegear.mariamc_rfid.scanner.activities.ImageActivity"
+356-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:351:13-86
 357            android:configChanges="orientation|screenSize"
 357-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:352:13-59
 358            android:label="@string/title_activity_active_scanner"
 358-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:353:13-66
-359            android:parentActivityName="com.zebra.demo.scanner.activities.ActiveScannerActivity"
-359-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:354:13-83
+359            android:parentActivityName="com.codegear.mariamc_rfid.scanner.activities.ActiveScannerActivity"
+359-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:354:13-108
 360            android:screenOrientation="portrait"
 360-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:355:13-49
 361            android:theme="@style/AppTheme.NoActionBar" >
 361-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:356:13-56
 362            <meta-data
-362-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:208:13-210:77
+362-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:208:13-210:102
 363                android:name="android.support.PARENT_ACTIVITY"
 363-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:209:17-63
-364                android:value=".scanner.activities.ActiveScannerActivity" />
-364-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:210:17-74
+364                android:value="com.codegear.mariamc_rfid.scanner.activities.ActiveScannerActivity" />
+364-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:210:17-99
 365        </activity>
 366        <activity
 366-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:361:9-371:20
-367            android:name="com.zebra.demo.scanner.activities.IntelligentImageCaptureActivity"
-367-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:362:13-79
+367            android:name="com.codegear.mariamc_rfid.scanner.activities.IntelligentImageCaptureActivity"
+367-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:362:13-104
 368            android:configChanges="orientation|screenSize"
 368-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:363:13-59
 369            android:label="@string/title_activity_active_scanner"
 369-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:364:13-66
-370            android:parentActivityName="com.zebra.demo.scanner.activities.ActiveScannerActivity"
-370-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:365:13-83
+370            android:parentActivityName="com.codegear.mariamc_rfid.scanner.activities.ActiveScannerActivity"
+370-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:365:13-108
 371            android:screenOrientation="portrait"
 371-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:366:13-49
 372            android:theme="@style/AppTheme.NoActionBar" >
 372-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:367:13-56
 373            <meta-data
-373-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:208:13-210:77
+373-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:208:13-210:102
 374                android:name="android.support.PARENT_ACTIVITY"
 374-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:209:17-63
-375                android:value=".scanner.activities.ActiveScannerActivity" />
-375-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:210:17-74
+375                android:value="com.codegear.mariamc_rfid.scanner.activities.ActiveScannerActivity" />
+375-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:210:17-99
 376        </activity>
 377        <activity
 377-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:372:9-382:20
-378            android:name="com.zebra.demo.scanner.activities.ScaleActivity"
-378-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:373:13-61
+378            android:name="com.codegear.mariamc_rfid.scanner.activities.ScaleActivity"
+378-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:373:13-86
 379            android:configChanges="orientation|screenSize"
 379-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:374:13-59
 380            android:label="@string/title_activity_active_scanner"
 380-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:375:13-66
-381            android:parentActivityName="com.zebra.demo.scanner.activities.ActiveScannerActivity"
-381-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:376:13-83
+381            android:parentActivityName="com.codegear.mariamc_rfid.scanner.activities.ActiveScannerActivity"
+381-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:376:13-108
 382            android:screenOrientation="portrait"
 382-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:377:13-49
 383            android:theme="@style/AppTheme.NoActionBar" >
 383-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:378:13-56
 384            <meta-data
-384-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:208:13-210:77
+384-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:208:13-210:102
 385                android:name="android.support.PARENT_ACTIVITY"
 385-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:209:17-63
-386                android:value=".scanner.activities.ActiveScannerActivity" />
-386-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:210:17-74
+386                android:value="com.codegear.mariamc_rfid.scanner.activities.ActiveScannerActivity" />
+386-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:210:17-99
 387        </activity>
 388        <activity
 388-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:383:9-387:59
-389            android:name="com.zebra.demo.scanner.activities.DecodeImageActivity"
-389-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:384:13-67
+389            android:name="com.codegear.mariamc_rfid.scanner.activities.DecodeImageActivity"
+389-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:384:13-92
 390            android:configChanges="orientation|screenSize"
 390-->/Volumes/Storage/오로라이브 (Aurolive)/외주 프로젝트/코드기어/마리동물의료센터_카우클로니클/codegear_mariamc/app/src/main/AndroidManifest.xml:385:13-59
 391            android:screenOrientation="portrait"

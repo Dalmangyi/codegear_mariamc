@@ -8,7 +8,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:background="@color/light_gray"
-    tools:context="com.zebra.demo.scanner.activities.SettingsActivity">
+    tools:context="com.zebra.demo.com.codegear.demo.scanner.activities.SettingsActivity">
 
     <TextView
         android:layout_width="match_parent"

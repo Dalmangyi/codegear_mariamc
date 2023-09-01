@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/base_layout_style"
     android:orientation="vertical"
-    tools:context=".rfidreader.settings.BatteryFragment">
+    tools:context="com.codegear.mariamc_rfid.rfidreader.settings.BatteryFragment">
 
     <TextView
         android:id="@+id/batteryLevelText"

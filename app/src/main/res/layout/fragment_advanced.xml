@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/light_gray"
     android:orientation="vertical"
-    tools:context=".scanner.fragments.AdvancedFragment">
+    tools:context="com.codegear.mariamc_rfid.scanner.fragments.AdvancedFragment">
 
     <ScrollView
         android:layout_width="match_parent"

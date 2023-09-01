@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/base_layout_style"
     android:orientation="vertical"
-    tools:context=".rfidreader.settings.BeeperFragment">
+    tools:context="com.codegear.mariamc_rfid.rfidreader.settings.BeeperFragment">
 
     <TableRow
         android:id="@+id/sledBeeperRow"

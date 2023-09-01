@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".rfidreader.locate_tag.multitag_locate.MultiTagLocateFragment">
+    tools:context="com.codegear.mariamc_rfid.rfidreader.locate_tag.multitag_locate.MultiTagLocateFragment">
 
     <LinearLayout
         android:id="@+id/multiTagLocateDataLayout"

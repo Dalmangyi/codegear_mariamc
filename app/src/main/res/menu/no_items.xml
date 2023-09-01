@@ -1,4 +1,4 @@
 <menu xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ActiveDeviceActivity">
+    tools:context="com.codegear.mariamc_rfid.ActiveDeviceActivity">
 
 </menu>

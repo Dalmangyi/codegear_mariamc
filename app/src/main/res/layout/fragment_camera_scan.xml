@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".rfidreader.reader_connection.CameraScanFragment">
+    tools:context="com.codegear.mariamc_rfid.rfidreader.reader_connection.CameraScanFragment">
 
     <FrameLayout
         android:id="@+id/button_view"

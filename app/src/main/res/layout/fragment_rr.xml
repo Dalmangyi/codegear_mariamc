@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".rfidreader.rapidread.RapidReadFragment">
+    tools:context="com.codegear.mariamc_rfid.rfidreader.rapidread.RapidReadFragment">
 
     <!-- <TextView
          android:id="@+id/tv_prefilter_enabled"

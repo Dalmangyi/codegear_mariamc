@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".rfidreader.settings.PreFilterFragment">
+    tools:context="com.codegear.mariamc_rfid.rfidreader.settings.PreFilterFragment">
 
     <include
         android:id="@+id/simplefilter"

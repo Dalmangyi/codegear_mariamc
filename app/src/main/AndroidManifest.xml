@@ -34,7 +34,7 @@
     <uses-permission android:name="android.permission.CAMERA" />
 
     <application
-        android:name=".application.Application"
+        android:name="com.codegear.mariamc_rfid.application.Application"
         android:allowBackup="false"
         android:appComponentFactory="androidx.core.app.CoreComponentFactory"
         android:icon="@mipmap/ic_launcher"
@@ -45,16 +45,16 @@
         tools:replace="android:allowBackup, android:appComponentFactory">
 
         <activity
-            android:name=".ManageDeviceActivity"
+            android:name="com.codegear.mariamc_rfid.ManageDeviceActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".scanner.activities.NavigationHelpActivity"
+            android:name="com.codegear.mariamc_rfid.scanner.activities.NavigationHelpActivity"
             android:label="@string/title_activity_navigation_help"
-            android:parentActivityName=".scanner.activities.ActiveScannerActivity"
+            android:parentActivityName="com.codegear.mariamc_rfid.scanner.activities.ActiveScannerActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".DeviceDiscoverActivity"
+            android:name="com.codegear.mariamc_rfid.DeviceDiscoverActivity"
             android:configChanges="keyboardHidden|screenSize|fontScale"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
@@ -68,7 +68,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".rfidreader.settings.SettingsDetailActivity"
+            android:name="com.codegear.mariamc_rfid.rfidreader.settings.SettingsDetailActivity"
             android:label="@string/title_activity_settings_detail"
             android:launchMode="singleTask"
             android:resizeableActivity="false"
@@ -76,11 +76,11 @@
             android:windowSoftInputMode="adjustResize" />
 
         <service
-            android:name=".rfidreader.notifications.NotificationsService"
+            android:name="com.codegear.mariamc_rfid.rfidreader.notifications.NotificationsService"
             android:exported="false" />
 
         <receiver
-            android:name=".rfidreader.notifications.NotificationsReceiver"
+            android:name="com.codegear.mariamc_rfid.rfidreader.notifications.NotificationsReceiver"
             android:enabled="true"
             android:exported="false">
             <intent-filter>
@@ -99,62 +99,62 @@
         </receiver>
 
         <activity
-            android:name=".scanner.activities.ScannerHomeActivity"
+            android:name="com.codegear.mariamc_rfid.scanner.activities.ScannerHomeActivity"
             android:configChanges="orientation|screenSize"
             android:label="@string/scanner_title"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeLight.NoActionBar" />
         <activity
-            android:name=".scanner.activities.PairNewScannerActivity"
+            android:name="com.codegear.mariamc_rfid.scanner.activities.PairNewScannerActivity"
             android:configChanges="orientation|screenSize"
             android:label="@string/pairing_barcode_title"
             android:launchMode="singleTask"
-            android:parentActivityName=".scanner.activities.ScannersActivity"
+            android:parentActivityName="com.codegear.mariamc_rfid.scanner.activities.ScannersActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".scanner.activities.SplashScreenActivity"
+            android:name="com.codegear.mariamc_rfid.scanner.activities.SplashScreenActivity"
             android:label="@string/title_activity_home"
             android:theme="@android:style/Theme.Black.NoTitleBar" />
         <activity
-            android:name=".scanner.activities.AboutActivity"
+            android:name="com.codegear.mariamc_rfid.scanner.activities.AboutActivity"
             android:configChanges="orientation|screenSize"
             android:label="@string/title_activity_about"
-            android:parentActivityName=".scanner.activities.ScannersActivity"
+            android:parentActivityName="com.codegear.mariamc_rfid.scanner.activities.ScannersActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".scanner.activities.ScannersActivity"
+            android:name="com.codegear.mariamc_rfid.scanner.activities.ScannersActivity"
             android:configChanges="orientation|screenSize"
             android:label="@string/title_activity_scanners"
             android:launchMode="singleTask"
-            android:parentActivityName=".scanner.activities.ScannersActivity"
+            android:parentActivityName="com.codegear.mariamc_rfid.scanner.activities.ScannersActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".scanner.activities.ConnectionHelpActivity2"
+            android:name="com.codegear.mariamc_rfid.scanner.activities.ConnectionHelpActivity2"
             android:configChanges="orientation|screenSize"
             android:label="@string/title_activity_scanner_configurations"
-            android:parentActivityName=".scanner.activities.ScannersActivity"
+            android:parentActivityName="com.codegear.mariamc_rfid.scanner.activities.ScannersActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".scanner.activities.SettingsActivity"
+            android:name="com.codegear.mariamc_rfid.scanner.activities.SettingsActivity"
             android:configChanges="orientation|screenSize"
             android:label="@string/title_activity_settings"
-            android:parentActivityName=".scanner.activities.ScannersActivity"
+            android:parentActivityName="com.codegear.mariamc_rfid.scanner.activities.ScannersActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".scanner.activities.NotificationsActivity"
+            android:name="com.codegear.mariamc_rfid.scanner.activities.NotificationsActivity"
             android:configChanges="orientation|screenSize"
             android:label="@string/title_activity_notifications"
-            android:parentActivityName=".scanner.activities.SettingsActivity"
+            android:parentActivityName="com.codegear.mariamc_rfid.scanner.activities.SettingsActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".scanner.activities.BaseActivity"
+            android:name="com.codegear.mariamc_rfid.scanner.activities.BaseActivity"
             android:configChanges="orientation|screenSize"
             android:label="@string/title_activity_base"
             android:screenOrientation="portrait" />
 
         <receiver
-            android:name=".scanner.receivers.NotificationsReceiver"
+            android:name="com.codegear.mariamc_rfid.scanner.receivers.NotificationsReceiver"
             android:enabled="true"
             android:exported="false">
             <intent-filter>
@@ -171,7 +171,7 @@
         </receiver>
 
         <activity
-            android:name=".ActiveDeviceActivity"
+            android:name="com.codegear.mariamc_rfid.ActiveDeviceActivity"
             android:configChanges="orientation|screenSize|fontScale"
             android:label="@string/title_activity_active_scanner"
             android:launchMode="singleTask"
@@ -185,7 +185,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".scanner.activities.ActiveScannerActivity"
+            android:name="com.codegear.mariamc_rfid.scanner.activities.ActiveScannerActivity"
             android:configChanges="orientation|screenSize"
             android:label="@string/title_activity_active_scanner"
             android:launchMode="singleTask"
@@ -199,189 +199,189 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".scanner.activities.BeeperActionsActivity"
+            android:name="com.codegear.mariamc_rfid.scanner.activities.BeeperActionsActivity"
             android:configChanges="orientation|screenSize"
             android:label="@string/title_activity_active_scanner"
-            android:parentActivityName=".scanner.activities.ActiveScannerActivity"
+            android:parentActivityName="com.codegear.mariamc_rfid.scanner.activities.ActiveScannerActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".scanner.activities.ActiveScannerActivity" />
+                android:value="com.codegear.mariamc_rfid.scanner.activities.ActiveScannerActivity" />
         </activity>
         <activity
-            android:name=".scanner.activities.LEDActivity"
+            android:name="com.codegear.mariamc_rfid.scanner.activities.LEDActivity"
             android:configChanges="orientation|screenSize"
             android:label="@string/title_activity_active_scanner"
-            android:parentActivityName=".scanner.activities.ActiveScannerActivity"
+            android:parentActivityName="com.codegear.mariamc_rfid.scanner.activities.ActiveScannerActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".scanner.activities.ActiveScannerActivity" />
+                android:value="com.codegear.mariamc_rfid.scanner.activities.ActiveScannerActivity" />
         </activity>
         <activity
-            android:name=".scanner.activities.SymbologiesActivity"
+            android:name="com.codegear.mariamc_rfid.scanner.activities.SymbologiesActivity"
             android:configChanges="orientation|screenSize"
             android:label="@string/title_activity_active_scanner"
-            android:parentActivityName=".scanner.activities.ActiveScannerActivity"
+            android:parentActivityName="com.codegear.mariamc_rfid.scanner.activities.ActiveScannerActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".scanner.activities.ActiveScannerActivity" />
+                android:value="com.codegear.mariamc_rfid.scanner.activities.ActiveScannerActivity" />
         </activity>
         <activity
-            android:name=".scanner.activities.BeeperSettingsActivity"
+            android:name="com.codegear.mariamc_rfid.scanner.activities.BeeperSettingsActivity"
             android:configChanges="orientation|screenSize"
             android:label="@string/title_activity_active_scanner"
-            android:parentActivityName=".scanner.activities.ActiveScannerActivity"
+            android:parentActivityName="com.codegear.mariamc_rfid.scanner.activities.ActiveScannerActivity"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".scanner.activities.ActiveScannerActivity" />
+                android:value="com.codegear.mariamc_rfid.scanner.activities.ActiveScannerActivity" />
         </activity>
         <activity
-            android:name=".scanner.activities.AvailableScannerActivity"
+            android:name="com.codegear.mariamc_rfid.scanner.activities.AvailableScannerActivity"
             android:configChanges="orientation|screenSize"
             android:label="@string/title_activity_available_scanner"
-            android:parentActivityName=".scanner.activities.ScannersActivity"
+            android:parentActivityName="com.codegear.mariamc_rfid.scanner.activities.ScannersActivity"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".scanner.activities.ScannersActivity" />
+                android:value="com.codegear.mariamc_rfid.scanner.activities.ScannersActivity" />
         </activity>
         <activity
-            android:name=".scanner.activities.VibrationFeedback"
+            android:name="com.codegear.mariamc_rfid.scanner.activities.VibrationFeedback"
             android:configChanges="orientation|screenSize"
             android:label="@string/title_activity_active_scanner"
-            android:parentActivityName=".scanner.activities.ActiveScannerActivity"
+            android:parentActivityName="com.codegear.mariamc_rfid.scanner.activities.ActiveScannerActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".scanner.activities.ActiveScannerActivity" />
+                android:value="com.codegear.mariamc_rfid.scanner.activities.ActiveScannerActivity" />
         </activity>
         <activity
-            android:name=".scanner.activities.BatteryStatistics"
+            android:name="com.codegear.mariamc_rfid.scanner.activities.BatteryStatistics"
             android:configChanges="orientation|screenSize"
             android:label="@string/title_activity_active_scanner"
-            android:parentActivityName=".scanner.activities.ActiveScannerActivity"
+            android:parentActivityName="com.codegear.mariamc_rfid.scanner.activities.ActiveScannerActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".scanner.activities.ActiveScannerActivity" />
+                android:value="com.codegear.mariamc_rfid.scanner.activities.ActiveScannerActivity" />
         </activity>
         <activity
-            android:name=".scanner.activities.SupportedScanners"
+            android:name="com.codegear.mariamc_rfid.scanner.activities.SupportedScanners"
             android:configChanges="orientation|screenSize"
             android:label="@string/title_activity_supported_scanners"
-            android:parentActivityName=".scanner.activities.ConnectionHelpActivity2"
+            android:parentActivityName="com.codegear.mariamc_rfid.scanner.activities.ConnectionHelpActivity2"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".scanner.activities.ConnectionHelpActivity2" />
+                android:value="com.codegear.mariamc_rfid.scanner.activities.ConnectionHelpActivity2" />
         </activity>
         <activity
-            android:name=".scanner.activities.PairingInstructionsAll"
+            android:name="com.codegear.mariamc_rfid.scanner.activities.PairingInstructionsAll"
             android:configChanges="orientation|screenSize"
             android:label="@string/title_activity_pairing_instructions_all"
-            android:parentActivityName=".scanner.activities.ConnectionHelpActivity2"
+            android:parentActivityName="com.codegear.mariamc_rfid.scanner.activities.ConnectionHelpActivity2"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".scanner.activities.ConnectionHelpActivity2" />
+                android:value="com.codegear.mariamc_rfid.scanner.activities.ConnectionHelpActivity2" />
         </activity>
         <activity
-            android:name=".scanner.activities.PairingInstructionsRFD8500"
+            android:name="com.codegear.mariamc_rfid.scanner.activities.PairingInstructionsRFD8500"
             android:configChanges="orientation|screenSize"
             android:label="@string/title_activity_pairing_instructions_rfd8500"
-            android:parentActivityName=".scanner.activities.ConnectionHelpActivity2"
+            android:parentActivityName="com.codegear.mariamc_rfid.scanner.activities.ConnectionHelpActivity2"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".scanner.activities.ConnectionHelpActivity2" />
+                android:value="com.codegear.mariamc_rfid.scanner.activities.ConnectionHelpActivity2" />
         </activity>
         <activity
-            android:name=".scanner.activities.FindCabledScanner"
+            android:name="com.codegear.mariamc_rfid.scanner.activities.FindCabledScanner"
             android:configChanges="orientation|screenSize"
             android:label="@string/title_activity_find_cabled_scanner"
-            android:parentActivityName=".scanner.activities.ScannersActivity"
+            android:parentActivityName="com.codegear.mariamc_rfid.scanner.activities.ScannersActivity"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".scanner.activities.ScannersActivity" />
+                android:value="com.codegear.mariamc_rfid.scanner.activities.ScannersActivity" />
         </activity>
         <activity
-            android:name=".scanner.activities.SampleBarcodes"
+            android:name="com.codegear.mariamc_rfid.scanner.activities.SampleBarcodes"
             android:configChanges="orientation|screenSize"
             android:label="@string/title_activity_active_scanner"
-            android:parentActivityName=".scanner.activities.ActiveScannerActivity"
+            android:parentActivityName="com.codegear.mariamc_rfid.scanner.activities.ActiveScannerActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".scanner.activities.ActiveScannerActivity" />
+                android:value="com.codegear.mariamc_rfid.scanner.activities.ActiveScannerActivity" />
         </activity>
         <activity
-            android:name=".scanner.activities.SsaSetSymbologyActivity"
+            android:name="com.codegear.mariamc_rfid.scanner.activities.SsaSetSymbologyActivity"
             android:configChanges="orientation|screenSize"
             android:label="@string/title_activity_active_scanner"
             android:noHistory="true"
-            android:parentActivityName=".scanner.activities.ActiveScannerActivity"
+            android:parentActivityName="com.codegear.mariamc_rfid.scanner.activities.ActiveScannerActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".scanner.activities.ActiveScannerActivity" />
+                android:value="com.codegear.mariamc_rfid.scanner.activities.ActiveScannerActivity" />
         </activity>
         <activity
-            android:name=".scanner.activities.ScanSpeedAnalyticsActivity"
+            android:name="com.codegear.mariamc_rfid.scanner.activities.ScanSpeedAnalyticsActivity"
             android:configChanges="orientation|screenSize"
             android:label="@string/title_activity_active_scanner"
-            android:parentActivityName=".scanner.activities.ActiveScannerActivity"
+            android:parentActivityName="com.codegear.mariamc_rfid.scanner.activities.ActiveScannerActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".scanner.activities.ActiveScannerActivity" />
+                android:value="com.codegear.mariamc_rfid.scanner.activities.ActiveScannerActivity" />
         </activity>
         <activity
-            android:name=".scanner.activities.ImageActivity"
+            android:name="com.codegear.mariamc_rfid.scanner.activities.ImageActivity"
             android:configChanges="orientation|screenSize"
             android:label="@string/title_activity_active_scanner"
-            android:parentActivityName=".scanner.activities.ActiveScannerActivity"
+            android:parentActivityName="com.codegear.mariamc_rfid.scanner.activities.ActiveScannerActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".scanner.activities.ActiveScannerActivity" />
+                android:value="com.codegear.mariamc_rfid.scanner.activities.ActiveScannerActivity" />
         </activity>
         <activity
-            android:name=".scanner.activities.IntelligentImageCaptureActivity"
+            android:name="com.codegear.mariamc_rfid.scanner.activities.IntelligentImageCaptureActivity"
             android:configChanges="orientation|screenSize"
             android:label="@string/title_activity_active_scanner"
-            android:parentActivityName=".scanner.activities.ActiveScannerActivity"
+            android:parentActivityName="com.codegear.mariamc_rfid.scanner.activities.ActiveScannerActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".scanner.activities.ActiveScannerActivity" />
+                android:value="com.codegear.mariamc_rfid.scanner.activities.ActiveScannerActivity" />
         </activity>
         <activity
-            android:name=".scanner.activities.ScaleActivity"
+            android:name="com.codegear.mariamc_rfid.scanner.activities.ScaleActivity"
             android:configChanges="orientation|screenSize"
             android:label="@string/title_activity_active_scanner"
-            android:parentActivityName=".scanner.activities.ActiveScannerActivity"
+            android:parentActivityName="com.codegear.mariamc_rfid.scanner.activities.ActiveScannerActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".scanner.activities.ActiveScannerActivity" />
+                android:value="com.codegear.mariamc_rfid.scanner.activities.ActiveScannerActivity" />
         </activity>
         <activity
-            android:name=".scanner.activities.DecodeImageActivity"
+            android:name="com.codegear.mariamc_rfid.scanner.activities.DecodeImageActivity"
             android:configChanges="orientation|screenSize"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />

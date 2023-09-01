@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.zebra.demo.app-mergeDebugResources-30:/values-h360dp-land-v13/values-h360dp-land-v13.xml",
+            "outputFile": "com.codegear.mariamc_rfid.app-mergeDebugResources-30:/values-h360dp-land-v13/values-h360dp-land-v13.xml",
             "map": [
                 {
                     "source": "/Users/shseo/.gradle/caches/transforms-3/45f4e37d9e6990b72f34141bedb79e76/transformed/material-1.4.0/res/values-h360dp-land-v13/values-h360dp-land-v13.xml",

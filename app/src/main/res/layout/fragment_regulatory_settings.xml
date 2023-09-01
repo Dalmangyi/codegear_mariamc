@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".rfidreader.settings.RegulatorySettingsFragment">
+    tools:context="com.codegear.mariamc_rfid.rfidreader.settings.RegulatorySettingsFragment">
 
     <TextView
         android:id="@+id/regulatorySettingsCurrentRegion"

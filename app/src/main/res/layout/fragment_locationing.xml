@@ -22,7 +22,7 @@
         android:paddingLeft="10dp"
         android:paddingRight="10dp">
 
-        <com.zebra.demo.rfidreader.locate_tag.RangeGraph
+        <com.codegear.mariamc_rfid.rfidreader.locate_tag.RangeGraph
             android:id="@+id/locationBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

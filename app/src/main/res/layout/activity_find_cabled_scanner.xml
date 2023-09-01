@@ -9,7 +9,7 @@
     android:paddingLeft="@dimen/app_margin_left"
     android:paddingRight="@dimen/app_margin_right"
     android:paddingTop="@dimen/app_margin_left"
-    tools:context="com.zebra.demo.scanner.activities.AboutActivity">
+    tools:context="com.zebra.demo.com.codegear.demo.scanner.activities.AboutActivity">
     <TableRow
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

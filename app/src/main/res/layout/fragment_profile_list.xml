@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layoutManager="LinearLayoutManager"
-        tools:context=".rfidreader.settings.ProfileFragment"
+        tools:context="com.codegear.mariamc_rfid.rfidreader.settings.ProfileFragment"
         tools:listitem="@layout/fragment_profile"/>
 
     <Button

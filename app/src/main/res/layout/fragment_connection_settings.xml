@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     style="@style/base_layout_style"
-    tools:context=".rfidreader.settings.ApplicationSettingsFragment">
+    tools:context="com.codegear.mariamc_rfid.rfidreader.settings.ApplicationSettingsFragment">
 
     <ScrollView
         android:layout_width="match_parent"

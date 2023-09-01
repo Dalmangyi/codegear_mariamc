@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/light_gray"
     android:orientation="vertical"
-    tools:context=".scanner.fragments.SettingsFragment">
+    tools:context="com.codegear.mariamc_rfid.scanner.fragments.SettingsFragment">
    <!-- <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >

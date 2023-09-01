@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:layout_marginTop="@dimen/default_top_margin"
     android:orientation="vertical"
-    tools:context=".rfidreader.reader_connection.InitReadersListFragment">
+    tools:context="com.codegear.mariamc_rfid.rfidreader.reader_connection.InitReadersListFragment">
     <include layout="@layout/readers_pair_connect"
         android:id="@+id/ll_pairedreader"
         android:visibility="visible"/>

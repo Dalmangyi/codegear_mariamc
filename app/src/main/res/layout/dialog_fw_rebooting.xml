@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/app_margin_right"
         android:text="@string/rebooting_scanner"/>
-    <com.zebra.demo.scanner.helpers.DotsProgressBar
+    <com.codegear.mariamc_rfid.scanner.helpers.DotsProgressBar
         android:layout_marginLeft="@dimen/app_margin_left"
         android:layout_marginRight="@dimen/app_margin_right"
         android:layout_width="match_parent"

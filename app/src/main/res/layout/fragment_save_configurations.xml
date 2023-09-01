@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:paddingLeft="0dp"
     android:paddingRight="0dp"
-    tools:context=".rfidreader.settings.SaveConfigurationsFragment">
+    tools:context="com.codegear.mariamc_rfid.rfidreader.settings.SaveConfigurationsFragment">
 
     <ScrollView
         android:layout_width="match_parent"

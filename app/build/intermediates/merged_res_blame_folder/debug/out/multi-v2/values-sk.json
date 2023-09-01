@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.zebra.demo.app-mergeDebugResources-30:/values-sk/values-sk.xml",
+            "outputFile": "com.codegear.mariamc_rfid.app-mergeDebugResources-30:/values-sk/values-sk.xml",
             "map": [
                 {
                     "source": "/Users/shseo/.gradle/caches/transforms-3/8a29496465990cb38d848207cf9e47f3/transformed/jetified-play-services-basement-18.0.0/res/values-sk/values.xml",

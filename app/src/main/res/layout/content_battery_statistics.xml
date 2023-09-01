@@ -8,7 +8,7 @@
 
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.zebra.demo.scanner.activities.BatteryStatistics"
+    tools:context="com.zebra.demo.com.codegear.demo.scanner.activities.BatteryStatistics"
     tools:showIn="@layout/app_bar_battery_statistics">
     <TextView
         android:id="@+id/txt_no_battery_statistics"
