@@ -7,7 +7,7 @@
 
     android:background="@android:color/white"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.zebra.demo.com.codegear.demo.scanner.activities.ActiveScannerActivity"
+    tools:context="com.codegear.mariamc_rfid.scanner.activities.ActiveScannerActivity"
     tools:showIn="@layout/app_bar_activescanner">
 
 

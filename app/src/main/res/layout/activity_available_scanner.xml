@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:background="@color/light_gray"
     android:orientation="vertical"
-    tools:context="com.zebra.demo.com.codegear.demo.scanner.activities.AvailableScannerActivity">
+    tools:context="com.codegear.mariamc_rfid.scanner.activities.AvailableScannerActivity">
 
     <Button
         android:id="@+id/connectButton"

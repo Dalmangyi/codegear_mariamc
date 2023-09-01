@@ -8,7 +8,7 @@
 
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.zebra.demo.com.codegear.demo.scanner.activities.UpdateFirmware"
+    tools:context="com.codegear.mariamc_rfid.scanner.activities.UpdateFirmware"
     tools:showIn="@layout/app_bar_update_firmware">
 
 

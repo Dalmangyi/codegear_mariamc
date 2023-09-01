@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.zebra.demo.com.codegear.demo.scanner.activities.ScaleActivity">
+    tools:context="com.codegear.mariamc_rfid.scanner.activities.ScaleActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"

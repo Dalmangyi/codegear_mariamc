@@ -8,7 +8,7 @@
 
     android:background="@color/light_gray"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.zebra.demo.com.codegear.demo.scanner.activities.ScanSpeedAnalyticsActivity"
+    tools:context="com.codegear.mariamc_rfid.scanner.activities.ScanSpeedAnalyticsActivity"
     tools:showIn="@layout/app_bar_scan_speed_analytics">
 
     <LinearLayout

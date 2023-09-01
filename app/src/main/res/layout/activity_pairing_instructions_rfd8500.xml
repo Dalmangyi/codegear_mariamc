@@ -8,7 +8,7 @@
     android:paddingLeft="@dimen/app_margin_left"
     android:paddingRight="@dimen/app_margin_right"
     android:paddingTop="@dimen/app_margin_left"
-    tools:context="com.zebra.demo.com.codegear.demo.scanner.activities.PairingInstructionsRFD8500">
+    tools:context="com.codegear.mariamc_rfid.scanner.activities.PairingInstructionsRFD8500">
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">

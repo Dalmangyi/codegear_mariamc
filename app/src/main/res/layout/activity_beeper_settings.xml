@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:background="@color/light_gray"
     android:orientation="vertical"
-    tools:context="com.zebra.demo.com.codegear.demo.scanner.activities.BeeperSettingsActivity">
+    tools:context="com.codegear.mariamc_rfid.scanner.activities.BeeperSettingsActivity">
 
     <TextView
         android:layout_width="match_parent"

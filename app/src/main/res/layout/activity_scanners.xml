@@ -4,7 +4,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:background="@color/light_gray"
-        tools:context="com.zebra.demo.com.codegear.demo.scanner.activities.ScannersActivity">
+        tools:context="com.codegear.mariamc_rfid.scanner.activities.ScannersActivity">
 
     <TableRow
         android:id="@+id/tbl_row_last_connected_scanner"
