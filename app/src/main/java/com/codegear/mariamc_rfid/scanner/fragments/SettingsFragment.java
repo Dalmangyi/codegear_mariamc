@@ -28,7 +28,7 @@ import com.zebra.rfid.api3.InvalidUsageException;
 import com.zebra.rfid.api3.OperationFailureException;
 import com.zebra.rfid.api3.RFIDResults;
 import com.zebra.rfid.api3.SCAN_BATCH_MODE;
-//import com.zebra.demo.scanner.activities.ActiveScannerActivity;
+//import com.codegear.mariamc_rfid.scanner.activities.ActiveScannerActivity;
 
 
 

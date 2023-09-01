@@ -29,7 +29,7 @@ import com.codegear.mariamc_rfid.R;
 
 import java.util.ArrayList;
 
-//import com.zebra.demo.scanner.activities.ActiveScannerActivity;
+//import com.codegear.mariamc_rfid.scanner.activities.ActiveScannerActivity;
 
 /**
  * A simple {@link Fragment} subclass.

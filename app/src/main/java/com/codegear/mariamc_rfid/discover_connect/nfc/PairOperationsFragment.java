@@ -77,11 +77,11 @@ public class PairOperationsFragment extends Fragment {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 String className = getActivity().getClass().getName();
-                if(className.equals("com.zebra.demo.DeviceDiscoverActivity"))
+                if(className.equals("com.codegear.mariamc_rfid.DeviceDiscoverActivity"))
                 {
                     Fragment fragment = InitReadersListFragment.getInstance();
                     ((DeviceDiscoverActivity) getActivity()).switchToFragment(fragment);
-                }else if(className.equals("com.zebra.demo.ActiveDeviceActivity"))
+                }else if(className.equals("com.codegear.mariamc_rfid.ActiveDeviceActivity"))
                     ((ActiveDeviceActivity) getActivity()).loadNextFragment(READER_LIST_TAB);
                 return true;
 

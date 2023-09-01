@@ -769,7 +769,7 @@ public class ScannerHomeActivity extends BaseActivity
     }
 
     /**
-     * Paired Bluetooth in {@link com.zebra.demo.scanner.activities} is selected
+     * Paired Bluetooth in {@link com.codegear.mariamc_rfid.scanner.activities} is selected
      */
     public void appSettingsClicked(View view) {
         selectNavigationMenuItem(4);
@@ -777,7 +777,7 @@ public class ScannerHomeActivity extends BaseActivity
     }
 
     /**
-     * Paired Bluetooth in {@link com.zebra.demo.scanner.activities} is selected
+     * Paired Bluetooth in {@link com.codegear.mariamc_rfid.scanner.activities} is selected
      */
     public void appOverviewClicked(View view) {
         selectNavigationMenuItem(5);

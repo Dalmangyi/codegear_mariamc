@@ -21,7 +21,7 @@ import com.codegear.mariamc_rfid.application.Application;
 import com.codegear.mariamc_rfid.scanner.adapters.BarcodeListAdapter;
 import com.codegear.mariamc_rfid.scanner.helpers.Barcode;
 import com.codegear.mariamc_rfid.R;
-//import com.zebra.demo.scanner.activities.ActiveScannerActivity;
+//import com.codegear.mariamc_rfid.scanner.activities.ActiveScannerActivity;
 import com.codegear.mariamc_rfid.rfidreader.rfid.RFIDController;
 
 import java.util.ArrayList;
