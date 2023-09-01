@@ -71,7 +71,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Press Pair New to start" />
+                android:text="@string/none_paired_details" />
         </LinearLayout>
 
     </LinearLayout>

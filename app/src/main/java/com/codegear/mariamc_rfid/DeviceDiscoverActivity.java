@@ -424,6 +424,12 @@ public class DeviceDiscoverActivity extends BaseActivity implements Readers.RFID
     public boolean onOptionsItemSelected(MenuItem item) {
         mDrawerLayout.closeDrawer(GravityCompat.START);
         switch (item.getItemId()) {
+            case R.id.menu_cowchronicle:
+                return true;
+
+            case R.id.menu_readers:
+                return true;
+
             case R.id.nav_fw_update:
                 if(mConnectedReader != null && mConnectedReader.isConnected()) {
                     loadUpdateFirmware(MenuItemCompat.getActionView(item));

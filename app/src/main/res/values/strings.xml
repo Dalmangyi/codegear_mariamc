@@ -218,7 +218,8 @@
     </string-array>
 
     <!-- Error Indicators -->
-    <string name="none_paired">No Devices Found</string>
+    <string name="none_paired">페어링된 장치가 없습니다.</string>
+    <string name="none_paired_details">장치를 추가하여 주시기 바랍니다.</string>
     <string name="title_activity_about">About</string>
     <string name="led_settings_title">LED Settings</string>
     <string name="action_refresh">Refresh</string>
@@ -784,7 +785,7 @@
     <string name="Export_Logs">Export Logs</string>
     <string name="sdkversiontitle">SDK Version</string>
     <string name="scannerversiontitle">Scanner Version</string>
-    <string name="title_empty_readers">Readers</string>
+    <string name="title_empty_readers">전자이표</string>
     <string name="batterylife">Battery Life</string>
     <string name="disconnectrfid">Disconnect RFIDXX</string>
     <string name="serial_no">Show Serial No.</string>

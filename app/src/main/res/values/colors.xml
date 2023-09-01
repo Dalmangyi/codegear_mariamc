@@ -34,4 +34,7 @@
     <color name="dark_blue">#333D47</color>
     <color name="dense_blue">#007ABA</color>
     <color name="transparent_grey">#14000000</color>
+
+    <!--    -->
+    <color name="main_color">#3AC7FF</color>
 </resources>

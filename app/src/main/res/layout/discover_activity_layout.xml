@@ -68,6 +68,7 @@
                 android:paddingBottom="@dimen/default_padding"
                 style="@style/style_bold_font"
                 android:id="@+id/battery_percentage"/>
+
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
