@@ -47,6 +47,7 @@
         <activity
             android:name="com.codegear.mariamc_rfid.ManageDeviceActivity"
             android:screenOrientation="portrait" />
+
         <activity
             android:name="com.codegear.mariamc_rfid.scanner.activities.NavigationHelpActivity"
             android:label="@string/title_activity_navigation_help"
