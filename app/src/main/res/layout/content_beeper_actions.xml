@@ -129,7 +129,7 @@
 
     </TableRow>
 
-    <com.zebra.demo.scanner.helpers.ZNumberPicker
+    <com.codegear.mariamc_rfid.scanner.helpers.ZNumberPicker
         style="@style/roboto_medium_16dp"
         android:id="@+id/beeperPicker"
         android:layout_gravity="center"
