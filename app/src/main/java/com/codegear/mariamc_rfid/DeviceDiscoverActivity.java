@@ -432,11 +432,6 @@ public class DeviceDiscoverActivity extends BaseActivity implements Readers.RFID
                 }
                 return true;
 
-            case R.id.nav_connection_help:
-                Intent helpIntent = new Intent(this, NavigationHelpActivity.class);
-                startActivity(helpIntent);
-                return true;
-
             case R.id.nav_battery_statics:
 
                 Intent detailsIntent = new Intent(this, SettingsDetailActivity.class);
