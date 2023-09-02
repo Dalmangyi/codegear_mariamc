@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:lineSpacingExtra="5dp"
         android:paddingTop="@dimen/default_padding"
-        android:text="Connected Readers"
+        android:text="@string/connected_readers"
         android:textStyle="bold"
         android:textAppearance="?android:textAppearanceMedium" />
 
@@ -26,7 +26,7 @@
         android:maxLines="2"
         android:paddingTop="@dimen/marginbottom"
         android:singleLine="false"
-        android:text="No reader connected.\nConnect to a available reader below or pair new"
+        android:text="@string/has_no_connected_readers_description"
         android:textAppearance="?android:textAppearanceSmall" />
     <include layout="@layout/connected_reader"/>
 

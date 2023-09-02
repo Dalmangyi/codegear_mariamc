@@ -228,7 +228,9 @@
     <string name="search_hint">Enter Tag ID</string>
 
     <!-- Titles in ReadersList -->
-    <string name="available_readers_title">Available Readers</string>
+    <string name="connected_readers">연결된 장치 목록</string>
+    <string name="has_no_connected_readers_description">연결된 장치가 없는 경우 하단의 플로팅 버튼을 통해 장치를 추가할 수 있습니다.</string>
+    <string name="available_readers_title">사용 가능한 장치 목록</string>
     <!-- Titles in regulatory settings -->
     <string name="channel_selection">Channel Selection</string>
 
@@ -411,7 +413,7 @@
     <string name="invalid_antenna_power">Invalid antenna power value</string>
     <string name="loading_csv">Importing tag list from CSV file</string>
     <string name="failed_settings">Failed to apply settings for BrandId</string>
-    <string name="camera_scan_flash_warning">Don\'t cover the barcode with flashlight reflection</string>
+    <string name="camera_scan_flash_warning">손전등 빛으로 바코드를 비추지 마세요.</string>
     <string name="ml_kit_internet_connection">Internet connection required to download.</string>
 
     <string-array name="inv_menu_items_for_matching_tags">
@@ -788,7 +790,7 @@
     <string name="title_empty_readers">전자이표</string>
     <string name="batterylife">Battery Life</string>
     <string name="disconnectrfid">Disconnect RFIDXX</string>
-    <string name="serial_no">Show Serial No.</string>
+    <string name="serial_no">시리얼번호 보기</string>
     <string name="readermodel">MODEL: %1$s</string>
     <string name="device_register">장치 등록</string>
     <string name="RFID">RFID</string>

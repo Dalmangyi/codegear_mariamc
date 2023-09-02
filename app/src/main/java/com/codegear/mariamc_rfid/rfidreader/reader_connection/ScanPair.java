@@ -126,7 +126,7 @@ public class ScanPair {
                             if (btConnection.isValidMacAddress(recvdMacAddress))
                                 connecting_pairingFlag = pairConnect(recvdMacAddress, true);
                             else {
-                                showToast(recvdMacAddress + " is not valid BT address");
+                                showToast(recvdMacAddress + " 는 올바른 블루투스 주소가 아닙니다.");
                             }
                         } else if (barcodeData.length() > Defines.BT_ADDRESS_LENGTH) {
                                 recvdBarcodeName = /*Defines.NameStartString + */barcodeData;
@@ -134,9 +134,9 @@ public class ScanPair {
                             connecting_pairingFlag = pairConnect(recvdBarcodeName, false);
                         } else {
                             if(fragment instanceof  ScanAndPairFragment) {
-                                ((ScanAndPairFragment) fragment).processCompleted(barcodeData + " is not valid");
+                                ((ScanAndPairFragment) fragment).processCompleted(barcodeData + " 가 올바르지 않습니다.");
                             }else if(fragment instanceof CameraScanFragment){
-                                ((CameraScanFragment) fragment).processCompleted(barcodeData + " is not valid");
+                                ((CameraScanFragment) fragment).processCompleted(barcodeData + " 가 올바르지 않습니다.");
                             }
                         }
                     }
@@ -147,9 +147,9 @@ public class ScanPair {
             }
         } catch (Exception ex) {
             if(fragment instanceof  ScanAndPairFragment) {
-                ((ScanAndPairFragment) fragment).processCompleted("Error while pairing");
+                ((ScanAndPairFragment) fragment).processCompleted("페어링 중 오류가 발생했습니다.");
             }else if(fragment instanceof CameraScanFragment){
-                ((CameraScanFragment) fragment).processCompleted("Error while pairing");
+                ((CameraScanFragment) fragment).processCompleted("페어링 중 오류가 발생했습니다.");
             }
             //showToast("EXCEPTION(ScanPair) - 'barcodeDeviceNameConnect'");
             Application.prevPairData = "";
@@ -194,7 +194,7 @@ public class ScanPair {
                     } else {
                         /// connect
                         connecting_pairingFlag = true;
-                        showToast("Device is already paired");
+                        showToast("장치가 이미 페어링 되었습니다.");
                         //showToast(Defines.INFO_ALREADY_PAIRED_CONNECTING_STR);
                         //ConnectDevice(rdDevice, true);
                     }
@@ -212,7 +212,7 @@ public class ScanPair {
                     isDevicePairing = true;*/
                 } else {
 
-                        mProgressDlg = new CustomProgressDialog(activityObject, "Scanning... (" + recvdBarcodeName + ")");
+                        mProgressDlg = new CustomProgressDialog(activityObject, "스캔중... (" + recvdBarcodeName + ")");
                         //mProgressDlg.setMessage("Scanning... (" + recvdBarcodeName + ")");
                         mProgressDlg.show();
                     /* mProgressDlg.setCancelable(false);
@@ -328,7 +328,7 @@ public class ScanPair {
                   //  showToast("Done scanning. Device NOT found.");
                 }
             } else {
-                showToast("Done scanning. Device NOT found(ex).");
+                showToast("스캔 완료. 장치를 찾을 수 없습니다(ex).");
             }
         } catch (Exception ex) {
             if( ex!= null && ex.getStackTrace().length>0){ Log.e(TAG, ex.getStackTrace()[0].toString()); }
@@ -370,7 +370,7 @@ public class ScanPair {
                 }
             } else {
                 Application.prevPairData = "";
-                showToast("ERROR - Pairing failed!");
+                showToast("에러 - 페어링 실패!");
             }
         } catch (Exception ex) {
             if( ex!= null && ex.getStackTrace().length>0){ Log.e(TAG, ex.getStackTrace()[0].toString()); }
@@ -390,7 +390,7 @@ public class ScanPair {
             loadAvailableReaders();
 
             if (successFlag) {
-                showToast("Unpairing done");
+                showToast("페어링 해제 완료");
                 if(fragment instanceof  ScanAndPairFragment) {
                     ((ScanAndPairFragment) fragment).removeDevice(unPairDevice);
                 }
