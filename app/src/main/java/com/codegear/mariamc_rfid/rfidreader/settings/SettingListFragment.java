@@ -85,24 +85,6 @@ public class SettingListFragment extends ListFragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-       /* inflater.inflate(R.menu.menu_rfid_settings, menu);
-        menu.findItem( R.id.action_inventory).setOnMenuItemClickListener( new MenuItem.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                int pos = ((ActiveDeviceActivity) getActivity()).getCurrentTabPosition();
-                switch (pos)
-                {
-                   /* case SETTINGS_TAB:
-                        ((ActiveDeviceActivity) getActivity()).loadNextFragment(MAIN_HOME_SETTINGS_TAB);
-                        break;
-                    case RFID_TAB:
-                        ((ActiveDeviceActivity) getActivity()).loadNextFragment(INVENTORY_TAB);
-                        break;* /
-                }
-
-                return true;
-            }
-        });*/
     }
 
     @Override
@@ -174,31 +156,4 @@ public class SettingListFragment extends ListFragment {
         mActivatedPosition = position;
     }
 
-//    public void settingsListUpdated() {
-//        //
-//        if (RFIDController.dynamicPowerSettings != null && RFIDController.dynamicPowerSettings.getValue() == 1)
-//            AdvancedOptionsContent.ITEMS.get(DPO_ITEM_INDEX).icon = R.drawable.title_dpo_enabled;
-//        else {
-//            AdvancedOptionsContent.ITEMS.get(DPO_ITEM_INDEX).icon = R.drawable.title_dpo_disabled;
-//        }
-//        getActivity().runOnUiThread(new Runnable() {
-//            @Override
-//            public void run() {
-//                if (adapter != null)
-//                    adapter.notifyDataSetChanged();
-//            }
-//        });
-//    }
-
-    /**
-     * A callback interface that all activities containing this fragment must
-     * implement. This mechanism allows activities to be notified of item
-     * selections.
-     */
-    public interface Callbacks {
-        /**
-         * Callback for when an item has been selected.
-         */
-        public void onSettingsItemSelected(String id);
-    }
 }

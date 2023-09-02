@@ -62,8 +62,7 @@ public class BeeperFragment extends BackPressedFragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_beeper, container, false);
     }
@@ -89,7 +88,7 @@ public class BeeperFragment extends BackPressedFragment {
                 sledBeeper.setChecked(false);
                 sledBeeper.setEnabled(false);
                 hostBeeper.setEnabled(true);
-            }else if (RFIDController.mConnectedReader.getHostName().startsWith("RFD40") || RFIDController.mConnectedReader.getHostName().startsWith("RFD90")) {
+            } else if (RFIDController.mConnectedReader.getHostName().startsWith("RFD40") || RFIDController.mConnectedReader.getHostName().startsWith("RFD90")) {
                 sledBeeper.setEnabled(true);
                 sledBeeper.setChecked(true);
                 hostBeeper.setChecked(false);
@@ -127,8 +126,8 @@ public class BeeperFragment extends BackPressedFragment {
         volumeSpinner.setAdapter(volumeAdapter);
         if (RFIDController.beeperVolume != null) {
             if (RFIDController.beeperVolume.equals(BEEPER_VOLUME.QUIET_BEEP)) {
-                    hostBeeper.setChecked(false);
-                    volumeSpinner.setEnabled(false);
+                hostBeeper.setChecked(false);
+                volumeSpinner.setEnabled(false);
                 if (RFIDController.beeperspinner_status != 3)
                     volumeSpinner.setSelection(RFIDController.beeperspinner_status);
 
@@ -141,7 +140,7 @@ public class BeeperFragment extends BackPressedFragment {
                         sledBeeper.setChecked(false);
                         sledBeeper.setEnabled(false);
 
-                    }else if (RFIDController.mConnectedReader.getHostName().startsWith("RFD40") || RFIDController.mConnectedReader.getHostName().startsWith("RFD90")) {
+                    } else if (RFIDController.mConnectedReader.getHostName().startsWith("RFD40") || RFIDController.mConnectedReader.getHostName().startsWith("RFD90")) {
                         volumeSpinner.setSelection(RFIDController.beeperVolume.getValue());
                         volumeSpinner.setEnabled(true);
                         //hostBeeper.setChecked(false);
@@ -159,11 +158,15 @@ public class BeeperFragment extends BackPressedFragment {
                 RFIDController.sledBeeperVolume = beeper_volume;
 
             } catch (InvalidUsageException e) {
-                if( e!= null && e.getStackTrace().length>0){ Log.e(TAG, e.getStackTrace()[0].toString()); }
+                if (e != null && e.getStackTrace().length > 0) {
+                    Log.e(TAG, e.getStackTrace()[0].toString());
+                }
             } catch (OperationFailureException e) {
 
                 beeper_volume = RFIDController.sledBeeperVolume;
-                if( e!= null && e.getStackTrace().length>0){ Log.e(TAG, e.getStackTrace()[0].toString()); }
+                if (e != null && e.getStackTrace().length > 0) {
+                    Log.e(TAG, e.getStackTrace()[0].toString());
+                }
             }
             if (beeper_volume != null) {
                 if (beeper_volume.equals(BEEPER_VOLUME.QUIET_BEEP)) {
@@ -196,21 +199,18 @@ public class BeeperFragment extends BackPressedFragment {
         if (RFIDController.mConnectedReader != null) {
             if ((hostBeeper.isChecked() && RFIDController.beeperVolume != null && RFIDController.beeperVolume.getValue() != volumeSpinner.getSelectedItemPosition()) || (sledBeeper.isEnabled() && sledBeeper.isChecked() && RFIDController.sledBeeperVolume != null && RFIDController.sledBeeperVolume.getValue() != volumeSpinner.getSelectedItemPosition())) {
                 new Task_SetVolume(volumeSpinner.getSelectedItemPosition()).execute();
-            } else if ((RFIDController.mConnectedReader.getHostName().startsWith("RFD40") || RFIDController.mConnectedReader.getHostName().startsWith("RFD90") || RFIDController.mConnectedReader.getHostName().startsWith("RFD8500"))
-                    && (hostBeeper.isChecked() && RFIDController.beeperVolume.getValue() == volumeSpinner.getSelectedItemPosition()
-                    && !sledBeeper.isChecked()) || (sledBeeper.isChecked() && RFIDController.sledBeeperVolume.getValue() == volumeSpinner.getSelectedItemPosition()
-                    && !hostBeeper.isChecked())) {
+            } else if ((RFIDController.mConnectedReader.getHostName().startsWith("RFD40") || RFIDController.mConnectedReader.getHostName().startsWith("RFD90") || RFIDController.mConnectedReader.getHostName().startsWith("RFD8500")) && (hostBeeper.isChecked() && RFIDController.beeperVolume.getValue() == volumeSpinner.getSelectedItemPosition() && !sledBeeper.isChecked()) || (sledBeeper.isChecked() && RFIDController.sledBeeperVolume.getValue() == volumeSpinner.getSelectedItemPosition() && !hostBeeper.isChecked())) {
                 if (RFIDController.beeperVolume.getValue() != volumeSpinner.getSelectedItemPosition()) {
-                    if(getActivity() instanceof SettingsDetailActivity)
+                    if (getActivity() instanceof SettingsDetailActivity)
                         ((SettingsDetailActivity) getActivity()).callBackPressed();
-                    else if(getActivity() instanceof ActiveDeviceActivity) {
+                    else if (getActivity() instanceof ActiveDeviceActivity) {
                         ((ActiveDeviceActivity) getActivity()).callBackPressed();
                         ((ActiveDeviceActivity) getActivity()).loadNextFragment(MAIN_RFID_SETTINGS_TAB);
                     }
                 } else if (RFIDController.sledBeeperVolume.getValue() != volumeSpinner.getSelectedItemPosition()) {
-                    if(getActivity() instanceof SettingsDetailActivity)
+                    if (getActivity() instanceof SettingsDetailActivity)
                         ((SettingsDetailActivity) getActivity()).callBackPressed();
-                    else if(getActivity() instanceof ActiveDeviceActivity) {
+                    else if (getActivity() instanceof ActiveDeviceActivity) {
                         ((ActiveDeviceActivity) getActivity()).callBackPressed();
                         ((ActiveDeviceActivity) getActivity()).loadNextFragment(MAIN_RFID_SETTINGS_TAB);
                     }
@@ -223,18 +223,18 @@ public class BeeperFragment extends BackPressedFragment {
 
 
             } else {
-                if(getActivity() instanceof SettingsDetailActivity)
+                if (getActivity() instanceof SettingsDetailActivity)
                     ((SettingsDetailActivity) getActivity()).callBackPressed();
-                if(getActivity() instanceof ActiveDeviceActivity) {
+                if (getActivity() instanceof ActiveDeviceActivity) {
                     ((ActiveDeviceActivity) getActivity()).callBackPressed();
                     ((ActiveDeviceActivity) getActivity()).loadNextFragment(MAIN_RFID_SETTINGS_TAB);
                 }
 
             }
         } else {
-            if(getActivity() instanceof SettingsDetailActivity)
+            if (getActivity() instanceof SettingsDetailActivity)
                 ((SettingsDetailActivity) getActivity()).callBackPressed();
-            if(getActivity() instanceof ActiveDeviceActivity) {
+            if (getActivity() instanceof ActiveDeviceActivity) {
                 ((ActiveDeviceActivity) getActivity()).callBackPressed();
                 ((ActiveDeviceActivity) getActivity()).loadNextFragment(MAIN_RFID_SETTINGS_TAB);
             }
@@ -341,11 +341,15 @@ public class BeeperFragment extends BackPressedFragment {
                 }
 
             } catch (InvalidUsageException e) {
-                if( e!= null && e.getStackTrace().length>0){ Log.e(TAG, e.getStackTrace()[0].toString()); }
+                if (e != null && e.getStackTrace().length > 0) {
+                    Log.e(TAG, e.getStackTrace()[0].toString());
+                }
                 invalidUsageException = e;
                 bResult = false;
             } catch (OperationFailureException e) {
-                if( e!= null && e.getStackTrace().length>0){ Log.e(TAG, e.getStackTrace()[0].toString()); }
+                if (e != null && e.getStackTrace().length > 0) {
+                    Log.e(TAG, e.getStackTrace()[0].toString());
+                }
                 operationFailureException = e;
                 bResult = false;
             }
@@ -358,15 +362,15 @@ public class BeeperFragment extends BackPressedFragment {
             try {
                 if (!result) {
                     if (invalidUsageException != null) {
-                        if(getActivity() instanceof SettingsDetailActivity)
+                        if (getActivity() instanceof SettingsDetailActivity)
                             ((SettingsDetailActivity) getActivity()).sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, getString(R.string.status_failure_message) + "\n" + invalidUsageException.getVendorMessage());
-                        else if(getActivity() instanceof ActiveDeviceActivity)
+                        else if (getActivity() instanceof ActiveDeviceActivity)
                             ((ActiveDeviceActivity) getActivity()).sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, getString(R.string.status_failure_message) + "\n" + invalidUsageException.getVendorMessage());
                     }
                     if (operationFailureException != null) {
-                        if(getActivity() instanceof SettingsDetailActivity)
+                        if (getActivity() instanceof SettingsDetailActivity)
                             ((SettingsDetailActivity) getActivity()).sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, getString(R.string.status_failure_message) + "\n" + operationFailureException.getVendorMessage());
-                        else if(getActivity() instanceof ActiveDeviceActivity)
+                        else if (getActivity() instanceof ActiveDeviceActivity)
                             ((ActiveDeviceActivity) getActivity()).sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, getString(R.string.status_failure_message) + "\n" + operationFailureException.getVendorMessage());
                     }
 
@@ -381,11 +385,11 @@ public class BeeperFragment extends BackPressedFragment {
                 RFIDController.toneGenerator = null;
             }
             super.onPostExecute(result);
-            if(getActivity() instanceof SettingsDetailActivity)
+            if (getActivity() instanceof SettingsDetailActivity)
                 ((SettingsDetailActivity) getActivity()).callBackPressed();
 
-            if(getActivity() instanceof ActiveDeviceActivity)
-                ((ActiveDeviceActivity)getActivity()).loadNextFragment(MAIN_RFID_SETTINGS_TAB);
+            if (getActivity() instanceof ActiveDeviceActivity)
+                ((ActiveDeviceActivity) getActivity()).loadNextFragment(MAIN_RFID_SETTINGS_TAB);
 
         }
     }

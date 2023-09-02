@@ -8,16 +8,16 @@
     <ImageView
         android:id="@+id/icon"
         android:layout_width="0dp"
-        android:layout_weight="15"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/ic_launcher"
         android:layout_gravity="center"
-        android:contentDescription="@string/setting_icon_desc" />
+        android:layout_weight="15"
+        android:contentDescription="@string/setting_icon_desc"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/firstLine"
         android:layout_width="0dp"
-        android:layout_height="30dp"
+        android:layout_height="60dp"
         android:layout_marginLeft="@dimen/list_horizontal_margin"
         android:layout_weight="85"
         android:ellipsize="marquee"

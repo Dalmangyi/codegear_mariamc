@@ -26,12 +26,12 @@ public class AdvancedOptionsContent {
     public static int DPO_ITEM_INDEX = 5;
 
     static {
-        addItem(new AdvancedOptionsContent.SettingItem(R.id.antenna + "", "Antenna",/*"Set Antenna parameters",*/R.drawable.settings_antenna));
-        addItem(new AdvancedOptionsContent.SettingItem(R.id.singulation_control + "", "Singulation Control",/*"Set target & action",*/R.drawable.settings_singulation_control));
-        addItem(new AdvancedOptionsContent.SettingItem(R.id.start_stop_triggers + "", "Start\\Stop Triggers",/*"Region and channels",*/R.drawable.settings_start_stop_triggers));
-        addItem(new AdvancedOptionsContent.SettingItem(R.id.tag_reporting + "", "Tag Reporting",/*"Triggers settings",*/R.drawable.settings_tag_reporting));
-        addItem(new AdvancedOptionsContent.SettingItem(R.id.save_configuration + "", "Save configuration",/*"Version information",*/R.drawable.settings_save_configuration));
-        addItem(new AdvancedOptionsContent.SettingItem(R.id.power_management + "", "Power Management",/*"Version information",*/R.drawable.title_dpo_disabled));
+        addItem(new AdvancedOptionsContent.SettingItem(R.id.antenna + "", "안테나",/*"Set Antenna parameters",*/R.drawable.settings_antenna));
+        addItem(new AdvancedOptionsContent.SettingItem(R.id.singulation_control + "", "싱귤레이션 제어",/*"Set target & action",*/R.drawable.settings_singulation_control));
+        addItem(new AdvancedOptionsContent.SettingItem(R.id.start_stop_triggers + "", "시작 \\ 정지 트리거",/*"Region and channels",*/R.drawable.settings_start_stop_triggers));
+        addItem(new AdvancedOptionsContent.SettingItem(R.id.tag_reporting + "", "태그 리포팅",/*"Triggers settings",*/R.drawable.settings_tag_reporting));
+        addItem(new AdvancedOptionsContent.SettingItem(R.id.save_configuration + "", "구성 저장",/*"Version information",*/R.drawable.settings_save_configuration));
+        addItem(new AdvancedOptionsContent.SettingItem(R.id.power_management + "", "전원 관리",/*"Version information",*/R.drawable.title_dpo_disabled));
     }
 
     private static void addItem(AdvancedOptionsContent.SettingItem item) {
@@ -52,13 +52,11 @@ public class AdvancedOptionsContent {
     public static class SettingItem {
         public String id;
         public String content;
-        //public String subcontent;
         public int icon;
 
         public SettingItem(String id, String content/*,String subcontent*/, int icon_id) {
             this.id = id;
             this.content = content;
-            //this.subcontent = subcontent;
             this.icon = icon_id;
         }
 

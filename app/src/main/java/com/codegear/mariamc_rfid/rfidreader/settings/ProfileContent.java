@@ -49,13 +49,13 @@ public class ProfileContent {
         if (ITEMS.size() == 0) {
             // Add profiles
             int index = 0;
-            addItem(new ProfilesItem(String.valueOf(index), "Fastest Read", "Read as many tags as fast as possible", 300, 1, 0, false, false, false));
-            addItem(new ProfilesItem(String.valueOf(++index), "Cycle Count", "Read as many unique tags possible", 300, 0, 2, false, false, false));
-            addItem(new ProfilesItem(String.valueOf(++index), "Dense Readers", "Use when multiple readers in close proximity", 300, 17, 1, false, false, false));
-            addItem(new ProfilesItem(String.valueOf(++index), "Optimal Battery", "Gives best battery life", 240, 0, 1, false, true, false));
-            addItem(new ProfilesItem(String.valueOf(++index), "Balanced Performance", "Maintains balance between performance and battery life", 270, 0, 1, false, true, false));
-            addItem(new ProfilesItem(String.valueOf(++index), "User Defined", "Custom profile \nUsed for custom requirement", 270, 0, 1, false, true, true));
-            addItem(new ProfilesItem(String.valueOf(++index), "Reader Defined", "Maintains Reader configurations\nApplication does not configure the reader after connection", 270, 0, 1, false, true, true));
+            addItem(new ProfilesItem(String.valueOf(index), "Fastest Read", "가능한 한 빨리 많은 태그를 읽을때 사용됩니다.", 300, 1, 0, false, false, false));
+            addItem(new ProfilesItem(String.valueOf(++index), "Cycle Count", "가능한 한 많은 고유 태그를 읽을때 사용됩니다.", 300, 0, 2, false, false, false));
+            addItem(new ProfilesItem(String.valueOf(++index), "Dense Readers", "여러 장치가 가까이 있을 때 사용됩니다.", 300, 17, 1, false, false, false));
+            addItem(new ProfilesItem(String.valueOf(++index), "Optimal Battery", "최고의 배터리 수명을 제공합니다", 240, 0, 1, false, true, false));
+            addItem(new ProfilesItem(String.valueOf(++index), "Balanced Performanc", "성능과 배터리 수명 사이의 균형을 유지합니다.", 270, 0, 1, false, true, false));
+            addItem(new ProfilesItem(String.valueOf(++index), "User Defined", "맞춤 프로필.\n맞춤 요구사항에 사용됩니다.", 270, 0, 1, false, true, true));
+            addItem(new ProfilesItem(String.valueOf(++index), "Reader Defined", "연결 후 애플리케이션이 장치를 구성하지 않고\n장치 구성을 유지합니다.", 270, 0, 1, false, true, true));
 
             MAX_NO_PROFILES = index;
 
@@ -93,8 +93,8 @@ public class ProfileContent {
         // TODO: make generic and remove hard coded references
 
         ProfileContent.ProfilesItem FastReadProfile = ProfileContent.ITEMS.get(0);
-        ProfileContent.ProfilesItem DenseModeProfile = ProfileContent.ITEMS.get(2);
         ProfileContent.ProfilesItem CycleCountProfile = ProfileContent.ITEMS.get(1);
+        ProfileContent.ProfilesItem DenseModeProfile = ProfileContent.ITEMS.get(2);
         ProfileContent.ProfilesItem OptBatteryProfile = ProfileContent.ITEMS.get(3);
         ProfileContent.ProfilesItem BalancePerformProfile = ProfileContent.ITEMS.get(4);
         ProfileContent.ProfilesItem UserProfile = ProfileContent.ITEMS.get(5);

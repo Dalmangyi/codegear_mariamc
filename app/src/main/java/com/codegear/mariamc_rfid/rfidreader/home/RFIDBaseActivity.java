@@ -141,8 +141,7 @@ import java.util.TimerTask;
 import java.util.logging.Level;
 
 
-public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler,
-        NavigationView.OnNavigationItemSelectedListener, ISettingsUtil, WifiScanDataEventsListener {
+public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler, NavigationView.OnNavigationItemSelectedListener, ISettingsUtil, WifiScanDataEventsListener {
     //Tag to identify the currently displayed fragment
     protected static final String TAG_RFID_FRAGMENT = "RFIDHomeFragment";
     //Messages for progress bar
@@ -163,7 +162,7 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler,
     private static ArrayList<ReaderDeviceFoundHandler> readerDeviceFoundHandlers = new ArrayList<>();
     private static ArrayList<BatteryNotificationHandler> batteryNotificationHandlers = new ArrayList<>();
     private static RFIDBaseActivity mRfidBaseActivity;
-    public Uri uri ;
+    public Uri uri;
     /**
      * method to start a timer task to beep for the duration of 10ms
      */
@@ -223,6 +222,7 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler,
     public static void activityPaused() {
         activityVisible = false;
     }
+
     //For multitag locate operation
     protected boolean isMultiTagLocationingAborted;
 
@@ -257,17 +257,15 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler,
 
     public static RFIDBaseActivity getInstance() {
 
-        if (mRfidBaseActivity == null )
-        {
+        if (mRfidBaseActivity == null) {
             mRfidBaseActivity = new RFIDBaseActivity();
         }
         return mRfidBaseActivity;
     }
 
 
-    public void reInit(ActiveDeviceActivity mActivity)
-    {
-        if(Application.RFIDBAseEventHandler == null) {
+    public void reInit(ActiveDeviceActivity mActivity) {
+        if (Application.RFIDBAseEventHandler == null) {
             Application.RFIDBAseEventHandler = new EventHandler(mActivity);
         }
 
@@ -288,11 +286,17 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler,
 
             }
         } catch (InvalidUsageException e) {
-            if( e!= null && e.getStackTrace().length>0){ Log.e(TAG, e.getStackTrace()[0].toString()); }
+            if (e != null && e.getStackTrace().length > 0) {
+                Log.e(TAG, e.getStackTrace()[0].toString());
+            }
         } catch (OperationFailureException e) {
-            if( e!= null && e.getStackTrace().length>0){ Log.e(TAG, e.getStackTrace()[0].toString()); }
-        } catch( ClassCastException e){
-            if( e!= null && e.getStackTrace().length>0){ Log.e(TAG, e.getStackTrace()[0].toString()); }
+            if (e != null && e.getStackTrace().length > 0) {
+                Log.e(TAG, e.getStackTrace()[0].toString());
+            }
+        } catch (ClassCastException e) {
+            if (e != null && e.getStackTrace().length > 0) {
+                Log.e(TAG, e.getStackTrace()[0].toString());
+            }
         }
 
         Inventorytimer.getInstance().setActivity(mActivity);
@@ -304,8 +308,7 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler,
         this.mActivity = mActivity;
 
 
-
-        if(Application.RFIDBAseEventHandler == null) {
+        if (Application.RFIDBAseEventHandler == null) {
             Application.RFIDBAseEventHandler = new EventHandler(mActivity);
         }
 
@@ -318,11 +321,15 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler,
                 RFIDController.mConnectedReader.Events.removeWifiScanDataEventsListener(this);
                 RFIDController.mConnectedReader.Events.addWifiScanDataEventsListener(this);
             }
-            } catch (InvalidUsageException e) {
-                if( e!= null && e.getStackTrace().length>0){ Log.e(TAG, e.getStackTrace()[0].toString()); }
-            } catch (OperationFailureException e) {
-                if( e!= null && e.getStackTrace().length>0){ Log.e(TAG, e.getStackTrace()[0].toString()); }
+        } catch (InvalidUsageException e) {
+            if (e != null && e.getStackTrace().length > 0) {
+                Log.e(TAG, e.getStackTrace()[0].toString());
             }
+        } catch (OperationFailureException e) {
+            if (e != null && e.getStackTrace().length > 0) {
+                Log.e(TAG, e.getStackTrace()[0].toString());
+            }
+        }
 
         Inventorytimer.getInstance().setActivity(mActivity);
 
@@ -338,7 +345,7 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler,
         mActivity.registerReceiver(BroadcastReceiver, filter);
 
         RFIDController.getInstance().clearAllInventoryData();
-        if(RFIDController.mConnectedReader != null && RFIDController.mConnectedReader.getHostName() != null && RFIDController.mConnectedReader.getHostName().startsWith("MC33")) {
+        if (RFIDController.mConnectedReader != null && RFIDController.mConnectedReader.getHostName() != null && RFIDController.mConnectedReader.getHostName().startsWith("MC33")) {
             Intent i = new Intent();
             i.setAction("com.symbol.datawedge.api.ACTION");
             i.putExtra("com.symbol.datawedge.api.SCANNER_INPUT_PLUGIN", "DISABLE_PLUGIN");
@@ -365,14 +372,13 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler,
     }
 
     public int getDeviceMode(String modelName, int currentScannerId) {
-        if(modelName.startsWith("RFD40+")) {
+        if (modelName.startsWith("RFD40+")) {
             return Application.DEVICE_PREMIUM_PLUS_MODE;
-        }else if (modelName.startsWith("RFD90")) {
+        } else if (modelName.startsWith("RFD90")) {
             return Application.DEVICE_PREMIUM_PLUS_MODE;
-        }
-        else if (modelName.startsWith("RFD90+")) {
+        } else if (modelName.startsWith("RFD90+")) {
             return Application.DEVICE_PREMIUM_PLUS_MODE;
-        }else if(modelName.startsWith("RFD40")) {
+        } else if (modelName.startsWith("RFD40")) {
             String[] splitStr = modelName.split("-");
 
             if (splitStr[0].equals("RFD4030")) {
@@ -388,30 +394,30 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler,
                 }
 
             }
-        }else if(modelName.startsWith("RFD8500")){
+        } else if (modelName.startsWith("RFD8500")) {
             String ScannerVersionInfo = Application.versionInfo.get("PL33");
 
-            if(ScannerVersionInfo != null && ScannerVersionInfo.equals(""))
+            if (ScannerVersionInfo != null && ScannerVersionInfo.equals(""))
                 return Application.DEVICE_STD_MODE;
-            else
-                return Application.DEVICE_PREMIUM_PLUS_MODE;
+            else return Application.DEVICE_PREMIUM_PLUS_MODE;
         }
         return Application.DEVICE_STD_MODE;
     }
 
-    private void disableBatterySaverModeChangeListner(){
+    private void disableBatterySaverModeChangeListner() {
 
-        if(mIdlemodechangereciever != null)
-            mActivity.unregisterReceiver(mIdlemodechangereciever);
-        if(mDeviceIdlereceiver != null)
-            mActivity.unregisterReceiver(mDeviceIdlereceiver);
+        if (mIdlemodechangereciever != null) mActivity.unregisterReceiver(mIdlemodechangereciever);
+        if (mDeviceIdlereceiver != null) mActivity.unregisterReceiver(mDeviceIdlereceiver);
     }
+
     private void enableBatterySaverModeChangeListner() {
 
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             mDeviceIdlereceiver = new BroadcastReceiver() {
-                @RequiresApi(api = Build.VERSION_CODES.M) @Override public void onReceive(Context context, Intent intent) {
+                @RequiresApi(api = Build.VERSION_CODES.M)
+                @Override
+                public void onReceive(Context context, Intent intent) {
                     PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
 
                     if (pm.isDeviceIdleMode()) {
@@ -425,21 +431,27 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler,
             mActivity.registerReceiver(mDeviceIdlereceiver, new IntentFilter(PowerManager.ACTION_DEVICE_IDLE_MODE_CHANGED));
 
             mIdlemodechangereciever = new BroadcastReceiver() {
-                @RequiresApi(api = Build.VERSION_CODES.M) @Override public void onReceive(Context context, Intent intent) {
+                @RequiresApi(api = Build.VERSION_CODES.M)
+                @Override
+                public void onReceive(Context context, Intent intent) {
                     PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
 
                     //if (pm.isPowerSaveMode())
                     {
                         Log.d(TAG, "In Power Save Mode");
-                        if(RFIDController.mIsInventoryRunning){
+                        if (RFIDController.mIsInventoryRunning) {
                             inventoryStartOrStop();
                             try {
                                 RFIDController.mConnectedDevice.getRFIDReader().disconnect();
                                 RFIDController.mConnectedDevice.getRFIDReader().Dispose();
                             } catch (InvalidUsageException e) {
-                                if( e!= null && e.getStackTrace().length>0){ Log.e(TAG, e.getStackTrace()[0].toString()); }
+                                if (e != null && e.getStackTrace().length > 0) {
+                                    Log.e(TAG, e.getStackTrace()[0].toString());
+                                }
                             } catch (OperationFailureException e) {
-                                if( e!= null && e.getStackTrace().length>0){ Log.e(TAG, e.getStackTrace()[0].toString()); }
+                                if (e != null && e.getStackTrace().length > 0) {
+                                    Log.e(TAG, e.getStackTrace()[0].toString());
+                                }
                             } catch (Exception e) {
                                 //if( e!= null && e.getStackTrace().length>0){ Log.e(TAG, e.getStackTrace()[0].toString()); }
                             }
@@ -458,8 +470,7 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler,
         public void onReceive(Context context, Intent intent) {
             final String action = intent.getAction();
             if (action.equals(BluetoothAdapter.ACTION_STATE_CHANGED)) {
-                final int state = intent.getIntExtra(BluetoothAdapter.EXTRA_STATE,
-                        BluetoothAdapter.ERROR);
+                final int state = intent.getIntExtra(BluetoothAdapter.EXTRA_STATE, BluetoothAdapter.ERROR);
                 switch (state) {
                     case BluetoothAdapter.STATE_OFF:
 
@@ -491,9 +502,13 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler,
                         try {
                             RFIDController.mConnectedReader.disconnect();
                         } catch (InvalidUsageException e) {
-                            if( e!= null && e.getStackTrace().length>0){ Log.e(TAG, e.getStackTrace()[0].toString()); }
+                            if (e != null && e.getStackTrace().length > 0) {
+                                Log.e(TAG, e.getStackTrace()[0].toString());
+                            }
                         } catch (OperationFailureException e) {
-                            if( e!= null && e.getStackTrace().length>0){ Log.e(TAG, e.getStackTrace()[0].toString()); }
+                            if (e != null && e.getStackTrace().length > 0) {
+                                Log.e(TAG, e.getStackTrace()[0].toString());
+                            }
                         }
 
                         clearConnectedReader();
@@ -516,8 +531,8 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler,
 
     private void handleBToff() {
 
-        for ( ReaderDevice readerDevice: RFIDController.readersList){
-            if( readerDevice.getTransport().equals("bluetooth") == true)
+        for (ReaderDevice readerDevice : RFIDController.readersList) {
+            if (readerDevice.getTransport().equals("bluetooth") == true)
                 RFIDController.readersList.remove(readerDevice);
         }
 
@@ -532,11 +547,11 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler,
 
     private void beeperSettings() {
         SharedPreferences sharedPref = mActivity.getSharedPreferences(mActivity.getString(R.string.pref_beeper), Context.MODE_PRIVATE);
-        int  volume;
-        if(RFIDController.mConnectedReader != null && RFIDController.mConnectedReader.getHostName() != null && RFIDController.mConnectedReader.getHostName().startsWith("MC33")){
-            volume= sharedPref.getInt(mActivity.getString(R.string.beeper_volume), 0);
-        }else{
-            volume= sharedPref.getInt(mActivity.getString(R.string.beeper_volume), 3);
+        int volume;
+        if (RFIDController.mConnectedReader != null && RFIDController.mConnectedReader.getHostName() != null && RFIDController.mConnectedReader.getHostName().startsWith("MC33")) {
+            volume = sharedPref.getInt(mActivity.getString(R.string.beeper_volume), 0);
+        } else {
+            volume = sharedPref.getInt(mActivity.getString(R.string.beeper_volume), 3);
         }
 
         int streamType = AudioManager.STREAM_DTMF;
@@ -570,7 +585,6 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler,
         SharedPreferences sharedPreferences = mActivity.getSharedPreferences(Constants.READER_PASSWORDS, 0);
         return sharedPreferences.getString(address, null);
     }
-
 
 
     private void EnableLogger() {
@@ -643,8 +657,7 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler,
         Application.RFIDBAseEventHandler = null;
         RFIDController.readers.deattach(this);
 
-        if (myToast != null)
-            myToast.cancel();
+        if (myToast != null) myToast.cancel();
 
     }
 
@@ -658,8 +671,8 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler,
                 detailsIntent.putExtra(Constants.SETTING_ITEM_ID, R.id.battery);
                 //mActivity.startActivity(detailsIntent);
                 return true;
-         }
-         return true;
+        }
+        return true;
     }
 
 
@@ -728,26 +741,16 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler,
     private int getActionBarIcon() {
         //Fragment fragment = mActivity.getSupportFragmentManager().findFragmentByTag(TAG_RFID_FRAGMENT);
         Fragment fragment = mActivity.getCurrentFragment(RFID_TAB);
-        if (fragment instanceof RapidReadFragment)
-            return R.drawable.dl_rr;
-        else if (fragment instanceof RFIDInventoryFragment)
-            return R.drawable.dl_inv;
-        else if (fragment instanceof LocateOperationsFragment)
-            return R.drawable.dl_loc;
-        else if (fragment instanceof SettingListFragment)
-            return R.drawable.dl_sett;
-        else if (fragment instanceof AccessOperationsFragment)
-            return R.drawable.dl_access;
-        else if (fragment instanceof PreFilterFragment)
-            return R.drawable.dl_filters;
-        else if (fragment instanceof RFIDReadersListFragment)
-            return R.drawable.dl_rdl;
-        else if (fragment instanceof AboutFragment)
-            return R.drawable.dl_about;
-        else
-            return -1;
+        if (fragment instanceof RapidReadFragment) return R.drawable.dl_rr;
+        else if (fragment instanceof RFIDInventoryFragment) return R.drawable.dl_inv;
+        else if (fragment instanceof LocateOperationsFragment) return R.drawable.dl_loc;
+        else if (fragment instanceof SettingListFragment) return R.drawable.dl_sett;
+        else if (fragment instanceof AccessOperationsFragment) return R.drawable.dl_access;
+        else if (fragment instanceof PreFilterFragment) return R.drawable.dl_filters;
+        else if (fragment instanceof RFIDReadersListFragment) return R.drawable.dl_rdl;
+        else if (fragment instanceof AboutFragment) return R.drawable.dl_about;
+        else return -1;
     }
-
 
 
     public void onResume() {
@@ -794,7 +797,7 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler,
 
 
     public void onBackPressed() {
-       {
+        {
             Fragment fragment = mActivity.getCurrentFragment(RFID_TAB);
             if (fragment != null && fragment instanceof BackPressedFragment) {
                 ((BackPressedFragment) fragment).onBackPressed();
@@ -803,48 +806,50 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler,
                 Inventorytimer.getInstance().stopTimer();
                 RFIDController.getInstance().stopTimer();
                 //
-                if (DisconnectTask != null)
-                    DisconnectTask.cancel(true);
+                if (DisconnectTask != null) DisconnectTask.cancel(true);
 
                 //Alert Dialog
-                showMessageOKCancel("Do you want to close this application?",
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
+                showMessageOKCancel("Do you want to close this application?", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
 
-                                //disconnect from reader
-                                if (RFIDController.mConnectedReader != null && RFIDController.mConnectedReader.Events != null) {
+                        //disconnect from reader
+                        if (RFIDController.mConnectedReader != null && RFIDController.mConnectedReader.Events != null) {
 
-                                    try {
-                                        if (RFIDController.mConnectedReader.isConnected()) {
-                                            if(RFIDController.mIsInventoryRunning)
-                                             RFIDController.mConnectedReader.Actions.Inventory.stop();
-                                            RFIDController.mConnectedReader.Events.removeEventsListener(Application.RFIDBAseEventHandler);
-                                            RFIDController.mConnectedReader.Events.removeWifiScanDataEventsListener(RFIDBaseActivity.this);
-                                        }
-                                        RFIDController.mConnectedReader.disconnect();
-                                    } catch (InvalidUsageException e) {
-                                        if( e!= null && e.getStackTrace().length>0){ Log.e(TAG, e.getStackTrace()[0].toString()); }
-                                    } catch (OperationFailureException e) {
-                                        if( e!= null && e.getStackTrace().length>0){ Log.e(TAG, e.getStackTrace()[0].toString()); }
-                                    }
+                            try {
+                                if (RFIDController.mConnectedReader.isConnected()) {
+                                    if (RFIDController.mIsInventoryRunning)
+                                        RFIDController.mConnectedReader.Actions.Inventory.stop();
+                                    RFIDController.mConnectedReader.Events.removeEventsListener(Application.RFIDBAseEventHandler);
+                                    RFIDController.mConnectedReader.Events.removeWifiScanDataEventsListener(RFIDBaseActivity.this);
                                 }
-                                RFIDController.mConnectedReader = null;
-                                // update dpo icon in settings list
-                                AdvancedOptionsContent.ITEMS.get(AdvancedOptionsContent.DPO_ITEM_INDEX).icon = R.drawable.title_dpo_disabled;
-                                RFIDController.getInstance().clearSettings();
-                                RFIDController.mConnectedDevice = null;
-                                RFIDController.mConnectedReader = null;
-                                RFIDController.readersList.clear();
-                                if (RFIDController.readers != null) {
-                                    RFIDController.readers.deattach(RFIDBaseActivity.this);
-                                    RFIDController.readers.Dispose();
-                                    RFIDController.readers = null;
+                                RFIDController.mConnectedReader.disconnect();
+                            } catch (InvalidUsageException e) {
+                                if (e != null && e.getStackTrace().length > 0) {
+                                    Log.e(TAG, e.getStackTrace()[0].toString());
                                 }
-                                RFIDController.reset();
-
+                            } catch (OperationFailureException e) {
+                                if (e != null && e.getStackTrace().length > 0) {
+                                    Log.e(TAG, e.getStackTrace()[0].toString());
+                                }
                             }
-                        });
+                        }
+                        RFIDController.mConnectedReader = null;
+                        // update dpo icon in settings list
+                        AdvancedOptionsContent.ITEMS.get(AdvancedOptionsContent.DPO_ITEM_INDEX).icon = R.drawable.title_dpo_disabled;
+                        RFIDController.getInstance().clearSettings();
+                        RFIDController.mConnectedDevice = null;
+                        RFIDController.mConnectedReader = null;
+                        RFIDController.readersList.clear();
+                        if (RFIDController.readers != null) {
+                            RFIDController.readers.deattach(RFIDBaseActivity.this);
+                            RFIDController.readers.Dispose();
+                            RFIDController.readers = null;
+                        }
+                        RFIDController.reset();
+
+                    }
+                });
             } else {
 
             }
@@ -863,7 +868,7 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler,
             Log.d(TAG, "Loading CSV");
             return;
         }
-        if(Application.mIsMultiTagLocatingRunning == true){
+        if (Application.mIsMultiTagLocatingRunning == true) {
             Toast.makeText(mActivity.getApplicationContext(), "Operation in progress-command not allowed", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -872,7 +877,7 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler,
         if (fragment != null && fragment instanceof RFIDInventoryFragment) {
             inventoryBT = mActivity.findViewById(R.id.inventoryButton);
         } else if (fragment != null && fragment instanceof RapidReadFragment) {
-            inventoryBT = mActivity.findViewById( R.id.rr_inventoryButton );
+            inventoryBT = mActivity.findViewById(R.id.rr_inventoryButton);
         }
 
         //tagListMatchNotice = false;
@@ -936,34 +941,30 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler,
                 // perform read or inventory
                 if (fragment != null && fragment instanceof RFIDInventoryFragment && !RFIDController.regionNotSet && !((RFIDInventoryFragment) fragment).getMemoryBankID().equalsIgnoreCase("none") && !Application.TAG_LIST_MATCH_MODE) {
                     //If memory bank is selected, call read command with appropriate memory bank
-                    RFIDController.getInstance().inventoryWithMemoryBank(
-                            ((RFIDInventoryFragment) fragment).getMemoryBankID(),
-                            new RfidListeners() {
-                                @Override
-                                public void onSuccess(Object object) {
-                                    Log.d(TAG, "onSuccess");
-                                }
+                    RFIDController.getInstance().inventoryWithMemoryBank(((RFIDInventoryFragment) fragment).getMemoryBankID(), new RfidListeners() {
+                        @Override
+                        public void onSuccess(Object object) {
+                            Log.d(TAG, "onSuccess");
+                        }
 
-                                @Override
-                                public void onFailure(Exception exception) {
+                        @Override
+                        public void onFailure(Exception exception) {
 
-                                    //Fragment fragment = mActivity.getSupportFragmentManager().findFragmentByTag(TAG_RFID_FRAGMENT);
-                                    Fragment fragment = mActivity.getCurrentFragment(RFID_TAB);
-                                    if (fragment instanceof ResponseHandlerInterfaces.ResponseStatusHandler)
-                                        ((ResponseHandlerInterfaces.ResponseStatusHandler) fragment).
-                                                handleStatusResponse(((OperationFailureException) exception).getResults());
-                                    sendNotification( Constants.ACTION_READER_STATUS_OBTAINED, ((OperationFailureException) exception).getVendorMessage());
-                                }
+                            //Fragment fragment = mActivity.getSupportFragmentManager().findFragmentByTag(TAG_RFID_FRAGMENT);
+                            Fragment fragment = mActivity.getCurrentFragment(RFID_TAB);
+                            if (fragment instanceof ResponseHandlerInterfaces.ResponseStatusHandler)
+                                ((ResponseHandlerInterfaces.ResponseStatusHandler) fragment).handleStatusResponse(((OperationFailureException) exception).getResults());
+                            sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, ((OperationFailureException) exception).getVendorMessage());
+                        }
 
-                                @Override
-                                public void onFailure(String message) {
-                                    Toast.makeText( mActivity, message, Toast.LENGTH_SHORT).show();
-                                    if (inventoryBT != null) {
-                                        inventoryBT.setIconResource(android.R.drawable.ic_media_play);
-                                    }
-                                }
+                        @Override
+                        public void onFailure(String message) {
+                            Toast.makeText(mActivity, message, Toast.LENGTH_SHORT).show();
+                            if (inventoryBT != null) {
+                                inventoryBT.setIconResource(android.R.drawable.ic_media_play);
                             }
-                    );
+                        }
+                    });
                 } else {
                     //Perform inventory
                     try {
@@ -979,24 +980,22 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler,
                             @Override
                             public void onFailure(Exception exception) {
 
-                               // if( ((OperationFailureException) exception).getResults() == RFIDResults.RFID_OPERATION_IN_PROGRESS ){
-                               //         if (inventoryBT != null) {
-                               //             inventoryBT.setIconResource(R.drawable.ic_play_stop);
-                               //             inventoryBT.setText(R.string.stop);
-                               //          }
-                               //     mIsInventoryRunning = true;
+                                // if( ((OperationFailureException) exception).getResults() == RFIDResults.RFID_OPERATION_IN_PROGRESS ){
+                                //         if (inventoryBT != null) {
+                                //             inventoryBT.setIconResource(R.drawable.ic_play_stop);
+                                //             inventoryBT.setText(R.string.stop);
+                                //          }
+                                //     mIsInventoryRunning = true;
 
                                 //}
 
                                 //Fragment fragment = mActivity.getSupportFragmentManager().findFragmentByTag(TAG_RFID_FRAGMENT);
                                 Fragment fragment = mActivity.getCurrentFragment(RFID_TAB);
                                 if (fragment instanceof ResponseHandlerInterfaces.ResponseStatusHandler)
-                                    ((ResponseHandlerInterfaces.ResponseStatusHandler) fragment).
-                                            handleStatusResponse(((OperationFailureException) exception).getResults());
+                                    ((ResponseHandlerInterfaces.ResponseStatusHandler) fragment).handleStatusResponse(((OperationFailureException) exception).getResults());
 
 
-
-                                sendNotification( Constants.ACTION_READER_STATUS_OBTAINED, ((OperationFailureException) exception).getVendorMessage());
+                                sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, ((OperationFailureException) exception).getVendorMessage());
                             }
 
                             @Override
@@ -1007,7 +1006,9 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler,
                             }
                         });
                     } catch (Exception e) {
-                        if( e!= null && e.getStackTrace().length>0){ Log.e(TAG, e.getStackTrace()[0].toString()); }
+                        if (e != null && e.getStackTrace().length > 0) {
+                            Log.e(TAG, e.getStackTrace()[0].toString());
+                        }
                     }
                 }
                 //Perform stop inventory
@@ -1027,11 +1028,13 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler,
                     RFIDController.getInstance().stopInventory(new RfidListeners() {
                         @Override
                         public void onSuccess(Object object) {
-                            if(RFIDController.mIsInventoryRunning) {
+                            if (RFIDController.mIsInventoryRunning) {
                                 try {
                                     Thread.sleep(100);
                                 } catch (InterruptedException e) {
-                                    if( e!= null && e.getStackTrace().length>0){ Log.e(TAG, e.getStackTrace()[0].toString()); }
+                                    if (e != null && e.getStackTrace().length > 0) {
+                                        Log.e(TAG, e.getStackTrace()[0].toString());
+                                    }
                                 }
                             }
                             Application.bBrandCheckStarted = false;
@@ -1058,7 +1061,9 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler,
                     });
                     Log.d(TAG, "Inventory.stop");
                 } catch (Exception e) {
-                    if( e!= null && e.getStackTrace().length>0){ Log.e(TAG, e.getStackTrace()[0].toString()); }
+                    if (e != null && e.getStackTrace().length > 0) {
+                        Log.e(TAG, e.getStackTrace()[0].toString());
+                    }
                 }
             }
         } else
@@ -1073,211 +1078,219 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler,
     public void multiTagLocateStartOrStop(View v) {
         //if (isBluetoothEnabled() || !RFIDController.mConnectedReader.getHostName().startsWith("RFD8500")) {
         Fragment fragment = mActivity.getCurrentFragment(RFID_TAB);
-            if (RFIDController.mConnectedReader != null && RFIDController.mConnectedReader.isConnected()) {
-                if (Application.multiTagLocateTagListExist) {
-                    //Fragment fragment = getSupportFragmentManager().findFragmentByTag(TAG_CONTENT_FRAGMENT);
-                    //Fragment fragment = mActivity.getCurrentFragment(mActivity.RFID_TAB);
-                    if (!Application.mIsMultiTagLocatingRunning  ) {
-                        ((FloatingActionButton) v).setImageResource(R.drawable.ic_play_stop);
+        if (RFIDController.mConnectedReader != null && RFIDController.mConnectedReader.isConnected()) {
+            if (Application.multiTagLocateTagListExist) {
+                //Fragment fragment = getSupportFragmentManager().findFragmentByTag(TAG_CONTENT_FRAGMENT);
+                //Fragment fragment = mActivity.getCurrentFragment(mActivity.RFID_TAB);
+                if (!Application.mIsMultiTagLocatingRunning) {
+                    ((FloatingActionButton) v).setImageResource(R.drawable.ic_play_stop);
 
-                        Application.mIsMultiTagLocatingRunning = true;
-                        new AsyncTask<Void, Void, Boolean>() {
-                            private InvalidUsageException invalidUsageException;
-                            private OperationFailureException operationFailureException;
+                    Application.mIsMultiTagLocatingRunning = true;
+                    new AsyncTask<Void, Void, Boolean>() {
+                        private InvalidUsageException invalidUsageException;
+                        private OperationFailureException operationFailureException;
 
-                            @Override
-                            protected void onPreExecute() {
-                                super.onPreExecute();
-                                ((FloatingActionButton) v).setEnabled(false);
-                                ((FloatingActionButton) v).setClickable(false);
+                        @Override
+                        protected void onPreExecute() {
+                            super.onPreExecute();
+                            ((FloatingActionButton) v).setEnabled(false);
+                            ((FloatingActionButton) v).setClickable(false);
+                        }
+
+                        @Override
+                        protected Boolean doInBackground(Void... voids) {
+                            try {
+                                RFIDController.mConnectedReader.Actions.MultiTagLocate.perform();
+                            } catch (InvalidUsageException e) {
+                                if (e != null && e.getStackTrace().length > 0) {
+                                    Log.e(TAG, e.getStackTrace()[0].toString());
+                                }
+                                invalidUsageException = e;
+                            } catch (OperationFailureException e) {
+                                if (e != null && e.getStackTrace().length > 0) {
+                                    Log.e(TAG, e.getStackTrace()[0].toString());
+                                }
+                                operationFailureException = e;
+                            }
+                            return null;
+                        }
+
+                        @Override
+                        protected void onPostExecute(Boolean result) {
+                            if (invalidUsageException != null) {
+                                if (fragment instanceof ResponseHandlerInterfaces.ResponseStatusHandler)
+                                    ((ResponseHandlerInterfaces.ResponseStatusHandler) fragment).handleStatusResponse(operationFailureException.getResults());
+                                sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, invalidUsageException.getInfo());
+                            } else if (operationFailureException != null) {
+                                if (fragment instanceof ResponseHandlerInterfaces.ResponseStatusHandler)
+                                    ((ResponseHandlerInterfaces.ResponseStatusHandler) fragment).handleStatusResponse(operationFailureException.getResults());
+                                sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, operationFailureException.getVendorMessage());
+                            }
+                            if (invalidUsageException == null && operationFailureException == null) {
+                                ((LocateOperationsFragment) fragment).enableGUIComponents(false);
                             }
 
-                            @Override
-                            protected Boolean doInBackground(Void... voids) {
-                                try {
-                                    RFIDController.mConnectedReader.Actions.MultiTagLocate.perform();
-                                } catch (InvalidUsageException e) {
-                                    if( e!= null && e.getStackTrace().length>0){ Log.e(TAG, e.getStackTrace()[0].toString()); }
-                                    invalidUsageException = e;
-                                } catch (OperationFailureException e) {
-                                    if( e!= null && e.getStackTrace().length>0){ Log.e(TAG, e.getStackTrace()[0].toString()); }
-                                    operationFailureException = e;
+                            //new Handler().postDelayed(new Runnable() {
+                            //    @Override
+                            //    public void run() {
+                            // This method will be executed once the timer is over
+                            ((FloatingActionButton) v).setClickable(true);
+                            ((FloatingActionButton) v).setEnabled(true);
+
+                            //   }
+                            //},1000);// set time as per your requiremen
+
+                        }
+                    }.execute();
+                } else if (Application.mIsMultiTagLocatingRunning) {
+                    new AsyncTask<Void, Void, Boolean>() {
+                        private InvalidUsageException invalidUsageException;
+                        private OperationFailureException operationFailureException;
+
+                        @Override
+                        protected void onPreExecute() {
+                            super.onPreExecute();
+                            ((FloatingActionButton) v).setEnabled(false);
+                            ((FloatingActionButton) v).setClickable(false);
+                        }
+
+                        @Override
+                        protected Boolean doInBackground(Void... voids) {
+                            try {
+                                RFIDController.mConnectedReader.Actions.MultiTagLocate.stop();
+                                if (((RFIDController.settings_startTrigger != null && (RFIDController.settings_startTrigger.getTriggerType() == START_TRIGGER_TYPE.START_TRIGGER_TYPE_HANDHELD || RFIDController.settings_startTrigger.getTriggerType() == START_TRIGGER_TYPE.START_TRIGGER_TYPE_PERIODIC))) || (Application.isBatchModeInventoryRunning != null && Application.isBatchModeInventoryRunning))
+                                    operationHasAborted();
+                            } catch (InvalidUsageException e) {
+                                invalidUsageException = e;
+                                if (e != null && e.getStackTrace().length > 0) {
+                                    Log.e(TAG, e.getStackTrace()[0].toString());
                                 }
-                                return null;
+                            } catch (OperationFailureException e) {
+                                operationFailureException = e;
+                                if (e != null && e.getStackTrace().length > 0) {
+                                    Log.e(TAG, e.getStackTrace()[0].toString());
+                                }
+                            }
+                            return null;
+                        }
+
+                        @Override
+                        protected void onPostExecute(Boolean result) {
+                            if (invalidUsageException != null) {
+                                sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, invalidUsageException.getInfo());
+                            } else if (operationFailureException != null) {
+                                sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, operationFailureException.getVendorMessage());
+                            }
+                            if (invalidUsageException == null && operationFailureException == null) {
+                                ((LocateOperationsFragment) fragment).enableGUIComponents(true);
                             }
 
-                            @Override
-                            protected void onPostExecute(Boolean result) {
-                                if (invalidUsageException != null) {
-                                    if (fragment instanceof ResponseHandlerInterfaces.ResponseStatusHandler)
-                                        ((ResponseHandlerInterfaces.ResponseStatusHandler) fragment).handleStatusResponse(operationFailureException.getResults());
-                                    sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, invalidUsageException.getInfo());
-                                } else if (operationFailureException != null) {
-                                    if (fragment instanceof ResponseHandlerInterfaces.ResponseStatusHandler)
-                                        ((ResponseHandlerInterfaces.ResponseStatusHandler) fragment).handleStatusResponse(operationFailureException.getResults());
-                                    sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, operationFailureException.getVendorMessage());
-                                }
-                                if(invalidUsageException == null && operationFailureException == null) {
-                                    ((LocateOperationsFragment)fragment).enableGUIComponents(false);
-                                }
+                            // new Handler().postDelayed(new Runnable() {
+                            //    @Override
+                            ///    public void run() {
+                            // This method will be executed once the timer is over
+                            ((FloatingActionButton) v).setClickable(true);
+                            ((FloatingActionButton) v).setEnabled(true);
+                            //   }
+                            //},1000);// set time as per your requiremen
 
-                                //new Handler().postDelayed(new Runnable() {
-                                //    @Override
-                                //    public void run() {
-                                        // This method will be executed once the timer is over
-                                        ((FloatingActionButton) v).setClickable(true);
-                                        ((FloatingActionButton) v).setEnabled(true);
-
-                                 //   }
-                                //},1000);// set time as per your requiremen
-
-                            }
-                        }.execute();
-                    } else if(Application.mIsMultiTagLocatingRunning ){
-                        new AsyncTask<Void, Void, Boolean>() {
-                            private InvalidUsageException invalidUsageException;
-                            private OperationFailureException operationFailureException;
-
-                            @Override
-                            protected void onPreExecute() {
-                                super.onPreExecute();
-                                ((FloatingActionButton) v).setEnabled(false);
-                                ((FloatingActionButton) v).setClickable(false);
-                            }
-
-                            @Override
-                            protected Boolean doInBackground(Void... voids) {
-                                try {
-                                    RFIDController.mConnectedReader.Actions.MultiTagLocate.stop();
-                                    if (((RFIDController.settings_startTrigger != null && (RFIDController.settings_startTrigger.getTriggerType() == START_TRIGGER_TYPE.START_TRIGGER_TYPE_HANDHELD || RFIDController.settings_startTrigger.getTriggerType() == START_TRIGGER_TYPE.START_TRIGGER_TYPE_PERIODIC)))
-                                            || (Application.isBatchModeInventoryRunning != null && Application.isBatchModeInventoryRunning))
-                                        operationHasAborted();
-                                } catch (InvalidUsageException e) {
-                                    invalidUsageException = e;
-                                    if( e!= null && e.getStackTrace().length>0){ Log.e(TAG, e.getStackTrace()[0].toString()); }
-                                } catch (OperationFailureException e) {
-                                    operationFailureException = e;
-                                    if( e!= null && e.getStackTrace().length>0){ Log.e(TAG, e.getStackTrace()[0].toString()); }
-                                }
-                                return null;
-                            }
-
-                            @Override
-                            protected void onPostExecute(Boolean result) {
-                                if (invalidUsageException != null) {
-                                    sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, invalidUsageException.getInfo());
-                                } else if (operationFailureException != null) {
-                                    sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, operationFailureException.getVendorMessage());
-                                }
-                                if(invalidUsageException == null && operationFailureException == null) {
-                                    ((LocateOperationsFragment)fragment).enableGUIComponents(true);
-                                }
-
-                               // new Handler().postDelayed(new Runnable() {
-                                //    @Override
-                                ///    public void run() {
-                                        // This method will be executed once the timer is over
-                                        ((FloatingActionButton) v).setClickable(true);
-                                        ((FloatingActionButton) v).setEnabled(true);
-                                 //   }
-                                //},1000);// set time as per your requiremen
-
-                            }
-                        }.execute();
-                        ((FloatingActionButton) v).setImageResource(android.R.drawable.ic_media_play);
-                        isMultiTagLocationingAborted = true;
-                    }
-                } else
-                    Toast.makeText(mActivity.getApplicationContext(), mActivity.getResources().getString(R.string.multiTag_locate_error_no_data_loaded), Toast.LENGTH_SHORT).show();
+                        }
+                    }.execute();
+                    ((FloatingActionButton) v).setImageResource(android.R.drawable.ic_media_play);
+                    isMultiTagLocationingAborted = true;
+                }
             } else
-                Toast.makeText(mActivity.getApplicationContext(), mActivity.getResources().getString(R.string.error_disconnected), Toast.LENGTH_SHORT).show();
+                Toast.makeText(mActivity.getApplicationContext(), mActivity.getResources().getString(R.string.multiTag_locate_error_no_data_loaded), Toast.LENGTH_SHORT).show();
+        } else
+            Toast.makeText(mActivity.getApplicationContext(), mActivity.getResources().getString(R.string.error_disconnected), Toast.LENGTH_SHORT).show();
         //} else
         //    Toast.makeText(getApplicationContext(), getResources().getString(R.string.error_bluetooth_disabled), Toast.LENGTH_SHORT).show();
     }
 
     public void multiTagLocateAddTagItem(View v) {
         //if (isBluetoothEnabled() || !RFIDController.mConnectedReader.getHostName().startsWith("RFD8500")) {
-            if (RFIDController.mConnectedReader != null && RFIDController.mConnectedReader.isConnected()) {
-                if (Application.multiTagLocateTagListExist || Application.multiTagLocatelastTag ) {
-                    if (!Application.mIsMultiTagLocatingRunning) {
-                        String tagID = ((AutoCompleteTextView)mActivity. findViewById(R.id.multiTagLocate_epc)).getText().toString();
-                        if(RFIDController.asciiMode) {
-                            tagID = asciitohex.convert(tagID).toUpperCase();
-                        }
-                        if (!tagID.isEmpty()) {
-                            if(Application.multiTagLocateTagListMap.containsKey(tagID)) {
-                                try {
-                                    if(RFIDController.mConnectedReader.Actions.MultiTagLocate.addItem(tagID, Application.multiTagLocateTagMap.get(tagID)) == 0) {
-                                        Application.multiTagLocateTagListMap.get(tagID).setReadCount(0);
-                                        Application.multiTagLocateTagListMap.get(tagID).setProximityPercent((short)0);
-                                        Application.multiTagLocateActiveTagItemList.add(Application.multiTagLocateTagListMap.get(tagID));
-                                        ((LocateOperationsFragment) mActivity.getCurrentFragment(RFID_TAB)).handleLocateTagResponse();
-                                        Toast.makeText(mActivity.getApplicationContext(), mActivity.getResources().getString(R.string.multiTag_locate_add_item_success), Toast.LENGTH_SHORT).show();
-                                        if( Application.multiTagLocatelastTag == true) {
-                                            Application.multiTagLocateTagListExist = true;
-                                            Application.multiTagLocatelastTag = false;
-                                        }
-                                    } else
-                                        Toast.makeText(mActivity.getApplicationContext(), mActivity.getResources().getString(R.string.multiTag_locate_add_item_failed), Toast.LENGTH_SHORT).show();
-                                } catch (InvalidUsageException e) {
-                                    sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, e.getInfo());
-                                } catch (OperationFailureException e) {
-                                    sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, e.getVendorMessage());
-                                }
-                            } else
-                                Toast.makeText(mActivity.getApplicationContext(), mActivity.getResources().getString(R.string.multiTag_locate_add_item_failed), Toast.LENGTH_SHORT).show();
-                        }
-                    } else
-                        Toast.makeText(mActivity.getApplicationContext(), mActivity.getResources().getString(R.string.multiTag_locate_error_operation_running), Toast.LENGTH_SHORT).show();
+        if (RFIDController.mConnectedReader != null && RFIDController.mConnectedReader.isConnected()) {
+            if (Application.multiTagLocateTagListExist || Application.multiTagLocatelastTag) {
+                if (!Application.mIsMultiTagLocatingRunning) {
+                    String tagID = ((AutoCompleteTextView) mActivity.findViewById(R.id.multiTagLocate_epc)).getText().toString();
+                    if (RFIDController.asciiMode) {
+                        tagID = asciitohex.convert(tagID).toUpperCase();
+                    }
+                    if (!tagID.isEmpty()) {
+                        if (Application.multiTagLocateTagListMap.containsKey(tagID)) {
+                            try {
+                                if (RFIDController.mConnectedReader.Actions.MultiTagLocate.addItem(tagID, Application.multiTagLocateTagMap.get(tagID)) == 0) {
+                                    Application.multiTagLocateTagListMap.get(tagID).setReadCount(0);
+                                    Application.multiTagLocateTagListMap.get(tagID).setProximityPercent((short) 0);
+                                    Application.multiTagLocateActiveTagItemList.add(Application.multiTagLocateTagListMap.get(tagID));
+                                    ((LocateOperationsFragment) mActivity.getCurrentFragment(RFID_TAB)).handleLocateTagResponse();
+                                    Toast.makeText(mActivity.getApplicationContext(), mActivity.getResources().getString(R.string.multiTag_locate_add_item_success), Toast.LENGTH_SHORT).show();
+                                    if (Application.multiTagLocatelastTag == true) {
+                                        Application.multiTagLocateTagListExist = true;
+                                        Application.multiTagLocatelastTag = false;
+                                    }
+                                } else
+                                    Toast.makeText(mActivity.getApplicationContext(), mActivity.getResources().getString(R.string.multiTag_locate_add_item_failed), Toast.LENGTH_SHORT).show();
+                            } catch (InvalidUsageException e) {
+                                sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, e.getInfo());
+                            } catch (OperationFailureException e) {
+                                sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, e.getVendorMessage());
+                            }
+                        } else
+                            Toast.makeText(mActivity.getApplicationContext(), mActivity.getResources().getString(R.string.multiTag_locate_add_item_failed), Toast.LENGTH_SHORT).show();
+                    }
                 } else
-                    Toast.makeText(mActivity.getApplicationContext(), mActivity.getResources().getString(R.string.multiTag_locate_error_no_data_loaded), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mActivity.getApplicationContext(), mActivity.getResources().getString(R.string.multiTag_locate_error_operation_running), Toast.LENGTH_SHORT).show();
             } else
-                Toast.makeText(mActivity.getApplicationContext(), mActivity.getResources().getString(R.string.error_disconnected), Toast.LENGTH_SHORT).show();
+                Toast.makeText(mActivity.getApplicationContext(), mActivity.getResources().getString(R.string.multiTag_locate_error_no_data_loaded), Toast.LENGTH_SHORT).show();
+        } else
+            Toast.makeText(mActivity.getApplicationContext(), mActivity.getResources().getString(R.string.error_disconnected), Toast.LENGTH_SHORT).show();
         //} else
         //    Toast.makeText(getApplicationContext(), getResources().getString(R.string.error_bluetooth_disabled), Toast.LENGTH_SHORT).show();
     }
 
     public void multiTagLocateDeleteTagItem(View v) {
         //if (isBluetoothEnabled() || !RFIDController.mConnectedReader.getHostName().startsWith("RFD8500")) {
-            if (RFIDController.mConnectedReader != null && RFIDController.mConnectedReader.isConnected()) {
-                if (Application.multiTagLocateTagListExist) {
-                    if (!Application.mIsMultiTagLocatingRunning) {
-                        String tagID = ((AutoCompleteTextView) mActivity.findViewById(R.id.multiTagLocate_epc)).getText().toString();
-                      if(RFIDController.asciiMode) {
-                           tagID = asciitohex.convert(tagID).toUpperCase();
-                       }
-                        if (!tagID.isEmpty()) {
-                            if(Application.multiTagLocateTagListMap.containsKey(tagID)) {
-                                try {
-                                    if(RFIDController.mConnectedReader.Actions.MultiTagLocate.deleteItem(tagID) == 0) {
-                                        if(Application.multiTagLocateActiveTagItemList.size() == 1) {
-                                            Application.multiTagLocatelastTag = true;
-                                        }
-                                        Application.multiTagLocateActiveTagItemList.remove(Application.multiTagLocateTagListMap.get(tagID));
-                                        ((LocateOperationsFragment) mActivity.getCurrentFragment(RFID_TAB)).handleLocateTagResponse();
-                                        Toast.makeText(mActivity.getApplicationContext(), mActivity.getResources().getString(R.string.multiTag_locate_delete_item_success), Toast.LENGTH_SHORT).show();
-                                        if(Application.multiTagLocateActiveTagItemList.size() == 0) {
-                                            Application.multiTagLocateTagListExist = false;
-                                        }
-                                    } else
-                                        Toast.makeText(mActivity.getApplicationContext(), mActivity.getResources().getString(R.string.multiTag_locate_delete_item_failed), Toast.LENGTH_SHORT).show();
-                                } catch (InvalidUsageException e) {
-                                    sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, e.getInfo());
-                                } catch (OperationFailureException e) {
-                                    sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, e.getVendorMessage());
-                                }
-                            } else
-                                Toast.makeText(mActivity.getApplicationContext(), mActivity.getResources().getString(R.string.multiTag_locate_delete_item_failed), Toast.LENGTH_SHORT).show();
-                        }
-                    } else
-                        Toast.makeText(mActivity.getApplicationContext(), mActivity.getResources().getString(R.string.multiTag_locate_error_operation_running), Toast.LENGTH_SHORT).show();
+        if (RFIDController.mConnectedReader != null && RFIDController.mConnectedReader.isConnected()) {
+            if (Application.multiTagLocateTagListExist) {
+                if (!Application.mIsMultiTagLocatingRunning) {
+                    String tagID = ((AutoCompleteTextView) mActivity.findViewById(R.id.multiTagLocate_epc)).getText().toString();
+                    if (RFIDController.asciiMode) {
+                        tagID = asciitohex.convert(tagID).toUpperCase();
+                    }
+                    if (!tagID.isEmpty()) {
+                        if (Application.multiTagLocateTagListMap.containsKey(tagID)) {
+                            try {
+                                if (RFIDController.mConnectedReader.Actions.MultiTagLocate.deleteItem(tagID) == 0) {
+                                    if (Application.multiTagLocateActiveTagItemList.size() == 1) {
+                                        Application.multiTagLocatelastTag = true;
+                                    }
+                                    Application.multiTagLocateActiveTagItemList.remove(Application.multiTagLocateTagListMap.get(tagID));
+                                    ((LocateOperationsFragment) mActivity.getCurrentFragment(RFID_TAB)).handleLocateTagResponse();
+                                    Toast.makeText(mActivity.getApplicationContext(), mActivity.getResources().getString(R.string.multiTag_locate_delete_item_success), Toast.LENGTH_SHORT).show();
+                                    if (Application.multiTagLocateActiveTagItemList.size() == 0) {
+                                        Application.multiTagLocateTagListExist = false;
+                                    }
+                                } else
+                                    Toast.makeText(mActivity.getApplicationContext(), mActivity.getResources().getString(R.string.multiTag_locate_delete_item_failed), Toast.LENGTH_SHORT).show();
+                            } catch (InvalidUsageException e) {
+                                sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, e.getInfo());
+                            } catch (OperationFailureException e) {
+                                sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, e.getVendorMessage());
+                            }
+                        } else
+                            Toast.makeText(mActivity.getApplicationContext(), mActivity.getResources().getString(R.string.multiTag_locate_delete_item_failed), Toast.LENGTH_SHORT).show();
+                    }
                 } else
-                    Toast.makeText(mActivity.getApplicationContext(), mActivity.getResources().getString(R.string.multiTag_locate_error_no_data_loaded), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mActivity.getApplicationContext(), mActivity.getResources().getString(R.string.multiTag_locate_error_operation_running), Toast.LENGTH_SHORT).show();
             } else
-                Toast.makeText(mActivity.getApplicationContext(), mActivity.getResources().getString(R.string.error_disconnected), Toast.LENGTH_SHORT).show();
+                Toast.makeText(mActivity.getApplicationContext(), mActivity.getResources().getString(R.string.multiTag_locate_error_no_data_loaded), Toast.LENGTH_SHORT).show();
+        } else
+            Toast.makeText(mActivity.getApplicationContext(), mActivity.getResources().getString(R.string.error_disconnected), Toast.LENGTH_SHORT).show();
         //} else
         //    Toast.makeText(getApplicationContext(), getResources().getString(R.string.error_bluetooth_disabled), Toast.LENGTH_SHORT).show();
     }
+
     public void multiTagLocateClearTagItems(View v) {
         if (RFIDController.mConnectedReader != null && RFIDController.mConnectedReader.isConnected()) {
             if (Application.multiTagLocateTagListExist) {
@@ -1285,10 +1298,10 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler,
 
                     try {
                         int check = RFIDController.mConnectedReader.Actions.MultiTagLocate.clearItems();
-                        if(check == 0) {
+                        if (check == 0) {
                             Application.multiTagLocateActiveTagItemList.clear();
                             ((LocateOperationsFragment) mActivity.getCurrentFragment(RFID_TAB)).handleLocateTagResponse();
-                            if(Application.multiTagLocateActiveTagItemList.size() == 0) {
+                            if (Application.multiTagLocateActiveTagItemList.size() == 0) {
                                 Application.multiTagLocateTagListExist = false;
                             }
 
@@ -1298,31 +1311,30 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler,
                     } catch (OperationFailureException e) {
                         sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, e.getVendorMessage());
                     }
-                }else
+                } else
                     Toast.makeText(mActivity.getApplicationContext(), mActivity.getResources().getString(R.string.multiTag_locate_error_operation_running), Toast.LENGTH_SHORT).show();
 
-            }
-            else
+            } else
                 Toast.makeText(mActivity.getApplicationContext(), mActivity.getResources().getString(R.string.multiTag_locate_error_no_data_loaded), Toast.LENGTH_SHORT).show();
-        }  else
+        } else
             Toast.makeText(mActivity.getApplicationContext(), mActivity.getResources().getString(R.string.error_disconnected), Toast.LENGTH_SHORT).show();
     }
 
     public void multiTagLocateReset(View v) {
         //if (isBluetoothEnabled() || !RFIDController.mConnectedReader.getHostName().startsWith("RFD8500")) {
-            if (RFIDController.mConnectedReader != null && RFIDController.mConnectedReader.isConnected()) {
-                if (Application.multiTagLocateTagListExist || Application.multiTagLocatelastTag) {
-                    if (!Application.mIsMultiTagLocatingRunning) {
-                        Fragment fragment = mActivity.getCurrentFragment(RFID_TAB);
-                        if (fragment instanceof LocateOperationsFragment) {
-                            ((LocateOperationsFragment) fragment).resetMultiTagLocateDetail(false);
-                        }
-                    } else
-                        Toast.makeText(mActivity.getApplicationContext(), mActivity.getResources().getString(R.string.multiTag_locate_error_operation_running), Toast.LENGTH_SHORT).show();
+        if (RFIDController.mConnectedReader != null && RFIDController.mConnectedReader.isConnected()) {
+            if (Application.multiTagLocateTagListExist || Application.multiTagLocatelastTag) {
+                if (!Application.mIsMultiTagLocatingRunning) {
+                    Fragment fragment = mActivity.getCurrentFragment(RFID_TAB);
+                    if (fragment instanceof LocateOperationsFragment) {
+                        ((LocateOperationsFragment) fragment).resetMultiTagLocateDetail(false);
+                    }
                 } else
-                    Toast.makeText(mActivity.getApplicationContext(), mActivity.getResources().getString(R.string.multiTag_locate_error_no_data_loaded), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mActivity.getApplicationContext(), mActivity.getResources().getString(R.string.multiTag_locate_error_operation_running), Toast.LENGTH_SHORT).show();
             } else
-                Toast.makeText(mActivity.getApplicationContext(), mActivity.getResources().getString(R.string.error_disconnected), Toast.LENGTH_SHORT).show();
+                Toast.makeText(mActivity.getApplicationContext(), mActivity.getResources().getString(R.string.multiTag_locate_error_no_data_loaded), Toast.LENGTH_SHORT).show();
+        } else
+            Toast.makeText(mActivity.getApplicationContext(), mActivity.getResources().getString(R.string.error_disconnected), Toast.LENGTH_SHORT).show();
         //} else
         //    Toast.makeText(getApplicationContext(), getResources().getString(R.string.error_bluetooth_disabled), Toast.LENGTH_SHORT).show();
     }
@@ -1382,8 +1394,7 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler,
         }
         timerDelayRemoveDialog(Constants.RESPONSE_TIMEOUT, progressDialog, "Read");
         String tagValue;
-        if (RFIDController.asciiMode == true)
-            tagValue = asciitohex.convert(tagId);
+        if (RFIDController.asciiMode == true) tagValue = asciitohex.convert(tagId);
         else tagValue = tagId;
         if (RFIDController.mConnectedReader == null || !RFIDController.mConnectedReader.isConnected()) {
             Toast.makeText(mActivity.getApplicationContext(), "No Active Connection with Reader", Toast.LENGTH_SHORT).show();
@@ -1401,38 +1412,37 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler,
             Toast.makeText(mActivity.getApplicationContext(), "Please fill length", Toast.LENGTH_SHORT).show();
             progressDialog.dismiss();
         } else
-            RFIDController.getInstance().accessOperationsRead(tagId, offsetText, lengthText, accessRWpassword, bankItem,
-                    new RfidListeners() {
-                        @Override
-                        public void onSuccess(Object object) {
-                            progressDialog.dismiss();
-                            if (RFIDController.isAccessCriteriaRead && !RFIDController.mIsInventoryRunning) {
-                                if (fragment instanceof AccessOperationsFragment)
-                                    ((AccessOperationsFragment) fragment).handleTagResponse((TagData) object);
-                            }
+            RFIDController.getInstance().accessOperationsRead(tagId, offsetText, lengthText, accessRWpassword, bankItem, new RfidListeners() {
+                @Override
+                public void onSuccess(Object object) {
+                    progressDialog.dismiss();
+                    if (RFIDController.isAccessCriteriaRead && !RFIDController.mIsInventoryRunning) {
+                        if (fragment instanceof AccessOperationsFragment)
+                            ((AccessOperationsFragment) fragment).handleTagResponse((TagData) object);
+                    }
 
 
-                        }
+                }
 
-                        @Override
-                        public void onFailure(Exception exception) {
-                            progressDialog.dismiss();
-                            if (exception instanceof InvalidUsageException) {
-                                sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, ((InvalidUsageException) exception).getInfo());
-                            } else if (exception instanceof OperationFailureException) {
-                                sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, ((OperationFailureException) exception).getVendorMessage());
-                            } else {
-                                Toast.makeText(mActivity.getApplicationContext(), exception.getMessage(), Toast.LENGTH_SHORT).show();
-                            }
+                @Override
+                public void onFailure(Exception exception) {
+                    progressDialog.dismiss();
+                    if (exception instanceof InvalidUsageException) {
+                        sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, ((InvalidUsageException) exception).getInfo());
+                    } else if (exception instanceof OperationFailureException) {
+                        sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, ((OperationFailureException) exception).getVendorMessage());
+                    } else {
+                        Toast.makeText(mActivity.getApplicationContext(), exception.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
 
-                        }
+                }
 
-                        @Override
-                        public void onFailure(String message) {
-                            progressDialog.dismiss();
-                            Toast.makeText(mActivity.getApplicationContext(), message, Toast.LENGTH_SHORT).show();
-                        }
-                    });
+                @Override
+                public void onFailure(String message) {
+                    progressDialog.dismiss();
+                    Toast.makeText(mActivity.getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                }
+            });
 
 
     }
@@ -1455,8 +1465,7 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler,
         progressDialog.show();
         timerDelayRemoveDialog(Constants.RESPONSE_TIMEOUT, progressDialog, "Write");
         String tagValue;
-        if (RFIDController.asciiMode == true)
-            tagValue = asciitohex.convert(tagId);
+        if (RFIDController.asciiMode == true) tagValue = asciitohex.convert(tagId);
         else tagValue = tagId;
         if (RFIDController.mConnectedReader == null || !RFIDController.mConnectedReader.isConnected()) {
             Toast.makeText(mActivity.getApplicationContext(), "No Active Connection with Reader", Toast.LENGTH_SHORT).show();
@@ -1474,32 +1483,31 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler,
             Toast.makeText(mActivity.getApplicationContext(), "Please fill length", Toast.LENGTH_SHORT).show();
             progressDialog.dismiss();
         } else
-            RFIDController.getInstance().accessOperationsWrite(tagValue, offsetText, lengthText, accessRWData, accessRWpassword, bankItem,
-                    new RfidListeners() {
-                        @Override
-                        public void onSuccess(Object object) {
-                            progressDialog.dismiss();
-                            startbeepingTimer();
-                            Toast.makeText(mActivity.getApplicationContext(), mActivity.getString(R.string.msg_write_succeed), Toast.LENGTH_SHORT).show();
-                        }
+            RFIDController.getInstance().accessOperationsWrite(tagValue, offsetText, lengthText, accessRWData, accessRWpassword, bankItem, new RfidListeners() {
+                @Override
+                public void onSuccess(Object object) {
+                    progressDialog.dismiss();
+                    startbeepingTimer();
+                    Toast.makeText(mActivity.getApplicationContext(), mActivity.getString(R.string.msg_write_succeed), Toast.LENGTH_SHORT).show();
+                }
 
-                        @Override
-                        public void onFailure(Exception exception) {
-                            progressDialog.dismiss();
-                            if (exception instanceof InvalidUsageException) {
-                                sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, ((InvalidUsageException) exception).getInfo());
-                            } else if (exception instanceof OperationFailureException) {
-                                sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, ((OperationFailureException) exception).getResults().toString());
-                            }
+                @Override
+                public void onFailure(Exception exception) {
+                    progressDialog.dismiss();
+                    if (exception instanceof InvalidUsageException) {
+                        sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, ((InvalidUsageException) exception).getInfo());
+                    } else if (exception instanceof OperationFailureException) {
+                        sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, ((OperationFailureException) exception).getResults().toString());
+                    }
 
-                        }
+                }
 
-                        @Override
-                        public void onFailure(String message) {
-                            progressDialog.dismiss();
-                            Toast.makeText(mActivity.getApplicationContext(), message, Toast.LENGTH_SHORT).show();
-                        }
-                    });
+                @Override
+                public void onFailure(String message) {
+                    progressDialog.dismiss();
+                    Toast.makeText(mActivity.getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                }
+            });
 
     }
 
@@ -1536,16 +1544,14 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler,
                         lockDataField = LOCK_DATA_FIELD.LOCK_ACCESS_PASSWORD;
                     else if (lockMemoryBank.equalsIgnoreCase("kill pwd"))
                         lockDataField = LOCK_DATA_FIELD.LOCK_KILL_PASSWORD;
-                    else if (lockMemoryBank.equalsIgnoreCase("all"))
-                        ALL_Memory_Bank = true;
+                    else if (lockMemoryBank.equalsIgnoreCase("all")) ALL_Memory_Bank = true;
                     lockPrivilege = lockFragment.getLockAccessPermission();
 
                 }
             }
         }
         String tagValue;
-        if (RFIDController.asciiMode == true)
-            tagValue = asciitohex.convert(tagId);
+        if (RFIDController.asciiMode == true) tagValue = asciitohex.convert(tagId);
         else tagValue = tagId;
         if (RFIDController.mConnectedReader == null || !RFIDController.mConnectedReader.isConnected()) {
             Toast.makeText(mActivity.getApplicationContext(), "No Active Connection with Reader", Toast.LENGTH_SHORT).show();
@@ -1557,32 +1563,31 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler,
             Toast.makeText(mActivity.getApplicationContext(), "Please fill Tag Id", Toast.LENGTH_SHORT).show();
             progressDialog.dismiss();
         } else
-            RFIDController.getInstance().accessOperationLock(tagValue, accessRWpassword, lockDataField, lockPrivilege,ALL_Memory_Bank,
-                    new RfidListeners() {
-                        @Override
-                        public void onSuccess(Object object) {
-                            progressDialog.dismiss();
-                            startbeepingTimer();
-                            Toast.makeText(mActivity.getApplicationContext(), mActivity.getString(R.string.msg_lock_succeed), Toast.LENGTH_SHORT).show();
-                        }
+            RFIDController.getInstance().accessOperationLock(tagValue, accessRWpassword, lockDataField, lockPrivilege, ALL_Memory_Bank, new RfidListeners() {
+                @Override
+                public void onSuccess(Object object) {
+                    progressDialog.dismiss();
+                    startbeepingTimer();
+                    Toast.makeText(mActivity.getApplicationContext(), mActivity.getString(R.string.msg_lock_succeed), Toast.LENGTH_SHORT).show();
+                }
 
-                        @Override
-                        public void onFailure(Exception exception) {
-                            progressDialog.dismiss();
-                            if (exception instanceof InvalidUsageException) {
-                                sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, ((InvalidUsageException) exception).getInfo());
-                            } else if (exception instanceof OperationFailureException) {
-                                sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, ((OperationFailureException) exception).getVendorMessage());
-                            }
+                @Override
+                public void onFailure(Exception exception) {
+                    progressDialog.dismiss();
+                    if (exception instanceof InvalidUsageException) {
+                        sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, ((InvalidUsageException) exception).getInfo());
+                    } else if (exception instanceof OperationFailureException) {
+                        sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, ((OperationFailureException) exception).getVendorMessage());
+                    }
 
-                        }
+                }
 
-                        @Override
-                        public void onFailure(String message) {
-                            progressDialog.dismiss();
-                            Toast.makeText(mActivity.getApplicationContext(), message, Toast.LENGTH_SHORT).show();
-                        }
-                    });
+                @Override
+                public void onFailure(String message) {
+                    progressDialog.dismiss();
+                    Toast.makeText(mActivity.getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                }
+            });
 
     }
 
@@ -1601,8 +1606,7 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler,
         progressDialog.show();
         timerDelayRemoveDialog(Constants.RESPONSE_TIMEOUT, progressDialog, "Kill");
         String tagValue;
-        if (RFIDController.asciiMode == true)
-            tagValue = asciitohex.convert(tagId);
+        if (RFIDController.asciiMode == true) tagValue = asciitohex.convert(tagId);
         else tagValue = tagId;
         if (RFIDController.mConnectedReader == null || !RFIDController.mConnectedReader.isConnected()) {
             Toast.makeText(mActivity.getApplicationContext(), "No Active Connection with Reader", Toast.LENGTH_SHORT).show();
@@ -1614,31 +1618,30 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler,
             Toast.makeText(mActivity.getApplicationContext(), "Please fill Tag Id", Toast.LENGTH_SHORT).show();
             progressDialog.dismiss();
         } else
-            RFIDController.getInstance().accessOperationsKill(tagValue, accessRWpassword,
-                    new RfidListeners() {
-                        @Override
-                        public void onSuccess(Object object) {
-                            progressDialog.dismiss();
-                            startbeepingTimer();
-                            Toast.makeText(mActivity.getApplicationContext(), mActivity.getString(R.string.msg_kill_succeed), Toast.LENGTH_SHORT).show();
-                        }
+            RFIDController.getInstance().accessOperationsKill(tagValue, accessRWpassword, new RfidListeners() {
+                @Override
+                public void onSuccess(Object object) {
+                    progressDialog.dismiss();
+                    startbeepingTimer();
+                    Toast.makeText(mActivity.getApplicationContext(), mActivity.getString(R.string.msg_kill_succeed), Toast.LENGTH_SHORT).show();
+                }
 
-                        @Override
-                        public void onFailure(Exception exception) {
-                            progressDialog.dismiss();
-                            if (exception instanceof InvalidUsageException) {
-                                sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, ((InvalidUsageException) exception).getInfo());
-                            } else if (exception instanceof OperationFailureException) {
-                                sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, ((OperationFailureException) exception).getVendorMessage());
-                            }
-                        }
+                @Override
+                public void onFailure(Exception exception) {
+                    progressDialog.dismiss();
+                    if (exception instanceof InvalidUsageException) {
+                        sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, ((InvalidUsageException) exception).getInfo());
+                    } else if (exception instanceof OperationFailureException) {
+                        sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, ((OperationFailureException) exception).getVendorMessage());
+                    }
+                }
 
-                        @Override
-                        public void onFailure(String message) {
-                            progressDialog.dismiss();
-                            Toast.makeText(mActivity.getApplicationContext(), message, Toast.LENGTH_SHORT).show();
-                        }
-                    });
+                @Override
+                public void onFailure(String message) {
+                    progressDialog.dismiss();
+                    Toast.makeText(mActivity.getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                }
+            });
     }
 
     /**
@@ -1648,22 +1651,22 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler,
      */
     public synchronized void locationingButtonClicked(final View v) {
 
-        if(Application.mIsMultiTagLocatingRunning == true ){
+        if (Application.mIsMultiTagLocatingRunning == true) {
             Toast.makeText(mActivity.getApplicationContext(), "Operation In Progress-Command Not Allowed", Toast.LENGTH_SHORT).show();
             return;
         }
-        FloatingActionButton btn_locate = mActivity.findViewById( R.id.btn_locate );
-        EditText lt_et_epc = (AutoCompleteTextView)mActivity.findViewById( R.id.lt_et_epc );
+        FloatingActionButton btn_locate = mActivity.findViewById(R.id.btn_locate);
+        EditText lt_et_epc = (AutoCompleteTextView) mActivity.findViewById(R.id.lt_et_epc);
         String locateTag = lt_et_epc.getText().toString();
 
         if (locateTag != null && !RFIDController.isLocatingTag && !locateTag.isEmpty()) {
 
-            lt_et_epc.setFocusable( false );
+            lt_et_epc.setFocusable(false);
             if (btn_locate != null) {
-                btn_locate.setImageResource( R.drawable.ic_play_stop );
+                btn_locate.setImageResource(R.drawable.ic_play_stop);
             }
-            RangeGraph locationBar = mActivity.findViewById( R.id.locationBar );
-            locationBar.setValue( 0 );
+            RangeGraph locationBar = mActivity.findViewById(R.id.locationBar);
+            locationBar.setValue(0);
             locationBar.invalidate();
             locationBar.requestLayout();
         } else {
@@ -1685,16 +1688,17 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler,
                 //  progressDialog.dismiss();
                 //Fragment fragment = mActivity.getSupportFragmentManager().findFragmentByTag(TAG_RFID_FRAGMENT);
                 Fragment fragment = mActivity.getCurrentFragment(RFID_TAB);
-                if (exception instanceof InvalidUsageException ) {
+                if (exception instanceof InvalidUsageException) {
                     if (fragment instanceof ResponseHandlerInterfaces.ResponseStatusHandler)
                         ((ResponseHandlerInterfaces.ResponseStatusHandler) fragment).handleStatusResponse(RFIDResults.RFID_API_PARAM_ERROR);
-                    sendNotification( Constants.ACTION_READER_STATUS_OBTAINED, ((InvalidUsageException) exception).getInfo());
+                    sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, ((InvalidUsageException) exception).getInfo());
                 } else if (exception instanceof OperationFailureException) {
                     if (fragment instanceof ResponseHandlerInterfaces.ResponseStatusHandler)
                         ((ResponseHandlerInterfaces.ResponseStatusHandler) fragment).handleStatusResponse(((OperationFailureException) exception).getResults());
                     sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, ((OperationFailureException) exception).getVendorMessage());
                 }
             }
+
             @Override
             public void onFailure(String message) {
                 //  progressDialog.dismiss();
@@ -1709,6 +1713,7 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler,
             }
         });
     }
+
     /**
      * Method to change operation status and ui in app on recieving abort status
      */
@@ -1755,6 +1760,7 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler,
                     }
                 }
             }
+
             @Override
             public void onFailure(Exception exception) {
             }
@@ -1772,16 +1778,14 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler,
             try {
                 Thread.sleep(100);
             } catch (InterruptedException e) {
-                if( e!= null && e.getStackTrace().length>0){ Log.e(TAG, e.getStackTrace()[0].toString()); }
+                if (e != null && e.getStackTrace().length > 0) {
+                    Log.e(TAG, e.getStackTrace()[0].toString());
+                }
             }
             new DataExportTask(mActivity.getApplicationContext(), Application.tagsReadInventory, RFIDController.mConnectedReader.getHostName(), Application.TOTAL_TAGS, Application.UNIQUE_TAGS, RFIDController.mRRStartedTime, uri).execute();
 
         }
     }
-
-
-
-
 
 
     public void LoadTagListCSV() {
@@ -1793,55 +1797,46 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler,
     }
 
     void checkForExportPermission(final int code) {
-        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.Q){
-            if (ContextCompat.checkSelfPermission(mActivity,
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                    != PackageManager.PERMISSION_GRANTED) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
+            if (ContextCompat.checkSelfPermission(mActivity, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
                 // No explanation needed, we can request the permission.
 
-                showMessageOKCancel("Write to external storage permission needed to export the inventory.",
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                ActivityCompat.requestPermissions(mActivity, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                                        code);
-                            }
-                        });
+                showMessageOKCancel("Write to external storage permission needed to export the inventory.", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        ActivityCompat.requestPermissions(mActivity, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, code);
+                    }
+                });
 
             } else {
                 switch (code) {
                     case REQUEST_CODE_ASK_PERMISSIONS:
                         createFileInterface.createFile1(uri);
-                      //  exportData(uri);
+                        //  exportData(uri);
                         break;
                     case REQUEST_CODE_ASK_PERMISSIONS_CSV:
                         MatchModeFileLoader.getInstance(mActivity.getApplicationContext()).LoadMatchModeCSV();
                         break;
                 }
             }
+        } else {
+
+            switch (code) {
+                case REQUEST_CODE_ASK_PERMISSIONS:
+                    createFileInterface.createFile1(uri);
+                    // exportData(uri);
+                    break;
+                case REQUEST_CODE_ASK_PERMISSIONS_CSV:
+                    MatchModeFileLoader.getInstance(mActivity.getApplicationContext()).LoadMatchModeCSV();
+                    break;
+            }
+
         }
-
-        else {
-
-                switch (code) {
-                    case REQUEST_CODE_ASK_PERMISSIONS:
-                        createFileInterface.createFile1(uri);
-                       // exportData(uri);
-                        break;
-                    case REQUEST_CODE_ASK_PERMISSIONS_CSV:
-                        MatchModeFileLoader.getInstance(mActivity.getApplicationContext()).LoadMatchModeCSV();
-                        break;
-                }
-
-            }
 
     }
 
 
-
-
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
-                                           @NonNull int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == REQUEST_CODE_ASK_PERMISSIONS) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 createFileInterface.createFile1(uri);
@@ -1855,12 +1850,7 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler,
     }
 
     private void showMessageOKCancel(String message, DialogInterface.OnClickListener okListener) {
-        new AlertDialog.Builder(mActivity)
-                .setMessage(message)
-                .setPositiveButton("OK", okListener)
-                .setNegativeButton("Cancel", null)
-                .create()
-                .show();
+        new AlertDialog.Builder(mActivity).setMessage(message).setPositiveButton("OK", okListener).setNegativeButton("Cancel", null).create().show();
     }
 
     /**
@@ -1962,8 +1952,7 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler,
         // store app reader
         RFIDController.mConnectedDevice = readerDevice;
         RFIDController.mConnectedReader = readerDevice.getRFIDReader();
-        if (RFIDController.isBatchModeInventoryRunning != null &&
-                RFIDController.isBatchModeInventoryRunning) {
+        if (RFIDController.isBatchModeInventoryRunning != null && RFIDController.isBatchModeInventoryRunning) {
 
             RFIDController.getInstance().clearInventoryData();
             RFIDController.mIsInventoryRunning = true;
@@ -1974,18 +1963,21 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler,
             if (fragment instanceof ResponseHandlerInterfaces.BatchModeEventHandler) {
                 ((ResponseHandlerInterfaces.BatchModeEventHandler) fragment).batchModeEventReceived();
                 //update battery status as well here
-                if (RFIDController.BatteryData != null){
+                if (RFIDController.BatteryData != null) {
                     setActionBarBatteryStatus(RFIDController.BatteryData.getLevel());
                 }
             }
-        } else
-            try {
-                RFIDController.getInstance().updateReaderConnection(false);
-            } catch (InvalidUsageException e) {
-                if( e!= null && e.getStackTrace().length>0){ Log.e(TAG, e.getStackTrace()[0].toString()); }
-            } catch (OperationFailureException e) {
-                if( e!= null && e.getStackTrace().length>0){ Log.e(TAG, e.getStackTrace()[0].toString()); }
+        } else try {
+            RFIDController.getInstance().updateReaderConnection(false);
+        } catch (InvalidUsageException e) {
+            if (e != null && e.getStackTrace().length > 0) {
+                Log.e(TAG, e.getStackTrace()[0].toString());
             }
+        } catch (OperationFailureException e) {
+            if (e != null && e.getStackTrace().length > 0) {
+                Log.e(TAG, e.getStackTrace()[0].toString());
+            }
+        }
         ReaderDeviceConnected(readerDevice);
     }
 
@@ -2000,7 +1992,7 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler,
         if (RFIDController.NOTIFY_READER_CONNECTION)
             sendNotification(Constants.ACTION_READER_DISCONNECTED, "Disconnected from " + readerDevice.getName());
 
-        if(RFIDController.readersList.contains(readerDevice) == false)
+        if (RFIDController.readersList.contains(readerDevice) == false)
             RFIDController.readersList.add(readerDevice);
 
 
@@ -2044,9 +2036,13 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler,
             try {
                 RFIDController.mConnectedReader.disconnect();
             } catch (InvalidUsageException e) {
-                if( e!= null && e.getStackTrace().length>0){ Log.e(TAG, e.getStackTrace()[0].toString()); }
+                if (e != null && e.getStackTrace().length > 0) {
+                    Log.e(TAG, e.getStackTrace()[0].toString());
+                }
             } catch (OperationFailureException e) {
-                if( e!= null && e.getStackTrace().length>0){ Log.e(TAG, e.getStackTrace()[0].toString()); }
+                if (e != null && e.getStackTrace().length > 0) {
+                    Log.e(TAG, e.getStackTrace()[0].toString());
+                }
             }
 
             clearConnectedReader();
@@ -2056,12 +2052,10 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler,
 
     public void ReaderDeviceDisConnected(ReaderDevice device) {
 
-        if ( (UpdateFirmware.isWaitingForFWUpdateToComplete == true) || (Application.isFirmwareUpdateInProgress == true ) )
-        {
+        if ((UpdateFirmware.isWaitingForFWUpdateToComplete == true) || (Application.isFirmwareUpdateInProgress == true)) {
             return;
         }
-        if (progressDialog != null && progressDialog.isShowing())
-            progressDialog.dismiss();
+        if (progressDialog != null && progressDialog.isShowing()) progressDialog.dismiss();
         if (RFIDController.mIsInventoryRunning) {
             inventoryAborted();
             //export Data to the file if inventory is running in batch mode
@@ -2088,12 +2082,12 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler,
             ((RFIDReadersListFragment) fragment).ReaderDeviceDisConnected(device);
         } else if (fragment instanceof LocateOperationsFragment) {
             ((LocateOperationsFragment) fragment).resetLocationingDetails(true);
-        }  else if (fragment instanceof AboutFragment) {
+        } else if (fragment instanceof AboutFragment) {
             ((AboutFragment) fragment).resetVersionDetail();
         } else if (fragment instanceof AdvancedOptionItemFragment) {
             ((AdvancedOptionItemFragment) fragment).settingsListUpdated();
         }
-         fragment = mActivity.getCurrentFragment(RFID_TAB);
+        fragment = mActivity.getCurrentFragment(RFID_TAB);
         if (fragment instanceof RFIDInventoryFragment) {
             ((RFIDInventoryFragment) fragment).resetInventoryDetail();
         } else if (fragment instanceof RapidReadFragment) {
@@ -2112,9 +2106,13 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler,
                 RFIDController.mConnectedReader.disconnect();
 
             } catch (InvalidUsageException e) {
-                if( e!= null && e.getStackTrace().length>0){ Log.e(TAG, e.getStackTrace()[0].toString()); }
+                if (e != null && e.getStackTrace().length > 0) {
+                    Log.e(TAG, e.getStackTrace()[0].toString());
+                }
             } catch (OperationFailureException e) {
-                if( e!= null && e.getStackTrace().length>0){ Log.e(TAG, e.getStackTrace()[0].toString()); }
+                if (e != null && e.getStackTrace().length > 0) {
+                    Log.e(TAG, e.getStackTrace()[0].toString());
+                }
             }
             try {
                 RFIDController.mConnectedReader.Dispose();
@@ -2146,14 +2144,14 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler,
                 if (fragment instanceof UpdateFirmware) {
                     ((UpdateFirmware) fragment).RFIDReaderAppeared(device);
                 }
-               // if (readersList.contains(device) == false)
+                // if (readersList.contains(device) == false)
                 //    readersList.add(device);
                 // return;
                 mActivity.setCurrentTabFocus(READERS_TAB);
             }
 
-           // if (readersList.contains(device) == false)
-           //     readersList.add(device);
+            // if (readersList.contains(device) == false)
+            //     readersList.add(device);
 
             if (RFIDController.mConnectedDevice != null) {
                 if (RFIDController.mConnectedDevice.getName().equals(device.getName()) == false) {
@@ -2179,8 +2177,7 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler,
                 }
                 mActivity.loadNextFragment(READER_LIST_TAB);
                 //
-                if (RFIDController.AUTO_RECONNECT_READERS && RFIDController.LAST_CONNECTED_READER != null && RFIDController.LAST_CONNECTED_READER.length() != 0 &&
-                        (RFIDController.mConnectedDevice == null || !RFIDController.mConnectedDevice.getRFIDReader().isConnected())) {
+                if (RFIDController.AUTO_RECONNECT_READERS && RFIDController.LAST_CONNECTED_READER != null && RFIDController.LAST_CONNECTED_READER.length() != 0 && (RFIDController.mConnectedDevice == null || !RFIDController.mConnectedDevice.getRFIDReader().isConnected())) {
 
                     mActivity.setCurrentTabFocus(READERS_TAB);
 
@@ -2213,8 +2210,7 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler,
                 if (!device.getName().equalsIgnoreCase("null"))
                     sendNotification(Constants.ACTION_READER_AVAILABLE, device.getName() + " is available.");
             }
-            if (RFIDController.AUTO_RECONNECT_READERS && RFIDController.LAST_CONNECTED_READER != null && RFIDController.LAST_CONNECTED_READER.length() != 0 &&
-                    (RFIDController.mConnectedDevice == null || !RFIDController.mConnectedDevice.getRFIDReader().isConnected())) {
+            if (RFIDController.AUTO_RECONNECT_READERS && RFIDController.LAST_CONNECTED_READER != null && RFIDController.LAST_CONNECTED_READER.length() != 0 && (RFIDController.mConnectedDevice == null || !RFIDController.mConnectedDevice.getRFIDReader().isConnected())) {
 
                 RFIDController.mReaderDisappeared = null;
             }
@@ -2222,58 +2218,54 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler,
     }
 
 
-
-
-    public void setReaderstatuscallback(Readers.RFIDReaderEventHandler readerStatusCallback )
-     {
-         mReaderstatuscallback = readerStatusCallback;
-     }
+    public void setReaderstatuscallback(Readers.RFIDReaderEventHandler readerStatusCallback) {
+        mReaderstatuscallback = readerStatusCallback;
+    }
 
     public void resetReaderstatuscallback() {
         mReaderstatuscallback = null;
     }
 
     /*
-    * On factory reset clean up
+     * On factory reset clean up
      */
 
-    public void onFactoryReset(ReaderDevice device){
+    public void onFactoryReset(ReaderDevice device) {
         Log.d(TAG, "RFIDBase onFactoryReset");
 
-       if(Application.scanPair == null ) {
+        if (Application.scanPair == null) {
             Application.scanPair = new ScanPair();
-       }
+        }
 
-       ScanAndPairFragment scanAndPairFragment;
-       scanAndPairFragment = ScanAndPairFragment.newInstance();
-       Application.scanPair.Init(mActivity, scanAndPairFragment);
-       BluetoothHandler btConnection = new BluetoothHandler();
-       btConnection.init(mActivity,Application.scanPair);
-       btConnection.unpairReader(device.getName());
+        ScanAndPairFragment scanAndPairFragment;
+        scanAndPairFragment = ScanAndPairFragment.newInstance();
+        Application.scanPair.Init(mActivity, scanAndPairFragment);
+        BluetoothHandler btConnection = new BluetoothHandler();
+        btConnection.init(mActivity, Application.scanPair);
+        btConnection.unpairReader(device.getName());
 
-        if(RFIDController.readersList.contains(device))
-            RFIDController.readersList.remove(device);
+        if (RFIDController.readersList.contains(device)) RFIDController.readersList.remove(device);
 
     }
 
     private ReaderDevice getReaderDevice(ReaderDevice readerdevice) {
 
-    try {
-        for (ReaderDevice device : RFIDController.readersList) {
-            if (device.getName().equals(readerdevice.getName()) && device.getSerialNumber().equals(readerdevice.getSerialNumber().substring(0,device.getSerialNumber().length() ))) {
-                return device;
+        try {
+            for (ReaderDevice device : RFIDController.readersList) {
+                if (device.getName().equals(readerdevice.getName()) && device.getSerialNumber().equals(readerdevice.getSerialNumber().substring(0, device.getSerialNumber().length()))) {
+                    return device;
+                }
             }
+            //check also if its part of connected device
+            if (RFIDController.mConnectedDevice != null && RFIDController.mConnectedDevice.getName().equals(readerdevice.getName()) && RFIDController.mConnectedDevice.getSerialNumber().equals(readerdevice.getSerialNumber().substring(0, RFIDController.mConnectedDevice.getSerialNumber().length()))) {
+                return RFIDController.mConnectedDevice;
+            }
+        } catch (NullPointerException e) {
+            return null;
         }
-        //check also if its part of connected device
-        if (RFIDController.mConnectedDevice != null &&
-                RFIDController.mConnectedDevice.getName().equals(readerdevice.getName()) && RFIDController.mConnectedDevice.getSerialNumber().equals(readerdevice.getSerialNumber().substring(0, RFIDController.mConnectedDevice.getSerialNumber().length()))) {
-            return RFIDController.mConnectedDevice;
-        }
-    }catch(NullPointerException e){
         return null;
     }
-        return null;
-    }
+
     @Override
     public void RFIDReaderDisappeared(ReaderDevice readerdevice) {
         mActivity.runOnUiThread(() -> {
@@ -2393,7 +2385,6 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler,
     }
 
 
-
     /**
      * Method which will called once notification received from reader.
      * update the operation status in the application based on notification type
@@ -2405,8 +2396,8 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler,
         final Fragment fragment = mActivity.getCurrentFragment(RFID_TAB);
         if (rfidStatusEvents.StatusEventData.getStatusEventType() == STATUS_EVENT_TYPE.DISCONNECTION_EVENT) {
             // if ((mConnectedReader != null) && (mReaderDisappeared.getAddress().equals(mConnectedDevice.getAddress() )))
-            String readername= rfidStatusEvents.StatusEventData.DisconnectionEventData.m_DisconnectionEvent.getreadername();
-            if((RFIDController.mConnectedReader!=null) && (readername.equals(RFIDController.mConnectedDevice.getName())))
+            String readername = rfidStatusEvents.StatusEventData.DisconnectionEventData.m_DisconnectionEvent.getreadername();
+            if ((RFIDController.mConnectedReader != null) && (readername.equals(RFIDController.mConnectedDevice.getName())))
                 DisconnectTask = new UpdateDisconnectedStatusTask(RFIDController.mConnectedReader.getHostName()).execute();
         } else if (rfidStatusEvents.StatusEventData.getStatusEventType() == STATUS_EVENT_TYPE.INVENTORY_START_EVENT) {
             if (!RFIDController.isAccessCriteriaRead && !RFIDController.isLocatingTag && !Application.mIsMultiTagLocatingRunning) {
@@ -2417,14 +2408,13 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler,
                 //}
             }
         } else if (rfidStatusEvents.StatusEventData.getStatusEventType() == STATUS_EVENT_TYPE.INVENTORY_STOP_EVENT) {
-            if (progressDialog != null && progressDialog.isShowing())
-                progressDialog.dismiss();
+            if (progressDialog != null && progressDialog.isShowing()) progressDialog.dismiss();
             //tagListMatchNotice = false;
             //TODO: revisit why to clear here
             //accessTagCount = 0;
             //RFIDController.isAccessCriteriaRead = false;
             RFIDController.getInstance().startTimer();
-            if (RFIDController.mIsInventoryRunning  || Inventorytimer.getInstance().isTimerRunning() == true) {
+            if (RFIDController.mIsInventoryRunning || Inventorytimer.getInstance().isTimerRunning() == true) {
                 Inventorytimer.getInstance().stopTimer();
             } else if (RFIDController.isGettingTags) {
                 RFIDController.isGettingTags = false;
@@ -2473,33 +2463,26 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler,
                 });
             }
             if (!RFIDController.getInstance().getRepeatTriggers()) {
-                if (RFIDController.mIsInventoryRunning)
-                    RFIDController.isInventoryAborted = true;
-                else if (RFIDController.isLocatingTag)
-                    RFIDController.isLocationingAborted = true;
+                if (RFIDController.mIsInventoryRunning) RFIDController.isInventoryAborted = true;
+                else if (RFIDController.isLocatingTag) RFIDController.isLocationingAborted = true;
                 operationHasAborted();
             }
         } else if (rfidStatusEvents.StatusEventData.getStatusEventType() == STATUS_EVENT_TYPE.OPERATION_END_SUMMARY_EVENT) {
-            if (fragment instanceof RapidReadFragment)
-                mActivity.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        ((RapidReadFragment) fragment).updateInventoryDetails();
-                    }
-                });
-        } else if (rfidStatusEvents.StatusEventData.getStatusEventType() == STATUS_EVENT_TYPE.HANDHELD_TRIGGER_EVENT
-                && isActivityVisible()) {
+            if (fragment instanceof RapidReadFragment) mActivity.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    ((RapidReadFragment) fragment).updateInventoryDetails();
+                }
+            });
+        } else if (rfidStatusEvents.StatusEventData.getStatusEventType() == STATUS_EVENT_TYPE.HANDHELD_TRIGGER_EVENT && isActivityVisible()) {
 
-            Log.d(TAG, "notificationFromGenericReader " + fragment + " screen " + m_ScreenOn +
-                    "trigger type = " + rfidStatusEvents.StatusEventData.HandheldTriggerEventData.getHandheldTriggerType().ordinal );
+            Log.d(TAG, "notificationFromGenericReader " + fragment + " screen " + m_ScreenOn + "trigger type = " + rfidStatusEvents.StatusEventData.HandheldTriggerEventData.getHandheldTriggerType().ordinal);
 
-            if( rfidStatusEvents.StatusEventData.HandheldTriggerEventData.getHandheldTriggerType().ordinal
-                    == HANDHELD_TRIGGER_TYPE.HANDHELD_TRIGGER_DUAL.ordinal){
-                Log.d(TAG, "notificationFromGenericReader if Dual " + HANDHELD_TRIGGER_TYPE.HANDHELD_TRIGGER_DUAL.ordinal );
+            if (rfidStatusEvents.StatusEventData.HandheldTriggerEventData.getHandheldTriggerType().ordinal == HANDHELD_TRIGGER_TYPE.HANDHELD_TRIGGER_DUAL.ordinal) {
+                Log.d(TAG, "notificationFromGenericReader if Dual " + HANDHELD_TRIGGER_TYPE.HANDHELD_TRIGGER_DUAL.ordinal);
                 //return;
             }
-            if( rfidStatusEvents.StatusEventData.HandheldTriggerEventData.getHandheldTriggerType().ordinal
-                    != HANDHELD_TRIGGER_TYPE.HANDHELD_TRIGGER_RFID.ordinal){
+            if (rfidStatusEvents.StatusEventData.HandheldTriggerEventData.getHandheldTriggerType().ordinal != HANDHELD_TRIGGER_TYPE.HANDHELD_TRIGGER_RFID.ordinal) {
                 return;
             }
 
@@ -2533,16 +2516,16 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler,
                             sendNotification(Constants.ACTION_READER_BATTERY_CRITICAL, mActivity.getString(R.string.battery_status__critical_message));
                         else if (batteryData.getCause().trim().equalsIgnoreCase(Constants.MESSAGE_BATTERY_LOW))
                             sendNotification(Constants.ACTION_READER_BATTERY_CRITICAL, mActivity.getString(R.string.battery_status_low_message));
-                        else if(batteryData.getLevel() < Constants.BATTERY_CRITICAL){
+                        else if (batteryData.getLevel() < Constants.BATTERY_CRITICAL) {
                             sendNotification(Constants.ACTION_READER_BATTERY_CRITICAL, mActivity.getString(R.string.battery_status_critical_message));
-                        }else if(batteryData.getLevel() < Constants.BATTERY_LOW){
-                            sendNotification(Constants.ACTION_READER_BATTERY_LOW, mActivity.getString(R.string.battery__status_low_message) );
+                        } else if (batteryData.getLevel() < Constants.BATTERY_LOW) {
+                            sendNotification(Constants.ACTION_READER_BATTERY_LOW, mActivity.getString(R.string.battery__status_low_message));
                         }
                     }
                 });
             }
         } else if (rfidStatusEvents.StatusEventData.getStatusEventType() == STATUS_EVENT_TYPE.BATCH_MODE_EVENT) {
-            Log.d(TAG, "notify-event - Notification_BatchModeEvent" );
+            Log.d(TAG, "notify-event - Notification_BatchModeEvent");
             RFIDController.mConnectedReader.Actions.getBatchedTags();
             Inventorytimer.getInstance().startTimer();
             RFIDController.isBatchModeInventoryRunning = true;
@@ -2572,12 +2555,12 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler,
 
 
         } else if (rfidStatusEvents.StatusEventData.getStatusEventType() == STATUS_EVENT_TYPE.WPA_EVENT) {
-            Log.d(TAG, "notificationFromGenericReader "+" WPA_EVENT " +"Type: " + rfidStatusEvents.StatusEventData.WPAEventData.getType()+" ssid :"+rfidStatusEvents.StatusEventData.WPAEventData.getssid());
+            Log.d(TAG, "notificationFromGenericReader " + " WPA_EVENT " + "Type: " + rfidStatusEvents.StatusEventData.WPAEventData.getType() + " ssid :" + rfidStatusEvents.StatusEventData.WPAEventData.getssid());
 
             String scanStatus = rfidStatusEvents.StatusEventData.WPAEventData.getType();
-            Fragment wififragment =  mActivity.getCurrentFragment(READERS_TAB);
-            if(wififragment instanceof ReaderWifiSettingsFragment)
-                ((ReaderWifiSettingsFragment)wififragment).readWifiScanNotification(scanStatus);
+            Fragment wififragment = mActivity.getCurrentFragment(READERS_TAB);
+            if (wififragment instanceof ReaderWifiSettingsFragment)
+                ((ReaderWifiSettingsFragment) wififragment).readWifiScanNotification(scanStatus);
 
         }
     }
@@ -2586,16 +2569,11 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler,
      *method to check if both start and stop trigger is IMMEDIATE or repeat trigger
      */
     public Boolean isTriggerImmediateorRepeat(Boolean trigPress) {
-        if (trigPress && RFIDController.settings_startTrigger.getTriggerType().toString().equalsIgnoreCase(START_TRIGGER_TYPE.START_TRIGGER_TYPE_IMMEDIATE.toString())
-                && (!RFIDController.settings_stopTrigger.getTriggerType().toString().equalsIgnoreCase(STOP_TRIGGER_TYPE.STOP_TRIGGER_TYPE_HANDHELD_WITH_TIMEOUT.toString()))
-        ) {
+        if (trigPress && RFIDController.settings_startTrigger.getTriggerType().toString().equalsIgnoreCase(START_TRIGGER_TYPE.START_TRIGGER_TYPE_IMMEDIATE.toString()) && (!RFIDController.settings_stopTrigger.getTriggerType().toString().equalsIgnoreCase(STOP_TRIGGER_TYPE.STOP_TRIGGER_TYPE_HANDHELD_WITH_TIMEOUT.toString()))) {
             return true;
-        } else if (!trigPress && !RFIDController.settings_startTrigger.getTriggerType().toString().equalsIgnoreCase(START_TRIGGER_TYPE.START_TRIGGER_TYPE_HANDHELD.toString())
-                && (RFIDController.settings_stopTrigger.getTriggerType().toString().equalsIgnoreCase(STOP_TRIGGER_TYPE.STOP_TRIGGER_TYPE_IMMEDIATE.toString()))
-        ) {
+        } else if (!trigPress && !RFIDController.settings_startTrigger.getTriggerType().toString().equalsIgnoreCase(START_TRIGGER_TYPE.START_TRIGGER_TYPE_HANDHELD.toString()) && (RFIDController.settings_stopTrigger.getTriggerType().toString().equalsIgnoreCase(STOP_TRIGGER_TYPE.STOP_TRIGGER_TYPE_IMMEDIATE.toString()))) {
             return true;
-        } else
-            return false;
+        } else return false;
     }
 
     /**
@@ -2665,7 +2643,7 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler,
         }
     }
 
-    public  void startlocatebeepingTimer(int proximity) {
+    public void startlocatebeepingTimer(int proximity) {
         if (RFIDController.beeperVolume != BEEPER_VOLUME.QUIET_BEEP) {
             int POLLING_INTERVAL1 = BEEP_DELAY_TIME_MIN + (((BEEP_DELAY_TIME_MAX - BEEP_DELAY_TIME_MIN) * (100 - proximity)) / 100);
             if (!beepONLocate) {
@@ -2704,14 +2682,17 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler,
         Thread trigThread = new Thread(new Runnable() {
             @Override
             public void run() {
-                if(RFIDController.mConnectedReader != null)
-                {
+                if (RFIDController.mConnectedReader != null) {
                     try {
                         RFIDController.mConnectedReader.Config.setTriggerMode(triggerMode, true);
                     } catch (InvalidUsageException e) {
-                        if( e!= null && e.getStackTrace().length>0){ Log.e(TAG, e.getStackTrace()[0].toString()); }
+                        if (e != null && e.getStackTrace().length > 0) {
+                            Log.e(TAG, e.getStackTrace()[0].toString());
+                        }
                     } catch (OperationFailureException e) {
-                        if( e!= null && e.getStackTrace().length>0){ Log.e(TAG, e.getStackTrace()[0].toString()); }
+                        if (e != null && e.getStackTrace().length > 0) {
+                            Log.e(TAG, e.getStackTrace()[0].toString());
+                        }
                     }
                 }
             }
@@ -2722,31 +2703,33 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler,
 
     public void RfidDisconnect() {
 
-        if(RFIDController.mConnectedReader == null)
-            return;
+        if (RFIDController.mConnectedReader == null) return;
 
-            if (RFIDController.mConnectedReader.isConnected()) {
-                   RFIDController.is_disconnection_requested = true;
-                try {
-                    RFIDController.mConnectedReader.disconnect();
-                } catch (InvalidUsageException e) {
-                    if( e!= null && e.getStackTrace().length>0){ Log.e(TAG, e.getStackTrace()[0].toString()); }
-                } catch (OperationFailureException e) {
-                    if( e!= null && e.getStackTrace().length>0){ Log.e(TAG, e.getStackTrace()[0].toString()); }
+        if (RFIDController.mConnectedReader.isConnected()) {
+            RFIDController.is_disconnection_requested = true;
+            try {
+                RFIDController.mConnectedReader.disconnect();
+            } catch (InvalidUsageException e) {
+                if (e != null && e.getStackTrace().length > 0) {
+                    Log.e(TAG, e.getStackTrace()[0].toString());
                 }
-                //
-                ReaderDeviceDisConnected(RFIDController.mConnectedDevice);
+            } catch (OperationFailureException e) {
+                if (e != null && e.getStackTrace().length > 0) {
+                    Log.e(TAG, e.getStackTrace()[0].toString());
+                }
             }
+            //
+            ReaderDeviceDisConnected(RFIDController.mConnectedDevice);
+        }
     }
 
     public void resetFactoryDefault() throws InvalidUsageException, OperationFailureException {
 
 
-            if ((RFIDController.mConnectedReader != null) && (RFIDController.mConnectedReader.isConnected())) {
-                RFIDController.mConnectedReader.Config.resetFactoryDefaults();
-            }
+        if ((RFIDController.mConnectedReader != null) && (RFIDController.mConnectedReader.isConnected())) {
+            RFIDController.mConnectedReader.Config.resetFactoryDefaults();
         }
-
+    }
 
 
     public boolean deviceReset() throws InvalidUsageException, OperationFailureException {
@@ -2756,8 +2739,7 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler,
             if ((RFIDController.mConnectedReader != null) && (RFIDController.mConnectedReader.isConnected())) {
                 RFIDController.mConnectedReader.Actions.reset();
             }
-        }catch(OperationFailureException e)
-        {
+        } catch (OperationFailureException e) {
             return true;
         }
         return true;
@@ -2765,14 +2747,12 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler,
 
     public void eventWifiScanNotify(RfidWifiScanEvents rfidwifiscanevents) {
         Events.WifiScanEventData data = rfidwifiscanevents.getWifiScanEventData();
-        Log.d(TAG, "eventWifiScanNotify: " + " ssid: "+ data.wifiscandata.getssid()
-                + " macaddress:" + data.wifiscandata.getmacaddress()+ " key:" + data.wifiscandata.getkey() +"\n");
+        Log.d(TAG, "eventWifiScanNotify: " + " ssid: " + data.wifiscandata.getssid() + " macaddress:" + data.wifiscandata.getmacaddress() + " key:" + data.wifiscandata.getkey() + "\n");
         Fragment fragment = mActivity.getCurrentFragment(READERS_TAB);
-        if(fragment instanceof ReaderWifiSettingsFragment){
-            ((ReaderWifiSettingsFragment)fragment).updateScanResult(data.wifiscandata);
+        if (fragment instanceof ReaderWifiSettingsFragment) {
+            ((ReaderWifiSettingsFragment) fragment).updateScanResult(data.wifiscandata);
         }
     }
-
 
 
     public class EventHandler implements RfidEventsListener {
@@ -2787,42 +2767,41 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler,
         @Override
         public void eventReadNotify(RfidReadEvents e) {
             if (RFIDController.mConnectedReader != null) {
-                if(!RFIDController.mConnectedReader.Actions.MultiTagLocate.isMultiTagLocatePerforming()) {
-                final TagData[] myTags = RFIDController.mConnectedReader.Actions.getReadTags(100);
-                if (myTags != null) {
-                    //Log.d("RFID_EVENT","l: "+myTags.length);
-                    //Fragment fragment = mRFIDHomeActivity.getSupportFragmentManager().findFragmentByTag(TAG_RFID_FRAGMENT);
-                    Fragment fragment = mActivity.getCurrentFragment(RFID_TAB);
+                if (!RFIDController.mConnectedReader.Actions.MultiTagLocate.isMultiTagLocatePerforming()) {
+                    final TagData[] myTags = RFIDController.mConnectedReader.Actions.getReadTags(100);
+                    if (myTags != null) {
+                        //Log.d("RFID_EVENT","l: "+myTags.length);
+                        //Fragment fragment = mRFIDHomeActivity.getSupportFragmentManager().findFragmentByTag(TAG_RFID_FRAGMENT);
+                        Fragment fragment = mActivity.getCurrentFragment(RFID_TAB);
 
-                   // List<Fragment> frList = mRFIDHomeActivity.getSupportFragmentManager().getFragments();
-                    for (int index = 0; index < myTags.length; index++) {
-                        if (myTags[index].getOpCode() == ACCESS_OPERATION_CODE.ACCESS_OPERATION_READ &&
-                                myTags[index].getOpStatus() == ACCESS_OPERATION_STATUS.ACCESS_SUCCESS) {
-                        }
-                        if (myTags[index].isContainsLocationInfo()) {
-                            final int tag = index;
-                            RFIDController.TagProximityPercent = myTags[tag].LocationInfo.getRelativeDistance();
-                            if (RFIDController.TagProximityPercent > 0) {
-                                startlocatebeepingTimer(RFIDController.TagProximityPercent);
+                        // List<Fragment> frList = mRFIDHomeActivity.getSupportFragmentManager().getFragments();
+                        for (int index = 0; index < myTags.length; index++) {
+                            if (myTags[index].getOpCode() == ACCESS_OPERATION_CODE.ACCESS_OPERATION_READ && myTags[index].getOpStatus() == ACCESS_OPERATION_STATUS.ACCESS_SUCCESS) {
                             }
-                            if (fragment instanceof LocateOperationsFragment)
-                                ((LocateOperationsFragment) fragment).handleLocateTagResponse();
-                        } else {
-                            if (RFIDController.isAccessCriteriaRead && !RFIDController.mIsInventoryRunning) {
-                                accessTagCount++;
+                            if (myTags[index].isContainsLocationInfo()) {
+                                final int tag = index;
+                                RFIDController.TagProximityPercent = myTags[tag].LocationInfo.getRelativeDistance();
+                                if (RFIDController.TagProximityPercent > 0) {
+                                    startlocatebeepingTimer(RFIDController.TagProximityPercent);
+                                }
+                                if (fragment instanceof LocateOperationsFragment)
+                                    ((LocateOperationsFragment) fragment).handleLocateTagResponse();
                             } else {
-                                if (myTags[index] != null && (myTags[index].getOpStatus() == null || myTags[index].getOpStatus() == ACCESS_OPERATION_STATUS.ACCESS_SUCCESS)) {
-                                    final int tag = index;
-                                    mActivity.runOnUiThread(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            //mActivity.setRFIDTab();
-                                            if (Application.TAG_LIST_MATCH_MODE)
-                                                new MatchingTagsResponseHandlerTask(myTags[tag], fragment).execute();
-                                            else
-                                                new ResponseHandlerTask(myTags[tag], fragment).execute();
-                                        }
-                                    });
+                                if (RFIDController.isAccessCriteriaRead && !RFIDController.mIsInventoryRunning) {
+                                    accessTagCount++;
+                                } else {
+                                    if (myTags[index] != null && (myTags[index].getOpStatus() == null || myTags[index].getOpStatus() == ACCESS_OPERATION_STATUS.ACCESS_SUCCESS)) {
+                                        final int tag = index;
+                                        mActivity.runOnUiThread(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                //mActivity.setRFIDTab();
+                                                if (Application.TAG_LIST_MATCH_MODE)
+                                                    new MatchingTagsResponseHandlerTask(myTags[tag], fragment).execute();
+                                                else
+                                                    new ResponseHandlerTask(myTags[tag], fragment).execute();
+                                            }
+                                        });
                                     }
                                 }
                             }
@@ -2888,9 +2867,9 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler,
                         }
 
                     }
-                }else{
-                   memoryBank = "none";
-                   memoryBankData = mTagData;
+                } else {
+                    memoryBank = "none";
+                    memoryBankData = mTagData;
                 }
 
                 if (Application.inventoryList.containsKey(mTagData)) {
@@ -3015,14 +2994,13 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler,
                 @Override
                 public void run() {
                     isCancelPressed = false;
-                    retryCountDialog = new CustomProgressDialog(context,
-                            "Connecting to " + RFIDController.LAST_CONNECTED_READER + "\n" +
-                                    "Retry Count : 1");
+                    retryCountDialog = new CustomProgressDialog(context, "Connecting to " + RFIDController.LAST_CONNECTED_READER + "\n" + "Retry Count : 1");
                     try {
-                        if (!mActivity.isFinishing())
-                            retryCountDialog.show();
+                        if (!mActivity.isFinishing()) retryCountDialog.show();
                     } catch (WindowManager.BadTokenException ex) {
-                        if( ex!= null){ Log.e(TAG, ex.getMessage()); }
+                        if (ex != null) {
+                            Log.e(TAG, ex.getMessage());
+                        }
                     }
                 }
             });
@@ -3054,15 +3032,14 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler,
             super.onPreExecute();
 
 
-
             mActivity.runOnUiThread(new Runnable() {
-               @Override
+                @Override
                 public void run() {
                     if (readerDevice != null && readerDevice.getName().equalsIgnoreCase(device)) {
 
                         Fragment fragment = mActivity.getCurrentFragment(SETTINGS_TAB);
-                        if(fragment instanceof FactoryResetFragment){
-                            ((FactoryResetFragment) fragment).RFIDReaderDisappeared( readerDevice );
+                        if (fragment instanceof FactoryResetFragment) {
+                            ((FactoryResetFragment) fragment).RFIDReaderDisappeared(readerDevice);
                             mActivity.setCurrentTabFocus(READERS_TAB);
                         }
                         readerDisconnected(readerDevice);
@@ -3091,12 +3068,15 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler,
             super.onCancelled();
             Log.d(TAG, "onCancelled disconnect" + readerDevice);
             try {
-                if (readerDevice != null)
-                    readerDevice.getRFIDReader().disconnect();
+                if (readerDevice != null) readerDevice.getRFIDReader().disconnect();
             } catch (InvalidUsageException e) {
-                if( e!= null && e.getStackTrace().length>0){ Log.e(TAG, e.getStackTrace()[0].toString()); }
+                if (e != null && e.getStackTrace().length > 0) {
+                    Log.e(TAG, e.getStackTrace()[0].toString());
+                }
             } catch (OperationFailureException e) {
-                if( e!= null && e.getStackTrace().length>0){ Log.e(TAG, e.getStackTrace()[0].toString()); }
+                if (e != null && e.getStackTrace().length > 0) {
+                    Log.e(TAG, e.getStackTrace()[0].toString());
+                }
             }
         }
     }
@@ -3135,8 +3115,7 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler,
             switch (action) {
                 case ACTION_SCREEN_OFF:
                     //Log.d(TAG, "BroadcastReceiver: " + action + " " + RFIDController.mConnectedReader.getHostName());
-                    if (!RFIDController.mIsInventoryRunning)
-                        m_ScreenOn = false;
+                    if (!RFIDController.mIsInventoryRunning) m_ScreenOn = false;
                     break;
                 case ACTION_SCREEN_ON:
                     //Log.d(TAG, "BroadcastReceiver: " + action + " " + RFIDController.mConnectedReader.getHostName());
@@ -3182,8 +3161,7 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler,
         @Override
         public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
             for (int i = start; i < end; i++) {
-                if (!isAllowed(source.charAt(i)))
-                    return "";
+                if (!isAllowed(source.charAt(i))) return "";
             }
             return null;
         }
@@ -3193,8 +3171,7 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler,
         private boolean isAllowed(char c) {
             if (RFIDController.asciiMode == false) {
                 for (char ch : allowed.toCharArray()) {
-                    if (ch == c)
-                        return true;
+                    if (ch == c) return true;
                 }
                 return false;
             }
@@ -3270,7 +3247,8 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler,
                                 oldObject.setPC(Integer.toString(tagData.getPC()));
                                 oldObject.setPhase(Integer.toString(tagData.getPhase()));
                                 oldObject.setChannelIndex(Integer.toString(tagData.getChannelIndex()));
-                                if (RFIDController.rssi) oldObject.setRSSI(Integer.toString(tagData.getPeakRSSI()));
+                                if (RFIDController.rssi)
+                                    oldObject.setRSSI(Integer.toString(tagData.getPeakRSSI()));
                             }
 
                         } else {
@@ -3286,8 +3264,7 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler,
                                 }
                                 if (Application.tagListMap.containsKey(tagData.getTagID()))
                                     inventoryItem.setTagStatus("MATCH");
-                                else
-                                    inventoryItem.setTagStatus("UNKNOWN");
+                                else inventoryItem.setTagStatus("UNKNOWN");
                                 if (Application.memoryBankId == 1)
                                     Application.tagsReadInventory.add(inventoryItem);
                                 else if (Application.memoryBankId == 3) {
@@ -3316,7 +3293,8 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler,
                                     oldObject.setPC(Integer.toString(tagData.getPC()));
                                     oldObject.setPhase(Integer.toString(tagData.getPhase()));
                                     oldObject.setChannelIndex(Integer.toString(tagData.getChannelIndex()));
-                                    if (RFIDController.rssi) oldObject.setRSSI(Integer.toString(tagData.getPeakRSSI()));
+                                    if (RFIDController.rssi)
+                                        oldObject.setRSSI(Integer.toString(tagData.getPeakRSSI()));
                                     Application.UNIQUE_TAGS++;
                                     Application.UNIQUE_TAGS_CSV++;
                                 }
@@ -3346,7 +3324,7 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler,
                         RFIDController.tagListMatchNotice = true;
 
 
-                        Toast.makeText(mActivity.getApplicationContext(), mActivity.getResources().getString( R.string.tag_match_complete), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(mActivity.getApplicationContext(), mActivity.getResources().getString(R.string.tag_match_complete), Toast.LENGTH_SHORT).show();
 
                         if (RFIDController.tagListMatchAutoStop) {
                             mActivity.runOnUiThread(new Runnable() {
@@ -3394,16 +3372,15 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler,
                     //TODO: cross check on selective flag clearing
                     if (RFIDController.isAccessCriteriaRead) {
                         if (accessTagCount == 0) {
-                            if(command.equals("Read"))
+                            if (command.equals("Read"))
                                 sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, mActivity.getString(R.string.err_read_access_op_failed));
-                            if(command.equals("Write"))
+                            if (command.equals("Write"))
                                 sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, mActivity.getString(R.string.err_access_op_failed));
                         }
                         RFIDController.isAccessCriteriaRead = false;
                     } else {
                         sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, command + " timeout");
-                        if (isActivityVisible())
-                            callBackPressed();
+                        if (isActivityVisible()) callBackPressed();
                     }
                     RFIDController.isAccessCriteriaRead = false;
                     accessTagCount = 0;
@@ -3439,15 +3416,15 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler,
     public void callBackPressed() {
 
     }
-public void deleteDWProfile()
-{
-    Intent i = new Intent();
-    i.setAction("com.symbol.datawedge.api.ACTION");
-    String[] values = {"RFIDMobileApp"};
-    i.putExtra("com.symbol.datawedge.api.DELETE_PROFILE", values);
-    mActivity.sendBroadcast(i);
 
-}
+    public void deleteDWProfile() {
+        Intent i = new Intent();
+        i.setAction("com.symbol.datawedge.api.ACTION");
+        String[] values = {"RFIDMobileApp"};
+        i.putExtra("com.symbol.datawedge.api.DELETE_PROFILE", values);
+        mActivity.sendBroadcast(i);
+
+    }
 
 
     public void disableScanner() {
@@ -3469,8 +3446,7 @@ public void deleteDWProfile()
     }
 
 
-
-    public interface CreateFileInterface{
+    public interface CreateFileInterface {
         public void createFile1(Uri uri);
     }
 

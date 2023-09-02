@@ -2,152 +2,156 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:background="@color/light_gray"
-android:orientation="vertical"
-tools:context="com.codegear.mariamc_rfid.scanner.fragments.SettingsFragment">
-<!--<View
     android:layout_width="match_parent"
-    android:layout_height="10dp"
-    android:background="@color/light_gray" />
--->
-<ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <LinearLayout
+    android:layout_height="match_parent"
+    android:background="@color/light_gray"
+    android:orientation="vertical"
+    tools:context="com.codegear.mariamc_rfid.scanner.fragments.SettingsFragment">
+    <!--<View
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="10dp"
+        android:background="@color/light_gray" />
+    -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-        <include layout="@layout/normal_divider" />
-        <TableRow
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/generalrow"
-            android:background="@android:color/white"
-            android:onClick="generalSettingsClicked">
+            android:orientation="vertical">
 
-            <TextView
-                style="@style/roboto_medium_16dp"
-                android:layout_height="60dp"
-                android:layout_marginLeft="18dp"
-                android:layout_weight="0"
-                android:text="@string/generalSettings" />
+            <include layout="@layout/normal_divider" />
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical"></LinearLayout>
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="20dp"
-                android:layout_gravity="center|right"
-                android:layout_marginRight="18dp"
-                android:layout_weight="0"
-                app:srcCompat="@drawable/right" />
-        </TableRow>
-
-
-        <include layout="@layout/normal_divider" />
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/rfidrow"
-            android:background="@android:color/white"
-            android:onClick="showRFIDSettings">
-
-            <TextView
-                style="@style/roboto_medium_16dp"
-                android:layout_height="60dp"
-                android:layout_marginLeft="18dp"
-                android:layout_weight="0"
-                android:text="@string/RFID"/>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical"></LinearLayout>
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="20dp"
-                android:layout_gravity="center|right"
-                android:layout_marginRight="18dp"
-                android:layout_weight="0"
-                app:srcCompat="@drawable/right" />
-        </TableRow>
-
-        <include layout="@layout/normal_divider" />
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/applicationrow"
-            android:background="@android:color/white"
-            android:onClick="applicationSettingsClicked">
-
-            <TextView
-                style="@style/roboto_medium_16dp"
-                android:layout_height="60dp"
-                android:layout_marginLeft="18dp"
-                android:layout_weight="0"
-                android:text="@string/ApplicationSettings"/>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
+            <TableRow
+                android:id="@+id/generalrow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:background="@android:color/white"
-                android:orientation="vertical"></LinearLayout>
+                android:onClick="generalSettingsClicked">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="20dp"
-                android:layout_gravity="center|right"
-                android:layout_marginRight="18dp"
-                android:layout_weight="0"
-                app:srcCompat="@drawable/right" />
-        </TableRow>
-        <include layout="@layout/normal_divider" />
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:color/white"
-            android:id="@+id/scansettingrow"
-            android:onClick="scanSettingsClicked"
-            android:visibility="invisible">
+                <TextView
+                    style="@style/roboto_medium_16dp"
+                    android:layout_height="60dp"
+                    android:layout_marginLeft="18dp"
+                    android:layout_weight="0"
+                    android:text="@string/generalSettings" />
 
-            <TextView
-                style="@style/roboto_medium_16dp"
-                android:layout_height="60dp"
-                android:layout_marginLeft="18dp"
-                android:layout_weight="0"
-                android:text="@string/SCAN"/>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical"></LinearLayout>
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical"></LinearLayout>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center|right"
+                    android:layout_marginRight="18dp"
+                    android:layout_weight="0"
+                    app:srcCompat="@drawable/right" />
+            </TableRow>
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="20dp"
-                android:layout_gravity="center|right"
-                android:layout_marginRight="18dp"
-                android:layout_weight="0"
-                app:srcCompat="@drawable/right" />
-        </TableRow>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="45" />
-    </LinearLayout>
-</ScrollView>
+            <include layout="@layout/normal_divider" />
+
+            <TableRow
+                android:id="@+id/rfidrow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/white"
+                android:onClick="showRFIDSettings">
+
+                <TextView
+                    style="@style/roboto_medium_16dp"
+                    android:layout_height="60dp"
+                    android:layout_marginLeft="18dp"
+                    android:layout_weight="0"
+                    android:text="@string/RFID" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical"></LinearLayout>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center|right"
+                    android:layout_marginRight="18dp"
+                    android:layout_weight="0"
+                    app:srcCompat="@drawable/right" />
+            </TableRow>
+
+            <include layout="@layout/normal_divider" />
+
+            <TableRow
+                android:id="@+id/applicationrow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/white"
+                android:onClick="applicationSettingsClicked">
+
+                <TextView
+                    style="@style/roboto_medium_16dp"
+                    android:layout_height="60dp"
+                    android:layout_marginLeft="18dp"
+                    android:layout_weight="0"
+                    android:text="@string/ApplicationSettings" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@android:color/white"
+                    android:orientation="vertical"></LinearLayout>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center|right"
+                    android:layout_marginRight="18dp"
+                    android:layout_weight="0"
+                    app:srcCompat="@drawable/right" />
+            </TableRow>
+
+            <include layout="@layout/normal_divider" />
+
+            <TableRow
+                android:id="@+id/scansettingrow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/white"
+                android:onClick="scanSettingsClicked"
+                android:visibility="invisible">
+
+                <TextView
+                    style="@style/roboto_medium_16dp"
+                    android:layout_height="60dp"
+                    android:layout_marginLeft="18dp"
+                    android:layout_weight="0"
+                    android:text="@string/SCAN" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical"></LinearLayout>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center|right"
+                    android:layout_marginRight="18dp"
+                    android:layout_weight="0"
+                    app:srcCompat="@drawable/right" />
+            </TableRow>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="45" />
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

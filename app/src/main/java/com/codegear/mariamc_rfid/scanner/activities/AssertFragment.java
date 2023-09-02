@@ -4,6 +4,7 @@ package com.codegear.mariamc_rfid.scanner.activities;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
+
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
@@ -31,7 +32,9 @@ import com.zebra.scannercontrol.DCSSDKDefs;
 import com.codegear.mariamc_rfid.R;
 
 import android.os.AsyncTask;
+
 import org.xmlpull.v1.XmlPullParser;
+
 import java.io.StringReader;
 
 
@@ -48,7 +51,7 @@ import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_DOM;
 public class AssertFragment extends Fragment {
 
     int scannerID;
-     View rootview=null;
+    View rootview = null;
     private static final String TAG = "AssertFragment";
 
     public static AssertFragment newInstance() {
@@ -63,45 +66,42 @@ public class AssertFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        rootview = inflater.inflate(R.layout.content_asset_information,container, false);
+        rootview = inflater.inflate(R.layout.content_asset_information, container, false);
 
         Configuration configuration = getResources().getConfiguration();
-        if(configuration.orientation == Configuration.ORIENTATION_LANDSCAPE){
-            if(configuration.smallestScreenWidthDp< Application.minScreenWidth){
+        if (configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            if (configuration.smallestScreenWidthDp < Application.minScreenWidth) {
                 getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
             }
-        }else{
-            if(configuration.screenWidthDp<Application.minScreenWidth){
+        } else {
+            if (configuration.screenWidthDp < Application.minScreenWidth) {
                 getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
             }
         }
 
         //retry for fetching scanner version
 
-        if(RFIDController.mConnectedReader != null) {
-                try {
-                    String ModelName =  RFIDController.mConnectedReader.ReaderCapabilities.getModelName();
+        if (RFIDController.mConnectedReader != null) {
+            try {
+                String ModelName = RFIDController.mConnectedReader.ReaderCapabilities.getModelName();
 
-                    String ScannerVersionInfo;
-                    if(ModelName.startsWith("RFD8500"))
-                        ScannerVersionInfo = Application.versionInfo.get("PL33");
-                    else
-                        ScannerVersionInfo = Application.versionInfo.get("PL5000");
-                    if(ScannerVersionInfo != null && ScannerVersionInfo.isEmpty()){
-                        try {
-                            RFIDController.mConnectedReader.Config.getDeviceVersionInfo(Application.versionInfo);
-                        } catch (InvalidUsageException | OperationFailureException e) {
-                            Log.e(TAG, String.valueOf(e));
-                        }
+                String ScannerVersionInfo;
+                if (ModelName.startsWith("RFD8500"))
+                    ScannerVersionInfo = Application.versionInfo.get("PL33");
+                else ScannerVersionInfo = Application.versionInfo.get("PL5000");
+                if (ScannerVersionInfo != null && ScannerVersionInfo.isEmpty()) {
+                    try {
+                        RFIDController.mConnectedReader.Config.getDeviceVersionInfo(Application.versionInfo);
+                    } catch (InvalidUsageException | OperationFailureException e) {
+                        Log.e(TAG, String.valueOf(e));
                     }
                 }
-               catch (Exception e) {
-                    Log.d(TAG,  "Returned SDK Exception");
-                }
+            } catch (Exception e) {
+                Log.d(TAG, "Returned SDK Exception");
             }
+        }
         return rootview;
     }
 
@@ -120,82 +120,80 @@ public class AssertFragment extends Fragment {
         super.onResume();
         fetchDeviceInfo();
     }
-    private void fetchDeviceInfo()
-    {
-        if(RFIDController.mConnectedReader != null) {
+
+    private void fetchDeviceInfo() {
+        if (RFIDController.mConnectedReader != null) {
             try {
-                String ModelName =  RFIDController.mConnectedReader.ReaderCapabilities.getModelName();
-                ((TextView) ((ActiveDeviceActivity)getActivity()).findViewById(R.id.txtModel)).setText(ModelName);
-                String Firmware =  RFIDController.mConnectedReader.ReaderCapabilities.getFirwareVersion();
-                ((TextView) ((ActiveDeviceActivity)getActivity()).findViewById(R.id.txtFW)).setText(Firmware);
+                String ModelName = RFIDController.mConnectedReader.ReaderCapabilities.getModelName();
+                ((TextView) ((ActiveDeviceActivity) getActivity()).findViewById(R.id.txtModel)).setText(ModelName);
+                String Firmware = RFIDController.mConnectedReader.ReaderCapabilities.getFirwareVersion();
+                ((TextView) ((ActiveDeviceActivity) getActivity()).findViewById(R.id.txtFW)).setText(Firmware);
                 String pcfw = Application.versionInfo.get("CRIMAN_DEVICE");
-                if(RFIDController.mConnectedReader.getHostName().startsWith("RFD8500")){
+                if (RFIDController.mConnectedReader.getHostName().startsWith("RFD8500")) {
                     pcfw = Application.versionInfo.get("GENX_DEVICE");
                 }
-                if(RFIDController.mConnectedReader.getHostName().startsWith("MC33")){
+                if (RFIDController.mConnectedReader.getHostName().startsWith("MC33")) {
                     pcfw = Application.versionInfo.get("RFID_DEVICE");
                 }
 
                 String nge = Application.versionInfo.get("NGE");
-                ((TextView) ((ActiveDeviceActivity)getActivity()).findViewById(R.id.txtFW)).setText(pcfw);
-                ((TextView) ((ActiveDeviceActivity)getActivity()).findViewById(R.id.txtRadio)).setText(nge);
-                String SerialNo =  RFIDController.mConnectedReader.ReaderCapabilities.getSerialNumber();
-                ((TextView) ((ActiveDeviceActivity)getActivity()).findViewById(R.id.txtSerial)).setText(SerialNo);
-                String ManufactureDate =  RFIDController.mConnectedReader.ReaderCapabilities.getManufacturingDate();
-                ((TextView) ((ActiveDeviceActivity)getActivity()).findViewById(R.id.txtDOM)).setText(ManufactureDate);
+                ((TextView) ((ActiveDeviceActivity) getActivity()).findViewById(R.id.txtFW)).setText(pcfw);
+                ((TextView) ((ActiveDeviceActivity) getActivity()).findViewById(R.id.txtRadio)).setText(nge);
+                String SerialNo = RFIDController.mConnectedReader.ReaderCapabilities.getSerialNumber();
+                ((TextView) ((ActiveDeviceActivity) getActivity()).findViewById(R.id.txtSerial)).setText(SerialNo);
+                String ManufactureDate = RFIDController.mConnectedReader.ReaderCapabilities.getManufacturingDate();
+                ((TextView) ((ActiveDeviceActivity) getActivity()).findViewById(R.id.txtDOM)).setText(ManufactureDate);
 
                 String ScannerVersionInfo;
-                if(ModelName.startsWith("RFD8500"))
+                if (ModelName.startsWith("RFD8500"))
                     ScannerVersionInfo = Application.versionInfo.get("PL33");
-                else
-                    ScannerVersionInfo = Application.versionInfo.get("PL5000");
+                else ScannerVersionInfo = Application.versionInfo.get("PL5000");
 
 
-                TextView Scannerinfo = (TextView) ((ActiveDeviceActivity)getActivity()) .findViewById(R.id.ScannerVersionTextView);
-                if(!ScannerVersionInfo.equals("") || !ScannerVersionInfo.isEmpty()) {
+                TextView Scannerinfo = (TextView) ((ActiveDeviceActivity) getActivity()).findViewById(R.id.ScannerVersionTextView);
+                if (!ScannerVersionInfo.equals("") || !ScannerVersionInfo.isEmpty()) {
                     Scannerinfo.setText(ScannerVersionInfo);
-                }else{
-                    TableRow entry  = (TableRow) ((ActiveDeviceActivity)getActivity()) .findViewById(R.id.scannertablerowid);
+                } else {
+                    TableRow entry = (TableRow) ((ActiveDeviceActivity) getActivity()).findViewById(R.id.scannertablerowid);
                     entry.setVisibility(View.GONE);
 
                 }
-             //   String ScannerName = RFIDController.mConnectedReader.ReaderCapabilities.getScannerName();
+                //   String ScannerName = RFIDController.mConnectedReader.ReaderCapabilities.getScannerName();
                 //((TextView) findViewById(R.id.txt_scanner_name)).setText(ScannerName);
 
             } catch (Exception e) {
-               Log.d(TAG,  "Returned SDK Exception");
+                Log.d(TAG, "Returned SDK Exception");
             }
 
         }
 
-        ((TextView) ((ActiveDeviceActivity)getActivity()).findViewById(R.id.sdkVersion)).setText(com.zebra.rfid.api3.BuildConfig.VERSION_NAME);
-        ((TextView)((ActiveDeviceActivity)getActivity()). findViewById(R.id.appVersion)).setText(BuildConfig.VERSION_NAME);
+        ((TextView) ((ActiveDeviceActivity) getActivity()).findViewById(R.id.sdkVersion)).setText(com.zebra.rfid.api3.BuildConfig.VERSION_NAME);
+        ((TextView) ((ActiveDeviceActivity) getActivity()).findViewById(R.id.appVersion)).setText(BuildConfig.VERSION_NAME);
     }
 
     private void fetchAssertInfo() {
-       // int scannerID = getIntent().getIntExtra(Constants.SCANNER_ID, -1);
+        // int scannerID = getIntent().getIntExtra(Constants.SCANNER_ID, -1);
         scannerID = Application.currentScannerId;
 
         if (scannerID != -1) {
 
             String in_xml = "<inArgs><scannerID>" + scannerID + " </scannerID><cmdArgs><arg-xml><attrib_list>";
-            in_xml+=RMD_ATTR_MODEL_NUMBER;
-            in_xml+=",";
-            in_xml+=RMD_ATTR_SERIAL_NUMBER;
-            in_xml+=",";
-            in_xml+=RMD_ATTR_FW_VERSION;
-            in_xml+=",";
-            in_xml+=RMD_ATTR_CONFIG_NAME;
-            in_xml+=",";
-            in_xml+=RMD_ATTR_DOM;
+            in_xml += RMD_ATTR_MODEL_NUMBER;
+            in_xml += ",";
+            in_xml += RMD_ATTR_SERIAL_NUMBER;
+            in_xml += ",";
+            in_xml += RMD_ATTR_FW_VERSION;
+            in_xml += ",";
+            in_xml += RMD_ATTR_CONFIG_NAME;
+            in_xml += ",";
+            in_xml += RMD_ATTR_DOM;
             in_xml += "</attrib_list></arg-xml></cmdArgs></inArgs>";
 
             new MyAsyncTask(scannerID, DCSSDKDefs.DCSSDK_COMMAND_OPCODE.DCSSDK_RSM_ATTR_GET).execute(new String[]{in_xml});
         } else {
-            Toast.makeText(((ActiveDeviceActivity)getActivity()), Constants.INVALID_SCANNER_ID_MSG, Toast.LENGTH_SHORT).show();
+            Toast.makeText(((ActiveDeviceActivity) getActivity()), Constants.INVALID_SCANNER_ID_MSG, Toast.LENGTH_SHORT).show();
         }
     }
-
 
 
     public void sendNotification(String action, String data) {
@@ -203,7 +201,7 @@ public class AssertFragment extends Fragment {
             if (action.equalsIgnoreCase(com.codegear.mariamc_rfid.rfidreader.common.Constants.ACTION_READER_BATTERY_CRITICAL) || action.equalsIgnoreCase(com.codegear.mariamc_rfid.rfidreader.common.Constants.ACTION_READER_BATTERY_LOW)) {
                 new CustomToast(getActivity(), R.layout.toast_layout, data).show();
             } else {
-                Toast.makeText(((ActiveDeviceActivity)getActivity()), data, Toast.LENGTH_SHORT).show();
+                Toast.makeText(((ActiveDeviceActivity) getActivity()), data, Toast.LENGTH_SHORT).show();
             }
         } else {
             /*Intent i = new Intent(this, NotificationsService.class);
@@ -211,8 +209,8 @@ public class AssertFragment extends Fragment {
             i.putExtra(Constants.INTENT_DATA, data);
             startService(i);*/
 
-            if(getActivity() != null)
-            NotificationUtil.displayNotificationforSettingsDeialActivity(getActivity(), action, data);
+            if (getActivity() != null)
+                NotificationUtil.displayNotificationforSettingsDeialActivity(getActivity(), action, data);
         }
     }
 
@@ -225,35 +223,37 @@ public class AssertFragment extends Fragment {
 
         if (RFIDController.NOTIFY_READER_AVAILABLE)
             sendNotification(com.codegear.mariamc_rfid.rfidreader.common.Constants.ACTION_READER_AVAILABLE, readerDevice.getName() + " is unavailable.");
-       // RFIDController.mReaderDisappeared = readerDevice;
+        // RFIDController.mReaderDisappeared = readerDevice;
         getActivity().onBackPressed();
 
     }
 
-    private class MyAsyncTask extends AsyncTask<String,Integer,Boolean>{
+    private class MyAsyncTask extends AsyncTask<String, Integer, Boolean> {
         int scannerId;
         private CustomProgressDialog progressDialog;
         DCSSDKDefs.DCSSDK_COMMAND_OPCODE opcode;
-        public MyAsyncTask(int scannerId,  DCSSDKDefs.DCSSDK_COMMAND_OPCODE opcode){
-            this.scannerId=scannerId;
-            this.opcode=opcode;
+
+        public MyAsyncTask(int scannerId, DCSSDKDefs.DCSSDK_COMMAND_OPCODE opcode) {
+            this.scannerId = scannerId;
+            this.opcode = opcode;
         }
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            progressDialog = new CustomProgressDialog(getActivity(), "Execute Command...");
+            progressDialog = new CustomProgressDialog(getActivity(), "명령어 실행중...");
             progressDialog.setCancelable(false);
             progressDialog.show();
         }
 
         @Override
         protected Boolean doInBackground(String... strings) {
-            StringBuilder sb = new StringBuilder() ;
-            boolean result =  ((ActiveDeviceActivity)getActivity()).executeCommand(opcode, strings[0], sb, scannerId);
+            StringBuilder sb = new StringBuilder();
+            boolean result = ((ActiveDeviceActivity) getActivity()).executeCommand(opcode, strings[0], sb, scannerId);
             if (opcode == DCSSDKDefs.DCSSDK_COMMAND_OPCODE.DCSSDK_RSM_ATTR_GET) {
                 if (result) {
                     try {
-                        Log.i(TAG,sb.toString());
+                        Log.i(TAG, sb.toString());
                         int i = 0;
                         int attrId = -1;
                         XmlPullParser parser = Xml.newPullParser();
@@ -271,8 +271,8 @@ public class AssertFragment extends Fragment {
                                     break;
 
                                 case XmlPullParser.END_TAG:
-                                    Log.i(TAG,"Name of the end tag: "+name);
-                                    if(text!=null) {
+                                    Log.i(TAG, "Name of the end tag: " + name);
+                                    if (text != null) {
                                         if (name.equals("id")) {
                                             attrId = Integer.parseInt(text.trim());
                                             Log.i(TAG, "ID tag found: ID: " + attrId);
@@ -281,7 +281,7 @@ public class AssertFragment extends Fragment {
                                             Log.i(TAG, "Value tag found: Value: " + attrVal);
                                             if (RMD_ATTR_MODEL_NUMBER == attrId) {
 
-                                                getActivity(). runOnUiThread(new Runnable() {
+                                                getActivity().runOnUiThread(new Runnable() {
                                                     @Override
                                                     public void run() {
                                                         ((TextView) rootview.findViewById(R.id.txtModel)).setText(attrVal);
@@ -299,7 +299,7 @@ public class AssertFragment extends Fragment {
 
                                             } else if (RMD_ATTR_FW_VERSION == attrId) {
 
-                                                getActivity(). runOnUiThread(new Runnable() {
+                                                getActivity().runOnUiThread(new Runnable() {
                                                     @Override
                                                     public void run() {
                                                         ((TextView) rootview.findViewById(R.id.txtFW)).setText(attrVal);
@@ -332,7 +332,7 @@ public class AssertFragment extends Fragment {
                             event = parser.next();
                         }
                     } catch (Exception e) {
-                        Log.e(TAG,e.toString());
+                        Log.e(TAG, e.toString());
                     }
 
                 }
@@ -343,8 +343,7 @@ public class AssertFragment extends Fragment {
         @Override
         protected void onPostExecute(Boolean b) {
             super.onPostExecute(b);
-            if (progressDialog != null && progressDialog.isShowing())
-                progressDialog.dismiss();
+            if (progressDialog != null && progressDialog.isShowing()) progressDialog.dismiss();
 
         }
 

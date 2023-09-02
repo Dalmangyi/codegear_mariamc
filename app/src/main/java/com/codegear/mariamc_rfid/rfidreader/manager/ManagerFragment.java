@@ -1,4 +1,3 @@
-
 package com.codegear.mariamc_rfid.rfidreader.manager;
 
 import static androidx.appcompat.app.AppCompatActivity.RESULT_OK;
@@ -89,12 +88,11 @@ public class ManagerFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         //ManagerFragmentView = inflater.inflate(R.layout.fragment_manage, container, false);
         ManagerFragmentView = inflater.inflate(R.layout.fragment_manage, container, false);
-       // ((ActiveDeviceActivity)getActivity()).getSupportActionBar().setTitle("General Settings");
+        // ((ActiveDeviceActivity)getActivity()).getSupportActionBar().setTitle("General Settings");
 
         SwitchCompat picklistMode = (SwitchCompat) ManagerFragmentView.findViewById(R.id.switch_picklist_mode);
         final TextView txtPicklistMode = (TextView) ManagerFragmentView.findViewById(R.id.txt_picklist_mode);
@@ -144,23 +142,7 @@ public class ManagerFragment extends Fragment {
                 txtVibration.setTextColor(ContextCompat.getColor(((ActiveDeviceActivity) getActivity()), R.color.inactive_text));
             }
         }
-//        SwitchCompat scanControl = (SwitchCompat)settingsFragmentView.findViewById(R.id.switch_scanning);
-//        final TextView txtScanningControl = (TextView)settingsFragmentView.findViewById(R.id.txt_scanning_control);
-//        if(scanControl!=null){
-//            scanControl.setChecked(true);
-//            scanControl.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//                @Override
-//                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//                    if(isChecked) {
-//                        ((ActiveDeviceActivity) getActivity()).enableScanning(settingsFragmentView);
-//                        txtScanningControl.setTextColor(ContextCompat.getColor(((ActiveDeviceActivity) getActivity()), R.color.font_color));
-//                    }else{
-//                        ((ActiveDeviceActivity) getActivity()).disableScanning(settingsFragmentView);
-//                        txtScanningControl.setTextColor(ContextCompat.getColor(((ActiveDeviceActivity) getActivity()), R.color.inactive_text));
-//                    }
-//                }
-//            });
-//        }
+
         return ManagerFragmentView;
     }
 
@@ -218,27 +200,25 @@ public class ManagerFragment extends Fragment {
     }
 
 
-
-
-    public void callChooseFileFromDevice(){
+    public void callChooseFileFromDevice() {
         Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
         intent.addCategory(Intent.CATEGORY_OPENABLE);
-        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE,true);
+        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
         intent.setType("*/*");
         //  startActivityForResult(Intent.createChooser(intent,"Selecting multiple files"),CHOOSE_PDF_FROM_DEVICE);
-        startActivityForResult(Intent.createChooser(intent,"Selecting multiple files"),CHOOSE_FILE_FROM_DEVICE);
+        startActivityForResult(Intent.createChooser(intent, "Selecting multiple files"), CHOOSE_FILE_FROM_DEVICE);
         //  Log.d("Share"," selecting ");
     }
 
-    public void shareFile(){
+    public void shareFile() {
 
-        Log.d("Share","before sharing");
+        Log.d("Share", "before sharing");
         Intent intentShare = new Intent(Intent.ACTION_SEND_MULTIPLE);
 
         intentShare.setType("*/*");
         intentShare.putParcelableArrayListExtra(Intent.EXTRA_STREAM, multipleFiles);
-        startActivity(Intent.createChooser(intentShare,"Share the file ..."));
-        Log.d("Share","after sharing");
+        startActivity(Intent.createChooser(intentShare, "Share the file ..."));
+        Log.d("Share", "after sharing");
         multipleFiles.clear();
     }
 

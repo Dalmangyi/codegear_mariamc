@@ -431,7 +431,7 @@ public class VibrationFeedback extends BaseActivity implements NavigationView.On
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            progressDialog = new CustomProgressDialog(VibrationFeedback.this, "Execute Command...");
+            progressDialog = new CustomProgressDialog(VibrationFeedback.this, "명령어 실행중...");
             progressDialog.show();
         }
 
@@ -447,7 +447,7 @@ public class VibrationFeedback extends BaseActivity implements NavigationView.On
             if (progressDialog != null && progressDialog.isShowing())
                 progressDialog.dismiss();
             if (!b) {
-                Toast.makeText(VibrationFeedback.this, "Cannot perform the action", Toast.LENGTH_SHORT).show();
+                Toast.makeText(VibrationFeedback.this, "작업을 수행할 수 없습니다.", Toast.LENGTH_SHORT).show();
             }
         }
     }

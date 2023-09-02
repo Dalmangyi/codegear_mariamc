@@ -287,7 +287,7 @@ public class SsaSetSymbologyActivity extends BaseActivity implements AdapterView
 
             if(!b){
                 if(opcode==DCSSDKDefs.DCSSDK_COMMAND_OPCODE.DCSSDK_RSM_ATTR_SET){
-                    Toast.makeText(SsaSetSymbologyActivity.this, "Cannot perform the action", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SsaSetSymbologyActivity.this, "작업을 수행할 수 없습니다.", Toast.LENGTH_SHORT).show();
                 }
                 return;
             }

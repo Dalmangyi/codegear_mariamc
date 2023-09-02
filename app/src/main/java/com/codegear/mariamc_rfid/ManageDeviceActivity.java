@@ -25,8 +25,7 @@ import com.zebra.rfid.api3.RfidStatusEvents;
 import com.zebra.rfid.api3.STATUS_EVENT_TYPE;
 
 
-
-public class ManageDeviceActivity extends AppCompatActivity  implements Readers.RFIDReaderEventHandler, RfidEventsListener {
+public class ManageDeviceActivity extends AppCompatActivity implements Readers.RFIDReaderEventHandler, RfidEventsListener {
 
     private static final String MANAGEDEVICEFRAGMENT = "ManageDeviceFragment";
     private RFIDBaseActivity mRfidBaseActivity;
@@ -41,10 +40,8 @@ public class ManageDeviceActivity extends AppCompatActivity  implements Readers.
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
-        if(getIntent().getExtras() != null)
-        {
-            switch(getIntent().getExtras().getInt(Constants.MNG_FRAGMENT_ID))
-            {
+        if (getIntent().getExtras() != null) {
+            switch (getIntent().getExtras().getInt(Constants.MNG_FRAGMENT_ID)) {
                 case 0:
                     fragment = FactoryResetFragment.newInstance();
                     break;
@@ -65,10 +62,11 @@ public class ManageDeviceActivity extends AppCompatActivity  implements Readers.
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item){
+    public boolean onOptionsItemSelected(MenuItem item) {
         finish();
         return true;
     }
+
     public void switchToFragment(Fragment fragment) {
         if (fragment != null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.manage_frame_layout, fragment, MANAGEDEVICEFRAGMENT).commit();
@@ -158,13 +156,11 @@ public class ManageDeviceActivity extends AppCompatActivity  implements Readers.
     @Override
     public void eventStatusNotify(RfidStatusEvents rfidStatusEvents) {
         if (rfidStatusEvents.StatusEventData.getStatusEventType() == STATUS_EVENT_TYPE.DISCONNECTION_EVENT) {
-            if(fragment != null) {
-                if (fragment instanceof FactoryResetFragment )
-                {
+            if (fragment != null) {
+                if (fragment instanceof FactoryResetFragment) {
                     ((FactoryResetFragment) fragment).eventStatusNotify(rfidStatusEvents);
 
-                }else if (fragment instanceof FactoryResetFragment )
-                {
+                } else if (fragment instanceof FactoryResetFragment) {
                     ((DeviceResetFragment) fragment).eventStatusNotify(rfidStatusEvents);
                 }
             }

@@ -55,23 +55,19 @@ public class ChargeTerminalFragment extends BackPressedFragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         final View view = inflater.inflate(R.layout.fragment_charge_terminal, container, false);
         context = view.getContext();
         checkBoxCT = view.findViewById(R.id.check_box_ct);
         TextView tv = view.findViewById(R.id.ct_mesg);
 
-        if(!RFIDController.mConnectedReader.getHostName().startsWith("RFD40") &&
-                !RFIDController.mConnectedReader.getHostName().startsWith("RFD90")) {
-       //     context = view.getContext();
-       //     checkBoxCT = view.findViewById(R.id.check_box_ct);
+        if (!RFIDController.mConnectedReader.getHostName().startsWith("RFD40") && !RFIDController.mConnectedReader.getHostName().startsWith("RFD90")) {
             tv.setVisibility(View.VISIBLE);
             checkBoxCT.setEnabled(false);
             checkBoxCT.setVisibility(View.INVISIBLE);
 
-        }else{
+        } else {
             tv.setVisibility(View.VISIBLE);
             checkBoxCT.setEnabled(true);
         }
@@ -82,7 +78,7 @@ public class ChargeTerminalFragment extends BackPressedFragment {
     @Override
     public void onResume() {
         super.onResume();
-        if(RFIDController.mConnectedReader != null && RFIDController.mConnectedReader.Config != null) {
+        if (RFIDController.mConnectedReader != null && RFIDController.mConnectedReader.Config != null) {
             chargeTerminalState = RFIDController.mConnectedReader.Config.getChargeTerminalState();
             checkBoxCT.setChecked(chargeTerminalState);
         }
@@ -90,35 +86,37 @@ public class ChargeTerminalFragment extends BackPressedFragment {
 
     @Override
     public void onBackPressed() {
-        if(chargeTerminalState != checkBoxCT.isChecked()) {
+        if (chargeTerminalState != checkBoxCT.isChecked()) {
             saveCTState();
-        }else{
-            if(getActivity() instanceof SettingsDetailActivity)
+        } else {
+            if (getActivity() instanceof SettingsDetailActivity)
                 ((SettingsDetailActivity) getActivity()).callBackPressed();
-            if(getActivity() instanceof ActiveDeviceActivity) {
+            if (getActivity() instanceof ActiveDeviceActivity) {
                 ((ActiveDeviceActivity) getActivity()).callBackPressed();
                 ((ActiveDeviceActivity) getActivity()).loadNextFragment(MAIN_RFID_SETTINGS_TAB);
             }
         }
     }
 
-    private void saveCTState(){
+    private void saveCTState() {
         progressDialog = new CustomProgressDialog(getActivity(), getString(R.string.ct_settings));
         progressDialog.show();
         ExecutorService executor = Executors.newSingleThreadExecutor();
         Handler handler = new Handler(Looper.getMainLooper());
         executor.execute(() -> {
             try {
-               RFIDController.mConnectedReader.Config.setChargeTerminalEnable(checkBoxCT.isChecked());
+                RFIDController.mConnectedReader.Config.setChargeTerminalEnable(checkBoxCT.isChecked());
             } catch (InvalidUsageException | OperationFailureException e) {
-                if(e.getStackTrace().length>0){ Log.e(TAG, e.getStackTrace()[0].toString()); }
+                if (e.getStackTrace().length > 0) {
+                    Log.e(TAG, e.getStackTrace()[0].toString());
+                }
             }
             handler.post(() -> {
                 progressDialog.dismiss();
                 Toast.makeText(context, R.string.status_success_message, Toast.LENGTH_SHORT).show();
-                if(getActivity() instanceof SettingsDetailActivity)
+                if (getActivity() instanceof SettingsDetailActivity)
                     ((SettingsDetailActivity) getActivity()).callBackPressed();
-                if(getActivity() instanceof ActiveDeviceActivity) {
+                if (getActivity() instanceof ActiveDeviceActivity) {
                     ((ActiveDeviceActivity) getActivity()).callBackPressed();
                     ((ActiveDeviceActivity) getActivity()).loadNextFragment(MAIN_RFID_SETTINGS_TAB);
                 }

@@ -2249,7 +2249,7 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            progressDialog = new com.codegear.mariamc_rfid.scanner.helpers.CustomProgressDialog(ActiveDeviceActivity.this, "Execute Command...");
+            progressDialog = new com.codegear.mariamc_rfid.scanner.helpers.CustomProgressDialog(ActiveDeviceActivity.this, "명령어 실행중...");
             progressDialog.show();
         }
 
@@ -2265,7 +2265,7 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
             if (progressDialog != null && progressDialog.isShowing())
                 progressDialog.dismiss();
             if (!b) {
-                Toast.makeText(ActiveDeviceActivity.this, "Cannot perform the action", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ActiveDeviceActivity.this, "작업을 수행할 수 없습니다.", Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -2490,22 +2490,22 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
 
 
                 case MAIN_RFID_SETTINGS_TAB:
-                    PageTitle = "RFID Settings";
+                    PageTitle = "RFID 설정";
                     mAdapter.setSettingsMode(MAIN_RFID_SETTINGS_TAB);
                     getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
                     break;
                 case MAIN_HOME_SETTINGS_TAB:
-                    PageTitle = "Settings";
+                    PageTitle = "설정";
                     mAdapter.setSettingsMode(MAIN_HOME_SETTINGS_TAB);
                     getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
                     break;
                 case MAIN_GENERAL_SETTINGS_TAB:
-                    PageTitle = "General Settings";
+                    PageTitle = "일반 설정";
                     mAdapter.setSettingsMode(MAIN_GENERAL_SETTINGS_TAB);
                     getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
                     break;
                 case APPLICATION_SETTINGS_TAB:
-                    PageTitle = "Application";
+                    PageTitle = "어플리케이션";
                     mAdapter.setSettingsMode(APPLICATION_SETTINGS_TAB);
                     getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
                     break;
@@ -2515,7 +2515,7 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
                     getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
                     break;
                 case RFID_ADVANCED_OPTIONS_TAB:
-                    PageTitle = "RFID Advanced Settings";
+                    PageTitle = "RFID 고급 설정";
                     mAdapter.setSettingsMode(RFID_ADVANCED_OPTIONS_TAB);
                     getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
                     break;
@@ -2527,7 +2527,7 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
                     break;
 
                 case RFID_BEEPER_TAB:
-                    PageTitle = "Beeper";
+                    PageTitle = "호출기";
                     mAdapter.setSettingsMode(RFID_BEEPER_TAB);
                     getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
                     break;
@@ -2543,12 +2543,12 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
                     getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
                     break;
                 case CHARGE_TERMINAL_TAB:
-                    PageTitle = "Charge Terminal";
+                    PageTitle = "충전 단자";
                     mAdapter.setSettingsMode(CHARGE_TERMINAL_TAB);
                     getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
                     break;
                 case ANTENNA_SETTINGS_TAB:
-                    PageTitle = "Antenna";
+                    PageTitle = "안테나";
                     mAdapter.setSettingsMode(ANTENNA_SETTINGS_TAB);
                     getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
                     break;
@@ -2559,12 +2559,12 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
                     getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
                     break;
                 case START_STOP_TRIGGER_TAB:
-                    PageTitle = "Start/Stop";
+                    PageTitle = "시작 / 정지";
                     mAdapter.setSettingsMode(START_STOP_TRIGGER_TAB);
                     getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
                     break;
                 case TAG_REPORTING_TAB:
-                    PageTitle = "Tag Reporting";
+                    PageTitle = "태그 리포팅";
                     mAdapter.setSettingsMode(TAG_REPORTING_TAB);
                     getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
                     break;
@@ -2579,22 +2579,22 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
                     getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
                     break;
                 case FACTORY_RESET_FRAGMENT_TAB:
-                    PageTitle = "Factory Reset";
+                    PageTitle = "공장 초기화";
                     mAdapter.setSettingsMode(FACTORY_RESET_FRAGMENT_TAB);
                     getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
                     break;
                 case LOGGER_FRAGMENT_TAB:
-                    PageTitle = "Logging";
+                    PageTitle = "로깅 설정";
                     mAdapter.setSettingsMode(LOGGER_FRAGMENT_TAB);
                     getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
                     break;
                 case DEVICE_RESET_TAB:
-                    PageTitle = "Device Reset";
+                    PageTitle = "기기 초기화";
                     mAdapter.setSettingsMode(DEVICE_RESET_TAB);
                     getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
                     break;
                 case KEYREMAP_TAB:
-                    PageTitle = "Trigger Map";
+                    PageTitle = "트리거 맵";
                     mAdapter.setSettingsMode(KEYREMAP_TAB);
                     getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
                     break;
@@ -2604,7 +2604,7 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
                     getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
                     break;
                 case ASSERT_DEVICE_INFO_TAB:
-                    PageTitle = "Device Info";
+                    PageTitle = "장치 정보";
                     mAdapter.setSettingsMode(ASSERT_DEVICE_INFO_TAB);
                     getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
                     break;
@@ -2619,12 +2619,12 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
                     getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
                     break;
                 case BEEPER_ACTION_TAB:
-                    PageTitle = "Beeper";
+                    PageTitle = "호출기";
                     mAdapter.setSettingsMode(BEEPER_ACTION_TAB);
                     getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
                     break;
                 case BATTERY_STATISTICS_TAB:
-                    PageTitle = "Battery Statistics";
+                    PageTitle = "배터리 통계";
                     mAdapter.setSettingsMode(BATTERY_STATISTICS_TAB);
                     getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
                     break;

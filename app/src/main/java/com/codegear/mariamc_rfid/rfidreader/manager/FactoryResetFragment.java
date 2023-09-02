@@ -32,7 +32,7 @@ import com.zebra.rfid.api3.RfidStatusEvents;
 
 public class FactoryResetFragment extends Fragment {
 
-    private static final String TAG = "FactoryResetFragment" ;
+    private static final String TAG = "FactoryResetFragment";
     private CustomProgressDialog progressDialog;
     private TextView textView;
     private int resetType = R.id.radio_factory;
@@ -49,8 +49,8 @@ public class FactoryResetFragment extends Fragment {
 
         View rootview = inflater.inflate(R.layout.factoryreset_fragment, container, false);
         Button resetbutton = (Button) rootview.findViewById(R.id.resetbutton);
-        textView = (TextView)rootview.findViewById(R.id.factoryresettextview);
-        headerView = (TextView)rootview.findViewById(R.id.factoryresetheading);
+        textView = (TextView) rootview.findViewById(R.id.factoryresettextview);
+        headerView = (TextView) rootview.findViewById(R.id.factoryresetheading);
         RadioButton radioButton = rootview.findViewById(R.id.radio_factory);
         radioButton.setChecked(true);
         resetbutton.setOnClickListener(new View.OnClickListener() {
@@ -60,34 +60,32 @@ public class FactoryResetFragment extends Fragment {
                 //command_changeConfig.setMode(ENUM_CHANGE_CONFIG_MODE.RESTORE_FACTORY_DEFAULTS);
 
 
-                if(RFIDController.mConnectedReader == null )
-                {
-                    Toast.makeText(getActivity(), "Cannot perform the action, Reader not connected", Toast.LENGTH_SHORT).show();
+                if (RFIDController.mConnectedReader == null) {
+                    Toast.makeText(getActivity(), "작업을 수행할 수 없습니다. 장치가 연결되지 않았습니다.", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                if((RFIDController.mConnectedReader.getHostName().startsWith("RFD40") == false)
-                    && (RFIDController.mConnectedReader.getHostName().startsWith("RFD90") == false))
-                {
-                    Toast.makeText(getActivity(), "Cannot perform the action, not supported for" + RFIDController.mConnectedReader.getHostName() , Toast.LENGTH_SHORT).show();
+                if ((RFIDController.mConnectedReader.getHostName().startsWith("RFD40") == false)
+                        && (RFIDController.mConnectedReader.getHostName().startsWith("RFD90") == false)) {
+                    Toast.makeText(getActivity(), "작업을 수행할 수 없습니다." + RFIDController.mConnectedReader.getHostName() + "에 대해 지원되지 않습니다.", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if(RFIDController.mIsInventoryRunning == true || RFIDController.isLocatingTag == true){
-                    Toast.makeText(getActivity(), "Operation In Progress-Command not Allowed", Toast.LENGTH_SHORT).show();
+                if (RFIDController.mIsInventoryRunning == true || RFIDController.isLocatingTag == true) {
+                    Toast.makeText(getActivity(), "작업 진행 중 - 명령이 허용되지 않음", Toast.LENGTH_SHORT).show();
                     return;
 
                 }
-                switch (resetType){
+                switch (resetType) {
                     case R.id.radio_factory:
-                        progressDialog = new CustomProgressDialog(getContext(), "Factory Reset");
-                        progressDialog.setMessage("Factory Reset done device rebooting..");
+                        progressDialog = new CustomProgressDialog(getContext(), "공장 초기화");
+                        progressDialog.setMessage("공장초기화 완료. 기기 재부팅..");
                         progressDialog.show();
-                        startFactoryReset( getString(R.string.resetFactory_progress_title));
+                        startFactoryReset(getString(R.string.resetFactory_progress_title));
 
                         break;
                     case R.id.radio_device:
-                        progressDialog = new CustomProgressDialog(getContext(), "Device Reset");
-                        progressDialog.setMessage("Reader reset is in progress");
+                        progressDialog = new CustomProgressDialog(getContext(), "기기 초기화");
+                        progressDialog.setMessage("기기 초기화가 진행 중입니다.");
                         progressDialog.show();
                         Thread deviceReset = new Thread(new Runnable() {
                             @Override
@@ -96,7 +94,7 @@ public class FactoryResetFragment extends Fragment {
                             }
                         });
                         deviceReset.start();
-                         break;
+                        break;
                 }
 
             }
@@ -110,12 +108,12 @@ public class FactoryResetFragment extends Fragment {
         try {
             if (!((ActiveDeviceActivity) requireActivity()).deviceReset(ASCIIProcessor.getCommandString(cmd))) {
                 Log.d(TAG, "operation_not_allowed_reader_detached");
-                if(progressDialog != null && progressDialog.isShowing()){
+                if (progressDialog != null && progressDialog.isShowing()) {
                     progressDialog.dismiss();
                 }
             }
         } catch (InvalidUsageException | OperationFailureException e) {
-           Log.d(TAG,  "Returned SDK Exception");
+            Log.d(TAG, "Returned SDK Exception");
         }
     }
 
@@ -124,138 +122,137 @@ public class FactoryResetFragment extends Fragment {
         return fragment;
     }
 
-    public void changeResetMode( View view )
-    {
+    public void changeResetMode(View view) {
         boolean checked = ((RadioButton) view).isChecked();
 
         // Check which radio button was clicked
-        switch(view.getId()) {
+        switch (view.getId()) {
             case R.id.radio_factory:
                 if (checked)
                     //factoryResetClicked(view);
                     resetType = R.id.radio_factory;
-                    headerView.setText("Reset to Factory Defaults");
-                    textView.setText(R.string.factory_reset);
-                    break;
+                headerView.setText("Reset to Factory Defaults");
+                textView.setText(R.string.factory_reset);
+                break;
             case R.id.radio_device:
                 if (checked)
                     //deviceResetClicked(view);
                     resetType = R.id.radio_device;
                 headerView.setText("Device Reset");
-                textView.setText("Device reset will reboot RFDXX device");
-                    break;
+                textView.setText("기기 초기화를 수행하면, 장치가 재부팅됩니다.");
+                break;
         }
     }
-    public void startFactoryReset( String title) {
-       // if (Application.StatusReaderConnection == ENUM_SERVICE_STATUS.READER_ATTACHED.ordinal())
 
-                new AsyncTask<Void, Void, Void>() {
+    public void startFactoryReset(String title) {
+        // if (Application.StatusReaderConnection == ENUM_SERVICE_STATUS.READER_ATTACHED.ordinal())
 
-                    @Override
-                    protected void onPreExecute() {
+        new AsyncTask<Void, Void, Void>() {
 
-                        //timerDelayRemoveDialog(com.zebra.rfid.api3.Constants.RESPONSE_TIMEOUT, progressDialog, getString(R.string.status_failure_message), true);
+            @Override
+            protected void onPreExecute() {
 
-                    }
+                //timerDelayRemoveDialog(com.zebra.rfid.api3.Constants.RESPONSE_TIMEOUT, progressDialog, getString(R.string.status_failure_message), true);
 
-                    @Override
-                    protected Void doInBackground(Void... params) {
+            }
 
+            @Override
+            protected Void doInBackground(Void... params) {
+
+                {
+                    try {
+                        ((ActiveDeviceActivity) getActivity()).resetFactoryDefault();
                         {
-                            try {
-                                ((ActiveDeviceActivity) getActivity()).resetFactoryDefault();
-                                {
-                                    //Toast.makeText((ManageDeviceActivity) getActivity(), "Operation not allowed when reader is busy/off", Toast.LENGTH_SHORT).show();
-                                    Log.d(TAG, "operation_not_allowed_reader_detached");
-                                    //if(progressDialog.isShowing())
-                                    //    progressDialog.dismiss();
-                                }
-                            } catch (InvalidUsageException e) {
-                               Log.d(TAG,  "Returned SDK Exception");
-                            } catch (OperationFailureException e) {
-                               Log.d(TAG,  "Returned SDK Exception");
-                                if(e.getResults().equals(RFIDResults.RFID_API_COMMAND_TIMEOUT)) {
-
-                                    getActivity().runOnUiThread(new Runnable() {
-                                        @Override
-                                        public void run() {
-
-                                            textView.setText("Factory Reset initiated successfully...");
-                                        }
-                                    });
-
-
-                                }else{
-                                    if((progressDialog != null) && progressDialog.isShowing())
-                                        progressDialog.dismiss();
-                                    String eMsg = e.getVendorMessage();
-                                    getActivity().runOnUiThread(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            textView.setText(eMsg);
-                                        }
-                                    });
-                                    return null;
-                                }
-                            }
+                            //Toast.makeText((ManageDeviceActivity) getActivity(), "Operation not allowed when reader is busy/off", Toast.LENGTH_SHORT).show();
+                            Log.d(TAG, "operation_not_allowed_reader_detached");
+                            //if(progressDialog.isShowing())
+                            //    progressDialog.dismiss();
                         }
+                    } catch (InvalidUsageException e) {
+                        Log.d(TAG, "Returned SDK Exception");
+                    } catch (OperationFailureException e) {
+                        Log.d(TAG, "Returned SDK Exception");
+                        if (e.getResults().equals(RFIDResults.RFID_API_COMMAND_TIMEOUT)) {
 
-                        if (getActivity() == null)
-                            return null;
-                        int loopCount = 0;
-                        do{
-                            try {
-                                Thread.sleep(1000);
-                                loopCount++;
-                            } catch (InterruptedException e) {
-                               Log.d(TAG,  "Returned SDK Exception");
-                                break;
-                            }
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
 
-                            Log.d(TAG, "Reset in Progress, Reader not attached" );
+                                    textView.setText("공장 초기화가 성공적으로 시작되었습니다...");
+                                }
+                            });
 
-                        }while(loopCount < 5);
-                        if(getActivity() == null){
+
+                        } else {
+                            if ((progressDialog != null) && progressDialog.isShowing())
+                                progressDialog.dismiss();
+                            String eMsg = e.getVendorMessage();
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    textView.setText(eMsg);
+                                }
+                            });
                             return null;
                         }
-                        getActivity().runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
+                    }
+                }
 
-                                textView.setText("Factory Reset done.");
-                                if (progressDialog != null) {
-                                    if(progressDialog.isShowing())
-                                        progressDialog.dismiss();
-                                    progressDialog = null;
-                                }
-
-                            }
-                        });
-                        return null;
+                if (getActivity() == null)
+                    return null;
+                int loopCount = 0;
+                do {
+                    try {
+                        Thread.sleep(1000);
+                        loopCount++;
+                    } catch (InterruptedException e) {
+                        Log.d(TAG, "Returned SDK Exception");
+                        break;
                     }
 
+                    Log.d(TAG, "Reset in Progress, Reader not attached");
+
+                } while (loopCount < 5);
+                if (getActivity() == null) {
+                    return null;
+                }
+                getActivity().runOnUiThread(new Runnable() {
                     @Override
-                    protected void onPostExecute(Void aVoid) {
-                        super.onPostExecute(aVoid);
-                        if (getActivity() == null) return;
-                        //if (progressDialog != null)
-                        //    progressDialog.dismiss();
-                        if (RFIDController.mConnectedDevice != null) {
-                            //Toast.makeText(getActivity(), getActivity().getString(R.string.operation_success_message), Toast.LENGTH_SHORT).show();
-                            Log.d(TAG, "Operation successfull");
-                            //FOr BT transport type refresh Bt Pairing again
+                    public void run() {
 
-                        }else
-                        {
-                            //progressDialog.cancel();
-                            Intent intent;
-                            intent = new Intent(getActivity(), DeviceDiscoverActivity.class);
-                            intent.putExtra("enable_toolbar", false);
-                            //startActivity(intent);
-                            //getActivity().finish();
+                        textView.setText("공장 초기화가 완료되었습니다.");
+                        if (progressDialog != null) {
+                            if (progressDialog.isShowing())
+                                progressDialog.dismiss();
+                            progressDialog = null;
                         }
+
                     }
-                }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+                });
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void aVoid) {
+                super.onPostExecute(aVoid);
+                if (getActivity() == null) return;
+                //if (progressDialog != null)
+                //    progressDialog.dismiss();
+                if (RFIDController.mConnectedDevice != null) {
+                    //Toast.makeText(getActivity(), getActivity().getString(R.string.operation_success_message), Toast.LENGTH_SHORT).show();
+                    Log.d(TAG, "Operation successfull");
+                    //FOr BT transport type refresh Bt Pairing again
+
+                } else {
+                    //progressDialog.cancel();
+                    Intent intent;
+                    intent = new Intent(getActivity(), DeviceDiscoverActivity.class);
+                    intent.putExtra("enable_toolbar", false);
+                    //startActivity(intent);
+                    //getActivity().finish();
+                }
+            }
+        }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 
     }
 
@@ -274,7 +271,7 @@ public class FactoryResetFragment extends Fragment {
 
         if (getActivity() == null) return;
         if (progressDialog != null) {
-            if(progressDialog.isShowing())
+            if (progressDialog.isShowing())
                 progressDialog.dismiss();
             progressDialog = null;
         }
@@ -284,7 +281,7 @@ public class FactoryResetFragment extends Fragment {
     public void onDestroy() {
         super.onDestroy();
         if (progressDialog != null) {
-            if(progressDialog.isShowing())
+            if (progressDialog.isShowing())
                 progressDialog.dismiss();
             progressDialog = null;
         }
@@ -301,7 +298,7 @@ public class FactoryResetFragment extends Fragment {
     }
 
     public void handleStatusResponse(final String data) {
-        if(getActivity() == null)
+        if (getActivity() == null)
             return;
         getActivity().runOnUiThread(new Runnable() {
             @Override
@@ -315,18 +312,18 @@ public class FactoryResetFragment extends Fragment {
                                 if (getActivity() == null)
                                     return null;
                                 int loopCount = 0;
-                                do{
+                                do {
                                     try {
                                         Thread.sleep(1000);
                                         loopCount++;
                                     } catch (InterruptedException e) {
-                                       Log.d(TAG,  "Returned SDK Exception");
+                                        Log.d(TAG, "Returned SDK Exception");
                                         break;
                                     }
 
-                                    Log.d(TAG, "Reset in Progress, Reader not attached" );
+                                    Log.d(TAG, "Reset in Progress, Reader not attached");
 
-                                }while((RFIDController.mConnectedDevice != null) && (loopCount < 5));
+                                } while ((RFIDController.mConnectedDevice != null) && (loopCount < 5));
                                 return null;
                             }
 
@@ -358,7 +355,7 @@ public class FactoryResetFragment extends Fragment {
 
     public void RFIDReaderAppeared(ReaderDevice readerDevice) {
 
-        if(progressDialog != null){
+        if (progressDialog != null) {
             progressDialog.dismiss();
             progressDialog = null;
         }

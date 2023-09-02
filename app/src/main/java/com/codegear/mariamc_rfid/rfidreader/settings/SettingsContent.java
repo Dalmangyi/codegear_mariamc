@@ -26,23 +26,12 @@ public class SettingsContent {
 
     static {
         // Add items.
-//        addItem(new SettingItem(R.id.readers_list + "", "Readers List"/*,"Available Readers"*/, R.drawable.settings_readers_list));
-//        addItem(new SettingItem(R.id.application + "", "Application"/*,"Settings"*/, R.drawable.settings_management));
-        addItem(new SettingItem(R.id.profiles + "", "Profiles",/*"Set Antenna parameters",*/R.drawable.profiles));
-//        addItem(new SettingItem("4", "Antenna",/*"Set Antenna parameters",*/R.drawable.title_antn));
-//        addItem(new SettingItem("5", "Singulation Control",/*"Set target & action",*/R.drawable.title_singl));
-//        addItem(new SettingItem("6", "Start\\Stop Triggers",/*"Region and channels",*/R.drawable.title_strstp));
-//        addItem(new SettingItem("7", "Tag Reporting",/*"Triggers settings",*/R.drawable.title_tags));
-        addItem(new SettingItem(R.id.advanced_options + "", "Advanced Reader Options",/*"Tag Settings",*/R.drawable.settings_rfid_accessory));
-        addItem(new SettingItem(R.id.regulatory + "", "Regulatory",/*"Host and sled volumes",*/R.drawable.settings_regulatory));
-       // addItem(new SettingItem(R.id.battery + "", "Battery",/*"Configurations",*/R.drawable.settings_battery));
-        addItem(new SettingItem(R.id.beeper + "", "Beeper",/*"Status",*/R.drawable.settings_beeper));
+        addItem(new SettingItem(R.id.profiles + "", "프로파일",/*"Set Antenna parameters",*/R.drawable.profiles));
+        addItem(new SettingItem(R.id.advanced_options + "", "고급 리더 옵션",/*"Tag Settings",*/R.drawable.settings_rfid_accessory));
+        addItem(new SettingItem(R.id.regulatory + "", "규제",/*"Host and sled volumes",*/R.drawable.settings_regulatory));
+        addItem(new SettingItem(R.id.beeper + "", "호출기",/*"Status",*/R.drawable.settings_beeper));
         addItem(new SettingItem(R.id.led + "", "LED ",/*"Status",*/R.drawable.settings_led));
-//        addItem(new SettingItem("13", "Save Configuration",/*"Tag Settings",*/R.drawable.title_save));
-//        addItem(new SettingItem(R.id.wifi_power + "", "WiFi ",/*"Status",*/R.drawable.ic_wifi));// icon need to be replaced.
-        addItem(new SettingItem(R.id.charge_terminal + "", "Charge Terminal ",/*"Status",*/R.drawable.settings_antenna));// icon need to be replaced.
-//        addItem(new SettingItem(R.id.usb_mifi + "", "USB MiFi ",/*"Status",*/R.drawable.settings_rfid_accessory));
-
+        addItem(new SettingItem(R.id.charge_terminal + "", "충전 단자",/*"Status",*/R.drawable.settings_antenna));// icon need to be replaced.
     }
 
     private static void addItem(SettingItem item) {
@@ -56,13 +45,11 @@ public class SettingsContent {
     public static class SettingItem {
         public String id;
         public String content;
-        //public String subcontent;
         public int icon;
 
         public SettingItem(String id, String content/*,String subcontent*/, int icon_id) {
             this.id = id;
             this.content = content;
-            //this.subcontent = subcontent;
             this.icon = icon_id;
         }
 

@@ -8,6 +8,7 @@
     android:background="@color/light_gray"
     android:orientation="vertical"
     tools:context="com.codegear.mariamc_rfid.scanner.fragments.SettingsFragment">
+
     <View
         android:layout_width="match_parent"
         android:layout_height="10dp"
@@ -23,7 +24,6 @@
             android:orientation="vertical">
 
 
-
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -35,7 +35,7 @@
                     android:layout_height="60dp"
                     android:layout_marginLeft="18dp"
                     android:layout_weight="0"
-                    android:text="@string/beeper"/>
+                    android:text="@string/beeper" />
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -69,7 +69,7 @@
                     android:layout_height="60dp"
                     android:layout_marginLeft="18dp"
                     android:layout_weight="0"
-                    android:text="@string/symbologies"/>
+                    android:text="@string/symbologies" />
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -88,47 +88,6 @@
             </TableRow>
 
             <include layout="@layout/normal_divider" />
-
-            <!--Scanning Control -->
-
-            <!--<TableRow-->
-                <!--android:id="@+id/tbl_row_scanning"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:background="@android:color/white">-->
-
-                <!--<LinearLayout-->
-                    <!--android:id="@+id/layout_scanning"-->
-                    <!--android:layout_width="0dp"-->
-                    <!--android:layout_height="60dp"-->
-                    <!--android:layout_marginLeft="18dp"-->
-                    <!--android:layout_weight="85"-->
-                    <!--android:background="@android:color/white"-->
-                    <!--android:gravity="center_vertical"-->
-                    <!--android:orientation="vertical">-->
-
-                    <!--<TextView-->
-                        <!--android:id="@+id/txt_scanning_control"-->
-                        <!--style="@style/roboto_medium_16dp"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:text="@string/scanning"/>-->
-
-                    <!--&lt;!&ndash;<TextView&ndash;&gt;-->
-                        <!--&lt;!&ndash;style="@style/roboto_regular_14dp"&ndash;&gt;-->
-                        <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
-                        <!--&lt;!&ndash;android:text="@string/enable_disable"/>&ndash;&gt;-->
-                <!--</LinearLayout>-->
-
-                <!--<android.support.v7.widget.SwitchCompat-->
-                    <!--android:id="@+id/switch_scanning"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_gravity="center"-->
-                    <!--android:layout_weight="25"-->
-                    <!--android:paddingEnd="18dp" />-->
-            <!--</TableRow>-->
-
-            <!--<include layout="@layout/normal_divider" />-->
 
             <TableRow
                 android:layout_width="match_parent"
@@ -156,16 +115,16 @@
                     android:layout_weight="0"
                     android:clickable="true"
                     android:onClick="pullTrigger"
-                    android:text="Pull"
                     android:paddingLeft="10dp"
-                    android:paddingRight="20dp" />
+                    android:paddingRight="20dp"
+                    android:text="풀" />
 
                 <View
                     android:layout_width="0.4dip"
                     android:layout_height="30dp"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
                     android:layout_marginTop="20dp"
+                    android:layout_marginRight="10dp"
                     android:layout_weight="0"
                     android:background="@color/dark_gray" />
 
@@ -176,10 +135,11 @@
                     android:layout_weight="0"
                     android:clickable="true"
                     android:onClick="releaseTrigger"
-                    android:text="Release"
                     android:paddingLeft="10dp"
-                    android:paddingRight="@dimen/app_margin_right" />
+                    android:paddingRight="@dimen/app_margin_right"
+                    android:text="릴리즈" />
             </TableRow>
+
             <include layout="@layout/normal_divider" />
 
             <TableRow
@@ -202,12 +162,8 @@
                         android:id="@+id/txt_picklist_mode"
                         style="@style/roboto_medium_16dp"
                         android:layout_height="wrap_content"
-                        android:text="@string/pick_list_mode"/>
+                        android:text="@string/pick_list_mode" />
 
-                    <!--<TextView-->
-                        <!--style="@style/roboto_regular_14dp"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:text="@string/enable_disable"/>-->
                 </LinearLayout>
 
                 <androidx.appcompat.widget.SwitchCompat
@@ -232,7 +188,7 @@
                     android:layout_height="60dp"
                     android:layout_marginLeft="18dp"
                     android:layout_weight="85"
-                    android:text="@string/aim_guide"/>
+                    android:text="@string/aim_guide" />
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -247,16 +203,16 @@
                     android:layout_weight="0"
                     android:clickable="true"
                     android:onClick="aimOn"
-                    android:text="On"
                     android:paddingLeft="20dp"
-                    android:paddingRight="20dp" />
+                    android:paddingRight="20dp"
+                    android:text="켜기" />
 
                 <View
                     android:layout_width="0.4dip"
                     android:layout_height="30dp"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
                     android:layout_marginTop="15dp"
+                    android:layout_marginRight="10dp"
                     android:layout_weight="0"
                     android:background="@color/dark_gray" />
 
@@ -267,18 +223,19 @@
                     android:layout_weight="0"
                     android:clickable="true"
                     android:onClick="aimOff"
-                    android:text="Off"
                     android:paddingLeft="20dp"
-                    android:paddingRight="@dimen/app_margin_right" />
+                    android:paddingRight="@dimen/app_margin_right"
+                    android:text="끄기" />
 
             </TableRow>
+
             <include layout="@layout/normal_divider" />
 
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="gone"
-                android:background="@android:color/white">
+                android:background="@android:color/white"
+                android:visibility="gone">
 
                 <TextView
                     style="@style/roboto_medium_16dp"
@@ -297,6 +254,7 @@
                 </Spinner>
 
             </TableRow>
+
             <include layout="@layout/normal_divider" />
 
             <TableRow
@@ -311,7 +269,7 @@
                     android:layout_height="60dp"
                     android:layout_marginLeft="18dp"
                     android:layout_weight="0"
-                    android:text="@string/led_control"/>
+                    android:text="@string/led_control" />
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -345,7 +303,7 @@
                     android:layout_height="60dp"
                     android:layout_marginLeft="18dp"
                     android:layout_weight="0"
-                    android:text="@string/vibration_feedback"/>
+                    android:text="@string/vibration_feedback" />
 
                 <LinearLayout
                     android:layout_width="0dp"

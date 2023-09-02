@@ -90,12 +90,7 @@ public class StartStopTriggersFragment extends BackPressedFragment implements Sp
         return new StartStopTriggersFragment();
     }
 
-    public static void replaceFragment(@NonNull FragmentManager fragmentManager,
-                                       @NonNull Fragment fragment, int frameId) {
-//        FragmentTransaction transaction = fragmentManager.beginTransaction();
-//        transaction.replace(frameId, fragment);
-//        transaction.disallowAddToBackStack();
-//        transaction.commit();
+    public static void replaceFragment(@NonNull FragmentManager fragmentManager, @NonNull Fragment fragment, int frameId) {
     }
 
     @Override
@@ -104,8 +99,7 @@ public class StartStopTriggersFragment extends BackPressedFragment implements Sp
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_start_stop_triggers, container, false);
     }
@@ -161,8 +155,7 @@ public class StartStopTriggersFragment extends BackPressedFragment implements Sp
             stopTriggerSpinner.setSelection(3, false);
         else if (stop_trigger_type == STOP_TRIGGER_TYPE.STOP_TRIGGER_TYPE_N_ATTEMPTS_WITH_TIMEOUT)
             stopTriggerSpinner.setSelection(4, false);
-        else
-            stopTriggerSpinner.setSelection(0, false);
+        else stopTriggerSpinner.setSelection(0, false);
 
         startTriggerSpinner.setOnItemSelectedListener(this);
         stopTriggerSpinner.setOnItemSelectedListener(this);
@@ -300,24 +293,6 @@ public class StartStopTriggersFragment extends BackPressedFragment implements Sp
         }
     }
 
-  /*  @Override
-    public void handleStatusResponse(final Response_Status statusData) {
-        String command = statusData.command.trim();
-        if (command.equalsIgnoreCase(Constants.COMMAND_STARTTRIGGER) || command.equalsIgnoreCase(Constants.COMMAND_STOPTRIGGER))
-            getActivity().runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    if (statusData.Status.trim().equalsIgnoreCase("OK")) {
-                        ((BaseReceiverActivity) getActivity()).sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, getString(R.string.status_success_message));
-                    } else
-                        ((BaseReceiverActivity) getActivity()).sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, getString(R.string.status_failure_message) + "\n" + statusData.Status);
-                    ((SettingsDetailActivity) getActivity()).callBackPressed();
-                }
-            });
-    }
-
-    */
-
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
     }
@@ -332,8 +307,8 @@ public class StartStopTriggersFragment extends BackPressedFragment implements Sp
             //((SettingsDetailActivity) getActivity()).callBackPressed();
             AdvancedOptionItemFragment fragment = AdvancedOptionItemFragment.newInstance();
             replaceFragment(getFragmentManager(), fragment, R.id.settings_content_frame);
-            if(getActivity() instanceof ActiveDeviceActivity)
-                ((ActiveDeviceActivity)getActivity()).loadNextFragment(RFID_ADVANCED_OPTIONS_TAB);
+            if (getActivity() instanceof ActiveDeviceActivity)
+                ((ActiveDeviceActivity) getActivity()).loadNextFragment(RFID_ADVANCED_OPTIONS_TAB);
         }
     }
 
@@ -342,12 +317,16 @@ public class StartStopTriggersFragment extends BackPressedFragment implements Sp
         try {
             tempStartTrigger = RFIDController.mConnectedReader.Config.getStartTrigger();
         } catch (InvalidUsageException e) {
-            if( e!= null && e.getStackTrace().length>0){ Log.e(TAG, e.getStackTrace()[0].toString()); }
+            if (e != null && e.getStackTrace().length > 0) {
+                Log.e(TAG, e.getStackTrace()[0].toString());
+            }
         } catch (OperationFailureException e) {
-            if( e!= null && e.getStackTrace().length>0){ Log.e(TAG, e.getStackTrace()[0].toString()); }
-            if(getActivity() instanceof SettingsDetailActivity)
-            ((SettingsDetailActivity) getActivity()).sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, getString(R.string.status_failure_message) + "\n" + e.getVendorMessage());
-            if(getActivity() instanceof ActiveDeviceActivity)
+            if (e != null && e.getStackTrace().length > 0) {
+                Log.e(TAG, e.getStackTrace()[0].toString());
+            }
+            if (getActivity() instanceof SettingsDetailActivity)
+                ((SettingsDetailActivity) getActivity()).sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, getString(R.string.status_failure_message) + "\n" + e.getVendorMessage());
+            if (getActivity() instanceof ActiveDeviceActivity)
                 ((ActiveDeviceActivity) getActivity()).sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, getString(R.string.status_failure_message) + "\n" + e.getVendorMessage());
 
         }
@@ -359,12 +338,16 @@ public class StartStopTriggersFragment extends BackPressedFragment implements Sp
         try {
             tempStopTrigger = RFIDController.mConnectedReader.Config.getStopTrigger();
         } catch (InvalidUsageException e) {
-            if( e!= null && e.getStackTrace().length>0){ Log.e(TAG, e.getStackTrace()[0].toString()); }
+            if (e != null && e.getStackTrace().length > 0) {
+                Log.e(TAG, e.getStackTrace()[0].toString());
+            }
         } catch (OperationFailureException e) {
-            if( e!= null && e.getStackTrace().length>0){ Log.e(TAG, e.getStackTrace()[0].toString()); }
-            if(getActivity() instanceof SettingsDetailActivity)
-            ((SettingsDetailActivity) getActivity()).sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, getString(R.string.status_failure_message) + "\n" + e.getVendorMessage());
-            if(getActivity() instanceof ActiveDeviceActivity)
+            if (e != null && e.getStackTrace().length > 0) {
+                Log.e(TAG, e.getStackTrace()[0].toString());
+            }
+            if (getActivity() instanceof SettingsDetailActivity)
+                ((SettingsDetailActivity) getActivity()).sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, getString(R.string.status_failure_message) + "\n" + e.getVendorMessage());
+            if (getActivity() instanceof ActiveDeviceActivity)
                 ((ActiveDeviceActivity) getActivity()).sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, getString(R.string.status_failure_message) + "\n" + e.getVendorMessage());
 
         }
@@ -389,22 +372,18 @@ public class StartStopTriggersFragment extends BackPressedFragment implements Sp
             switch (startTriggerSpinner.getSelectedItemPosition()) {
                 case 1:
                     if (startHandHeldTriggerPressed.isChecked() || startHandHeldTriggerReleased.isChecked()) {
-                        if (((RFIDController.settings_startTrigger.getTriggerType() != START_TRIGGER_TYPE.START_TRIGGER_TYPE_HANDHELD) && (startHandHeldTriggerPressed.isChecked() || startHandHeldTriggerReleased.isChecked())) ||
-                                ((startHandHeldTriggerPressed.isChecked() && RFIDController.settings_startTrigger.Handheld.getHandheldTriggerEvent() != HANDHELD_TRIGGER_EVENT_TYPE.HANDHELD_TRIGGER_PRESSED) ||
-                                        (startHandHeldTriggerReleased.isChecked() && RFIDController.settings_startTrigger.Handheld.getHandheldTriggerEvent() != HANDHELD_TRIGGER_EVENT_TYPE.HANDHELD_TRIGGER_RELEASED))) {
+                        if (((RFIDController.settings_startTrigger.getTriggerType() != START_TRIGGER_TYPE.START_TRIGGER_TYPE_HANDHELD) && (startHandHeldTriggerPressed.isChecked() || startHandHeldTriggerReleased.isChecked())) || ((startHandHeldTriggerPressed.isChecked() && RFIDController.settings_startTrigger.Handheld.getHandheldTriggerEvent() != HANDHELD_TRIGGER_EVENT_TYPE.HANDHELD_TRIGGER_PRESSED) || (startHandHeldTriggerReleased.isChecked() && RFIDController.settings_startTrigger.Handheld.getHandheldTriggerEvent() != HANDHELD_TRIGGER_EVENT_TYPE.HANDHELD_TRIGGER_RELEASED))) {
                             isSettingsChanged = true;
                             tempStartTrigger = getDefaultStartTrigger();
                             if (tempStartTrigger != null) {
                                 tempStartTrigger.setTriggerType(START_TRIGGER_TYPE.START_TRIGGER_TYPE_HANDHELD);
-                                tempStartTrigger.Handheld.setHandheldTriggerEvent(startHandHeldTriggerPressed.isChecked() ?
-                                        HANDHELD_TRIGGER_EVENT_TYPE.HANDHELD_TRIGGER_PRESSED : HANDHELD_TRIGGER_EVENT_TYPE.HANDHELD_TRIGGER_RELEASED);
-                            } else
-                                return false;
+                                tempStartTrigger.Handheld.setHandheldTriggerEvent(startHandHeldTriggerPressed.isChecked() ? HANDHELD_TRIGGER_EVENT_TYPE.HANDHELD_TRIGGER_PRESSED : HANDHELD_TRIGGER_EVENT_TYPE.HANDHELD_TRIGGER_RELEASED);
+                            } else return false;
                         }
                     } else {
-                        if(getActivity() instanceof SettingsDetailActivity)
-                        ((SettingsDetailActivity) getActivity()).sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, getString(R.string.status_failure_message) + "\n" + getString(R.string.error_empty_fields_start_trigger));
-                        if(getActivity() instanceof ActiveDeviceActivity)
+                        if (getActivity() instanceof SettingsDetailActivity)
+                            ((SettingsDetailActivity) getActivity()).sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, getString(R.string.status_failure_message) + "\n" + getString(R.string.error_empty_fields_start_trigger));
+                        if (getActivity() instanceof ActiveDeviceActivity)
                             ((ActiveDeviceActivity) getActivity()).sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, getString(R.string.status_failure_message) + "\n" + getString(R.string.error_empty_fields_start_trigger));
 
                     }
@@ -418,13 +397,12 @@ public class StartStopTriggersFragment extends BackPressedFragment implements Sp
                             if (tempStartTrigger != null) {
                                 tempStartTrigger.setTriggerType(START_TRIGGER_TYPE.START_TRIGGER_TYPE_PERIODIC);
                                 tempStartTrigger.Periodic.setPeriod(periodic.intValue());
-                            } else
-                                return false;
+                            } else return false;
                         }
                     } else {
-                        if(getActivity() instanceof SettingsDetailActivity)
-                        ((SettingsDetailActivity) getActivity()).sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, getString(R.string.status_failure_message) + "\n" + getString(R.string.error_empty_fields_start_trigger));
-                        if(getActivity() instanceof ActiveDeviceActivity)
+                        if (getActivity() instanceof SettingsDetailActivity)
+                            ((SettingsDetailActivity) getActivity()).sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, getString(R.string.status_failure_message) + "\n" + getString(R.string.error_empty_fields_start_trigger));
+                        if (getActivity() instanceof ActiveDeviceActivity)
                             ((ActiveDeviceActivity) getActivity()).sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, getString(R.string.status_failure_message) + "\n" + getString(R.string.error_empty_fields_start_trigger));
 
                     }
@@ -435,8 +413,7 @@ public class StartStopTriggersFragment extends BackPressedFragment implements Sp
                         tempStartTrigger = getDefaultStartTrigger();
                         if (tempStartTrigger != null) {
                             tempStartTrigger.setTriggerType(START_TRIGGER_TYPE.START_TRIGGER_TYPE_IMMEDIATE);
-                        } else
-                            return false;
+                        } else return false;
                     }
 
             }
@@ -445,23 +422,19 @@ public class StartStopTriggersFragment extends BackPressedFragment implements Sp
                 case 1:
                     if (!stopHandheldDuration.getText().toString().isEmpty() && (stopHandHeldTriggerReleased.isChecked() || stopHandHeldTriggerPressed.isChecked())) {
                         Long timeout = Long.parseLong(stopHandheldDuration.getText().toString());
-                        if ((RFIDController.settings_stopTrigger.getTriggerType() != STOP_TRIGGER_TYPE.STOP_TRIGGER_TYPE_HANDHELD_WITH_TIMEOUT) ||
-                                (stopHandHeldTriggerReleased.isChecked() && RFIDController.settings_stopTrigger.Handheld.getHandheldTriggerEvent() != HANDHELD_TRIGGER_EVENT_TYPE.HANDHELD_TRIGGER_RELEASED) ||
-                                (stopHandHeldTriggerPressed.isChecked() && RFIDController.settings_stopTrigger.Handheld.getHandheldTriggerEvent() != HANDHELD_TRIGGER_EVENT_TYPE.HANDHELD_TRIGGER_PRESSED) ||
-                                (RFIDController.settings_stopTrigger.Handheld.getHandheldTriggerTimeout() != timeout)) {
+                        if ((RFIDController.settings_stopTrigger.getTriggerType() != STOP_TRIGGER_TYPE.STOP_TRIGGER_TYPE_HANDHELD_WITH_TIMEOUT) || (stopHandHeldTriggerReleased.isChecked() && RFIDController.settings_stopTrigger.Handheld.getHandheldTriggerEvent() != HANDHELD_TRIGGER_EVENT_TYPE.HANDHELD_TRIGGER_RELEASED) || (stopHandHeldTriggerPressed.isChecked() && RFIDController.settings_stopTrigger.Handheld.getHandheldTriggerEvent() != HANDHELD_TRIGGER_EVENT_TYPE.HANDHELD_TRIGGER_PRESSED) || (RFIDController.settings_stopTrigger.Handheld.getHandheldTriggerTimeout() != timeout)) {
                             isSettingsChanged = true;
                             tempStopTrigger = getDefaultStopTrigger();
                             if (tempStopTrigger != null) {
                                 tempStopTrigger.setTriggerType(STOP_TRIGGER_TYPE.STOP_TRIGGER_TYPE_HANDHELD_WITH_TIMEOUT);
                                 tempStopTrigger.Handheld.setHandheldTriggerEvent(stopHandHeldTriggerPressed.isChecked() ? HANDHELD_TRIGGER_EVENT_TYPE.HANDHELD_TRIGGER_PRESSED : HANDHELD_TRIGGER_EVENT_TYPE.HANDHELD_TRIGGER_RELEASED);
                                 tempStopTrigger.Handheld.setHandheldTriggerTimeout(timeout.intValue());
-                            } else
-                                return false;
+                            } else return false;
                         }
                     } else {
-                        if(getActivity() instanceof SettingsDetailActivity)
-                        ((SettingsDetailActivity) getActivity()).sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, getString(R.string.status_failure_message) + "\n" + getString(R.string.error_empty_fields_stop_trigger));
-                        if(getActivity() instanceof ActiveDeviceActivity)
+                        if (getActivity() instanceof SettingsDetailActivity)
+                            ((SettingsDetailActivity) getActivity()).sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, getString(R.string.status_failure_message) + "\n" + getString(R.string.error_empty_fields_stop_trigger));
+                        if (getActivity() instanceof ActiveDeviceActivity)
                             ((ActiveDeviceActivity) getActivity()).sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, getString(R.string.status_failure_message) + "\n" + getString(R.string.error_empty_fields_stop_trigger));
 
                     }
@@ -476,13 +449,12 @@ public class StartStopTriggersFragment extends BackPressedFragment implements Sp
                             if (tempStopTrigger != null) {
                                 tempStopTrigger.setTriggerType(STOP_TRIGGER_TYPE.STOP_TRIGGER_TYPE_DURATION);
                                 tempStopTrigger.setDurationMilliSeconds(duration.intValue());
-                            } else
-                                return false;
+                            } else return false;
                         }
                     } else {
-                        if(getActivity() instanceof SettingsDetailActivity)
-                        ((SettingsDetailActivity) getActivity()).sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, getString(R.string.status_failure_message) + "\n" + getString(R.string.error_empty_fields_stop_trigger));
-                        if(getActivity() instanceof ActiveDeviceActivity)
+                        if (getActivity() instanceof SettingsDetailActivity)
+                            ((SettingsDetailActivity) getActivity()).sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, getString(R.string.status_failure_message) + "\n" + getString(R.string.error_empty_fields_stop_trigger));
+                        if (getActivity() instanceof ActiveDeviceActivity)
                             ((ActiveDeviceActivity) getActivity()).sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, getString(R.string.status_failure_message) + "\n" + getString(R.string.error_empty_fields_stop_trigger));
 
                     }
@@ -498,13 +470,12 @@ public class StartStopTriggersFragment extends BackPressedFragment implements Sp
                                 tempStopTrigger.setTriggerType(STOP_TRIGGER_TYPE.STOP_TRIGGER_TYPE_TAG_OBSERVATION_WITH_TIMEOUT);
                                 tempStopTrigger.TagObservation.setN(tagObservation.shortValue());
                                 tempStopTrigger.TagObservation.setTimeout(tagTimeOut.intValue());
-                            } else
-                                return false;
+                            } else return false;
                         }
                     } else {
-                        if(getActivity() instanceof SettingsDetailActivity)
-                        ((SettingsDetailActivity) getActivity()).sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, getString(R.string.status_failure_message) + "\n" + getString(R.string.error_empty_fields_stop_trigger));
-                        if(getActivity() instanceof ActiveDeviceActivity)
+                        if (getActivity() instanceof SettingsDetailActivity)
+                            ((SettingsDetailActivity) getActivity()).sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, getString(R.string.status_failure_message) + "\n" + getString(R.string.error_empty_fields_stop_trigger));
+                        if (getActivity() instanceof ActiveDeviceActivity)
                             ((ActiveDeviceActivity) getActivity()).sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, getString(R.string.status_failure_message) + "\n" + getString(R.string.error_empty_fields_stop_trigger));
 
                     }
@@ -520,13 +491,12 @@ public class StartStopTriggersFragment extends BackPressedFragment implements Sp
                                 tempStopTrigger.setTriggerType(STOP_TRIGGER_TYPE.STOP_TRIGGER_TYPE_N_ATTEMPTS_WITH_TIMEOUT);
                                 tempStopTrigger.NumAttempts.setN(nAttempts.shortValue());
                                 tempStopTrigger.NumAttempts.setTimeout(nTimeOut.intValue());
-                            } else
-                                return false;
+                            } else return false;
                         }
                     } else {
-                        if(getActivity() instanceof SettingsDetailActivity)
-                        ((SettingsDetailActivity) getActivity()).sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, getString(R.string.status_failure_message) + "\n" + getString(R.string.error_empty_fields_stop_trigger));
-                        if(getActivity() instanceof ActiveDeviceActivity)
+                        if (getActivity() instanceof SettingsDetailActivity)
+                            ((SettingsDetailActivity) getActivity()).sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, getString(R.string.status_failure_message) + "\n" + getString(R.string.error_empty_fields_stop_trigger));
+                        if (getActivity() instanceof ActiveDeviceActivity)
                             ((ActiveDeviceActivity) getActivity()).sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, getString(R.string.status_failure_message) + "\n" + getString(R.string.error_empty_fields_stop_trigger));
 
                     }
@@ -538,8 +508,7 @@ public class StartStopTriggersFragment extends BackPressedFragment implements Sp
                         tempStopTrigger = getDefaultStopTrigger();
                         if (tempStopTrigger != null) {
                             tempStopTrigger.setTriggerType(STOP_TRIGGER_TYPE.STOP_TRIGGER_TYPE_IMMEDIATE);
-                        } else
-                            return false;
+                        } else return false;
                     }
             }
         }
@@ -599,10 +568,14 @@ public class StartStopTriggersFragment extends BackPressedFragment implements Sp
                 }
                 result = true;
             } catch (InvalidUsageException e) {
-                if( e!= null && e.getStackTrace().length>0){ Log.e(TAG, e.getStackTrace()[0].toString()); }
+                if (e != null && e.getStackTrace().length > 0) {
+                    Log.e(TAG, e.getStackTrace()[0].toString());
+                }
                 invalidUsageException = e;
             } catch (OperationFailureException e) {
-                if( e!= null && e.getStackTrace().length>0){ Log.e(TAG, e.getStackTrace()[0].toString()); }
+                if (e != null && e.getStackTrace().length > 0) {
+                    Log.e(TAG, e.getStackTrace()[0].toString());
+                }
                 operationFailureException = e;
             }
             return result;
@@ -614,16 +587,16 @@ public class StartStopTriggersFragment extends BackPressedFragment implements Sp
             super.onPostExecute(result);
             if (!result) {
                 if (invalidUsageException != null) {
-                    if(getActivity() instanceof SettingsDetailActivity)
-                    ((SettingsDetailActivity) getActivity()).sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, getString(R.string.status_failure_message) + "\n" + invalidUsageException.getVendorMessage());
-                    if(getActivity() instanceof ActiveDeviceActivity)
+                    if (getActivity() instanceof SettingsDetailActivity)
+                        ((SettingsDetailActivity) getActivity()).sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, getString(R.string.status_failure_message) + "\n" + invalidUsageException.getVendorMessage());
+                    if (getActivity() instanceof ActiveDeviceActivity)
                         ((ActiveDeviceActivity) getActivity()).sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, getString(R.string.status_failure_message) + "\n" + invalidUsageException.getVendorMessage());
 
                 }
                 if (operationFailureException != null) {
-                    if(getActivity() instanceof SettingsDetailActivity)
-                    ((SettingsDetailActivity) getActivity()).sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, getString(R.string.status_failure_message) + "\n" + operationFailureException.getVendorMessage());
-                    if(getActivity() instanceof ActiveDeviceActivity)
+                    if (getActivity() instanceof SettingsDetailActivity)
+                        ((SettingsDetailActivity) getActivity()).sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, getString(R.string.status_failure_message) + "\n" + operationFailureException.getVendorMessage());
+                    if (getActivity() instanceof ActiveDeviceActivity)
                         ((ActiveDeviceActivity) getActivity()).sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, getString(R.string.status_failure_message) + "\n" + operationFailureException.getVendorMessage());
 
                 }
@@ -632,8 +605,8 @@ public class StartStopTriggersFragment extends BackPressedFragment implements Sp
             //((SettingsDetailActivity) getActivity()).callBackPressed();
             AdvancedOptionItemFragment fragment = AdvancedOptionItemFragment.newInstance();
             replaceFragment(getFragmentManager(), fragment, R.id.settings_content_frame);
-            if(getActivity() instanceof ActiveDeviceActivity)
-                ((ActiveDeviceActivity)getActivity()).loadNextFragment(RFID_ADVANCED_OPTIONS_TAB);
+            if (getActivity() instanceof ActiveDeviceActivity)
+                ((ActiveDeviceActivity) getActivity()).loadNextFragment(RFID_ADVANCED_OPTIONS_TAB);
         }
     }
 

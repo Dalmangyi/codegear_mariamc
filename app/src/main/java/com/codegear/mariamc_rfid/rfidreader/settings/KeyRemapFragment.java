@@ -37,16 +37,8 @@ public class KeyRemapFragment extends Fragment {
     SharedPreferences.Editor editor;
     ActiveDeviceActivity mActivity;
     ENUM_NEW_KEYLAYOUT_TYPE UpperTrigger, LowerTrigger;
-/*
 
-    String[] itemsPremiumPlus = {"RFID","Sled scanner","Terminal scanner",
-            "Scan notification","No action"};
-
-    String[] itemsStandard = {"Upper(RFID)Lower(Host Scan)",
-            "Upper(Host Scan)Lower(RFID)"};
-*/
-
-    String[] items = {"RFID","Sled scanner","Terminal scanner","Scan notification","No action"};
+    String[] items = {"RFID", "Sled scanner", "Terminal scanner", "Scan notification", "No action"};
     Button apply;
 
 
@@ -54,7 +46,6 @@ public class KeyRemapFragment extends Fragment {
         KeyRemapFragment fragment = new KeyRemapFragment();
         return fragment;
     }
-
 
 
     @Override
@@ -65,24 +56,25 @@ public class KeyRemapFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         String keylayoutType;
         super.onCreate(savedInstanceState);
         final View rootview = inflater.inflate(R.layout.activity_keymap_select, container, false);
         //getSupportActionBar().setTitle(R.string.KeyMapping);
 
         try {
-
-            if ((keylayoutType = RFIDController.mConnectedReader.Config.getKeylayoutType()) != null)
-            {
+            if ((keylayoutType = RFIDController.mConnectedReader.Config.getKeylayoutType()) != null) {
                 upperTval = mConnectedReader.Config.getUpperTriggerValue(keylayoutType).getEnumValue();
                 lowerTval = mConnectedReader.Config.getLowerTriggerValue(keylayoutType).getEnumValue();
             }
         } catch (InvalidUsageException e) {
-            if( e!= null && e.getStackTrace().length>0){ Log.e(TAG, e.getStackTrace()[0].toString()); }
+            if (e != null && e.getStackTrace().length > 0) {
+                Log.e(TAG, e.getStackTrace()[0].toString());
+            }
         } catch (OperationFailureException e) {
-            if( e!= null && e.getStackTrace().length>0){ Log.e(TAG, e.getStackTrace()[0].toString()); }
+            if (e != null && e.getStackTrace().length > 0) {
+                Log.e(TAG, e.getStackTrace()[0].toString());
+            }
         }
         upperspinner = rootview.findViewById(R.id.upperTrigger);
         lowerspinner = rootview.findViewById(R.id.lowerTrigger);
@@ -109,7 +101,7 @@ public class KeyRemapFragment extends Fragment {
 
 
                 if (mConnectedReader == null) return;
-                if(!RFIDController.mIsInventoryRunning) {
+                if (!RFIDController.mIsInventoryRunning) {
                     switch (position) {
                         case 0:
                             UpperTrigger = ENUM_NEW_KEYLAYOUT_TYPE.RFID;
@@ -131,14 +123,12 @@ public class KeyRemapFragment extends Fragment {
                             UpperTrigger = ENUM_NEW_KEYLAYOUT_TYPE.NO_ACTION;
                             break;
                     }
-                  //  upperTval = position;
+                    //  upperTval = position;
                 } else {
-                    Toast.makeText(parent.getContext(),"Inventory inprogress TriggerMapping not allowed" ,Toast.LENGTH_SHORT).show();
-
+                    Toast.makeText(parent.getContext(), "인벤토리 진행 중에는 트리거 매핑이 허용되지 않습니다.", Toast.LENGTH_SHORT).show();
                     //  position = Application.keyLayoutType;
                 }
                 //  upperspinner.setItemChecked(position, true);
-
 
 
             }
@@ -155,32 +145,32 @@ public class KeyRemapFragment extends Fragment {
 
 
                 if (mConnectedReader == null) return;
-                if(!RFIDController.mIsInventoryRunning) {
+                if (!RFIDController.mIsInventoryRunning) {
                     switch (position) {
                         case 0:
-                            LowerTrigger =   ENUM_NEW_KEYLAYOUT_TYPE.RFID;
+                            LowerTrigger = ENUM_NEW_KEYLAYOUT_TYPE.RFID;
 
                             break;
                         case 1:
-                            LowerTrigger =   ENUM_NEW_KEYLAYOUT_TYPE.SLED_SCAN;
+                            LowerTrigger = ENUM_NEW_KEYLAYOUT_TYPE.SLED_SCAN;
 
                             break;
                         case 2:
-                            LowerTrigger =   ENUM_NEW_KEYLAYOUT_TYPE.TERMINAL_SCAN;
+                            LowerTrigger = ENUM_NEW_KEYLAYOUT_TYPE.TERMINAL_SCAN;
 
                             break;
                         case 3:
-                            LowerTrigger =   ENUM_NEW_KEYLAYOUT_TYPE.SCAN_NOTIFY;
+                            LowerTrigger = ENUM_NEW_KEYLAYOUT_TYPE.SCAN_NOTIFY;
 
                             break;
                         case 4:
-                            LowerTrigger =   ENUM_NEW_KEYLAYOUT_TYPE.NO_ACTION;
+                            LowerTrigger = ENUM_NEW_KEYLAYOUT_TYPE.NO_ACTION;
                             break;
                     }
-                 //   lowerTval = position;
+                    //   lowerTval = position;
 
                 } else {
-                    Toast.makeText(parent.getContext(),"Inventory inprogress TriggerMapping not allowed" ,Toast.LENGTH_SHORT).show();
+                    Toast.makeText(parent.getContext(), "인벤토리 진행 중에는 트리거 매핑이 허용되지 않습니다.", Toast.LENGTH_SHORT).show();
 
 
                 }
@@ -193,60 +183,38 @@ public class KeyRemapFragment extends Fragment {
             }
         });
 
-      /*  try {
-            if(!RFIDController.mIsInventoryRunning) {
-                keylayoutType = mConnectedReader.Config.getKeylayoutType();
-                currentkeymapping = keylayoutType.getEnumValue();
-                Application.keyLayoutType = currentkeymapping;
-            } else {
-                currentkeymapping = Application.keyLayoutType;
-            }
-            //   upperspinner.setSelection(currentkeymapping);
-            if (currentkeymapping == -1) {
-                //    upperspinner.setSelection(0);
-                //  lowerspinner.setSelection(0);
-            } else {
-                // upperspinner.setItemChecked(currentkeymapping, true);
-            }
-
-        } catch (InvalidUsageException e) {
-            if( e!= null && e.getStackTrace().length>0){ Log.e(TAG, e.getStackTrace()[0].toString()); }
-        } catch (OperationFailureException e) {
-            if( e!= null && e.getStackTrace().length>0){ Log.e(TAG, e.getStackTrace()[0].toString()); }
-        }
-*/
         apply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!RFIDController.mIsInventoryRunning){
+                if (!RFIDController.mIsInventoryRunning) {
                     try {
                         RFIDResults result = mConnectedReader.Config.setKeylayoutType(UpperTrigger, LowerTrigger);
-                        if(result == RFIDResults.RFID_API_SUCCESS){
+                        if (result == RFIDResults.RFID_API_SUCCESS) {
 
-                           // Log.d("getKeylayoutType","Keymap val = "+mConnectedReader.Config.getKeylayoutType() );
-                            Toast.makeText(getContext(), "Trigger Selection applied successfully " , Toast.LENGTH_SHORT).show();
-                        }
-                        else{
-                            Toast.makeText(getContext(), "Trigger selection settings not allowed " , Toast.LENGTH_SHORT).show();
+                            // Log.d("getKeylayoutType","Keymap val = "+mConnectedReader.Config.getKeylayoutType() );
+                            Toast.makeText(getContext(), "트리거 선택이 성공적으로 적용되었습니다.", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(getContext(), "트리거 선택 설정이 허용되지 않습니다.", Toast.LENGTH_SHORT).show();
                         }
 
                     } catch (InvalidUsageException e) {
-                        if( e!= null && e.getStackTrace().length>0){ Log.e(TAG, e.getStackTrace()[0].toString()); }
-                        Toast.makeText(getContext(),"Invalid Usage" ,Toast.LENGTH_SHORT).show();
+                        if (e != null && e.getStackTrace().length > 0) {
+                            Log.e(TAG, e.getStackTrace()[0].toString());
+                        }
+                        Toast.makeText(getContext(), "잘못된 사용법", Toast.LENGTH_SHORT).show();
                     } catch (OperationFailureException e) {
-                        if( e!= null && e.getStackTrace().length>0){ Log.e(TAG, e.getStackTrace()[0].toString()); }
-                        Toast.makeText(getContext(),"Remapping not set for the device" ,Toast.LENGTH_SHORT).show();
+                        if (e != null && e.getStackTrace().length > 0) {
+                            Log.e(TAG, e.getStackTrace()[0].toString());
+                        }
+                        Toast.makeText(getContext(), "장치에 재매핑이 설정되지 않았습니다.", Toast.LENGTH_SHORT).show();
                     }
-                }
-                else{
-                    Toast.makeText(getContext(),"Inventory inprogress TriggerMapping not allowed" ,Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getContext(), "인벤토리 진행 중에는 트리거 매핑이 허용되지 않습니다.", Toast.LENGTH_SHORT).show();
                 }
 
 
             }
         });
-
-
 
 
         return rootview;

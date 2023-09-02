@@ -1,6 +1,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -11,10 +11,10 @@
         style="@style/style_normal_font"
         android:layout_height="0dp"
         android:layout_weight="7"
+        android:background="@color/transparent_grey"
         android:gravity="center_vertical"
-        android:text="@string/region_title"
         android:paddingLeft="@dimen/default_padding"
-        android:background="@color/transparent_grey"/>
+        android:text="@string/region_title" />
 
     <include layout="@layout/divider" />
 
@@ -23,24 +23,19 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginBottom="@dimen/default_bottom_margin"
-        android:layout_weight="8"
-        />
+        android:layout_weight="8" />
+
     <include layout="@layout/divider" />
-   <!-- <View
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="5"
-        android:orientation="vertical" /> -->
 
     <TextView
         android:id="@+id/regulatorySettingsChannelSelectionTitle"
         style="@style/style_normal_font"
         android:layout_height="0dp"
         android:layout_weight="7"
+        android:background="@color/transparent_grey"
         android:gravity="center_vertical"
-        android:text="@string/channel_selection"
         android:paddingLeft="@dimen/default_padding"
-        android:background="@color/transparent_grey"/>
+        android:text="@string/channel_selection" />
 
     <include layout="@layout/divider" />
 
@@ -53,23 +48,15 @@
             android:id="@+id/regChannelCheckBoxes"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical" >
-        </LinearLayout>
+            android:orientation="vertical"/>
+
     </ScrollView>
 
     <RelativeLayout
-        android:layout_width="match_parent"
         android:id="@+id/rl_warning"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="18">
-
-       <!-- <TextView
-            style="@style/style_red_font"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/selectCountryWarningText"
-            android:gravity="center"
-            android:text="@string/warning_title" />
-            -->
 
         <TextView
             android:id="@+id/selectCountryWarningText"
@@ -79,17 +66,18 @@
             android:paddingLeft="@dimen/margin"
             android:paddingTop="@dimen/margin"
             android:text="@string/country_selection_warning" />
+
         <Button
             android:id="@+id/regulatoryButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
             android:layout_margin="@dimen/default_margin"
             android:onClick="showProfileSettings"
-            android:layout_alignParentBottom="true"
-            app:backgroundTint="@color/blue"
-            app:iconTint="@color/white"
             android:text="@string/next"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white"
+            app:backgroundTint="@color/blue"
+            app:iconTint="@color/white" />
     </RelativeLayout>
 
 </LinearLayout>

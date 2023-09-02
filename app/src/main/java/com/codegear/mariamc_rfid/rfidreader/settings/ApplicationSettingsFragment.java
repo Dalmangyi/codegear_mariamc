@@ -70,8 +70,9 @@ public class ApplicationSettingsFragment extends Fragment {
     private static TextView KeyMapTextView;
     private TextView bluetoothModeTextView;
     private Spinner bluetoothMode;
-    private int bluetoothModePosition=0;
+    private int bluetoothModePosition = 0;
     private boolean TaglistmatchmodeChecked = false;
+
     public ApplicationSettingsFragment() {
         // Required empty public constructor
     }
@@ -93,16 +94,15 @@ public class ApplicationSettingsFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view  =  inflater.inflate(R.layout.fragment_connection_settings, container, false);
+        View view = inflater.inflate(R.layout.fragment_connection_settings, container, false);
         return view;
 
     }
 
-    public static void SetSpinnerText(String value){
-        if(KeyMapTextView!=null && value !=null) {
+    public static void SetSpinnerText(String value) {
+        if (KeyMapTextView != null && value != null) {
             KeyMapTextView.setText(value);
         }
     }
@@ -118,8 +118,7 @@ public class ApplicationSettingsFragment extends Fragment {
     public void onResume() {
         super.onResume();
         loadCheckBoxStates();
-        if(getActivity() != null )
-            ((ActiveDeviceActivity)getActivity()).disableScanner();
+        if (getActivity() != null) ((ActiveDeviceActivity) getActivity()).disableScanner();
     }
 
     @Override
@@ -151,8 +150,8 @@ public class ApplicationSettingsFragment extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (RFIDController.mIsInventoryRunning || RFIDController.isLocatingTag) {
-                    if(getActivity() != null )
-                        Toast.makeText(getActivity(), "Operation in Progress", Toast.LENGTH_SHORT).show();
+                    if (getActivity() != null)
+                        Toast.makeText(getActivity(), "작업 진행중", Toast.LENGTH_SHORT).show();
 
                     tagListMatchMode.setChecked(!tagListMatchMode.isChecked());
                     return;
@@ -191,11 +190,7 @@ public class ApplicationSettingsFragment extends Fragment {
             }
         });
         tagListMatchTagNames.setOnCheckedChangeListener((buttonView, isChecked) -> {
-
-            //if(isChecked){
-//                Toast.makeText(getActivity(), getString(R.string.REQUIRES_TAGLIST_CSV), Toast.LENGTH_SHORT).show();
             tagListMatchTagNames.setChecked(isChecked);
-            //}
         });
 
         //   asciiMode.setOnCheckedChangeListener((buttonView, isChecked) -> RFIDController.asciiMode = isChecked);
@@ -204,7 +199,7 @@ public class ApplicationSettingsFragment extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 RFIDController.asciiMode = b;
-                if(asciiMode.isChecked() && sgtin96Mode.isChecked())
+                if (asciiMode.isChecked() && sgtin96Mode.isChecked())
                     RFIDController.sgtinMode = false;
                 sgtin96Mode.setChecked(RFIDController.sgtinMode);
             }
@@ -213,12 +208,12 @@ public class ApplicationSettingsFragment extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 RFIDController.sgtinMode = b;
-                if(asciiMode.isChecked() && sgtin96Mode.isChecked())
+                if (asciiMode.isChecked() && sgtin96Mode.isChecked())
                     RFIDController.asciiMode = false;
                 asciiMode.setChecked(RFIDController.asciiMode);
             }
         });
-        boolean readerType = (RFIDController.mConnectedReader != null )?RFIDController.mConnectedReader.getHostName().startsWith("RFD40"):false;
+        boolean readerType = (RFIDController.mConnectedReader != null) ? RFIDController.mConnectedReader.getHostName().startsWith("RFD40") : false;
 
         /*Adding spinner for bluetooth mode selection*/
         List<String> categories = new ArrayList<String>();
@@ -231,11 +226,9 @@ public class ApplicationSettingsFragment extends Fragment {
         bluetoothMode.setAdapter(BluetoothModeAdapter);
         /*TODO set the spinner position based on sled configuration*/
 
-        bluetoothMode.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
-        {
+        bluetoothMode.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
-            {
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 try {
                     if (mConnectedReader == null) return;
                     switch (position) {
@@ -247,17 +240,16 @@ public class ApplicationSettingsFragment extends Fragment {
                             break;
                     }
                 } catch (InvalidUsageException e) {
-                    Log.d(TAG,  "Returned SDK Exception");
+                    Log.d(TAG, "Returned SDK Exception");
                 } catch (OperationFailureException e) {
-                    Log.d(TAG,  "Returned SDK Exception");
+                    Log.d(TAG, "Returned SDK Exception");
                 }
-                bluetoothModePosition=position;
+                bluetoothModePosition = position;
                 bluetoothModeTextView.setText(bluetoothMode.getItemAtPosition(position).toString());
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> parent)
-            {
+            public void onNothingSelected(AdapterView<?> parent) {
             }
 
         });
@@ -275,116 +267,71 @@ public class ApplicationSettingsFragment extends Fragment {
         storeCheckBoxesStatus();
     }
 
-  /*  public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        // TODO Auto-generated method stub
-        if (cacheMatchModeTagFile.exists()) {
-            cacheMatchModeTagFile.delete();
-        }
-        if (resultCode == RESULT_OK && requestCode == TAGLIST_MATCH_MODE_IMPORT) {
-            Uri uri = data.getData();
-            if (data == null) {
-                return;
+    ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
+        @Override
+        public void onActivityResult(ActivityResult result) {
+            if (cacheMatchModeTagFile.exists()) {
+                cacheMatchModeTagFile.delete();
             }
-            try {
-                InputStream in = getActivity().getContentResolver().openInputStream(uri);
-                OutputStream out = new FileOutputStream(cacheMatchModeTagFile);
-                Log.d("size", in.toString());
-                byte[] buf = new byte[1024];
-                int len;
-                while ((len = in.read(buf)) > 0) {
-                    out.write(buf, 0, len);
+            if (result.getResultCode() == Activity.RESULT_CANCELED) {
+                TaglistmatchmodeChecked = false;
+            }
+
+            if (result.getResultCode() == RESULT_OK) {
+                Intent data = result.getData();
+                Uri documentUri = data.getData();
+                if (data == null) {
+                    //   Toast.makeText(getActivity(),"No File selected  ",Toast.LENGTH_SHORT).show();
+                    return;
                 }
-                out.close();
-                in.close();
-            } catch (FileNotFoundException e) {
-                Log.d(TAG,  "Returned SDK Exception");
-            } catch (Exception e) {
-                Log.d(TAG,  "Returned SDK Exception");
-            }
-            if (!cacheMatchModeTagFile.exists()) {
-                Toast.makeText(getActivity(), getString(R.string.REQUIRES_TAGLIST_CSV), Toast.LENGTH_SHORT).show();
-                tagListMatchMode.setChecked(false);
-            } else {
-                tagListMatchTagNames.setEnabled(true);
-                Toast.makeText(getActivity(), R.string.status_success_message, Toast.LENGTH_SHORT).show();
-            }
-        }
-        // if( getActivity().isFinishing() == false ){
-        loadCheckBoxStates();
-        storeCheckBoxesStatus();
-        //  getActivity().finish();
-        // }
-    }*/
-
-
-    ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(
-            new ActivityResultContracts.StartActivityForResult(),
-            new ActivityResultCallback<ActivityResult>() {
-                @Override
-                public void onActivityResult(ActivityResult result) {
-                    if (cacheMatchModeTagFile.exists()) {
-                        cacheMatchModeTagFile.delete();
-                    }
-                    if(result.getResultCode() == Activity.RESULT_CANCELED){
-                        TaglistmatchmodeChecked = false;
-                    }
-
-                    if (result.getResultCode() == RESULT_OK ) {
-                        Intent data = result.getData();
-                        Uri documentUri =  data.getData();
-                        if( data == null) {
-                            //   Toast.makeText(getActivity(),"No File selected  ",Toast.LENGTH_SHORT).show();
-                            return;
+                if (data != null) {
+                    if (data.getData().toString().contains("content://com.android.providers")) {
+                        getActivity().runOnUiThread(this::ShowPlugInPathChangeDialog);
+                    } else {
+                        try {
+                            InputStream in = getActivity().getContentResolver().openInputStream(documentUri);
+                            OutputStream out = new FileOutputStream(cacheMatchModeTagFile);
+                            Log.d("size", in.toString());
+                            byte[] buf = new byte[1024];
+                            int len;
+                            while ((len = in.read(buf)) > 0) {
+                                out.write(buf, 0, len);
+                            }
+                            out.close();
+                            in.close();
+                        } catch (FileNotFoundException e) {
+                            Log.d(TAG, "Returned SDK Exception");
+                        } catch (Exception e) {
+                            Log.d(TAG, "Returned SDK Exception");
                         }
-                        if (data != null) {
-                            if (data.getData().toString().contains("content://com.android.providers")) {
-                                getActivity().runOnUiThread(this::ShowPlugInPathChangeDialog);
-                            }
-
-                            else{
-                                try {
-                                    InputStream in = getActivity().getContentResolver().openInputStream(documentUri);
-                                    OutputStream out = new FileOutputStream(cacheMatchModeTagFile);
-                                    Log.d("size", in.toString());
-                                    byte[] buf = new byte[1024];
-                                    int len;
-                                    while ((len = in.read(buf)) > 0) {
-                                        out.write(buf, 0, len);
-                                    }
-                                    out.close();
-                                    in.close();
-                                } catch (FileNotFoundException e) {
-                                    Log.d(TAG, "Returned SDK Exception");
-                                } catch (Exception e) {
-                                    Log.d(TAG, "Returned SDK Exception");
-                                }
-                                if (!cacheMatchModeTagFile.exists()) {
-                                    Toast.makeText(getActivity(), getString(R.string.REQUIRES_TAGLIST_CSV), Toast.LENGTH_SHORT).show();
-                                    tagListMatchMode.setChecked(false);
-                                } else {
-                                    //  tagListMatchMode.setChecked(true);
-                                    tagListMatchTagNames.setEnabled(true);
-                                    Toast.makeText(getActivity(), R.string.status_success_message, Toast.LENGTH_SHORT).show();
-                                }
-                            }
+                        if (!cacheMatchModeTagFile.exists()) {
+                            Toast.makeText(getActivity(), getString(R.string.REQUIRES_TAGLIST_CSV), Toast.LENGTH_SHORT).show();
+                            tagListMatchMode.setChecked(false);
+                        } else {
+                            //  tagListMatchMode.setChecked(true);
+                            tagListMatchTagNames.setEnabled(true);
+                            Toast.makeText(getActivity(), R.string.status_success_message, Toast.LENGTH_SHORT).show();
                         }
                     }
                 }
-                private void ShowPlugInPathChangeDialog() {
-                    if (!getActivity().isFinishing()) {
-                        final Dialog dialog = new Dialog(getActivity());
-                        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                        dialog.setContentView(R.layout.dialog_taglistmatchmode_path);
-                        dialog.setCancelable(false);
-                        dialog.setCanceledOnTouchOutside(false);
-                        dialog.show();
-                        TextView declineButton = (TextView) dialog.findViewById(R.id.btn_ok);
-                        declineButton.setOnClickListener(v -> dialog.dismiss());
-                    }
-                }
+            }
+        }
 
-            });
+        private void ShowPlugInPathChangeDialog() {
+            if (!getActivity().isFinishing()) {
+                final Dialog dialog = new Dialog(getActivity());
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                dialog.setContentView(R.layout.dialog_taglistmatchmode_path);
+                dialog.setCancelable(false);
+                dialog.setCanceledOnTouchOutside(false);
+                dialog.show();
+                TextView declineButton = (TextView) dialog.findViewById(R.id.btn_ok);
+                declineButton.setOnClickListener(v -> dialog.dismiss());
+            }
+        }
+
+    });
 
 
     /**
@@ -395,10 +342,6 @@ public class ApplicationSettingsFragment extends Fragment {
         autoReconnectReaders.setChecked(settings.getBoolean(Constants.AUTO_RECONNECT_READERS, true));
         readerConnection.setChecked(settings.getBoolean(Constants.NOTIFY_READER_CONNECTION, false));
         readerBattery.setChecked(settings.getBoolean(Constants.NOTIFY_BATTERY_STATUS, true));
-//        if (Build.MODEL.contains("MC33"))
-//            readerBattery.setChecked(settings.getBoolean(Constants.NOTIFY_BATTERY_STATUS, false));
-//        else
-//            readerBattery.setChecked(settings.getBoolean(Constants.NOTIFY_BATTERY_STATUS, true));
         exportData.setChecked(settings.getBoolean(Constants.EXPORT_DATA, false));
         tagListMatchMode.setChecked(settings.getBoolean(Constants.TAG_LIST_MATCH_MODE, false));
 
@@ -432,7 +375,7 @@ public class ApplicationSettingsFragment extends Fragment {
         boolean SHOW_CSV_TAG_NAMES = ((CheckBox) getActivity().findViewById(R.id.tagListMatchTagNames)).isChecked();
         boolean ASCCI_MODE = asciiMode.isChecked();
         boolean SGTIN_MODE = sgtin96Mode.isChecked();
-        Log.d("Matchmode","Tagmatchmode="+TaglistmatchmodeChecked);
+        Log.d("Matchmode", "Tagmatchmode=" + TaglistmatchmodeChecked);
         SharedPreferences settings = getActivity().getSharedPreferences(Constants.APP_SETTINGS_STATUS, 0);
         SharedPreferences.Editor editor = settings.edit();
 
@@ -458,8 +401,7 @@ public class ApplicationSettingsFragment extends Fragment {
         }
         if (settings.getBoolean(Constants.TAG_LIST_MATCH_MODE, false) != TAG_LIST_MATCH_MODE) {
             editor.putBoolean(Constants.TAG_LIST_MATCH_MODE, TAG_LIST_MATCH_MODE);
-            if(!TaglistmatchmodeChecked)
-                isChanged = true;
+            if (!TaglistmatchmodeChecked) isChanged = true;
         }
         if (settings.getBoolean(Constants.SHOW_CSV_TAG_NAMES, false) != SHOW_CSV_TAG_NAMES) {
             editor.putBoolean(Constants.SHOW_CSV_TAG_NAMES, SHOW_CSV_TAG_NAMES);

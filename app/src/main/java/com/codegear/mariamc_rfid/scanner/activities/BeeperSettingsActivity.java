@@ -171,7 +171,7 @@ public class BeeperSettingsActivity extends BaseActivity implements View.OnClick
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            progressDialog = new CustomProgressDialog(BeeperSettingsActivity.this, "Execute Command...");
+            progressDialog = new CustomProgressDialog(BeeperSettingsActivity.this, "명령어 실행중...");
             progressDialog.show();
         }
 
@@ -295,7 +295,7 @@ public class BeeperSettingsActivity extends BaseActivity implements View.OnClick
                 if(opcode==DCSSDKDefs.DCSSDK_COMMAND_OPCODE.DCSSDK_RSM_ATTR_GET)
                   Toast.makeText(BeeperSettingsActivity.this, "Unable to fetch beeper settings", Toast.LENGTH_SHORT).show();
                 else if(opcode==DCSSDKDefs.DCSSDK_COMMAND_OPCODE.DCSSDK_RSM_ATTR_SET){
-                    Toast.makeText(BeeperSettingsActivity.this, "Cannot perform the action", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(BeeperSettingsActivity.this, "작업을 수행할 수 없습니다.", Toast.LENGTH_SHORT).show();
                 }
             }
         }

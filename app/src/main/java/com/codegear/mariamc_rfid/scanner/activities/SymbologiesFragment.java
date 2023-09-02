@@ -98,7 +98,7 @@ public class SymbologiesFragment extends Fragment implements NavigationView.OnNa
     private ArrayList<Symbology> symbologies;
     private AsyncTask task;
     private Stack<Integer> attStack; //RHBJ36-SSDK-3450-12.24.2015
-	private CustomProgressDialog progressDialog;
+    private CustomProgressDialog progressDialog;
     private NavigationView navigationView;
     SymbologiesFragment mSymbologiesFragment = null;
     Menu menu;
@@ -119,15 +119,14 @@ public class SymbologiesFragment extends Fragment implements NavigationView.OnNa
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                                Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View rootview = inflater.inflate(R.layout.content_symbologies, container, false);
 
         scannerID = Application.currentScannerId;
 
-		/*RHBJ36-SSDK-3450-12.24.2015
-		 * Allocate stack to store attributes.
-		*/
+        /*RHBJ36-SSDK-3450-12.24.2015
+         * Allocate stack to store attributes.
+         */
         attStack = new Stack<Integer>();
         symbologies = new ArrayList<>();
         symbologies.add(new Symbology("UPC-A", RMD_ATTR_SYM_UPC_A));                                //0
@@ -182,23 +181,22 @@ public class SymbologiesFragment extends Fragment implements NavigationView.OnNa
     }
 
 
-
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater){
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         // Inflate the menu; this adds items to the action bar if it is present.
         inflater.inflate(R.menu.no_items, menu);
 
     }
 
     /*RHBJ36 12.15.2015
-	 *Cancel the async task (Fetching symbologies) on destroying the Symbology activity.
-	*/
+     *Cancel the async task (Fetching symbologies) on destroying the Symbology activity.
+     */
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if(task !=null){
+        if (task != null) {
             task.cancel(true);
-            task=null;
+            task = null;
         }
     }
 
@@ -210,54 +208,54 @@ public class SymbologiesFragment extends Fragment implements NavigationView.OnNa
     }
 
     private void registerCheckChangeListner() {
-        ((SwitchCompat)getView().findViewById(R.id.upcA)).setOnCheckedChangeListener(this);
-        ((SwitchCompat)getView().findViewById(R.id.upcE)).setOnCheckedChangeListener(this);
-        ((SwitchCompat)getView().findViewById(R.id.upcE1)).setOnCheckedChangeListener(this);
-        ((SwitchCompat)getView().findViewById(R.id.ean8)).setOnCheckedChangeListener(this);
-        ((SwitchCompat)getView().findViewById(R.id.ean13)).setOnCheckedChangeListener(this);
-        ((SwitchCompat)getView().findViewById(R.id.bookland)).setOnCheckedChangeListener(this);
-        ((SwitchCompat)getView().findViewById(R.id.code128)).setOnCheckedChangeListener(this);
-        ((SwitchCompat)getView().findViewById(R.id.ean128)).setOnCheckedChangeListener(this);
-        ((SwitchCompat)getView().findViewById(R.id.code39)).setOnCheckedChangeListener(this);
-        ((SwitchCompat)getView().findViewById(R.id.code93)).setOnCheckedChangeListener(this);
-        ((SwitchCompat)getView().findViewById(R.id.code11)).setOnCheckedChangeListener(this);
-        ((SwitchCompat)getView().findViewById(R.id.interleaved)).setOnCheckedChangeListener(this);
-        ((SwitchCompat)getView().findViewById(R.id.discrete)).setOnCheckedChangeListener(this);
-        ((SwitchCompat)getView().findViewById(R.id.chinese)).setOnCheckedChangeListener(this);
-        ((SwitchCompat)getView().findViewById(R.id.codabar)).setOnCheckedChangeListener(this);
-        ((SwitchCompat)getView().findViewById(R.id.msi)).setOnCheckedChangeListener(this);
-        ((SwitchCompat)getView().findViewById(R.id.code32)).setOnCheckedChangeListener(this);
-        ((SwitchCompat)getView().findViewById(R.id.dataMatrix)).setOnCheckedChangeListener(this);
-        ((SwitchCompat)getView().findViewById(R.id.pdf)).setOnCheckedChangeListener(this);
+        ((SwitchCompat) getView().findViewById(R.id.upcA)).setOnCheckedChangeListener(this);
+        ((SwitchCompat) getView().findViewById(R.id.upcE)).setOnCheckedChangeListener(this);
+        ((SwitchCompat) getView().findViewById(R.id.upcE1)).setOnCheckedChangeListener(this);
+        ((SwitchCompat) getView().findViewById(R.id.ean8)).setOnCheckedChangeListener(this);
+        ((SwitchCompat) getView().findViewById(R.id.ean13)).setOnCheckedChangeListener(this);
+        ((SwitchCompat) getView().findViewById(R.id.bookland)).setOnCheckedChangeListener(this);
+        ((SwitchCompat) getView().findViewById(R.id.code128)).setOnCheckedChangeListener(this);
+        ((SwitchCompat) getView().findViewById(R.id.ean128)).setOnCheckedChangeListener(this);
+        ((SwitchCompat) getView().findViewById(R.id.code39)).setOnCheckedChangeListener(this);
+        ((SwitchCompat) getView().findViewById(R.id.code93)).setOnCheckedChangeListener(this);
+        ((SwitchCompat) getView().findViewById(R.id.code11)).setOnCheckedChangeListener(this);
+        ((SwitchCompat) getView().findViewById(R.id.interleaved)).setOnCheckedChangeListener(this);
+        ((SwitchCompat) getView().findViewById(R.id.discrete)).setOnCheckedChangeListener(this);
+        ((SwitchCompat) getView().findViewById(R.id.chinese)).setOnCheckedChangeListener(this);
+        ((SwitchCompat) getView().findViewById(R.id.codabar)).setOnCheckedChangeListener(this);
+        ((SwitchCompat) getView().findViewById(R.id.msi)).setOnCheckedChangeListener(this);
+        ((SwitchCompat) getView().findViewById(R.id.code32)).setOnCheckedChangeListener(this);
+        ((SwitchCompat) getView().findViewById(R.id.dataMatrix)).setOnCheckedChangeListener(this);
+        ((SwitchCompat) getView().findViewById(R.id.pdf)).setOnCheckedChangeListener(this);
 
-        ((SwitchCompat)getView().findViewById(R.id.isbn)).setOnCheckedChangeListener(this);
-        ((SwitchCompat)getView().findViewById(R.id.ucc_coupon_extended)).setOnCheckedChangeListener(this);
-        ((SwitchCompat)getView().findViewById(R.id.issn_ean)).setOnCheckedChangeListener(this);
-        ((SwitchCompat)getView().findViewById(R.id.isbt_128)).setOnCheckedChangeListener(this);
-        ((SwitchCompat)getView().findViewById(R.id.triopticCode39)).setOnCheckedChangeListener(this);
-        ((SwitchCompat)getView().findViewById(R.id.matrix2o5)).setOnCheckedChangeListener(this);
-        ((SwitchCompat)getView().findViewById(R.id.korean3o5)).setOnCheckedChangeListener(this);
-        ((SwitchCompat)getView().findViewById(R.id.gs1DataBar14)).setOnCheckedChangeListener(this);
-        ((SwitchCompat)getView().findViewById(R.id.gs1DatabarLimited)).setOnCheckedChangeListener(this);
-        ((SwitchCompat)getView().findViewById(R.id.gs1DatabarExpanded)).setOnCheckedChangeListener(this);
-        ((SwitchCompat)getView().findViewById(R.id.micropdf417)).setOnCheckedChangeListener(this);
-        ((SwitchCompat)getView().findViewById(R.id.maxicode)).setOnCheckedChangeListener(this);
-        ((SwitchCompat)getView().findViewById(R.id.qrCode)).setOnCheckedChangeListener(this);
-        ((SwitchCompat)getView().findViewById(R.id.microQRCode)).setOnCheckedChangeListener(this);
-        ((SwitchCompat)getView().findViewById(R.id.aztec)).setOnCheckedChangeListener(this);
-        ((SwitchCompat)getView().findViewById(R.id.hanXinCode)).setOnCheckedChangeListener(this);
-        ((SwitchCompat)getView().findViewById(R.id.aupost)).setOnCheckedChangeListener(this);
-        ((SwitchCompat)getView().findViewById(R.id.us_planet)).setOnCheckedChangeListener(this);
-        ((SwitchCompat)getView().findViewById(R.id.us_postnet)).setOnCheckedChangeListener(this);
-        ((SwitchCompat)getView().findViewById(R.id.kixCode)).setOnCheckedChangeListener(this);
-        ((SwitchCompat)getView().findViewById(R.id.usps4CB)).setOnCheckedChangeListener(this);
-        ((SwitchCompat)getView().findViewById(R.id.uk_postal)).setOnCheckedChangeListener(this);
-        ((SwitchCompat)getView().findViewById(R.id.japanPostal)).setOnCheckedChangeListener(this);
-        ((SwitchCompat)getView().findViewById(R.id.fics)).setOnCheckedChangeListener(this);
-        ((SwitchCompat)getView().findViewById(R.id.compositec)).setOnCheckedChangeListener(this);
-        ((SwitchCompat)getView().findViewById(R.id.compositeAB)).setOnCheckedChangeListener(this);
-        ((SwitchCompat)getView().findViewById(R.id.tlc39)).setOnCheckedChangeListener(this);
-        ((SwitchCompat)getView().findViewById(R.id.dotcode)).setOnCheckedChangeListener(this);
+        ((SwitchCompat) getView().findViewById(R.id.isbn)).setOnCheckedChangeListener(this);
+        ((SwitchCompat) getView().findViewById(R.id.ucc_coupon_extended)).setOnCheckedChangeListener(this);
+        ((SwitchCompat) getView().findViewById(R.id.issn_ean)).setOnCheckedChangeListener(this);
+        ((SwitchCompat) getView().findViewById(R.id.isbt_128)).setOnCheckedChangeListener(this);
+        ((SwitchCompat) getView().findViewById(R.id.triopticCode39)).setOnCheckedChangeListener(this);
+        ((SwitchCompat) getView().findViewById(R.id.matrix2o5)).setOnCheckedChangeListener(this);
+        ((SwitchCompat) getView().findViewById(R.id.korean3o5)).setOnCheckedChangeListener(this);
+        ((SwitchCompat) getView().findViewById(R.id.gs1DataBar14)).setOnCheckedChangeListener(this);
+        ((SwitchCompat) getView().findViewById(R.id.gs1DatabarLimited)).setOnCheckedChangeListener(this);
+        ((SwitchCompat) getView().findViewById(R.id.gs1DatabarExpanded)).setOnCheckedChangeListener(this);
+        ((SwitchCompat) getView().findViewById(R.id.micropdf417)).setOnCheckedChangeListener(this);
+        ((SwitchCompat) getView().findViewById(R.id.maxicode)).setOnCheckedChangeListener(this);
+        ((SwitchCompat) getView().findViewById(R.id.qrCode)).setOnCheckedChangeListener(this);
+        ((SwitchCompat) getView().findViewById(R.id.microQRCode)).setOnCheckedChangeListener(this);
+        ((SwitchCompat) getView().findViewById(R.id.aztec)).setOnCheckedChangeListener(this);
+        ((SwitchCompat) getView().findViewById(R.id.hanXinCode)).setOnCheckedChangeListener(this);
+        ((SwitchCompat) getView().findViewById(R.id.aupost)).setOnCheckedChangeListener(this);
+        ((SwitchCompat) getView().findViewById(R.id.us_planet)).setOnCheckedChangeListener(this);
+        ((SwitchCompat) getView().findViewById(R.id.us_postnet)).setOnCheckedChangeListener(this);
+        ((SwitchCompat) getView().findViewById(R.id.kixCode)).setOnCheckedChangeListener(this);
+        ((SwitchCompat) getView().findViewById(R.id.usps4CB)).setOnCheckedChangeListener(this);
+        ((SwitchCompat) getView().findViewById(R.id.uk_postal)).setOnCheckedChangeListener(this);
+        ((SwitchCompat) getView().findViewById(R.id.japanPostal)).setOnCheckedChangeListener(this);
+        ((SwitchCompat) getView().findViewById(R.id.fics)).setOnCheckedChangeListener(this);
+        ((SwitchCompat) getView().findViewById(R.id.compositec)).setOnCheckedChangeListener(this);
+        ((SwitchCompat) getView().findViewById(R.id.compositeAB)).setOnCheckedChangeListener(this);
+        ((SwitchCompat) getView().findViewById(R.id.tlc39)).setOnCheckedChangeListener(this);
+        ((SwitchCompat) getView().findViewById(R.id.dotcode)).setOnCheckedChangeListener(this);
     }
 
 
@@ -268,34 +266,34 @@ public class SymbologiesFragment extends Fragment implements NavigationView.OnNa
             String outXML;
             String scannerName = Application.currentScannerName;
             /*RHBJ36 check null 12.15.2015
-			 *Check null for not to create multilple Asynctask for fetching symbologies with same task variable to avoid crash.
-			*/
-            if(task==null)
-                task = new MyAsyncTask(scannerID, scannerName,DCSSDKDefs.DCSSDK_COMMAND_OPCODE.DCSSDK_RSM_ATTR_GETALL, null).execute(new String[]{inXML});
+             *Check null for not to create multilple Asynctask for fetching symbologies with same task variable to avoid crash.
+             */
+            if (task == null)
+                task = new MyAsyncTask(scannerID, scannerName, DCSSDKDefs.DCSSDK_COMMAND_OPCODE.DCSSDK_RSM_ATTR_GETALL, null).execute(new String[]{inXML});
         } else {
             Toast.makeText(getActivity(), Constants.INVALID_SCANNER_ID_MSG, Toast.LENGTH_SHORT).show();
         }
     }
 
 
-
     private void setSymbologyConfiguration(String param, View view) {
         String scannerName = Application.currentScannerName;
 
-        CheckBox cbPermanant = (CheckBox)getView().findViewById(R.id.checkBoxPermanant);
-        if(cbPermanant.isChecked()) {
-            new MyAsyncTask(Application.currentScannerId,scannerName, DCSSDKDefs.DCSSDK_COMMAND_OPCODE.DCSSDK_RSM_ATTR_STORE, view).execute(new String[]{param});
-        }else{
-            new MyAsyncTask(Application.currentScannerId,scannerName, DCSSDKDefs.DCSSDK_COMMAND_OPCODE.DCSSDK_RSM_ATTR_SET, view).execute(new String[]{param});
+        CheckBox cbPermanant = (CheckBox) getView().findViewById(R.id.checkBoxPermanant);
+        if (cbPermanant.isChecked()) {
+            new MyAsyncTask(Application.currentScannerId, scannerName, DCSSDKDefs.DCSSDK_COMMAND_OPCODE.DCSSDK_RSM_ATTR_STORE, view).execute(new String[]{param});
+        } else {
+            new MyAsyncTask(Application.currentScannerId, scannerName, DCSSDKDefs.DCSSDK_COMMAND_OPCODE.DCSSDK_RSM_ATTR_SET, view).execute(new String[]{param});
 
         }
     }
-	/*RHBJ36:Issue reported from IOS.SSDK-3471.
-	 *Change for fix for crashing when scanning barcode while fetching Symbologies.
-	 *Dialog is dismisses after Activity finished. Added check to confirm if the activity is not in Finishing state
-	 *before dismissing the dialog.
-	*/
-	private void dismissDialog(){
+
+    /*RHBJ36:Issue reported from IOS.SSDK-3471.
+     *Change for fix for crashing when scanning barcode while fetching Symbologies.
+     *Dialog is dismisses after Activity finished. Added check to confirm if the activity is not in Finishing state
+     *before dismissing the dialog.
+     */
+    private void dismissDialog() {
         if (progressDialog != null && progressDialog.isShowing()) {
             progressDialog.dismiss();
         }
@@ -306,7 +304,7 @@ public class SymbologiesFragment extends Fragment implements NavigationView.OnNa
         int id = item.getItemId();
         Intent intent;
         if (id == R.id.nav_pair_device) {
-            ((ActiveDeviceActivity)getActivity()).disconnect(scannerID);
+            ((ActiveDeviceActivity) getActivity()).disconnect(scannerID);
             //Application.barcodeData.clear();
             Application.currentScannerId = Application.SCANNER_ID_NONE;
             //finish();
@@ -317,14 +315,14 @@ public class SymbologiesFragment extends Fragment implements NavigationView.OnNa
             intent = new Intent(getActivity(), ScannersActivity.class);
 
             startActivity(intent);
-        }else if (id == R.id.nav_find_cabled_scanner) {
-            AlertDialog.Builder dlg = new  AlertDialog.Builder(getActivity());
-            dlg.setTitle("This will disconnect your current scanner");
+        } else if (id == R.id.nav_find_cabled_scanner) {
+            AlertDialog.Builder dlg = new AlertDialog.Builder(getActivity());
+            dlg.setTitle("현재 스캐너의 연결이 끊어집니다.");
             //dlg.setIcon(android.R.drawable.ic_dialog_alert);
-            dlg.setPositiveButton("Continue", new DialogInterface.OnClickListener() {
+            dlg.setPositiveButton("계속하기", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int arg) {
 
-                    ((ActiveDeviceActivity)getActivity()).disconnect(scannerID);
+                    ((ActiveDeviceActivity) getActivity()).disconnect(scannerID);
                     //Application.barcodeData.clear();
                     Application.currentScannerId = Application.SCANNER_ID_NONE;
                     //finish();
@@ -333,13 +331,13 @@ public class SymbologiesFragment extends Fragment implements NavigationView.OnNa
                 }
             });
 
-            dlg.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            dlg.setNegativeButton("취소", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int arg) {
 
                 }
             });
             dlg.show();
-        }else if (id == R.id.nav_connection_help) {
+        } else if (id == R.id.nav_connection_help) {
             intent = new Intent(getActivity(), ConnectionHelpActivity2.class);
             startActivity(intent);
         } else if (id == R.id.nav_settings) {
@@ -360,19 +358,17 @@ public class SymbologiesFragment extends Fragment implements NavigationView.OnNa
         if (settingsFetched) {
             Symbology buttonSymbology = new Symbology((String) buttonView.getTag(), 0);
             Symbology symbology = symbologies.get(symbologies.indexOf(buttonSymbology));
-            String inXML = "<inArgs><scannerID>" + Application.currentScannerId + "</scannerID><cmdArgs><arg-xml><attrib_list><attribute>" +
-                    "<id>" + symbology.getRmdAttributeID() + "</id><datatype>F</datatype><value>" + isChecked + "</value>" +
-                    "</attribute></attrib_list></arg-xml></cmdArgs></inArgs>";
+            String inXML = "<inArgs><scannerID>" + Application.currentScannerId + "</scannerID><cmdArgs><arg-xml><attrib_list><attribute>" + "<id>" + symbology.getRmdAttributeID() + "</id><datatype>F</datatype><value>" + isChecked + "</value>" + "</attribute></attrib_list></arg-xml></cmdArgs></inArgs>";
             setSymbologyConfiguration(inXML, buttonView);
         } else {
-            Toast.makeText(getActivity(), "Supported symbologies have not been retrieved. Action will not be performed", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "지원되는 기호가 검색되지 않았습니다. 작업이 수행되지 않습니다.", Toast.LENGTH_SHORT).show();
         }
 
-        final TextView textView = (TextView)getView().findViewById(getTitleTextID(((SwitchCompat) buttonView).getTag().toString()) );
+        final TextView textView = (TextView) getView().findViewById(getTitleTextID(((SwitchCompat) buttonView).getTag().toString()));
 
-        if(isChecked){
+        if (isChecked) {
             textView.setTextColor(ContextCompat.getColor(getActivity(), R.color.font_color));
-        }else{
+        } else {
             textView.setTextColor(ContextCompat.getColor(getActivity(), R.color.inactive_text));
         }
 
@@ -380,53 +376,53 @@ public class SymbologiesFragment extends Fragment implements NavigationView.OnNa
     }
 
     private int getTitleTextID(String tag) {
-        if(tag.equals("UPC-A") )return R.id.upcA_title    ;
-        if(tag.equals("UPC-E"))return R.id.upcETitle    ;
-        if(tag.equals("UPC-E1"))return R.id.upcE1Title    ;
-        if(tag.equals("EAN-8/JAN8"))return R.id.ean8Title    ;
-        if(tag.equals("EAN-13/JAN13"))return R.id.ean13Title    ;
-        if(tag.equals("Bookland EAN"))return R.id.booklandTitle    ;
-        if(tag.equals("Code 128"))return R.id.code128Title    ;
-        if(tag.equals("GS1-128"))return R.id.ean128Title    ;
-        if(tag.equals("Code 39"))return R.id.code39Title   ;
-        if(tag.equals("Code 93"))return R.id.code93Title    ;
-        if(tag.equals("Code 11"))return R.id.code11Title    ;
-        if(tag.equals("Interleaved 2 of 5"))return R.id.interleavedTitle    ;
-        if(tag.equals("Discrete 2 of 5"))return R.id.discreteTitle    ;
-        if(tag.equals("Chinese 2 of 5"))return R.id.chineseTitle    ;
-        if(tag.equals("Codabar"))return R.id.codabarTitle    ;
-        if(tag.equals("MSI"))return R.id.msiTitle    ;
-        if(tag.equals("Code 32"))return R.id.code32Title    ;
-        if(tag.equals("Data Matrix"))return R.id.dataMatrixTitle    ;
-        if(tag.equals("PDF417"))return R.id.pdfTitle    ;
-        if(tag.equals("ISBN"))return R.id.isbnTitle    ;
-        if(tag.equals("UCC Coupon Extended Code"))return R.id.ucc_coupon_extended_Title    ;
-        if(tag.equals("ISSN EAN"))return R.id.issn_ean_Title   ;
-        if(tag.equals("ISBT 128"))return R.id.isbt_128Title    ;
-        if(tag.equals("Trioptic Code 39"))return R.id.triopticCode39Title    ;
-        if(tag.equals("Matrix 2 of 5"))return R.id.matrix2o5Title    ;
-        if(tag.equals("Korean 3 of 5"))return R.id.korean3o5Title    ;
-        if(tag.equals("GS1 DataBar-14"))return R.id.gs1DataBar14Title    ;
-        if(tag.equals("GS1 DataBar Limited"))return R.id.gs1DatabarLimitedTitle   ;
-        if(tag.equals("GS1 DataBar Expanded"))return R.id.gs1DatabarExpandedTitle   ;
-        if(tag.equals("MicroPDF417"))return R.id.microPDF417Title    ;
-        if(tag.equals("Maxicode"))return R.id.maxicodeTitle    ;
-        if(tag.equals("QR Code"))return R.id.qrCodeTitle    ;
-        if(tag.equals("Aztec"))return R.id.aztecTitle    ;
-        if(tag.equals("Han Xin Code"))return R.id.hanXinCodeTitle    ;
-        if(tag.equals("Australian Post"))return R.id.aupostTitle   ;
-        if(tag.equals("US PLANET"))return R.id.us_planetTitle    ;
-        if(tag.equals("US POSTNET"))return R.id.us_postnetTitle    ;
-        if(tag.equals("Netherlands KIX"))return R.id.kixCodeTitle    ;
-        if(tag.equals("USPS 4CB"))return R.id.usps4CBTitle    ;
-        if(tag.equals("UK Postal"))return R.id.uk_postalTitle    ;
-        if(tag.equals("Japan Post"))return R.id.japanPostalTitle    ;
-        if(tag.equals("UPU FICS"))return R.id.ficsTitle    ;
-        if(tag.equals("MicroQR"))return R.id.microQrCodeTitle    ;
-        if(tag.equals("Composite C"))return R.id.composteCTitle    ;
-        if(tag.equals("Composite AB"))return R.id.compositeABTitle    ;
-        if(tag.equals("TLC39"))return R.id.tlc39Title    ;
-        if(tag.equals("Dot Code"))return R.id.dotCodeTitle    ;
+        if (tag.equals("UPC-A")) return R.id.upcA_title;
+        if (tag.equals("UPC-E")) return R.id.upcETitle;
+        if (tag.equals("UPC-E1")) return R.id.upcE1Title;
+        if (tag.equals("EAN-8/JAN8")) return R.id.ean8Title;
+        if (tag.equals("EAN-13/JAN13")) return R.id.ean13Title;
+        if (tag.equals("Bookland EAN")) return R.id.booklandTitle;
+        if (tag.equals("Code 128")) return R.id.code128Title;
+        if (tag.equals("GS1-128")) return R.id.ean128Title;
+        if (tag.equals("Code 39")) return R.id.code39Title;
+        if (tag.equals("Code 93")) return R.id.code93Title;
+        if (tag.equals("Code 11")) return R.id.code11Title;
+        if (tag.equals("Interleaved 2 of 5")) return R.id.interleavedTitle;
+        if (tag.equals("Discrete 2 of 5")) return R.id.discreteTitle;
+        if (tag.equals("Chinese 2 of 5")) return R.id.chineseTitle;
+        if (tag.equals("Codabar")) return R.id.codabarTitle;
+        if (tag.equals("MSI")) return R.id.msiTitle;
+        if (tag.equals("Code 32")) return R.id.code32Title;
+        if (tag.equals("Data Matrix")) return R.id.dataMatrixTitle;
+        if (tag.equals("PDF417")) return R.id.pdfTitle;
+        if (tag.equals("ISBN")) return R.id.isbnTitle;
+        if (tag.equals("UCC Coupon Extended Code")) return R.id.ucc_coupon_extended_Title;
+        if (tag.equals("ISSN EAN")) return R.id.issn_ean_Title;
+        if (tag.equals("ISBT 128")) return R.id.isbt_128Title;
+        if (tag.equals("Trioptic Code 39")) return R.id.triopticCode39Title;
+        if (tag.equals("Matrix 2 of 5")) return R.id.matrix2o5Title;
+        if (tag.equals("Korean 3 of 5")) return R.id.korean3o5Title;
+        if (tag.equals("GS1 DataBar-14")) return R.id.gs1DataBar14Title;
+        if (tag.equals("GS1 DataBar Limited")) return R.id.gs1DatabarLimitedTitle;
+        if (tag.equals("GS1 DataBar Expanded")) return R.id.gs1DatabarExpandedTitle;
+        if (tag.equals("MicroPDF417")) return R.id.microPDF417Title;
+        if (tag.equals("Maxicode")) return R.id.maxicodeTitle;
+        if (tag.equals("QR Code")) return R.id.qrCodeTitle;
+        if (tag.equals("Aztec")) return R.id.aztecTitle;
+        if (tag.equals("Han Xin Code")) return R.id.hanXinCodeTitle;
+        if (tag.equals("Australian Post")) return R.id.aupostTitle;
+        if (tag.equals("US PLANET")) return R.id.us_planetTitle;
+        if (tag.equals("US POSTNET")) return R.id.us_postnetTitle;
+        if (tag.equals("Netherlands KIX")) return R.id.kixCodeTitle;
+        if (tag.equals("USPS 4CB")) return R.id.usps4CBTitle;
+        if (tag.equals("UK Postal")) return R.id.uk_postalTitle;
+        if (tag.equals("Japan Post")) return R.id.japanPostalTitle;
+        if (tag.equals("UPU FICS")) return R.id.ficsTitle;
+        if (tag.equals("MicroQR")) return R.id.microQrCodeTitle;
+        if (tag.equals("Composite C")) return R.id.composteCTitle;
+        if (tag.equals("Composite AB")) return R.id.compositeABTitle;
+        if (tag.equals("TLC39")) return R.id.tlc39Title;
+        if (tag.equals("Dot Code")) return R.id.dotCodeTitle;
 
         return 0;
     }
@@ -480,17 +476,17 @@ public class SymbologiesFragment extends Fragment implements NavigationView.OnNa
 
     }
 
-    private class MyAsyncTask extends AsyncTask<String,Integer,Boolean> {
+    private class MyAsyncTask extends AsyncTask<String, Integer, Boolean> {
         int scannerId;
         DCSSDKDefs.DCSSDK_COMMAND_OPCODE opcode;
         View view;
         String outXML;
         String scannerName;
-        
 
-        public MyAsyncTask(int scannerId, String scannerName,DCSSDKDefs.DCSSDK_COMMAND_OPCODE opcode, View _view) {
-            this.scannerId=scannerId;
-            this.opcode=opcode;
+
+        public MyAsyncTask(int scannerId, String scannerName, DCSSDKDefs.DCSSDK_COMMAND_OPCODE opcode, View _view) {
+            this.scannerId = scannerId;
+            this.opcode = opcode;
             this.view = _view;
             this.scannerName = scannerName;
         }
@@ -504,17 +500,17 @@ public class SymbologiesFragment extends Fragment implements NavigationView.OnNa
         protected void onPreExecute() {
             super.onPreExecute();
             progressDialog = new CustomProgressDialog(getActivity(), "잠시만 기다려주세요...");
-			/*RHBJ36 12.15.2015
-			 * Added Dialog box with cancel option while fetching symbologies. So that user can cancel the task and directly navigate to the Settings
-			 * cancelling the current symbologies fetching task.
-			 */
+            /*RHBJ36 12.15.2015
+             * Added Dialog box with cancel option while fetching symbologies. So that user can cancel the task and directly navigate to the Settings
+             * cancelling the current symbologies fetching task.
+             */
             progressDialog.setCancelable(false);
-            progressDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
+            progressDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "취소", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     dismissDialog();
                     //RHBJ36 : finish Activity on cancle async task 12.15.2015
-                    if(task != null) {
+                    if (task != null) {
                         task.cancel(true);
                         task = null;
                         //finish();
@@ -527,14 +523,14 @@ public class SymbologiesFragment extends Fragment implements NavigationView.OnNa
         @Override
         protected Boolean doInBackground(String... strings) {
             StringBuilder sb = new StringBuilder();
-            boolean result=false;
+            boolean result = false;
             /*RHBJ36 : Add Try catch 12.15.2015
-			 * Handle executeCommand in try catch to avoid application crash if executeCommand fails.
-			 * Dismissed the dialog if showing any.
-			 */
+             * Handle executeCommand in try catch to avoid application crash if executeCommand fails.
+             * Dismissed the dialog if showing any.
+             */
             try {
-                result = ((ActiveDeviceActivity)getActivity()).executeCommand(opcode, strings[0], sb, scannerId);
-            }catch (Exception e){
+                result = ((ActiveDeviceActivity) getActivity()).executeCommand(opcode, strings[0], sb, scannerId);
+            } catch (Exception e) {
                 dismissDialog();
             }
             if (opcode == DCSSDKDefs.DCSSDK_COMMAND_OPCODE.DCSSDK_RSM_ATTR_GETALL) {
@@ -580,31 +576,31 @@ public class SymbologiesFragment extends Fragment implements NavigationView.OnNa
                             }
 
                             /*RHBJ36-SSDK-3450-12.24.2015
-							 *With CS4070, Symbologies fetching takes longer time.
-							 *when experimented, it observed that CS4070 supports 14-15 Symbologies fetch with best optimized time.
-							 *Following change is to fetch 14 symbologies (can be changed) in single fetch.
-							 */
-                            for(Symbology sym:symbologies){
-                                if(sym.isSupported()){
+                             *With CS4070, Symbologies fetching takes longer time.
+                             *when experimented, it observed that CS4070 supports 14-15 Symbologies fetch with best optimized time.
+                             *Following change is to fetch 14 symbologies (can be changed) in single fetch.
+                             */
+                            for (Symbology sym : symbologies) {
+                                if (sym.isSupported()) {
                                     attStack.push(sym.getRmdAttributeID());
                                 }
                             }
 
                             /*RHBJ36-SSDK-3450-12.24.2015
-							 *With CS4070, Symbologies fetching takes longer time.
-							 *when experimented, it observed that CS4070 supports 14-15 Symbologies fetch with best optimized time.
-							 *Following change is to fetch 14 symbologies (can be changed) in single fetch.
-							 */
+                             *With CS4070, Symbologies fetching takes longer time.
+                             *when experimented, it observed that CS4070 supports 14-15 Symbologies fetch with best optimized time.
+                             *Following change is to fetch 14 symbologies (can be changed) in single fetch.
+                             */
                             if (scannerName.startsWith("CS4070")) {
-                                while(attStack.size()>0){
+                                while (attStack.size() > 0) {
                                     StringBuilder in_xml = new StringBuilder("<inArgs><scannerID>" + scannerId + " </scannerID><cmdArgs><arg-xml><attrib_list>");
-                                    for(int val=0;val<14; val++){
-                                        if(attStack.size()!=0)
+                                    for (int val = 0; val < 14; val++) {
+                                        if (attStack.size() != 0)
                                             in_xml.append(attStack.pop()).append(",");
                                     }
                                     in_xml.append("</attrib_list></arg-xml></cmdArgs></inArgs>");
                                     StringBuilder sbGet = new StringBuilder();
-                                    boolean res = ((ActiveDeviceActivity)getActivity()).executeCommand(DCSSDKDefs.DCSSDK_COMMAND_OPCODE.DCSSDK_RSM_ATTR_GET, in_xml.toString(), sbGet, scannerId);
+                                    boolean res = ((ActiveDeviceActivity) getActivity()).executeCommand(DCSSDKDefs.DCSSDK_COMMAND_OPCODE.DCSSDK_RSM_ATTR_GET, in_xml.toString(), sbGet, scannerId);
                                     Log.i(TAG, sbGet.toString());
                                     outXML = sbGet.toString();
 
@@ -627,7 +623,7 @@ public class SymbologiesFragment extends Fragment implements NavigationView.OnNa
                                                 if (name.equals("id")) {
                                                     iAttributeID = Integer.parseInt(text);
                                                 } else if (name.equals("value")) {
-                                                    if(text!=null) {
+                                                    if (text != null) {
                                                         for (Symbology symbology : symbologies) {
                                                             if (symbology.getRmdAttributeID() == iAttributeID) {
                                                                 if (text.equalsIgnoreCase("true")) {
@@ -657,7 +653,7 @@ public class SymbologiesFragment extends Fragment implements NavigationView.OnNa
                                 in_xml = new StringBuilder(in_xml.substring(0, in_xml.length() - 1));
                                 in_xml.append("</attrib_list></arg-xml></cmdArgs></inArgs>");
                                 StringBuilder sbGet = new StringBuilder();
-                                boolean res = ((ActiveDeviceActivity)getActivity()).executeCommand(DCSSDKDefs.DCSSDK_COMMAND_OPCODE.DCSSDK_RSM_ATTR_GET, in_xml.toString(), sbGet, scannerId);
+                                boolean res = ((ActiveDeviceActivity) getActivity()).executeCommand(DCSSDKDefs.DCSSDK_COMMAND_OPCODE.DCSSDK_RSM_ATTR_GET, in_xml.toString(), sbGet, scannerId);
                                 Log.i(TAG, sbGet.toString());
                                 outXML = sbGet.toString();
 
@@ -681,7 +677,7 @@ public class SymbologiesFragment extends Fragment implements NavigationView.OnNa
                                             if (name.equals("id")) {
                                                 iAttributeID = Integer.parseInt(text);
                                             } else if (name.equals("value")) {
-                                                if(text!=null) {
+                                                if (text != null) {
                                                     for (Symbology symbology : symbologies) {
                                                         if (symbology.getRmdAttributeID() == iAttributeID) {
                                                             if (text.equalsIgnoreCase("true")) {
@@ -721,7 +717,7 @@ public class SymbologiesFragment extends Fragment implements NavigationView.OnNa
             dismissDialog();
             if (!b) {
                 if (opcode == DCSSDKDefs.DCSSDK_COMMAND_OPCODE.DCSSDK_RSM_ATTR_SET || opcode == DCSSDKDefs.DCSSDK_COMMAND_OPCODE.DCSSDK_RSM_ATTR_STORE) {
-                    Toast.makeText(((ActiveDeviceActivity)getActivity()), "Symbology configuration failed", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(((ActiveDeviceActivity) getActivity()), "기호 구성 실패", Toast.LENGTH_SHORT).show();
                     /* failed, return to previous value */
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
@@ -730,10 +726,10 @@ public class SymbologiesFragment extends Fragment implements NavigationView.OnNa
                         }
                     });
                 } else if (opcode == DCSSDKDefs.DCSSDK_COMMAND_OPCODE.DCSSDK_RSM_ATTR_GETALL) {
-                    Toast.makeText(getActivity(), "Unable to retrieve supported  symbologies", Toast.LENGTH_SHORT).show();
-					 /*RHBJ36 12.15.2015
-					  *Failed to retrive supported symbologies. Finish Activity.
-					 */
+                    Toast.makeText(getActivity(), "지원되는 기호를 검색할 수 없습니다.", Toast.LENGTH_SHORT).show();
+                    /*RHBJ36 12.15.2015
+                     *Failed to retrive supported symbologies. Finish Activity.
+                     */
                     //finish();
                 }
             } else {
@@ -824,7 +820,7 @@ public class SymbologiesFragment extends Fragment implements NavigationView.OnNa
                                 switchCompat.setChecked(symbologies.get(19).isEnabled());
                                 makeRowEnableDisable(switchCompat, symbologies.get(19));
 
-                                switchCompat = (SwitchCompat)  getView().findViewById(R.id.ucc_coupon_extended);
+                                switchCompat = (SwitchCompat) getView().findViewById(R.id.ucc_coupon_extended);
                                 switchCompat.setChecked(symbologies.get(20).isEnabled());
                                 makeRowEnableDisable(switchCompat, symbologies.get(20));
 
@@ -888,7 +884,7 @@ public class SymbologiesFragment extends Fragment implements NavigationView.OnNa
                                 switchCompat.setChecked(symbologies.get(35).isEnabled());
                                 makeRowEnableDisable(switchCompat, symbologies.get(35));
 
-                                switchCompat = (SwitchCompat)  getView().findViewById(R.id.us_postnet);
+                                switchCompat = (SwitchCompat) getView().findViewById(R.id.us_postnet);
                                 switchCompat.setChecked(symbologies.get(36).isEnabled());
                                 makeRowEnableDisable(switchCompat, symbologies.get(36));
 
@@ -939,7 +935,7 @@ public class SymbologiesFragment extends Fragment implements NavigationView.OnNa
 
                     }
 
-                   settingsFetched = true;
+                    settingsFetched = true;
 
                 }
             }
@@ -948,11 +944,11 @@ public class SymbologiesFragment extends Fragment implements NavigationView.OnNa
         private void makeRowEnableDisable(SwitchCompat switchCompat, Symbology symbology) {
             switchCompat.setEnabled(symbology.isSupported());
 
-            final TextView txtTitle = (TextView)getView().findViewById(getTitleTextID(symbology.getSymbologyName()) );
+            final TextView txtTitle = (TextView) getView().findViewById(getTitleTextID(symbology.getSymbologyName()));
 
-            if(symbology.isSupported() && symbology.isEnabled()){
+            if (symbology.isSupported() && symbology.isEnabled()) {
                 txtTitle.setTextColor(ContextCompat.getColor(getActivity(), R.color.font_color));
-            }else{
+            } else {
                 txtTitle.setTextColor(ContextCompat.getColor(getActivity(), R.color.inactive_text));
             }
         }

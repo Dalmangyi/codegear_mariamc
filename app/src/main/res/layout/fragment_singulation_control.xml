@@ -104,8 +104,8 @@
         android:id="@+id/tv_preFilterEnabled"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="10dp"
         android:gravity="bottom|center"
+        android:padding="10dp"
         android:text="Pre Filter option is enabled" />
 
 </LinearLayout>

@@ -12,14 +12,12 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-
             <TextView
                 style="@style/style_medium_font"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_marginTop="5dp"
                 android:layout_weight="10"
-
                 android:gravity="bottom"
                 android:text="@string/tag_report_settings_title" />
 
@@ -38,7 +36,7 @@
                     style="@style/style_normal_font"
                     android:layout_width="0dp"
                     android:layout_weight="85"
-                    android:gravity="left"
+                    android:gravity="left|center_vertical"
                     android:text="@string/pc" />
 
                 <CheckBox
@@ -186,6 +184,7 @@
 
 
             </TableRow>
+
             <include layout="@layout/normal_divider" />
 
             <TableRow style="@style/table_row_layout_style">
@@ -252,7 +251,7 @@
                 android:layout_marginTop="5dp"
                 android:layout_weight="10"
                 android:gravity="bottom"
-                android:text="NXP BrandID Check" />
+                android:text="NXP BrandID 확인" />
 
             <include layout="@layout/title_divider" />
 
@@ -280,10 +279,6 @@
             </TableRow>
 
             <include layout="@layout/normal_divider" />
-            <!--     <View
-                     android:layout_width="match_parent"
-                     android:layout_height="0dp"
-                     android:layout_weight="10" />-->
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -303,7 +298,6 @@
                     android:layout_weight="1"
                     android:digits="0123456789ABCDEF"
                     android:gravity="center"
-
                     android:inputType="textCapCharacters"
                     android:maxLength="4" />
 
@@ -322,7 +316,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="EPC Length" />
+                    android:text="EPC 길이" />
 
                 <EditText
                     android:id="@+id/epcET"
@@ -334,14 +328,8 @@
                     android:maxLength="4"
                     android:text="12" />
 
-
             </LinearLayout>
-
-
-
         </LinearLayout>
-
-
     </ScrollView>
 </LinearLayout>
 

@@ -41,8 +41,7 @@
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="23">
+            android:layout_height="wrap_content">
 
             <LinearLayout
                 android:id="@+id/startPeriodicLayout"
@@ -67,7 +66,7 @@
                     android:layout_weight="60"
                     android:gravity="center"
                     android:inputType="number"
-                    android:text="@string/default_timeout"/>
+                    android:text="@string/default_timeout" />
             </LinearLayout>
 
             <LinearLayout
@@ -130,7 +129,8 @@
             style="@style/style_medium_font"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/stop_title" />
+            android:text="@string/stop_title"
+            android:layout_marginTop="30dp"/>
 
         <include layout="@layout/title_divider" />
 
@@ -156,8 +156,7 @@
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="30">
+            android:layout_height="wrap_content" >
 
             <LinearLayout
                 android:id="@+id/stopHandheldLayout"
@@ -234,7 +233,7 @@
                         android:layout_weight="60"
                         android:gravity="center"
                         android:inputType="number"
-                        android:text="@string/default_timeout"/>
+                        android:text="@string/default_timeout" />
                 </TableRow>
             </LinearLayout>
 
@@ -263,7 +262,7 @@
                     android:layout_weight="60"
                     android:gravity="center"
                     android:inputType="number"
-                    android:text="@string/default_timeout"/>
+                    android:text="@string/default_timeout" />
             </LinearLayout>
 
             <LinearLayout
@@ -320,7 +319,7 @@
                         android:layout_weight="60"
                         android:gravity="center"
                         android:inputType="number"
-                        android:text="@string/default_timeout"/>
+                        android:text="@string/default_timeout" />
                 </TableRow>
             </LinearLayout>
 
@@ -353,7 +352,7 @@
                         android:layout_weight="60"
                         android:gravity="center"
                         android:inputType="number"
-                        android:text="@string/default_no_of_attempts"/>
+                        android:text="@string/default_no_of_attempts" />
                 </TableRow>
 
                 <TableRow
@@ -378,14 +377,10 @@
                         android:layout_weight="60"
                         android:gravity="center"
                         android:inputType="number"
-                        android:text="@string/default_timeout"/>
+                        android:text="@string/default_timeout" />
                 </TableRow>
             </LinearLayout>
         </FrameLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="10" />
     </LinearLayout>
 </ScrollView>

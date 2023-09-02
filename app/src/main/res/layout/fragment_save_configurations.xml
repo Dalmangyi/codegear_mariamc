@@ -17,8 +17,6 @@
             android:layout_height="fill_parent"
             android:orientation="vertical">
 
-            //Antenna settings
-
             <TextView
                 style="@style/save_config_background"
                 android:gravity="center_vertical"
@@ -63,10 +61,10 @@
                     android:layout_weight="55"
                     android:gravity="right|center_vertical" />
             </TableRow>
-            //Singulation control configuration details
 
             <TextView
                 style="@style/save_config_background"
+                android:layout_marginTop="20dp"
                 android:gravity="center_vertical"
                 android:text="@string/save_singulation_title" />
 
@@ -151,10 +149,10 @@
                     android:layout_weight="55"
                     android:gravity="right|center_vertical" />
             </TableRow>
-            //Tag Reporting details
 
             <TextView
                 style="@style/save_config_background"
+                android:layout_marginTop="20dp"
                 android:gravity="center_vertical"
                 android:text="@string/save_tag_report_title" />
 
@@ -285,10 +283,10 @@
                     android:gravity="right|center_vertical"
                     android:text="@string/off" />
             </TableRow>
-            // Batch mode detail
 
             <TextView
                 style="@style/save_config_background"
+                android:layout_marginTop="20dp"
                 android:gravity="center_vertical"
                 android:text="@string/save_config_batch_mode_title" />
 
@@ -312,7 +310,9 @@
                     android:text="@string/off" />
 
             </TableRow>
+
             <include layout="@layout/normal_divider" />
+
             <TableRow style="@style/save_config_setting_detail_background">
 
                 <TextView
@@ -333,9 +333,6 @@
                     android:text="@string/off" />
 
             </TableRow>
-
-
-            //Power management detail
 
             <TextView
                 style="@style/save_config_background"
@@ -360,25 +357,11 @@
                     android:layout_weight="55"
                     android:gravity="right|center_vertical" />
             </TableRow>
-            //start \ stop trigger details
 
             <TextView
                 style="@style/save_config_background"
                 android:gravity="center_vertical"
                 android:text="@string/save_start_stop_title" />
-
-
-            //start trigger details
-
-            <!-- <TextView
-                 style="@style/style_medium_font"
-                 android:layout_width="match_parent"
-                 android:layout_height="wrap_content"
-                 android:layout_marginTop="@dimen/default_top_margin"
-                 android:paddingLeft="@dimen/default_left_padding"
-                 android:text="@string/start" />
-
-             <include layout="@layout/title_divider" />-->
 
             <TableRow style="@style/save_config_setting_detail_background">
 
@@ -485,18 +468,6 @@
 
             </LinearLayout>
 
-            //stop trigger
-
-            <!--  <TextView
-                  style="@style/style_medium_font"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:layout_marginTop="@dimen/default_top_margin"
-                  android:paddingLeft="@dimen/default_left_padding"
-                  android:text="@string/stop_title" />
-
-              <include layout="@layout/title_divider" />
-  -->
             <TableRow style="@style/save_config_setting_detail_background">
 
                 <TextView
@@ -683,8 +654,6 @@
                     android:gravity="right|center_vertical" />
             </TableRow>
 
-            //Beeper settings
-
             <TextView
                 style="@style/save_config_background"
                 android:gravity="center_vertical"
@@ -711,7 +680,8 @@
 
             <include layout="@layout/normal_divider" />
 
-            <TableRow style="@style/save_config_setting_detail_background"
+            <TableRow
+                style="@style/save_config_setting_detail_background"
                 android:visibility="gone">
 
                 <TextView
@@ -776,32 +746,6 @@
                     android:gravity="right|center_vertical" />
             </TableRow>
 
-            //Regulatory settings
-            <!--
-                        <TextView
-                            style="@style/save_config_background"
-                            android:gravity="center_vertical"
-                            android:text="@string/save_regulatory_title" />
-
-                        <TableRow style="@style/save_config_setting_detail_background">
-
-                            <TextView
-                                style="@style/style_normal_font"
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight="45"
-                                android:gravity="center_vertical"
-                                android:text="@string/region_title" />
-
-                            <TextView
-                                android:id="@+id/saveRegion"
-                                style="@style/style_normal_font"
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight="55"
-                                android:gravity="right|center_vertical" />
-                        </TableRow>
-            -->
         </LinearLayout>
     </ScrollView>
 

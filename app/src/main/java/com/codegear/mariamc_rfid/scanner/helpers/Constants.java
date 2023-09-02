@@ -107,7 +107,7 @@ public class Constants {
     public static final String CONNECTION_HELP_LI4278_SSI_HOST_SERVER = "SSI Host Server";
 
     //Error Messages
-    public static final String INVALID_SCANNER_ID_MSG = "Invalid Scanner ID";
+    public static final String INVALID_SCANNER_ID_MSG = "올바르지 않은 스캐너 ID";
 
     //Type of data recieved
 

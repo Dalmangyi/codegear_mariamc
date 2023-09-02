@@ -62,8 +62,7 @@ public class AdvancedOptionItemFragment extends BackPressedFragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_advancedoptionitem_list, container, false);
 
         // Set the adapter
@@ -77,9 +76,7 @@ public class AdvancedOptionItemFragment extends BackPressedFragment {
             }
             advancedOptionItemAdapter = new AdvancedOptionItemAdapter(AdvancedOptionsContent.ITEMS, mListener);
             recyclerView.setAdapter(advancedOptionItemAdapter);
-            recyclerView.addItemDecoration(new
-                    DividerItemDecoration(getActivity(),
-                    DividerItemDecoration.VERTICAL));
+            recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
         }
         getActivity().setTitle(SettingsContent.ITEM_MAP.get(R.id.advanced_options + "").content);
         return view;
@@ -91,11 +88,10 @@ public class AdvancedOptionItemFragment extends BackPressedFragment {
         super.onAttach(context);
         if (context instanceof OnAdvancedListFragmentInteractionListener) {
             mListener = (OnAdvancedListFragmentInteractionListener) context;
-        } else if(context instanceof ActiveDeviceActivity) {
+        } else if (context instanceof ActiveDeviceActivity) {
             mListener = (OnAdvancedListFragmentInteractionListener) context;
-        }else{
-            throw new RuntimeException(context.toString()
-                    + " must implement OnListFragmentInteractionListener");
+        } else {
+            throw new RuntimeException(context.toString() + " must implement OnListFragmentInteractionListener");
         }
     }
 
@@ -123,9 +119,9 @@ public class AdvancedOptionItemFragment extends BackPressedFragment {
 
     @Override
     public void onBackPressed() {
-        if(getActivity() instanceof SettingsDetailActivity)
+        if (getActivity() instanceof SettingsDetailActivity)
             ((SettingsDetailActivity) getActivity()).callBackPressed();
-        else if (getActivity() instanceof  ActiveDeviceActivity)
+        else if (getActivity() instanceof ActiveDeviceActivity)
             ((ActiveDeviceActivity) getActivity()).callBackPressed();
 
     }

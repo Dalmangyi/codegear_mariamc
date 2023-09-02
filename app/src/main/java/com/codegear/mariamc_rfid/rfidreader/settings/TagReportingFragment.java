@@ -80,8 +80,7 @@ public class TagReportingFragment extends BackPressedFragment implements View.On
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_tag_reporting, container, false);
         CheckBox pc = (CheckBox) view.findViewById(R.id.incPC);
@@ -161,27 +160,20 @@ public class TagReportingFragment extends BackPressedFragment implements View.On
         batchModeSpinner.setAdapter(batchModeAdapter);
         ArrayAdapter<CharSequence> usbbatchModeAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.usb_batch_modes_array, R.layout.custom_spinner_layout);
         if (RFIDController.mConnectedReader != null) {
-            if (RFIDController.mConnectedReader.getHostName().startsWith("RFD8500")
-                    || RFIDController.mConnectedReader.getHostName().startsWith("RFD40P")
-                    || RFIDController.mConnectedReader.getHostName().startsWith("RFD40+")
-                    || RFIDController.mConnectedReader.getHostName().startsWith("RFD90+")) {
-
-
-               batchModeSpinner.setEnabled(true);
-               batchModeSpinner.setVisibility(View.VISIBLE);
+            if (RFIDController.mConnectedReader.getHostName().startsWith("RFD8500") || RFIDController.mConnectedReader.getHostName().startsWith("RFD40P") || RFIDController.mConnectedReader.getHostName().startsWith("RFD40+") || RFIDController.mConnectedReader.getHostName().startsWith("RFD90+")) {
+                batchModeSpinner.setEnabled(true);
+                batchModeSpinner.setVisibility(View.VISIBLE);
             }// else
-                if(!RFIDController.mConnectedReader.getHostName().startsWith("RFD8500") && !RFIDController.mConnectedReader.getHostName().startsWith("MC33")){
-               // batchModeAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.usb_batch_modes_array, R.layout.custom_spinner_layout);
-               // batchModeSpinner.setEnabled(false);
-               // batchModeSpinner.setVisibility(View.INVISIBLE);
-                    usbbatchModeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    usbbatchModeSpinner.setAdapter(usbbatchModeAdapter);
-
-
+            if (!RFIDController.mConnectedReader.getHostName().startsWith("RFD8500") && !RFIDController.mConnectedReader.getHostName().startsWith("MC33")) {
+                // batchModeAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.usb_batch_modes_array, R.layout.custom_spinner_layout);
+                // batchModeSpinner.setEnabled(false);
+                // batchModeSpinner.setVisibility(View.INVISIBLE);
+                usbbatchModeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                usbbatchModeSpinner.setAdapter(usbbatchModeAdapter);
             } else {
-                    usbbatchModeSpinner.setEnabled(false);
-                    usbbatchModeSpinner.setVisibility(View.INVISIBLE);
-                    RFIDController.usbBatchMode = -1;
+                usbbatchModeSpinner.setEnabled(false);
+                usbbatchModeSpinner.setVisibility(View.INVISIBLE);
+                RFIDController.usbBatchMode = -1;
             }
         } else {
             batchModeSpinner.setEnabled(false);
@@ -190,11 +182,11 @@ public class TagReportingFragment extends BackPressedFragment implements View.On
             usbbatchModeSpinner.setVisibility(View.INVISIBLE);
 
         }
-        if (RFIDController.batchMode != -1 ) {
+        if (RFIDController.batchMode != -1) {
             batchModeSpinner.setSelection(RFIDController.batchMode);
         }
         if (RFIDController.usbBatchMode != -1) {
-            switch(RFIDController.usbBatchMode) {
+            switch (RFIDController.usbBatchMode) {
                 case 0:
                     usbbatchModeSpinner.setSelection(RFIDController.usbBatchMode);
                     break;
@@ -206,23 +198,8 @@ public class TagReportingFragment extends BackPressedFragment implements View.On
                     break;
             }
         }
-//        if (RFIDController.scanBatchMode != -1) {
-//            //usbbatchModeSpinner.setSelection(RFIDController.scanBatchMode);
-//            switch(RFIDController.scanBatchMode) {
-//                case 0:
-//                    usbbatchModeSpinner.setSelection(RFIDController.scanBatchMode);
-//                    break;
-//                case 1:
-//                    usbbatchModeSpinner.setSelection(RFIDController.scanBatchMode);
-//                    break;
-//                case 2:
-//                    usbbatchModeSpinner.setSelection(1);
-//                    break;
-//            }
-//        }
         if (RFIDController.reportUniquetags != null) {
-            if (RFIDController.reportUniquetags.getValue() == 1)
-                beepOnUniqueTag.setChecked(true);
+            if (RFIDController.reportUniquetags.getValue() == 1) beepOnUniqueTag.setChecked(true);
             else if (RFIDController.reportUniquetags.getValue() == 0)
                 beepOnUniqueTag.setChecked(false);
         }
@@ -252,16 +229,11 @@ public class TagReportingFragment extends BackPressedFragment implements View.On
         if (RFIDController.tagStorageSettings != null) {
             TAG_FIELD[] tag_field = RFIDController.tagStorageSettings.getTagFields();
             for (int idx = 0; idx < tag_field.length; idx++) {
-                if (tag_field[idx] == TAG_FIELD.PEAK_RSSI)
-                    rssifield = true;
-                if (tag_field[idx] == TAG_FIELD.PHASE_INFO)
-                    phasefield = true;
-                if (tag_field[idx] == TAG_FIELD.PC)
-                    pcfield = true;
-                if (tag_field[idx] == TAG_FIELD.CHANNEL_INDEX)
-                    channelfield = true;
-                if (tag_field[idx] == TAG_FIELD.TAG_SEEN_COUNT)
-                    seencountfield = true;
+                if (tag_field[idx] == TAG_FIELD.PEAK_RSSI) rssifield = true;
+                if (tag_field[idx] == TAG_FIELD.PHASE_INFO) phasefield = true;
+                if (tag_field[idx] == TAG_FIELD.PC) pcfield = true;
+                if (tag_field[idx] == TAG_FIELD.CHANNEL_INDEX) channelfield = true;
+                if (tag_field[idx] == TAG_FIELD.TAG_SEEN_COUNT) seencountfield = true;
             }
             ((CheckBox) getActivity().findViewById(R.id.incRSSI)).setChecked(rssifield);
             ((CheckBox) getActivity().findViewById(R.id.incPhase)).setChecked(phasefield);
@@ -282,8 +254,8 @@ public class TagReportingFragment extends BackPressedFragment implements View.On
             //((SettingsDetailActivity) getActivity()).callBackPressed();
             AdvancedOptionItemFragment fragment = AdvancedOptionItemFragment.newInstance();
             replaceFragment(getFragmentManager(), fragment, R.id.settings_content_frame);
-            if(getActivity() instanceof ActiveDeviceActivity)
-                ((ActiveDeviceActivity)getActivity()).loadNextFragment(RFID_ADVANCED_OPTIONS_TAB);
+            if (getActivity() instanceof ActiveDeviceActivity)
+                ((ActiveDeviceActivity) getActivity()).loadNextFragment(RFID_ADVANCED_OPTIONS_TAB);
 
         }
     }
@@ -299,12 +271,12 @@ public class TagReportingFragment extends BackPressedFragment implements View.On
             try {
                 tmpTagStorageSettings = RFIDController.mConnectedReader.Config.getTagStorageSettings();
             } catch (InvalidUsageException e) {
-               Log.d(TAG,  "Returned SDK Exception");
+                Log.d(TAG, "Returned SDK Exception");
             } catch (OperationFailureException e) {
-               Log.d(TAG,  "Returned SDK Exception");
-                if(getActivity() instanceof SettingsDetailActivity)
+                Log.d(TAG, "Returned SDK Exception");
+                if (getActivity() instanceof SettingsDetailActivity)
                     ((SettingsDetailActivity) getActivity()).sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, getString(R.string.status_failure_message) + "\n" + e.getVendorMessage());
-                if(getActivity() instanceof ActiveDeviceActivity)
+                if (getActivity() instanceof ActiveDeviceActivity)
                     ((ActiveDeviceActivity) getActivity()).sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, getString(R.string.status_failure_message) + "\n" + e.getVendorMessage());
 
                 return false;
@@ -312,35 +284,25 @@ public class TagReportingFragment extends BackPressedFragment implements View.On
             TAG_FIELD[] tag_fields = new TAG_FIELD[5];
             int index = 0;
             boolean incPC = ((CheckBox) getActivity().findViewById(R.id.incPC)).isChecked();
-            boolean incRSSI = ((CheckBox)
-                    getActivity().findViewById(R.id.incRSSI)).isChecked();
+            boolean incRSSI = ((CheckBox) getActivity().findViewById(R.id.incRSSI)).isChecked();
             boolean incPhase = ((CheckBox) getActivity().findViewById(R.id.incPhase)).isChecked();
             boolean incChannel = ((CheckBox) getActivity().findViewById(R.id.incChannel)).isChecked();
             boolean incTagSeen = ((CheckBox) getActivity().findViewById(R.id.incTagSeen)).isChecked();
-            if (incRSSI)
-                tag_fields[index++] = TAG_FIELD.PEAK_RSSI;
-            if (incPhase)
-                tag_fields[index++] = TAG_FIELD.PHASE_INFO;
-            if (incPC)
-                tag_fields[index++] = TAG_FIELD.PC;
-            if (incChannel)
-                tag_fields[index++] = TAG_FIELD.CHANNEL_INDEX;
-            if (incTagSeen)
-                tag_fields[index] = TAG_FIELD.TAG_SEEN_COUNT;
+            if (incRSSI) tag_fields[index++] = TAG_FIELD.PEAK_RSSI;
+            if (incPhase) tag_fields[index++] = TAG_FIELD.PHASE_INFO;
+            if (incPC) tag_fields[index++] = TAG_FIELD.PC;
+            if (incChannel) tag_fields[index++] = TAG_FIELD.CHANNEL_INDEX;
+            if (incTagSeen) tag_fields[index] = TAG_FIELD.TAG_SEEN_COUNT;
             tmpTagStorageSettings.setTagFields(tag_fields);
         }
         if (RFIDController.batchMode != -1 && RFIDController.batchMode != batchModeSpinner.getSelectedItemPosition()) {
-            if (RFIDController.mConnectedReader != null && (RFIDController.mConnectedReader.getHostName().startsWith("RFD8500")
-                    || RFIDController.mConnectedReader.getHostName().startsWith("RFD90")
-                    || RFIDController.mConnectedReader.getHostName().startsWith("RFD40"))) {
+            if (RFIDController.mConnectedReader != null && (RFIDController.mConnectedReader.getHostName().startsWith("RFD8500") || RFIDController.mConnectedReader.getHostName().startsWith("RFD90") || RFIDController.mConnectedReader.getHostName().startsWith("RFD40"))) {
                 isSettingsChanged = true;
                 batchmode = batchModeSpinner.getSelectedItemPosition();
             }
         }
-        if(RFIDController.usbBatchMode != -1 && RFIDController.usbBatchMode != usbbatchModeSpinner.getSelectedItemPosition()) {
-            if (RFIDController.mConnectedReader != null && (RFIDController.mConnectedReader.getHostName().startsWith("RFD8500")
-                    ||RFIDController.mConnectedReader.getHostName().startsWith("RFD90")
-                    || RFIDController.mConnectedReader.getHostName().startsWith("RFD40"))) {
+        if (RFIDController.usbBatchMode != -1 && RFIDController.usbBatchMode != usbbatchModeSpinner.getSelectedItemPosition()) {
+            if (RFIDController.mConnectedReader != null && (RFIDController.mConnectedReader.getHostName().startsWith("RFD8500") || RFIDController.mConnectedReader.getHostName().startsWith("RFD90") || RFIDController.mConnectedReader.getHostName().startsWith("RFD40"))) {
                 isSettingsChanged = true;
                 usbbatchmode = usbbatchModeSpinner.getSelectedItemPosition();
             }
@@ -416,7 +378,7 @@ public class TagReportingFragment extends BackPressedFragment implements View.On
                     RFIDController.mConnectedReader.Config.setBatchMode((BATCH_MODE) BATCH_MODE.GetBatchModeCodeValue(fnbatchmodepos));
                     RFIDController.batchMode = RFIDController.mConnectedReader.Config.getBatchModeConfig().getValue();
                 }
-                if(usbfnbatchmodepos != null && RFIDController.mConnectedReader != null) {
+                if (usbfnbatchmodepos != null && RFIDController.mConnectedReader != null) {
                     RFIDController.mConnectedReader.Config.setUsbBatchMode((USB_BATCH_MODE) USB_BATCH_MODE.GetBatchModeCodeValue(usbfnbatchmodepos));
                     RFIDController.usbBatchMode = RFIDController.mConnectedReader.Config.getUsbBatchModeConfig().getValue();
                 }
@@ -424,15 +386,14 @@ public class TagReportingFragment extends BackPressedFragment implements View.On
                     RFIDController.mConnectedReader.Config.setUniqueTagReport(uniqueTagReport);
                     RFIDController.reportUniquetags = RFIDController.mConnectedReader.Config.getUniqueTagReport();
                 }
-                if (isBrandIdSettingsChanged)
-                    bResult = setBrandIdValues();
+                if (isBrandIdSettingsChanged) bResult = setBrandIdValues();
 
             } catch (InvalidUsageException e) {
-               Log.d(TAG,  "Returned SDK Exception");
+                Log.d(TAG, "Returned SDK Exception");
                 invalidUsageException = e;
                 bResult = false;
             } catch (OperationFailureException e) {
-                Log.d(TAG,  "Returned SDK Exception");
+                Log.d(TAG, "Returned SDK Exception");
                 operationFailureException = e;
                 bResult = false;
             }
@@ -444,29 +405,26 @@ public class TagReportingFragment extends BackPressedFragment implements View.On
             progressDialog.cancel();
             if (!result) {
                 if (invalidUsageException != null) {
-                    if(getActivity() instanceof SettingsDetailActivity)
+                    if (getActivity() instanceof SettingsDetailActivity)
                         ((SettingsDetailActivity) getActivity()).sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, getString(R.string.status_failure_message) + "\n" + invalidUsageException.getVendorMessage());
-                    if(getActivity() instanceof ActiveDeviceActivity)
+                    if (getActivity() instanceof ActiveDeviceActivity)
                         ((ActiveDeviceActivity) getActivity()).sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, getString(R.string.status_failure_message) + "\n" + invalidUsageException.getVendorMessage());
 
-                }
-                else if (operationFailureException != null) {
-                    if(getActivity() instanceof SettingsDetailActivity)
+                } else if (operationFailureException != null) {
+                    if (getActivity() instanceof SettingsDetailActivity)
                         ((SettingsDetailActivity) getActivity()).sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, getString(R.string.status_failure_message) + "\n" + operationFailureException.getVendorMessage());
-                    if(getActivity() instanceof ActiveDeviceActivity)
+                    if (getActivity() instanceof ActiveDeviceActivity)
                         ((ActiveDeviceActivity) getActivity()).sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, getString(R.string.status_failure_message) + "\n" + operationFailureException.getVendorMessage());
 
-                }
-                else
-                    Toast.makeText(getContext(), getContext().
-                            getString(R.string.failed_settings), Toast.LENGTH_SHORT).show();
+                } else
+                    Toast.makeText(getContext(), getContext().getString(R.string.failed_settings), Toast.LENGTH_SHORT).show();
             } else
                 Toast.makeText(getActivity(), R.string.status_success_message, Toast.LENGTH_SHORT).show();
             super.onPostExecute(result);
             AdvancedOptionItemFragment fragment = AdvancedOptionItemFragment.newInstance();
             replaceFragment(getFragmentManager(), fragment, R.id.settings_content_frame);
-            if(getActivity() instanceof ActiveDeviceActivity)
-                ((ActiveDeviceActivity)getActivity()).loadNextFragment(RFID_ADVANCED_OPTIONS_TAB);
+            if (getActivity() instanceof ActiveDeviceActivity)
+                ((ActiveDeviceActivity) getActivity()).loadNextFragment(RFID_ADVANCED_OPTIONS_TAB);
         }
     }
 
@@ -478,7 +436,7 @@ public class TagReportingFragment extends BackPressedFragment implements View.On
                 if (RFIDController.batchMode != -1) {
                     batchModeSpinner.setSelection(RFIDController.batchMode);
                 }
-                if(RFIDController.usbBatchMode != -1) {
+                if (RFIDController.usbBatchMode != -1) {
                     usbbatchModeSpinner.setSelection(RFIDController.usbBatchMode);
                 }
             }
@@ -501,12 +459,11 @@ public class TagReportingFragment extends BackPressedFragment implements View.On
         });
     }
 
-    public static void replaceFragment(@NonNull FragmentManager fragmentManager,
-                                       @NonNull Fragment fragment, int frameId) {
-       // FragmentTransaction transaction = fragmentManager.beginTransaction();
-       // transaction.replace(frameId, fragment);
-       // transaction.disallowAddToBackStack();
-       // transaction.commit();
+    public static void replaceFragment(@NonNull FragmentManager fragmentManager, @NonNull Fragment fragment, int frameId) {
+        // FragmentTransaction transaction = fragmentManager.beginTransaction();
+        // transaction.replace(frameId, fragment);
+        // transaction.disallowAddToBackStack();
+        // transaction.commit();
     }
 
     public boolean setBrandIdValues() {
@@ -541,14 +498,6 @@ public class TagReportingFragment extends BackPressedFragment implements View.On
         editor.commit();
 
     }
-
-   /* public void loadBrandIdValues(){
-        SharedPreferences pref = getContext().getSharedPreferences("BrandIdValues", 0);
-
-        RFIDController.strBrandID = pref.getString(MainActivity.BRAND_ID, "AAAA"); // getting String
-        RFIDController.iBrandIDLen =  pref.getInt(MainActivity.EPC_LEN, 12); // getting Integer
-        RFIDController.brandidcheckenabled =pref.getBoolean(MainActivity.IS_BRANDID_CHECK, false);
-    }*/
 
 }
 

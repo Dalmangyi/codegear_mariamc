@@ -377,7 +377,7 @@ public class ScaleActivity extends BaseActivity implements NavigationView.OnNavi
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            progressDialog = new CustomProgressDialog(ScaleActivity.this, "Execute Command...");
+            progressDialog = new CustomProgressDialog(ScaleActivity.this, "명령어 실행중...");
             progressDialog.setCancelable(false);
             progressDialog.show();
         }

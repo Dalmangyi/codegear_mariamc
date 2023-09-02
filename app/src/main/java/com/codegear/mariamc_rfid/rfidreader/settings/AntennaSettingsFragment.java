@@ -49,6 +49,7 @@ public class AntennaSettingsFragment extends BackPressedFragment {
     private LinkProfileUtil linkProfileUtil;
     Context context;
     private static final String TAG = "AntennaSettingsFragment";
+
     public AntennaSettingsFragment() {
         // Required empty public constructor
     }
@@ -69,11 +70,9 @@ public class AntennaSettingsFragment extends BackPressedFragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_antenna_settings, container, false);
-
     }
 
     @Override
@@ -96,8 +95,7 @@ public class AntennaSettingsFragment extends BackPressedFragment {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     setTariSpinnerFromSelection();
-                    if(!previousSelection.equalsIgnoreCase(""))
-                        setPIESpinnerFromSelection();
+                    if (!previousSelection.equalsIgnoreCase("")) setPIESpinnerFromSelection();
                     previousSelection = linkProfileSpinner.getItemAtPosition(position).toString();
                 }
 
@@ -111,13 +109,11 @@ public class AntennaSettingsFragment extends BackPressedFragment {
             pieAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             PIESpinner.setAdapter(pieAdapter);
 
-           // if (antennaRfConfig != null) {
-                int modeIndex = (int) RFIDController.antennaRfConfig.getrfModeTableIndex();
-                powerLevel.setText(String.valueOf(powerLevels[RFIDController.antennaRfConfig.getTransmitPowerIndex()]));
-                setTariSpinner(modeIndex);
-                setPIESpinner(modeIndex);
-                linkProfileSpinner.setSelection(linkProfileUtil.getSelectedLinkProfilePosition(RFIDController.antennaRfConfig.getrfModeTableIndex()));
-           // }
+            int modeIndex = (int) RFIDController.antennaRfConfig.getrfModeTableIndex();
+            powerLevel.setText(String.valueOf(powerLevels[RFIDController.antennaRfConfig.getTransmitPowerIndex()]));
+            setTariSpinner(modeIndex);
+            setPIESpinner(modeIndex);
+            linkProfileSpinner.setSelection(linkProfileUtil.getSelectedLinkProfilePosition(RFIDController.antennaRfConfig.getrfModeTableIndex()));
         }
     }
 
@@ -126,29 +122,20 @@ public class AntennaSettingsFragment extends BackPressedFragment {
         RFModeTableEntry rfModeTableEntry = getRFModeTableEntry(index);
 
         if ((rfModeTableEntry.getMinTariValue() == 25000 && linkProfileUtil.isMinTari_1250()) || (rfModeTableEntry.getMaxTariValue() == 23000 && rfModeTableEntry.getMinTariValue() == 12500)) {
-            if (linkProfileUtil.isStepTari_6300())
-                return R.array.tari_array_25_6300;
-            else
-                return R.array.tari_array_12_25;
+            if (linkProfileUtil.isStepTari_6300()) return R.array.tari_array_25_6300;
+            else return R.array.tari_array_12_25;
         } else if (rfModeTableEntry.getMinTariValue() == 25000 && linkProfileUtil.isStepTari_non_0() || (rfModeTableEntry.getMaxTariValue() == 23000 && rfModeTableEntry.getMinTariValue() == 18800))
             return R.array.tari_array_18_25;
         else if (rfModeTableEntry.getMaxTariValue() == 18800 && rfModeTableEntry.getMinTariValue() == 12500) {
-            if (linkProfileUtil.isStepTari_6300())
-                return R.array.tari_array_18_6300;
-            else
-                return R.array.tari_array_18;
-        } else if (rfModeTableEntry.getMinTariValue() == 18800)
-            return R.array.tari_array_18_only;
-        else if(rfModeTableEntry.getMinTariValue() == 25000 && !linkProfileUtil.isStepTari_non_0() )
+            if (linkProfileUtil.isStepTari_6300()) return R.array.tari_array_18_6300;
+            else return R.array.tari_array_18;
+        } else if (rfModeTableEntry.getMinTariValue() == 18800) return R.array.tari_array_18_only;
+        else if (rfModeTableEntry.getMinTariValue() == 25000 && !linkProfileUtil.isStepTari_non_0())
             return R.array.tari_array_25_only;
-        else if (rfModeTableEntry.getMaxTariValue() == 6250)
-            return R.array.tari_array_625;
-        else if (rfModeTableEntry.getMaxTariValue() == 668)
-            return R.array.tari_array_668;
-        else if (rfModeTableEntry.getMaxTariValue() == 0)
-            return R.array.tari0_array;
-        else
-            return R.array.tari_array;
+        else if (rfModeTableEntry.getMaxTariValue() == 6250) return R.array.tari_array_625;
+        else if (rfModeTableEntry.getMaxTariValue() == 668) return R.array.tari_array_668;
+        else if (rfModeTableEntry.getMaxTariValue() == 0) return R.array.tari0_array;
+        else return R.array.tari_array;
     }
 
     private RFModeTableEntry getRFModeTableEntry(int modeIndex) {
@@ -167,7 +154,7 @@ public class AntennaSettingsFragment extends BackPressedFragment {
     }
 
     private void setTariSpinner(int modeIndex) {
-        if(RFIDController.antennaRfConfig !=null) {
+        if (RFIDController.antennaRfConfig != null) {
             String tariConfig = String.valueOf(RFIDController.antennaRfConfig.getTari());
 
             RFModeTableEntry rfModeTableEntry = getRFModeTableEntry(modeIndex);
@@ -213,14 +200,10 @@ public class AntennaSettingsFragment extends BackPressedFragment {
     }
 
     private int GetPIEResourceIndex(int index) {
-        if (getRFModeTableEntry(index).getPieValue() == 668)
-            return R.array.pie_array_668;
-        if (getRFModeTableEntry(index).getPieValue() == 0)
-            return R.array.pie0_array;
-        else if(!linkProfileUtil.isPie_1500())
-            return R.array.pie_array_2000;
-        else
-            return R.array.pie_array;
+        if (getRFModeTableEntry(index).getPieValue() == 668) return R.array.pie_array_668;
+        if (getRFModeTableEntry(index).getPieValue() == 0) return R.array.pie0_array;
+        else if (!linkProfileUtil.isPie_1500()) return R.array.pie_array_2000;
+        else return R.array.pie_array;
     }
 
     private void initializeViews() {
@@ -247,19 +230,12 @@ public class AntennaSettingsFragment extends BackPressedFragment {
     @Override
     public void onBackPressed() {
         if (!isSettingsChanged()) {
-           // AdvancedOptionItemFragment fragment = AdvancedOptionItemFragment.newInstance();
-           // replaceFragment(getFragmentManager(), fragment, R.id.settings_content_frame);
             return;
         }
-    //    Toast.makeText(getActivity(), "Setting applied successfully. ", Toast.LENGTH_LONG).show();
+        //    Toast.makeText(getActivity(), "Setting applied successfully. ", Toast.LENGTH_LONG).show();
     }
 
-    public static void replaceFragment(@NonNull FragmentManager fragmentManager,
-                                       @NonNull Fragment fragment, int frameId) {
-       // FragmentTransaction transaction = fragmentManager.beginTransaction();
-       // transaction.replace(frameId, fragment);
-       // transaction.disallowAddToBackStack();
-       // transaction.commit();
+    public static void replaceFragment(@NonNull FragmentManager fragmentManager, @NonNull Fragment fragment, int frameId) {
     }
 
     /**
@@ -278,17 +254,17 @@ public class AntennaSettingsFragment extends BackPressedFragment {
                     Toast.makeText(getActivity(), "Please enter a valid value for Power Level", Toast.LENGTH_LONG).show();
                 }
                 if (powerLevelIndex == -1) {
-                    if(getActivity() instanceof SettingsDetailActivity)
+                    if (getActivity() instanceof SettingsDetailActivity)
                         ((SettingsDetailActivity) getActivity()).sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, getString(R.string.status_failure_message) + "\n" + getString(R.string.error_invalid_fields_antenna_config));
-                    else if(getActivity() instanceof ActiveDeviceActivity)
+                    else if (getActivity() instanceof ActiveDeviceActivity)
                         ((ActiveDeviceActivity) getActivity()).sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, getString(R.string.status_failure_message) + "\n" + getString(R.string.error_invalid_fields_antenna_config));
                     return false;
                 }
                 int linkedProfileIndex = getSelectedLinkedProfileIndex();
                 if (linkedProfileIndex == -1) {
-                    if(getActivity() instanceof SettingsDetailActivity)
+                    if (getActivity() instanceof SettingsDetailActivity)
                         ((SettingsDetailActivity) getActivity()).sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, getString(R.string.status_failure_message) + "\n" + getString(R.string.error_invalid_fields_antenna_config));
-                    else if(getActivity() instanceof ActiveDeviceActivity)
+                    else if (getActivity() instanceof ActiveDeviceActivity)
                         ((ActiveDeviceActivity) getActivity()).sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, getString(R.string.status_failure_message) + "\n" + getString(R.string.error_invalid_fields_antenna_config));
                     return false;
                 }
@@ -297,16 +273,15 @@ public class AntennaSettingsFragment extends BackPressedFragment {
                     tariValue = Integer.parseInt(tariSpinner.getSelectedItem().toString());
                     if (RFIDController.antennaRfConfig.getTari() == 0 && linkedProfileIndex == RFIDController.antennaRfConfig.getrfModeTableIndex()) {
                         RFModeTableEntry rfModeTableEntry = getRFModeTableEntry(linkedProfileIndex);
-                        if (rfModeTableEntry.getMinTariValue() == tariValue)
-                            tariValue = 0;
+                        if (rfModeTableEntry.getMinTariValue() == tariValue) tariValue = 0;
                     }
                 } catch (NumberFormatException e) {
                     Toast.makeText(getActivity(), "Please enter a valid value for Tari Value", Toast.LENGTH_LONG).show();
                 }
                 if (tariValue == -1) {
-                    if(getActivity() instanceof  SettingsDetailActivity)
+                    if (getActivity() instanceof SettingsDetailActivity)
                         ((SettingsDetailActivity) getActivity()).sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, getString(R.string.status_failure_message) + "\n" + getString(R.string.error_invalid_fields_antenna_config));
-                    else if (getActivity() instanceof  ActiveDeviceActivity)
+                    else if (getActivity() instanceof ActiveDeviceActivity)
                         ((ActiveDeviceActivity) getActivity()).sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, getString(R.string.status_failure_message) + "\n" + getString(R.string.error_invalid_fields_antenna_config));
                     return false;
                 }
@@ -376,10 +351,14 @@ public class AntennaSettingsFragment extends BackPressedFragment {
                 ProfileContent.UpdateActiveProfile();
                 return true;
             } catch (InvalidUsageException e) {
-                if( e!= null && e.getStackTrace().length>0){ Log.e(TAG, e.getStackTrace()[0].toString()); }
+                if (e != null && e.getStackTrace().length > 0) {
+                    Log.e(TAG, e.getStackTrace()[0].toString());
+                }
                 invalidUsageException = e;
             } catch (OperationFailureException e) {
-                if( e!= null && e.getStackTrace().length>0){ Log.e(TAG, e.getStackTrace()[0].toString()); }
+                if (e != null && e.getStackTrace().length > 0) {
+                    Log.e(TAG, e.getStackTrace()[0].toString());
+                }
                 operationFailureException = e;
             }
             return false;
@@ -390,24 +369,23 @@ public class AntennaSettingsFragment extends BackPressedFragment {
             progressDialog.cancel();
             if (!result) {
                 if (invalidUsageException != null) {
-                    if(getActivity() instanceof SettingsDetailActivity)
+                    if (getActivity() instanceof SettingsDetailActivity)
                         ((SettingsDetailActivity) getActivity()).sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, getString(R.string.status_failure_message) + "\n" + invalidUsageException.getVendorMessage());
-                    else if(getActivity() instanceof ActiveDeviceActivity)
+                    else if (getActivity() instanceof ActiveDeviceActivity)
                         ((ActiveDeviceActivity) getActivity()).sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, getString(R.string.status_failure_message) + "\n" + invalidUsageException.getVendorMessage());
                 }
                 if (operationFailureException != null) {
-                 //   if(getActivity() instanceof SettingsDetailActivity)
-              //          ((SettingsDetailActivity) getActivity()).sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, getString(R.string.status_failure_message) + "\n" + operationFailureException.getVendorMessage());
-                     if(current_context instanceof ActiveDeviceActivity)
-                         ((ActiveDeviceActivity) current_context).sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, "Failed to apply settings" + "\n" + operationFailureException.getVendorMessage());
+                    //   if(getActivity() instanceof SettingsDetailActivity)
+                    //          ((SettingsDetailActivity) getActivity()).sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, getString(R.string.status_failure_message) + "\n" + operationFailureException.getVendorMessage());
+                    if (current_context instanceof ActiveDeviceActivity)
+                        ((ActiveDeviceActivity) current_context).sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, "Failed to apply settings" + "\n" + operationFailureException.getVendorMessage());
                 }
             }
             if (invalidUsageException == null && operationFailureException == null) {
-                if(getActivity() instanceof SettingsDetailActivity)
-                    Toast.makeText((SettingsDetailActivity)getActivity(), R.string.status_success_message, Toast.LENGTH_SHORT).show();
-                else if(current_context instanceof ActiveDeviceActivity)
-                    Toast.makeText((ActiveDeviceActivity)current_context
-                            , "Setting applied successfully", Toast.LENGTH_SHORT).show();
+                if (getActivity() instanceof SettingsDetailActivity)
+                    Toast.makeText((SettingsDetailActivity) getActivity(), R.string.status_success_message, Toast.LENGTH_SHORT).show();
+                else if (current_context instanceof ActiveDeviceActivity)
+                    Toast.makeText((ActiveDeviceActivity) current_context, "Setting applied successfully", Toast.LENGTH_SHORT).show();
             }
             super.onPostExecute(result);
             //AdvancedOptionItemFragment fragment = AdvancedOptionItemFragment.newInstance();

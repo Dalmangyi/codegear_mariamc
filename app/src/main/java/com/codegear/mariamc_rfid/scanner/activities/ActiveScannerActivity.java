@@ -994,7 +994,7 @@ public class ActiveScannerActivity extends BaseActivity implements  /*Navigation
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        progressDialog = new CustomProgressDialog(ActiveScannerActivity.this, "Execute Command...");
+        progressDialog = new CustomProgressDialog(ActiveScannerActivity.this, "명령어 실행중...");
         progressDialog.show();
     }
 
@@ -1010,7 +1010,7 @@ public class ActiveScannerActivity extends BaseActivity implements  /*Navigation
         if (progressDialog != null && progressDialog.isShowing())
             progressDialog.dismiss();
         if(!b){
-            Toast.makeText(ActiveScannerActivity.this, "Cannot perform the action", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ActiveScannerActivity.this, "작업을 수행할 수 없습니다.", Toast.LENGTH_SHORT).show();
         }
     }
 }

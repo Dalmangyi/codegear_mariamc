@@ -38,14 +38,14 @@ public class BatteryStatsFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        View view = inflater.inflate(R.layout.fragment_battery_stats,container, false);
+
+        View view = inflater.inflate(R.layout.fragment_battery_stats, container, false);
         RecyclerView batteryRecyclerView = view.findViewById(R.id.battery_stats_recyclerview);
         BatteryStaticsAdapter batteryStaticsAdapter = new BatteryStaticsAdapter(batteryTitleList);
         batteryRecyclerView.setAdapter(batteryStaticsAdapter);
-        batteryRecyclerView.addItemDecoration(new DividerItemDecoration(requireActivity(),DividerItemDecoration.VERTICAL));
+        batteryRecyclerView.addItemDecoration(new DividerItemDecoration(requireActivity(), DividerItemDecoration.VERTICAL));
 
         return view;
 
@@ -69,7 +69,7 @@ public class BatteryStatsFragment extends Fragment {
 
     private void fetchAndUpdateBatteryStats() {
 
-        if(RFIDController.mConnectedReader == null ) {
+        if (RFIDController.mConnectedReader == null) {
             Toast.makeText(getActivity(), "No device in connected state", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -78,8 +78,7 @@ public class BatteryStatsFragment extends Fragment {
             try {
                 if (RFIDController.mConnectedReader.Config != null)
                     batteryStats = RFIDController.mConnectedReader.Config.getBatteryStats();
-                else
-                    return;
+                else return;
             } catch (InvalidUsageException | NullPointerException e) {
                 Log.e(TAG, e.getStackTrace()[0].toString());
             } catch (OperationFailureException e) {
@@ -90,61 +89,44 @@ public class BatteryStatsFragment extends Fragment {
         } else {
             Toast.makeText(getActivity(), "Inventory is in progress, Battery statistics cannot be fetched", Toast.LENGTH_SHORT).show();
         }
-        String header = "Battery Asset Information";
+        String header = "배터리 자산 정보";
         List<String> itemTitle = new ArrayList<>();
         List<String> itemValue = new ArrayList<>();
-        itemTitle.add("Manufacture Date");
+        itemTitle.add("제조일자");
         itemValue.add(batteryStats.getManufactureDate());
-//        itemTitle.add("Serial Number");
-//        itemValue.add(String.valueOf(batteryStats.getSerialNumber()));
-        itemTitle.add("Model Number");
+        itemTitle.add("모델 번호");
         itemValue.add(batteryStats.getModelNumber());
-        itemTitle.add("Battery ID");
+        itemTitle.add("배터리 ID");
         itemValue.add(batteryStats.getBatteryId());
-//        itemTitle.add("Design Capacity");
-//        itemValue.add(batteryStats.getDesignCapacity() +" mAh");
 
-        String header1 = "Battery Life Statistics";
+
+        String header1 = "배터리 수명 통계";
         List<String> itemTitle1 = new ArrayList<>();
         List<String> itemValue1 = new ArrayList<>();
-        itemTitle1.add("State of Health");
-        itemValue1.add(batteryStats.getHealth() +"%");
-        itemTitle1.add("Charge Cycles Consumed");
+        itemTitle1.add("건강 상태");
+        itemValue1.add(batteryStats.getHealth() + "%");
+        itemTitle1.add("소비된 충전 주기");
         itemValue1.add(String.valueOf(batteryStats.getCycleCount()));
 
-        String header2 = "Battery Status";
+        String header2 = "배터리 상태";
         List<String> itemTitle2 = new ArrayList<>();
         List<String> itemValue2 = new ArrayList<>();
-//        itemTitle2.add("Voltage");
-//        itemValue2.add(batteryStats.getVoltage() +" mV");
-//        itemTitle2.add("Current");
-//        itemValue2.add(batteryStats.getCurrent() + " mA");
-//        itemTitle2.add("Fully Charge Capacity");
-//        itemValue2.add(batteryStats.getFullChargeCapacity() +" mAh");
-        itemTitle2.add("Charge Percentage");
-        itemValue2.add(batteryStats.getPercentage() +"%");
-//        itemTitle2.add("Remaining Capacity");
-//        itemValue2.add(batteryStats.getRemainingCapacity() +" mAh");
-        itemTitle2.add("Charge Status");
+        itemTitle2.add("충전 퍼센트");
+        itemValue2.add(batteryStats.getPercentage() + "%");
+        itemTitle2.add("충전 상태");
         itemValue2.add(String.valueOf(batteryStats.getChargeStatus()));
-//        itemTitle2.add("Time To Full Charge");
-//        itemValue2.add(batteryStats.getTimeToFullCharge() +" ms");
-//        itemTitle2.add("Charging Status");
-//        itemValue2.add(String.valueOf(batteryStats.getCharging()));
-//        itemTitle2.add("Status");
-//        itemValue2.add(String.valueOf(batteryStats.getStatus()));
 
-        String header3 = "Battery Temperature";
+        String header3 = "배터리 온도";
         List<String> itemTitle3 = new ArrayList<>();
         List<String> itemValue3 = new ArrayList<>();
-        itemTitle3.add("Present");
-        itemValue3.add(batteryStats.getTemperature() +"\u00B0"+"C");
+        itemTitle3.add("현재 온도");
+        itemValue3.add(batteryStats.getTemperature() + "\u00B0" + "C");
 
 
-        batteryTitleList.add(new BatteryStatisticsData(header,itemTitle,itemValue));
-        batteryTitleList.add(new BatteryStatisticsData(header1,itemTitle1,itemValue1));
-        batteryTitleList.add(new BatteryStatisticsData(header2,itemTitle2,itemValue2));
-        batteryTitleList.add(new BatteryStatisticsData(header3,itemTitle3,itemValue3));
+        batteryTitleList.add(new BatteryStatisticsData(header, itemTitle, itemValue));
+        batteryTitleList.add(new BatteryStatisticsData(header1, itemTitle1, itemValue1));
+        batteryTitleList.add(new BatteryStatisticsData(header2, itemTitle2, itemValue2));
+        batteryTitleList.add(new BatteryStatisticsData(header3, itemTitle3, itemValue3));
 
     }
 

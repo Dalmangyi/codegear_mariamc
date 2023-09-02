@@ -254,7 +254,7 @@ public class LEDActivity extends BaseActivity implements NavigationView.OnNaviga
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            progressDialog = new CustomProgressDialog(LEDActivity.this, "Execute Command...");
+            progressDialog = new CustomProgressDialog(LEDActivity.this, "명령어 실행중...");
             progressDialog.show();
         }
 

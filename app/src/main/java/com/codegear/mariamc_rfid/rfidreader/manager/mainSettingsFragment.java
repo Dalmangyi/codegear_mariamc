@@ -1,4 +1,3 @@
-
 package com.codegear.mariamc_rfid.rfidreader.manager;
 
 import static androidx.appcompat.app.AppCompatActivity.RESULT_OK;
@@ -49,7 +48,7 @@ public class mainSettingsFragment extends Fragment {
     private static final int CHOOSE_FILE_FROM_DEVICE = 1001;
     private Uri filePath;
     private ArrayList<Uri> multipleFiles;
-    private TableRow generalRow, rfidRow,applicationRow;
+    private TableRow generalRow, rfidRow, applicationRow;
 
     public mainSettingsFragment() {
         // Required empty public constructor
@@ -79,14 +78,13 @@ public class mainSettingsFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mainSettingsFragmentView = inflater.inflate(R.layout.fragment_mainsettings, container, false);
         generalRow = mainSettingsFragmentView.findViewById(R.id.generalrow);
         rfidRow = mainSettingsFragmentView.findViewById(R.id.rfidrow);
         applicationRow = mainSettingsFragmentView.findViewById(R.id.applicationrow);
         scanSettingRow = mainSettingsFragmentView.findViewById(R.id.scansettingrow);
-        if(Application.RFD_DEVICE_MODE == Application.DEVICE_PREMIUM_PLUS_MODE) {
+        if (Application.RFD_DEVICE_MODE == Application.DEVICE_PREMIUM_PLUS_MODE) {
             scanSettingRow.setVisibility(View.VISIBLE);
         }
         return mainSettingsFragmentView;
@@ -101,7 +99,7 @@ public class mainSettingsFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         initialize();
-        if(RFIDController.mConnectedReader == null) {
+        if (RFIDController.mConnectedReader == null) {
             generalRow.setEnabled(false);
             generalRow.setBackgroundColor(Color.LTGRAY);
             rfidRow.setEnabled(false);
@@ -152,27 +150,25 @@ public class mainSettingsFragment extends Fragment {
     }
 
 
-
-
-    public void callChooseFileFromDevice(){
+    public void callChooseFileFromDevice() {
         Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
         intent.addCategory(Intent.CATEGORY_OPENABLE);
-        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE,true);
+        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
         intent.setType("*/*");
         //  startActivityForResult(Intent.createChooser(intent,"Selecting multiple files"),CHOOSE_PDF_FROM_DEVICE);
-        startActivityForResult(Intent.createChooser(intent,"Selecting multiple files"),CHOOSE_FILE_FROM_DEVICE);
+        startActivityForResult(Intent.createChooser(intent, "Selecting multiple files"), CHOOSE_FILE_FROM_DEVICE);
         //  Log.d("Share"," selecting ");
     }
 
-    public void shareFile(){
+    public void shareFile() {
 
-        Log.d("Share","before sharing");
+        Log.d("Share", "before sharing");
         Intent intentShare = new Intent(Intent.ACTION_SEND_MULTIPLE);
 
         intentShare.setType("*/*");
         intentShare.putParcelableArrayListExtra(Intent.EXTRA_STREAM, multipleFiles);
-        startActivity(Intent.createChooser(intentShare,"Share the file ..."));
-        Log.d("Share","after sharing");
+        startActivity(Intent.createChooser(intentShare, "Share the file ..."));
+        Log.d("Share", "after sharing");
         multipleFiles.clear();
     }
 

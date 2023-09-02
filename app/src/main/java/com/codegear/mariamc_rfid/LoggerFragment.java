@@ -30,24 +30,24 @@ import com.zebra.rfid.api3.OperationFailureException;
 public class LoggerFragment extends Fragment {
 
 
-    public static final String SHARED_PREF_NAME             = "Switch";
-    public static final String REALTIMELOGGERSTATE          = "REALTIMELOGGER_STATE";
-    public static final String DEBUGLOGGERSTATE             = "DEBUGLOGGER_STATE";
-    public static final String NGEERRORLOGSTATE             = "NGEERRORLOGSTATE";
-    public static final String NGEEVENTLOGSTATE             = "NGEEVENTLOGSTATE";
-    public static final String NGEPACKETLOGSTATE            = "NGEPACKETLOGSTATE";
-    public static final String INTERNALRAMLOGSTATE          = "INTERNALRAMLOGSTATE";
-    public static final String INTERNALFLASHLOGSTATE        = "INTERNALFLASHLOGSTATE";
-    private static final int REQUEST_ID_READ_PERMISSION     = 100;
-    private static final int REQUEST_ID_WRITE_PERMISSION    = 200;
-    private static final String TAG                         = "RFIDMANAGERAPP-" + LoggerFragment.class.getSimpleName();
-    private final String fileName                           = "RfidLog.txt";
-    private final String BUFFEREDLOG_PREFIX                 = "Notification:Dump";
+    public static final String SHARED_PREF_NAME = "Switch";
+    public static final String REALTIMELOGGERSTATE = "REALTIMELOGGER_STATE";
+    public static final String DEBUGLOGGERSTATE = "DEBUGLOGGER_STATE";
+    public static final String NGEERRORLOGSTATE = "NGEERRORLOGSTATE";
+    public static final String NGEEVENTLOGSTATE = "NGEEVENTLOGSTATE";
+    public static final String NGEPACKETLOGSTATE = "NGEPACKETLOGSTATE";
+    public static final String INTERNALRAMLOGSTATE = "INTERNALRAMLOGSTATE";
+    public static final String INTERNALFLASHLOGSTATE = "INTERNALFLASHLOGSTATE";
+    private static final int REQUEST_ID_READ_PERMISSION = 100;
+    private static final int REQUEST_ID_WRITE_PERMISSION = 200;
+    private static final String TAG = "RFIDMANAGERAPP-" + LoggerFragment.class.getSimpleName();
+    private final String fileName = "RfidLog.txt";
+    private final String BUFFEREDLOG_PREFIX = "Notification:Dump";
     Context mContext;
     Spinner mSprlogger;
     Switch RealtimeLoggerEnableButton, DebugLoggerEnableButton;
-    String RealtimeLoggerstate, DebugLoggerstate, Bufferedlogsstate ;
-    String NgeErrorlogsstate ,NgeEventlogstate,NgePacketlogstate ;
+    String RealtimeLoggerstate, DebugLoggerstate, Bufferedlogsstate;
+    String NgeErrorlogsstate, NgeEventlogstate, NgePacketlogstate;
     private StringBuilder readerLogText;
     private CheckBox chechkboxlogs;
     private CheckBox NgeErrorlogEnableCheckbox;
@@ -68,19 +68,16 @@ public class LoggerFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        if( RFIDController.mConnectedReader!= null)
+        if (RFIDController.mConnectedReader != null)
             rfidLogger = RFIDController.mConnectedReader.Logger;
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View rootview = inflater.inflate(R.layout.logger_fragment, container, false);
         mContext = rootview.getContext();
-        if(RFIDController.mConnectedReader == null )
-        {
+        if (RFIDController.mConnectedReader == null) {
             Toast.makeText(getActivity(), "Reader not connected", Toast.LENGTH_SHORT).show();
-
         }
 
         // setting switch button for application debug logging
@@ -94,12 +91,12 @@ public class LoggerFragment extends Fragment {
         // Checkbox for enabling nge packet logs
         NgepacketlogEnableCheckbox = (CheckBox) rootview.findViewById(R.id.ngepacketlogging_checkBox);
         // Checkbox for retrieving internal ram logs
-        retrieveramlogbtn = (Button)rootview.findViewById(R.id.ramlogbutton);
+        retrieveramlogbtn = (Button) rootview.findViewById(R.id.ramlogbutton);
         // Checkbox for retrieving internal flash logs
-        retrieveflashlogbtn = (Button)rootview.findViewById(R.id.flashlogbutton);
+        retrieveflashlogbtn = (Button) rootview.findViewById(R.id.flashlogbutton);
 
         // get real time logger state from RFID service
-        if(rfidLogger != null ) {
+        if (rfidLogger != null) {
 
             RealtimeLoggerstate = rfidLogger.getLogConfig(REALTIMELOGGERSTATE);
             DebugLoggerstate = rfidLogger.getLogConfig(DEBUGLOGGERSTATE);
@@ -108,8 +105,7 @@ public class LoggerFragment extends Fragment {
             NgePacketlogstate = rfidLogger.getLogConfig(NGEPACKETLOGSTATE);
 
             // debug out put
-            Log.d("TAG", "RealtimeLoggerState: " + RealtimeLoggerstate + ", DebugLoggerState: "
-                    + DebugLoggerstate + ", BufferedLogState: " + Bufferedlogsstate);
+            Log.d("TAG", "RealtimeLoggerState: " + RealtimeLoggerstate + ", DebugLoggerState: " + DebugLoggerstate + ", BufferedLogState: " + Bufferedlogsstate);
             if (RealtimeLoggerstate.equalsIgnoreCase("ON")) {
                 RealtimeLoggerEnableButton.setChecked(true);
             } else {
@@ -124,9 +120,9 @@ public class LoggerFragment extends Fragment {
                     try {
                         rfidLogger.setRfidReaderLog(REALTIMELOGGERSTATE, isChecked);
                     } catch (OperationFailureException e) {
-                       Log.d(TAG,  "Returned SDK Exception");
+                        Log.d(TAG, "Returned SDK Exception");
                     } catch (InvalidUsageException e) {
-                       Log.d(TAG,  "Returned SDK Exception");
+                        Log.d(TAG, "Returned SDK Exception");
                     }
                 }
 
@@ -163,9 +159,9 @@ public class LoggerFragment extends Fragment {
                     try {
                         rfidLogger.setRfidReaderLog(NGEERRORLOGSTATE, isChecked);
                     } catch (OperationFailureException e) {
-                       Log.d(TAG,  "Returned SDK Exception");
+                        Log.d(TAG, "Returned SDK Exception");
                     } catch (InvalidUsageException e) {
-                       Log.d(TAG,  "Returned SDK Exception");
+                        Log.d(TAG, "Returned SDK Exception");
                     }
                 }
 
@@ -186,9 +182,9 @@ public class LoggerFragment extends Fragment {
                     try {
                         rfidLogger.setRfidReaderLog(NGEEVENTLOGSTATE, isChecked);
                     } catch (OperationFailureException e) {
-                       Log.d(TAG,  "Returned SDK Exception");
+                        Log.d(TAG, "Returned SDK Exception");
                     } catch (InvalidUsageException e) {
-                       Log.d(TAG,  "Returned SDK Exception");
+                        Log.d(TAG, "Returned SDK Exception");
                     }
                 }
 
@@ -208,9 +204,9 @@ public class LoggerFragment extends Fragment {
                     try {
                         rfidLogger.setRfidReaderLog(NGEPACKETLOGSTATE, isChecked);
                     } catch (OperationFailureException e) {
-                       Log.d(TAG,  "Returned SDK Exception");
+                        Log.d(TAG, "Returned SDK Exception");
                     } catch (InvalidUsageException e) {
-                       Log.d(TAG,  "Returned SDK Exception");
+                        Log.d(TAG, "Returned SDK Exception");
                     }
                 }
             });
@@ -219,17 +215,17 @@ public class LoggerFragment extends Fragment {
                 @Override
                 public void onClick(View view) {
 
-                        try {
-                            retrieveramlogbtn.setEnabled(false);
-                            Toast.makeText(getActivity(), "Retrieving internal RAM logs!", Toast.LENGTH_SHORT).show();
-                            rfidLogger.getRfidReaderLogs(INTERNALRAMLOGSTATE, true);
-                            retrieveramlogbtn.setEnabled(true);
-                        } catch (OperationFailureException e) {
-                           Log.d(TAG,  "Returned SDK Exception");
-                        } catch (InvalidUsageException e) {
-                           Log.d(TAG,  "Returned SDK Exception");
-                        }
+                    try {
+                        retrieveramlogbtn.setEnabled(false);
+                        Toast.makeText(getActivity(), "내부 램(RAM)에서 로그를 검색중입니다!", Toast.LENGTH_SHORT).show();
+                        rfidLogger.getRfidReaderLogs(INTERNALRAMLOGSTATE, true);
+                        retrieveramlogbtn.setEnabled(true);
+                    } catch (OperationFailureException e) {
+                        Log.d(TAG, "Returned SDK Exception");
+                    } catch (InvalidUsageException e) {
+                        Log.d(TAG, "Returned SDK Exception");
                     }
+                }
 
             });
             retrieveflashlogbtn.setOnClickListener(new View.OnClickListener() {
@@ -237,13 +233,13 @@ public class LoggerFragment extends Fragment {
                 public void onClick(View view) {
                     try {
                         retrieveflashlogbtn.setEnabled(false);
-                        Toast.makeText(getActivity(), "Retrieving internal Flash logs!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "내부 플래쉬(Flash)에서 로그를 검색중입니다!", Toast.LENGTH_SHORT).show();
                         rfidLogger.getRfidReaderLogs(INTERNALFLASHLOGSTATE, true);
                         retrieveflashlogbtn.setEnabled(true);
                     } catch (OperationFailureException e) {
-                       Log.d(TAG,  "Returned SDK Exception");
+                        Log.d(TAG, "Returned SDK Exception");
                     } catch (InvalidUsageException e) {
-                       Log.d(TAG,  "Returned SDK Exception");
+                        Log.d(TAG, "Returned SDK Exception");
                     }
                 }
 
@@ -252,11 +248,10 @@ public class LoggerFragment extends Fragment {
 
         }
 
-        if(RFIDController.mConnectedReader == null ||
-                ((RFIDController.mConnectedReader != null ) && RFIDController.mConnectedReader.getHostName().startsWith("MC33"))){
+        if (RFIDController.mConnectedReader == null || ((RFIDController.mConnectedReader != null) && RFIDController.mConnectedReader.getHostName().startsWith("MC33"))) {
 
-       //     if(RFIDController.mConnectedReader != null )
-        //        Toast.makeText(getActivity(), "Real time log not supported for MC33", Toast.LENGTH_SHORT).show();
+            //     if(RFIDController.mConnectedReader != null )
+            //        Toast.makeText(getActivity(), "Real time log not supported for MC33", Toast.LENGTH_SHORT).show();
 
             //chechkboxlogs.setVisibility(View.INVISIBLE);
             RealtimeLoggerEnableButton.setVisibility(View.INVISIBLE);
@@ -286,8 +281,7 @@ public class LoggerFragment extends Fragment {
     }
 
     private void askPermissionAndWriteFile() {
-        canWrite = this.askPermission(REQUEST_ID_WRITE_PERMISSION,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        canWrite = this.askPermission(REQUEST_ID_WRITE_PERMISSION, Manifest.permission.WRITE_EXTERNAL_STORAGE);
        /* if (canWrite) {
             this.writeFile();
 
@@ -302,10 +296,7 @@ public class LoggerFragment extends Fragment {
             int permission = ActivityCompat.checkSelfPermission(getActivity(), permissionName);
             if (permission != PackageManager.PERMISSION_GRANTED) {
                 // If don't have permission so prompt the user.
-                this.requestPermissions(
-                        new String[]{permissionName},
-                        requestId
-                );
+                this.requestPermissions(new String[]{permissionName}, requestId);
                 return false;
             }
         }
@@ -314,8 +305,7 @@ public class LoggerFragment extends Fragment {
 
     // When you have the request results
     @Override
-    public void onRequestPermissionsResult(int requestCode,
-                                           String permissions[], int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         //
         // Note: If request is cancelled, the result arrays are empty.
@@ -332,11 +322,10 @@ public class LoggerFragment extends Fragment {
                 }
             }
         } else {
-            Toast.makeText(getActivity(), "Permission Cancelled!", Toast.LENGTH_SHORT).show();
-            Log.d( TAG, "Permission Cancelled!" );
+            Toast.makeText(getActivity(), "권한이 취소되었습니다!", Toast.LENGTH_SHORT).show();
+            Log.d(TAG, "Permission Cancelled!");
         }
     }
-
 
 
     public void onDataReceived(String data) {
@@ -361,7 +350,7 @@ public class LoggerFragment extends Fragment {
         //Intent intent;
         //intent = new Intent(getActivity(), DeviceDiscoverActivity.class);
         //intent.putExtra("enable_toolbar", false);
-       // startActivity(intent);
+        // startActivity(intent);
 
         //getActivity().finish();
 
