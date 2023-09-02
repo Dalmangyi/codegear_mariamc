@@ -215,7 +215,7 @@ public class BatteryStatistics extends BaseActivity implements NavigationView.On
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            progressDialog = new CustomProgressDialog(BatteryStatistics.this, "Please wait...");
+            progressDialog = new CustomProgressDialog(BatteryStatistics.this, "잠시만 기다려주세요...");
             progressDialog.setCancelable(false);
             progressDialog.show();
         }

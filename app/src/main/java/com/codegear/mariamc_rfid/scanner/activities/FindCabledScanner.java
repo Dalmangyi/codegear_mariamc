@@ -180,7 +180,7 @@ public class FindCabledScanner extends BaseActivity implements ScannerAppEngine.
         protected void onPreExecute() {
             super.onPreExecute();
             if(!isFinishing()) {
-                progressDialog = new CustomProgressDialog(FindCabledScanner.this, "Connecting To scanner. Please Wait...");
+                progressDialog = new CustomProgressDialog(FindCabledScanner.this, "Connecting To scanner. 잠시만 기다려주세요...");
                 progressDialog.setCancelable(false);
                 progressDialog.show();
             }

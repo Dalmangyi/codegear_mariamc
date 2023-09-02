@@ -1686,7 +1686,7 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            progressDialog = new com.codegear.mariamc_rfid.scanner.helpers.CustomProgressDialog(ActiveDeviceActivity.this, "Please wait...");
+            progressDialog = new com.codegear.mariamc_rfid.scanner.helpers.CustomProgressDialog(ActiveDeviceActivity.this, "잠시만 기다려주세요...");
             progressDialog.setCancelable(false);
             progressDialog.show();
         }
@@ -1964,7 +1964,7 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            progressDialog = new com.codegear.mariamc_rfid.scanner.helpers.CustomProgressDialog(ActiveDeviceActivity.this, "Please wait...");
+            progressDialog = new com.codegear.mariamc_rfid.scanner.helpers.CustomProgressDialog(ActiveDeviceActivity.this, "잠시만 기다려주세요...");
             progressDialog.setCancelable(false);
             progressDialog.show();
         }
@@ -2043,7 +2043,7 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            progressDialog = new com.codegear.mariamc_rfid.scanner.helpers.CustomProgressDialog(ActiveDeviceActivity.this, "Please wait...");
+            progressDialog = new com.codegear.mariamc_rfid.scanner.helpers.CustomProgressDialog(ActiveDeviceActivity.this, "잠시만 기다려주세요...");
             progressDialog.setCancelable(false);
             progressDialog.show();
         }
@@ -2599,7 +2599,7 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
                     getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
                     break;
                 case UPDATE_FIRMWARE_TAB:
-                    PageTitle = "FW Update";
+                    PageTitle = "펌웨어 업데이트";
                     mAdapter.setSettingsMode(UPDATE_FIRMWARE_TAB);
                     getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
                     break;

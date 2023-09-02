@@ -602,8 +602,8 @@ public class InitReadersListFragment extends Fragment implements IRFIDConnectTas
                 try {
                     RFIDController.mConnectedReader.disconnect();
                     if (connectingDevice.getTransport().equals("BLUETOOTH")) {
-                        unPair(connectingDevice);
-                        readersList.remove(connectingDevice);
+//                        unPair(connectingDevice);
+//                        readersList.remove(connectingDevice);
                         pairedReaderListAdapter.notifyDataSetChanged();
                     }
                     if (progressDialog != null) {

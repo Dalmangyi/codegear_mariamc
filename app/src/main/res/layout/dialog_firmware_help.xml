@@ -3,8 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginLeft="@dimen/app_margin_left"
-    android:layout_marginRight="@dimen/app_margin_right"
     android:layout_marginTop="@dimen/app_margin_right"
+    android:layout_marginRight="@dimen/app_margin_right"
     android:orientation="vertical">
 
     <ScrollView
@@ -37,10 +37,10 @@
                     style="@style/roboto_regular_14dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
                     android:layout_marginRight="@dimen/app_margin_right"
+                    android:layout_marginBottom="5dp"
                     android:paddingStart="10dp"
-                    android:text="Copy correct DAT file to /SDcard/download" />
+                    android:text="올바른 DAT 파일을 /SDcard/download 폴더에 복사하세요." />
 
             </TableRow>
 
@@ -58,13 +58,12 @@
                     style="@style/roboto_regular_14dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
                     android:layout_marginRight="@dimen/app_margin_right"
+                    android:layout_marginBottom="5dp"
                     android:paddingStart="10dp"
-                    android:text="Make sure the terminal is connected to device " />
+                    android:text="터미널이 장치에 연결되어 있는지 확인하십시오." />
 
             </TableRow>
-
 
 
             <TableRow
@@ -93,9 +92,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
-                android:layout_marginBottom="@dimen/app_margin_right"
-                android:layout_marginRight="@dimen/app_margin_right"
                 android:layout_marginTop="@dimen/app_margin_right"
+                android:layout_marginRight="@dimen/app_margin_right"
+                android:layout_marginBottom="@dimen/app_margin_right"
                 android:clickable="true"
                 android:gravity="right"
                 android:text="@string/close" />

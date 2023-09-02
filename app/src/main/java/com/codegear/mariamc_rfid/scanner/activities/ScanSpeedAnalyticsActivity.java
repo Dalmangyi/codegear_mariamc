@@ -287,9 +287,6 @@ public class ScanSpeedAnalyticsActivity extends  BaseActivity implements  Naviga
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-//            progressDialog = new CustomProgressDialog(ScanSpeedAnalyticsActivity.this, "Please wait...");
-//            progressDialog.setCancelable(false);
-//            progressDialog.show();
         }
 
         @Override

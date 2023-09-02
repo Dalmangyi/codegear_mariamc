@@ -501,7 +501,7 @@ public class ActiveScannerActivity extends BaseActivity implements  /*Navigation
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            progressDialog = new CustomProgressDialog(ActiveScannerActivity.this, "Please wait...");
+            progressDialog = new CustomProgressDialog(ActiveScannerActivity.this, "잠시만 기다려주세요...");
             progressDialog.setCancelable(false);
             progressDialog.show();
         }
@@ -740,7 +740,7 @@ public class ActiveScannerActivity extends BaseActivity implements  /*Navigation
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            progressDialog = new CustomProgressDialog(ActiveScannerActivity.this, "Please wait...");
+            progressDialog = new CustomProgressDialog(ActiveScannerActivity.this, "잠시만 기다려주세요...");
             progressDialog.setCancelable(false);
             progressDialog.show();
         }
@@ -817,7 +817,7 @@ public class ActiveScannerActivity extends BaseActivity implements  /*Navigation
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            progressDialog = new CustomProgressDialog(ActiveScannerActivity.this, "Please wait...");
+            progressDialog = new CustomProgressDialog(ActiveScannerActivity.this, "잠시만 기다려주세요...");
             progressDialog.setCancelable(false);
             progressDialog.show();
         }

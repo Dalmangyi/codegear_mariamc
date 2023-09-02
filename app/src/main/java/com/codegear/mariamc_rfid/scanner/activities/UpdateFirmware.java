@@ -76,13 +76,13 @@ import java.util.Locale;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
-public class UpdateFirmware extends Fragment implements  NavigationView.OnNavigationItemSelectedListener,ScannerAppEngine.IScannerAppEngineDevConnectionsDelegate, ScannerAppEngine.IScannerAppEngineDevEventsDelegate {
+public class UpdateFirmware extends Fragment implements NavigationView.OnNavigationItemSelectedListener, ScannerAppEngine.IScannerAppEngineDevConnectionsDelegate, ScannerAppEngine.IScannerAppEngineDevEventsDelegate {
     private static UpdateFirmware mUpdateFragment = null;
     private NavigationView navigationView;
     Menu menu;
     MenuItem pairNewScannerMenu;
     int scannerID;
-    static MyAsyncTask cmdExecTask=null;
+    static MyAsyncTask cmdExecTask = null;
     static File selectedPlugIn = null;
     static DCSScannerInfo fwUpdatingScanner;
     static final int PERMISSIONS_REQUEST_READ_EX_STORAGE = 10;
@@ -90,7 +90,6 @@ public class UpdateFirmware extends Fragment implements  NavigationView.OnNaviga
     static Dialog dialogFwProgress;
     static Dialog dialogFwRebooting;
     static Dialog dialogFwReconnectScanner;
-    static boolean processMultiplePlugIn = false;
     static Dialog dialogFWHelp;
     int dialogFWProgessX = 90;
     int dialogFWProgessY = 220;
@@ -106,7 +105,7 @@ public class UpdateFirmware extends Fragment implements  NavigationView.OnNaviga
     static UpdateFirmware mUpdateFirmware = null;
     ScanPair scanPair = null;
 
-    TableRow selectFirmwareRow,tblRowFW;
+    TableRow selectFirmwareRow, tblRowFW;
 
     private RFIDBaseActivity mRfidBaseActivity;
     private int fwupdateState = -1;
@@ -114,8 +113,8 @@ public class UpdateFirmware extends Fragment implements  NavigationView.OnNaviga
     private String TAG = "RFIDUpdateFrimware";
     private Boolean viewCreated = false;
 
-    private HashMap<String,String> devicemodelMap=null;
-    private HashMap<String,String> deviceskuMap=null;
+    private HashMap<String, String> devicemodelMap = null;
+    private HashMap<String, String> deviceskuMap = null;
     private Uri documentUri;
 
     public static UpdateFirmware newInstance() {
@@ -133,55 +132,24 @@ public class UpdateFirmware extends Fragment implements  NavigationView.OnNaviga
         setHasOptionsMenu(true);
 
     }
+
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         final View rootview = inflater.inflate(R.layout.content_update_firmware, container, false);
 
-        Configuration configuration = getResources().getConfiguration();
-        //setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-//        if(configuration.orientation == Configuration.ORIENTATION_LANDSCAPE){
-//            if(configuration.smallestScreenWidthDp<Application.minScreenWidth){
-//                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-//            }
-//        }else{
-//            if(configuration.screenWidthDp<Application.minScreenWidth){
-//                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-//            }
-//        }
-
-
-        //DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-       // ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-       //         this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-       // drawer.setDrawerListener(toggle);
-       // toggle.syncState();
-
-//        navigationView = (NavigationView) rootview.findViewById(R.id.nav_view);
-//        navigationView.setNavigationItemSelectedListener(this);
-//        menu = navigationView.getMenu();
-//        pairNewScannerMenu = menu.findItem(R.id.nav_pair_device);
-//        pairNewScannerMenu.setTitle(R.string.menu_item_device_disconnect);
-
-
-
-        selectFirmwareRow = (TableRow)rootview.findViewById(R.id.tbl_row_select_firmware);
+        selectFirmwareRow = (TableRow) rootview.findViewById(R.id.tbl_row_select_firmware);
         selectFirmwareRow.setVisibility(View.VISIBLE);
 
-        tblRowFW = (TableRow)rootview.findViewById(R.id.tbl_row_fw_update);
+        tblRowFW = (TableRow) rootview.findViewById(R.id.tbl_row_fw_update);
         tblRowFW.setVisibility(View.GONE);
 
         //scannerID = getIntent().getIntExtra(Constants.SCANNER_ID, -1);
         scannerID = Application.currentScannerId;
-        isWaitingForFWUpdateToComplete= false;
+        isWaitingForFWUpdateToComplete = false;
         fwUpdatingScanner = Application.currentConnectedScanner;
         Log.i("ScannerControl", "Adding Update FW IScannerAppEngineDevEventsDelegate into list");
-        //((ActiveDeviceActivity)getActivity()).addDevConnectionsDelegate(this);
-        //((ActiveDeviceActivity)getActivity()).addDevEventsDelegate(this);
-        //mUpdateFirmware = this;
-        //mRfidBaseActivity = RFIDBaseActivity.getInstance();
-        //mRfidBaseActivity.setReaderstatuscallback(this);
+
 
         return rootview;
 
@@ -196,7 +164,7 @@ public class UpdateFirmware extends Fragment implements  NavigationView.OnNaviga
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        if((getActivity() != null) && (viewCreated == false )) {
+        if ((getActivity() != null) && (viewCreated == false)) {
             initview((AppCompatActivity) getActivity());
             viewCreated = true;
         }
@@ -205,8 +173,6 @@ public class UpdateFirmware extends Fragment implements  NavigationView.OnNaviga
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-
-
     }
 
     @Override
@@ -217,10 +183,9 @@ public class UpdateFirmware extends Fragment implements  NavigationView.OnNaviga
     @Override
     public void onDetach() {
         super.onDetach();
-     }
+    }
 
-    public static UpdateFirmware getmUpdateFirmwareInstance()
-    {
+    public static UpdateFirmware getmUpdateFirmwareInstance() {
         return mUpdateFirmware;
     }
 
@@ -232,16 +197,12 @@ public class UpdateFirmware extends Fragment implements  NavigationView.OnNaviga
             dialogFWHelp = null;
         }
 
-        if(RFIDController.mConnectedReader==null)
-        {
-            Toast.makeText(((ActiveDeviceActivity)getActivity()), "Cannot perform the action, Reader not connected", Toast.LENGTH_SHORT).show();
+        if (RFIDController.mConnectedReader == null) {
+            Toast.makeText(((ActiveDeviceActivity) getActivity()), "작업을 수행할 수 없습니다. 장치가 연결되지 않았습니다.", Toast.LENGTH_SHORT).show();
             return;
         }
-        if(!RFIDController.mConnectedReader.getHostName().startsWith("RFD40") &&
-                !RFIDController.mConnectedReader.getHostName().startsWith("RFD90") &&
-                !RFIDController.mConnectedReader.getHostName().startsWith("RFD8500"))
-        {
-            dialogFWHelp = new Dialog(((ActiveDeviceActivity)getActivity()));
+        if (!RFIDController.mConnectedReader.getHostName().startsWith("RFD40") && !RFIDController.mConnectedReader.getHostName().startsWith("RFD90") && !RFIDController.mConnectedReader.getHostName().startsWith("RFD8500")) {
+            dialogFWHelp = new Dialog(((ActiveDeviceActivity) getActivity()));
             dialogFWHelp.requestWindowFeature(Window.FEATURE_NO_TITLE);
             dialogFWHelp.setContentView(R.layout.dialog_rfd8500_firmware_help);
             dialogFWHelp.setCancelable(false);
@@ -265,26 +226,25 @@ public class UpdateFirmware extends Fragment implements  NavigationView.OnNaviga
             public void run() {
                 //fwReboot = getIntent().getBooleanExtra(Constants.FW_REBOOT, false);
 
-                if(fwReboot){
-                    Application.isFirmwareUpdateInProgress =false;
+                if (fwReboot) {
+                    Application.isFirmwareUpdateInProgress = false;
                     UIUpdater uiUpdater = new UIUpdater(fwReboot);
                     uiUpdater.execute();
                 }
 
                 if (!fwReboot && isWaitingForFWUpdateToComplete) {
-                    Log.i("ScannerControl","Waiting for fw update to be completed");
+                    Log.i("ScannerControl", "Waiting for fw update to be completed");
                 } else {
                     if (dialogFwProgress == null && dialogFwRebooting == null) {
                         if (Application.currentConnectedScanner != null) {
-                            if( RFIDController.mConnectedReader == null )
-                            {
+                            if (RFIDController.mConnectedReader == null) {
                                 requireActivity().runOnUiThread(() -> {
                                     LinearLayout updateFirmwarelayout = (LinearLayout) getView().findViewById(R.id.layout_update_firmware);
                                     updateFirmwarelayout.setVisibility(View.INVISIBLE);
                                     updateFirmwarelayout.setVisibility(View.GONE);
-                                    Toast.makeText(getActivity(), "Cannot perform the action, Reader not connected", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getActivity(), "작업을 수행할 수 없습니다. 장치가 연결되지 않았습니다.", Toast.LENGTH_SHORT).show();
                                 });
-                            }else{
+                            } else {
                                 UIUpdater uiUpdater = new UIUpdater(fwReboot);
                                 uiUpdater.execute();
                             }
@@ -300,7 +260,7 @@ public class UpdateFirmware extends Fragment implements  NavigationView.OnNaviga
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         // Inflate the menu; this adds items to the action bar if it is present.
         inflater.inflate(R.menu.firmware, menu);
-        return ;
+        return;
     }
 
     @Override
@@ -311,7 +271,7 @@ public class UpdateFirmware extends Fragment implements  NavigationView.OnNaviga
 
         switch (item.getItemId()) {
             case R.id.firmware_help: {
-               // if(!isFinishing())
+                // if(!isFinishing())
                 {
                     dialogFWHelp = new Dialog(getActivity());
                     dialogFWHelp.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -319,10 +279,6 @@ public class UpdateFirmware extends Fragment implements  NavigationView.OnNaviga
                     dialogFWHelp.setCancelable(false);
                     dialogFWHelp.setCanceledOnTouchOutside(false);
                     dialogFWHelp.show();
-                  /*  TextView textView = (TextView) dialogFWHelp.findViewById(R.id.url);
-                    if (textView != null) {
-                        textView.setMovementMethod(LinkMovementMethod.getInstance());
-                    }*/
 
                     TextView declineButton = (TextView) dialogFWHelp.findViewById(R.id.btn_ok);
                     // if decline button is clicked, close the custom dialog
@@ -385,8 +341,8 @@ public class UpdateFirmware extends Fragment implements  NavigationView.OnNaviga
     private ScannerPlugIn getLatestPlugIn(List<ScannerPlugIn> matchingPlugins) {
         ScannerPlugIn latestPlugIn = matchingPlugins.get(0);
 
-        for (ScannerPlugIn plugIn:matchingPlugins) {
-            if(Integer.valueOf(plugIn.getRevision())>Integer.valueOf(latestPlugIn.getRevision())){
+        for (ScannerPlugIn plugIn : matchingPlugins) {
+            if (Integer.valueOf(plugIn.getRevision()) > Integer.valueOf(latestPlugIn.getRevision())) {
                 latestPlugIn = plugIn;
             }
         }
@@ -396,7 +352,7 @@ public class UpdateFirmware extends Fragment implements  NavigationView.OnNaviga
     private void ProcessPlugIn(File plugInFile, final boolean bFwReboot) {
         if (isPlugIn(plugInFile)) {
             // This is a plug-in file
-            String unzipLocation = ((ActiveDeviceActivity)getActivity()).getCacheDir().getAbsolutePath() + File.separator;
+            String unzipLocation = ((ActiveDeviceActivity) getActivity()).getCacheDir().getAbsolutePath() + File.separator;
             String metaDataFilePath = extractMetaData(unzipLocation, plugInFile.getAbsolutePath());
             String scannerModel = getScannerModelNumber(scannerID); // 533
             List<String> metaSupportedModels = getSupportedModels(metaDataFilePath);
@@ -470,7 +426,7 @@ public class UpdateFirmware extends Fragment implements  NavigationView.OnNaviga
                 public void run() {
                     UpdatePlugInName(plugInName);
 
-                    if (bFwReboot && (Application.isFirmwareUpdateSuccess == true )) {
+                    if (bFwReboot && (Application.isFirmwareUpdateSuccess == true)) {
                         TurnOffLEDPattern();
                         isWaitingForFWUpdateToComplete = false;
                         UpdateScannerFirmwareVersion(scannerFirmwareVersion, true);
@@ -488,9 +444,8 @@ public class UpdateFirmware extends Fragment implements  NavigationView.OnNaviga
     }
 
 
-
     private boolean isPlugIn(File plugInFile) {
-        if(plugInFile.getAbsolutePath().endsWith(".SCNPLG") || plugInFile.getAbsolutePath().endsWith(".scnplg") ){
+        if (plugInFile.getAbsolutePath().endsWith(".SCNPLG") || plugInFile.getAbsolutePath().endsWith(".scnplg")) {
             return true;
         }
         return false;
@@ -505,9 +460,9 @@ public class UpdateFirmware extends Fragment implements  NavigationView.OnNaviga
             }
         }
 
-        if(matchingFWName.equals("")){
+        if (matchingFWName.equals("")) {
             for (String plugInFwName : plugInFwNames) {
-                if (plugInFwName.length()>3 && scannerFirmwareVersion.startsWith(plugInFwName.substring(0, 3))) {
+                if (plugInFwName.length() > 3 && scannerFirmwareVersion.startsWith(plugInFwName.substring(0, 3))) {
                     matchingFWName = plugInFwName;
                     break;
                 }
@@ -524,11 +479,11 @@ public class UpdateFirmware extends Fragment implements  NavigationView.OnNaviga
     }
 
     private void UpdateButton() {
-        TableRow tblRowFWSuccess = (TableRow)getView().findViewById(R.id.tbl_row_fw_update_success);
+        TableRow tblRowFWSuccess = (TableRow) getView().findViewById(R.id.tbl_row_fw_update_success);
         if (tblRowFWSuccess != null) {
             tblRowFWSuccess.setVisibility(View.VISIBLE);
         }
-        TableRow tblRowFW = (TableRow)getView().findViewById(R.id.tbl_row_fw_update);
+        TableRow tblRowFW = (TableRow) getView().findViewById(R.id.tbl_row_fw_update);
         if (tblRowFW != null) {
             tblRowFW.setVisibility(View.INVISIBLE);
             tblRowFW.setVisibility(View.GONE);
@@ -541,23 +496,23 @@ public class UpdateFirmware extends Fragment implements  NavigationView.OnNaviga
         try {
             cal.setTime(dateFormat.parse(plugInDate));// all done
         } catch (ParseException e) {
-           Log.d(TAG,  "Returned SDK Exception");
+            Log.d(TAG, "Returned SDK Exception");
         }
 
 
         String toString;
-        String month = String.valueOf(cal.get(Calendar.MONTH)+1);
-        if(month.length()==1){
-            month = "0"+month;
+        String month = String.valueOf(cal.get(Calendar.MONTH) + 1);
+        if (month.length() == 1) {
+            month = "0" + month;
         }
         String date = String.valueOf(cal.get(Calendar.DATE));
-        if(date.length()==1){
-            date = "0"+date;
+        if (date.length() == 1) {
+            date = "0" + date;
         }
-        if(afterFWUpdate){
-            toString = "Current: Release " + plugInRev + " - " + cal.get(Calendar.YEAR)+"."+ month +"."+ date+  " (" + plugInCombinedFwName + ")";
-        }else {
-            toString = "To: Release " + plugInRev + " - " + cal.get(Calendar.YEAR)+"."+ month +"."+ date+ " (" + plugInCombinedFwName + ")";
+        if (afterFWUpdate) {
+            toString = "Current: Release " + plugInRev + " - " + cal.get(Calendar.YEAR) + "." + month + "." + date + " (" + plugInCombinedFwName + ")";
+        } else {
+            toString = "To: Release " + plugInRev + " - " + cal.get(Calendar.YEAR) + "." + month + "." + date + " (" + plugInCombinedFwName + ")";
         }
         TextView textView = (TextView) getView().findViewById(R.id.txt_to_fw_version);
         textView.setText(toString);
@@ -567,11 +522,11 @@ public class UpdateFirmware extends Fragment implements  NavigationView.OnNaviga
 
         String toString;
 
-        if(afterFWUpdate){
+        if (afterFWUpdate) {
             //toString = "Current: "+datFileName;
             toString = "";
-        }else {
-            toString = "To: "+datFileName;
+        } else {
+            toString = "To: " + datFileName;
         }
         TextView textView = (TextView) getView().findViewById(R.id.txt_to_fw_version);
         textView.setText(toString);
@@ -579,26 +534,26 @@ public class UpdateFirmware extends Fragment implements  NavigationView.OnNaviga
 
     private void UpdateScannerFirmwareVersion(String scannerFirmwareVersion, boolean afterFWUdate) {
         TextView textView = (TextView) getView().findViewById(R.id.txt_from_fw_version);
-        if(afterFWUdate){
+        if (afterFWUdate) {
             textView.setText("");
-        }else {
+        } else {
             String pcfw = Application.versionInfo.get("CRIMAN_DEVICE");
-            if (pcfw !=null) {
+            if (pcfw != null) {
                 textView.setText("From: " + pcfw.replaceFirst("P", "S"));
-            }else{
+            } else {
                 textView.setText("From: " + scannerFirmwareVersion.replaceFirst("C", "S"));
             }
         }
     }
 
-    private void UpdateFilePath(String path){
+    private void UpdateFilePath(String path) {
         TextView textView = (TextView) requireView().findViewById(R.id.txt_file_path);
-        textView.setText("Path: " +path);
+        textView.setText("Path: " + path);
     }
 
     private void UpdatePlugInName(String plugInName) {
         TextView textView = (TextView) requireView().findViewById(R.id.txt_to_fw_version);
-        textView.setText("To: "  + plugInName);
+        textView.setText("To: " + plugInName);
     }
 
     private ArrayList<String> getPlugInFwNames(String metaDataFilePath) {
@@ -621,12 +576,12 @@ public class UpdateFirmware extends Fragment implements  NavigationView.OnNaviga
                         }
                         break;
                     case XmlPullParser.TEXT:
-                         text = parser.getText().trim();
+                        text = parser.getText().trim();
                         break;
 
                     case XmlPullParser.END_TAG:
                         if (name.equals("component")) {
-                            if(text!=null) {
+                            if (text != null) {
                                 plugInFWVersion.add(text.trim());
                             }
                         }
@@ -663,8 +618,8 @@ public class UpdateFirmware extends Fragment implements  NavigationView.OnNaviga
                         break;
 
                     case XmlPullParser.END_TAG:
-                        if (name.equals("release-date") && text!=null) {
-                            plugInRev =text.trim();
+                        if (name.equals("release-date") && text != null) {
+                            plugInRev = text.trim();
                         }
                         break;
                 }
@@ -697,8 +652,8 @@ public class UpdateFirmware extends Fragment implements  NavigationView.OnNaviga
                         break;
 
                     case XmlPullParser.END_TAG:
-                        if (name.equals("revision") && text!=null) {
-                            plugInRev =text.trim();
+                        if (name.equals("revision") && text != null) {
+                            plugInRev = text.trim();
                         }
                         break;
                 }
@@ -731,7 +686,7 @@ public class UpdateFirmware extends Fragment implements  NavigationView.OnNaviga
                         break;
 
                     case XmlPullParser.END_TAG:
-                        if(text!=null) {
+                        if (text != null) {
                             if (name.equals("family")) {
                                 plugInName = new StringBuilder(text.trim());
                                 plugInName.append("-");
@@ -794,7 +749,7 @@ public class UpdateFirmware extends Fragment implements  NavigationView.OnNaviga
 
                     case XmlPullParser.END_TAG:
                         if (name.equals("model")) {
-                            if(text!=null) {
+                            if (text != null) {
                                 modelList.add(text.trim());
                             }
                         }
@@ -809,13 +764,11 @@ public class UpdateFirmware extends Fragment implements  NavigationView.OnNaviga
     }
 
 
-    private String extractMetaData(String extractPath, String zipPath)
-    {
+    private String extractMetaData(String extractPath, String zipPath) {
         InputStream is;
         ZipInputStream zis;
-        String unzipFile="";
-        try
-        {
+        String unzipFile = "";
+        try {
             String filename;
             is = new FileInputStream(zipPath);
             zis = new ZipInputStream(new BufferedInputStream(is));
@@ -823,17 +776,15 @@ public class UpdateFirmware extends Fragment implements  NavigationView.OnNaviga
             byte[] buffer = new byte[1024];
             int count;
 
-            while ((ze = zis.getNextEntry()) != null)
-            {
+            while ((ze = zis.getNextEntry()) != null) {
                 filename = ze.getName();
-                if(filename.equalsIgnoreCase("Metadata.xml")){
+                if (filename.equalsIgnoreCase("Metadata.xml")) {
                     unzipFile = extractPath + filename;
 
                     FileOutputStream fout = new FileOutputStream(unzipFile);
 
                     // cteni zipu a zapis
-                    while ((count = zis.read(buffer)) != -1)
-                    {
+                    while ((count = zis.read(buffer)) != -1) {
                         fout.write(buffer, 0, count);
                     }
                     fout.close();
@@ -842,10 +793,8 @@ public class UpdateFirmware extends Fragment implements  NavigationView.OnNaviga
             }
 
             zis.close();
-        }
-        catch(IOException e)
-        {
-           Log.d(TAG,  "Returned SDK Exception");
+        } catch (IOException e) {
+            Log.d(TAG, "Returned SDK Exception");
             return null;
         }
         return unzipFile;
@@ -854,7 +803,7 @@ public class UpdateFirmware extends Fragment implements  NavigationView.OnNaviga
     private String getScannerFirmwareVersion(int scannerID) {
         String in_xml = "<inArgs><scannerID>" + scannerID + "</scannerID><cmdArgs><arg-xml><attrib_list>20012</attrib_list></arg-xml></cmdArgs></inArgs>";
         StringBuilder outXML = new StringBuilder();
-        ((ActiveDeviceActivity)getActivity()).executeCommand(DCSSDKDefs.DCSSDK_COMMAND_OPCODE.DCSSDK_RSM_ATTR_GET,in_xml,outXML,scannerID);
+        ((ActiveDeviceActivity) getActivity()).executeCommand(DCSSDKDefs.DCSSDK_COMMAND_OPCODE.DCSSDK_RSM_ATTR_GET, in_xml, outXML, scannerID);
         return getSingleStringValue(outXML);
     }
 
@@ -876,7 +825,7 @@ public class UpdateFirmware extends Fragment implements  NavigationView.OnNaviga
                         break;
 
                     case XmlPullParser.END_TAG:
-                        if (name.equals("value")&& text!=null) {
+                        if (name.equals("value") && text != null) {
                             attr_val = text.trim();
                         }
                         break;
@@ -892,7 +841,7 @@ public class UpdateFirmware extends Fragment implements  NavigationView.OnNaviga
     private String getScannerModelNumber(int scannerID) {
         String in_xml = "<inArgs><scannerID>" + scannerID + "</scannerID><cmdArgs><arg-xml><attrib_list>533</attrib_list></arg-xml></cmdArgs></inArgs>";
         StringBuilder outXML = new StringBuilder();
-        ((ActiveDeviceActivity)getActivity()).executeCommand(DCSSDKDefs.DCSSDK_COMMAND_OPCODE.DCSSDK_RSM_ATTR_GET,in_xml,outXML,scannerID);
+        ((ActiveDeviceActivity) getActivity()).executeCommand(DCSSDKDefs.DCSSDK_COMMAND_OPCODE.DCSSDK_RSM_ATTR_GET, in_xml, outXML, scannerID);
         return getSingleStringValue(outXML);
     }
 
@@ -922,7 +871,7 @@ public class UpdateFirmware extends Fragment implements  NavigationView.OnNaviga
         int id = item.getItemId();
         Intent intent;
         if (id == R.id.nav_pair_device) {
-            ((ActiveDeviceActivity)getActivity()).disconnect(scannerID);
+            ((ActiveDeviceActivity) getActivity()).disconnect(scannerID);
             //Application.barcodeData.clear();
             Application.currentScannerId = Application.SCANNER_ID_NONE;
             //finish();
@@ -933,14 +882,14 @@ public class UpdateFirmware extends Fragment implements  NavigationView.OnNaviga
             intent = new Intent(getActivity(), ScannersActivity.class);
 
             startActivity(intent);
-        }else if (id == R.id.nav_find_cabled_scanner) {
-            AlertDialog.Builder dlg = new  AlertDialog.Builder(getActivity());
-            dlg.setTitle("This will disconnect your current scanner");
+        } else if (id == R.id.nav_find_cabled_scanner) {
+            AlertDialog.Builder dlg = new AlertDialog.Builder(getActivity());
+            dlg.setTitle("현재 장치의 연결이 끊어집니다.");
             //dlg.setIcon(android.R.drawable.ic_dialog_alert);
-            dlg.setPositiveButton("Continue", new DialogInterface.OnClickListener() {
+            dlg.setPositiveButton("계속하기", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int arg) {
 
-                    ((ActiveDeviceActivity)getActivity()).disconnect(scannerID);
+                    ((ActiveDeviceActivity) getActivity()).disconnect(scannerID);
                     //Application.barcodeData.clear();
                     Application.currentScannerId = Application.SCANNER_ID_NONE;
                     //finish();
@@ -949,13 +898,13 @@ public class UpdateFirmware extends Fragment implements  NavigationView.OnNaviga
                 }
             });
 
-            dlg.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            dlg.setNegativeButton("취소", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int arg) {
 
                 }
             });
             dlg.show();
-        }else if (id == R.id.nav_connection_help) {
+        } else if (id == R.id.nav_connection_help) {
             intent = new Intent(getActivity(), ConnectionHelpActivity2.class);
             startActivity(intent);
         } else if (id == R.id.nav_settings) {
@@ -974,7 +923,7 @@ public class UpdateFirmware extends Fragment implements  NavigationView.OnNaviga
 
     @Override
     public boolean scannerHasAppeared(int scannerID) {
-        if(fwUpdatingScanner.getConnectionType() == DCSSDKDefs.DCSSDK_CONN_TYPES.DCSSDK_CONNTYPE_USB_SNAPI){
+        if (fwUpdatingScanner.getConnectionType() == DCSSDKDefs.DCSSDK_CONN_TYPES.DCSSDK_CONNTYPE_USB_SNAPI) {
             Application.sdkHandler.dcssdkEstablishCommunicationSession(fwUpdatingScanner.getScannerID());
         }
         return true;
@@ -988,11 +937,11 @@ public class UpdateFirmware extends Fragment implements  NavigationView.OnNaviga
     @Override
     public boolean scannerHasConnected(int scannerID) {
         pairNewScannerMenu.setTitle(R.string.menu_item_device_disconnect);
-        if(isWaitingForFWUpdateToComplete && dialogFwRebooting!=null){
+        if (isWaitingForFWUpdateToComplete && dialogFwRebooting != null) {
             dialogFwRebooting.dismiss();
             dialogFwRebooting = null;
         }
-        if(isWaitingForFWUpdateToComplete && dialogFwReconnectScanner!=null){
+        if (isWaitingForFWUpdateToComplete && dialogFwReconnectScanner != null) {
             dialogFwReconnectScanner.dismiss();
             dialogFwReconnectScanner = null;
         }
@@ -1000,14 +949,14 @@ public class UpdateFirmware extends Fragment implements  NavigationView.OnNaviga
     }
 
 
-    private Handler pnpHandler = new Handler(){
+    private Handler pnpHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 1:
-                    if(dialogFwRebooting!=null){
+                    if (dialogFwRebooting != null) {
                         dialogFwRebooting.dismiss();
-                        dialogFwRebooting =null;
+                        dialogFwRebooting = null;
                         ShowReconnectScanner();
                     }
                     break;
@@ -1037,13 +986,13 @@ public class UpdateFirmware extends Fragment implements  NavigationView.OnNaviga
 
             if (fwUpdatingScanner.getConnectionType() == DCSSDKDefs.DCSSDK_CONN_TYPES.DCSSDK_CONNTYPE_USB_SNAPI) {
                 barCodeView = Application.sdkHandler.dcssdkGetUSBSNAPIWithImagingBarcode();
-            }else{
+            } else {
                 barCodeView = Application.sdkHandler.dcssdkGetPairingBarcode(BaseActivity.selectedProtocol, BaseActivity.selectedConfig);
-                if(barCodeView==null){
+                if (barCodeView == null) {
                     barCodeView = Application.sdkHandler.dcssdkGetPairingBarcode(BaseActivity.selectedProtocol, BaseActivity.selectedConfig, ScannerHomeActivity.btAddress);
                 }
             }
-                //dialogFwReconnectScanner.getWindow().setLayout(getXReconnection(), getYReconnection());
+            //dialogFwReconnectScanner.getWindow().setLayout(getXReconnection(), getYReconnection());
             if (barCodeView != null && llBarcode != null) {
                 LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(-1, -1);
                 Display display = getActivity().getWindowManager().getDefaultDisplay();
@@ -1060,19 +1009,17 @@ public class UpdateFirmware extends Fragment implements  NavigationView.OnNaviga
             dialogFwReconnectScanner.setCanceledOnTouchOutside(false);
             dialogFwReconnectScanner.show();
             Window window = dialogFwReconnectScanner.getWindow();
-            if(window!=null) {
+            if (window != null) {
                 window.setLayout(LinearLayout.LayoutParams.MATCH_PARENT, getY());
             }
         }
     }
 
-    public static int dpToPx(int dp)
-    {
+    public static int dpToPx(int dp) {
         return (int) (dp * Resources.getSystem().getDisplayMetrics().density);
     }
 
-    public static int pxToDp(int px)
-    {
+    public static int pxToDp(int px) {
         return (int) (px / Resources.getSystem().getDisplayMetrics().density);
     }
 
@@ -1110,20 +1057,20 @@ public class UpdateFirmware extends Fragment implements  NavigationView.OnNaviga
     @Override
     public boolean scannerHasDisconnected(int scannerID) {
         pairNewScannerMenu.setTitle(R.string.menu_item_device_pair);
-        if(isWaitingForFWUpdateToComplete){
-            ((ActiveDeviceActivity)getActivity()).setWaitingForFWReboot(true);
-            pnpHandler.sendMessageDelayed(pnpHandler.obtainMessage(1),180000);
-        }else {
+        if (isWaitingForFWUpdateToComplete) {
+            ((ActiveDeviceActivity) getActivity()).setWaitingForFWReboot(true);
+            pnpHandler.sendMessageDelayed(pnpHandler.obtainMessage(1), 180000);
+        } else {
             //Application.barcodeData.clear();
             //finish();
         }
 
-        if(dialogFwProgress !=null) {
+        if (dialogFwProgress != null) {
             dialogFwProgress.dismiss();
             dialogFwProgress = null;
 
         }
-        isWaitingForFWUpdateToComplete= true;
+        isWaitingForFWUpdateToComplete = true;
         tblRowFW.setVisibility(View.GONE);
         showRebooting();
         return true;
@@ -1138,7 +1085,7 @@ public class UpdateFirmware extends Fragment implements  NavigationView.OnNaviga
         public void handleMessage(android.os.Message msg) {
             switch (msg.what) {
                 case MSG_DISMISS_DIALOG:
-                    if( (TIME_OUT > 0) && (dialogFwRebooting!=null)) {
+                    if ((TIME_OUT > 0) && (dialogFwRebooting != null)) {
                         TextView counter = (TextView) dialogFwRebooting.findViewById(R.id.counter);
                         counter.setText(String.valueOf(TIME_OUT));
                         TIME_OUT--;
@@ -1164,7 +1111,7 @@ public class UpdateFirmware extends Fragment implements  NavigationView.OnNaviga
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                Log.i("ScannerControl","Show Rebooting dialog");
+                Log.i("ScannerControl", "Show Rebooting dialog");
                 //if(!isFinishing())
                 {
                     dialogFwRebooting = new Dialog(getActivity());
@@ -1172,27 +1119,17 @@ public class UpdateFirmware extends Fragment implements  NavigationView.OnNaviga
                     dialogFwRebooting.setContentView(R.layout.dialog_fw_rebooting);
                     TextView reason = (TextView) dialogFwRebooting.findViewById(R.id.fwstatus);
                     reason.setText(failureReason + reason.getText());
-                    // if decline button is clicked, close the custom dialog
-//                    cancelButton.setOnClickListener(new View.OnClickListener() {
-//                        @Override
-//                        public void onClick(View v) {
-                            // Close dialog
-//                            dialogFwRebooting.dismiss();
-//                            dialogFwRebooting = null;
-//                            finish();
-//                        }
-//                    });
 
                     dotProgressBar = (DotsProgressBar) dialogFwRebooting.findViewById(R.id.progressBar);
                     dotProgressBar.setDotsCount(6);
 
                     Window window = dialogFwRebooting.getWindow();
-                    if(window!=null) {
+                    if (window != null) {
                         dialogFwRebooting.getWindow().setLayout(getX(), getY());
                     }
                     dialogFwRebooting.setCancelable(false);
                     dialogFwRebooting.setCanceledOnTouchOutside(false);
-                    Log.i("ScannerControl","Showing dot progress dialog");
+                    Log.i("ScannerControl", "Showing dot progress dialog");
                     dialogFwRebooting.show();
                     TIME_OUT = 50;
                     mHandler.sendEmptyMessageDelayed(MSG_DISMISS_DIALOG, TIME_TICK);
@@ -1202,11 +1139,11 @@ public class UpdateFirmware extends Fragment implements  NavigationView.OnNaviga
         });
     }
 
-    public void selectedFile(Uri data){
+    public void selectedFile(Uri data) {
 
         selectedPlugIn = new File(data.getPath());
         documentUri = data;
-        selectedPlugIn = new File(selectedPlugIn.toString().replace("/document/primary:","/storage/emulated/0/"));
+        selectedPlugIn = new File(selectedPlugIn.toString().replace("/document/primary:", "/storage/emulated/0/"));
         UIUpdater uiUpdater = new UIUpdater(fwReboot);
         uiUpdater.execute();
         UpdateFilePath(selectedPlugIn.toString());
@@ -1219,34 +1156,38 @@ public class UpdateFirmware extends Fragment implements  NavigationView.OnNaviga
 
     public void updateFirmware(View view) {
 
-        if(mIsInventoryRunning){
-            Toast.makeText(getActivity(),"Firmware update not allowed while inventory is running",Toast.LENGTH_SHORT).show();
+        if (mIsInventoryRunning) {
+            Toast.makeText(getActivity(), "인벤토리가 실행되는 동안에는 펌웨어 업데이트가 허용되지 않습니다.", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        if(selectedPlugIn != null) {
+        if (selectedPlugIn != null) {
             File file = new File(selectedPlugIn.getAbsolutePath());
-            if(file != null && file.exists()) {
+            if (file != null && file.exists()) {
                 String strFileName = file.getName();
                 if (strFileName.endsWith(".FCDAT") || strFileName.endsWith(".fcdat")) {
                     InitializeDeviceCompatibilityMap();
-                    if(!CheckFCDATCompatability(selectedPlugIn.getAbsolutePath())){
-                        Toast.makeText(getActivity(),"Selected .FCDAT is not compatible with connected reader!Firmware update not allowed!",Toast.LENGTH_SHORT).show();
+                    if (!CheckFCDATCompatability(selectedPlugIn.getAbsolutePath())) {
+                        Toast.makeText(getActivity(),
+                            "선택된 FCDAT는 연결된 리더와 호환되지 않습니다!" +
+                            "\n펌웨어 업데이트가 허용되지 않습니다!",
+                            Toast.LENGTH_SHORT
+                        ).show();
                         return;
                     }
                 }
             }
         }
 
-        if(selectedPlugIn == null )
-            return;
+        if (selectedPlugIn == null) return;
         Application.isFirmwareUpdateInProgress = true;
         TurnOnLEDPattern();
         String in_xml = "<inArgs><scannerID>" + scannerID + "</scannerID><cmdArgs><arg-string>" + documentUri + "</arg-string></cmdArgs></inArgs>";
-        cmdExecTask = new MyAsyncTask(scannerID, DCSSDKDefs.DCSSDK_COMMAND_OPCODE.DCSSDK_UPDATE_FIRMWARE,null);
+        cmdExecTask = new MyAsyncTask(scannerID, DCSSDKDefs.DCSSDK_COMMAND_OPCODE.DCSSDK_UPDATE_FIRMWARE, null);
         cmdExecTask.execute(new String[]{in_xml});
 
     }
+
     private void InitializeDeviceCompatibilityMap() {
 
         devicemodelMap = new HashMap<String, String>();
@@ -1270,68 +1211,65 @@ public class UpdateFirmware extends Fragment implements  NavigationView.OnNaviga
         }
     }
 
-    private boolean CheckFCDATCompatability(String filename){
+    private boolean CheckFCDATCompatability(String filename) {
 
         FileInputStream InputStream = null;
-        int bytesread=0;
+        int bytesread = 0;
         byte[] buffer = new byte[4];
-        int model_len =0;
-        String Devicemodel=null;
-        String readersku=null;
-        int Devicemodelvalue=0;
-        int readerskuvalue=0;
+        int model_len = 0;
+        String Devicemodel = null;
+        String readersku = null;
+        int Devicemodelvalue = 0;
+        int readerskuvalue = 0;
 
-        if(filename == null ){
+        if (filename == null) {
             Log.e(TAG, "Invalid Input .FCDAT file\n");
             return false;
         }
 
-        if(mConnectedReader != null  ) {
+        if (mConnectedReader != null) {
             try {
                 InputStream = new FileInputStream(filename);
-                if(InputStream == null){
+                if (InputStream == null) {
                     Log.e(TAG, "Error getting the file e\n");
                     return false;
                 }
 
-                if(buffer!=null) {
+                if (buffer != null) {
                     /*Read first 4 bytes of data from the .FCDAT file*/
                     bytesread = InputStream.read(buffer);
                 }
                 if (bytesread != 4) {
-                    Log.e(TAG,"Error reading from FCDAT file");
+                    Log.e(TAG, "Error reading from FCDAT file");
                     // releases all system resources from the streams
-                    if(InputStream !=null)
-                        InputStream.close();
+                    if (InputStream != null) InputStream.close();
                     return false;
                 }
 
                 /*Get model name and sku of connected reader*/
-                String modelname=mConnectedReader.ReaderCapabilities.getModelName();
+                String modelname = mConnectedReader.ReaderCapabilities.getModelName();
                 model_len = mConnectedReader.ReaderCapabilities.getModelName().length();
                 readersku = mConnectedReader.ReaderCapabilities.getModelName().substring(model_len - 2, model_len);
-                if(mConnectedDevice!=null) {
+                if (mConnectedDevice != null) {
                     Devicemodel = mConnectedDevice.getDeviceCapability(modelname);
                 }
 
                 /*Get hashmap values corresponding to connecterd readers sku and model*/
-                if(devicemodelMap!=null){
-                    if(devicemodelMap.get(Devicemodel)!=null) {
+                if (devicemodelMap != null) {
+                    if (devicemodelMap.get(Devicemodel) != null) {
                         Devicemodelvalue = Integer.valueOf(devicemodelMap.get(Devicemodel));
-                    }else{
-                        Log.e(TAG,"Unsupported Device model");
-                        if(InputStream !=null)
-                            InputStream.close();
+                    } else {
+                        Log.e(TAG, "Unsupported Device model");
+                        if (InputStream != null) InputStream.close();
                         return false;
                     }
                 }
-                if(deviceskuMap !=null){
-                    if(deviceskuMap.get(readersku)!=null) {
+                if (deviceskuMap != null) {
+                    if (deviceskuMap.get(readersku) != null) {
                         readerskuvalue = Integer.valueOf(deviceskuMap.get(readersku));
                     } else {
-                        Log.e(TAG,"Unsupported sku model");
-                        if(InputStream !=null)
-                            InputStream.close();
+                        Log.e(TAG, "Unsupported sku model");
+                        if (InputStream != null) InputStream.close();
                         return false;
                     }
                 }
@@ -1339,44 +1277,41 @@ public class UpdateFirmware extends Fragment implements  NavigationView.OnNaviga
                 int a = Character.digit(buffer[1], 10);
                 int b = Character.digit(buffer[3], 10);
 
-                if(a == -1 || b == -1){
-                    Log.e(TAG,"Invalid FCDAT data");
-                    if(InputStream !=null)
-                        InputStream.close();
+                if (a == -1 || b == -1) {
+                    Log.e(TAG, "Invalid FCDAT data");
+                    if (InputStream != null) InputStream.close();
                     return false;
                 }
 
-                if( (Devicemodelvalue != a) ||  (readerskuvalue != b)){
-                    if(InputStream !=null)
-                        InputStream.close();
+                if ((Devicemodelvalue != a) || (readerskuvalue != b)) {
+                    if (InputStream != null) InputStream.close();
                     return false;
                 }
                 // releases all system resources from the streams
-                if(InputStream !=null)
-                    InputStream.close();
+                if (InputStream != null) InputStream.close();
 
             } catch (IOException ex) {
-                if( ex!= null){ Log.e(TAG, ex.getMessage()); }
+                if (ex != null) {
+                    Log.e(TAG, ex.getMessage());
+                }
             }
-        }else{
-            Log.e(TAG,"Connected reader is invalid!");
+        } else {
+            Log.e(TAG, "Connected reader is invalid!");
             return false;
         }
         return true;
     }
 
     private void TurnOnLEDPattern() {
-        String inXML = "<inArgs><scannerID>" + scannerID + "</scannerID><cmdArgs><arg-int>" +
-                85 + "</arg-int></cmdArgs></inArgs>";
+        String inXML = "<inArgs><scannerID>" + scannerID + "</scannerID><cmdArgs><arg-int>" + 85 + "</arg-int></cmdArgs></inArgs>";
         StringBuilder outXML = new StringBuilder();
-        ((ActiveDeviceActivity)getActivity()).executeCommand(DCSSDKDefs.DCSSDK_COMMAND_OPCODE.DCSSDK_SET_ACTION, inXML, outXML, scannerID);
+        ((ActiveDeviceActivity) getActivity()).executeCommand(DCSSDKDefs.DCSSDK_COMMAND_OPCODE.DCSSDK_SET_ACTION, inXML, outXML, scannerID);
     }
 
     private void TurnOffLEDPattern() {
-        String inXML = "<inArgs><scannerID>" + scannerID + "</scannerID><cmdArgs><arg-int>" +
-                90 + "</arg-int></cmdArgs></inArgs>";
+        String inXML = "<inArgs><scannerID>" + scannerID + "</scannerID><cmdArgs><arg-int>" + 90 + "</arg-int></cmdArgs></inArgs>";
         StringBuilder outXML = new StringBuilder();
-        ((ActiveDeviceActivity)getActivity()).executeCommand(DCSSDKDefs.DCSSDK_COMMAND_OPCODE.DCSSDK_SET_ACTION,inXML,outXML,scannerID);
+        ((ActiveDeviceActivity) getActivity()).executeCommand(DCSSDKDefs.DCSSDK_COMMAND_OPCODE.DCSSDK_SET_ACTION, inXML, outXML, scannerID);
     }
 
     @Override
@@ -1385,87 +1320,73 @@ public class UpdateFirmware extends Fragment implements  NavigationView.OnNaviga
     }
 
     @Override
-    public void  scannerImageEvent(byte[] imageData) {
+    public void scannerImageEvent(byte[] imageData) {
 
     }
 
     @Override
-    public void  scannerVideoEvent(byte[] videoData) {
+    public void scannerVideoEvent(byte[] videoData) {
     }
+
     @Override
     public void scannerFirmwareUpdateEvent(FirmwareUpdateEvent firmwareUpdateEvent) {
-        Log.i("ScannerControl","scannerFirmwareUpdateEvent type = "+firmwareUpdateEvent.getEventType());
+        Log.i("ScannerControl", "scannerFirmwareUpdateEvent type = " + firmwareUpdateEvent.getEventType());
 
-        if(firmwareUpdateEvent.getEventType() == DCSSDKDefs.DCSSDK_FU_EVENT_TYPE.SCANNER_UF_SESS_START){
+        if (firmwareUpdateEvent.getEventType() == DCSSDKDefs.DCSSDK_FU_EVENT_TYPE.SCANNER_UF_SESS_START) {
 
             getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    dialogFwProgress = new Dialog((ActiveDeviceActivity)getActivity());
+                    dialogFwProgress = new Dialog((ActiveDeviceActivity) getActivity());
                     dialogFwProgress.requestWindowFeature(Window.FEATURE_NO_TITLE);
                     dialogFwProgress.setContentView(R.layout.dialog_fw_progress);
-//                    //TextView cancelButton = (TextView) dialogFwProgress.findViewById(R.id.btn_cancel);
                     final int scannerIDFWSessionStarted = firmwareUpdateEvent.getScannerInfo().getScannerID();
-                    // if decline button is clicked, close the custom dialog
-//                    cancelButton.setOnClickListener(new View.OnClickListener() {
-//                        @Override
-//                        public void onClick(View v) {
-//                            String in_xml = "<inArgs><scannerID>" + scannerIDFWSessionStarted+ "</scannerID></inArgs>";
-//                            cmdExecTask = new MyAsyncTask(scannerIDFWSessionStarted,DCSSDKDefs.DCSSDK_COMMAND_OPCODE.DCSSDK_ABORT_UPDATE_FIRMWARE,null);
-//                            cmdExecTask.execute(new String[]{in_xml});
-//                        }
-//                    });
 
-                    progressBar = (ProgressBar)dialogFwProgress.findViewById(R.id.progressBar);
+                    progressBar = (ProgressBar) dialogFwProgress.findViewById(R.id.progressBar);
                     progressBar.setMax(firmwareUpdateEvent.getMaxRecords());
                     fwMax = firmwareUpdateEvent.getMaxRecords();
 
                     Window window = dialogFwProgress.getWindow();
-                    if(window!=null) {
+                    if (window != null) {
                         dialogFwProgress.getWindow().setLayout(getX(), getY());
                     }
                     dialogFwProgress.setCancelable(false);
                     dialogFwProgress.setCanceledOnTouchOutside(false);
                     //if(!isFinishing())
                     {
-                        Log.i("ScannerControl","Show Progress dialog");
+                        Log.i("ScannerControl", "Show Progress dialog");
                         dialogFwProgress.show();
                         txtPercentage = (TextView) dialogFwProgress.findViewById(R.id.txt_percentage);
                         txtPercentage.setText("0%");
                     }
-
                 }
-
-
             });
 
 
-
-
         }
-        if(firmwareUpdateEvent.getEventType() == DCSSDKDefs.DCSSDK_FU_EVENT_TYPE.SCANNER_UF_DL_PROGRESS){
+        if (firmwareUpdateEvent.getEventType() == DCSSDKDefs.DCSSDK_FU_EVENT_TYPE.SCANNER_UF_DL_PROGRESS) {
 
-            if(progressBar !=null){
+            if (progressBar != null) {
                 progressBar.setProgress(firmwareUpdateEvent.getCurrentRecord());
-                double percentage = (firmwareUpdateEvent.getCurrentRecord()*100.0/fwMax);
+                double percentage = (firmwareUpdateEvent.getCurrentRecord() * 100.0 / fwMax);
                 int iPercentage = (int) percentage;
-                if(txtPercentage !=null) {
+                if (txtPercentage != null) {
                     txtPercentage.setText(String.format("%s%%", Integer.toString(iPercentage)));
                 }
             }
-            if(dialogFwProgress !=null && !dialogFwProgress.isShowing() ){
-                Log.i("ScannerControl","Show Progress dialog");
+            if (dialogFwProgress != null && !dialogFwProgress.isShowing()) {
+                Log.i("ScannerControl", "Show Progress dialog");
                 dialogFwProgress.show();
             }
         }
 
-        if(firmwareUpdateEvent.getEventType() == DCSSDKDefs.DCSSDK_FU_EVENT_TYPE.SCANNER_UF_SESS_END){
+        if (firmwareUpdateEvent.getEventType() == DCSSDKDefs.DCSSDK_FU_EVENT_TYPE.SCANNER_UF_SESS_END) {
 
             getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    if(dialogFwProgress !=null) {
-                        if(txtPercentage !=null) {
+                    if (dialogFwProgress != null) {
+                        if (txtPercentage != null) {
                             txtPercentage.setText("100%");
                         }
                         dialogFwProgress.dismiss();
@@ -1475,10 +1396,10 @@ public class UpdateFirmware extends Fragment implements  NavigationView.OnNaviga
                         try {
                             Thread.sleep(1000);
                         } catch (InterruptedException e) {
-                           Log.d(TAG,  "Returned SDK Exception");
+                            Log.d(TAG, "Returned SDK Exception");
                         }
-                        ((ActiveDeviceActivity)getActivity()).executeCommand(DCSSDKDefs.DCSSDK_COMMAND_OPCODE.DCSSDK_START_NEW_FIRMWARE, in_xml, outXML, firmwareUpdateEvent.getScannerInfo().getScannerID());
-                        isWaitingForFWUpdateToComplete= true;
+                        ((ActiveDeviceActivity) getActivity()).executeCommand(DCSSDKDefs.DCSSDK_COMMAND_OPCODE.DCSSDK_START_NEW_FIRMWARE, in_xml, outXML, firmwareUpdateEvent.getScannerInfo().getScannerID());
+                        isWaitingForFWUpdateToComplete = true;
                         Application.isFirmwareUpdateSuccess = true;
                         tblRowFW.setVisibility(View.GONE);
                         showRebooting();
@@ -1488,43 +1409,41 @@ public class UpdateFirmware extends Fragment implements  NavigationView.OnNaviga
             });
         }
 
-        if(firmwareUpdateEvent.getEventType() == DCSSDKDefs.DCSSDK_FU_EVENT_TYPE.SCANNER_UF_STATUS){
+        if (firmwareUpdateEvent.getEventType() == DCSSDKDefs.DCSSDK_FU_EVENT_TYPE.SCANNER_UF_STATUS) {
 
             TurnOffLEDPattern();
-            isWaitingForFWUpdateToComplete= false;
-            if(dialogFwProgress !=null) {
+            isWaitingForFWUpdateToComplete = false;
+            if (dialogFwProgress != null) {
                 dialogFwProgress.dismiss();
                 dialogFwProgress = null;
             }
-            if(firmwareUpdateEvent.getStatus()!= DCSSDKDefs.DCSSDK_RESULT.DCSSDK_RESULT_FIRMWARE_UPDATE_ABORTED) {
+            if (firmwareUpdateEvent.getStatus() != DCSSDKDefs.DCSSDK_RESULT.DCSSDK_RESULT_FIRMWARE_UPDATE_ABORTED) {
                 if (firmwareUpdateEvent.getStatus() == DCSSDKDefs.DCSSDK_RESULT.DCSSDK_RESULT_FAILURE) {
-                }else {
-                    failureReason  = getFlashResponseErrorDescription(firmwareUpdateEvent.getStatus());
-                    Log.i(TAG, "Aborted"  + failureReason);
+                } else {
+                    failureReason = getFlashResponseErrorDescription(firmwareUpdateEvent.getStatus());
+                    Log.i(TAG, "Aborted" + failureReason);
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(getActivity(), "Aborted"  + failureReason, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "중단되었습니다. " + failureReason, Toast.LENGTH_SHORT).show();
                         }
                     });
                     return;
                 }
-                    getActivity().runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            UpdateStatus();
-                            isWaitingForFWUpdateToComplete = true;
-                            tblRowFW.setVisibility(View.GONE);
-                            showRebooting();
-                            Application.isFirmwareUpdateSuccess = false;
-                        }
-                    });
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        UpdateStatus();
+                        isWaitingForFWUpdateToComplete = true;
+                        tblRowFW.setVisibility(View.GONE);
+                        showRebooting();
+                        Application.isFirmwareUpdateSuccess = false;
+                    }
+                });
 
             }
         }
     }
-
-
 
 
     /**
@@ -1556,20 +1475,20 @@ public class UpdateFirmware extends Fragment implements  NavigationView.OnNaviga
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
 
-        if(dialogFwProgress!=null) {
+        if (dialogFwProgress != null) {
             Window window = dialogFwProgress.getWindow();
-            if(window!=null) {
+            if (window != null) {
                 window.setLayout(getX(), getY());
             }
         }
-        if(dialogFwRebooting!=null) {
+        if (dialogFwRebooting != null) {
             Window window = dialogFwRebooting.getWindow();
-            if(window!=null) {
+            if (window != null) {
                 window.setLayout(getX(), getY());
             }
         }
-        if(dialogFwReconnectScanner!=null) {
-            if(barCodeView !=null && llBarcode !=null) {
+        if (dialogFwReconnectScanner != null) {
+            if (barCodeView != null && llBarcode != null) {
                 LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(-1, -1);
                 Display display = getActivity().getWindowManager().getDefaultDisplay();
                 Point size = new Point();
@@ -1583,7 +1502,7 @@ public class UpdateFirmware extends Fragment implements  NavigationView.OnNaviga
                 llBarcode.addView(barCodeView, layoutParams);
             }
             Window window = dialogFwReconnectScanner.getWindow();
-            if(window!=null) {
+            if (window != null) {
                 window.setLayout(LinearLayout.LayoutParams.MATCH_PARENT, getY());
             }
         }
@@ -1593,12 +1512,12 @@ public class UpdateFirmware extends Fragment implements  NavigationView.OnNaviga
 
     public void RFIDReaderAppeared(ReaderDevice device) {
 
-        if( dialogFwRebooting != null) {
+        if (dialogFwRebooting != null) {
             dialogFwRebooting.dismiss();
             dialogFwRebooting = null;
         }
         //mUpdateFirmware.finish();
-        if(dialogFwProgress != null ){
+        if (dialogFwProgress != null) {
             dialogFwProgress.dismiss();
             dialogFwProgress = null;
         }
@@ -1611,39 +1530,33 @@ public class UpdateFirmware extends Fragment implements  NavigationView.OnNaviga
 
     public void RFIDReaderDisappeared(ReaderDevice device) {
 
-        if( dialogFwRebooting != null)
-        {
+        if (dialogFwRebooting != null) {
             dialogFwRebooting.dismiss();
             dialogFwRebooting = null;
         }
-        if(dialogFwProgress != null ){
+        if (dialogFwProgress != null) {
             dialogFwProgress.dismiss();
             dialogFwProgress = null;
         }
 
-        //mUpdateFirmware.finish();
-       // isWaitingForFWUpdateToComplete = false;
-       // Application.isFirmwareUpdateInProgress = false;
-      //  Application.updateReaderConnection = true;
-
-
     }
 
-    private class MyAsyncTask extends AsyncTask<String,Integer,Boolean> {
+    private class MyAsyncTask extends AsyncTask<String, Integer, Boolean> {
         int scannerId;
         StringBuilder outXML;
         DCSSDKDefs.DCSSDK_COMMAND_OPCODE opcode;
         private CustomProgressDialog progressDialog;
 
-        public MyAsyncTask(int scannerId,  DCSSDKDefs.DCSSDK_COMMAND_OPCODE opcode,StringBuilder outXML){
+        public MyAsyncTask(int scannerId, DCSSDKDefs.DCSSDK_COMMAND_OPCODE opcode, StringBuilder outXML) {
             this.scannerId = scannerId;
             this.opcode = opcode;
             this.outXML = outXML;
         }
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            progressDialog = new CustomProgressDialog(getActivity(), "Please wait...");
+            progressDialog = new CustomProgressDialog(getActivity(), "잠시만 기다려주세요...");
             progressDialog.setCancelable(false);
             progressDialog.show();
         }
@@ -1652,31 +1565,31 @@ public class UpdateFirmware extends Fragment implements  NavigationView.OnNaviga
         @Override
         protected Boolean doInBackground(String... strings) {
 
-            return  ((ActiveDeviceActivity)getActivity()).executeCommand(opcode,strings[0],outXML,scannerId);
+            return ((ActiveDeviceActivity) getActivity()).executeCommand(opcode, strings[0], outXML, scannerId);
         }
 
         @Override
         protected void onPostExecute(Boolean b) {
             super.onPostExecute(b);
-            if (progressDialog != null && progressDialog.isShowing())
-                progressDialog.dismiss();
-            if(!b){
-                Toast.makeText(getActivity(), "Cannot perform the action", Toast.LENGTH_SHORT).show();
+            if (progressDialog != null && progressDialog.isShowing()) progressDialog.dismiss();
+            if (!b) {
+                Toast.makeText(getActivity(), "작업을 수행할 수 없습니다.", Toast.LENGTH_SHORT).show();
             }
         }
     }
 
-    private class UIUpdater extends AsyncTask<String,Integer,Boolean> {
+    private class UIUpdater extends AsyncTask<String, Integer, Boolean> {
         private CustomProgressDialog progressDialog;
         private boolean bFwReboot;
 
-        public UIUpdater(boolean fwReboot){
+        public UIUpdater(boolean fwReboot) {
             bFwReboot = fwReboot;
         }
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            progressDialog = new CustomProgressDialog(getActivity(), "Please wait...");
+            progressDialog = new CustomProgressDialog(getActivity(), "잠시만 기다려주세요...");
             progressDialog.setCancelable(false);
             progressDialog.show();
         }
@@ -1684,16 +1597,15 @@ public class UpdateFirmware extends Fragment implements  NavigationView.OnNaviga
 
         @Override
         protected Boolean doInBackground(String... strings) {
-            return  ShowFirmwareInfo(bFwReboot);
+            return ShowFirmwareInfo(bFwReboot);
         }
 
         @Override
         protected void onPostExecute(Boolean b) {
             super.onPostExecute(b);
-            if (progressDialog != null && progressDialog.isShowing())
-                progressDialog.dismiss();
-            if(!b){
-                Toast.makeText(getActivity(), "Cannot perform the action", Toast.LENGTH_SHORT).show();
+            if (progressDialog != null && progressDialog.isShowing()) progressDialog.dismiss();
+            if (!b) {
+                Toast.makeText(getActivity(), "작업을 수행할 수 없습니다.", Toast.LENGTH_SHORT).show();
             }
         }
     }

@@ -486,7 +486,7 @@ public class SymbologiesActivity extends BaseActivity implements  NavigationView
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            progressDialog = new CustomProgressDialog(SymbologiesActivity.this, "Please wait...");
+            progressDialog = new CustomProgressDialog(SymbologiesActivity.this, "잠시만 기다려주세요...");
 			/*RHBJ36 12.15.2015
 			 * Added Dialog box with cancel option while fetching symbologies. So that user can cancel the task and directly navigate to the Settings
 			 * cancelling the current symbologies fetching task.

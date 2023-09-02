@@ -503,7 +503,7 @@ public class SymbologiesFragment extends Fragment implements NavigationView.OnNa
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            progressDialog = new CustomProgressDialog(getActivity(), "Please wait...");
+            progressDialog = new CustomProgressDialog(getActivity(), "잠시만 기다려주세요...");
 			/*RHBJ36 12.15.2015
 			 * Added Dialog box with cancel option while fetching symbologies. So that user can cancel the task and directly navigate to the Settings
 			 * cancelling the current symbologies fetching task.
