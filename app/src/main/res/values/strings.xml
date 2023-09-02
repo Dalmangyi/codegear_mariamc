@@ -501,7 +501,7 @@
     <string name="notifications_title">NOTIFICATIONS</string>
     <string name="title_activity_base">BaseActivity</string>
     <string name="title_activity_active_scanner">RFDXX</string>
-    <string name="Disconnect">Disconnect</string>
+    <string name="Disconnect">연결해제</string>
     <string name="title_activity_beeper_actions">Beeper Settings</string>
     <string name="title_activity_led">LED Control</string>
     <string name="title_activity_assert">Active Scanner</string>

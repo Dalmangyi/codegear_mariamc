@@ -8,7 +8,7 @@
         android:id="@+id/edit_ReaderName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter Name" />
+        android:hint="이름을 입력하세요." />
 
 
 </RelativeLayout>

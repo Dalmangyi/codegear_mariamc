@@ -42,8 +42,7 @@ public class ReaderDetailsFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    TextView tv_name,tv_serialno,tv_model, tv_mac;
-    TextView tv_ipaddress, tv_ipaddress2;
+    TextView tv_name, tv_serialno, tv_model, tv_mac;
     TextView tv_wifi, tv_rfid, tv_scan;
     Bundle readerdetailsBundle;
     ReaderDevice mReaderDevice;
@@ -53,18 +52,10 @@ public class ReaderDetailsFragment extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ReaderDetailsFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static ReaderDetailsFragment newInstance() {
         return new ReaderDetailsFragment();
     }
+
     public static ReaderDetailsFragment newInstance(String param1, String param2) {
         ReaderDetailsFragment fragment = new ReaderDetailsFragment();
         Bundle args = new Bundle();
@@ -85,11 +76,9 @@ public class ReaderDetailsFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
-        View view =  inflater.inflate(R.layout.activity_reader_details, container, false);
+        View view = inflater.inflate(R.layout.activity_reader_details, container, false);
         InitializeView(view);
 
         iconRenameReader.setVisibility(View.GONE);
@@ -104,113 +93,100 @@ public class ReaderDetailsFragment extends Fragment {
     }
 
     private void setReaderDetails() {
-        if(getActivity() instanceof ActiveDeviceActivity)
-            mReaderDevice = ((ActiveDeviceActivity)getActivity()).connectedReaderDetails();
-        else if(getActivity() instanceof DeviceDiscoverActivity)
-            mReaderDevice = ((DeviceDiscoverActivity)getActivity()).connectedReaderDetails();
+        if (getActivity() instanceof ActiveDeviceActivity)
+            mReaderDevice = ((ActiveDeviceActivity) getActivity()).connectedReaderDetails();
+        else if (getActivity() instanceof DeviceDiscoverActivity)
+            mReaderDevice = ((DeviceDiscoverActivity) getActivity()).connectedReaderDetails();
+
         tv_name.setText(mReaderDevice.getName().toString());
-        String readerName;
-      /*  if(mReaderDevice.getRFIDReader().ReaderCapabilities != null && !mReaderDevice.getName().startsWith("RFD8500")) {
-            readerName = mReaderDevice.getRFIDReader().ReaderCapabilities.getModelName();
-        }
-        else*/
-            readerName = mReaderDevice.getName().toString();
-       // Log.d("serialno","no-"+mReaderDevice.getRFIDReader().ReaderCapabilities.getSerialNumber());
-        if(RFIDController.mConnectedReader != null &&
-                RFIDController.mConnectedReader.getHostName().equalsIgnoreCase(readerName)){
+        String readerName = mReaderDevice.getName().toString();
+        // Log.d("serialno","no-"+mReaderDevice.getRFIDReader().ReaderCapabilities.getSerialNumber());
+        if (RFIDController.mConnectedReader != null && RFIDController.mConnectedReader.getHostName().equalsIgnoreCase(readerName)) {
             iconRenameReader.setVisibility(View.VISIBLE);
         }
 
         if (readerName != null) {
             if (readerName.startsWith("MC33")) {
                 tv_model.setText("MC330XR");
-                tv_wifi.setText("Not Available");
-                tv_scan.setText("Not Available");
+                tv_wifi.setText("사용 불가");
+                tv_scan.setText("사용 불가");
                 String[] splitStr = readerName.split("R");
 
-                if (mReaderDevice.getRFIDReader().ReaderCapabilities != null){
+                if (mReaderDevice.getRFIDReader().ReaderCapabilities != null) {
                     tv_serialno.setText(mReaderDevice.getRFIDReader().ReaderCapabilities.getSerialNumber());
-                }
-                else
-                    tv_serialno.setText(splitStr[1]);
+                } else tv_serialno.setText(splitStr[1]);
 
             } else if (readerName.startsWith("RFD40")) {
 
                 String[] splitStr = readerName.split("-");
 
                 tv_serialno.setText(mReaderDevice.getSerialNumber());
-              /*  if (mReaderDevice.getRFIDReader().ReaderCapabilities != null) {
-
-              //      tv_serialno.setText(mReaderDevice.getRFIDReader().ReaderCapabilities.getSerialNumber());
-                }*/
                 if (splitStr[0].equals("RFD4030")) {
                     if (splitStr[1].contains("G0")) {
                         tv_model.setText("Standard");
-                        tv_wifi.setText("Not Available");
-                        tv_scan.setText("Not Available");
+                        tv_wifi.setText("사용 불가");
+                        tv_scan.setText("사용 불가");
                     }
 
                 } else if (splitStr[0].equals("RFD4031")) {
                     if (splitStr[1].contains("G0")) {
                         tv_model.setText("Premium (WiFi)");
-                        tv_wifi.setText("Available");
-                        tv_scan.setText("Not Available");
+                        tv_wifi.setText("사용 가능");
+                        tv_scan.setText("사용 불가");
                     } else if (splitStr[1].contains("G1")) {
                         tv_model.setText("Premium Plus (WiFi & Scan)");
-                        tv_wifi.setText("Available");
-                        tv_scan.setText("Available");
+                        tv_wifi.setText("사용 가능");
+                        tv_scan.setText("사용 가능");
                     }
 
                 } else if (splitStr[0].startsWith("RFD40+")) {
                     String serialno[] = readerName.split("_");
                     int length = serialno.length;
-                    tv_serialno.setText(serialno[length-1]);
+                    tv_serialno.setText(serialno[length - 1]);
                     tv_model.setText("Premium Plus (WiFi & Scan)");
-                    tv_wifi.setText("Available");
-                    tv_scan.setText("Available");
-                }else if (splitStr[0].startsWith("RFD40P")) {
+                    tv_wifi.setText("사용 가능");
+                    tv_scan.setText("사용 가능");
+                } else if (splitStr[0].startsWith("RFD40P")) {
                     String serialno[] = readerName.split("_");
                     int length = serialno.length;
-                    tv_serialno.setText(serialno[length-1]);
+                    tv_serialno.setText(serialno[length - 1]);
                     tv_model.setText("Premium (WiFi)");
-                    tv_wifi.setText("Available");
-                    tv_scan.setText("Not Available");
+                    tv_wifi.setText("사용 가능");
+                    tv_scan.setText("사용 불가");
                 }
 
-            }  else if(readerName.startsWith("RFD90+")) {
+            } else if (readerName.startsWith("RFD90+")) {
                 String serialno[] = readerName.split("_");
                 int length = serialno.length;
-                tv_serialno.setText(serialno[length-1]);
+                tv_serialno.setText(serialno[length - 1]);
                 tv_model.setText("Premium Plus (WiFi & Scan)");
-                tv_wifi.setText("Available");
-                tv_scan.setText("Available");
-            }  else if(readerName.startsWith("RFD90")) {
+                tv_wifi.setText("사용 가능");
+                tv_scan.setText("사용 가능");
+            } else if (readerName.startsWith("RFD90")) {
                 readerName = mReaderDevice.getSerialNumber();
                 String serialno[] = readerName.split("S/N:");
                 tv_serialno.setText(serialno[1]);
                 tv_model.setText("Premium Plus (WiFi & Scan)");
-                tv_wifi.setText("Available");
-                tv_scan.setText("Available");
+                tv_wifi.setText("사용 가능");
+                tv_scan.setText("사용 가능");
             } else if (readerName.startsWith("RFD8500")) {
                 String[] splitStr = readerName.split("RFD8500");
                 tv_serialno.setText(splitStr[1]);
                 tv_model.setText("RFD8500");
-                tv_wifi.setText("Not Available");
-                if(Application.currentScannerId == -1)
-                    tv_scan.setText("Not Available");
-                else
-                    tv_scan.setText("Available");
+                tv_wifi.setText("사용 불가");
+                if (Application.currentScannerId == -1) tv_scan.setText("사용 불가");
+                else tv_scan.setText("사용 가능");
             }
         }
 
-        if(tv_serialno.getText().toString().contains("S/N:")){
+        if (tv_serialno.getText().toString().contains("S/N:")) {
             String sn = tv_serialno.getText().toString();
             String serialno[] = sn.split("S/N:");
             tv_serialno.setText(serialno[1]);
         }
     }
 
-    public void renameReader( ){
+    public void renameReader() {
         AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity());
 
         LayoutInflater inflater = requireActivity().getLayoutInflater();
@@ -221,39 +197,41 @@ public class ReaderDetailsFragment extends Fragment {
         } catch (InvalidUsageException | OperationFailureException e) {
             Log.e(TAG, e.getStackTrace()[0].toString());
         }
-        builder.setView(view)
-                .setTitle("Rename Reader")
-                .setNegativeButton("cancel", (dialogInterface, i) -> {
+        builder.setView(view).setTitle("장치 이름 변경")
+            .setNegativeButton("취소", (dialogInterface, i) -> {
 
-                })
-                .setPositiveButton("Ok", (dialogInterface, i) -> {
-                    String newName = etRenameReader.getText().toString();
-                    try {
-                        RFIDResults rfidResults = mConnectedReader.Config.setFriendlyName(newName);
+            })
+            .setPositiveButton("확인", (dialogInterface, i) -> {
+                String newName = etRenameReader.getText().toString();
+                try {
+                    RFIDResults rfidResults = mConnectedReader.Config.setFriendlyName(newName);
 
-                        if(rfidResults == RFIDResults.RFID_API_SUCCESS){
-                            Toast.makeText(getActivity(),"Rename Success. To see changes" +
-                                    "\nUSB connection: Deattach and attach the reader " +
-                                    "\nBluetooth: Unpair and pair the device",Toast.LENGTH_LONG).show();
-                            requireActivity().onBackPressed();
-                        }
-                        else if(rfidResults == RFIDResults.RFID_COMMAND_OPTION_WITHOUT_DELIMITER){
-                            Toast.makeText(getActivity(),"Renaming failed. Don't include Space in between words", Toast.LENGTH_SHORT).show();
-                        }
-                        else {
-                            Toast.makeText(getActivity(),"Rename fail. Unknown error",Toast.LENGTH_SHORT).show();
-                        }
-                    } catch (InvalidUsageException e) {
-                        if(e.getStackTrace().length>0) {
-                            Log.e(TAG, e.getStackTrace()[0].toString());
-                            Log.e(TAG, e.getInfo());
-                            Toast.makeText(getActivity(),e.getInfo(),Toast.LENGTH_SHORT).show();
-                        }
-                    } catch (OperationFailureException e) {
-                        if(e.getStackTrace().length>0)
-                        { Log.e(TAG, e.getStackTrace()[0].toString()); }
+                    if (rfidResults == RFIDResults.RFID_API_SUCCESS) {
+                        Toast.makeText(getActivity(),
+                            "이름 변경 성공. 변경 사항을 보려면"
+                            + "\nUSB 연결인 경우: 장치를 분리하고 다시 연결해주세요. "
+                            + "\n블루투스 연결인 경우: 장치를 페어링 해제 후, 다시 페어링해주세요.",
+                            Toast.LENGTH_LONG
+                        ).show();
+                        requireActivity().onBackPressed();
+                    } else if (rfidResults == RFIDResults.RFID_COMMAND_OPTION_WITHOUT_DELIMITER) {
+                        Toast.makeText(getActivity(), "이름 변경 실패하였습니다. 단어 사이에 공백을 포함하지 마세요.", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getActivity(), "이름 변경 실패. 알 수 없는 에러.", Toast.LENGTH_SHORT).show();
                     }
-                });
+                } catch (InvalidUsageException e) {
+                    if (e.getStackTrace().length > 0) {
+                        Log.e(TAG, e.getStackTrace()[0].toString());
+                        Log.e(TAG, e.getInfo());
+                        Toast.makeText(getActivity(), e.getInfo(), Toast.LENGTH_SHORT).show();
+                    }
+                } catch (OperationFailureException e) {
+                    if (e.getStackTrace().length > 0) {
+                        Log.e(TAG, e.getStackTrace()[0].toString());
+                    }
+                }
+            }
+        );
         builder.show();
     }
 

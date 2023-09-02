@@ -3,19 +3,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-
     android:background="@android:color/white"
+    android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.codegear.mariamc_rfid.scanner.activities.ActiveScannerActivity"
     tools:showIn="@layout/app_bar_activescanner">
 
-
     <androidx.viewpager.widget.ViewPager xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/activeScannerPager"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"/>
+        android:id="@+id/activeScannerPager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tablayout"
@@ -24,12 +22,10 @@
         app:tabBackground="@color/black_dark"
         app:tabGravity="fill"
         app:tabIndicatorColor="@color/white"
-        app:tabMode="fixed"
+        app:tabInlineLabel="true"
         app:tabMaxWidth="0dp"
+        app:tabMode="fixed"
         app:tabSelectedTextColor="@color/white"
-        app:tabTextAppearance="@style/AppTabTextAppearance"
-        app:tabInlineLabel="true">
-    </com.google.android.material.tabs.TabLayout>
-
+        app:tabTextAppearance="@style/AppTabTextAppearance"/>
 
 </LinearLayout>

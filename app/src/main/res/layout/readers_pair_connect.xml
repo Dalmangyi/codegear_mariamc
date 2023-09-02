@@ -61,7 +61,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/empty_paired_reader"
         android:lineSpacingExtra="1dp"
-        android:text="No other reader connected. Pair new below"
+        android:text="다른 장치가 등록되어 있지 않습니다.\n아래에서 장치추가 버튼을 눌러 새로 페어링하세요."
         android:visibility="gone"
         />
 

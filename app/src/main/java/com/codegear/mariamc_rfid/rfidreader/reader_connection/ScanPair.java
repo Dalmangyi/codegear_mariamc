@@ -511,15 +511,13 @@ public class ScanPair {
 
         protected void onPreExecute() {
             if(devName.contains("RFD8500")) {
-                pairTaskDailog.setMessage("Pairing " + devName + "...\nPress RFD8500 Yellow Trigger " +
-                        "button when Bluetooth button LED blinks fast to finalize pairing!");
+                pairTaskDailog.setMessage("" + devName + " 페어링 진행중..." +
+                    "RFD8500 장치의 블루투스 버튼 LED가 빠르게 깜박일 때, 노란색 트리거 버튼을 누르면 페어링이 완료됩니다!"
+                );
             }  else {
-                pairTaskDailog.setMessage("Pairing " + devName + "in progress");
+                pairTaskDailog.setMessage("" + devName + " 페어링 진행중...");
             }
-           /* pairTaskDailog.setCancelable(false);
-            pairTaskDailog.setCanceledOnTouchOutside(false);*/
             pairTaskDailog.show();
-
         }
 
         @Override

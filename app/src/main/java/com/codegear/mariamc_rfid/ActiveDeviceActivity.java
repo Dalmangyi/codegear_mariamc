@@ -1,276 +1,276 @@
-    package com.codegear.mariamc_rfid;
+package com.codegear.mariamc_rfid;
 
-    import static com.codegear.mariamc_rfid.application.Application.DEVICE_PREMIUM_PLUS_MODE;
-    import static com.codegear.mariamc_rfid.application.Application.DEVICE_STD_MODE;
-    import static com.codegear.mariamc_rfid.application.Application.RFD_DEVICE_MODE;
-    import static com.codegear.mariamc_rfid.application.Application.TAG_LIST_LOADED;
-    import static com.codegear.mariamc_rfid.application.Application.TAG_LIST_MATCH_MODE;
-    import static com.codegear.mariamc_rfid.application.Application.UNIQUE_TAGS_CSV;
-    import static com.codegear.mariamc_rfid.application.Application.inventoryList;
-    import static com.codegear.mariamc_rfid.application.Application.matchingTags;
-    import static com.codegear.mariamc_rfid.application.Application.missedTags;
-    import static com.codegear.mariamc_rfid.application.Application.tagListMap;
-    import static com.codegear.mariamc_rfid.application.Application.tagsListCSV;
-    import static com.codegear.mariamc_rfid.application.Application.tagsReadInventory;
-    import static com.codegear.mariamc_rfid.rfidreader.rfid.RFIDController.mConnectedReader;
-    import static com.codegear.mariamc_rfid.rfidreader.rfid.RFIDController.mIsInventoryRunning;
-    import static com.codegear.mariamc_rfid.rfidreader.rfid.RFIDController.mReaderDisappeared;
-    import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.ANTENNA_SETTINGS_TAB;
-    import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.APPLICATION_SETTINGS_TAB;
-    import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.ASSERT_DEVICE_INFO_TAB;
-    import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.BARCODE_SYMBOLOGIES_TAB;
-    import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.BARCODE_TAB;
-    import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.BATTERY_STATISTICS_TAB;
-    import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.BEEPER_ACTION_TAB;
-    import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.CHARGE_TERMINAL_TAB;
-    import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.DEVICE_PAIR_TAB;
-    import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.DEVICE_RESET_TAB;
-    import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.DPO_SETTING_TAB;
-    import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.FACTORY_RESET_FRAGMENT_TAB;
-    import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.INVENTORY_TAB;
-    import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.KEYREMAP_TAB;
-    import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.LOCATE_TAG_TAB;
-    import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.LOGGER_FRAGMENT_TAB;
-    import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.MAIN_GENERAL_SETTINGS_TAB;
-    import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.MAIN_HOME_SETTINGS_TAB;
-    import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.MAIN_RFID_SETTINGS_TAB;
-    import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.NONOPER_TAB;
-    import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.RAPID_READ_TAB;
-    import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.READERS_TAB;
-    import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.READER_DETAILS_TAB;
-    import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.READER_LIST_TAB;
-    import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.READER_WIFI_SETTINGS_TAB;
-    import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.RFID_ACCESS_TAB;
-    import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.RFID_ADVANCED_OPTIONS_TAB;
-    import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.RFID_BEEPER_TAB;
-    import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.RFID_LED_TAB;
-    import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.RFID_PREFILTERS_TAB;
-    import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.RFID_PROFILES_TAB;
-    import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.RFID_REGULATORY_TAB;
-    import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.RFID_SETTINGS_TAB;
-    import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.RFID_TAB;
-    import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.RFID_WIFI_TAB;
-    import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.SAVE_CONFIG_TAB;
-    import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.SCAN_ADVANCED_TAB;
-    import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.SCAN_DATAVIEW_TAB;
-    import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.SCAN_HOME_SETTINGS_TAB;
-    import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.SCAN_SETTINGS_TAB;
-    import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.SCAN_TAB;
-    import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.SETTINGS_TAB;
-    import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.SINGULATION_CONTROL_TAB;
-    import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.START_STOP_TRIGGER_TAB;
-    import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.STATIC_IP_CONFIG;
-    import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.TAG_REPORTING_TAB;
-    import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.UPDATE_FIRMWARE_TAB;
-    import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.USB_MIFI_TAB;
-    import static com.codegear.mariamc_rfid.scanner.helpers.Constants.DEBUG_TYPE.TYPE_DEBUG;
-    import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_ACTION_HIGH_HIGH_LOW_LOW_BEEP;
-    import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_DECODE_COUNT_2_OF_5;
-    import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_DECODE_COUNT_AZTEC;
-    import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_DECODE_COUNT_CODEBAR;
-    import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_DECODE_COUNT_CODE_11;
-    import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_DECODE_COUNT_CODE_128;
-    import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_DECODE_COUNT_CODE_39;
-    import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_DECODE_COUNT_CODE_93;
-    import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_DECODE_COUNT_COMPOSITE;
-    import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_DECODE_COUNT_COUPON;
-    import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_DECODE_COUNT_DATAMARIX;
-    import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_DECODE_COUNT_DIGIMARC_EAN_JAN;
-    import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_DECODE_COUNT_DIGIMARC_OTHER;
-    import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_DECODE_COUNT_DIGIMARC_UPC;
-    import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_DECODE_COUNT_EAN_JAN;
-    import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_DECODE_COUNT_GS1_DATABAR;
-    import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_DECODE_COUNT_GS1_DATAMATRIX;
-    import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_DECODE_COUNT_GS1_QR_CODE;
-    import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_DECODE_COUNT_MAXICODE;
-    import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_DECODE_COUNT_MSI;
-    import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_DECODE_COUNT_OCR;
-    import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_DECODE_COUNT_OTHER;
-    import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_DECODE_COUNT_OTHER_1D;
-    import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_DECODE_COUNT_OTHER_2D;
-    import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_DECODE_COUNT_PDF;
-    import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_DECODE_COUNT_POSTAL_CODES;
-    import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_DECODE_COUNT_QR;
-    import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_DECODE_COUNT_UNUSED_ID;
-    import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_DECODE_COUNT_UPC;
-    import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_HISTOGRAM_2_OF_5;
-    import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_HISTOGRAM_AZTEC;
-    import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_HISTOGRAM_CODEBAR;
-    import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_HISTOGRAM_CODE_11;
-    import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_HISTOGRAM_CODE_128;
-    import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_HISTOGRAM_CODE_39;
-    import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_HISTOGRAM_CODE_93;
-    import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_HISTOGRAM_COMPOSITE;
-    import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_HISTOGRAM_COUPON;
-    import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_HISTOGRAM_DATAMARIX;
-    import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_HISTOGRAM_DIGIMARC_EAN_JAN;
-    import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_HISTOGRAM_DIGIMARC_OTHER;
-    import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_HISTOGRAM_DIGIMARC_UPC;
-    import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_HISTOGRAM_EAN_JAN;
-    import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_HISTOGRAM_GS1_DATABAR;
-    import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_HISTOGRAM_GS1_DATAMATRIX;
-    import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_HISTOGRAM_GS1_QR_CODE;
-    import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_HISTOGRAM_MAXICODE;
-    import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_HISTOGRAM_MSI;
-    import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_HISTOGRAM_OCR;
-    import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_HISTOGRAM_OTHER;
-    import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_HISTOGRAM_OTHER_1D;
-    import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_HISTOGRAM_OTHER_2D;
-    import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_HISTOGRAM_PDF;
-    import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_HISTOGRAM_POSTAL_CODES;
-    import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_HISTOGRAM_QR;
-    import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_HISTOGRAM_UNUSED_ID;
-    import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_HISTOGRAM_UPC;
+import static com.codegear.mariamc_rfid.application.Application.DEVICE_PREMIUM_PLUS_MODE;
+import static com.codegear.mariamc_rfid.application.Application.DEVICE_STD_MODE;
+import static com.codegear.mariamc_rfid.application.Application.RFD_DEVICE_MODE;
+import static com.codegear.mariamc_rfid.application.Application.TAG_LIST_LOADED;
+import static com.codegear.mariamc_rfid.application.Application.TAG_LIST_MATCH_MODE;
+import static com.codegear.mariamc_rfid.application.Application.UNIQUE_TAGS_CSV;
+import static com.codegear.mariamc_rfid.application.Application.inventoryList;
+import static com.codegear.mariamc_rfid.application.Application.matchingTags;
+import static com.codegear.mariamc_rfid.application.Application.missedTags;
+import static com.codegear.mariamc_rfid.application.Application.tagListMap;
+import static com.codegear.mariamc_rfid.application.Application.tagsListCSV;
+import static com.codegear.mariamc_rfid.application.Application.tagsReadInventory;
+import static com.codegear.mariamc_rfid.rfidreader.rfid.RFIDController.mConnectedReader;
+import static com.codegear.mariamc_rfid.rfidreader.rfid.RFIDController.mIsInventoryRunning;
+import static com.codegear.mariamc_rfid.rfidreader.rfid.RFIDController.mReaderDisappeared;
+import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.ANTENNA_SETTINGS_TAB;
+import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.APPLICATION_SETTINGS_TAB;
+import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.ASSERT_DEVICE_INFO_TAB;
+import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.BARCODE_SYMBOLOGIES_TAB;
+import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.BARCODE_TAB;
+import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.BATTERY_STATISTICS_TAB;
+import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.BEEPER_ACTION_TAB;
+import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.CHARGE_TERMINAL_TAB;
+import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.DEVICE_PAIR_TAB;
+import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.DEVICE_RESET_TAB;
+import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.DPO_SETTING_TAB;
+import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.FACTORY_RESET_FRAGMENT_TAB;
+import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.INVENTORY_TAB;
+import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.KEYREMAP_TAB;
+import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.LOCATE_TAG_TAB;
+import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.LOGGER_FRAGMENT_TAB;
+import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.MAIN_GENERAL_SETTINGS_TAB;
+import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.MAIN_HOME_SETTINGS_TAB;
+import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.MAIN_RFID_SETTINGS_TAB;
+import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.NONOPER_TAB;
+import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.RAPID_READ_TAB;
+import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.READERS_TAB;
+import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.READER_DETAILS_TAB;
+import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.READER_LIST_TAB;
+import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.READER_WIFI_SETTINGS_TAB;
+import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.RFID_ACCESS_TAB;
+import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.RFID_ADVANCED_OPTIONS_TAB;
+import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.RFID_BEEPER_TAB;
+import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.RFID_LED_TAB;
+import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.RFID_PREFILTERS_TAB;
+import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.RFID_PROFILES_TAB;
+import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.RFID_REGULATORY_TAB;
+import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.RFID_SETTINGS_TAB;
+import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.RFID_TAB;
+import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.RFID_WIFI_TAB;
+import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.SAVE_CONFIG_TAB;
+import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.SCAN_ADVANCED_TAB;
+import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.SCAN_DATAVIEW_TAB;
+import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.SCAN_HOME_SETTINGS_TAB;
+import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.SCAN_SETTINGS_TAB;
+import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.SCAN_TAB;
+import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.SETTINGS_TAB;
+import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.SINGULATION_CONTROL_TAB;
+import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.START_STOP_TRIGGER_TAB;
+import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.STATIC_IP_CONFIG;
+import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.TAG_REPORTING_TAB;
+import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.UPDATE_FIRMWARE_TAB;
+import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.USB_MIFI_TAB;
+import static com.codegear.mariamc_rfid.scanner.helpers.Constants.DEBUG_TYPE.TYPE_DEBUG;
+import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_ACTION_HIGH_HIGH_LOW_LOW_BEEP;
+import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_DECODE_COUNT_2_OF_5;
+import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_DECODE_COUNT_AZTEC;
+import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_DECODE_COUNT_CODEBAR;
+import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_DECODE_COUNT_CODE_11;
+import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_DECODE_COUNT_CODE_128;
+import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_DECODE_COUNT_CODE_39;
+import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_DECODE_COUNT_CODE_93;
+import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_DECODE_COUNT_COMPOSITE;
+import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_DECODE_COUNT_COUPON;
+import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_DECODE_COUNT_DATAMARIX;
+import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_DECODE_COUNT_DIGIMARC_EAN_JAN;
+import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_DECODE_COUNT_DIGIMARC_OTHER;
+import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_DECODE_COUNT_DIGIMARC_UPC;
+import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_DECODE_COUNT_EAN_JAN;
+import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_DECODE_COUNT_GS1_DATABAR;
+import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_DECODE_COUNT_GS1_DATAMATRIX;
+import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_DECODE_COUNT_GS1_QR_CODE;
+import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_DECODE_COUNT_MAXICODE;
+import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_DECODE_COUNT_MSI;
+import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_DECODE_COUNT_OCR;
+import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_DECODE_COUNT_OTHER;
+import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_DECODE_COUNT_OTHER_1D;
+import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_DECODE_COUNT_OTHER_2D;
+import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_DECODE_COUNT_PDF;
+import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_DECODE_COUNT_POSTAL_CODES;
+import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_DECODE_COUNT_QR;
+import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_DECODE_COUNT_UNUSED_ID;
+import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_DECODE_COUNT_UPC;
+import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_HISTOGRAM_2_OF_5;
+import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_HISTOGRAM_AZTEC;
+import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_HISTOGRAM_CODEBAR;
+import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_HISTOGRAM_CODE_11;
+import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_HISTOGRAM_CODE_128;
+import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_HISTOGRAM_CODE_39;
+import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_HISTOGRAM_CODE_93;
+import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_HISTOGRAM_COMPOSITE;
+import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_HISTOGRAM_COUPON;
+import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_HISTOGRAM_DATAMARIX;
+import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_HISTOGRAM_DIGIMARC_EAN_JAN;
+import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_HISTOGRAM_DIGIMARC_OTHER;
+import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_HISTOGRAM_DIGIMARC_UPC;
+import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_HISTOGRAM_EAN_JAN;
+import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_HISTOGRAM_GS1_DATABAR;
+import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_HISTOGRAM_GS1_DATAMATRIX;
+import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_HISTOGRAM_GS1_QR_CODE;
+import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_HISTOGRAM_MAXICODE;
+import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_HISTOGRAM_MSI;
+import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_HISTOGRAM_OCR;
+import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_HISTOGRAM_OTHER;
+import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_HISTOGRAM_OTHER_1D;
+import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_HISTOGRAM_OTHER_2D;
+import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_HISTOGRAM_PDF;
+import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_HISTOGRAM_POSTAL_CODES;
+import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_HISTOGRAM_QR;
+import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_HISTOGRAM_UNUSED_ID;
+import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_HISTOGRAM_UPC;
 
-    import android.Manifest;
-    import android.app.Activity;
-    import android.app.Dialog;
-    import android.app.NotificationManager;
-    import android.app.ProgressDialog;
-    import android.content.Context;
-    import android.content.DialogInterface;
-    import android.content.Intent;
-    import android.content.SharedPreferences;
-    import android.content.pm.ActivityInfo;
-    import android.content.pm.PackageManager;
-    import android.content.res.Configuration;
-    import android.content.res.Resources;
-    import android.graphics.Color;
-    import android.net.Uri;
-    import android.nfc.NdefMessage;
-    import android.nfc.NdefRecord;
-    import android.nfc.NfcAdapter;
-    import android.nfc.NfcEvent;
-    import android.os.AsyncTask;
-    import android.os.Build;
-    import android.os.Bundle;
-    import android.os.Handler;
-    import android.os.Parcelable;
-    import android.provider.DocumentsContract;
-    import android.util.Log;
-    import android.util.Xml;
-    import android.view.LayoutInflater;
-    import android.view.MenuItem;
-    import android.view.View;
-    import android.view.ViewGroup;
-    import android.view.Window;
-    import android.view.WindowManager;
-    import android.widget.BaseExpandableListAdapter;
-    import android.widget.Button;
-    import android.widget.ExpandableListView;
-    import android.widget.ImageView;
-    import android.widget.TextView;
-    import android.widget.Toast;
+import android.Manifest;
+import android.app.Activity;
+import android.app.Dialog;
+import android.app.NotificationManager;
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
+import android.content.res.Configuration;
+import android.content.res.Resources;
+import android.graphics.Color;
+import android.net.Uri;
+import android.nfc.NdefMessage;
+import android.nfc.NdefRecord;
+import android.nfc.NfcAdapter;
+import android.nfc.NfcEvent;
+import android.os.AsyncTask;
+import android.os.Build;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Parcelable;
+import android.provider.DocumentsContract;
+import android.util.Log;
+import android.util.Xml;
+import android.view.LayoutInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.BaseExpandableListAdapter;
+import android.widget.Button;
+import android.widget.ExpandableListView;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
-    import androidx.activity.result.ActivityResult;
-    import androidx.activity.result.ActivityResultCallback;
-    import androidx.activity.result.ActivityResultLauncher;
-    import androidx.activity.result.contract.ActivityResultContracts;
-    import androidx.annotation.NonNull;
-    import androidx.annotation.Nullable;
-    import androidx.appcompat.app.ActionBar;
-    import androidx.appcompat.app.ActionBarDrawerToggle;
-    import androidx.appcompat.app.AlertDialog;
-    import androidx.appcompat.widget.Toolbar;
-    import androidx.core.view.GravityCompat;
-    import androidx.core.view.MenuItemCompat;
-    import androidx.drawerlayout.widget.DrawerLayout;
-    import androidx.fragment.app.Fragment;
-    import androidx.fragment.app.FragmentTransaction;
-    import androidx.viewpager.widget.PagerAdapter;
-    import androidx.viewpager.widget.ViewPager;
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.core.view.MenuItemCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
-    import com.codegear.mariamc_rfid.rfidreader.common.Constants;
-    import com.codegear.mariamc_rfid.rfidreader.common.CustomProgressDialog;
-    import com.codegear.mariamc_rfid.rfidreader.locate_tag.LocateOperationsFragment;
-    import com.codegear.mariamc_rfid.rfidreader.settings.ApplicationSettingsFragment;
-    import com.codegear.mariamc_rfid.scanner.activities.SsaSetSymbologyActivity;
-    import com.codegear.mariamc_rfid.scanner.activities.SymbologiesFragment;
-    import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
-    import com.google.android.material.floatingactionbutton.FloatingActionButton;
-    import com.google.android.material.navigation.NavigationView;
-    import com.google.android.material.tabs.TabLayout;
-    import com.google.android.material.tabs.TabLayoutMediator;
-    import com.codegear.mariamc_rfid.R;
-    import com.codegear.mariamc_rfid.application.Application;
-    import com.codegear.mariamc_rfid.discover_connect.nfc.PairOperationsFragment;
-    import com.codegear.mariamc_rfid.rfidreader.access_operations.AccessOperationsFragment;
-    import com.codegear.mariamc_rfid.rfidreader.common.MatchModeFileLoader;
-    import com.codegear.mariamc_rfid.rfidreader.home.RFIDBaseActivity;
-    import com.codegear.mariamc_rfid.rfidreader.inventory.InventoryListItem;
-    import com.codegear.mariamc_rfid.rfidreader.inventory.RFIDInventoryFragment;
-    import com.codegear.mariamc_rfid.rfidreader.manager.FactoryResetFragment;
-    import com.codegear.mariamc_rfid.rfidreader.manager.ManagerFragment;
-    import com.codegear.mariamc_rfid.rfidreader.manager.ScanHomeSettingsFragment;
-    import com.codegear.mariamc_rfid.rfidreader.rapidread.RapidReadFragment;
-    import com.codegear.mariamc_rfid.rfidreader.reader_connection.RFIDReadersListFragment;
-    import com.codegear.mariamc_rfid.rfidreader.rfid.RFIDController;
-    import com.codegear.mariamc_rfid.rfidreader.settings.AdvancedOptionItemFragment;
-    import com.codegear.mariamc_rfid.rfidreader.settings.AdvancedOptionsContent;
-    import com.codegear.mariamc_rfid.rfidreader.settings.AntennaSettingsFragment;
-    import com.codegear.mariamc_rfid.rfidreader.settings.BackPressedFragment;
-    import com.codegear.mariamc_rfid.rfidreader.settings.BatteryFragment;
-    import com.codegear.mariamc_rfid.rfidreader.settings.BatteryStatsFragment;
-    import com.codegear.mariamc_rfid.rfidreader.settings.BeeperFragment;
-    import com.codegear.mariamc_rfid.rfidreader.settings.ChargeTerminalFragment;
-    import com.codegear.mariamc_rfid.rfidreader.settings.DPOSettingsFragment;
-    import com.codegear.mariamc_rfid.rfidreader.settings.ISettingsUtil;
-    import com.codegear.mariamc_rfid.rfidreader.settings.KeyRemapFragment;
-    import com.codegear.mariamc_rfid.rfidreader.settings.LedFragment;
-    import com.codegear.mariamc_rfid.rfidreader.settings.PreFilterFragment;
-    import com.codegear.mariamc_rfid.rfidreader.settings.ProfileFragment;
-    import com.codegear.mariamc_rfid.rfidreader.settings.RegulatorySettingsFragment;
-    import com.codegear.mariamc_rfid.rfidreader.settings.SaveConfigurationsFragment;
-    import com.codegear.mariamc_rfid.rfidreader.settings.SettingListFragment;
-    import com.codegear.mariamc_rfid.rfidreader.settings.SettingsDetailActivity;
-    import com.codegear.mariamc_rfid.rfidreader.settings.SingulationControlFragment;
-    import com.codegear.mariamc_rfid.rfidreader.settings.StartStopTriggersFragment;
-    import com.codegear.mariamc_rfid.rfidreader.settings.TagReportingFragment;
-    import com.codegear.mariamc_rfid.rfidreader.settings.UsbMiFiFragment;
-    import com.codegear.mariamc_rfid.rfidreader.settings.WifiFragment;
-    import com.codegear.mariamc_rfid.scanner.activities.AssertFragment;
-    import com.codegear.mariamc_rfid.scanner.activities.BaseActivity;
-    import com.codegear.mariamc_rfid.scanner.activities.BatteryStatistics;
-    import com.codegear.mariamc_rfid.scanner.activities.BeeperActionsFragment;
-    import com.codegear.mariamc_rfid.scanner.activities.ImageActivity;
-    import com.codegear.mariamc_rfid.scanner.activities.IntelligentImageCaptureActivity;
-    import com.codegear.mariamc_rfid.scanner.activities.LEDActivity;
-    import com.codegear.mariamc_rfid.scanner.activities.NavigationHelpActivity;
-    import com.codegear.mariamc_rfid.scanner.activities.SampleBarcodes;
-    import com.codegear.mariamc_rfid.scanner.activities.ScaleActivity;
-    import com.codegear.mariamc_rfid.scanner.activities.ScanSpeedAnalyticsActivity;
-    import com.codegear.mariamc_rfid.scanner.activities.UpdateFirmware;
-    import com.codegear.mariamc_rfid.scanner.activities.VibrationFeedback;
-    import com.codegear.mariamc_rfid.scanner.fragments.AdvancedFragment;
-    import com.codegear.mariamc_rfid.scanner.fragments.BarcodeFargment;
-    import com.codegear.mariamc_rfid.scanner.fragments.ReaderDetailsFragment;
-    import com.codegear.mariamc_rfid.scanner.fragments.SettingsFragment;
-    import com.codegear.mariamc_rfid.scanner.fragments.Static_ipconfig;
-    import com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter;
-    import com.codegear.mariamc_rfid.scanner.helpers.ActiveDevicePremiumAdapter;
-    import com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceStandardAdapter;
-    import com.codegear.mariamc_rfid.scanner.helpers.DotsProgressBar;
-    import com.codegear.mariamc_rfid.scanner.helpers.ScannerAppEngine;
-    import com.codegear.mariamc_rfid.scanner.receivers.NotificationsReceiver;
-    import com.codegear.mariamc_rfid.wifi.ReaderWifiSettingsFragment;
-    import com.zebra.rfid.api3.ENUM_TRIGGER_MODE;
-    import com.zebra.rfid.api3.InvalidUsageException;
-    import com.zebra.rfid.api3.OperationFailureException;
-    import com.zebra.rfid.api3.ReaderDevice;
-    import com.zebra.scannercontrol.DCSSDKDefs;
-    import com.zebra.scannercontrol.FirmwareUpdateEvent;
+import com.codegear.mariamc_rfid.rfidreader.common.Constants;
+import com.codegear.mariamc_rfid.rfidreader.common.CustomProgressDialog;
+import com.codegear.mariamc_rfid.rfidreader.locate_tag.LocateOperationsFragment;
+import com.codegear.mariamc_rfid.rfidreader.settings.ApplicationSettingsFragment;
+import com.codegear.mariamc_rfid.scanner.activities.SsaSetSymbologyActivity;
+import com.codegear.mariamc_rfid.scanner.activities.SymbologiesFragment;
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
+import com.codegear.mariamc_rfid.R;
+import com.codegear.mariamc_rfid.application.Application;
+import com.codegear.mariamc_rfid.discover_connect.nfc.PairOperationsFragment;
+import com.codegear.mariamc_rfid.rfidreader.access_operations.AccessOperationsFragment;
+import com.codegear.mariamc_rfid.rfidreader.common.MatchModeFileLoader;
+import com.codegear.mariamc_rfid.rfidreader.home.RFIDBaseActivity;
+import com.codegear.mariamc_rfid.rfidreader.inventory.InventoryListItem;
+import com.codegear.mariamc_rfid.rfidreader.inventory.RFIDInventoryFragment;
+import com.codegear.mariamc_rfid.rfidreader.manager.FactoryResetFragment;
+import com.codegear.mariamc_rfid.rfidreader.manager.ManagerFragment;
+import com.codegear.mariamc_rfid.rfidreader.manager.ScanHomeSettingsFragment;
+import com.codegear.mariamc_rfid.rfidreader.rapidread.RapidReadFragment;
+import com.codegear.mariamc_rfid.rfidreader.reader_connection.RFIDReadersListFragment;
+import com.codegear.mariamc_rfid.rfidreader.rfid.RFIDController;
+import com.codegear.mariamc_rfid.rfidreader.settings.AdvancedOptionItemFragment;
+import com.codegear.mariamc_rfid.rfidreader.settings.AdvancedOptionsContent;
+import com.codegear.mariamc_rfid.rfidreader.settings.AntennaSettingsFragment;
+import com.codegear.mariamc_rfid.rfidreader.settings.BackPressedFragment;
+import com.codegear.mariamc_rfid.rfidreader.settings.BatteryFragment;
+import com.codegear.mariamc_rfid.rfidreader.settings.BatteryStatsFragment;
+import com.codegear.mariamc_rfid.rfidreader.settings.BeeperFragment;
+import com.codegear.mariamc_rfid.rfidreader.settings.ChargeTerminalFragment;
+import com.codegear.mariamc_rfid.rfidreader.settings.DPOSettingsFragment;
+import com.codegear.mariamc_rfid.rfidreader.settings.ISettingsUtil;
+import com.codegear.mariamc_rfid.rfidreader.settings.KeyRemapFragment;
+import com.codegear.mariamc_rfid.rfidreader.settings.LedFragment;
+import com.codegear.mariamc_rfid.rfidreader.settings.PreFilterFragment;
+import com.codegear.mariamc_rfid.rfidreader.settings.ProfileFragment;
+import com.codegear.mariamc_rfid.rfidreader.settings.RegulatorySettingsFragment;
+import com.codegear.mariamc_rfid.rfidreader.settings.SaveConfigurationsFragment;
+import com.codegear.mariamc_rfid.rfidreader.settings.SettingListFragment;
+import com.codegear.mariamc_rfid.rfidreader.settings.SettingsDetailActivity;
+import com.codegear.mariamc_rfid.rfidreader.settings.SingulationControlFragment;
+import com.codegear.mariamc_rfid.rfidreader.settings.StartStopTriggersFragment;
+import com.codegear.mariamc_rfid.rfidreader.settings.TagReportingFragment;
+import com.codegear.mariamc_rfid.rfidreader.settings.UsbMiFiFragment;
+import com.codegear.mariamc_rfid.rfidreader.settings.WifiFragment;
+import com.codegear.mariamc_rfid.scanner.activities.AssertFragment;
+import com.codegear.mariamc_rfid.scanner.activities.BaseActivity;
+import com.codegear.mariamc_rfid.scanner.activities.BatteryStatistics;
+import com.codegear.mariamc_rfid.scanner.activities.BeeperActionsFragment;
+import com.codegear.mariamc_rfid.scanner.activities.ImageActivity;
+import com.codegear.mariamc_rfid.scanner.activities.IntelligentImageCaptureActivity;
+import com.codegear.mariamc_rfid.scanner.activities.LEDActivity;
+import com.codegear.mariamc_rfid.scanner.activities.NavigationHelpActivity;
+import com.codegear.mariamc_rfid.scanner.activities.SampleBarcodes;
+import com.codegear.mariamc_rfid.scanner.activities.ScaleActivity;
+import com.codegear.mariamc_rfid.scanner.activities.ScanSpeedAnalyticsActivity;
+import com.codegear.mariamc_rfid.scanner.activities.UpdateFirmware;
+import com.codegear.mariamc_rfid.scanner.activities.VibrationFeedback;
+import com.codegear.mariamc_rfid.scanner.fragments.AdvancedFragment;
+import com.codegear.mariamc_rfid.scanner.fragments.BarcodeFargment;
+import com.codegear.mariamc_rfid.scanner.fragments.ReaderDetailsFragment;
+import com.codegear.mariamc_rfid.scanner.fragments.SettingsFragment;
+import com.codegear.mariamc_rfid.scanner.fragments.Static_ipconfig;
+import com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter;
+import com.codegear.mariamc_rfid.scanner.helpers.ActiveDevicePremiumAdapter;
+import com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceStandardAdapter;
+import com.codegear.mariamc_rfid.scanner.helpers.DotsProgressBar;
+import com.codegear.mariamc_rfid.scanner.helpers.ScannerAppEngine;
+import com.codegear.mariamc_rfid.scanner.receivers.NotificationsReceiver;
+import com.codegear.mariamc_rfid.wifi.ReaderWifiSettingsFragment;
+import com.zebra.rfid.api3.ENUM_TRIGGER_MODE;
+import com.zebra.rfid.api3.InvalidUsageException;
+import com.zebra.rfid.api3.OperationFailureException;
+import com.zebra.rfid.api3.ReaderDevice;
+import com.zebra.scannercontrol.DCSSDKDefs;
+import com.zebra.scannercontrol.FirmwareUpdateEvent;
 
-    import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParser;
 
-    import java.io.StringReader;
-    import java.text.SimpleDateFormat;
-    import java.util.ArrayList;
-    import java.util.Date;
-    import java.util.HashMap;
-    import java.util.List;
-    import java.util.Locale;
+import java.io.StringReader;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
 
-    public class ActiveDeviceActivity extends BaseActivity implements AdvancedOptionItemFragment.OnAdvancedListFragmentInteractionListener, ActionBar.TabListener, ScannerAppEngine.IScannerAppEngineDevEventsDelegate, ScannerAppEngine.IScannerAppEngineDevConnectionsDelegate,
+public class ActiveDeviceActivity extends BaseActivity implements AdvancedOptionItemFragment.OnAdvancedListFragmentInteractionListener, ActionBar.TabListener, ScannerAppEngine.IScannerAppEngineDevEventsDelegate, ScannerAppEngine.IScannerAppEngineDevConnectionsDelegate,
         ISettingsUtil, NavigationView.OnNavigationItemSelectedListener, RFIDBaseActivity.CreateFileInterface {
     private static final String TAG_RFID_FRAGMENT = "RFID_FRAGMENT";
     public static final String MIME_TEXT_PLAIN = "text/plain";
@@ -320,7 +320,7 @@
 
     List<Integer> ssaSupportedAttribs;
     DrawerLayout drawer;
-    ImageView iv_batteryLevel ,iv_headerImageView;
+    ImageView iv_batteryLevel, iv_headerImageView;
     TextView battery_percentage;
     Button btn_disconnect;
 
@@ -328,7 +328,7 @@
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if(mConnectedReader != null) {
+        if (mConnectedReader != null) {
             initializeView();
         } else {
             Intent intent = new Intent(this, DeviceDiscoverActivity.class);
@@ -363,7 +363,7 @@
 
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                mActiveDeviceActivity, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close) ;
+                mActiveDeviceActivity, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
 
         iv_batteryLevel = (ImageView) findViewById(R.id.batterylevel);
         battery_percentage = (TextView) findViewById(R.id.battery_percentage);
@@ -390,15 +390,15 @@
 
             @Override
             public void onDrawerOpened(@NonNull View drawerView) {
-                if( viewPager.getCurrentItem() != mAdapter.getCurrentActivePosition()){
+                if (viewPager.getCurrentItem() != mAdapter.getCurrentActivePosition()) {
                     viewPager.setCurrentItem(mAdapter.getCurrentActivePosition());
                 }
-                if (RFIDController.BatteryData != null ){
+                if (RFIDController.BatteryData != null) {
                     deviceStatusReceived(RFIDController.BatteryData.getLevel(), RFIDController.BatteryData.getCharging(), RFIDController.BatteryData.getCause());
                 }
-                if(mConnectedReader != null && mConnectedReader.isConnected()) {
+                if (mConnectedReader != null && mConnectedReader.isConnected()) {
                     btn_disconnect.setEnabled(true);
-                    btn_disconnect.setText("DISCONNECT "+ mConnectedReader.getHostName());
+                    btn_disconnect.setText("DISCONNECT " + mConnectedReader.getHostName());
                 } else {
                     btn_disconnect.setEnabled(false);
                     btn_disconnect.setText(R.string.disconnectrfid);
@@ -407,7 +407,7 @@
 
             @Override
             public void onDrawerClosed(@NonNull View drawerView) {
-                battery_percentage.setText(String.valueOf(0)+"%");
+                battery_percentage.setText(String.valueOf(0) + "%");
                 iv_batteryLevel.setImageLevel(0);
 
             }
@@ -422,18 +422,18 @@
         btn_disconnect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(mConnectedReader != null && mConnectedReader.isConnected()) {
+                if (mConnectedReader != null && mConnectedReader.isConnected()) {
                     viewPager.setCurrentItem(READERS_TAB);
                     Fragment fragment = getCurrentFragment(READERS_TAB);
-                    if(fragment instanceof PairOperationsFragment) {
+                    if (fragment instanceof PairOperationsFragment) {
                         loadNextFragment(READER_LIST_TAB);
                         fragment = getCurrentFragment(READERS_TAB);
                     }
-                    if(fragment instanceof ReaderDetailsFragment) {
+                    if (fragment instanceof ReaderDetailsFragment) {
                         loadNextFragment(READER_LIST_TAB);
                         fragment = getCurrentFragment(READERS_TAB);
                     }
-                    if (fragment instanceof RFIDReadersListFragment ) {
+                    if (fragment instanceof RFIDReadersListFragment) {
                         ((RFIDReadersListFragment) fragment).disconnectConnectedReader();
                     }
 
@@ -459,11 +459,11 @@
         Application.currentScannerName = scannerName;
         Application.currentScannerAddress = address;
 
-        mRFIDBaseActivity =  RFIDBaseActivity.getInstance();
+        mRFIDBaseActivity = RFIDBaseActivity.getInstance();
         mRFIDBaseActivity.onCreate(mActiveDeviceActivity);
         viewPager = (ViewPager) findViewById(R.id.activeScannerPager);
 
-        if(mConnectedReader != null) {
+        if (mConnectedReader != null) {
             RFD_DEVICE_MODE = mRFIDBaseActivity.getDeviceMode(mConnectedReader.getHostName(), Application.currentScannerId);
             if (RFD_DEVICE_MODE == DEVICE_STD_MODE)
                 mAdapter = new ActiveDeviceStandardAdapter(this, getSupportFragmentManager(), DEVICE_STD_MODE);
@@ -484,18 +484,17 @@
 
         tabLayout = (TabLayout) findViewById(R.id.tablayout);
         tabLayout.setupWithViewPager(viewPager);
-        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener(){
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
 
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 mAdapter.setCurrentActivePosition(tab.getPosition());
                 Log.d(TAG, tab.toString());
-                switch (tab.getPosition())
-                {
+                switch (tab.getPosition()) {
                     case RFID_TAB:
-                        if( mAdapter.getRFIDMOde() == RFID_ACCESS_TAB) {
+                        if (mAdapter.getRFIDMOde() == RFID_ACCESS_TAB) {
                             // mAdapter.notifyDataSetChanged();
-                        }else if( mAdapter.getRFIDMOde() == INVENTORY_TAB) {
+                        } else if (mAdapter.getRFIDMOde() == INVENTORY_TAB) {
                             // mAdapter.notifyDataSetChanged();
                             Fragment fragment = getCurrentFragment(RFID_TAB);
 
@@ -503,10 +502,9 @@
                                 //  ((RFIDInventoryFragment)fragment).onRFIDFragmentSelected();
                             }
 
-                        }else if( mAdapter.getRFIDMOde() == RAPID_READ_TAB) {
+                        } else if (mAdapter.getRFIDMOde() == RAPID_READ_TAB) {
                             Fragment fragment = getCurrentFragment(RFID_TAB);
-                            if(fragment != null && fragment instanceof RapidReadFragment)
-                            {
+                            if (fragment != null && fragment instanceof RapidReadFragment) {
                                 //       ((RapidReadFragment)fragment).onRapidReadSelected();
                             }
                         }
@@ -541,16 +539,15 @@
                 mAdapter.setCurrentActivePosition(position);
                 switch (position) {
                     case RFID_TAB:
-                        if(mAdapter.getReaderListMOde() == UPDATE_FIRMWARE_TAB )
-                        {
+                        if (mAdapter.getReaderListMOde() == UPDATE_FIRMWARE_TAB) {
                             getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(mAdapter.getSettingsTab())).commit();
                             getSupportFragmentManager().beginTransaction().addToBackStack(null);
                             getSupportFragmentManager().executePendingTransactions();
                             mAdapter.setReaderListMOde(MAIN_HOME_SETTINGS_TAB);
 
-                        }else{
+                        } else {
 
-                            if( getCurrentFragment(mAdapter.getSettingsTab()) != null ){
+                            if (getCurrentFragment(mAdapter.getSettingsTab()) != null) {
                                 getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(mAdapter.getSettingsTab())).commit();
                                 getSupportFragmentManager().beginTransaction().addToBackStack(null);
                                 getSupportFragmentManager().executePendingTransactions();
@@ -559,28 +556,27 @@
                         }
 
 
-                        if( (mConnectedReader != null) && mConnectedReader.getHostName().startsWith("RFD8500")  )
+                        if ((mConnectedReader != null) && mConnectedReader.getHostName().startsWith("RFD8500"))
                             setTriggerMode(ENUM_TRIGGER_MODE.RFID_MODE);
 
-                        if(mAdapter.getRFIDMOde() == RAPID_READ_TAB)
+                        if (mAdapter.getRFIDMOde() == RAPID_READ_TAB)
                             loadNextFragment(RAPID_READ_TAB);
-                        else if(mAdapter.getRFIDMOde() == INVENTORY_TAB)
+                        else if (mAdapter.getRFIDMOde() == INVENTORY_TAB)
                             loadNextFragment(INVENTORY_TAB);
-                        else if(mAdapter.getRFIDMOde() == RFID_ACCESS_TAB)
+                        else if (mAdapter.getRFIDMOde() == RFID_ACCESS_TAB)
                             loadNextFragment(RFID_ACCESS_TAB);
-                        else  if(mAdapter.getRFIDMOde() == RFID_PREFILTERS_TAB)
+                        else if (mAdapter.getRFIDMOde() == RFID_PREFILTERS_TAB)
                             loadNextFragment(RFID_PREFILTERS_TAB);
-                        else if(mAdapter.getRFIDMOde() == LOCATE_TAG_TAB)
+                        else if (mAdapter.getRFIDMOde() == LOCATE_TAG_TAB)
                             loadNextFragment(LOCATE_TAG_TAB);
-                        else if(mAdapter.getRFIDMOde() == RFID_SETTINGS_TAB)
+                        else if (mAdapter.getRFIDMOde() == RFID_SETTINGS_TAB)
                             loadNextFragment(RFID_SETTINGS_TAB);
-                        else if(mAdapter.getRFIDMOde() == NONOPER_TAB)
+                        else if (mAdapter.getRFIDMOde() == NONOPER_TAB)
                             loadNextFragment(RAPID_READ_TAB);
 
                         break;
                     case READERS_TAB:
-                        if(mAdapter.getReaderListMOde() == UPDATE_FIRMWARE_TAB )
-                        {
+                        if (mAdapter.getReaderListMOde() == UPDATE_FIRMWARE_TAB) {
                             getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(mAdapter.getSettingsTab())).commit();
                             getSupportFragmentManager().beginTransaction().addToBackStack(null);
                             getSupportFragmentManager().executePendingTransactions();
@@ -589,8 +585,8 @@
                         loadNextFragment(READER_LIST_TAB);
                         break;
                     case SCAN_TAB:
-                        if(RFD_DEVICE_MODE == DEVICE_PREMIUM_PLUS_MODE) {
-                            if( getCurrentFragment(mAdapter.getSettingsTab()) != null ){
+                        if (RFD_DEVICE_MODE == DEVICE_PREMIUM_PLUS_MODE) {
+                            if (getCurrentFragment(mAdapter.getSettingsTab()) != null) {
                                 getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(mAdapter.getSettingsTab())).commit();
                                 getSupportFragmentManager().beginTransaction().addToBackStack(null);
                                 getSupportFragmentManager().executePendingTransactions();
@@ -599,18 +595,17 @@
                             loadNextFragment(SCAN_DATAVIEW_TAB);
                             barcodeCount = (TextView) findViewById(R.id.barcodesListCount);
                             barcodeCount.setText("Barcodes Scanned: " + Integer.toString(iBarcodeCount));
-                            if(mAdapter.getReaderListMOde() == UPDATE_FIRMWARE_TAB )
-                            {
+                            if (mAdapter.getReaderListMOde() == UPDATE_FIRMWARE_TAB) {
                                 getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(mAdapter.getSettingsTab())).commit();
                                 getSupportFragmentManager().beginTransaction().addToBackStack(null);
                                 getSupportFragmentManager().executePendingTransactions();
                                 mAdapter.setReaderListMOde(MAIN_HOME_SETTINGS_TAB);
                             }
-                            if( (mConnectedReader != null) && mConnectedReader.getHostName().startsWith("RFD8500")  )
+                            if ((mConnectedReader != null) && mConnectedReader.getHostName().startsWith("RFD8500"))
                                 setTriggerMode(ENUM_TRIGGER_MODE.BARCODE_MODE);
                             break;
 
-                        } else if (RFD_DEVICE_MODE == DEVICE_STD_MODE){
+                        } else if (RFD_DEVICE_MODE == DEVICE_STD_MODE) {
                             getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(mAdapter.getSettingsTab())).commit();
                             getSupportFragmentManager().beginTransaction().addToBackStack(null);
                             getSupportFragmentManager().executePendingTransactions();
@@ -647,7 +642,7 @@
             nMgr.cancel(NotificationsReceiver.DEFAULT_NOTIFICATION_ID);
         }
 
-        setActionBarTitle("Rapid");
+        setActionBarTitle("전자이표");
         viewPager.setCurrentItem(RFID_TAB);
         mAdapter.setCurrentActivePosition(RFID_TAB);
 
@@ -658,9 +653,9 @@
                 RFIDController.getInstance().updateReaderConnection(false);
             }
         } catch (InvalidUsageException e) {
-            Log.d(TAG,  "Returned SDK Exception");
+            Log.d(TAG, "Returned SDK Exception");
         } catch (OperationFailureException e) {
-            Log.d(TAG,  "Returned SDK Exception");
+            Log.d(TAG, "Returned SDK Exception");
         }
         initScanner();
         setParentActivity(this);
@@ -674,7 +669,7 @@
     }
 
     public void deviceStatusReceived(final int level, final boolean charging, final String cause) {
-        battery_percentage.setText(String.valueOf(level)+"%");
+        battery_percentage.setText(String.valueOf(level) + "%");
         iv_batteryLevel.setImageLevel(level);
 
     }
@@ -708,47 +703,46 @@
 
         }
 
-        if((onSaveInstanceState == true) && (mReaderDisappeared != null) && (RFIDController.regionNotSet == false )) {
+        if ((onSaveInstanceState == true) && (mReaderDisappeared != null) && (RFIDController.regionNotSet == false)) {
             //loadNextFragment(MAIN_HOME_SETTINGS_TAB);
             setCurrentTabFocus(READERS_TAB);
         }
         onSaveInstanceState = false;
 
         mRFIDBaseActivity.activityResumed();
-       if(RFIDController.regionNotSet == true ) {
+        if (RFIDController.regionNotSet == true) {
 
-        Intent detailsIntent = new Intent(getApplicationContext(), SettingsDetailActivity.class);
-        detailsIntent.addFlags(Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
-        detailsIntent.putExtra(Constants.SETTING_ITEM_ID, R.id.regulatory);
-        detailsIntent.putExtra(Constants.SETTING_ON_FACTORY, true);
-        startActivityForResult(detailsIntent, 0);
+            Intent detailsIntent = new Intent(getApplicationContext(), SettingsDetailActivity.class);
+            detailsIntent.addFlags(Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
+            detailsIntent.putExtra(Constants.SETTING_ITEM_ID, R.id.regulatory);
+            detailsIntent.putExtra(Constants.SETTING_ON_FACTORY, true);
+            startActivityForResult(detailsIntent, 0);
 
-       }else if(Application.updateReaderConnection == true) {
+        } else if (Application.updateReaderConnection == true) {
 
-           try {
-               RFIDController.getInstance().updateReaderConnection(false);
-               Application.updateReaderConnection = false;
-           } catch (InvalidUsageException e) {
-              Log.d(TAG,  "Returned SDK Exception");
-           } catch (OperationFailureException e) {
-               if( e!= null && e.getStackTrace().length>0){ Log.e(TAG, e.getStackTrace()[0].toString()); }
-           }
-       }else{
+            try {
+                RFIDController.getInstance().updateReaderConnection(false);
+                Application.updateReaderConnection = false;
+            } catch (InvalidUsageException e) {
+                Log.d(TAG, "Returned SDK Exception");
+            } catch (OperationFailureException e) {
+                if (e != null && e.getStackTrace().length > 0) {
+                    Log.e(TAG, e.getStackTrace()[0].toString());
+                }
+            }
+        } else {
 
-       }
+        }
     }
 
 
-
-
-    public void showFwRebootdialog()
-    {
+    public void showFwRebootdialog() {
         String fwStatus;
         dialogFwRebooting = new Dialog(mActiveDeviceActivity);
         dialogFwRebooting.setContentView(R.layout.dialog_fw_rebooting);
 
         TextView Status = (TextView) dialogFwRebooting.findViewById(R.id.fwstatus);
-        if(Application.isFirmwareUpdateSuccess == true) {
+        if (Application.isFirmwareUpdateSuccess == true) {
             fwStatus = "Firmware update Success. ";  //Toast.makeText(this, "Firmware update Success", Toast.LENGTH_SHORT).show();
         } else {
             fwStatus = "Firmware update failed. ";  //Toast.makeText(this, "Firmware update Failed", Toast.LENGTH_SHORT).show();
@@ -758,7 +752,6 @@
         //dialogFwRebooting.requestWindowFeature(Window.FEATURE_NO_TITLE);
         TextView counter = (TextView) dialogFwRebooting.findViewById(R.id.counter);
         Status.setText(fwStatus + Status.getText());
-
 
 
         dotProgressBar = (DotsProgressBar) dialogFwRebooting.findViewById(R.id.progressBar);
@@ -775,7 +768,7 @@
 
         if (waitingForFWReboot) {
             setWaitingForFWReboot(false);
-            if(dialogFwRebooting != null) {
+            if (dialogFwRebooting != null) {
                 dialogFwRebooting.dismiss();
                 dialogFwRebooting = null;
             }
@@ -821,14 +814,14 @@
     private void handleIntent(Intent intent) {
         String action = intent.getAction();
         if (NfcAdapter.ACTION_NDEF_DISCOVERED.equals(intent.getAction())) {
-            nfcData = ((Application)getApplication()).processNFCData(intent);
-        }else if( NfcAdapter.ACTION_TAG_DISCOVERED.equals(intent.getAction()))
+            nfcData = ((Application) getApplication()).processNFCData(intent);
+        } else if (NfcAdapter.ACTION_TAG_DISCOVERED.equals(intent.getAction()))
             processTAGData(intent);
 
     }
 
     private void processTAGData(Intent intent) {
-        Log.d(TAG,"ProcessTAG data " );
+        Log.d(TAG, "ProcessTAG data ");
 
         Parcelable[] rawMessages = intent.getParcelableArrayExtra(NfcAdapter.EXTRA_TAG);
         if (rawMessages != null && rawMessages.length > 0) {
@@ -891,7 +884,7 @@
 
         int position = getCurrentTabPosition();
         Fragment fragment = getCurrentFragment(position);
-        switch(position) {
+        switch (position) {
 
 
             case READERS_TAB:
@@ -915,11 +908,11 @@
                 } else if (fragment instanceof SettingListFragment) {
                     loadNextFragment(MAIN_HOME_SETTINGS_TAB);
 
-                } else if(fragment instanceof  BeeperActionsFragment) {
+                } else if (fragment instanceof BeeperActionsFragment) {
                     loadNextFragment(SCAN_SETTINGS_TAB);
-                }else if(fragment instanceof SymbologiesFragment) {
-                        loadNextFragment(SCAN_SETTINGS_TAB);
-                }else if (fragment instanceof ScanHomeSettingsFragment) {
+                } else if (fragment instanceof SymbologiesFragment) {
+                    loadNextFragment(SCAN_SETTINGS_TAB);
+                } else if (fragment instanceof ScanHomeSettingsFragment) {
                     loadNextFragment(MAIN_HOME_SETTINGS_TAB);
                 } else if (fragment instanceof SettingsFragment) {
                     loadNextFragment(MAIN_HOME_SETTINGS_TAB);
@@ -934,9 +927,9 @@
 
                 } else if (fragment instanceof RegulatorySettingsFragment) {
 
-                }else if (fragment instanceof WifiFragment) {
+                } else if (fragment instanceof WifiFragment) {
 
-                }else if (fragment instanceof ChargeTerminalFragment) {
+                } else if (fragment instanceof ChargeTerminalFragment) {
 
                 } else if ((fragment instanceof AntennaSettingsFragment)) {
                     loadNextFragment(RFID_ADVANCED_OPTIONS_TAB);
@@ -954,47 +947,43 @@
 
                 } else if (fragment instanceof FactoryResetFragment) {
                     loadNextFragment(MAIN_GENERAL_SETTINGS_TAB);
-                }else if (fragment instanceof LoggerFragment){
-                        loadNextFragment(MAIN_GENERAL_SETTINGS_TAB);
-                  } else if (fragment instanceof ApplicationSettingsFragment){
+                } else if (fragment instanceof LoggerFragment) {
+                    loadNextFragment(MAIN_GENERAL_SETTINGS_TAB);
+                } else if (fragment instanceof ApplicationSettingsFragment) {
                     loadNextFragment(MAIN_HOME_SETTINGS_TAB);
-                }else if (fragment instanceof KeyRemapFragment) {
+                } else if (fragment instanceof KeyRemapFragment) {
                     loadNextFragment(MAIN_GENERAL_SETTINGS_TAB);
-                }else if (fragment instanceof UpdateFirmware) {
+                } else if (fragment instanceof UpdateFirmware) {
                     loadNextFragment(MAIN_GENERAL_SETTINGS_TAB);
-                }else if (fragment instanceof AssertFragment) {
+                } else if (fragment instanceof AssertFragment) {
                     loadNextFragment(MAIN_GENERAL_SETTINGS_TAB);
-                }
-                else if (fragment instanceof Static_ipconfig) {
+                } else if (fragment instanceof Static_ipconfig) {
                     loadNextFragment(MAIN_GENERAL_SETTINGS_TAB);
-                }
-                else if(fragment instanceof BatteryStatsFragment) {
+                } else if (fragment instanceof BatteryStatsFragment) {
                     loadNextFragment(MAIN_GENERAL_SETTINGS_TAB);
-                }else if(fragment instanceof BatteryFragment) {
+                } else if (fragment instanceof BatteryFragment) {
                     loadNextFragment(MAIN_GENERAL_SETTINGS_TAB);
-                }else if(fragment instanceof UsbMiFiFragment) {
+                } else if (fragment instanceof UsbMiFiFragment) {
 
-                }
-
-                else{
+                } else {
                     minimizeApp();
                 }
 
                 break;
             case RFID_TAB:
-                if( fragment instanceof PreFilterFragment) {
+                if (fragment instanceof PreFilterFragment) {
                     ((PreFilterFragment) fragment).onBackPressed();
                     loadNextFragment(INVENTORY_TAB);
 
-                }else if( fragment instanceof LocateOperationsFragment || fragment instanceof AccessOperationsFragment) {
+                } else if (fragment instanceof LocateOperationsFragment || fragment instanceof AccessOperationsFragment) {
                     loadNextFragment(RAPID_READ_TAB);
 
-                }else {
+                } else {
                     minimizeApp();
                 }
                 break;
         }
-       // Fragment fragment = getCurrentFragment(SETTINGS_TAB);
+        // Fragment fragment = getCurrentFragment(SETTINGS_TAB);
 
         return;
 
@@ -1044,23 +1033,23 @@
     public void loadBeeperActions(View view) {
         loadNextFragment(BEEPER_ACTION_TAB);
     }
+
     public void beeperAction(View view) {
         int position = getCurrentTabPosition();
         Fragment fragment = getCurrentFragment(position);
-        if(fragment instanceof BeeperActionsFragment)
-            ((BeeperActionsFragment)fragment).beeperAction(view);
+        if (fragment instanceof BeeperActionsFragment)
+            ((BeeperActionsFragment) fragment).beeperAction(view);
     }
-    public void factoryResetClicked(View view)
-    {
+
+    public void factoryResetClicked(View view) {
         loadNextFragment(FACTORY_RESET_FRAGMENT_TAB);
     }
 
-    public void enableLoggingClicked(View view)
-    {
-        if((RFIDController.mConnectedReader != null ) && RFIDController.mConnectedReader.getHostName().startsWith("MC33")) {
-             Toast.makeText(this, "Real time log not supported for MC33", Toast.LENGTH_SHORT).show();
+    public void enableLoggingClicked(View view) {
+        if ((RFIDController.mConnectedReader != null) && RFIDController.mConnectedReader.getHostName().startsWith("MC33")) {
+            Toast.makeText(this, "Real time log not supported for MC33", Toast.LENGTH_SHORT).show();
         }
-            loadNextFragment(LOGGER_FRAGMENT_TAB);
+        loadNextFragment(LOGGER_FRAGMENT_TAB);
         return;
     }
 
@@ -1068,51 +1057,47 @@
         loadNextFragment(MAIN_GENERAL_SETTINGS_TAB);
     }
 
-    public void showRFIDSettings( View view ){
+    public void showRFIDSettings(View view) {
         loadNextFragment(RFID_SETTINGS_TAB);
     }
 
-    public void scanSettingsClicked( View view ){
+    public void scanSettingsClicked(View view) {
 
         loadNextFragment(SCAN_SETTINGS_TAB);
     }
 
-    public void applicationSettingsClicked(View view)
-    {
+    public void applicationSettingsClicked(View view) {
         loadNextFragment(APPLICATION_SETTINGS_TAB);
         return;
     }
 
 
-    public void deviceResetClicked(View view)
-    {
+    public void deviceResetClicked(View view) {
         loadNextFragment(DEVICE_RESET_TAB);
     }
 
-    public void showDeviceInfoClicked(View view)
-    {
+    public void showDeviceInfoClicked(View view) {
         loadNextFragment(ASSERT_DEVICE_INFO_TAB);
 
     }
-    public void staticIpConfig(View view){
+
+    public void staticIpConfig(View view) {
         loadNextFragment(STATIC_IP_CONFIG);
     }
 
     public void keyRemapClicked(View view) {
-        if( RFIDController.mConnectedReader != null ) {
+        if (RFIDController.mConnectedReader != null) {
             if (RFIDController.mConnectedReader.getHostName().startsWith("RFD40")
-            || RFIDController.mConnectedReader.getHostName().startsWith("RFD90")) {
+                    || RFIDController.mConnectedReader.getHostName().startsWith("RFD90")) {
                 loadNextFragment(KEYREMAP_TAB);
             } else {
                 view.setEnabled(false);
                 Toast.makeText(this, "Trigger Mapping feature is not supported for " + mConnectedReader.getHostName(), Toast.LENGTH_LONG).show();
             }
-        }else{
-            Toast.makeText(this, "Trigger Mapping feature is not supported when device not connected " , Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(this, "Trigger Mapping feature is not supported when device not connected ", Toast.LENGTH_LONG).show();
         }
     }
-
-
 
 
     public void loadAssert(View view) {
@@ -1174,13 +1159,13 @@
         String in_xml = "<inArgs><scannerID>" + scannerID + "</scannerID></inArgs>";
         cmdExecTask = new MyAsyncTask(scannerID, DCSSDKDefs.DCSSDK_COMMAND_OPCODE.DCSSDK_DEVICE_RELEASE_TRIGGER, null);
         cmdExecTask.execute(new String[]{in_xml});
-       // view.setEnabled(true);
-       // view.setOnClickListener(new View.OnClickListener() {
-       //     @Override
+        // view.setEnabled(true);
+        // view.setOnClickListener(new View.OnClickListener() {
+        //     @Override
         //    public void onClick(View v) {
         //        scanTrigger(v);
         //    }
-       // });
+        // });
 
     }
 
@@ -1197,7 +1182,7 @@
         int attrVal = 0;
         String in_xml = "<inArgs><scannerID>" + Application.currentConnectedScannerID + "</scannerID><cmdArgs><arg-xml><attrib_list>402</attrib_list></arg-xml></cmdArgs></inArgs>";
         StringBuilder outXML = new StringBuilder();
-        executeCommand(DCSSDKDefs.DCSSDK_COMMAND_OPCODE.DCSSDK_RSM_ATTR_GET,in_xml,outXML,Application.currentConnectedScannerID);
+        executeCommand(DCSSDKDefs.DCSSDK_COMMAND_OPCODE.DCSSDK_RSM_ATTR_GET, in_xml, outXML, Application.currentConnectedScannerID);
 
         try {
             XmlPullParser parser = Xml.newPullParser();
@@ -1246,47 +1231,47 @@
     public synchronized void scannerBarcodeEvent(byte[] barcodeData, int barcodeType, int scannerID) {
 
 
-        if(viewPager.getCurrentItem() != BARCODE_TAB ) {
+        if (viewPager.getCurrentItem() != BARCODE_TAB) {
             Log.d(TAG, "Cached barcode Data");
             return;
         }
 
         Log.d(TAG, "Rendering barcode Data");
 
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                           // Fragment fragment = mAdapter.getRegisteredFragment(BARCODE_TAB);
-                            // if((fragment instanceof BarcodeFargment) == false)
-                            //     return;
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                // Fragment fragment = mAdapter.getRegisteredFragment(BARCODE_TAB);
+                // if((fragment instanceof BarcodeFargment) == false)
+                //     return;
 
-                            BarcodeFargment barcodeFargment = (BarcodeFargment) mAdapter.getRegisteredFragment(BARCODE_TAB);
-                            if (barcodeFargment != null) {
+                BarcodeFargment barcodeFargment = (BarcodeFargment) mAdapter.getRegisteredFragment(BARCODE_TAB);
+                if (barcodeFargment != null) {
 
-                                barcodeFargment.showBarCode();
+                    barcodeFargment.showBarCode();
 
-                                barcodeCount = (TextView) findViewById(R.id.barcodesListCount);
-                                barcodeCount.setText("Barcodes Scanned: " + Integer.toString(++iBarcodeCount));
-                                if (iBarcodeCount > 0) {
-                                    Button btnClear = (Button) findViewById(R.id.btnClearList);
-                                    btnClear.setEnabled(true);
-                                }
-                                if (!Application.isFirmwareUpdateInProgress) {
-                                    //viewPager.setCurrentItem(BARCODE_TAB);
-                                }
+                    barcodeCount = (TextView) findViewById(R.id.barcodesListCount);
+                    barcodeCount.setText("Barcodes Scanned: " + Integer.toString(++iBarcodeCount));
+                    if (iBarcodeCount > 0) {
+                        Button btnClear = (Button) findViewById(R.id.btnClearList);
+                        btnClear.setEnabled(true);
+                    }
+                    if (!Application.isFirmwareUpdateInProgress) {
+                        //viewPager.setCurrentItem(BARCODE_TAB);
+                    }
 
-                            }
-                        }
-                    });
+                }
+            }
+        });
 
-   }
+    }
 
     @Override
     public void scannerFirmwareUpdateEvent(FirmwareUpdateEvent firmwareUpdateEvent) {
-        int setTab = RFD_DEVICE_MODE == DEVICE_STD_MODE ? SCAN_TAB :SETTINGS_TAB;
+        int setTab = RFD_DEVICE_MODE == DEVICE_STD_MODE ? SCAN_TAB : SETTINGS_TAB;
         Fragment fragment = getCurrentFragment(setTab);
-        if(fragment instanceof UpdateFirmware )
-            ((UpdateFirmware) fragment).scannerFirmwareUpdateEvent( firmwareUpdateEvent);
+        if (fragment instanceof UpdateFirmware)
+            ((UpdateFirmware) fragment).scannerFirmwareUpdateEvent(firmwareUpdateEvent);
     }
 
     @Override
@@ -1354,7 +1339,7 @@
     }
 
     public synchronized void multiTagLocateStartOrStop(View view) {
-       mRFIDBaseActivity.multiTagLocateStartOrStop(view);
+        mRFIDBaseActivity.multiTagLocateStartOrStop(view);
     }
 
     public synchronized void multiTagLocateAddTagItem(View view) {
@@ -1368,14 +1353,16 @@
     public synchronized void multiTagLocateReset(View view) {
         mRFIDBaseActivity.multiTagLocateReset(view);
     }
+
     public synchronized void multiTagLocateClearTagItems(View view) {
         mRFIDBaseActivity.multiTagLocateClearTagItems(view);
     }
-    public void showBatteryStatsClicked(View view){
+
+    public void showBatteryStatsClicked(View view) {
         loadNextFragment(BATTERY_STATISTICS_TAB);
     }
 
-    public void showBatteryStats(){
+    public void showBatteryStats() {
         viewPager.setCurrentItem(mAdapter.getSettingsTab());
         loadNextFragment(BATTERY_STATISTICS_TAB);
     }
@@ -1393,17 +1380,16 @@
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         drawer.closeDrawer(GravityCompat.START);
         int id = item.getItemId();
-        if(item.getItemId() == android.R.id.home) {
+        if (item.getItemId() == android.R.id.home) {
             finish();
 
         }
-        switch(id)
-        {
-           case android.R.id.home:
-                    onBackPressed();
-                    return true;
+        switch (id) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
             case R.id.nav_fw_update:
-                if(mConnectedReader != null && mConnectedReader.isConnected()) {
+                if (mConnectedReader != null && mConnectedReader.isConnected()) {
                     loadUpdateFirmware(MenuItemCompat.getActionView(item));
                 } else {
                     Toast.makeText(this, "No device in connected state", Toast.LENGTH_SHORT).show();
@@ -1417,7 +1403,7 @@
 //                detailsIntent.putExtra(com.codegear.mariamc_rfid.rfidreader.common.Constants.SETTING_ITEM_ID, R.id.battery);
 //                startActivity(detailsIntent);
                 showBatteryStats();
-                 break;
+                break;
             case R.id.nav_about:
                 showDeviceInfoClicked(MenuItemCompat.getActionView(item));
                 break;
@@ -1430,7 +1416,7 @@
             case R.id.menu_readers:
                 Fragment fragment = getCurrentFragment(READERS_TAB);
 
-                if(fragment instanceof PairOperationsFragment)
+                if (fragment instanceof PairOperationsFragment)
                     loadNextFragment(READER_LIST_TAB);
 
                 viewPager.setCurrentItem(READERS_TAB);
@@ -1463,28 +1449,29 @@
     }
 
 
-
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
-            // Always call the superclass so it can save the view hierarchy state
+        // Always call the superclass so it can save the view hierarchy state
 
         super.onSaveInstanceState(savedInstanceState);
         savedInstanceState.putString("default_tab", "readers");
         onSaveInstanceState = true;
     }
+
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
 
 
-
-        if (waitingForFWReboot  == false) {
+        if (waitingForFWReboot == false) {
             //viewPager.setCurrentItem(READERS_TAB);
             setCurrentTabFocus(READERS_TAB);
             try {
                 Thread.sleep(500);
             } catch (InterruptedException e) {
-                if( e!= null && e.getStackTrace().length>0){ Log.e(TAG, e.getStackTrace()[0].toString()); }
+                if (e != null && e.getStackTrace().length > 0) {
+                    Log.e(TAG, e.getStackTrace()[0].toString());
+                }
             }
         }
         onSaveInstanceState = false;
@@ -1492,19 +1479,18 @@
     }
 
 
-
     public void setCurrentTabFocus(int pos) {
-        if(onSaveInstanceState == false) {
+        if (onSaveInstanceState == false) {
             //loadNextFragment(MAIN_HOME_SETTINGS_TAB);
-            if(mAdapter.getCurrentActivePosition() != pos )
-                    viewPager.setCurrentItem(pos);
+            if (mAdapter.getCurrentActivePosition() != pos)
+                viewPager.setCurrentItem(pos);
         }
 
     }
 
     public void setCurrentTabFocus(int pos, int fragment) {
-        if(!onSaveInstanceState) {
-            if(mAdapter.getCurrentActivePosition() != pos ) {
+        if (!onSaveInstanceState) {
+            if (mAdapter.getCurrentActivePosition() != pos) {
                 viewPager.setCurrentItem(pos);
                 loadNextFragment(fragment);
             }
@@ -1514,11 +1500,11 @@
 
     public void sendNotification(String actionReaderStatusObtained, String info) {
 
-        mRFIDBaseActivity.sendNotification(actionReaderStatusObtained, info );
+        mRFIDBaseActivity.sendNotification(actionReaderStatusObtained, info);
     }
 
     public void loadWifiReaderSettings() {
-        if(mConnectedReader != null && mConnectedReader.isConnected())
+        if (mConnectedReader != null && mConnectedReader.isConnected())
             loadNextFragment(READER_WIFI_SETTINGS_TAB);
 
     }
@@ -1600,9 +1586,13 @@
                         mConnectedReader.Config.saveConfig();
                         bResult = true;
                     } catch (InvalidUsageException e) {
-                        if( e!= null && e.getStackTrace().length>0){ Log.e(TAG, e.getStackTrace()[0].toString()); }
+                        if (e != null && e.getStackTrace().length > 0) {
+                            Log.e(TAG, e.getStackTrace()[0].toString());
+                        }
                     } catch (OperationFailureException e) {
-                        if( e!= null && e.getStackTrace().length>0){ Log.e(TAG, e.getStackTrace()[0].toString()); }
+                        if (e != null && e.getStackTrace().length > 0) {
+                            Log.e(TAG, e.getStackTrace()[0].toString());
+                        }
                         operationFailureException = e;
                     }
                     return bResult;
@@ -1624,10 +1614,10 @@
     }
 
     public void changeAdapter(int tabCount) {
-        if(tabCount == DEVICE_PREMIUM_PLUS_MODE)
-            mAdapter = new ActiveDevicePremiumAdapter(this,getSupportFragmentManager(), DEVICE_PREMIUM_PLUS_MODE);
+        if (tabCount == DEVICE_PREMIUM_PLUS_MODE)
+            mAdapter = new ActiveDevicePremiumAdapter(this, getSupportFragmentManager(), DEVICE_PREMIUM_PLUS_MODE);
         else
-            mAdapter = new ActiveDeviceStandardAdapter(this,getSupportFragmentManager(), DEVICE_STD_MODE);
+            mAdapter = new ActiveDeviceStandardAdapter(this, getSupportFragmentManager(), DEVICE_STD_MODE);
 
         RFD_DEVICE_MODE = tabCount;
         viewPager.setAdapter(mAdapter);
@@ -1780,15 +1770,16 @@
 
     public void updateFirmware(View view) {
 
-        int setTab = RFD_DEVICE_MODE == DEVICE_STD_MODE ? SCAN_TAB :SETTINGS_TAB;
+        int setTab = RFD_DEVICE_MODE == DEVICE_STD_MODE ? SCAN_TAB : SETTINGS_TAB;
         Fragment fragment = getCurrentFragment(setTab);
-        if(fragment instanceof UpdateFirmware )
+        if (fragment instanceof UpdateFirmware)
             ((UpdateFirmware) fragment).updateFirmware(view);
 
     }
 
     /**
      * select firmware file
+     *
      * @param view user interface
      */
     public void selectFirmware(View view) {
@@ -1814,10 +1805,10 @@
                             if (data.getData().toString().contains("content://com.android.providers")) {
                                 runOnUiThread(this::ShowPlugInPathChangeDialog);
                             } else {
-                                int setTab = RFD_DEVICE_MODE == DEVICE_STD_MODE ? SCAN_TAB :SETTINGS_TAB;
+                                int setTab = RFD_DEVICE_MODE == DEVICE_STD_MODE ? SCAN_TAB : SETTINGS_TAB;
                                 Fragment fragment = getCurrentFragment(setTab);
-                                if(fragment instanceof UpdateFirmware ) {
-                                    documentUri =data.getData();
+                                if (fragment instanceof UpdateFirmware) {
+                                    documentUri = data.getData();
                                     //((UpdateFirmware) fragment).selectedFile(data.getData());
                                     ((UpdateFirmware) fragment).selectedFile(documentUri);
                                 }
@@ -1841,7 +1832,6 @@
             });
 
 
-
     ActivityResultLauncher<Intent> exportresultLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
@@ -1859,19 +1849,20 @@
             });
 
 
-
     public void loadUpdateFirmware(View view) {
 
-            int tab = RFD_DEVICE_MODE == DEVICE_STD_MODE ? SCAN_TAB:SETTINGS_TAB;
-            setCurrentTabFocus(tab);
-            loadNextFragment(UPDATE_FIRMWARE_TAB);
+        int tab = RFD_DEVICE_MODE == DEVICE_STD_MODE ? SCAN_TAB : SETTINGS_TAB;
+        setCurrentTabFocus(tab);
+        loadNextFragment(UPDATE_FIRMWARE_TAB);
 
     }
+
     public void loadReaderDetails(ReaderDevice readerDevice) {
 
         connectedReaderDetails(readerDevice);
         loadNextFragment(READER_DETAILS_TAB);
     }
+
     private void connectedReaderDetails(ReaderDevice readerDevice) {
 
         mConnectedReaderDetails = readerDevice;
@@ -2303,33 +2294,43 @@
             try {
                 Thread.sleep(400);
             } catch (InterruptedException e) {
-                if( e!= null && e.getStackTrace().length>0){ Log.e(TAG, e.getStackTrace()[0].toString()); }
+                if (e != null && e.getStackTrace().length > 0) {
+                    Log.e(TAG, e.getStackTrace()[0].toString());
+                }
             }
             while (System.currentTimeMillis() - t0 < 3000) {
                 VibrateScanner();
                 try {
                     Thread.sleep(400);
                 } catch (InterruptedException e) {
-                    if( e!= null && e.getStackTrace().length>0){ Log.e(TAG, e.getStackTrace()[0].toString()); }
+                    if (e != null && e.getStackTrace().length > 0) {
+                        Log.e(TAG, e.getStackTrace()[0].toString());
+                    }
                 }
                 VibrateScanner();
                 try {
                     Thread.sleep(400);
                 } catch (InterruptedException e) {
-                    if( e!= null && e.getStackTrace().length>0){ Log.e(TAG, e.getStackTrace()[0].toString()); }
+                    if (e != null && e.getStackTrace().length > 0) {
+                        Log.e(TAG, e.getStackTrace()[0].toString());
+                    }
                 }
                 BeepScanner();
                 try {
                     Thread.sleep(400);
                 } catch (InterruptedException e) {
-                    if( e!= null && e.getStackTrace().length>0){ Log.e(TAG, e.getStackTrace()[0].toString()); }
+                    if (e != null && e.getStackTrace().length > 0) {
+                        Log.e(TAG, e.getStackTrace()[0].toString());
+                    }
                 }
                 VibrateScanner();
             }
             try {
                 Thread.sleep(400);
             } catch (InterruptedException e) {
-                if( e!= null && e.getStackTrace().length>0){ Log.e(TAG, e.getStackTrace()[0].toString()); }
+                if (e != null && e.getStackTrace().length > 0) {
+                    Log.e(TAG, e.getStackTrace()[0].toString());
+                }
             }
             TurnOffLEDPattern();
             return true;
@@ -2343,8 +2344,6 @@
             }
 
         }
-
-
 
 
         private void TurnOnLEDPattern() {
@@ -2406,244 +2405,243 @@
         }
     }
 
-    public synchronized  void inventoryStartOrStop(View view) {
+    public synchronized void inventoryStartOrStop(View view) {
         mRFIDBaseActivity.inventoryStartOrStop();
     }
 
     public void loadNextFragment(int fragmentType) {
         int settingsTab = mAdapter.getSettingsTab();
-        String PageTitle= " " ;
-     try {
+        String PageTitle = " ";
+        try {
 
-         switch (fragmentType) {
-             case RAPID_READ_TAB:
-                 PageTitle = "Rapid";
-                 mAdapter.setRFIDMOde(RAPID_READ_TAB);
-                 getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(RFID_TAB)).commit();
-                 break;
-             case LOCATE_TAG_TAB:
-                 PageTitle = "Locate";
-                 mAdapter.setRFIDMOde(LOCATE_TAG_TAB);
-                 getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(RFID_TAB)).commit();
-                 break;
-             case INVENTORY_TAB:
-                 PageTitle = "Inventory";
-                 mAdapter.setRFIDMOde(INVENTORY_TAB);
-                 getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(RFID_TAB)).commit();
-                 break;
-             case RFID_PREFILTERS_TAB:
-                 PageTitle = "Prefilter";
-                 mAdapter.setRFIDMOde(RFID_PREFILTERS_TAB);
-                 getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(RFID_TAB)).commit();
-                 break;
-             case RFID_ACCESS_TAB:
-                 PageTitle = "Tag Write";
-                 mAdapter.setRFIDMOde(RFID_ACCESS_TAB);
-                 getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(RFID_TAB)).commit();
-                 break;
-             case RFID_SETTINGS_TAB:
-                 PageTitle = "RFID Settings";
-                 mAdapter.setSettingsMode(RFID_SETTINGS_TAB);
-                 getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
-                 break;
-             case SCAN_SETTINGS_TAB:
-                 PageTitle = "Scan";
-                 mAdapter.setSettingsMode(SCAN_SETTINGS_TAB);
-                 getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
-                 break;
-             case SCAN_DATAVIEW_TAB:
-                 PageTitle = "Scan Data";
-                 mAdapter.setSCANMOde(SCAN_DATAVIEW_TAB);
-                 getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(SCAN_TAB)).commit();
-                 break;
-             case SCAN_ADVANCED_TAB:
-                 PageTitle = "Advanced Scan";
-                 mAdapter.setReaderListMOde(SCAN_ADVANCED_TAB);
-                 getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
-                 break;
-             case SCAN_HOME_SETTINGS_TAB:
-                 PageTitle = "Settings";
-                 mAdapter.setReaderListMOde(SCAN_HOME_SETTINGS_TAB);
-                 getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
-                 break;
+            switch (fragmentType) {
+                case RAPID_READ_TAB:
+                    PageTitle = "Rapid";
+                    mAdapter.setRFIDMOde(RAPID_READ_TAB);
+                    getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(RFID_TAB)).commit();
+                    break;
+                case LOCATE_TAG_TAB:
+                    PageTitle = "Locate";
+                    mAdapter.setRFIDMOde(LOCATE_TAG_TAB);
+                    getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(RFID_TAB)).commit();
+                    break;
+                case INVENTORY_TAB:
+                    PageTitle = "Inventory";
+                    mAdapter.setRFIDMOde(INVENTORY_TAB);
+                    getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(RFID_TAB)).commit();
+                    break;
+                case RFID_PREFILTERS_TAB:
+                    PageTitle = "Prefilter";
+                    mAdapter.setRFIDMOde(RFID_PREFILTERS_TAB);
+                    getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(RFID_TAB)).commit();
+                    break;
+                case RFID_ACCESS_TAB:
+                    PageTitle = "Tag Write";
+                    mAdapter.setRFIDMOde(RFID_ACCESS_TAB);
+                    getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(RFID_TAB)).commit();
+                    break;
+                case RFID_SETTINGS_TAB:
+                    PageTitle = "RFID Settings";
+                    mAdapter.setSettingsMode(RFID_SETTINGS_TAB);
+                    getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
+                    break;
+                case SCAN_SETTINGS_TAB:
+                    PageTitle = "Scan";
+                    mAdapter.setSettingsMode(SCAN_SETTINGS_TAB);
+                    getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
+                    break;
+                case SCAN_DATAVIEW_TAB:
+                    PageTitle = "Scan Data";
+                    mAdapter.setSCANMOde(SCAN_DATAVIEW_TAB);
+                    getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(SCAN_TAB)).commit();
+                    break;
+                case SCAN_ADVANCED_TAB:
+                    PageTitle = "Advanced Scan";
+                    mAdapter.setReaderListMOde(SCAN_ADVANCED_TAB);
+                    getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
+                    break;
+                case SCAN_HOME_SETTINGS_TAB:
+                    PageTitle = "Settings";
+                    mAdapter.setReaderListMOde(SCAN_HOME_SETTINGS_TAB);
+                    getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
+                    break;
 
-             case READER_LIST_TAB:
-                 PageTitle = "Readers";
-                 mAdapter.setReaderListMOde(READER_LIST_TAB);
-                 getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(READERS_TAB)).commit();
-                 break;
-             case DEVICE_PAIR_TAB:
-                 PageTitle = "Scan"; //"Pair";
-                 mAdapter.setReaderListMOde(DEVICE_PAIR_TAB);
-                 getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(READERS_TAB)).commit();
-                 break;
-             case READER_DETAILS_TAB:
-                 PageTitle = "Details";
-                 mAdapter.setReaderListMOde(READER_DETAILS_TAB);
-                 getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(READERS_TAB)).commit();
-                 break;
+                case READER_LIST_TAB:
+                    PageTitle = "Readers";
+                    mAdapter.setReaderListMOde(READER_LIST_TAB);
+                    getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(READERS_TAB)).commit();
+                    break;
+                case DEVICE_PAIR_TAB:
+                    PageTitle = "Scan"; //"Pair";
+                    mAdapter.setReaderListMOde(DEVICE_PAIR_TAB);
+                    getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(READERS_TAB)).commit();
+                    break;
+                case READER_DETAILS_TAB:
+                    PageTitle = "장치 상세 정보";
+                    mAdapter.setReaderListMOde(READER_DETAILS_TAB);
+                    getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(READERS_TAB)).commit();
+                    break;
 
-             case READER_WIFI_SETTINGS_TAB:
-                 PageTitle = "Wi-Fi";
-                 mAdapter.setReaderListMOde(READER_WIFI_SETTINGS_TAB);
-                 getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(READERS_TAB)).commit();
-                 break;
+                case READER_WIFI_SETTINGS_TAB:
+                    PageTitle = "Wi-Fi";
+                    mAdapter.setReaderListMOde(READER_WIFI_SETTINGS_TAB);
+                    getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(READERS_TAB)).commit();
+                    break;
 
 
-             case MAIN_RFID_SETTINGS_TAB:
-                 PageTitle ="RFID Settings";
-                 mAdapter.setSettingsMode(MAIN_RFID_SETTINGS_TAB);
-                 getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
-                 break;
-             case MAIN_HOME_SETTINGS_TAB:
-                 PageTitle = "Settings";
-                 mAdapter.setSettingsMode(MAIN_HOME_SETTINGS_TAB);
-                 getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
-                 break;
-             case MAIN_GENERAL_SETTINGS_TAB:
-                 PageTitle = "General Settings";
-                 mAdapter.setSettingsMode(MAIN_GENERAL_SETTINGS_TAB);
-                 getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
-                 break;
-             case APPLICATION_SETTINGS_TAB:
-                 PageTitle = "Application";
-                 mAdapter.setSettingsMode(APPLICATION_SETTINGS_TAB);
-                 getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
-                 break;
-             case RFID_PROFILES_TAB:
-                 PageTitle = "Profiles";
-                 mAdapter.setSettingsMode(RFID_PROFILES_TAB);
-                 getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
-                 break;
-             case RFID_ADVANCED_OPTIONS_TAB:
-                 PageTitle = "RFID Advanced Settings";
-                 mAdapter.setSettingsMode(RFID_ADVANCED_OPTIONS_TAB);
-                 getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
-                 break;
+                case MAIN_RFID_SETTINGS_TAB:
+                    PageTitle = "RFID Settings";
+                    mAdapter.setSettingsMode(MAIN_RFID_SETTINGS_TAB);
+                    getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
+                    break;
+                case MAIN_HOME_SETTINGS_TAB:
+                    PageTitle = "Settings";
+                    mAdapter.setSettingsMode(MAIN_HOME_SETTINGS_TAB);
+                    getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
+                    break;
+                case MAIN_GENERAL_SETTINGS_TAB:
+                    PageTitle = "General Settings";
+                    mAdapter.setSettingsMode(MAIN_GENERAL_SETTINGS_TAB);
+                    getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
+                    break;
+                case APPLICATION_SETTINGS_TAB:
+                    PageTitle = "Application";
+                    mAdapter.setSettingsMode(APPLICATION_SETTINGS_TAB);
+                    getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
+                    break;
+                case RFID_PROFILES_TAB:
+                    PageTitle = "Profiles";
+                    mAdapter.setSettingsMode(RFID_PROFILES_TAB);
+                    getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
+                    break;
+                case RFID_ADVANCED_OPTIONS_TAB:
+                    PageTitle = "RFID Advanced Settings";
+                    mAdapter.setSettingsMode(RFID_ADVANCED_OPTIONS_TAB);
+                    getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
+                    break;
 
-             case RFID_REGULATORY_TAB:
-                 PageTitle = "Regulatory";
-                 mAdapter.setSettingsMode(RFID_REGULATORY_TAB);
-                 getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
-                 break;
+                case RFID_REGULATORY_TAB:
+                    PageTitle = "Regulatory";
+                    mAdapter.setSettingsMode(RFID_REGULATORY_TAB);
+                    getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
+                    break;
 
-             case RFID_BEEPER_TAB:
-                 PageTitle = "Beeper";
-                 mAdapter.setSettingsMode(RFID_BEEPER_TAB);
-                 getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
-                 break;
+                case RFID_BEEPER_TAB:
+                    PageTitle = "Beeper";
+                    mAdapter.setSettingsMode(RFID_BEEPER_TAB);
+                    getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
+                    break;
 
-             case RFID_LED_TAB:
-                 PageTitle = "LED";
-                 mAdapter.setSettingsMode(RFID_LED_TAB);
-                 getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
-                 break;
-             case RFID_WIFI_TAB:
-                 PageTitle = "WiFi";
-                 mAdapter.setSettingsMode(RFID_WIFI_TAB);
-                 getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
-                 break;
-             case CHARGE_TERMINAL_TAB:
-                 PageTitle = "Charge Terminal";
-                 mAdapter.setSettingsMode(CHARGE_TERMINAL_TAB);
-                 getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
-                 break;
-             case ANTENNA_SETTINGS_TAB:
-                 PageTitle = "Antenna";
-                 mAdapter.setSettingsMode(ANTENNA_SETTINGS_TAB);
-                 getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
-                 break;
+                case RFID_LED_TAB:
+                    PageTitle = "LED";
+                    mAdapter.setSettingsMode(RFID_LED_TAB);
+                    getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
+                    break;
+                case RFID_WIFI_TAB:
+                    PageTitle = "WiFi";
+                    mAdapter.setSettingsMode(RFID_WIFI_TAB);
+                    getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
+                    break;
+                case CHARGE_TERMINAL_TAB:
+                    PageTitle = "Charge Terminal";
+                    mAdapter.setSettingsMode(CHARGE_TERMINAL_TAB);
+                    getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
+                    break;
+                case ANTENNA_SETTINGS_TAB:
+                    PageTitle = "Antenna";
+                    mAdapter.setSettingsMode(ANTENNA_SETTINGS_TAB);
+                    getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
+                    break;
 
-             case SINGULATION_CONTROL_TAB:
-                 PageTitle = "Singulation";
-                 mAdapter.setSettingsMode(SINGULATION_CONTROL_TAB);
-                 getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
-                 break;
-             case START_STOP_TRIGGER_TAB:
-                 PageTitle = "Start/Stop";
-                 mAdapter.setSettingsMode(START_STOP_TRIGGER_TAB);
-                 getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
-                 break;
-             case TAG_REPORTING_TAB:
-                 PageTitle = "Tag Reporting";
-                 mAdapter.setSettingsMode(TAG_REPORTING_TAB);
-                 getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
-                 break;
-             case  SAVE_CONFIG_TAB:
-                 PageTitle = "Save";
-                 mAdapter.setSettingsMode(SAVE_CONFIG_TAB);
-                 getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
-                 break;
-             case DPO_SETTING_TAB:
-                 PageTitle = "Power";
-                 mAdapter.setSettingsMode(DPO_SETTING_TAB);
-                 getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
-                 break;
-             case FACTORY_RESET_FRAGMENT_TAB:
-                 PageTitle = "Factory Reset";
-                 mAdapter.setSettingsMode(FACTORY_RESET_FRAGMENT_TAB);
-                 getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
-                 break;
-             case LOGGER_FRAGMENT_TAB:
-                 PageTitle = "Logging";
-                 mAdapter.setSettingsMode(LOGGER_FRAGMENT_TAB);
-                 getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
-                 break;
-             case DEVICE_RESET_TAB:
-                 PageTitle = "Device Reset";
-                 mAdapter.setSettingsMode(DEVICE_RESET_TAB);
-                 getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
-                 break;
-             case KEYREMAP_TAB:
-                 PageTitle = "Trigger Map";
-                 mAdapter.setSettingsMode(KEYREMAP_TAB);
-                 getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
-                 break;
-             case UPDATE_FIRMWARE_TAB:
-                 PageTitle = "FW Update";
-                 mAdapter.setSettingsMode(UPDATE_FIRMWARE_TAB);
-                 getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
-                 break;
-             case ASSERT_DEVICE_INFO_TAB:
-                 PageTitle = "Device Info";
-                 mAdapter.setSettingsMode(ASSERT_DEVICE_INFO_TAB);
-                 getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
-                 break;
-             case STATIC_IP_CONFIG:
-                 PageTitle = "Network Ip Configuration";
-                 mAdapter.setSettingsMode(STATIC_IP_CONFIG);
-                 getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
-                 break;
-             case BARCODE_SYMBOLOGIES_TAB:
-                 PageTitle = "Symbologies";
-                 mAdapter.setSettingsMode(BARCODE_SYMBOLOGIES_TAB);
-                 getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
-                 break;
-             case BEEPER_ACTION_TAB:
-                 PageTitle = "Beeper";
-                 mAdapter.setSettingsMode(BEEPER_ACTION_TAB);
-                 getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
-                 break;
-             case BATTERY_STATISTICS_TAB:
-                 PageTitle = "Battery Statistics";
-                 mAdapter.setSettingsMode(BATTERY_STATISTICS_TAB);
-                 getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
-                 break;
-             case USB_MIFI_TAB:
-                 PageTitle = "USB MiFi";
-                 mAdapter.setSettingsMode(USB_MIFI_TAB);
-                 getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
-                 break;
+                case SINGULATION_CONTROL_TAB:
+                    PageTitle = "Singulation";
+                    mAdapter.setSettingsMode(SINGULATION_CONTROL_TAB);
+                    getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
+                    break;
+                case START_STOP_TRIGGER_TAB:
+                    PageTitle = "Start/Stop";
+                    mAdapter.setSettingsMode(START_STOP_TRIGGER_TAB);
+                    getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
+                    break;
+                case TAG_REPORTING_TAB:
+                    PageTitle = "Tag Reporting";
+                    mAdapter.setSettingsMode(TAG_REPORTING_TAB);
+                    getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
+                    break;
+                case SAVE_CONFIG_TAB:
+                    PageTitle = "Save";
+                    mAdapter.setSettingsMode(SAVE_CONFIG_TAB);
+                    getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
+                    break;
+                case DPO_SETTING_TAB:
+                    PageTitle = "Power";
+                    mAdapter.setSettingsMode(DPO_SETTING_TAB);
+                    getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
+                    break;
+                case FACTORY_RESET_FRAGMENT_TAB:
+                    PageTitle = "Factory Reset";
+                    mAdapter.setSettingsMode(FACTORY_RESET_FRAGMENT_TAB);
+                    getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
+                    break;
+                case LOGGER_FRAGMENT_TAB:
+                    PageTitle = "Logging";
+                    mAdapter.setSettingsMode(LOGGER_FRAGMENT_TAB);
+                    getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
+                    break;
+                case DEVICE_RESET_TAB:
+                    PageTitle = "Device Reset";
+                    mAdapter.setSettingsMode(DEVICE_RESET_TAB);
+                    getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
+                    break;
+                case KEYREMAP_TAB:
+                    PageTitle = "Trigger Map";
+                    mAdapter.setSettingsMode(KEYREMAP_TAB);
+                    getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
+                    break;
+                case UPDATE_FIRMWARE_TAB:
+                    PageTitle = "FW Update";
+                    mAdapter.setSettingsMode(UPDATE_FIRMWARE_TAB);
+                    getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
+                    break;
+                case ASSERT_DEVICE_INFO_TAB:
+                    PageTitle = "Device Info";
+                    mAdapter.setSettingsMode(ASSERT_DEVICE_INFO_TAB);
+                    getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
+                    break;
+                case STATIC_IP_CONFIG:
+                    PageTitle = "Network Ip Configuration";
+                    mAdapter.setSettingsMode(STATIC_IP_CONFIG);
+                    getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
+                    break;
+                case BARCODE_SYMBOLOGIES_TAB:
+                    PageTitle = "Symbologies";
+                    mAdapter.setSettingsMode(BARCODE_SYMBOLOGIES_TAB);
+                    getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
+                    break;
+                case BEEPER_ACTION_TAB:
+                    PageTitle = "Beeper";
+                    mAdapter.setSettingsMode(BEEPER_ACTION_TAB);
+                    getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
+                    break;
+                case BATTERY_STATISTICS_TAB:
+                    PageTitle = "Battery Statistics";
+                    mAdapter.setSettingsMode(BATTERY_STATISTICS_TAB);
+                    getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
+                    break;
+                case USB_MIFI_TAB:
+                    PageTitle = "USB MiFi";
+                    mAdapter.setSettingsMode(USB_MIFI_TAB);
+                    getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
+                    break;
 
-         }
-         setActionBarTitle(PageTitle);
-     }catch(NullPointerException ne)
-     {
-         return;
-     }catch(IllegalStateException ise){
+            }
+            setActionBarTitle(PageTitle);
+        } catch (NullPointerException ne) {
+            return;
+        } catch (IllegalStateException ise) {
 
-         return;
-     }
+            return;
+        }
 
         //getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(RFID_TAB)).commit();
         getSupportFragmentManager().beginTransaction().addToBackStack(null);
@@ -2661,6 +2659,7 @@
     public static boolean isActivityVisible() {
         return activityVisible;
     }
+
     void exportData() {
         if (mConnectedReader != null) {
             Uri uri = Uri.parse("content://com.android.externalstorage.documents/document/primary:Download");
@@ -2674,17 +2673,17 @@
         Boolean btCon = false;
         try {
 
-            if(mConnectedReader!= null && mConnectedReader.getTransport() != null &&
-                    mConnectedReader.getTransport().equals("BLUETOOTH") ) {
+            if (mConnectedReader != null && mConnectedReader.getTransport() != null &&
+                    mConnectedReader.getTransport().equals("BLUETOOTH")) {
 
                 mRFIDBaseActivity.resetFactoryDefault();
                 Thread.sleep(2000);
                 mRFIDBaseActivity.onFactoryReset(RFIDController.mConnectedDevice);
-            }else if( RFIDController.mConnectedDevice != null) {
+            } else if (RFIDController.mConnectedDevice != null) {
                 mRFIDBaseActivity.resetFactoryDefault();
             }
 
-        }catch(OperationFailureException e){
+        } catch (OperationFailureException e) {
             throw e;
         } catch (InterruptedException e) {
         }
@@ -2692,16 +2691,15 @@
     }
 
 
-
-
-    public void onRadioButtonClicked(View view){
+    public void onRadioButtonClicked(View view) {
 
         Fragment fragment = getCurrentFragment(SETTINGS_TAB);
-        if(fragment instanceof FactoryResetFragment){
-            ((FactoryResetFragment)fragment).changeResetMode(view );
+        if (fragment instanceof FactoryResetFragment) {
+            ((FactoryResetFragment) fragment).changeResetMode(view);
         }
 
     }
+
     public boolean deviceReset(String commandString) throws InvalidUsageException, OperationFailureException {
         return mRFIDBaseActivity.deviceReset();
     }
@@ -2760,7 +2758,6 @@
     }
 
 
-
     public void startbeepingTimer() {
         mRFIDBaseActivity.startbeepingTimer();
     }
@@ -2783,7 +2780,7 @@
         @Override
         public Object getChild(int groupPosition, int childPosititon) {
             return this._listDataChild.get(
-                    this._listDataHeader.get(groupPosition))
+                            this._listDataHeader.get(groupPosition))
                     .get(childPosititon);
         }
 
@@ -2813,7 +2810,7 @@
             ImageView imgListGroup = (ImageView) convertView
                     .findViewById(R.id.drawerIcon);
 
-            if(groupPosition == 1) {
+            if (groupPosition == 1) {
                 imgListGroup.setImageResource(managexx_icon[childPosition]);
             }
             //imgListGroup.setImageResource(icon[groupPosition+childPosition]);
@@ -2824,7 +2821,7 @@
         @Override
         public int getChildrenCount(int groupPosition) {
             return this._listDataChild.get(
-                        this._listDataHeader.get(groupPosition)).size();
+                    this._listDataHeader.get(groupPosition)).size();
         }
 
         @Override
@@ -2875,7 +2872,8 @@
             return true;
         }
     }
-        public void performtagmatchClick(){
+
+    public void performtagmatchClick() {
         if (inventoryBT != null) {
             if (mIsInventoryRunning) {
                 inventoryBT.performClick();
@@ -2891,7 +2889,7 @@
         Resources res = super.getResources();
         Configuration config = new Configuration();
         config.setToDefaults();
-        res.updateConfiguration(config,res.getDisplayMetrics() );
+        res.updateConfiguration(config, res.getDisplayMetrics());
         return res;
 
     }
@@ -2903,6 +2901,7 @@
         super.onConfigurationChanged(newConfig);
 
     }
+
     public NfcAdapter.CreateNdefMessageCallback _onNfcCreateCallback = new NfcAdapter.CreateNdefMessageCallback() {
         @Override
         public NdefMessage createNdefMessage(NfcEvent inputNfcEvent) {
@@ -2915,7 +2914,7 @@
         String text = ("Hello there from another device!\n\n" +
                 "Beam Time: " + System.currentTimeMillis());
         NdefMessage msg = new NdefMessage(
-                new NdefRecord[] { NdefRecord.createMime(
+                new NdefRecord[]{NdefRecord.createMime(
                         "application/com.bluefletch.nfcdemo.mimetype", text.getBytes())
                         /**
                          * The Android Application Record (AAR) is commented out. When a device
@@ -2929,6 +2928,7 @@
                 });
         return msg;
     }
+
     private void ShowPlugInPathChangeDialog() {
         if (!isFinishing()) {
             final Dialog dialog = new Dialog(ActiveDeviceActivity.this);
@@ -2947,7 +2947,7 @@
 
     public void createDWProfile() {
         // MAIN BUNDLE PROPERTIES
-        if((RFIDController.mConnectedReader != null ) && RFIDController.mConnectedReader.getHostName()!= null && RFIDController.mConnectedReader.getHostName().startsWith("MC33")) {
+        if ((RFIDController.mConnectedReader != null) && RFIDController.mConnectedReader.getHostName() != null && RFIDController.mConnectedReader.getHostName().startsWith("MC33")) {
 
 
             Bundle bMain = new Bundle();

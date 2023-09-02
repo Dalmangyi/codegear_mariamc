@@ -41,7 +41,6 @@ public class PairOperationsFragment extends Fragment {
 
     private ViewPager viewPager;
     private PairOperationAdapter mAdapter;
-    private ActionBar actionBar;
     TabLayout tabLayout;
     static Dialog scan_and_pair_help;
     LinearLayout scanAndPairLayout, BarcodePairLayout;
@@ -73,15 +72,14 @@ public class PairOperationsFragment extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_devicepair, menu);
         //super.onCreateOptionsMenu(menu, inflater);
-        menu.findItem( R.id.action_readerlist).setOnMenuItemClickListener( new MenuItem.OnMenuItemClickListener() {
+        menu.findItem(R.id.action_readerlist).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 String className = getActivity().getClass().getName();
-                if(className.equals("com.codegear.mariamc_rfid.DeviceDiscoverActivity")) {
+                if (className.equals("com.codegear.mariamc_rfid.DeviceDiscoverActivity")) {
                     Fragment fragment = InitReadersListFragment.getInstance();
                     ((DeviceDiscoverActivity) getActivity()).switchToFragment(fragment);
-                }
-                else if(className.equals("com.codegear.mariamc_rfid.ActiveDeviceActivity"))
+                } else if (className.equals("com.codegear.mariamc_rfid.ActiveDeviceActivity"))
                     ((ActiveDeviceActivity) getActivity()).loadNextFragment(READER_LIST_TAB);
                 return true;
 
@@ -92,24 +90,23 @@ public class PairOperationsFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.scan_and_pair_help:
-            {
+            case R.id.scan_and_pair_help: {
                 scan_and_pair_help = new Dialog(getActivity());
                 scan_and_pair_help.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 scan_and_pair_help.setContentView(R.layout.dialog_pair_operations_help);
                 scan_and_pair_help.setCancelable(false);
                 scan_and_pair_help.setCanceledOnTouchOutside(false);
-                scanAndPairLayout = (LinearLayout)scan_and_pair_help. findViewById(R.id.dialogScanAndPairlayout);
+                scanAndPairLayout = (LinearLayout) scan_and_pair_help.findViewById(R.id.dialogScanAndPairlayout);
                 BarcodePairLayout = scan_and_pair_help.findViewById(R.id.CordlessPair);
                 scan_and_pair_help.show();
-                Fragment fragmentInFrame =mAdapter.getFragment(viewPager.getCurrentItem());
+                Fragment fragmentInFrame = mAdapter.getFragment(viewPager.getCurrentItem());
 
-                if (fragmentInFrame instanceof ScanAndPairFragment){
+                if (fragmentInFrame instanceof ScanAndPairFragment) {
                     scanAndPairLayout.setVisibility(View.VISIBLE);
                     BarcodePairLayout.setVisibility(View.GONE);
                 }
 
-                if (fragmentInFrame instanceof ScanBarcodeAndPairFragment){
+                if (fragmentInFrame instanceof ScanBarcodeAndPairFragment) {
                     scanAndPairLayout.setVisibility(View.GONE);
                     BarcodePairLayout.setVisibility(View.VISIBLE);
                 }
@@ -142,7 +139,6 @@ public class PairOperationsFragment extends Fragment {
     }
 
 
-
     @Override
     public void onResume() {
         super.onResume();
@@ -154,7 +150,7 @@ public class PairOperationsFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         // Initialization
         viewPager = (ViewPager) getActivity().findViewById(R.id.pairDevicePager);
-        mAdapter = new PairOperationAdapter(getActivity() , getActivity().getSupportFragmentManager());
+        mAdapter = new PairOperationAdapter(getActivity(), getActivity().getSupportFragmentManager());
         viewPager.setAdapter(mAdapter);
         tabLayout = getActivity().findViewById(R.id.pair_device_tabs);
         tabLayout.setupWithViewPager(viewPager);
@@ -164,30 +160,19 @@ public class PairOperationsFragment extends Fragment {
         mAdapter.notifyDataSetChanged();
 
 
-
         ((DeviceDiscoverActivity) getActivity()).setActionBarTitle(getResources().getString(R.string.device_register));
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-
-//                if(isResumed()) {
-//                    if (getActivity() instanceof DeviceDiscoverActivity)
-//                        ((DeviceDiscoverActivity) getActivity()).setActionBarTitle(mAdapter.getPageTitle(tab.getPosition()).toString());
-//                    if (getActivity() instanceof ActiveDeviceActivity)
-//                        ((ActiveDeviceActivity) getActivity()).setActionBarTitle(mAdapter.getPageTitle(tab.getPosition()).toString());
-//                }
             }
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
-
             }
-
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
-
             }
         });
         mAdapter.notifyDataSetChanged();
@@ -200,17 +185,17 @@ public class PairOperationsFragment extends Fragment {
 
             @Override
             public void onPageSelected(int position) {
-                currentFragment =mAdapter.getFragment(viewPager.getCurrentItem());
+                currentFragment = mAdapter.getFragment(viewPager.getCurrentItem());
                 switch (position) {
                     case 0:
                         //mAdapter.notifyDataSetChanged();
                         break;
                     case 1:
-                     //   mAdapter.notifyDataSetChanged();
+                        //   mAdapter.notifyDataSetChanged();
                         break;
                     case 2:
-                       // Fragment fragment = ScanBarcodeAndPairFragment.newInstance(getActivity(),dialog);
-                        if(isResumed()) {
+                        // Fragment fragment = ScanBarcodeAndPairFragment.newInstance(getActivity(),dialog);
+                        if (isResumed()) {
                             getActivity().getSupportFragmentManager().beginTransaction().addToBackStack(null).commit();
                             getActivity().getSupportFragmentManager().executePendingTransactions();
                             mAdapter.notifyDataSetChanged();
@@ -218,8 +203,8 @@ public class PairOperationsFragment extends Fragment {
 
                         break;
                 }
-              //  getActivity().getSupportFragmentManager().beginTransaction().addToBackStack(null).commit();
-               // getActivity().getSupportFragmentManager().executePendingTransactions();
+                //  getActivity().getSupportFragmentManager().beginTransaction().addToBackStack(null).commit();
+                // getActivity().getSupportFragmentManager().executePendingTransactions();
                 //mAdapter.notifyDataSetChanged();
 
             }
@@ -243,9 +228,9 @@ public class PairOperationsFragment extends Fragment {
     }
 
     public void RFIDReaderAppeared(ReaderDevice device) {
-        if(RFIDController.readersList.contains(device )== false)
+        if (RFIDController.readersList.contains(device) == false)
             RFIDController.readersList.add(device);
-        }
+    }
 
 
 }
