@@ -979,17 +979,6 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler, Navigat
 
                             @Override
                             public void onFailure(Exception exception) {
-
-                                // if( ((OperationFailureException) exception).getResults() == RFIDResults.RFID_OPERATION_IN_PROGRESS ){
-                                //         if (inventoryBT != null) {
-                                //             inventoryBT.setIconResource(R.drawable.ic_play_stop);
-                                //             inventoryBT.setText(R.string.stop);
-                                //          }
-                                //     mIsInventoryRunning = true;
-
-                                //}
-
-                                //Fragment fragment = mActivity.getSupportFragmentManager().findFragmentByTag(TAG_RFID_FRAGMENT);
                                 Fragment fragment = mActivity.getCurrentFragment(RFID_TAB);
                                 if (fragment instanceof ResponseHandlerInterfaces.ResponseStatusHandler)
                                     ((ResponseHandlerInterfaces.ResponseStatusHandler) fragment).handleStatusResponse(((OperationFailureException) exception).getResults());

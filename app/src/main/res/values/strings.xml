@@ -2,8 +2,8 @@
 <resources>
 
     <string name="app_name">123RFID Mobile</string>
-    <string name="action_settings">RFID Settings</string>
-    <string name="rapid_read">Rapid Read</string>
+    <string name="action_settings">RFID 설정</string>
+    <string name="rapid_read">빨리 읽기</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -237,25 +237,25 @@
     <!-- Titles in connection settings -->
     <string name="reader_conn_sett">장치 연결 설정</string>
     <string name="notification_settings">알림 설정</string>
-    <string name="rr_unique_tags_title">UNIQUE TAGS</string>
-    <string name="rr_total_tag_title">TOTAL READS</string>
+    <string name="rr_unique_tags_title">유일한 태그 수</string>
+    <string name="rr_total_tag_title">총 읽은 수</string>
     <string name="rr_unique_tags_title_MM">MISSING TAGS</string>
     <string name="rr_total_tag_title_MM">MATCHING TAGS</string>
-    <string name="rr_read_time_title">READ TIME</string>
-    <string name="rr_read_rate_title">READ RATE</string>
-    <string name="stop_title">STOP</string>
-    <string name="tag_pattern_title">Tag Pattern</string>
-    <string name="password_title">Password</string>
+    <string name="rr_read_time_title">경과 시간</string>
+    <string name="rr_read_rate_title">읽기 속도</string>
+    <string name="stop_title">정지</string>
+    <string name="tag_pattern_title">태그 패턴</string>
+    <string name="password_title">비밀번호</string>
     <string name="memory_bank_title">Memory Bank</string>
     <string name="offset_title">Offset (words)</string>
     <string name="length_title">Length (words)</string>
     <string name="data_title">Data</string>
-    <string name="read_title">READ</string>
-    <string name="write_title">WRITE</string>
+    <string name="read_title">읽기</string>
+    <string name="write_title">쓰기</string>
     <string name="lock_privilege_title">Lock Privilege</string>
-    <string name="lock_title">LOCK</string>
-    <string name="kill_pass_title">Kill Password</string>
-    <string name="kill_title">KILL</string>
+    <string name="lock_title">잠금</string>
+    <string name="kill_pass_title">죽이기 비밀번호</string>
+    <string name="kill_title">죽이기</string>
     <string name="offset_bits_title">Offset (words)</string>
     <string name="target_title">Target</string>
     <string name="action_title">Action</string>
@@ -289,8 +289,8 @@
     <string name="inv_state_title">Inventory State</string>
     <string name="tag_population_title">Tag Population</string>
     <string name="session_title">Session</string>
-    <string name="sled_beeper_title">Sled 호출기</string>
-    <string name="host_beeper_title">Host 호출기</string>
+    <string name="sled_beeper_title">Sled 신호음</string>
+    <string name="host_beeper_title">Host 신호음</string>
     <string name="led_subtitle">Host LED 활성화</string>
     <string name="start_trigger_title">시작 트리거</string>
     <string name="stop_trigger_title">정지 트리거</string>
@@ -302,16 +302,16 @@
     <string name="battery_level_desc">Icon depicting level of battery in the reader</string>
     <string name="battery_percentage_text">0%</string>
     <string name="inv_filter_title">MEMORY BANK</string>
-    <string name="inv_unique_title">UNIQUE TAGS</string>
-    <string name="inv_count_title">TOTAL READS</string>
+    <string name="inv_unique_title">유일한 태그 수</string>
+    <string name="inv_count_title">총 읽은 태그 수</string>
     <string name="save_antenna_power">안테나 전력</string>
     <string name="save_link_profile">링크 프로파일</string>
     <string name="save_seesion">Session</string>
-    <string name="start">START</string>
-    <string name="stop">STOP</string>
-    <string name="start_trigger_released_title">Trigger Released</string>
-    <string name="home_filter">Pre Filters</string>
-    <string name="tag_write">Tag Write</string>
+    <string name="start">시작</string>
+    <string name="stop">정지</string>
+    <string name="start_trigger_released_title">트리거 릴리즈</string>
+    <string name="home_filter">사전 필터</string>
+    <string name="tag_write">태그 쓰기</string>
     <string name="inv_user_memory_title">MEMORY None</string>
     <string name="inv_pc_title">PC</string>
     <string name="inv_rssi_title">RSSI</string>
@@ -337,23 +337,23 @@
     <string name="save_singulation_title">규제</string>
     <string name="save_tag_report_title">태그 리포트</string>
     <string name="save_start_stop_title">시작 \\ 정지 트리거 </string>
-    <string name="save_beeper_title">호출기</string>
+    <string name="save_beeper_title">신호음</string>
     <string name="save_regulatory_title">REGULATORY</string>
     <string name="save_keymapping_title">트리거 키맵핑</string>
     <string name="save_config_batch_mode_title">배치 모드</string>
     <string name="save_dpo_title">전력 관리</string>
     <string name="save_sled_beeper_volume_title">Beeper volume</string>
     <string name="off">끄기</string>
-    <string name="error_disconnected">No Active Connection with Reader</string>
+    <string name="error_disconnected">장치와 활성된 연결이 없습니다.</string>
     <string name="beeper_volume_title">음량</string>
     <string name="title_model">Model</string>
     <string name="title_serial">Serial</string>
     <string name="colon">:</string>
-    <string name="msg_read_succeed">Read succeed</string>
-    <string name="msg_write_succeed">Write succeed</string>
-    <string name="msg_lock_succeed">Lock succeed</string>
-    <string name="msg_kill_succeed">Kill succeed</string>
-    <string name="err_access_op_failed">Tag Write operation Failed</string>
+    <string name="msg_read_succeed">읽기 성공</string>
+    <string name="msg_write_succeed">쓰기 성공</string>
+    <string name="msg_lock_succeed">잠금 성공</string>
+    <string name="msg_kill_succeed">죽이기 성공</string>
+    <string name="err_access_op_failed">태그 쓰기 작업이 실패했습니다.</string>
     <string name="password_connection_title">Connection password required !</string>
     <string name="hint_password">Password</string>
     <string name="cancel_title">Cancel</string>
@@ -389,7 +389,7 @@
     <string name="batch_mode_title">BT 배치 모드</string>
     <string name="usb_batch_mode_title">USB 배치 모드</string>
     <string name="scan_batch_mode">Scan Batchmode</string>
-    <string name="batch_mode_inventory_title">Inventory is running in batch mode</string>
+    <string name="batch_mode_inventory_title">보관함이 배치모드에서 실행중입니다.</string>
     <string name="tag_report_settings_title">태그 리포트 설정</string>
     <string name="dpo_message_title">동적 전력 최적화는 최고의 배터리 수명을 위해 리더를 구성하고 사전 구성된 설정과 함께 작동합니다. 동적 전력 최적화는 재고 작업에만 작동합니다.</string>
     <string name="batch_mode_running_title">Running in batch mode</string>
@@ -397,7 +397,7 @@
     <string name="tari_title">Tari</string>
     <string name="action_bc">BC Scanning</string>
     <string name="pref_beeper">BeeperPreference</string>
-    <string name="enable_nom_filter_1">Select non matching TAGs</string>
+    <string name="enable_nom_filter_1">일치하지 않는 태그 선택</string>
     <string name="tag_list_match_mode">태그 리스트 매치 모드</string>
     <string name="match_mode">매치 모드</string>
     <string name="bluetooth_config">Bluetooth Configuration</string>
@@ -409,7 +409,7 @@
     <string name="bluetooth_mode">Bluetooth Mode</string>
     <string name="REQUIRES_TAGLIST_CSV">rfid 폴더에 taglist.csv 파일이 필요합니다.</string>
     <string name="PIE_title">PIE</string>
-    <string name="action_locate">Locate Tag</string>
+    <string name="action_locate">태그 찾기</string>
     <string name="invalid_antenna_power">Invalid antenna power value</string>
     <string name="loading_csv">Importing tag list from CSV file</string>
     <string name="failed_settings">BrandId 설정을 적용하지 못했습니다.</string>
@@ -450,15 +450,16 @@
     <string name="datawedge_intent_key_data">com.symbol.datawedge.data_string</string>
     <string name="warning_title_ukrain_l">Warning:</string>
     <string name="warning_text_ukrain_l">User license required for 2W power mode.</string>
-    <string name="action_inventory">Inventory</string>
+    <string name="action_inventory">보관함</string>
+
     <!-- Items for MultiTag Locate  -->
-    <string name="multiTag_locate_error_no_data_loaded">No Tag Item loaded</string>
-    <string name="multiTag_locate_error_operation_running">MultiTag locationing is currently running</string>
+    <string name="multiTag_locate_error_no_data_loaded">로드된 태그 항목 없음</string>
+    <string name="multiTag_locate_error_operation_running">MultiTag 위치 확인이 현재 실행 중입니다.</string>
     <string name="multiTag_locate_add_item_success">Add Tag Item succesfully</string>
     <string name="multiTag_locate_add_item_failed">Add Tag Item failed</string>
     <string name="multiTag_locate_delete_item_success">Delete Tag Item succesfully</string>
     <string name="multiTag_locate_delete_item_failed">Delete Tag Item failed</string>
-    <string name="warning_bt_enable_on_sled">Turn on Bluetooth on sled Device</string>
+    <string name="warning_bt_enable_on_sled">슬레드 장치에서 블루투스 켜주세요</string>
     <string name="title_activity_home">Scanner Control</string>
 
 
@@ -511,11 +512,11 @@
     <string name="information">INFORMATION</string>
     <string name="id">ID</string>
     <string name="name">Name</string>
-    <string name="beeper_volume">호출기 음량</string>
-    <string name="low">Low</string>
+    <string name="beeper_volume">신호음 음량</string>
+    <string name="low">낮음</string>
+    <string name="medium">중간</string>
+    <string name="high">높음</string>
     <string name="save_image">Save Image</string>
-    <string name="medium">Medium</string>
-    <string name="high">High</string>
     <string name="beeper_frequency">BEEPER FREQUENCY</string>
     <string name="green_led_control">Green LED</string>
     <string name="amber_led_control">Amber/Blue LED</string>
@@ -531,7 +532,7 @@
     <string name="code39">Code 39</string>
     <string name="code93">Code 93</string>
     <string name="code11">Code 11</string>
-    <string name="beeper">호출기</string>
+    <string name="beeper">신호음</string>
     <string name="symbologies">바코드 기호</string>
     <string name="persist_settings">   지속 설정</string>
     <string name="iso_file">   Received data in ISO format</string>
@@ -546,7 +547,7 @@
     <string name="live_Weight">Live Weight :</string>
 
 
-    <string name="clearList">CLEAR LIST</string>
+    <string name="clearList">리스트 초기화</string>
     <string name="scale">Scale</string>
     <string name="GS1128">GS1-128</string>
     <string name="ok">확인</string>
@@ -624,7 +625,7 @@
     <string name="bat_serial">Serial Number:</string>
     <string name="bat_design_cap">Design Capacity:</string>
     <string name="bat_state_of_health">State of Health:</string>
-    <string name="battery_life_stat">Battery Life Statistics</string>
+    <string name="battery_life_stat">배터리 수명 통계</string>
     <string name="bat_charge_cycles_consumed">Charge Cycles Consumed:</string>
     <string name="battery_status">Battery Status</string>
     <string name="bat_full_charge_cap">Full Charge Capacity:</string>
@@ -759,8 +760,8 @@
     <string name="action_scan">Scan View</string>
     <string name="title_nfc_pair">Pair</string>
     <string name="title_nfc_instruction">Tap NFC Tag</string>
-    <string name="scanTrigger">Scan</string>
-    <string name="batch_request">Batch Request</string>
+    <string name="scanTrigger">스캔</string>
+    <string name="batch_request">배치 요청</string>
     <string name="factory_reset">공장 초기화를 수행하면 저장된 설정이 모두 삭제되고 장치가 다시 시작됩니다. 지역을 다시 설정해야 합니다.</string>
     <string name="factory_heading">공장 기본값으로 재설정</string>
     <string name="resetFactory_progress_title">Device Factory Reset</string>
@@ -775,20 +776,20 @@
     <string name="EnableLogging">로깅 설정</string>
     <string name="ApplicationSettings">어플리케이션</string>
     <string name="KeyMapping">트리거 매핑</string>
-    <string name="Logger">Logger</string>
+    <string name="Logger">로거</string>
     <string name="Realtime">실시간 로그 활성화</string>
     <string name="NGEErrorlogs">NGE 에러 로그 활성화</string>
     <string name="NGEEventlogs">NGE 이벤트 로그 활성화</string>
     <string name="NGEPacketlogs">NGE 패킷 로그 활성화</string>
-    <string name="InternalRamLogs">램(RAM)에서 로그 검색</string>
-    <string name="InternalFlashLogs">플래쉬(Flash)에서 로그 검색</string>
+    <string name="InternalRamLogs">램(RAM)에서\n로그 검색</string>
+    <string name="InternalFlashLogs">플래쉬(Flash)에서\n로그 검색</string>
     <string name="ApplicationLogger">어플리케이션</string>
     <string name="Enable">디버그 로그 활성화</string>
     <string name="Export_Logs">Export Logs</string>
     <string name="sdkversiontitle">SDK 버전:</string>
     <string name="scannerversiontitle">스캐너 버전:</string>
     <string name="title_empty_readers">전자이표</string>
-    <string name="batterylife">Battery Life</string>
+    <string name="batterylife">배터리 수명</string>
     <string name="disconnectrfid">Disconnect RFIDXX</string>
     <string name="serial_no">시리얼번호 보기</string>
     <string name="readermodel">MODEL: %1$s</string>
@@ -816,14 +817,14 @@
 
 
     <string name="title_activity_navigation_help">NavigationHelpActivity</string>
-    <string name="err_read_access_op_failed">Tag Read operation Failed</string>
+    <string name="err_read_access_op_failed">태그 읽기 작업이 실패했습니다.</string>
     <string name="update_failed_low_battery_level">(배터리 비율이 20% 미만입니다.)</string>
     <string name="update_failed_commands_are_out_of_sync">(명령이 동기화되지 않았습니다.)</string>
     <string name="update_failed_has_overlapping_address">(펌웨어에 중복된 주소가 있습니다.)</string>
     <string name="update_failed_load_count_error">(로드 횟수 오류)</string>
     <string name="wificonnectdetails">\"Would you like to share access to \n %1$s with your \n %2$s reader?</string>
-    <string name="scan_settings">Scan Settings</string>
-    <string name="scan_adv__settings">Advance Scan Settings</string>
+    <string name="scan_settings">스캔 설정</string>
+    <string name="scan_adv__settings">고급 스캔 설정</string>
     <string name="DeviceReset">기기 초기화</string>
     <string name="nonPremium">This feature is supported not supported for this device </string>
     <string name="network_ip_Config">Network IP Config</string>

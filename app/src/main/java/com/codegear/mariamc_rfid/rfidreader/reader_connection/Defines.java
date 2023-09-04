@@ -16,17 +16,17 @@ public final class Defines {
 
 
     /// Strings
-    public static final String INFO_ALREADY_CONNECTED_STR = "RFD8500 already connected!";
-    public static final String INFO_ALREADY_PAIRED_CONNECTING_STR = "RFD8500 already paired! Connecting";
-    public static final String INFO_PAIRING = "Pairing with ";
-    public static final String INFO_DONE_PAIRING_CONNECTING_STR = "Pairing done. Connecting";
-    public static final String SUCCESS_CONNECTING_DONE_STR = "SUCCESS - Connecting done.";
-    public static final String CONFIRM_CONNECTION_ACTION_STR = "Please confirm connection by pressing Yellow Trigger button on RFD8500!";
-    public static final String INFO_CONNECTING_ABORTED_STR = "INFO - Connecting aborted.";
-    public static final String INFO_CONNECTING_TIMED_OUT_STR = "INFO - Connecting timed out.";
-    public static final String ERROR_CONNECTING_FAILED_STR = "ERROR - Connecting failed!";
-    public static final String ERROR_PAIRING_FAILED_STR = "ERROR - Pairing failed!";
-    public static final String ERROR_PAIRING_FAILED_TIMEOUT_STR = "ERROR - Pairing failed (timeout)!";
+    public static final String INFO_ALREADY_CONNECTED_STR = "RFD8500이 이미 연결되어 있습니다!";
+    public static final String INFO_ALREADY_PAIRED_CONNECTING_STR = "RFD8500이 이미 페어링되었습니다! 연결 중";
+    public static final String INFO_PAIRING = "페어링 ";
+    public static final String INFO_DONE_PAIRING_CONNECTING_STR = "페어링 완료, 연결중";
+    public static final String SUCCESS_CONNECTING_DONE_STR = "성공 - 연결 완료";
+    public static final String CONFIRM_CONNECTION_ACTION_STR = "RFD8500의 노란색 트리거 버튼을 눌러 연결을 확인해 주세요!";
+    public static final String INFO_CONNECTING_ABORTED_STR = "정보 - 연결이 중단됨";
+    public static final String INFO_CONNECTING_TIMED_OUT_STR = "정보 - 연결 시간이 초과됨";
+    public static final String ERROR_CONNECTING_FAILED_STR = "에러 - 연결 실패!";
+    public static final String ERROR_PAIRING_FAILED_STR = "에러 - 페어링 실패!";
+    public static final String ERROR_PAIRING_FAILED_TIMEOUT_STR = "에러 - 페어링 실패! (타임아웃)";
 
     public static final int BT_ADDRESS_LENGTH = 12;
 }

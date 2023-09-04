@@ -4,9 +4,11 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
-import 	androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.PagerAdapter;
+
 import android.util.Log;
 import android.view.ViewGroup;
+
 import java.util.HashMap;
 
 /**
@@ -29,8 +31,7 @@ public class AccessOperationsAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public Fragment getItem(int index) {
-        if (currentlyActiveFragments == null)
-            currentlyActiveFragments = new HashMap<>();
+        if (currentlyActiveFragments == null) currentlyActiveFragments = new HashMap<>();
 
         Fragment fragment;
 
@@ -64,10 +65,8 @@ public class AccessOperationsAdapter extends FragmentStatePagerAdapter {
      * @return - {@link androidx.core.app.Fragment} at the given index
      */
     public Fragment getFragment(int key) {
-        if (currentlyActiveFragments != null)
-            return currentlyActiveFragments.get(key);
-        else
-            return null;
+        if (currentlyActiveFragments != null) return currentlyActiveFragments.get(key);
+        else return null;
     }
 
     @Override
@@ -94,7 +93,7 @@ public class AccessOperationsAdapter extends FragmentStatePagerAdapter {
     @Nullable
     @Override
     public CharSequence getPageTitle(int position) {
-        String[] tabs = {"Read \\ Write", "Lock", "Kill"};
+        String[] tabs = {"읽기 \\ 쓰기", "잠금", "Kill"};
         return tabs[position];
     }
 }

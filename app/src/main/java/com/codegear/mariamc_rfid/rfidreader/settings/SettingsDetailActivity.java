@@ -90,7 +90,7 @@ public class SettingsDetailActivity extends AppCompatActivity implements
     protected void startFragment(Intent intent) {
         Fragment fragment = null;
         if(RFIDController.mConnectedReader == null ){
-            Toast.makeText(this, "Reader not connected", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "연결된 장치가 없습니다.", Toast.LENGTH_SHORT).show();
             finish();
             return;
         }

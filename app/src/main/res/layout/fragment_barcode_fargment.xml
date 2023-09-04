@@ -18,7 +18,7 @@
             android:id="@+id/barcodesListCount"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:text="Barcodes Scanned: 0"
+            android:text="스캔된 바코드: 0"
             android:gravity="center_vertical"
             android:layout_marginLeft="18dp" />
     </TableRow>

@@ -293,7 +293,7 @@ public class BeeperSettingsActivity extends BaseActivity implements View.OnClick
             dismissDailog();
             if(!b){
                 if(opcode==DCSSDKDefs.DCSSDK_COMMAND_OPCODE.DCSSDK_RSM_ATTR_GET)
-                  Toast.makeText(BeeperSettingsActivity.this, "Unable to fetch beeper settings", Toast.LENGTH_SHORT).show();
+                  Toast.makeText(BeeperSettingsActivity.this, "신호음 설정을 가져올 수 없습니다.", Toast.LENGTH_SHORT).show();
                 else if(opcode==DCSSDKDefs.DCSSDK_COMMAND_OPCODE.DCSSDK_RSM_ATTR_SET){
                     Toast.makeText(BeeperSettingsActivity.this, "작업을 수행할 수 없습니다.", Toast.LENGTH_SHORT).show();
                 }

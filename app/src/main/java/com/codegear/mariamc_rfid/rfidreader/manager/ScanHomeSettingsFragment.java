@@ -27,11 +27,10 @@ public class ScanHomeSettingsFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         ScanHomeSettingsFragmentView = inflater.inflate(R.layout.fragment_scan_main_settings, container, false);
-        ((ActiveDeviceActivity)getActivity()).getSupportActionBar().setTitle("SCAN Settings");
+        ((ActiveDeviceActivity) getActivity()).getSupportActionBar().setTitle("스캔 설정");
         return ScanHomeSettingsFragmentView;
     }
 }

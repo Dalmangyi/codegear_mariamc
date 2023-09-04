@@ -33,8 +33,7 @@ public class LocateOperationAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public Fragment getItem(int index) {
-        if (currentlyActiveFragments == null)
-            currentlyActiveFragments = new HashMap<>();
+        if (currentlyActiveFragments == null) currentlyActiveFragments = new HashMap<>();
 
         Fragment fragment;
 
@@ -64,10 +63,8 @@ public class LocateOperationAdapter extends FragmentStatePagerAdapter {
      * @return - {@link Fragment} at the given index
      */
     public Fragment getFragment(int key) {
-        if (currentlyActiveFragments != null)
-            return currentlyActiveFragments.get(key);
-        else
-            return null;
+        if (currentlyActiveFragments != null) return currentlyActiveFragments.get(key);
+        else return null;
     }
 
     @Override
@@ -94,7 +91,7 @@ public class LocateOperationAdapter extends FragmentStatePagerAdapter {
     @Nullable
     @Override
     public CharSequence getPageTitle(int position) {
-        String[] tabs = {"Single Tag", "Multi Tag"};
+        String[] tabs = {"단일 태그", "다중 태그"};
         return tabs[position];
     }
 }

@@ -54,8 +54,7 @@ public class AccessOperationsKillFragment extends Fragment implements AccessOper
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_access_operations_kill, container, false);
     }
@@ -70,8 +69,7 @@ public class AccessOperationsKillFragment extends Fragment implements AccessOper
         super.onActivityCreated(savedInstanceState);
         tagIDField = ((AutoCompleteTextView) getActivity().findViewById(R.id.accessKillTagID));
         RFIDController.getInstance().updateTagIDs();
-        adapter = new ArrayAdapter<>(getActivity(),
-                android.R.layout.simple_dropdown_item_1line, Application.tagIDs);
+        adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_dropdown_item_1line, Application.tagIDs);
         tagIDField.setAdapter(adapter);
         if (RFIDController.asciiMode == true) {
             tagIDField.setFilters(new InputFilter[]{filter});
@@ -82,8 +80,7 @@ public class AccessOperationsKillFragment extends Fragment implements AccessOper
         if (RFIDController.accessControlTag != null) {
             if (RFIDController.asciiMode == true)
                 tagIDField.setText(hextoascii.convert(RFIDController.accessControlTag));
-            else
-                tagIDField.setText(RFIDController.accessControlTag);
+            else tagIDField.setText(RFIDController.accessControlTag);
         }
     }
 
@@ -112,8 +109,7 @@ public class AccessOperationsKillFragment extends Fragment implements AccessOper
         if (isVisible() && tagIDField != null) {
             if (RFIDController.asciiMode == true)
                 RFIDController.accessControlTag = asciitohex.convert(tagIDField.getText().toString());
-            else
-                RFIDController.accessControlTag = tagIDField.getText().toString();
+            else RFIDController.accessControlTag = tagIDField.getText().toString();
         }
     }
 
@@ -122,8 +118,7 @@ public class AccessOperationsKillFragment extends Fragment implements AccessOper
         if (RFIDController.accessControlTag != null && tagIDField != null) {
             if (RFIDController.asciiMode == true)
                 tagIDField.setText(hextoascii.convert(RFIDController.accessControlTag));
-            else
-                tagIDField.setText(RFIDController.accessControlTag);
+            else tagIDField.setText(RFIDController.accessControlTag);
         }
     }
 }

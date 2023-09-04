@@ -77,7 +77,7 @@ public class LoggerFragment extends Fragment {
         final View rootview = inflater.inflate(R.layout.logger_fragment, container, false);
         mContext = rootview.getContext();
         if (RFIDController.mConnectedReader == null) {
-            Toast.makeText(getActivity(), "Reader not connected", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "연결된 장치가 없습니다.", Toast.LENGTH_SHORT).show();
         }
 
         // setting switch button for application debug logging

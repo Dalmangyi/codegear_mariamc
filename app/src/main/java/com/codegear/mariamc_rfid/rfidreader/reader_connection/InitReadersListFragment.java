@@ -931,7 +931,7 @@ public class InitReadersListFragment extends Fragment implements IRFIDConnectTas
         if (progressDialog != null && progressDialog.isShowing()) {
             progressDialog.dismiss();
         }
-        progressDialog = new CustomProgressDialog(activity, "" + connectingDevice.getName() + " 장치에 연결중...");
+        progressDialog = new CustomProgressDialog(activity, "" + connectingDevice.getName() + " 연결중...");
         progressDialog.show();
     }
 
@@ -960,7 +960,7 @@ public class InitReadersListFragment extends Fragment implements IRFIDConnectTas
                 Log.e(TAG, e.getStackTrace()[0].toString());
             }
         }
-        deviceConnectTask = new DeviceConnectTask((AppCompatActivity) getActivity(), readerDevice, "" + readerDevice.getName()+" 장치에 연결중...", password, handlers);
+        deviceConnectTask = new DeviceConnectTask((AppCompatActivity) getActivity(), readerDevice, "" + readerDevice.getName()+" 연결중...", password, handlers);
 
         deviceConnectTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }

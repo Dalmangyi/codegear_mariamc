@@ -426,7 +426,7 @@ public class ActiveScannerActivity extends BaseActivity implements  /*Navigation
         if (barcodeFargment != null) {
             barcodeFargment.showBarCode();
             barcodeCount = (TextView) findViewById(R.id.barcodesListCount);
-            barcodeCount.setText("Barcodes Scanned: " + Integer.toString(++iBarcodeCount));
+            barcodeCount.setText("스캔된 바코드: " + Integer.toString(++iBarcodeCount));
             if (iBarcodeCount > 0) {
                 Button btnClear = (Button) findViewById(R.id.btnClearList);
                 btnClear.setEnabled(true);
@@ -455,7 +455,7 @@ public class ActiveScannerActivity extends BaseActivity implements  /*Navigation
             barcodeFargment.clearList();
             barcodeCount = (TextView)findViewById(R.id.barcodesListCount);
             iBarcodeCount = 0;
-            barcodeCount.setText("Barcodes Scanned: " + Integer.toString(iBarcodeCount));
+            barcodeCount.setText("스캔된 바코드: " + Integer.toString(iBarcodeCount));
             Button btnClear = (Button)findViewById(R.id.btnClearList);
             btnClear.setEnabled(false);
         }
@@ -539,7 +539,7 @@ public class ActiveScannerActivity extends BaseActivity implements  /*Navigation
         if (barcodeQueue.size() != iBarcodeCount) {
             barcodeCount = (TextView) findViewById(R.id.barcodesListCount);
             iBarcodeCount = barcodeQueue.size();
-            barcodeCount.setText("Barcodes Scanned: " + Integer.toString(iBarcodeCount));
+            barcodeCount.setText("스캔된 바코드: " + Integer.toString(iBarcodeCount));
             if(iBarcodeCount>0){
                 Button btnClear = (Button)findViewById(R.id.btnClearList);
                 btnClear.setEnabled(true);

@@ -400,7 +400,7 @@ public class ScanAndPairFragment extends DialogFragment implements GoogleApiClie
     }*/
 
     public void connectDevice(String rdDevice, boolean b) {
-        Toast.makeText(getContext(), "Device ready to connect:" + rdDevice, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "장치 연결 준비: " + rdDevice, Toast.LENGTH_SHORT).show();
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         if(activity instanceof DeviceDiscoverActivity){
             Fragment fragment = InitReadersListFragment.getInstance();

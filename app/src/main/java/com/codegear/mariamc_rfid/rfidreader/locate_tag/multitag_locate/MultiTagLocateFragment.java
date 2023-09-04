@@ -55,8 +55,7 @@ import java.util.concurrent.FutureTask;
  * Created by PKF847 on 7/31/2017.
  */
 
-public class MultiTagLocateFragment extends Fragment implements ResponseHandlerInterfaces.TriggerEventHandler, ResponseHandlerInterfaces.ResponseStatusHandler,
-        View.OnClickListener {
+public class MultiTagLocateFragment extends Fragment implements ResponseHandlerInterfaces.TriggerEventHandler, ResponseHandlerInterfaces.ResponseStatusHandler, View.OnClickListener {
     private static final int LOCATE_TAG_CSV_IMPORT = 0;
     private MultiTagLocateInventoryAdapter tagListAdapter;
     private static final String TAG = "MultiTagLocateFragment";
@@ -86,7 +85,6 @@ public class MultiTagLocateFragment extends Fragment implements ResponseHandlerI
     public MultiTagLocateFragment() {
         // Required empty public constructor
     }
-
 
 
     /**
@@ -136,11 +134,10 @@ public class MultiTagLocateFragment extends Fragment implements ResponseHandlerI
         listView = (RecyclerView) getActivity().findViewById(R.id.inventoryList);
         listView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        searchTagListAdapter = new ArrayAdapter<>(getActivity(),
-                android.R.layout.simple_dropdown_item_1line, Application.multiTagLocateTagIDs);
+        searchTagListAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_dropdown_item_1line, Application.multiTagLocateTagIDs);
         tagItemView.setAdapter(searchTagListAdapter);
 
-        if (Application.locateTag != null && Application.multiTagLocateTagListMap.containsKey(Application.locateTag)){
+        if (Application.locateTag != null && Application.multiTagLocateTagListMap.containsKey(Application.locateTag)) {
             if (RFIDController.asciiMode == true) {
                 tagItemView.setText(hextoascii.convert(Application.locateTag));
             } else {
@@ -156,9 +153,9 @@ public class MultiTagLocateFragment extends Fragment implements ResponseHandlerI
             enableGUIComponents(true);
         }
         cacheLocateTagfile = new File(getActivity().getCacheDir().getAbsolutePath(), Application.CACHE_LOCATE_TAG_FILE);
-        if(Application.MultiTagInventoryMultiSelect == true) {
+        if (Application.MultiTagInventoryMultiSelect == true) {
             multiLocateTagImportFromInventory();
-        }else {
+        } else {
             if (cacheLocateTagfile.exists()) {
                 multiTagLocatPreImportList(cacheLocateTagfile);
             } else {
@@ -186,7 +183,7 @@ public class MultiTagLocateFragment extends Fragment implements ResponseHandlerI
             //enableGUIComponents(true);
 
             if (!isDeviceDisconnected) { //called because of RESET button event
-                if (Application.multiTagLocateTagListExist || Application.multiTagLocatelastTag ) {
+                if (Application.multiTagLocateTagListExist || Application.multiTagLocatelastTag) {
                     Application.multiTagLocateActiveTagItemList.clear();
                     //Application.multiTagLocateTagIDs.clear();
 
@@ -199,9 +196,9 @@ public class MultiTagLocateFragment extends Fragment implements ResponseHandlerI
                     try {
                         RFIDController.mConnectedReader.Actions.MultiTagLocate.purgeItemList();
                         RFIDController.mConnectedReader.Actions.MultiTagLocate.importItemList(Application.multiTagLocateTagMap);
-                        if(Application.multiTagLocatelastTag == true) {
-                            Application.multiTagLocateTagListExist =true;
-                            Application.multiTagLocatelastTag =false;
+                        if (Application.multiTagLocatelastTag == true) {
+                            Application.multiTagLocateTagListExist = true;
+                            Application.multiTagLocatelastTag = false;
 
                         }
                     } catch (InvalidUsageException e) {
@@ -213,9 +210,9 @@ public class MultiTagLocateFragment extends Fragment implements ResponseHandlerI
                     listView.setAdapter(null);
                     updateTagItemList();
                 }
-            }else{
+            } else {
 
-                if (Application.multiTagLocateTagListExist || Application.multiTagLocatelastTag ) {
+                if (Application.multiTagLocateTagListExist || Application.multiTagLocatelastTag) {
                     Application.multiTagLocateActiveTagItemList.clear();
                     //Application.multiTagLocateTagIDs.clear();
 
@@ -243,11 +240,11 @@ public class MultiTagLocateFragment extends Fragment implements ResponseHandlerI
     @Override
     public void triggerPressEventRecieved() {
         if (!Application.mIsMultiTagLocatingRunning) {
-           getActivity().runOnUiThread(new Runnable() {
+            getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
 
-                        ((ActiveDeviceActivity) getActivity()).multiTagLocateStartOrStop(locateButton);
+                    ((ActiveDeviceActivity) getActivity()).multiTagLocateStartOrStop(locateButton);
                 }
             });
         }
@@ -255,12 +252,12 @@ public class MultiTagLocateFragment extends Fragment implements ResponseHandlerI
 
     @Override
     public void triggerReleaseEventRecieved() {
-        if (Application.mIsMultiTagLocatingRunning ) {
+        if (Application.mIsMultiTagLocatingRunning) {
             getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                   //locateButton.setImageResource(R.drawable.ic_play_stop);
-                     ((ActiveDeviceActivity) getActivity()).multiTagLocateStartOrStop(locateButton);
+                    //locateButton.setImageResource(R.drawable.ic_play_stop);
+                    ((ActiveDeviceActivity) getActivity()).multiTagLocateStartOrStop(locateButton);
                 }
             });
         }
@@ -283,7 +280,7 @@ public class MultiTagLocateFragment extends Fragment implements ResponseHandlerI
     }
 
     public void updateTagItemList() {
-        if(listView.getAdapter() == null) {
+        if (listView.getAdapter() == null) {
             tagListAdapter = new MultiTagLocateInventoryAdapter(onItemClickListener);
             listView.setAdapter(tagListAdapter);
         }
@@ -305,8 +302,8 @@ public class MultiTagLocateFragment extends Fragment implements ResponseHandlerI
             executorService.execute(importTask);
             while (true) {
                 if (importTask.isDone()) {
-                    Application.MultiTagLocateTagListImport=true;
-                    Application.MultiTagInventoryMultiSelect=false;
+                    Application.MultiTagLocateTagListImport = true;
+                    Application.MultiTagInventoryMultiSelect = false;
                     listView.setAdapter(null);
                     updateTagItemList();
                     executorService.shutdown();
@@ -315,25 +312,25 @@ public class MultiTagLocateFragment extends Fragment implements ResponseHandlerI
             }
         }
     }
-    private void multiLocateTagImportFromInventory(){
 
-        if(Application.multiTagLocateTagListMap.size() > 0)
-        {
+    private void multiLocateTagImportFromInventory() {
+
+        if (Application.multiTagLocateTagListMap.size() > 0) {
             Application.multiTagLocateActiveTagItemList = new ArrayList<MultiTagLocateListItem>(Application.multiTagLocateTagListMap.values());
             Application.multiTagLocateTagIDs = new ArrayList<String>(Application.multiTagLocateTagListMap.keySet());
             Application.multiTagLocateTagListExist = true;
             if (mConnectedReader != null && mConnectedReader.isConnected()) {
-                if(Application.multiTagLocateTagListExist) {
+                if (Application.multiTagLocateTagListExist) {
                     try {
                         mConnectedReader.Actions.MultiTagLocate.purgeItemList();
                         mConnectedReader.Actions.MultiTagLocate.importItemList(Application.multiTagLocateTagMap);
                     } catch (OperationFailureException e) {
-                       Log.d(TAG,  "Returned SDK Exception");
+                        Log.d(TAG, "Returned SDK Exception");
                     } catch (InvalidUsageException e) {
-                       Log.d(TAG,  "Returned SDK Exception");
+                        Log.d(TAG, "Returned SDK Exception");
                     }
                 }
-                Application.MultiTagLocateTagListImport=false;
+                Application.MultiTagLocateTagListImport = false;
                 listView.setAdapter(null);
                 updateTagItemList();
             }
@@ -346,11 +343,7 @@ public class MultiTagLocateFragment extends Fragment implements ResponseHandlerI
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.multi_tag_locate_import:
-                if(!Application.mIsMultiTagLocatingRunning) {
-                  /*  Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-                    intent.addCategory(Intent.CATEGORY_OPENABLE);
-                    intent.setType("text/*");
-                    startActivityForResult(Intent.createChooser(intent, "ChooseFile to upload"), LOCATE_TAG_CSV_IMPORT);*/
+                if (!Application.mIsMultiTagLocatingRunning) {
 
                     Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
                     intent.addCategory(Intent.CATEGORY_OPENABLE);
@@ -376,62 +369,59 @@ public class MultiTagLocateFragment extends Fragment implements ResponseHandlerI
         // TODO Auto-generated method stub
 
         if (resultCode == RESULT_OK && requestCode == LOCATE_TAG_CSV_IMPORT) {
-            if(data == null) return;
+            if (data == null) return;
             Uri uri = data.getData();
             importLocateTagList(String.valueOf(uri));
         }
     }
 
 
-    ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(
-            new ActivityResultContracts.StartActivityForResult(),
-            new ActivityResultCallback<ActivityResult>() {
-                @Override
-                public void onActivityResult(ActivityResult result) {
-                    File cacheMatchModeTagFile = new File(getActivity().getCacheDir().getAbsolutePath(), Application.CACHE_TAGLIST_MATCH_MODE_FILE);
-                    if (cacheMatchModeTagFile.exists()) {
-                        cacheMatchModeTagFile.delete();
-                    }
+    ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
+        @Override
+        public void onActivityResult(ActivityResult result) {
+            File cacheMatchModeTagFile = new File(getActivity().getCacheDir().getAbsolutePath(), Application.CACHE_TAGLIST_MATCH_MODE_FILE);
+            if (cacheMatchModeTagFile.exists()) {
+                cacheMatchModeTagFile.delete();
+            }
 
-                    if (result.getResultCode() == RESULT_OK ) {
-                        //    Uri uri = data.getData();
+            if (result.getResultCode() == RESULT_OK) {
+                //    Uri uri = data.getData();
 
-                        Intent data = result.getData();
-                        Uri uri =  data.getData();
-                        if( data == null) {
-                            Toast.makeText(getActivity(),"No File selected ,using old CSV file for TAGLIST_MATCH_MODE ",Toast.LENGTH_SHORT).show();
-                            return;
-                        }
-                        if (data != null) {
-                            if (data.getData().toString().contains("content://com.android.providers")) {
-                                getActivity().runOnUiThread(this::ShowPlugInPathChangeDialog);
-                            }
-
-                            else{
-                                importLocateTagList(String.valueOf(uri));
-                            }
-                        }
+                Intent data = result.getData();
+                Uri uri = data.getData();
+                if (data == null) {
+                    Toast.makeText(getActivity(), "선택한 파일이 없습니다. TAGLIST_MATCH_MODE에 이전 CSV 파일을 사용합니다.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (data != null) {
+                    if (data.getData().toString().contains("content://com.android.providers")) {
+                        getActivity().runOnUiThread(this::ShowPlugInPathChangeDialog);
+                    } else {
+                        importLocateTagList(String.valueOf(uri));
                     }
                 }
-                private void ShowPlugInPathChangeDialog() {
-                    if (!getActivity().isFinishing()) {
-                        final Dialog dialog = new Dialog(getActivity());
-                        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                        dialog.setContentView(R.layout.dialog_taglistmatchmode_path);
-                        dialog.setCancelable(false);
-                        dialog.setCanceledOnTouchOutside(false);
-                        dialog.show();
-                        TextView declineButton = (TextView) dialog.findViewById(R.id.btn_ok);
-                        declineButton.setOnClickListener(v -> dialog.dismiss());
-                    }
-                }
+            }
+        }
 
-            });
+        private void ShowPlugInPathChangeDialog() {
+            if (!getActivity().isFinishing()) {
+                final Dialog dialog = new Dialog(getActivity());
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                dialog.setContentView(R.layout.dialog_taglistmatchmode_path);
+                dialog.setCancelable(false);
+                dialog.setCanceledOnTouchOutside(false);
+                dialog.show();
+                TextView declineButton = (TextView) dialog.findViewById(R.id.btn_ok);
+                declineButton.setOnClickListener(v -> dialog.dismiss());
+            }
+        }
+
+    });
 
     private void importLocateTagList(String locateCsvFile) {
         Uri locateCsvUri = Uri.parse(locateCsvFile);
         try {
-            if(cacheLocateTagfile.exists()) {
+            if (cacheLocateTagfile.exists()) {
                 cacheLocateTagfile.delete();
             }
             InputStream in = getActivity().getContentResolver().openInputStream(locateCsvUri);
@@ -445,11 +435,11 @@ public class MultiTagLocateFragment extends Fragment implements ResponseHandlerI
             out.close();
             in.close();
         } catch (FileNotFoundException e) {
-           Log.d(TAG,  "Returned SDK Exception");
+            Log.d(TAG, "Returned SDK Exception");
         } catch (Exception e) {
-           Log.d(TAG,  "Returned SDK Exception");
+            Log.d(TAG, "Returned SDK Exception");
         }
-        if(cacheLocateTagfile.exists()) {
+        if (cacheLocateTagfile.exists()) {
             multiTagLocatPreImportList(cacheLocateTagfile);
             Toast.makeText(getActivity(), R.string.status_success_message, Toast.LENGTH_SHORT).show();
         } else {

@@ -93,8 +93,7 @@ public class SaveConfigurationsFragment extends BackPressedFragment {
         return new SaveConfigurationsFragment();
     }
 
-    public static void replaceFragment(@NonNull FragmentManager fragmentManager,
-                                       @NonNull Fragment fragment, int frameId) {
+    public static void replaceFragment(@NonNull FragmentManager fragmentManager, @NonNull Fragment fragment, int frameId) {
         //   FragmentTransaction transaction = fragmentManager.beginTransaction();
         //   transaction.replace(frameId, fragment);
         //   transaction.disallowAddToBackStack();
@@ -107,8 +106,7 @@ public class SaveConfigurationsFragment extends BackPressedFragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_save_configurations, container, false);
     }
@@ -140,7 +138,7 @@ public class SaveConfigurationsFragment extends BackPressedFragment {
         saveIncChannel = (TextView) getActivity().findViewById(R.id.saveIncChannel);
         saveIncTagSeenCount = (TextView) getActivity().findViewById(R.id.saveIncTagSeenCount);
         savebatchMode = (TextView) getActivity().findViewById(R.id.savebatchModeBT);
-        savebatchModeUSb = (TextView) getActivity().findViewById(R.id.savebatchModeUSB) ;
+        savebatchModeUSb = (TextView) getActivity().findViewById(R.id.savebatchModeUSB);
         saveDPO = (TextView) getActivity().findViewById(R.id.saveDPO);
         reportUniqueTags = (TextView) getActivity().findViewById(R.id.reportUniqueTags);
         startTrigger = (TextView) getActivity().findViewById(R.id.saveStartTrigger);
@@ -173,9 +171,13 @@ public class SaveConfigurationsFragment extends BackPressedFragment {
                     linkProfile.setText(linkedProfiles.get(getSelectedLinkedProfilePosition(RFIDController.antennaRfConfig.getrfModeTableIndex())));
                 }
             } catch (InvalidUsageException e) {
-                if( e!= null && e.getStackTrace().length>0){ Log.e(TAG, e.getStackTrace()[0].toString()); }
+                if (e != null && e.getStackTrace().length > 0) {
+                    Log.e(TAG, e.getStackTrace()[0].toString());
+                }
             } catch (OperationFailureException e) {
-                if( e!= null && e.getStackTrace().length>0){ Log.e(TAG, e.getStackTrace()[0].toString()); }
+                if (e != null && e.getStackTrace().length > 0) {
+                    Log.e(TAG, e.getStackTrace()[0].toString());
+                }
             }
         }
         //Singulation settings detail
@@ -212,39 +214,38 @@ public class SaveConfigurationsFragment extends BackPressedFragment {
                         break;
                 }
             } catch (InvalidUsageException e) {
-                if( e!= null && e.getStackTrace().length>0){ Log.e(TAG, e.getStackTrace()[0].toString()); }
+                if (e != null && e.getStackTrace().length > 0) {
+                    Log.e(TAG, e.getStackTrace()[0].toString());
+                }
             } catch (OperationFailureException e) {
-                if( e!= null && e.getStackTrace().length>0){ Log.e(TAG, e.getStackTrace()[0].toString()); }
+                if (e != null && e.getStackTrace().length > 0) {
+                    Log.e(TAG, e.getStackTrace()[0].toString());
+                }
             }
         }
         //Tag Report settings Details
         if (RFIDController.tagStorageSettings != null) {
             TAG_FIELD[] tag_field = RFIDController.tagStorageSettings.getTagFields();
             for (int idx = 0; idx < tag_field.length; idx++) {
-                if (tag_field[idx] == TAG_FIELD.PEAK_RSSI)
-                    saveIncRSSI.setText(Constants.ON);
-                if (tag_field[idx] == TAG_FIELD.PHASE_INFO)
-                    saveIncPhase.setText(Constants.ON);
-                if (tag_field[idx] == TAG_FIELD.PC)
-                    saveIncPC.setText(Constants.ON);
-                if (tag_field[idx] == TAG_FIELD.CHANNEL_INDEX)
-                    saveIncChannel.setText(Constants.ON);
+                if (tag_field[idx] == TAG_FIELD.PEAK_RSSI) saveIncRSSI.setText(Constants.ON);
+                if (tag_field[idx] == TAG_FIELD.PHASE_INFO) saveIncPhase.setText(Constants.ON);
+                if (tag_field[idx] == TAG_FIELD.PC) saveIncPC.setText(Constants.ON);
+                if (tag_field[idx] == TAG_FIELD.CHANNEL_INDEX) saveIncChannel.setText(Constants.ON);
                 if (tag_field[idx] == TAG_FIELD.TAG_SEEN_COUNT)
                     saveIncTagSeenCount.setText(Constants.ON);
             }
         }
-        if (RFIDController.batchMode != -1 ) {
+        if (RFIDController.batchMode != -1) {
             savebatchMode.setText(getResources().getStringArray(R.array.batch_modes_array)[RFIDController.batchMode]);
         }
-        if(RFIDController.usbBatchMode != -1) {
+        if (RFIDController.usbBatchMode != -1) {
             savebatchModeUSb.setText(getResources().getStringArray(R.array.usb_batch_modes_array)[RFIDController.usbBatchMode]);
         }
         //Power management detail
         if (RFIDController.dynamicPowerSettings != null) {
             if (RFIDController.dynamicPowerSettings.getValue() == 1) {
                 saveDPO.setText(Constants.ON);
-            } else
-                saveDPO.setText(Constants.OFF);
+            } else saveDPO.setText(Constants.OFF);
         }
         //Unique Tag Report Settings
         if (RFIDController.reportUniquetags != null) {
@@ -345,24 +346,24 @@ public class SaveConfigurationsFragment extends BackPressedFragment {
 
 
         } catch (InvalidUsageException e) {
-            if( e!= null && e.getStackTrace().length>0){ Log.e(TAG, e.getStackTrace()[0].toString()); }
+            if (e != null && e.getStackTrace().length > 0) {
+                Log.e(TAG, e.getStackTrace()[0].toString());
+            }
         } catch (OperationFailureException e) {
-            if( e!= null && e.getStackTrace().length>0){ Log.e(TAG, e.getStackTrace()[0].toString()); }
+            if (e != null && e.getStackTrace().length > 0) {
+                Log.e(TAG, e.getStackTrace()[0].toString());
+            }
         }
         if (RFIDController.beeperVolume != null) {
             if (RFIDController.beeperVolume.equals(BEEPER_VOLUME.QUIET_BEEP)) {
                 if (RFIDController.beeperspinner_status != 3)
-                    saveSledBeeperVolume.setText(
-                            getResources().getStringArray(R.array.beeper_volume_array)
-                                    [RFIDController.beeperspinner_status]);
+                    saveSledBeeperVolume.setText(getResources().getStringArray(R.array.beeper_volume_array)[RFIDController.beeperspinner_status]);
 
             } else if (!RFIDController.beeperVolume.equals(BEEPER_VOLUME.QUIET_BEEP)) {
                 if (RFIDController.mConnectedReader != null) {
                     if (RFIDController.mConnectedReader.getHostName().startsWith("MC33")) {
                         saveSledBeeper.setText(Constants.OFF);
-                        saveSledBeeperVolume.setText(
-                                getResources().getStringArray(R.array.beeper_volume_array)
-                                        [RFIDController.beeperVolume.getValue()]);
+                        saveSledBeeperVolume.setText(getResources().getStringArray(R.array.beeper_volume_array)[RFIDController.beeperVolume.getValue()]);
                     }
                 }
             }
@@ -374,39 +375,35 @@ public class SaveConfigurationsFragment extends BackPressedFragment {
                 if (RFIDController.mConnectedReader.Config.getBeeperVolume() != null) {
                     if (RFIDController.mConnectedReader.Config.getBeeperVolume().equals(BEEPER_VOLUME.QUIET_BEEP)) {
                         if (!RFIDController.beeperVolume.equals(BEEPER_VOLUME.QUIET_BEEP)) {
-                            saveSledBeeperVolume.setText(
-                                    getResources().getStringArray(R.array.beeper_volume_array)
-                                            [RFIDController.beeperVolume.getValue()]);
+                            saveSledBeeperVolume.setText(getResources().getStringArray(R.array.beeper_volume_array)[RFIDController.beeperVolume.getValue()]);
 
 
                         } else {
                             if (RFIDController.beeperspinner_status != 3)
-                                saveSledBeeperVolume.setText(
-                                        getResources().getStringArray(R.array.beeper_volume_array)
-                                                [RFIDController.beeperspinner_status]);
+                                saveSledBeeperVolume.setText(getResources().getStringArray(R.array.beeper_volume_array)[RFIDController.beeperspinner_status]);
                         }
                     } else if (!RFIDController.mConnectedReader.Config.getBeeperVolume().equals(BEEPER_VOLUME.QUIET_BEEP)) {
                         if (RFIDController.beeperVolume.equals(BEEPER_VOLUME.QUIET_BEEP)) {
-                            saveSledBeeperVolume.setText(
-                                    getResources().getStringArray(R.array.beeper_volume_array)
-                                            [RFIDController.mConnectedReader.Config.getBeeperVolume().getValue()]);
+                            saveSledBeeperVolume.setText(getResources().getStringArray(R.array.beeper_volume_array)[RFIDController.mConnectedReader.Config.getBeeperVolume().getValue()]);
 
                         } else {
-                            saveSledBeeperVolume.setText(
-                                    getResources().getStringArray(R.array.beeper_volume_array)
-                                            [RFIDController.beeperVolume.getValue()]);
+                            saveSledBeeperVolume.setText(getResources().getStringArray(R.array.beeper_volume_array)[RFIDController.beeperVolume.getValue()]);
 
                         }
                     }
                 }
             }
         } catch (InvalidUsageException e) {
-            if( e!= null && e.getStackTrace().length>0){ Log.e(TAG, e.getStackTrace()[0].toString()); }
+            if (e != null && e.getStackTrace().length > 0) {
+                Log.e(TAG, e.getStackTrace()[0].toString());
+            }
         } catch (OperationFailureException e) {
-            if( e!= null && e.getStackTrace().length>0){ Log.e(TAG, e.getStackTrace()[0].toString()); }
+            if (e != null && e.getStackTrace().length > 0) {
+                Log.e(TAG, e.getStackTrace()[0].toString());
+            }
         }
 
-        try{
+        try {
             //Triggerkeymap settings Detail
             if (RFIDController.mConnectedReader != null) {
                 if ((keylayoutType = RFIDController.mConnectedReader.Config.getKeylayoutType()) != null) {
@@ -418,8 +415,7 @@ public class SaveConfigurationsFragment extends BackPressedFragment {
                     String lower = getKeymap(lowerTval);
 
 
-
-                    triggerKeyMapping.setText("Upper trigger - " + upper +" Lower trigger "+ lower);
+                    triggerKeyMapping.setText("Upper trigger - " + upper + " Lower trigger " + lower);
 /*
                 if(keylayoutType.equals(ENUM_KEYLAYOUT_TYPE.UPPER_TRIGGER_FOR_RFID)){
                     triggerKeyMapping.setText("Upper(RFID)Lower(Host Scan)");
@@ -436,14 +432,18 @@ public class SaveConfigurationsFragment extends BackPressedFragment {
                 }
             }
         } catch (InvalidUsageException e) {
-            if( e!= null && e.getStackTrace().length>0){ Log.e(TAG, e.getStackTrace()[0].toString()); }
+            if (e != null && e.getStackTrace().length > 0) {
+                Log.e(TAG, e.getStackTrace()[0].toString());
+            }
         } catch (OperationFailureException e) {
-            if( e!= null && e.getStackTrace().length>0){ Log.e(TAG, e.getStackTrace()[0].toString()); }
+            if (e != null && e.getStackTrace().length > 0) {
+                Log.e(TAG, e.getStackTrace()[0].toString());
+            }
         }
     }
 
-    private String getKeymap(int pos){
-        switch (pos){
+    private String getKeymap(int pos) {
+        switch (pos) {
             case 0:
                 return "RFID";
 
@@ -532,8 +532,8 @@ public class SaveConfigurationsFragment extends BackPressedFragment {
     public void onBackPressed() {
         AdvancedOptionItemFragment fragment = AdvancedOptionItemFragment.newInstance();
         //replaceFragment(getFragmentManager(), fragment, R.id.settings_content_frame);
-        if(getActivity() instanceof ActiveDeviceActivity)
-            ((ActiveDeviceActivity)getActivity()).loadNextFragment(RFID_ADVANCED_OPTIONS_TAB);
+        if (getActivity() instanceof ActiveDeviceActivity)
+            ((ActiveDeviceActivity) getActivity()).loadNextFragment(RFID_ADVANCED_OPTIONS_TAB);
     }
 
 }

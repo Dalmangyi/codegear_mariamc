@@ -71,10 +71,10 @@
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:text="9999"
-                        app:autoSizeTextType="uniform"
-                        app:autoSizeMinTextSize="4sp"
                         app:autoSizeMaxTextSize="24sp"
-                        app:autoSizeStepGranularity="2sp"/>
+                        app:autoSizeMinTextSize="4sp"
+                        app:autoSizeStepGranularity="2sp"
+                        app:autoSizeTextType="uniform" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -101,10 +101,10 @@
                         android:gravity="center"
                         android:text="9999999"
 
-                        app:autoSizeTextType="uniform"
-                        app:autoSizeMinTextSize="4sp"
                         app:autoSizeMaxTextSize="24sp"
-                        app:autoSizeStepGranularity="2sp"/>
+                        app:autoSizeMinTextSize="4sp"
+                        app:autoSizeStepGranularity="2sp"
+                        app:autoSizeTextType="uniform" />
                 </LinearLayout>
 
 
@@ -119,22 +119,23 @@
                 android:layout_alignParentBottom="true"
                 android:layout_margin="5dp"
                 android:onClick="filterClicked"
-                app:srcCompat="@drawable/ic_nav_filter"
-                android:visibility="gone" />
+                android:visibility="gone"
+                app:srcCompat="@drawable/ic_nav_filter" />
 
 
         </RelativeLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/background">
 
             <androidx.appcompat.widget.SearchView
+                android:id="@+id/search_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:iconifiedByDefault="false"
-                app:queryHint="Search..."
-                android:id="@+id/search_view"/>
+                app:queryHint="검색..." />
         </LinearLayout>
 
 
@@ -158,15 +159,16 @@
                     android:layout_width="0dp"
                     android:layout_gravity="center_vertical"
                     android:layout_weight="80"
-                    android:text="TAG" />
+                    android:text="태그" />
 
                 <TextView
                     style="@style/style_small_font"
                     android:layout_width="0dp"
                     android:layout_gravity="right|center_vertical"
                     android:layout_weight="16"
+                    android:gravity="right"
                     android:paddingLeft="5dp"
-                    android:text="Count" />
+                    android:text="읽은 수" />
 
                 <TextView
                     android:id="@+id/rssiColumnHeader"
@@ -174,6 +176,7 @@
                     android:layout_width="0dp"
                     android:layout_gravity="right|center_vertical"
                     android:layout_weight="13"
+                    android:gravity="right"
                     android:paddingLeft="5dp"
                     android:text="RSSI" />
 
@@ -190,8 +193,8 @@
             android:id="@+id/inventoryList"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:paddingBottom="20dp"
-            android:layout_weight="74" />
+            android:layout_weight="74"
+            android:paddingBottom="20dp" />
 
         <TextView
             android:id="@+id/batchModeInventoryList"
@@ -219,20 +222,20 @@
             android:layout_centerInParent="true"
             android:layout_margin="@dimen/default_margin"
             android:onClick="inventoryStartOrStop"
-            app:backgroundTint="@color/blue"
-            app:iconTint="@color/white"
             android:textColor="@color/white"
-            app:icon="@android:drawable/ic_media_play"/>
+            app:backgroundTint="@color/blue"
+            app:icon="@android:drawable/ic_media_play"
+            app:iconTint="@color/white" />
 
-       <!-- <android.support.v7.widget.AppCompatButton
-            android:id="@+id/bt_clear"
-            style="@style/Widget.AppCompat.Button.Colored"
-            android:layout_width="wrap_content"
-            android:layout_toRightOf="@id/inventoryButton"
-            android:layout_centerVertical="true"
-            android:layout_height="wrap_content"
-            android:text="Clear"
-            android:textSize="15dp" /-->
+        <!-- <android.support.v7.widget.AppCompatButton
+             android:id="@+id/bt_clear"
+             style="@style/Widget.AppCompat.Button.Colored"
+             android:layout_width="wrap_content"
+             android:layout_toRightOf="@id/inventoryButton"
+             android:layout_centerVertical="true"
+             android:layout_height="wrap_content"
+             android:text="Clear"
+             android:textSize="15dp" /-->
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/matchModeButton"
@@ -268,10 +271,7 @@
             android:textColor="#8F8888"
             android:textSize="15dp" />
 
-
     </RelativeLayout>
-
-
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

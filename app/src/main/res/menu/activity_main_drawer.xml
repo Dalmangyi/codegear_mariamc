@@ -7,15 +7,15 @@
         <item
             android:id="@+id/nav_rapidread"
             android:icon="@drawable/ic_nav_rr"
-            android:title="Rapid Read" />
+            android:title="빠른 태그" />
         <item
             android:id="@+id/nav_inventory"
             android:icon="@drawable/ic_nav_inv"
-            android:title="Inventory" />
+            android:title="보관함" />
         <item
             android:id="@+id/nav_locatetag"
             android:icon="@drawable/ic_nav_loc"
-            android:title="Locate Tag" />
+            android:title="태그 찾기" />
         <item
             android:id="@+id/nav_access_control"
             android:icon="@drawable/ic_nav_access"
@@ -23,22 +23,22 @@
         <item
             android:id="@+id/nav_profiles"
             android:icon="@drawable/ic_list_profiles"
-            android:title="Profiles" />
+            android:title="프로파일" />
 
         <item
             android:id="@+id/nav_settings"
             android:icon="@drawable/ic_nav_sett"
-            android:title="Settings" />
+            android:title="설정" />
 
         <item
             android:id="@+id/nav_prefilters"
             android:icon="@drawable/ic_nav_filter"
-            android:title="Pre Filters" />
+            android:title="사전 필터" />
 
         <item
             android:id="@+id/nav_about"
             android:icon="@drawable/ic_action_about"
-            android:title="About" />
+            android:title="소개" />
     </group>
 
 </menu>

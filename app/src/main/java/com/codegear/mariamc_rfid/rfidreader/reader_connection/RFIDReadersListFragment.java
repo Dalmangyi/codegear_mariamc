@@ -1017,7 +1017,7 @@ public class RFIDReadersListFragment extends Fragment implements IRFIDConnectTas
     {
         if (progressDialog == null) {
 
-            progressDialog = new CustomProgressDialog(activity, "" + connectingDevice.getName() +" 장치에 연결중...");
+            progressDialog = new CustomProgressDialog(activity, "" + connectingDevice.getName() +" 연결중...");
             progressDialog.setCancelable(false);
             progressDialog.show();
 

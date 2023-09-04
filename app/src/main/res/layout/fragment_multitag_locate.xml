@@ -27,22 +27,26 @@
 
         <Button
             android:id="@+id/multiTagLocateAddItemButton"
-            style="@style/style_locate_icon"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="8"
             android:padding="5sp"
             android:text="+"
-            android:onClick="multiTagLocateAddTagItem"/>
+            android:textColor="@color/white"
+            android:onClick="multiTagLocateAddTagItem"
+            android:layout_marginRight="5dp"/>
 
         <Button
             android:id="@+id/multiTagLocateDeleteItemButton"
-            style="@style/style_locate_icon"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="8"
             android:padding="5sp"
+            android:layout_marginRight="5dp"
+
             android:text="-"
+            android:textColor="@color/white"
+            app:tint="@color/white"
             android:onClick="multiTagLocateDeleteTagItem"/>
 
     </LinearLayout>
@@ -85,9 +89,13 @@
             android:id="@+id/multiTagLocateButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/default_margin"
+            android:layout_marginStart="@dimen/default_margin"
+            android:layout_marginTop="@dimen/default_margin"
+            android:layout_marginEnd="@dimen/default_margin"
+            android:layout_marginBottom="@dimen/default_margin"
             android:onClick="multiTagLocateStartOrStop"
-            app:backgroundTint="#0066ff"
+            app:backgroundTint="@color/colorPrimary"
+            app:tint="@color/white"
             app:srcCompat="@android:drawable/ic_media_play" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -100,24 +108,27 @@
             android:layout_marginBottom="@dimen/default_margin"
             android:layout_toEndOf="@id/multiTagLocateButton"
             android:onClick="multiTagLocateReset"
-            app:backgroundTint="#0066ff"
+            app:backgroundTint="@color/colorPrimary"
+            app:tint="@color/white"
             app:srcCompat="@drawable/ic_btn_reset" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/multi_tag_locate_import"
-            app:backgroundTint="#0066ff"
+            app:backgroundTint="@color/colorPrimary"
             app:srcCompat="@drawable/ic_btn_add"
+            app:tint="@color/white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/default_margin"
             android:layout_toEndOf="@id/multiTagLocateResetButton"/>
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/multi_tag_locate_clear"
-            app:backgroundTint="#0066ff"
+            app:backgroundTint="@color/colorPrimary"
             app:srcCompat="@drawable/ic_btn_clear"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/default_margin"
+            app:tint="@color/white"
             android:onClick="multiTagLocateClearTagItems"
             android:layout_toEndOf="@id/multi_tag_locate_import"/>
     </RelativeLayout>

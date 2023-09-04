@@ -130,7 +130,7 @@ public class RapidReadFragment extends Fragment implements ResponseHandlerInterf
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 if(RFIDController.mConnectedReader == null ){
-                    Toast.makeText(getContext(), "Reader not connected", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "연결된 장치가 없습니다.", Toast.LENGTH_SHORT).show();
                     return true;
                 }
 

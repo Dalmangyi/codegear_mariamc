@@ -134,7 +134,9 @@ public class RangeGraph extends View {
         mPaint.setStyle(oldStyle);
 
         // Percentage text
-        mPaint.setTextSize(25);
+        float density = getResources().getDisplayMetrics().density;
+        float textSize = Math.round((float) 25 * density);
+        mPaint.setTextSize(textSize);
         mPaint.setTextAlign(Paint.Align.CENTER);
         mPaint.setFakeBoldText(true);
         mPaint.setColor(FONT_COLOR);

@@ -125,7 +125,7 @@ public class KeyRemapFragment extends Fragment {
                     }
                     //  upperTval = position;
                 } else {
-                    Toast.makeText(parent.getContext(), "인벤토리 진행 중에는 트리거 매핑이 허용되지 않습니다.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(parent.getContext(), "보관함 진행 중에는 트리거 매핑이 허용되지 않습니다.", Toast.LENGTH_SHORT).show();
                     //  position = Application.keyLayoutType;
                 }
                 //  upperspinner.setItemChecked(position, true);
@@ -170,7 +170,7 @@ public class KeyRemapFragment extends Fragment {
                     //   lowerTval = position;
 
                 } else {
-                    Toast.makeText(parent.getContext(), "인벤토리 진행 중에는 트리거 매핑이 허용되지 않습니다.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(parent.getContext(), "보관함 진행 중에는 트리거 매핑이 허용되지 않습니다.", Toast.LENGTH_SHORT).show();
 
 
                 }
@@ -209,7 +209,7 @@ public class KeyRemapFragment extends Fragment {
                         Toast.makeText(getContext(), "장치에 재매핑이 설정되지 않았습니다.", Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    Toast.makeText(getContext(), "인벤토리 진행 중에는 트리거 매핑이 허용되지 않습니다.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "보관함 진행 중에는 트리거 매핑이 허용되지 않습니다.", Toast.LENGTH_SHORT).show();
                 }
 
 

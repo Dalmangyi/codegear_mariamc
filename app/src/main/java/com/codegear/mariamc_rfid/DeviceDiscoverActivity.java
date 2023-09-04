@@ -434,7 +434,7 @@ public class DeviceDiscoverActivity extends BaseActivity implements Readers.RFID
                 if(mConnectedReader != null && mConnectedReader.isConnected()) {
                     loadUpdateFirmware(MenuItemCompat.getActionView(item));
                 } else {
-                    Toast.makeText(this, "No device in connected state", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "연결된 장치가 없습니다. ", Toast.LENGTH_SHORT).show();
                 }
                 return true;
 

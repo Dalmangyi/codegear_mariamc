@@ -70,7 +70,7 @@ public class BatteryStatsFragment extends Fragment {
     private void fetchAndUpdateBatteryStats() {
 
         if (RFIDController.mConnectedReader == null) {
-            Toast.makeText(getActivity(), "No device in connected state", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "연결된 장치가 없습니다. ", Toast.LENGTH_SHORT).show();
             return;
         }
 

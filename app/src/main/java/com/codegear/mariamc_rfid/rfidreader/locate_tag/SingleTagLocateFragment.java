@@ -30,6 +30,7 @@ import com.codegear.mariamc_rfid.rfidreader.rfid.RFIDController;
 import com.zebra.rfid.api3.RFIDResults;
 
 import static com.codegear.mariamc_rfid.rfidreader.home.RFIDBaseActivity.filter;
+
 /**
  * A simple {@link androidx.fragment.app.Fragment} subclass.
  * <p/>
@@ -38,8 +39,7 @@ import static com.codegear.mariamc_rfid.rfidreader.home.RFIDBaseActivity.filter;
  * <p/>
  * Fragment to handle locationing
  */
-public class SingleTagLocateFragment extends Fragment implements ResponseHandlerInterfaces.TriggerEventHandler, ResponseHandlerInterfaces.ResponseStatusHandler,
-        LocateOperationsFragment.OnRefreshListener{
+public class SingleTagLocateFragment extends Fragment implements ResponseHandlerInterfaces.TriggerEventHandler, ResponseHandlerInterfaces.ResponseStatusHandler, LocateOperationsFragment.OnRefreshListener {
     private RangeGraph locationBar;
     //private TextView distance;
     private FloatingActionButton btn_locate;
@@ -70,8 +70,7 @@ public class SingleTagLocateFragment extends Fragment implements ResponseHandler
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_single_tag_locate, container, false);
     }
@@ -88,25 +87,21 @@ public class SingleTagLocateFragment extends Fragment implements ResponseHandler
         // distance=(TextView)getActivity().findViewById(R.id.distance);
         btn_locate = (FloatingActionButton) getActivity().findViewById(R.id.btn_locate);
         et_locateTag = (AutoCompleteTextView) getActivity().findViewById(R.id.lt_et_epc);
-        if (RFIDController.asciiMode == true)
-            et_locateTag.setFilters(new InputFilter[]{filter});
+        if (RFIDController.asciiMode == true) et_locateTag.setFilters(new InputFilter[]{filter});
 
-        else
-            et_locateTag.setFilters(new InputFilter[]{filter, new InputFilter.AllCaps()});
+        else et_locateTag.setFilters(new InputFilter[]{filter, new InputFilter.AllCaps()});
         RFIDController.getInstance().updateTagIDs();
-        adapter = new ArrayAdapter<>(getActivity(),
-                android.R.layout.simple_dropdown_item_1line, Application.tagIDs);
+        adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_dropdown_item_1line, Application.tagIDs);
         et_locateTag.setAdapter(adapter);
 
         locationBar.setValue(0);
 
-        if (RFIDController.isLocatingTag ) {
-            if (et_locateTag != null ) {
+        if (RFIDController.isLocatingTag) {
+            if (et_locateTag != null) {
                 if (RFIDController.asciiMode == true)
                     et_locateTag.setText(hextoascii.convert(RFIDController.currentLocatingTag));
 
-                else
-                    et_locateTag.setText(asciitohex.convert(RFIDController.currentLocatingTag));
+                else et_locateTag.setText(asciitohex.convert(RFIDController.currentLocatingTag));
             }
             et_locateTag.setFocusable(false);
             if (btn_locate != null) {
@@ -117,19 +112,18 @@ public class SingleTagLocateFragment extends Fragment implements ResponseHandler
             if (et_locateTag != null && Application.locateTag != null) {
                 if (RFIDController.asciiMode == true)
                     et_locateTag.setText(hextoascii.convert(Application.locateTag));
-                else
-                    et_locateTag.setText(asciitohex.convert(Application.locateTag));
+                else et_locateTag.setText(asciitohex.convert(Application.locateTag));
             }
             if (btn_locate != null) {
                 btn_locate.setImageResource(android.R.drawable.ic_media_play);
             }
         }
-        if(RFIDController.asciiMode == true) {
+        if (RFIDController.asciiMode == true) {
             SpannableStringBuilder print_tag = new SpannableStringBuilder(et_locateTag.getText());
-            for(int i =0; i < print_tag.length(); i++) {
-                if(print_tag.charAt(i) == ' ') {
+            for (int i = 0; i < print_tag.length(); i++) {
+                if (print_tag.charAt(i) == ' ') {
                     BackgroundColorSpan bcs = new BackgroundColorSpan(Color.YELLOW);
-                    print_tag.setSpan(bcs, i, i+1, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+                    print_tag.setSpan(bcs, i, i + 1, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
                 }
             }
             et_locateTag.setText(print_tag);
@@ -266,7 +260,7 @@ public class SingleTagLocateFragment extends Fragment implements ResponseHandler
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
-            if (action!=null && action.equals(getResources().getString(R.string.dw_action))) {
+            if (action != null && action.equals(getResources().getString(R.string.dw_action))) {
                 displayScanResult(intent);
             }
 
@@ -275,7 +269,7 @@ public class SingleTagLocateFragment extends Fragment implements ResponseHandler
 
     private void displayScanResult(Intent initiatingIntent) {
         String decodedData = initiatingIntent.getStringExtra(getResources().getString(R.string.datawedge_intent_key_data));
-        if (decodedData != null && et_locateTag!=null) {
+        if (decodedData != null && et_locateTag != null) {
             et_locateTag.setText(decodedData);
             et_locateTag.setSelection(decodedData.length());
             if (btn_locate != null) {

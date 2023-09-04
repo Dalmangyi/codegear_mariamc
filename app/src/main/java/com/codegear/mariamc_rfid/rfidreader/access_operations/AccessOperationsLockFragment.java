@@ -39,6 +39,7 @@ public class AccessOperationsLockFragment extends Fragment implements AdapterVie
     private AutoCompleteTextView tagIDField;
     private ArrayAdapter<String> adapter;
     private Spinner lockSpinner;
+
     public AccessOperationsLockFragment() {
         // Required empty public constructor
     }
@@ -60,8 +61,7 @@ public class AccessOperationsLockFragment extends Fragment implements AdapterVie
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_access_operations_lock, container, false);
     }
@@ -72,8 +72,7 @@ public class AccessOperationsLockFragment extends Fragment implements AdapterVie
         initializeSpinner();
         tagIDField = ((AutoCompleteTextView) getActivity().findViewById(R.id.accessLockTagID));
         RFIDController.getInstance().updateTagIDs();
-        adapter = new ArrayAdapter<>(getActivity(),
-                android.R.layout.simple_dropdown_item_1line, Application.tagIDs);
+        adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_dropdown_item_1line, Application.tagIDs);
         tagIDField.setAdapter(adapter);
 
         if (RFIDController.asciiMode == true) {
@@ -88,8 +87,7 @@ public class AccessOperationsLockFragment extends Fragment implements AdapterVie
         if (RFIDController.accessControlTag != null) {
             if (RFIDController.asciiMode == true)
                 tagIDField.setText(hextoascii.convert(RFIDController.accessControlTag));
-            else
-                tagIDField.setText(RFIDController.accessControlTag);
+            else tagIDField.setText(RFIDController.accessControlTag);
         }
     }
 
@@ -105,7 +103,7 @@ public class AccessOperationsLockFragment extends Fragment implements AdapterVie
         // Apply the adapter to the spinner
         memoryBankSpinner.setAdapter(memoryBankAdapter);
 
-         lockSpinner = (Spinner) getActivity().findViewById(R.id.accessLockPrivilege);
+        lockSpinner = (Spinner) getActivity().findViewById(R.id.accessLockPrivilege);
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> lockAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.acess_lock_privilege_array, R.layout.custom_spinner_layout);
         // Specify the layout to use when the list of choices appears
@@ -179,10 +177,9 @@ public class AccessOperationsLockFragment extends Fragment implements AdapterVie
                     lockAccessPermission = LOCK_PRIVILEGE.LOCK_PRIVILEGE_UNLOCK;
                     break;
             }
-        }
-        else if (adapterView == getActivity().findViewById(R.id.accessLockMemoryBank)) {
+        } else if (adapterView == getActivity().findViewById(R.id.accessLockMemoryBank)) {
             lockMemoryBank = adapterView.getSelectedItem().toString();
-            switch (pos){
+            switch (pos) {
                 case 5:
                     lockSpinner.setSelection(1);
                     lockSpinner.setEnabled(false);
@@ -204,8 +201,7 @@ public class AccessOperationsLockFragment extends Fragment implements AdapterVie
         if (isVisible() && tagIDField != null) {
             if (RFIDController.asciiMode == true)
                 RFIDController.accessControlTag = asciitohex.convert(tagIDField.getText().toString());
-            else
-                RFIDController.accessControlTag = tagIDField.getText().toString();
+            else RFIDController.accessControlTag = tagIDField.getText().toString();
         }
     }
 
@@ -214,8 +210,7 @@ public class AccessOperationsLockFragment extends Fragment implements AdapterVie
         if (RFIDController.accessControlTag != null && tagIDField != null) {
             if (RFIDController.asciiMode == true)
                 tagIDField.setText(hextoascii.convert(RFIDController.accessControlTag));
-            else
-                tagIDField.setText(RFIDController.accessControlTag);
+            else tagIDField.setText(RFIDController.accessControlTag);
         }
     }
 }

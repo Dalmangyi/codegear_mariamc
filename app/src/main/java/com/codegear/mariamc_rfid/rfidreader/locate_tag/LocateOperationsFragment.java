@@ -63,16 +63,15 @@ public class LocateOperationsFragment extends Fragment implements ResponseHandle
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_inventory :
-                ((ActiveDeviceActivity)getActivity()).loadNextFragment(INVENTORY_TAB);
+            case R.id.action_inventory:
+                ((ActiveDeviceActivity) getActivity()).loadNextFragment(INVENTORY_TAB);
                 break;
         }
         return super.onOptionsItemSelected(item);
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         setRetainInstance(true);
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_locate_tag, container, false);
@@ -86,22 +85,12 @@ public class LocateOperationsFragment extends Fragment implements ResponseHandle
         mAdapter = new LocateOperationAdapter(getActivity().getSupportFragmentManager());
         viewPager.setAdapter(mAdapter);
         mAdapter.notifyDataSetChanged();
-        //
-/*        SharedPreferences settings = getActivity().getSharedPreferences(Constants.APP_SETTINGS_STATUS, 0);
-        showAdvancedOptions = settings.getBoolean(Constants.ACCESS_ADV_OPTIONS, false);*/
     }
 
-/*    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        accessOperationCount = -1;
-    }*/
 
     @Override
     public void onDetach() {
         super.onDetach();
-/*        RFIDController.isAccessCriteriaRead = false;
-        setAccessProfile(false);*/
     }
 
     public void handleLocateTagResponse() {

@@ -67,7 +67,7 @@ public class AccessOperationsFragment extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_advanced_option, menu);
 
-        menu.findItem( R.id.action_inventory).setOnMenuItemClickListener( new MenuItem.OnMenuItemClickListener() {
+        menu.findItem(R.id.action_inventory).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 ((ActiveDeviceActivity) getActivity()).loadNextFragment(INVENTORY_TAB);
@@ -77,18 +77,18 @@ public class AccessOperationsFragment extends Fragment {
 
         super.onCreateOptionsMenu(menu, inflater);
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_inventory :
+            case R.id.action_inventory:
                 break;
         }
         return super.onOptionsItemSelected(item);
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         setRetainInstance(true);
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_access_operations, container, false);

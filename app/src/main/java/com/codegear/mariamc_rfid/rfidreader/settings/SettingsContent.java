@@ -29,7 +29,7 @@ public class SettingsContent {
         addItem(new SettingItem(R.id.profiles + "", "프로파일",/*"Set Antenna parameters",*/R.drawable.profiles));
         addItem(new SettingItem(R.id.advanced_options + "", "고급 리더 옵션",/*"Tag Settings",*/R.drawable.settings_rfid_accessory));
         addItem(new SettingItem(R.id.regulatory + "", "규제",/*"Host and sled volumes",*/R.drawable.settings_regulatory));
-        addItem(new SettingItem(R.id.beeper + "", "호출기",/*"Status",*/R.drawable.settings_beeper));
+        addItem(new SettingItem(R.id.beeper + "", "신호음",/*"Status",*/R.drawable.settings_beeper));
         addItem(new SettingItem(R.id.led + "", "LED ",/*"Status",*/R.drawable.settings_led));
         addItem(new SettingItem(R.id.charge_terminal + "", "충전 단자",/*"Status",*/R.drawable.settings_antenna));// icon need to be replaced.
     }

@@ -91,8 +91,7 @@ public class AccessOperationsReadWriteFragment extends Fragment implements Acces
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_access_operations_read_write, container, false);
         rw_typespinner = view.findViewById(R.id.readwrite_type);
@@ -100,7 +99,7 @@ public class AccessOperationsReadWriteFragment extends Fragment implements Acces
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String selectedType = parent.getItemAtPosition(position).toString();
-                if(selectedType.equals("Advanced")) {
+                if (selectedType.equals("Advanced")) {
                     Application.rwAdvancedOptions = true;
                 } else {
                     Application.rwAdvancedOptions = false;
@@ -147,8 +146,7 @@ public class AccessOperationsReadWriteFragment extends Fragment implements Acces
         //handle Seek Operations
         handleSeekOperations();
         RFIDController.getInstance().updateTagIDs();
-        adapter = new ArrayAdapter<>(getActivity(),
-                android.R.layout.simple_dropdown_item_1line, Application.tagIDs);
+        adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_dropdown_item_1line, Application.tagIDs);
         tagIDField.setAdapter(adapter);
         if (RFIDController.asciiMode == true) {
             tagIDField.setFilters(new InputFilter[]{filter});
@@ -161,8 +159,7 @@ public class AccessOperationsReadWriteFragment extends Fragment implements Acces
         if (RFIDController.accessControlTag != null) {
             if (RFIDController.asciiMode == true)
                 tagIDField.setText(hextoascii.convert(RFIDController.accessControlTag));
-            else
-                tagIDField.setText((RFIDController.accessControlTag));
+            else tagIDField.setText((RFIDController.accessControlTag));
             offsetEditText.setText("2");
         } else {
             offsetEditText.setText("0");
@@ -171,7 +168,7 @@ public class AccessOperationsReadWriteFragment extends Fragment implements Acces
         //
         SharedPreferences settings = getActivity().getSharedPreferences(Constants.APP_SETTINGS_STATUS, 0);
         showAdvancedOptions = settings.getBoolean(Constants.ACCESS_ADV_OPTIONS, false);
-        if(showAdvancedOptions) {
+        if (showAdvancedOptions) {
             rw_typespinner.setSelection(1);
 
         }
@@ -181,7 +178,7 @@ public class AccessOperationsReadWriteFragment extends Fragment implements Acces
     private void UpdateViews() {
         LinearLayout advancedOptions = (LinearLayout) getActivity().findViewById(R.id.accessRWAdvanceOption);
         if (advancedOptions != null) {
-            if (Application.rwAdvancedOptions ) {
+            if (Application.rwAdvancedOptions) {
                 advancedOptions.setVisibility(View.VISIBLE);
                 //getActivity().findViewById(R.id.seperaterData).setVisibility(View.GONE);
             } else {
@@ -323,8 +320,7 @@ public class AccessOperationsReadWriteFragment extends Fragment implements Acces
      */
     public void stopbeepingTimer() {
         if (tbeep != null) {
-            if (RFIDController.toneGenerator != null)
-                RFIDController.toneGenerator.stopTone();
+            if (RFIDController.toneGenerator != null) RFIDController.toneGenerator.stopTone();
             tbeep.cancel();
             tbeep.purge();
         }
@@ -342,7 +338,7 @@ public class AccessOperationsReadWriteFragment extends Fragment implements Acces
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
-            if (action!=null && action.equals(getResources().getString(R.string.dw_action))) {
+            if (action != null && action.equals(getResources().getString(R.string.dw_action))) {
                 displayScanResult(intent);
             }
 
@@ -351,7 +347,7 @@ public class AccessOperationsReadWriteFragment extends Fragment implements Acces
 
     private void displayScanResult(Intent initiatingIntent) {
         String decodedData = initiatingIntent.getStringExtra(getResources().getString(R.string.datawedge_intent_key_data));
-        if (decodedData != null && tagIDField!=null) {
+        if (decodedData != null && tagIDField != null) {
             tagIDField.setText(decodedData);
             tagIDField.setSelection(decodedData.length());
         }
