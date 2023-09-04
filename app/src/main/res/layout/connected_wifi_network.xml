@@ -69,11 +69,6 @@
             app:srcCompat="@drawable/wifi_menu"
             />
     </LinearLayout>
-
-
-
-
-
 </RelativeLayout>
 
 

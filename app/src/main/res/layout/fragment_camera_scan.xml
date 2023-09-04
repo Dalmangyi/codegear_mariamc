@@ -23,8 +23,7 @@
                 android:layout_width="300dp"
                 android:layout_height="300dp"
                 android:padding="@dimen/default_padding"
-                app:srcCompat="@drawable/ic_scanning"
-                android:contentDescription="@string/drawer_image_desc" />
+                app:srcCompat="@drawable/ic_scanning" />
 
             <Button
                 android:id="@+id/scan_button"

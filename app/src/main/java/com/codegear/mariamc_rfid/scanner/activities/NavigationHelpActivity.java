@@ -29,12 +29,12 @@ public class NavigationHelpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.app_bar_activity_help);
         Configuration configuration = getResources().getConfiguration();
-        if(configuration.orientation == Configuration.ORIENTATION_LANDSCAPE){
-            if(configuration.smallestScreenWidthDp< Application.minScreenWidth){
+        if (configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            if (configuration.smallestScreenWidthDp < Application.minScreenWidth) {
                 setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
             }
-        }else{
-            if(configuration.screenWidthDp<Application.minScreenWidth){
+        } else {
+            if (configuration.screenWidthDp < Application.minScreenWidth) {
                 setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
             }
         }
@@ -44,7 +44,7 @@ public class NavigationHelpActivity extends AppCompatActivity {
         setSupportActionBar(subActionBar);
         ActionBar actionBar = getSupportActionBar();
 
-        if(actionBar!=null){
+        if (actionBar != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
             getSupportActionBar().setTitle("Help");
@@ -53,14 +53,14 @@ public class NavigationHelpActivity extends AppCompatActivity {
         try {
             pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
         } catch (PackageManager.NameNotFoundException e) {
-            if( e!= null && e.getStackTrace().length>0){ Log.e(TAG, e.getStackTrace()[0].toString()); }
+            if (e != null && e.getStackTrace().length > 0) {
+                Log.e(TAG, e.getStackTrace()[0].toString());
+            }
         }
         String version;
-        if(pInfo != null) {
+        if (pInfo != null) {
             version = BuildConfig.VERSION_NAME;
-            ((TextView) findViewById(R.id.about)).setText(getResources().getString(R.string.app_name)+" Application v"+version+"\n\n"+
-                    "SDK version "+ com.zebra.rfid.api3.BuildConfig.VERSION_NAME +"\n\n"
-                    +"\u00a9 2023 Zebra Technologies Corp. and/or its affiliates.  All rights reserved.");
+            ((TextView) findViewById(R.id.about)).setText(getResources().getString(R.string.app_name) + " Application v" + version + "\n\n" + "SDK version " + com.zebra.rfid.api3.BuildConfig.VERSION_NAME + "\n\n" + "\u00a9 All rights reserved.");
         }
     }
 
@@ -70,11 +70,9 @@ public class NavigationHelpActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.no_items, menu);
         return true;
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
 
         switch (item.getItemId()) {
             case android.R.id.home:
@@ -84,6 +82,7 @@ public class NavigationHelpActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
     @Override
     protected void onPause() {
         super.onPause();
@@ -91,6 +90,7 @@ public class NavigationHelpActivity extends AppCompatActivity {
             finish();
         }
     }
+
     public boolean isInBackgroundMode(final Context context) {
         return Foreground.get().isBackground();
     }

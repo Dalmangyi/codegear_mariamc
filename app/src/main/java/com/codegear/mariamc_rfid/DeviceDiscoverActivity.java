@@ -95,7 +95,7 @@ public class DeviceDiscoverActivity extends BaseActivity implements Readers.RFID
     private AvailableScanner curAvailableScanner;
     private DeviceDiscoverActivity mDeviceDiscoverActivity;
     Toolbar toolbar;
-    ImageView iv_batteryLevel ,iv_headerImageView;
+    ImageView iv_batteryLevel, iv_headerImageView;
     TextView battery_percentage;
     Button btn_disconnect;
     //private boolean launchAppHome = false;
@@ -107,8 +107,7 @@ public class DeviceDiscoverActivity extends BaseActivity implements Readers.RFID
     private static final String INTENT_ACTION_GRANT_USB = "com.zebra.rfid.app.USB_PERMISSION";
 
 
-    protected Boolean isActivityRunning(Class activityClass)
-    {
+    protected Boolean isActivityRunning(Class activityClass) {
         ActivityManager activityManager = (ActivityManager) getBaseContext().getSystemService(Context.ACTIVITY_SERVICE);
         List<ActivityManager.RunningTaskInfo> tasks = activityManager.getRunningTasks(Integer.MAX_VALUE);
 
@@ -126,7 +125,7 @@ public class DeviceDiscoverActivity extends BaseActivity implements Readers.RFID
         mDeviceDiscoverActivity = this;
         mSavedInstanceState = savedInstanceState;
         //setContentView(R.layout.activity_settings_detail);
-        if(mConnectedReader != null ) {
+        if (mConnectedReader != null) {
             Log.d(TAG, "There is no way you can come here ");
         }
         setContentView(R.layout.discover_activity_layout);
@@ -136,9 +135,7 @@ public class DeviceDiscoverActivity extends BaseActivity implements Readers.RFID
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(getResources().getString(R.string.title_empty_readers));
         mDrawerLayout = (DrawerLayout) findViewById(R.id.discover_drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-        this, mDrawerLayout,toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close
-        );
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         iv_batteryLevel = (ImageView) findViewById(R.id.disbatteryLevel);
         battery_percentage = (TextView) findViewById(R.id.battery_percentage);
         btn_disconnect = findViewById(R.id.disconnect_btn);
@@ -150,12 +147,12 @@ public class DeviceDiscoverActivity extends BaseActivity implements Readers.RFID
 
             @Override
             public void onDrawerOpened(@NonNull View drawerView) {
-                if (RFIDController.BatteryData != null){
+                if (RFIDController.BatteryData != null) {
                     batteryStatus(RFIDController.BatteryData.getLevel(), RFIDController.BatteryData.getCharging(), RFIDController.BatteryData.getCause());
                 }
-                if(mConnectedReader != null && mConnectedReader.isConnected()) {
+                if (mConnectedReader != null && mConnectedReader.isConnected()) {
                     btn_disconnect.setEnabled(true);
-                    btn_disconnect.setText("DISCONNECT "+ mConnectedReader.getHostName());
+                    btn_disconnect.setText("DISCONNECT " + mConnectedReader.getHostName());
                 } else {
                     btn_disconnect.setEnabled(false);
                     btn_disconnect.setText(R.string.disconnectrfid);
@@ -164,7 +161,7 @@ public class DeviceDiscoverActivity extends BaseActivity implements Readers.RFID
 
             @Override
             public void onDrawerClosed(@NonNull View drawerView) {
-                battery_percentage.setText(String.valueOf(0)+"%");
+                battery_percentage.setText(String.valueOf(0) + "%");
                 iv_batteryLevel.setImageLevel(0);
             }
 
@@ -204,18 +201,14 @@ public class DeviceDiscoverActivity extends BaseActivity implements Readers.RFID
         }
         //Scanner Initializations
         //Handling Runtime BT permissions for Android 12 and higher
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.S){
-            if (ContextCompat.checkSelfPermission(this,
-                    Manifest.permission.BLUETOOTH_CONNECT)
-                    != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.BLUETOOTH_SCAN, Manifest.permission.BLUETOOTH_CONNECT},
-                        BLUETOOTH_PERMISSION_REQUEST_CODE);
-            }else{
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.BLUETOOTH_SCAN, Manifest.permission.BLUETOOTH_CONNECT}, BLUETOOTH_PERMISSION_REQUEST_CODE);
+            } else {
                 initialize();
             }
 
-        }else{
+        } else {
             initialize();
         }
 
@@ -224,11 +217,10 @@ public class DeviceDiscoverActivity extends BaseActivity implements Readers.RFID
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
 
-        if(requestCode == BLUETOOTH_PERMISSION_REQUEST_CODE){
+        if (requestCode == BLUETOOTH_PERMISSION_REQUEST_CODE) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 initialize();
-            }
-            else {
+            } else {
                 Toast.makeText(this, "Bluetooth Permissions not granted", Toast.LENGTH_SHORT).show();
             }
         }
@@ -251,13 +243,13 @@ public class DeviceDiscoverActivity extends BaseActivity implements Readers.RFID
     private void handleIntent(Intent intent) {
         String str = getIntent().getAction();
         if (NfcAdapter.ACTION_NDEF_DISCOVERED.equals(intent.getAction())) {
-            nfcData = ((Application)getApplication()).processNFCData(intent);
-        }else if( NfcAdapter.ACTION_TAG_DISCOVERED.equals(intent.getAction()))
+            nfcData = ((Application) getApplication()).processNFCData(intent);
+        } else if (NfcAdapter.ACTION_TAG_DISCOVERED.equals(intent.getAction()))
             processTAGData(intent);
 
     }
-    public void deleteDWProfile()
-    {
+
+    public void deleteDWProfile() {
         Intent i = new Intent();
         i.setAction("com.symbol.datawedge.api.ACTION");
         String[] values = {"RFIDMobileApp"};
@@ -265,8 +257,9 @@ public class DeviceDiscoverActivity extends BaseActivity implements Readers.RFID
         mDeviceDiscoverActivity.sendBroadcast(i);
 
     }
+
     private void processTAGData(Intent intent) {
-        Log.i(TAG,"ProcessTAG data " );
+        Log.i(TAG, "ProcessTAG data ");
 
 
         Parcelable[] rawMessages = intent.getParcelableArrayExtra(NfcAdapter.EXTRA_TAG);
@@ -297,14 +290,13 @@ public class DeviceDiscoverActivity extends BaseActivity implements Readers.RFID
     }
 
 
-
     public String copyNfcContent() {
         return nfcData;
 
     }
 
     private void batteryStatus(int level, boolean charging, String cause) {
-        battery_percentage.setText(String.valueOf(level)+"%");
+        battery_percentage.setText(String.valueOf(level) + "%");
         iv_batteryLevel.setImageLevel(level);
     }
 
@@ -324,11 +316,10 @@ public class DeviceDiscoverActivity extends BaseActivity implements Readers.RFID
                     UsbDevice device = intent.getParcelableExtra(UsbManager.EXTRA_DEVICE);
 
                     if (intent.getBooleanExtra(UsbManager.EXTRA_PERMISSION_GRANTED, false)) {
-                        if(device != null){
+                        if (device != null) {
                             onPostPermissionGranted();
                         }
-                    }
-                    else {
+                    } else {
                         Log.d(TAG, "USB permission denied for device " + device);
                     }
                 }
@@ -340,15 +331,15 @@ public class DeviceDiscoverActivity extends BaseActivity implements Readers.RFID
 
     private void initialize() {
         PendingIntent permissionIntent;
-        UsbManager usbManager = (UsbManager)getSystemService(Context.USB_SERVICE);
-        if(usbManager.getDeviceList().size() > 0) {
+        UsbManager usbManager = (UsbManager) getSystemService(Context.USB_SERVICE);
+        if (usbManager.getDeviceList().size() > 0) {
             for (UsbDevice device : usbManager.getDeviceList().values()) {
                 if ((device.getVendorId() == vendorId) && (device.getProductId() == productId)) {
                     if (!usbManager.hasPermission(device)) {
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                             permissionIntent = PendingIntent.getBroadcast(this, 0, new Intent(INTENT_ACTION_GRANT_USB), PendingIntent.FLAG_UPDATE_CURRENT|PendingIntent.FLAG_MUTABLE);
-                        }else{
-                             permissionIntent = PendingIntent.getBroadcast(this, 0, new Intent(INTENT_ACTION_GRANT_USB), PendingIntent.FLAG_UPDATE_CURRENT);
+                            permissionIntent = PendingIntent.getBroadcast(this, 0, new Intent(INTENT_ACTION_GRANT_USB), PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_MUTABLE);
+                        } else {
+                            permissionIntent = PendingIntent.getBroadcast(this, 0, new Intent(INTENT_ACTION_GRANT_USB), PendingIntent.FLAG_UPDATE_CURRENT);
                         }
                         IntentFilter filter = new IntentFilter(INTENT_ACTION_GRANT_USB);
                         registerReceiver(usbReceiver, filter);
@@ -360,18 +351,19 @@ public class DeviceDiscoverActivity extends BaseActivity implements Readers.RFID
                     }
                 }
             }
-        }else {
+        } else {
             onPostPermissionGranted();
         }
     }
 
-        private void onPostPermissionGranted(){
-            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU){
-                requestBTEnable();
-            }else{
-                initializeDcsSdk(true);
-            }
+    private void onPostPermissionGranted() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            requestBTEnable();
+        } else {
+            initializeDcsSdk(true);
         }
+    }
+
     private void broadcastSCAisListening() {
         Intent intent = new Intent();
         intent.setAction("com.zebra.scannercontrol.LISTENING_STARTED");
@@ -384,17 +376,16 @@ public class DeviceDiscoverActivity extends BaseActivity implements Readers.RFID
         if (!bluetoothAdapter.isEnabled()) {
             Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
             activityResultLauncher.launch(enableBtIntent);
-        }else{
+        } else {
             initializeDcsSdk(true);
         }
     }
-    ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(
-            new ActivityResultContracts.StartActivityForResult(),
-            result -> initializeDcsSdk(result.getResultCode() == AppCompatActivity.RESULT_OK));
 
-    private void initializeDcsSdk(boolean enableBTConnect){
+    ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> initializeDcsSdk(result.getResultCode() == AppCompatActivity.RESULT_OK));
+
+    private void initializeDcsSdk(boolean enableBTConnect) {
         Application.sdkHandler.dcssdkEnableAvailableScannersDetection(true);
-        if(enableBTConnect){
+        if (enableBTConnect) {
             Application.sdkHandler.dcssdkSetOperationalMode(DCSSDKDefs.DCSSDK_MODE.DCSSDK_OPMODE_BT_NORMAL);
             Application.sdkHandler.dcssdkSetOperationalMode(DCSSDKDefs.DCSSDK_MODE.DCSSDK_OPMODE_BT_LE);
         }
@@ -415,7 +406,7 @@ public class DeviceDiscoverActivity extends BaseActivity implements Readers.RFID
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater=getMenuInflater();
+        MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_app_home, menu);
         return super.onCreateOptionsMenu(menu);
     }
@@ -431,7 +422,7 @@ public class DeviceDiscoverActivity extends BaseActivity implements Readers.RFID
                 return true;
 
             case R.id.nav_fw_update:
-                if(mConnectedReader != null && mConnectedReader.isConnected()) {
+                if (mConnectedReader != null && mConnectedReader.isConnected()) {
                     loadUpdateFirmware(MenuItemCompat.getActionView(item));
                 } else {
                     Toast.makeText(this, "연결된 장치가 없습니다. ", Toast.LENGTH_SHORT).show();
@@ -474,7 +465,7 @@ public class DeviceDiscoverActivity extends BaseActivity implements Readers.RFID
 
     @Override
     public void onBackPressed() {
-        if(mDrawerLayout != null && mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+        if (mDrawerLayout != null && mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
             mDrawerLayout.closeDrawer(GravityCompat.START);
         } else {
             //super.onBackPressed();
@@ -486,7 +477,7 @@ public class DeviceDiscoverActivity extends BaseActivity implements Readers.RFID
             startActivity(intent);
         }*/
         Fragment currentFragment = getSupportFragmentManager().findFragmentByTag(TAG_CONTENT_FRAGMENT);
-        if (currentFragment != null && (currentFragment instanceof PairOperationsFragment) || currentFragment instanceof ReaderDetailsFragment){
+        if (currentFragment != null && (currentFragment instanceof PairOperationsFragment) || currentFragment instanceof ReaderDetailsFragment) {
             setActionBarTitle(getResources().getString(R.string.title_empty_readers));
             Fragment fragment = InitReadersListFragment.getInstance();
             if (fragment != null) {
@@ -497,6 +488,7 @@ public class DeviceDiscoverActivity extends BaseActivity implements Readers.RFID
 
         }
     }
+
     private void minimizeApp() {
         Intent startMain = new Intent(Intent.ACTION_MAIN);
         startMain.addCategory(Intent.CATEGORY_HOME);
@@ -507,22 +499,22 @@ public class DeviceDiscoverActivity extends BaseActivity implements Readers.RFID
     @Override
     protected void onResume() {
         super.onResume();
-      //  setActionBarTitle(getResources().getString(R.string.title_empty_readers));
+        //  setActionBarTitle(getResources().getString(R.string.title_empty_readers));
 
     }
 
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btn_rfid :
+            case R.id.btn_rfid:
                 startRfidActivity();
                 break;
-            case R.id.btn_scanner :
+            case R.id.btn_scanner:
                 //startScannerActivity();
                 break;
-            case R.id.btn_update_firmware :
+            case R.id.btn_update_firmware:
                 startFirmwareUpdate();
                 break;
-            case R.id.btn_discovery :
+            case R.id.btn_discovery:
                 // Yet to implement
                 break;
             default:
@@ -534,9 +526,8 @@ public class DeviceDiscoverActivity extends BaseActivity implements Readers.RFID
     }
 
 
-
     private void startFirmwareUpdate() {
-        if(Application.currentConnectedScannerID != -1 && Application.currentConnectedScanner != null) {
+        if (Application.currentConnectedScannerID != -1 && Application.currentConnectedScanner != null) {
             Intent intent = new Intent(this, UpdateFirmware.class);
             intent.putExtra(Constants.SCANNER_ID, Application.currentConnectedScannerID);
             intent.putExtra(Constants.SCANNER_NAME, Application.currentConnectedScanner.getScannerName());
@@ -604,14 +595,18 @@ public class DeviceDiscoverActivity extends BaseActivity implements Readers.RFID
     protected void onDestroy() {
         super.onDestroy();
         RFIDController.readers.deattach(this);
-        if(mConnectedReader != null ) {
+        if (mConnectedReader != null) {
             try {
                 mConnectedReader.Events.removeEventsListener(mEventHandler);
 
             } catch (InvalidUsageException e) {
-                if( e!= null && e.getStackTrace().length>0){ Log.e(TAG, e.getStackTrace()[0].toString()); }
+                if (e != null && e.getStackTrace().length > 0) {
+                    Log.e(TAG, e.getStackTrace()[0].toString());
+                }
             } catch (OperationFailureException e) {
-                if( e!= null && e.getStackTrace().length>0){ Log.e(TAG, e.getStackTrace()[0].toString()); }
+                if (e != null && e.getStackTrace().length > 0) {
+                    Log.e(TAG, e.getStackTrace()[0].toString());
+                }
             }
         }
     }
@@ -665,6 +660,7 @@ public class DeviceDiscoverActivity extends BaseActivity implements Readers.RFID
         fragment = ReaderDetailsFragment.newInstance();
         switchToFragment(fragment);
     }
+
     private void connectedReaderDetails(ReaderDevice readerDevice) {
 
         mConnectedReaderDetails = readerDevice;
@@ -679,7 +675,7 @@ public class DeviceDiscoverActivity extends BaseActivity implements Readers.RFID
         Resources res = super.getResources();
         Configuration config = new Configuration();
         config.setToDefaults();
-        res.updateConfiguration(config,res.getDisplayMetrics() );
+        res.updateConfiguration(config, res.getDisplayMetrics());
         return res;
 
     }
@@ -701,21 +697,18 @@ public class DeviceDiscoverActivity extends BaseActivity implements Readers.RFID
     };
 
     private NdefMessage createMessage() {
-        String text = ("Hello there from another device!\n\n" +
-                "Beam Time: " + System.currentTimeMillis());
-        NdefMessage msg = new NdefMessage(
-                new NdefRecord[] { NdefRecord.createMime(
-                        "application/com.bluefletch.nfcdemo.mimetype", text.getBytes())
-                        /**
-                         * The Android Application Record (AAR) is commented out. When a device
-                         * receives a push with an AAR in it, the application specified in the AAR
-                         * is guaranteed to run. The AAR overrides the tag dispatch system.
-                         * You can add it back in to guarantee that this
-                         * activity starts when receiving a beamed message. For now, this code
-                         * uses the tag dispatch system.
-                        */
-                        //,NdefRecord.createApplicationRecord("com.example.android.beam")
-                });
+        String text = ("Hello there from another device!\n\n" + "Beam Time: " + System.currentTimeMillis());
+        NdefMessage msg = new NdefMessage(new NdefRecord[]{NdefRecord.createMime("application/com.bluefletch.nfcdemo.mimetype", text.getBytes())
+                /**
+                 * The Android Application Record (AAR) is commented out. When a device
+                 * receives a push with an AAR in it, the application specified in the AAR
+                 * is guaranteed to run. The AAR overrides the tag dispatch system.
+                 * You can add it back in to guarantee that this
+                 * activity starts when receiving a beamed message. For now, this code
+                 * uses the tag dispatch system.
+                */
+                //,NdefRecord.createApplicationRecord("com.example.android.beam")
+        });
 
         return msg;
     }

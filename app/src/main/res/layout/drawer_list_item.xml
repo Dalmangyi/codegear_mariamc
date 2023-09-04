@@ -8,9 +8,7 @@
         android:layout_width="0dp"
         android:layout_weight="15"
         android:layout_height="wrap_content"
-        android:padding="@dimen/default_padding"
-        app:srcCompat="@drawable/ic_launcher"
-        android:contentDescription="@string/drawer_image_desc" />
+        android:padding="@dimen/default_padding"/>
 
     <TextView
         android:id="@+id/drawerItemName"
@@ -23,6 +21,6 @@
         android:singleLine="true"
         android:textSize="15sp"
         style="@style/style_normal_font"
-        android:text="@string/drawer_item_text" />
+        android:text="" />
 
 </LinearLayout>

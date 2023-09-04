@@ -78,17 +78,6 @@
                 android:layout_marginLeft="10dp"
                 android:text="@string/nav_help_instruction_item5" />
 
-
-
-
-            <TextView
-                android:id="@+id/about"
-                style="@style/roboto_regular_12dp"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="@string/nav_version_info" />
-
         </LinearLayout>
     </ScrollView>
 

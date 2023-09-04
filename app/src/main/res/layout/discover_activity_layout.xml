@@ -44,9 +44,11 @@
         app:headerLayout="@layout/dis_main_menu"
         app:menu="@menu/disactivity_home_drawer">
 
-        <RelativeLayout android:layout_height="match_parent"
+        <RelativeLayout
+            android:layout_height="match_parent"
             android:layout_width="match_parent"
             android:layout_marginLeft="@dimen/margin"
+            android:layout_marginRight="@dimen/margin"
             >
 
             <TextView
@@ -75,7 +77,6 @@
                 android:id="@+id/disbatteryLevel"
                 android:layout_above="@+id/disconnect_btn"
                 android:layout_alignParentRight="true"
-                android:paddingRight="@dimen/margin"
                 android:paddingBottom="@dimen/default_padding"
                 app:srcCompat="@drawable/sled_battery_level"
                 />
@@ -86,7 +87,6 @@
                 android:layout_alignParentBottom="true"
                 android:gravity="center"
                 android:id="@+id/disconnect_btn"
-                android:layout_marginRight="@dimen/margin"
                 android:text="@string/disconnectrfid"
                 android:backgroundTint="@color/colorPrimary"
                 android:layout_marginBottom="@dimen/margin"
