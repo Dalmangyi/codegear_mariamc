@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">123RFID Mobile</string>
+    <string name="app_name">카우클로니클</string>
     <string name="action_settings">RFID 설정</string>
     <string name="rapid_read">빨리 읽기</string>
 
@@ -835,4 +835,15 @@
     <string name="Scan_pairing_help">사용자는 스캔 및 페어링 화면에서 휴대용 장치의 바코드를 스캔해야 합니다. 그러면 자동 연결이 시작되거나 일련 번호 또는 B/T Mac 주소를 입력해야 합니다.</string>
     <string name="Camera_barcode_scan_help">스캔 버튼을 클릭하고 슬레드의 일련번호 바코드를 스캔하세요.</string>
     <string name="navigation_drawer_open">네비게이션 창 열기</string>
+
+    <!-- 카우크로니클 -->
+    <string name="title_activity_userinfo">사용자</string>
+
+
+
+
+    <!-- Tableview -->
+    <string name="tableview_sort_ascending">오름차순 정렬</string>
+    <string name="tableview_sort_descending">내림차순 정렬</string>
+
 </resources>

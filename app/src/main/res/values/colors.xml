@@ -6,6 +6,7 @@
     <color name="notification_image_bg_color">#1d3741</color>
     <color name="colorPrimaryLight">#a7c0cd</color>
     <color name="colorPrimary">#0085C2</color>
+    <color name="colorHighlight">#009EE7</color>
     <color name="colorPrimaryDark">#4b636e</color>
     <color name="colorAccent">#ff7043</color>
 
@@ -35,6 +36,11 @@
     <color name="dense_blue">#007ABA</color>
     <color name="transparent_grey">#14000000</color>
 
-    <!--    -->
-    <color name="main_color">#3AC7FF</color>
+    <!--  TableView  -->
+    <color name="tableview_border_line_color">#D3D3D3</color>
+    <color name="tableview_header_background_color">#EAEAEA</color>
+    <color name="tableview_cell_background_color">#ffffff</color>
+    <color name="tableview_header_line_color">@android:color/holo_red_light</color>
+    <color name="tableview_default_text_color">#0a0a0a</color>
+
 </resources>

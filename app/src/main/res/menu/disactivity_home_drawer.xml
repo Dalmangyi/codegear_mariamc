@@ -1,49 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-        <item
-            android:id="@+id/menu_cowchronicle"
-            android:title="카우크로니클"
-            android:visible="true"/>
+    <item
+        android:id="@+id/menu_cowchronicle"
+        android:title="카우크로니클"
+        android:visible="true" />
 
-        <item
-            android:id="@+id/menu_readers"
-            android:title="전자이표"
-            android:visible="true"/>
+    <item
+        android:id="@+id/menu_readers"
+        android:title="전자이표"
+        android:visible="true" />
 
+    <item
+        android:id="@+id/nav_battery_statics"
+        android:title="배터리 상태"
+        android:visible="true" />
 
-        <item
-            android:id="@+id/nav_battery_statics"
-            android:title="배터리 상태"
-            android:visible="true"/>
-        <item
-            android:id="@+id/nav_pair_device"
-            android:title="Pair Bluetooth Scanner"
-            android:visible="false"/>
+    <item
+        android:id="@+id/nav_pair_device"
+        android:title="Pair Bluetooth Scanner"
+        android:visible="false" />
 
-        <item
-            android:id="@+id/nav_devices"
-            android:title="Available Device List"
-            android:visible="false" />
-        <item
-            android:id="@+id/nav_find_cabled_scanner"
-            android:title="Find Cabled Scanner"
-            android:visible="false"/>
-        <item
-            android:id="@+id/nav_manage_device"
-            android:title="Manage RFDXXX"
-            android:visible="false"/>
-        <item
-            android:id="@+id/nav_fw_update"
-            android:title="펌웨어 업데이트" />
+    <item
+        android:id="@+id/nav_devices"
+        android:title="Available Device List"
+        android:visible="false" />
 
-        <item
-            android:id="@+id/nav_settings"
-            android:title="기기설정"
-            android:visible="true"/>
-        <item
-            android:id="@+id/nav_about"
-            android:title="App Overview"
-            android:visible="false"/>
+    <item
+        android:id="@+id/nav_find_cabled_scanner"
+        android:title="Find Cabled Scanner"
+        android:visible="false" />
+
+    <item
+        android:id="@+id/nav_manage_device"
+        android:title="Manage RFDXXX"
+        android:visible="false" />
+
+    <item
+        android:id="@+id/nav_fw_update"
+        android:title="펌웨어 업데이트" />
+
+    <item
+        android:id="@+id/nav_settings"
+        android:title="기기 설정"
+        android:visible="true" />
+
+    <item
+        android:id="@+id/nav_about"
+        android:title="앱 소개"
+        android:visible="false" />
 
 </menu>

@@ -1,0 +1,141 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/app_margin_left"
+    android:paddingTop="@dimen/app_margin_left"
+    android:paddingRight="@dimen/app_margin_right"
+    android:paddingBottom="@dimen/app_margin_left"
+    tools:context="com.codegear.mariamc_rfid.cowchronicle.activities.CowTagActivity">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="목장 선택"
+            android:textSize="14dp" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnCurrentFarm"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/button_default_background"
+            android:onClick="clickFarmSearch"
+            android:text=""
+            android:textColor="@color/white"
+            android:drawableStart="@drawable/baseline_arrow_drop_down_24"
+            android:drawableTint="@color/white"
+            tools:text="제2ㅇㅇ목장 - ㅇㅇㅇ"
+            android:layout_marginTop="5dp"/>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="장치 수신거리"
+            android:textSize="14dp" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <com.xw.repo.BubbleSeekBar
+                android:id="@+id/sbDistancePower"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="5dp"
+                app:bsb_bubble_color="@color/colorHighlight"
+                app:bsb_bubble_text_color="@color/white"
+                app:bsb_max="300"
+                app:bsb_min="1"
+                app:bsb_progress="120"
+                app:bsb_second_track_color="@color/colorHighlight"
+                app:bsb_section_count="3"
+                app:bsb_section_text_position="bottom_sides"
+                app:bsb_show_progress_in_float="false"
+                app:bsb_show_section_mark="true"
+                app:bsb_show_section_text="true"
+                app:bsb_show_thumb_text="true"
+                app:bsb_track_color="@color/light_grey" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnDistancePowerApply"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:background="@drawable/button_default_background"
+                android:onClick="clickFarmSearch"
+                android:text="적용"
+                android:textColor="@color/white"
+                android:layout_marginLeft="@dimen/margin"/>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="1dp"
+        android:background="@color/light_grey"
+        android:layout_marginBottom="@dimen/margin"
+        android:layout_marginTop="@dimen/margin">
+
+        <com.evrencoskun.tableview.TableView
+            android:id="@+id/tbCowTags"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:allow_click_inside_cell="true"
+            app:allow_click_inside_column_header="true"
+            app:allow_click_inside_row_header="true"
+            app:selected_color="@color/colorHighlight"
+            android:background="@color/white"/>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:background="@drawable/button_default_background"
+            android:text="초기화"
+            android:textColor="@color/white"
+            android:textSize="16dp" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/button_default_background"
+            android:text="스캔"
+            android:textColor="@color/white"
+            android:textSize="16dp" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+</LinearLayout>

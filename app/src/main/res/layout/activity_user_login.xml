@@ -1,0 +1,142 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/app_margin_left"
+    android:paddingLeft="@dimen/app_margin_left"
+    android:paddingRight="@dimen/app_margin_right"
+    android:paddingTop="@dimen/app_margin_left"
+    tools:context="com.codegear.mariamc_rfid.cowchronicle.activities.UserInfoActivity">
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:minHeight="100dp"
+        android:layout_weight="1"/>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/white"
+        android:padding="@dimen/default_padding"
+        android:layout_margin="@dimen/app_margin">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:src="@drawable/logo_cow_chronicle"
+            android:scaleType="fitCenter"
+            android:padding="@dimen/default_padding"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvFarmNames"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/dark_grey"
+            android:text="Login"
+            android:textSize="26dp"
+            android:layout_marginBottom="@dimen/margin"
+            />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/etLoginId"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:drawableStart="@drawable/baseline_email_24"
+            android:drawableTint="@color/dark_grey"
+            android:hint="ID"
+            android:text=""
+            android:textSize="16dp"
+            android:lines="1"
+            android:maxLines="1"
+            android:inputType="text"
+            android:textColorHint="@color/light_grey"
+            android:backgroundTint="@android:color/holo_red_dark"
+            android:drawablePadding="10dp"
+            />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/etLoginPassword"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:drawableStart="@drawable/baseline_lock_24"
+            android:drawableTint="@color/dark_grey"
+            android:drawablePadding="10dp"
+            android:text=""
+            android:hint="비밀번호"
+            android:lines="1"
+            android:maxLines="1"
+            android:textSize="16dp"
+            android:textColorHint="@color/light_grey"
+            android:inputType="textPassword"
+            />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnLoginSignIn"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="Sign In"
+            android:textColor="@color/white"
+            android:background="@color/colorPrimary"
+            android:layout_marginTop="@dimen/margin"/>
+
+        <androidx.appcompat.widget.AppCompatCheckBox
+            android:id="@+id/cbIsAutoLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="자동 로그인"
+            android:textSize="16dp"/>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:minHeight="100dp"
+        android:layout_weight="1"/>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/app_padding"
+        android:background="#DFDFDF"
+        >
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="카우클로니클은 젖소, 한우 통합 통합관리 플랫폼입니다."
+            android:textSize="14dp"
+            android:gravity="center"
+            />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="회원가입 및 사용은 아래 연락처로 문의바랍니다."
+            android:textSize="14dp"
+            android:gravity="center"
+            />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="031-332-4309"
+            android:textSize="16dp"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/app_margin"
+            />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="enb8375@gmail.com"
+            android:textSize="16dp"
+            android:gravity="center"
+            />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</LinearLayout>

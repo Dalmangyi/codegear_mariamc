@@ -63,12 +63,22 @@
     <dimen name="info_message_height">48dp</dimen>
     <dimen name="info_message_font_size">17sp</dimen>
     <dimen name="barcode_font_size">10sp</dimen>
+    <dimen name="app_margin">18dp</dimen>
     <dimen name="app_margin_right">18dp</dimen>
     <dimen name="app_margin_left">18dp</dimen>
     <dimen name="circle_indicator_radius">8dp</dimen>
     <dimen name="app_padding_top">36dp</dimen>
     <dimen name="app_padding_bottom">40dp</dimen>
+    <dimen name="app_padding">16dp</dimen>
     <dimen name="nav_viewpadding">4dp</dimen>
     <dimen name="margin">16dp</dimen>
     <dimen name="marginbottom">8dp</dimen>
+
+    <!--  TableView   -->
+    <dimen name="tableview_text_size">12sp</dimen>
+    <dimen name="tableview_row_text_size">14sp</dimen>
+    <dimen name="tableview_cell_height">40dp</dimen>
+    <!-- TableView Library에서 Overriding하기 때문에 name을 바꾸면 다른 name으로 안됨.-->
+    <dimen name="default_row_header_width">100dp</dimen>
+    <dimen name="default_column_header_height">40dp</dimen>
 </resources>
