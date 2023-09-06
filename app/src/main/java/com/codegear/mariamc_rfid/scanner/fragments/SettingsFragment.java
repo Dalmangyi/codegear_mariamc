@@ -31,16 +31,15 @@ import com.zebra.rfid.api3.SCAN_BATCH_MODE;
 //import com.codegear.mariamc_rfid.scanner.activities.ActiveScannerActivity;
 
 
-
 /**
  * A simple {@link Fragment} subclass.
  */
 public class SettingsFragment extends Fragment {
     /* Use this factory method to create a new instance of
-    * this fragment using the provided parameters.
-    *
-            * @return A new instance of fragment AdvancedFragment.
-            */
+     * this fragment using the provided parameters.
+     *
+     * @return A new instance of fragment AdvancedFragment.
+     */
     private View settingsFragmentView;
     private static String TAG = "SettingsFragment";
 
@@ -51,11 +50,13 @@ public class SettingsFragment extends Fragment {
     public SettingsFragment() {
         // Required empty public constructor
     }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
     }
+
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 //        inflater.inflate(R.menu.menu_scan_settings, menu);
@@ -74,34 +75,33 @@ public class SettingsFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        settingsFragmentView  = inflater.inflate(R.layout.fragment_settings, container, false);
-        SwitchCompat picklistMode = (SwitchCompat)settingsFragmentView.findViewById(R.id.switch_picklist_mode);
-        final TextView txtPicklistMode = (TextView)settingsFragmentView.findViewById(R.id.txt_picklist_mode);
-        if(picklistMode!=null) {
+        settingsFragmentView = inflater.inflate(R.layout.fragment_settings, container, false);
+        SwitchCompat picklistMode = (SwitchCompat) settingsFragmentView.findViewById(R.id.switch_picklist_mode);
+        final TextView txtPicklistMode = (TextView) settingsFragmentView.findViewById(R.id.txt_picklist_mode);
+        if (picklistMode != null) {
 
             int picklistInt = ((ActiveDeviceActivity) requireActivity()).getPickListMode();
             boolean picklistBool = false;
             if (picklistInt == 2) {
                 picklistBool = true;
             }
-            Log.i("PickListMode", "Setting "+picklistBool +" int value = "+picklistInt);
+            Log.i("PickListMode", "Setting " + picklistBool + " int value = " + picklistInt);
             picklistMode.setChecked(picklistBool);
-            if(picklistBool){
+            if (picklistBool) {
                 txtPicklistMode.setTextColor(ContextCompat.getColor(((ActiveDeviceActivity) getActivity()), R.color.font_color));
-            }else{
+            } else {
                 txtPicklistMode.setTextColor(ContextCompat.getColor(((ActiveDeviceActivity) getActivity()), R.color.inactive_text));
             }
             picklistMode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     int picklistInt = 0;
-                    if(isChecked){
+                    if (isChecked) {
                         txtPicklistMode.setTextColor(ContextCompat.getColor(((ActiveDeviceActivity) getActivity()), R.color.font_color));
                         picklistInt = 2;
-                    }else{
+                    } else {
                         txtPicklistMode.setTextColor(ContextCompat.getColor(((ActiveDeviceActivity) getActivity()), R.color.inactive_text));
                     }
                     ((ActiveDeviceActivity) getActivity()).setPickListMode(picklistInt);
@@ -109,15 +109,15 @@ public class SettingsFragment extends Fragment {
             });
         }
 
-        final TextView txtVibration = (TextView)settingsFragmentView.findViewById(R.id.vibration_feedback_text);
-        TableRow tblRowFW = (TableRow)settingsFragmentView.findViewById(R.id.vibration_feedback_tbl_row);
+        final TextView txtVibration = (TextView) settingsFragmentView.findViewById(R.id.vibration_feedback_text);
+        TableRow tblRowFW = (TableRow) settingsFragmentView.findViewById(R.id.vibration_feedback_tbl_row);
 
-        if(txtVibration!=null && tblRowFW!=null) {
-            boolean isPagerMotorAvailable= ((ActiveDeviceActivity) requireActivity()).isPagerMotorAvailable();
-            if(isPagerMotorAvailable) {
+        if (txtVibration != null && tblRowFW != null) {
+            boolean isPagerMotorAvailable = ((ActiveDeviceActivity) requireActivity()).isPagerMotorAvailable();
+            if (isPagerMotorAvailable) {
                 tblRowFW.setClickable(true);
                 txtVibration.setTextColor(ContextCompat.getColor(((ActiveDeviceActivity) getActivity()), R.color.font_color));
-            }else{
+            } else {
                 tblRowFW.setClickable(false);
                 txtVibration.setTextColor(ContextCompat.getColor(((ActiveDeviceActivity) getActivity()), R.color.inactive_text));
             }
@@ -134,10 +134,10 @@ public class SettingsFragment extends Fragment {
                 if (RFIDController.mConnectedReader != null && RFIDController.scanBatchMode != position) {
                     try {
                         RFIDResults rfidResults = RFIDController.mConnectedReader.Config.setScanBatchMode((SCAN_BATCH_MODE) SCAN_BATCH_MODE.GetBatchModeCodeValue(position));
-                        if(rfidResults == RFIDResults.RFID_API_SUCCESS){
+                        if (rfidResults == RFIDResults.RFID_API_SUCCESS) {
                             Toast.makeText(getActivity(), "Scan Batch Mode Applied", Toast.LENGTH_SHORT).show();
                             RFIDController.scanBatchMode = RFIDController.mConnectedReader.Config.getScanBatchModeConfig().getValue();
-                        }else{
+                        } else {
                             Toast.makeText(getActivity(), "Failed to Apply Scan Batch Mode", Toast.LENGTH_SHORT).show();
                         }
                     } catch (InvalidUsageException | OperationFailureException e) {
@@ -145,6 +145,7 @@ public class SettingsFragment extends Fragment {
                     }
                 }
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
@@ -174,7 +175,7 @@ public class SettingsFragment extends Fragment {
     }
 
     @Override
-    public void onResume (){
+    public void onResume() {
         super.onResume();
     }
 

@@ -112,11 +112,18 @@ public class ActiveDeviceAdapter extends FragmentStatePagerAdapter {
     public static final int SCAN_TAB = 2;
     public static final int BARCODE_TAB = SCAN_TAB;
 
+    public static final int COWCHRONICLE_TAB = 200;
+
+
+
+
     private static int currentPostion = RFID_TAB;
     private static int mNextRFIDFragmentId = RAPID_READ_TAB;
     private static int mNextSCANFragmentId = SCAN_DATAVIEW_TAB;
     private static int mNextRedaerListFragmentId = READER_LIST_TAB;
     private static int mNextSettingsFragmentId = MAIN_HOME_SETTINGS_TAB;
+//    private static int mNextCowChronicleFragmentId =
+
     private Fragment mRfidFragment;
     private Fragment mScannerFragment;
     private Fragment mReadersFragment;
@@ -480,6 +487,7 @@ public class ActiveDeviceAdapter extends FragmentStatePagerAdapter {
            //     Constants.logAsMessage(TYPE_DEBUG, getClass().getSimpleName(), "3rd Tab Selected");
            //     return AdvancedFragment.newInstance();
 
+            case COWCHRONICLE_TAB:
             default:
                 return null;
         }
@@ -518,8 +526,6 @@ public class ActiveDeviceAdapter extends FragmentStatePagerAdapter {
         mNextRedaerListFragmentId = NONOPER_TAB;
         mNextSCANFragmentId = NONOPER_TAB;
         mNextRFIDFragmentId = NONOPER_TAB;
-
-
     }
 
     public int getSettingsMode() {

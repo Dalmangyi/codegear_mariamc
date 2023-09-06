@@ -733,9 +733,9 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
 
         TextView Status = (TextView) dialogFwRebooting.findViewById(R.id.fwstatus);
         if (Application.isFirmwareUpdateSuccess == true) {
-            fwStatus = "Firmware update Success. ";  //Toast.makeText(this, "Firmware update Success", Toast.LENGTH_SHORT).show();
+            fwStatus = "펌웨어 업데이트 성공";  //Toast.makeText(this, "Firmware update Success", Toast.LENGTH_SHORT).show();
         } else {
-            fwStatus = "Firmware update failed. ";  //Toast.makeText(this, "Firmware update Failed", Toast.LENGTH_SHORT).show();
+            fwStatus = "펌웨어 업데이트 실패";  //Toast.makeText(this, "Firmware update Failed", Toast.LENGTH_SHORT).show();
             Status.setTextColor(Color.RED);
         }
 
@@ -790,13 +790,6 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
 
     @Override
     protected void onNewIntent(Intent intent) {
-        /**
-         * This method gets called, when a new Intent gets associated with the current activity instance.
-         * Instead of creating a new activity, onNewIntent will be called. For more information have a look
-         * at the documentation.
-         *
-         * In our case this method gets called, when the user attaches a Tag to the device.
-         */
         super.onNewIntent(intent);
         handleIntent(intent);
     }
@@ -990,12 +983,10 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
 
     @Override
     public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
-
     }
 
     @Override
     public void onTabReselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
-
     }
 
 
@@ -1035,7 +1026,7 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
 
     public void enableLoggingClicked(View view) {
         if ((RFIDController.mConnectedReader != null) && RFIDController.mConnectedReader.getHostName().startsWith("MC33")) {
-            Toast.makeText(this, "Real time log not supported for MC33", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "MC33는 실시간 로그가 지원되지 않습니다.", Toast.LENGTH_SHORT).show();
         }
         loadNextFragment(LOGGER_FRAGMENT_TAB);
         return;
@@ -1079,10 +1070,10 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
                 loadNextFragment(KEYREMAP_TAB);
             } else {
                 view.setEnabled(false);
-                Toast.makeText(this, "Trigger Mapping feature is not supported for " + mConnectedReader.getHostName(), Toast.LENGTH_LONG).show();
+                Toast.makeText(this, " " + mConnectedReader.getHostName()+"는 트리거 매핑 기능을 지원하지 않습니다.", Toast.LENGTH_LONG).show();
             }
         } else {
-            Toast.makeText(this, "Trigger Mapping feature is not supported when device not connected ", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "장치가 연결되지 않은 경우 트리거 매핑 기능이 지원되지 않습니다.", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -1150,7 +1141,6 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
     }
 
     public void SetTunnelMode(View view) {
-
         String inXML = "<inArgs><scannerID>" + Application.currentConnectedScannerID + "</scannerID><cmdArgs><arg-int>" + 18 + "</arg-int></cmdArgs></inArgs>";
         StringBuilder outXML = new StringBuilder();
         executeCommand(DCSSDKDefs.DCSSDK_COMMAND_OPCODE.DCSSDK_SET_ACTION, inXML, outXML, Application.currentConnectedScannerID);
@@ -1220,10 +1210,6 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                // Fragment fragment = mAdapter.getRegisteredFragment(BARCODE_TAB);
-                // if((fragment instanceof BarcodeFargment) == false)
-                //     return;
-
                 BarcodeFargment barcodeFargment = (BarcodeFargment) mAdapter.getRegisteredFragment(BARCODE_TAB);
                 if (barcodeFargment != null) {
 
@@ -1255,7 +1241,6 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
 
     @Override
     public void scannerImageEvent(byte[] imageData) {
-
     }
 
     @Override
@@ -1275,7 +1260,6 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
     }
 
     public void scanTrigger(View view) {
-
         String in_xml = "<inArgs><scannerID>" + Application.currentConnectedScannerID + "</scannerID></inArgs>";
         cmdExecTask = new MyAsyncTask(Application.currentConnectedScannerID, DCSSDKDefs.DCSSDK_COMMAND_OPCODE.DCSSDK_DEVICE_PULL_TRIGGER, null);
         cmdExecTask.execute(new String[]{in_xml});
@@ -1287,7 +1271,6 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
      * @param view
      */
     public void loadScale(View view) {
-
         String in_xml = "<inArgs><scannerID>" + scannerID + "</scannerID></inArgs>";
         new AsyncTaskScaleAvailable(scannerID, DCSSDKDefs.DCSSDK_COMMAND_OPCODE.DCSSDK_READ_WEIGHT, this, ScaleActivity.class).execute(new String[]{in_xml});
 
@@ -1374,7 +1357,6 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
                     Toast.makeText(this, "연결된 장치가 없습니다. ", Toast.LENGTH_SHORT).show();
                 }
                 break;
-
             case R.id.nav_battery_statics:
                 showBatteryStats();
                 break;
@@ -1384,14 +1366,11 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
             case R.id.nav_settings:
                 viewPager.setCurrentItem(mAdapter.getSettingsTab());
                 loadNextFragment(MAIN_HOME_SETTINGS_TAB);
-
-
                 break;
             case R.id.menu_readers:
                 Fragment fragment = getCurrentFragment(READERS_TAB);
-
-                if (fragment instanceof PairOperationsFragment) loadNextFragment(READER_LIST_TAB);
-
+                if (fragment instanceof PairOperationsFragment)
+                    loadNextFragment(READER_LIST_TAB);
                 viewPager.setCurrentItem(READERS_TAB);
                 break;
             case R.id.nav_connection_help:
@@ -1424,8 +1403,6 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
 
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
-        // Always call the superclass so it can save the view hierarchy state
-
         super.onSaveInstanceState(savedInstanceState);
         savedInstanceState.putString("default_tab", "readers");
         onSaveInstanceState = true;
@@ -1434,8 +1411,6 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-
-
         if (waitingForFWReboot == false) {
             //viewPager.setCurrentItem(READERS_TAB);
             setCurrentTabFocus(READERS_TAB);
@@ -1471,7 +1446,6 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
     }
 
     public void sendNotification(String actionReaderStatusObtained, String info) {
-
         mRFIDBaseActivity.sendNotification(actionReaderStatusObtained, info);
     }
 
@@ -1496,28 +1470,21 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
         //Show the selected item
         switch (settingItemSelected) {
             case R.id.antenna:
-
                 loadNextFragment(ANTENNA_SETTINGS_TAB);
                 break;
             case R.id.singulation_control:
-
                 loadNextFragment(SINGULATION_CONTROL_TAB);
                 break;
             case R.id.start_stop_triggers:
-
                 loadNextFragment(START_STOP_TRIGGER_TAB);
                 break;
             case R.id.tag_reporting:
-
                 loadNextFragment(TAG_REPORTING_TAB);
                 break;
             case R.id.save_configuration:
-
                 loadNextFragment((SAVE_CONFIG_TAB));
-
                 break;
             case R.id.power_management:
-                fragment = DPOSettingsFragment.newInstance();
                 loadNextFragment(DPO_SETTING_TAB);
                 break;
         }
@@ -1803,7 +1770,6 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
 
 
     public void loadUpdateFirmware(View view) {
-
         int tab = RFD_DEVICE_MODE == DEVICE_STD_MODE ? SCAN_TAB : SETTINGS_TAB;
         setCurrentTabFocus(tab);
         loadNextFragment(UPDATE_FIRMWARE_TAB);
@@ -1811,13 +1777,11 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
     }
 
     public void loadReaderDetails(ReaderDevice readerDevice) {
-
         connectedReaderDetails(readerDevice);
         loadNextFragment(READER_DETAILS_TAB);
     }
 
     private void connectedReaderDetails(ReaderDevice readerDevice) {
-
         mConnectedReaderDetails = readerDevice;
     }
 
@@ -2426,14 +2390,11 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
                     mAdapter.setReaderListMOde(READER_DETAILS_TAB);
                     getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(READERS_TAB)).commit();
                     break;
-
                 case READER_WIFI_SETTINGS_TAB:
                     PageTitle = "Wi-Fi";
                     mAdapter.setReaderListMOde(READER_WIFI_SETTINGS_TAB);
                     getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(READERS_TAB)).commit();
                     break;
-
-
                 case MAIN_RFID_SETTINGS_TAB:
                     PageTitle = "RFID 설정";
                     mAdapter.setSettingsMode(MAIN_RFID_SETTINGS_TAB);
@@ -2464,19 +2425,16 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
                     mAdapter.setSettingsMode(RFID_ADVANCED_OPTIONS_TAB);
                     getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
                     break;
-
                 case RFID_REGULATORY_TAB:
                     PageTitle = "규제";
                     mAdapter.setSettingsMode(RFID_REGULATORY_TAB);
                     getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
                     break;
-
                 case RFID_BEEPER_TAB:
                     PageTitle = "신호음";
                     mAdapter.setSettingsMode(RFID_BEEPER_TAB);
                     getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
                     break;
-
                 case RFID_LED_TAB:
                     PageTitle = "LED";
                     mAdapter.setSettingsMode(RFID_LED_TAB);
@@ -2497,7 +2455,6 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
                     mAdapter.setSettingsMode(ANTENNA_SETTINGS_TAB);
                     getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
                     break;
-
                 case SINGULATION_CONTROL_TAB:
                     PageTitle = "싱귤레이션";
                     mAdapter.setSettingsMode(SINGULATION_CONTROL_TAB);
@@ -2699,103 +2656,6 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
         mRFIDBaseActivity.startbeepingTimer();
     }
 
-    public class ExpandableListAdapter extends BaseExpandableListAdapter {
-
-        private Context _context;
-        private List<String> _listDataHeader; // header titles
-        // child data in format of header title, child title
-        private HashMap<String, List<String>> _listDataChild;
-
-        public ExpandableListAdapter(Context context, List<String> listDataHeader, HashMap<String, List<String>> listChildData) {
-            this._context = context;
-            this._listDataHeader = listDataHeader;
-            this._listDataChild = listChildData;
-        }
-
-        @Override
-        public Object getChild(int groupPosition, int childPosititon) {
-            return this._listDataChild.get(this._listDataHeader.get(groupPosition)).get(childPosititon);
-        }
-
-        @Override
-        public long getChildId(int groupPosition, int childPosition) {
-            return childPosition;
-        }
-
-        @Override
-        public View getChildView(int groupPosition, final int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-
-            final String childText = (String) getChild(groupPosition, childPosition);
-
-            if (convertView == null) {
-                LayoutInflater infalInflater = (LayoutInflater) this._context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                convertView = infalInflater.inflate(R.layout.drawer_list_sub_item, null);
-            }
-            TextView txtListChild = (TextView) convertView.findViewById(R.id.drawerItemName);
-
-            txtListChild.setText(childText);
-
-            // adding icon to expandable list view
-            ImageView imgListGroup = (ImageView) convertView.findViewById(R.id.drawerIcon);
-
-            if (groupPosition == 1) {
-                imgListGroup.setImageResource(managexx_icon[childPosition]);
-            }
-            //imgListGroup.setImageResource(icon[groupPosition+childPosition]);
-
-            return convertView;
-        }
-
-        @Override
-        public int getChildrenCount(int groupPosition) {
-            return this._listDataChild.get(this._listDataHeader.get(groupPosition)).size();
-        }
-
-        @Override
-        public Object getGroup(int groupPosition) {
-            return this._listDataHeader.get(groupPosition);
-        }
-
-        @Override
-        public int getGroupCount() {
-            return this._listDataHeader.size();
-        }
-
-        @Override
-        public long getGroupId(int groupPosition) {
-            return groupPosition;
-        }
-
-        @Override
-        public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
-            String headerTitle = (String) getGroup(groupPosition);
-            if (convertView == null) {
-                LayoutInflater infalInflater = (LayoutInflater) this._context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                convertView = infalInflater.inflate(R.layout.drawer_list_item, null);
-            }
-
-            TextView lblListHeader = (TextView) convertView.findViewById(R.id.drawerItemName);
-            lblListHeader.setText(headerTitle);
-
-            // adding icon to expandable list view
-            ImageView imgListGroup = (ImageView) convertView.findViewById(R.id.drawerIcon);
-
-            imgListGroup.setImageResource(icon[groupPosition]);
-
-            return convertView;
-        }
-
-        @Override
-        public boolean hasStableIds() {
-            return false;
-        }
-
-        @Override
-        public boolean isChildSelectable(int groupPosition, int childPosition) {
-            return true;
-        }
-    }
-
     public void performtagmatchClick() {
         if (inventoryBT != null) {
             if (mIsInventoryRunning) {
@@ -2803,7 +2663,6 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
                 startbeepingTimer();
             }
         }
-
     }
 
 
@@ -2849,20 +2708,6 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
         return msg;
     }
 
-    private void ShowPlugInPathChangeDialog() {
-        if (!isFinishing()) {
-            final Dialog dialog = new Dialog(ActiveDeviceActivity.this);
-            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-            dialog.setContentView(R.layout.dialog_plugin_path_change);
-            dialog.setCancelable(false);
-            dialog.setCanceledOnTouchOutside(false);
-            dialog.show();
-            TextView declineButton = (TextView) dialog.findViewById(R.id.btn_ok);
-            declineButton.setOnClickListener(v -> {
-                dialog.dismiss();
-            });
-        }
-    }
 
 
     public void createDWProfile() {
