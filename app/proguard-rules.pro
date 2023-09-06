@@ -22,3 +22,8 @@
 
 # RFID API3 SDK package maintained
 -keep public class com.zebra.rfid.** { *; }
+
+
+# AdvancedWebView
+-keep class * extends android.webkit.WebChromeClient { *; }
+-dontwarn im.delight.android.webview.**

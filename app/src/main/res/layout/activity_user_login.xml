@@ -2,7 +2,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
     android:orientation="vertical"
     android:paddingBottom="@dimen/app_margin_left"
@@ -54,10 +53,11 @@
             android:textSize="16dp"
             android:lines="1"
             android:maxLines="1"
-            android:inputType="text"
+            android:inputType="text|textVisiblePassword"
             android:textColorHint="@color/light_grey"
-            android:backgroundTint="@android:color/holo_red_dark"
+            android:backgroundTint="@color/light_grey"
             android:drawablePadding="10dp"
+            android:privateImeOptions="defaultInputmode=english;"
             />
 
         <androidx.appcompat.widget.AppCompatEditText
@@ -73,7 +73,9 @@
             android:maxLines="1"
             android:textSize="16dp"
             android:textColorHint="@color/light_grey"
+            android:backgroundTint="@color/light_grey"
             android:inputType="textPassword"
+            android:privateImeOptions="defaultInputmode=english;"
             />
 
         <androidx.appcompat.widget.AppCompatButton
@@ -89,8 +91,10 @@
             android:id="@+id/cbIsAutoLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:checked="true"
             android:text="자동 로그인"
-            android:textSize="16dp"/>
+            android:textSize="16dp"
+            android:buttonTint="@color/colorPrimary"/>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

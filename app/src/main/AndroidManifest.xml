@@ -48,7 +48,7 @@
         android:usesCleartextTraffic="true">
 
         <activity
-            android:name="com.codegear.mariamc_rfid.cowchronicle.activities.CowTagActivity"
+            android:name="com.codegear.mariamc_rfid.cowchronicle.activities.UserLoginActivity"
             android:configChanges="keyboardHidden|screenSize|fontScale"
             android:exported="true"
             android:label="cow tag"
@@ -61,6 +61,34 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name="com.codegear.mariamc_rfid.cowchronicle.activities.WebviewActivity"
+            android:configChanges="keyboardHidden|screenSize|fontScale"
+            android:exported="true"
+            android:label="cow tag"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
+
+                        <intent-filter>
+                            <action android:name="android.intent.action.MAIN" />
+                            <category android:name="android.intent.category.LAUNCHER" />
+                        </intent-filter>
+        </activity>
+
+
+        <activity
+            android:name="com.codegear.mariamc_rfid.cowchronicle.activities.CowTagActivity"
+            android:configChanges="keyboardHidden|screenSize|fontScale"
+            android:exported="true"
+            android:label="cow tag"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
+
+            <!--            <intent-filter>-->
+            <!--                <action android:name="android.intent.action.MAIN" />-->
+            <!--                <category android:name="android.intent.category.LAUNCHER" />-->
+            <!--            </intent-filter>-->
+        </activity>
         <activity
             android:name="com.codegear.mariamc_rfid.DeviceDiscoverActivity"
             android:configChanges="keyboardHidden|screenSize|fontScale"

@@ -2,6 +2,7 @@ package com.codegear.mariamc_rfid.application;
 
 import android.bluetooth.BluetoothDevice;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.ToneGenerator;
 import android.nfc.NdefMessage;
 import android.nfc.NfcAdapter;
@@ -11,6 +12,8 @@ import android.util.ArrayMap;
 import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.security.crypto.EncryptedSharedPreferences;
+import androidx.security.crypto.MasterKey;
 
 import com.codegear.mariamc_rfid.rfidreader.common.PreFilters;
 import com.codegear.mariamc_rfid.rfidreader.reader_connection.ScanPair;
@@ -38,6 +41,8 @@ import com.zebra.rfid.api3.UNIQUE_TAG_REPORT_SETTING;
 import com.zebra.scannercontrol.DCSScannerInfo;
 import com.zebra.scannercontrol.SDKHandler;
 
+import java.io.IOException;
+import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
@@ -263,6 +268,8 @@ public class Application extends android.app.Application {
     public static boolean showAdvancedOptions = false;
     public static boolean rwAdvancedOptions = false;
 
+    public static SharedPreferences pref;
+
 
     public static int minScreenWidth = 360;
 
@@ -272,6 +279,14 @@ public class Application extends android.app.Application {
         Foreground.init(this);
         //this keyword referring to Context of the sample application
         sdkHandler = new SDKHandler(this, false);
+
+        try {
+            initPrefs();
+        } catch (GeneralSecurityException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**
@@ -463,5 +478,17 @@ public class Application extends android.app.Application {
         return String.copyValueOf(ch);
     }
 
+    private void initPrefs() throws GeneralSecurityException, IOException {
+        MasterKey masterKeyAlias = new MasterKey.Builder(this, MasterKey.DEFAULT_MASTER_KEY_ALIAS)
+                .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
+                .build();
 
+        pref = EncryptedSharedPreferences.create(
+            this.getApplicationContext(), // Context
+            "encrypted_pref_file", // 파일 명
+            masterKeyAlias,
+            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV, // AES256_SIV으로 key를 암호화
+            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM // AES256_GCM으로 value를 암호화
+        );
+    }
 }

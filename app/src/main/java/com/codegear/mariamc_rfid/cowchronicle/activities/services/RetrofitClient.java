@@ -8,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitClient {
 
-    private static final String BASE_URL = "http://marivet.co.kr/v2/ahebf/chalet/fetch_data.php?var1=002157718232";
+    private static final String BASE_URL = "http://marivet.co.kr:5139/v2/ahebf/chalet/";
 
     public static CowChronicleService getApiService(){
         return getInstance().create(CowChronicleService.class);
