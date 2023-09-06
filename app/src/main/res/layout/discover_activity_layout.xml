@@ -20,22 +20,23 @@
             android:layout_height="?attr/actionBarSize"
             android:background="@color/colorPrimary"
             android:elevation="4dp"
-            app:navigationIcon="@drawable/ic_hamburger"
-            app:titleTextColor="@color/white"
             android:theme="@style/ThemeOverlay.AppCompat.Dark"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+            app:navigationIcon="@drawable/ic_hamburger"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:titleTextColor="@color/white" />
 
         <FrameLayout
             android:id="@+id/settings_content_frame"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@android:color/white"/>
+            android:background="@android:color/white" />
 
     </LinearLayout>
 
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/disnav_view"
+        style="@style/NavigationTheme"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
@@ -43,54 +44,64 @@
         app:headerLayout="@layout/dis_main_menu"
         app:menu="@menu/disactivity_home_drawer">
 
+
         <RelativeLayout
-            android:layout_height="match_parent"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/margin"
-            android:layout_marginRight="@dimen/margin"
-            >
+            android:layout_marginRight="@dimen/margin">
 
-            <TextView
+            <RelativeLayout
+                android:id="@+id/containerDrawerBottom"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/battery_life"
-                android:text="@string/batterylife"
-                android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                android:layout_above="@+id/battery_percentage"
-                android:paddingBottom="@dimen/nav_viewpadding"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_above="@+id/disconnect_btn"
-                android:text="0%"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:padding="@dimen/nav_viewpadding"
-                android:paddingBottom="@dimen/default_padding"
-                style="@style/style_bold_font"
-                android:id="@+id/battery_percentage"/>
+                android:layout_height="130dp"
+                android:layout_alignParentBottom="true">
 
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:id="@+id/disbatteryLevel"
-                android:layout_above="@+id/disconnect_btn"
-                android:layout_alignParentRight="true"
-                android:paddingBottom="@dimen/default_padding"
-                app:srcCompat="@drawable/sled_battery_level"
-                />
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingBottom="@dimen/marginbottom"
-                android:layout_alignParentBottom="true"
-                android:gravity="center"
-                android:id="@+id/disconnect_btn"
-                android:text="@string/disconnectrfid"
-                android:backgroundTint="@color/colorPrimary"
-                android:layout_marginBottom="@dimen/margin"
-                />
+                <TextView
+                    android:id="@+id/battery_life"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/battery_percentage"
+                    android:paddingBottom="@dimen/nav_viewpadding"
+                    android:text="@string/batterylife"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+
+                <TextView
+                    android:id="@+id/battery_percentage"
+                    style="@style/style_bold_font"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/disconnect_btn"
+                    android:padding="@dimen/nav_viewpadding"
+                    android:paddingBottom="@dimen/default_padding"
+                    android:text="0%"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+                <ImageView
+                    android:id="@+id/disbatteryLevel"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_above="@+id/disconnect_btn"
+                    android:layout_alignParentRight="true"
+                    android:paddingBottom="@dimen/default_padding"
+                    app:srcCompat="@drawable/sled_battery_level" />
+
+                <Button
+                    android:id="@+id/disconnect_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:gravity="center"
+                    android:paddingBottom="@dimen/marginbottom"
+                    android:text="@string/disconnectrfid"
+                    android:layout_marginBottom="@dimen/margin"/>
+
+            </RelativeLayout>
+
         </RelativeLayout>
+
+
     </com.google.android.material.navigation.NavigationView>
 
 

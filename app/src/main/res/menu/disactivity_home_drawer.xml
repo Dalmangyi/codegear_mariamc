@@ -11,6 +11,18 @@
         android:title="전자이표"
         android:visible="true" />
 
+
+    <item
+        android:id="@+id/menu_empty"
+        android:title=""
+        android:visible="true" />
+
+
+    <item
+        android:id="@+id/nav_user_info"
+        android:title="사용자"
+        android:visible="true" />
+
     <item
         android:id="@+id/nav_battery_statics"
         android:title="배터리 상태"

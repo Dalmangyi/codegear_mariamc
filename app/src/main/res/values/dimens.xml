@@ -81,4 +81,7 @@
     <!-- TableView Library에서 Overriding하기 때문에 name을 바꾸면 다른 name으로 안됨.-->
     <dimen name="default_row_header_width">100dp</dimen>
     <dimen name="default_column_header_height">40dp</dimen>
+
+    <!--  Drawer  -->
+    <dimen name="drawer_navigationview_item_height">60dp</dimen>
 </resources>

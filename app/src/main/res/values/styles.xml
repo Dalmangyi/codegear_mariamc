@@ -522,4 +522,8 @@
         <item name="background">@android:color/transparent</item>
     </style>
 
+    <!--  Drawer  -->
+    <style name="NavigationTheme" parent="AppTheme">
+        <item name="listPreferredItemHeightSmall">@dimen/drawer_navigationview_item_height</item>
+    </style>
 </resources>

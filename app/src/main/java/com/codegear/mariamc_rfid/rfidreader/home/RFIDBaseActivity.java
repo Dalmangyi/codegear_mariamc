@@ -717,10 +717,6 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler, Navigat
 //            case R.id.nav_readerslist:
 //                selectItem(7);
 //                break;
-            case R.id.nav_about:
-                //selectItem(8);
-                mActivity.loadNextFragment(RFID_ABOUT_TAB);
-                break;
         }
         DrawerLayout drawer = (DrawerLayout) mActivity.findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

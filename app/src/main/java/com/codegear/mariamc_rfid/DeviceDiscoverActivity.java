@@ -28,6 +28,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -48,6 +50,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
 import com.codegear.mariamc_rfid.application.Application;
+import com.codegear.mariamc_rfid.cowchronicle.utils.PixelUtil;
 import com.codegear.mariamc_rfid.rfidreader.common.CustomProgressDialog;
 import com.codegear.mariamc_rfid.rfidreader.home.RFIDEventHandler;
 import com.codegear.mariamc_rfid.rfidreader.reader_connection.InitReadersListFragment;
@@ -75,9 +78,9 @@ import com.zebra.rfid.api3.ReaderDevice;
 import com.zebra.rfid.api3.Readers;
 import com.zebra.scannercontrol.DCSSDKDefs;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-//import com.zebra.scannercontrol.SDKHandler;
 
 public class DeviceDiscoverActivity extends BaseActivity implements Readers.RFIDReaderEventHandler, ResponseHandlerInterfaces.ReaderDeviceFoundHandler, ResponseHandlerInterfaces.BatteryNotificationHandler, ScannerAppEngine.IScannerAppEngineDevConnectionsDelegate {
 
@@ -107,24 +110,11 @@ public class DeviceDiscoverActivity extends BaseActivity implements Readers.RFID
     private static final String INTENT_ACTION_GRANT_USB = "com.zebra.rfid.app.USB_PERMISSION";
 
 
-    protected Boolean isActivityRunning(Class activityClass) {
-        ActivityManager activityManager = (ActivityManager) getBaseContext().getSystemService(Context.ACTIVITY_SERVICE);
-        List<ActivityManager.RunningTaskInfo> tasks = activityManager.getRunningTasks(Integer.MAX_VALUE);
-
-        for (ActivityManager.RunningTaskInfo task : tasks) {
-            if (activityClass.getCanonicalName().equalsIgnoreCase(task.baseActivity.getPackageName()))
-                return true;
-        }
-
-        return false;
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mDeviceDiscoverActivity = this;
         mSavedInstanceState = savedInstanceState;
-        //setContentView(R.layout.activity_settings_detail);
         if (mConnectedReader != null) {
             Log.d(TAG, "There is no way you can come here ");
         }
@@ -142,7 +132,6 @@ public class DeviceDiscoverActivity extends BaseActivity implements Readers.RFID
         mDrawerLayout.addDrawerListener(new DrawerLayout.DrawerListener() {
             @Override
             public void onDrawerSlide(@NonNull View drawerView, float slideOffset) {
-
             }
 
             @Override
@@ -167,22 +156,68 @@ public class DeviceDiscoverActivity extends BaseActivity implements Readers.RFID
 
             @Override
             public void onDrawerStateChanged(int newState) {
-
             }
         });
         toggle.syncState();
+
+
+        //사이즈 측정
+        View vDisMainMenu = getLayoutInflater().inflate(R.layout.dis_main_menu,null, false);
+        vDisMainMenu.measure(0, 0);
+        int disMainMenuHeight = vDisMainMenu.getMeasuredHeight();
+        int screenHeight = PixelUtil.getScreenHeightPx(this);
+        int navigationViewMenuHeight = (int)getResources().getDimension(R.dimen.drawer_navigationview_item_height);
+
+        //NavigationView의 특정 Menu에 사이즈 적용
         NavigationView navigationView = (NavigationView) findViewById(R.id.disnav_view);
         navigationView.setNavigationItemSelectedListener(this::onOptionsItemSelected);
-        View headerImageView = navigationView.getHeaderView(0);
-        iv_headerImageView = headerImageView.findViewById(R.id.imageView);
-        iv_headerImageView.setOnClickListener(new View.OnClickListener() {
+        MenuItem menuItem = navigationView.getMenu().findItem(R.id.menu_empty);
+        View viewContainerDrawerBottom = findViewById(R.id.containerDrawerBottom);
+        viewContainerDrawerBottom.measure(0,0);
+        int drawerBottomHeight = viewContainerDrawerBottom.getMeasuredHeight();
+        final View v = getLayoutInflater().inflate(R.layout.drawer_menu_custom_item, null);
+        v.addOnAttachStateChangeListener(new View.OnAttachStateChangeListener() {
+            int originalHeight = 0;
+
             @Override
-            public void onClick(View v) {
-                if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
-                    mDrawerLayout.closeDrawer(GravityCompat.START);
+            public void onViewAttachedToWindow(View v) {
+                View parent = (View) v.getParent();
+                if (parent != null)
+                    parent = (View)parent.getParent();
+
+                if (parent != null) {
+                    ViewGroup.LayoutParams p = parent.getLayoutParams();
+                    originalHeight = p.height;
+                    int drawerMenuCustomItemHeight = screenHeight - disMainMenuHeight - drawerBottomHeight - (navigationViewMenuHeight * 5);
+                    if (drawerMenuCustomItemHeight < 0){
+                        drawerMenuCustomItemHeight = 0;
+                    }
+                    p.height = drawerMenuCustomItemHeight;
+                    parent.setLayoutParams(p);
+                }
+            }
+
+            @Override
+            public void onViewDetachedFromWindow(View v) {
+                if (originalHeight != 0) {
+                    View parent = (View) v.getParent();
+                    if (parent != null)
+                        parent = (View)parent.getParent();
+
+                    if (parent != null) {
+                        ViewGroup.LayoutParams p = parent.getLayoutParams();
+                        p.height = originalHeight;
+                    }
                 }
             }
         });
+        menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+        menuItem.setActionView(v);
+        menuItem.setIcon(null);
+        menuItem.setTitle(null);
+
+
+
 
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -229,13 +264,6 @@ public class DeviceDiscoverActivity extends BaseActivity implements Readers.RFID
 
     @Override
     protected void onNewIntent(Intent intent) {
-        /**
-         * This method gets called, when a new Intent gets associated with the current activity instance.
-         * Instead of creating a new activity, onNewIntent will be called. For more information have a look
-         * at the documentation.
-         *
-         * In our case this method gets called, when the user attaches a Tag to the device.
-         */
         super.onNewIntent(intent);
         handleIntent(intent);
     }
@@ -266,11 +294,8 @@ public class DeviceDiscoverActivity extends BaseActivity implements Readers.RFID
         if (rawMessages != null && rawMessages.length > 0) {
 
             NdefMessage[] messages = new NdefMessage[rawMessages.length];
-
             for (int i = 0; i < rawMessages.length; i++) {
-
                 messages[i] = (NdefMessage) rawMessages[i];
-
             }
 
             Log.i(TAG, "message size = " + messages.length);
@@ -300,13 +325,6 @@ public class DeviceDiscoverActivity extends BaseActivity implements Readers.RFID
         iv_batteryLevel.setImageLevel(level);
     }
 
-    /* @Override
-     protected void onNewIntent(Intent intent) {
-         super.onNewIntent(intent);
-         if(!intent.getBooleanExtra("enable_toolbar", true)) {
-             getSupportActionBar().hide();
-         }
-     }*/
     private final BroadcastReceiver usbReceiver = new BroadcastReceiver() {
 
         public void onReceive(Context context, Intent intent) {
