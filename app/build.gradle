@@ -91,4 +91,8 @@ dependencies {
     //noinspection GradleDependency
     implementation 'com.afollestad.material-dialogs:core:0.9.6.0'
     implementation 'com.github.d-max:spots-dialog:1.1@aar'
+    implementation 'com.guolindev.permissionx:permissionx:1.7.1'
+    implementation 'com.fasterxml.jackson.core:jackson-core:2.9.7'
+    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.9.7'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.9.7'
 }

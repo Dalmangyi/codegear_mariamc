@@ -2,6 +2,7 @@
 <resources>
 
     <string name="app_name">카우클로니클</string>
+    <string name="app_setting_name">RFID 설정앱</string>
     <string name="action_settings">RFID 설정</string>
     <string name="rapid_read">빨리 읽기</string>
 
@@ -837,7 +838,7 @@
     <string name="navigation_drawer_open">네비게이션 창 열기</string>
 
     <!-- 카우크로니클 -->
-    <string name="title_activity_userinfo">사용자</string>
+    <string name="title_activity_userinfo">사용자 정보</string>
 
 
 

@@ -47,12 +47,12 @@
         tools:replace="android:allowBackup, android:appComponentFactory"
         android:usesCleartextTraffic="true">
 
+        <!-- 카우클로니클 시작 액티비티 : UserLoginActivity -->
         <activity
             android:name="com.codegear.mariamc_rfid.cowchronicle.activities.UserLoginActivity"
             android:configChanges="keyboardHidden|screenSize|fontScale"
             android:exported="true"
-            android:label="cow tag"
-            android:screenOrientation="portrait"
+            android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
 
             <intent-filter>
@@ -61,20 +61,30 @@
             </intent-filter>
         </activity>
 
+        <!-- 카우클로니클 설정용 액티비티 : DeviceDiscoverActivity -->
+        <activity
+            android:name="com.codegear.mariamc_rfid.DeviceDiscoverActivity"
+            android:configChanges="keyboardHidden|screenSize|fontScale"
+            android:exported="true"
+            android:label="@string/app_setting_name"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustResize">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+
+
         <activity
             android:name="com.codegear.mariamc_rfid.cowchronicle.activities.WebviewActivity"
             android:configChanges="keyboardHidden|screenSize|fontScale"
             android:exported="true"
-            android:label="cow tag"
-            android:screenOrientation="portrait"
+            android:label="WebView"
             android:theme="@style/AppTheme.NoActionBar">
-
-                        <intent-filter>
-                            <action android:name="android.intent.action.MAIN" />
-                            <category android:name="android.intent.category.LAUNCHER" />
-                        </intent-filter>
         </activity>
-
 
         <activity
             android:name="com.codegear.mariamc_rfid.cowchronicle.activities.CowTagActivity"
@@ -84,19 +94,6 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
 
-            <!--            <intent-filter>-->
-            <!--                <action android:name="android.intent.action.MAIN" />-->
-            <!--                <category android:name="android.intent.category.LAUNCHER" />-->
-            <!--            </intent-filter>-->
-        </activity>
-        <activity
-            android:name="com.codegear.mariamc_rfid.DeviceDiscoverActivity"
-            android:configChanges="keyboardHidden|screenSize|fontScale"
-            android:exported="true"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="adjustResize">
             <!--            <intent-filter>-->
             <!--                <action android:name="android.intent.action.MAIN" />-->
             <!--                <category android:name="android.intent.category.LAUNCHER" />-->
@@ -156,7 +153,8 @@
             android:label="@string/title_activity_scanners"
             android:launchMode="singleTask"
             android:parentActivityName="com.codegear.mariamc_rfid.scanner.activities.ScannersActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            />
 
         <activity
             android:name="com.codegear.mariamc_rfid.scanner.activities.ConnectionHelpActivity2"
@@ -183,7 +181,7 @@
             android:name="com.codegear.mariamc_rfid.scanner.activities.BaseActivity"
             android:configChanges="orientation|screenSize"
             android:label="@string/title_activity_base"
-            android:screenOrientation="portrait" />
+            />
 
         <activity
             android:name="com.codegear.mariamc_rfid.ActiveDeviceActivity"
@@ -191,11 +189,9 @@
             android:exported="true"
             android:label="@string/title_activity_active_scanner"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="ActiveDeviceActivity" />
-
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -423,8 +419,7 @@
         <activity
             android:name="com.codegear.mariamc_rfid.cowchronicle.activities.UserInfoActivity"
             android:configChanges="orientation|screenSize"
-            android:label="@string/title_activity_userinfo"
-            android:screenOrientation="portrait" />
+            android:label="@string/title_activity_userinfo" />
 
 
         <!-- 서비스 & 리시버 -->
