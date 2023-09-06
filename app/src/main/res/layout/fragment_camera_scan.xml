@@ -18,19 +18,33 @@
             android:orientation="vertical"
             android:layout_gravity="center">
 
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+
             <ImageView
                 android:id="@+id/drawerIcon"
-                android:layout_width="300dp"
-                android:layout_height="300dp"
+                android:layout_width="400dp"
+                android:layout_height="400dp"
                 android:padding="@dimen/default_padding"
+                android:scaleType="fitXY"
                 app:srcCompat="@drawable/ic_scanning" />
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
 
             <Button
                 android:id="@+id/scan_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="@string/SCAN"/>
+                android:text="스캔등록"/>
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
         </LinearLayout>
 
 

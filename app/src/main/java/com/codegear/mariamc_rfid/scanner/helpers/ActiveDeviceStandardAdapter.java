@@ -21,18 +21,11 @@ public class ActiveDeviceStandardAdapter extends ActiveDeviceAdapter {
     private final FragmentManager mFragmentManager;
     private final int mFunctionCount;
 
-
-
-    ///String[] tabs = {"Readers","RFID","Scan","Settings",};
-    String[] tabs = {"Readers","RFID","Settings",};
-    int[] icons = {R.drawable.ic_rfid_reader,R.drawable.ic_rfid_tab,R.drawable.ic_tab_settings};
+    String[] tabs = {"장치", "RFID", "설정",};
+    int[] icons = {R.drawable.ic_rfid_reader, R.drawable.ic_rfid_tab, R.drawable.ic_tab_settings};
     private Context mContext;
 
-    /**
-     * Constructor. Handles the initialization.
-     * @param fm - Fragment Manager to be used for handling fragments.
-     */
-    public ActiveDeviceStandardAdapter(Context ctx,FragmentManager fm, int fCount) {
+    public ActiveDeviceStandardAdapter(Context ctx, FragmentManager fm, int fCount) {
         super(fm, fCount);
         mContext = ctx;
         mFragmentManager = fm;
@@ -41,49 +34,32 @@ public class ActiveDeviceStandardAdapter extends ActiveDeviceAdapter {
     }
 
 
-
     @Override
     public CharSequence getPageTitle(int position) {
-        String title=tabs[position];
-        int resId= icons[position];
-        Drawable titleIcon = ContextCompat.getDrawable(mContext,resId);
-        titleIcon.setBounds(0,0,titleIcon.getIntrinsicWidth(),titleIcon.getIntrinsicHeight());
-        SpannableString spannable = new SpannableString(" " + "\n"+title);
+        String title = tabs[position];
+        int resId = icons[position];
+        Drawable titleIcon = ContextCompat.getDrawable(mContext, resId);
+        titleIcon.setBounds(0, 0, titleIcon.getIntrinsicWidth(), titleIcon.getIntrinsicHeight());
+        SpannableString spannable = new SpannableString(" " + "\n" + title);
         ImageSpan imageSpan = new ImageSpan(titleIcon, ImageSpan.ALIGN_BOTTOM);
-        spannable.setSpan(new ForegroundColorSpan(Color.WHITE), 0, title.length()+2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        spannable.setSpan(imageSpan, 0,1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spannable.setSpan(new ForegroundColorSpan(Color.WHITE), 0, title.length() + 2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spannable.setSpan(imageSpan, 0, 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         return spannable;
     }
 
     @Override
     public int getItemPosition(@NonNull Object object) {
-        //super.getItemPosition(object);
-        //if( object  instanceof  BarcodeFargment)
-        //    return POSITION_UNCHANGED;
-
-        //super.getItemPosition(object);
-        //if( object  instanceof  BarcodeFargment)
-        //    return POSITION_UNCHANGED;
-
-        //return POSITION_UNCHANGED;
         return POSITION_NONE;
     }
 
 
-
     @NonNull
-
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
-        // fragment TAG = "android:switcher:" + container.getId + ":" + position;
         Fragment fragment = (Fragment) super.instantiateItem(container, position);
         registeredFragments.put(position, fragment);
         return fragment;
     }
-
-
-
-
 
 
 }

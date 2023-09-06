@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:orientation="vertical"
     android:paddingLeft="16dp"
     android:paddingRight="16dp">
@@ -13,9 +13,8 @@
         android:lineSpacingExtra="5dp"
         android:paddingTop="@dimen/default_padding"
         android:text="@string/connected_readers"
-        android:textStyle="bold"
-        android:textAppearance="?android:textAppearanceMedium" />
-
+        android:textAppearance="?android:textAppearanceMedium"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/reader_description"
@@ -28,7 +27,8 @@
         android:singleLine="false"
         android:text="@string/has_no_connected_readers_description"
         android:textAppearance="?android:textAppearanceSmall" />
-    <include layout="@layout/connected_reader"/>
+
+    <include layout="@layout/connected_reader" />
 
 
     <FrameLayout
@@ -42,10 +42,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
-            android:text="@string/available_readers_title"
-            android:textStyle="bold"
             android:lineSpacingExtra="5dp"
-            android:textAppearance="?android:textAppearanceMedium" />
+            android:text="@string/available_readers_title"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/serial_no"
@@ -56,20 +56,20 @@
             android:textAppearance="?android:textAppearanceMedium"
             android:textColor="@color/blue" />
     </FrameLayout>
+
     <TextView
+        android:id="@+id/empty_paired_reader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/empty_paired_reader"
         android:lineSpacingExtra="1dp"
         android:text="다른 장치가 등록되어 있지 않습니다.\n아래에서 장치추가 버튼을 눌러 새로 페어링하세요."
-        android:visibility="gone"
-        />
-
+        android:visibility="gone" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:id="@+id/rv_pairedreaders"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:layout_below="@id/reader_description"
         android:paddingTop="@dimen/marginbottom" />
 

@@ -50,6 +50,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
 import com.codegear.mariamc_rfid.application.Application;
+import com.codegear.mariamc_rfid.cowchronicle.activities.WebviewActivity;
 import com.codegear.mariamc_rfid.cowchronicle.utils.PixelUtil;
 import com.codegear.mariamc_rfid.rfidreader.common.CustomProgressDialog;
 import com.codegear.mariamc_rfid.rfidreader.home.RFIDEventHandler;
@@ -77,9 +78,6 @@ import com.zebra.rfid.api3.OperationFailureException;
 import com.zebra.rfid.api3.ReaderDevice;
 import com.zebra.rfid.api3.Readers;
 import com.zebra.scannercontrol.DCSSDKDefs;
-
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 
 public class DeviceDiscoverActivity extends BaseActivity implements Readers.RFIDReaderEventHandler, ResponseHandlerInterfaces.ReaderDeviceFoundHandler, ResponseHandlerInterfaces.BatteryNotificationHandler, ScannerAppEngine.IScannerAppEngineDevConnectionsDelegate {
@@ -87,21 +85,9 @@ public class DeviceDiscoverActivity extends BaseActivity implements Readers.RFID
     protected static final String TAG_CONTENT_FRAGMENT = "ContentFragment";
     private static final int BLUETOOTH_PERMISSION_REQUEST_CODE = 100;
     DrawerLayout mDrawerLayout;
-    NavigationView navigationView;
-    Button btnRfid;
-    Button btnScanner;
-    Button btnFirmware;
-    Button btnDiscovery;
     Fragment fragment = null;
     public static RFIDEventHandler mEventHandler;
-    private CustomProgressDialog progressDialog;
-    private AvailableScanner curAvailableScanner;
     private DeviceDiscoverActivity mDeviceDiscoverActivity;
-    Toolbar toolbar;
-    ImageView iv_batteryLevel, iv_headerImageView;
-    TextView battery_percentage;
-    Button btn_disconnect;
-    //private boolean launchAppHome = false;
     public String nfcData;
     public static ReaderDevice mConnectedReaderDetails;
     private Bundle mSavedInstanceState = null;
@@ -119,62 +105,28 @@ public class DeviceDiscoverActivity extends BaseActivity implements Readers.RFID
             Log.d(TAG, "There is no way you can come here ");
         }
         setContentView(R.layout.discover_activity_layout);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.dis_toolbar);
         setSupportActionBar(toolbar);
         toolbar = (Toolbar) findViewById(R.id.dis_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(getResources().getString(R.string.title_empty_readers));
         mDrawerLayout = (DrawerLayout) findViewById(R.id.discover_drawer_layout);
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.discover_drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        iv_batteryLevel = (ImageView) findViewById(R.id.disbatteryLevel);
-        battery_percentage = (TextView) findViewById(R.id.battery_percentage);
-        btn_disconnect = findViewById(R.id.disconnect_btn);
-        mDrawerLayout.addDrawerListener(new DrawerLayout.DrawerListener() {
-            @Override
-            public void onDrawerSlide(@NonNull View drawerView, float slideOffset) {
-            }
-
-            @Override
-            public void onDrawerOpened(@NonNull View drawerView) {
-                if (RFIDController.BatteryData != null) {
-                    batteryStatus(RFIDController.BatteryData.getLevel(), RFIDController.BatteryData.getCharging(), RFIDController.BatteryData.getCause());
-                }
-                if (mConnectedReader != null && mConnectedReader.isConnected()) {
-                    btn_disconnect.setEnabled(true);
-                    btn_disconnect.setText("DISCONNECT " + mConnectedReader.getHostName());
-                } else {
-                    btn_disconnect.setEnabled(false);
-                    btn_disconnect.setText(R.string.disconnectrfid);
-                }
-            }
-
-            @Override
-            public void onDrawerClosed(@NonNull View drawerView) {
-                battery_percentage.setText(String.valueOf(0) + "%");
-                iv_batteryLevel.setImageLevel(0);
-            }
-
-            @Override
-            public void onDrawerStateChanged(int newState) {
-            }
-        });
-        toggle.syncState();
-
+        toggle.syncState(); //ActionBarDrawerToggle 누를때 앱 종료되는 현상 막기.
 
         //사이즈 측정
-        View vDisMainMenu = getLayoutInflater().inflate(R.layout.dis_main_menu,null, false);
+        View vDisMainMenu = getLayoutInflater().inflate(R.layout.dis_main_menu, null, false);
         vDisMainMenu.measure(0, 0);
         int disMainMenuHeight = vDisMainMenu.getMeasuredHeight();
         int screenHeight = PixelUtil.getScreenHeightPx(this);
-        int navigationViewMenuHeight = (int)getResources().getDimension(R.dimen.drawer_navigationview_item_height);
+        int navigationViewMenuHeight = (int) getResources().getDimension(R.dimen.drawer_navigationview_item_height);
 
         //NavigationView의 특정 Menu에 사이즈 적용
         NavigationView navigationView = (NavigationView) findViewById(R.id.disnav_view);
         navigationView.setNavigationItemSelectedListener(this::onOptionsItemSelected);
         MenuItem menuItem = navigationView.getMenu().findItem(R.id.menu_empty);
-        View viewContainerDrawerBottom = findViewById(R.id.containerDrawerBottom);
-        viewContainerDrawerBottom.measure(0,0);
-        int drawerBottomHeight = viewContainerDrawerBottom.getMeasuredHeight();
         final View v = getLayoutInflater().inflate(R.layout.drawer_menu_custom_item, null);
         v.addOnAttachStateChangeListener(new View.OnAttachStateChangeListener() {
             int originalHeight = 0;
@@ -182,14 +134,13 @@ public class DeviceDiscoverActivity extends BaseActivity implements Readers.RFID
             @Override
             public void onViewAttachedToWindow(View v) {
                 View parent = (View) v.getParent();
-                if (parent != null)
-                    parent = (View)parent.getParent();
+                if (parent != null) parent = (View) parent.getParent();
 
                 if (parent != null) {
                     ViewGroup.LayoutParams p = parent.getLayoutParams();
                     originalHeight = p.height;
-                    int drawerMenuCustomItemHeight = screenHeight - disMainMenuHeight - drawerBottomHeight - (navigationViewMenuHeight * 5);
-                    if (drawerMenuCustomItemHeight < 0){
+                    int drawerMenuCustomItemHeight = screenHeight - disMainMenuHeight - (navigationViewMenuHeight * 5);
+                    if (drawerMenuCustomItemHeight < 0) {
                         drawerMenuCustomItemHeight = 0;
                     }
                     p.height = drawerMenuCustomItemHeight;
@@ -201,8 +152,7 @@ public class DeviceDiscoverActivity extends BaseActivity implements Readers.RFID
             public void onViewDetachedFromWindow(View v) {
                 if (originalHeight != 0) {
                     View parent = (View) v.getParent();
-                    if (parent != null)
-                        parent = (View)parent.getParent();
+                    if (parent != null) parent = (View) parent.getParent();
 
                     if (parent != null) {
                         ViewGroup.LayoutParams p = parent.getLayoutParams();
@@ -217,13 +167,8 @@ public class DeviceDiscoverActivity extends BaseActivity implements Readers.RFID
         menuItem.setTitle(null);
 
 
-
-
-
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         deleteDWProfile();
-        // RFIDHomeActivity.addReaderDeviceFoundHandler(this);
-        // RFIDHomeActivity.addBatteryNotificationHandler(this);
 
         if (RFIDController.readers == null) {
             RFIDController.readers = new Readers(this.getApplicationContext(), ENUM_TRANSPORT.ALL);
@@ -269,12 +214,10 @@ public class DeviceDiscoverActivity extends BaseActivity implements Readers.RFID
     }
 
     private void handleIntent(Intent intent) {
-        String str = getIntent().getAction();
         if (NfcAdapter.ACTION_NDEF_DISCOVERED.equals(intent.getAction())) {
             nfcData = ((Application) getApplication()).processNFCData(intent);
         } else if (NfcAdapter.ACTION_TAG_DISCOVERED.equals(intent.getAction()))
             processTAGData(intent);
-
     }
 
     public void deleteDWProfile() {
@@ -289,7 +232,6 @@ public class DeviceDiscoverActivity extends BaseActivity implements Readers.RFID
     private void processTAGData(Intent intent) {
         Log.i(TAG, "ProcessTAG data ");
 
-
         Parcelable[] rawMessages = intent.getParcelableArrayExtra(NfcAdapter.EXTRA_TAG);
         if (rawMessages != null && rawMessages.length > 0) {
 
@@ -300,16 +242,10 @@ public class DeviceDiscoverActivity extends BaseActivity implements Readers.RFID
 
             Log.i(TAG, "message size = " + messages.length);
 
-            //TextView veiw = findViewById(R.id.viewdata);
-            ///if ( veiw != null ) {
-            // only one message sent during the beam
             NdefMessage msg = (NdefMessage) rawMessages[0];
-            // record 0 contains the MIME type, record 1 is the AAR, if present
             String base = new String(msg.getRecords()[0].getPayload());
             String str = String.format(Locale.getDefault(), "Message entries=%d. Base message is %s", rawMessages.length, base);
-            //    veiw.setText(str);
             Log.i(TAG, "message  = " + str);
-            //}
 
         }
     }
@@ -318,11 +254,6 @@ public class DeviceDiscoverActivity extends BaseActivity implements Readers.RFID
     public String copyNfcContent() {
         return nfcData;
 
-    }
-
-    private void batteryStatus(int level, boolean charging, String cause) {
-        battery_percentage.setText(String.valueOf(level) + "%");
-        iv_batteryLevel.setImageLevel(level);
     }
 
     private final BroadcastReceiver usbReceiver = new BroadcastReceiver() {
@@ -434,6 +365,9 @@ public class DeviceDiscoverActivity extends BaseActivity implements Readers.RFID
         mDrawerLayout.closeDrawer(GravityCompat.START);
         switch (item.getItemId()) {
             case R.id.menu_cowchronicle:
+                Intent webviewIntent = new Intent(this, WebviewActivity.class);
+                webviewIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(webviewIntent);
                 return true;
 
             case R.id.menu_readers:
@@ -443,30 +377,15 @@ public class DeviceDiscoverActivity extends BaseActivity implements Readers.RFID
                 if (mConnectedReader != null && mConnectedReader.isConnected()) {
                     loadUpdateFirmware(MenuItemCompat.getActionView(item));
                 } else {
-                    Toast.makeText(this, "연결된 장치가 없습니다. ", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "연결된 장치가 없습니다.", Toast.LENGTH_SHORT).show();
                 }
                 return true;
 
             case R.id.nav_battery_statics:
-
                 Intent detailsIntent = new Intent(this, SettingsDetailActivity.class);
                 detailsIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 detailsIntent.putExtra(com.codegear.mariamc_rfid.rfidreader.common.Constants.SETTING_ITEM_ID, Integer.parseInt(SettingsContent.ITEMS.get(3).id));
                 startActivity(detailsIntent);
-
-                return true;
-            case R.id.action_add: {
-                /*
-                 * Show only paired bluetooth devices.
-                 */
-                updateScannersList();
-                return true;
-            }
-            case R.id.action_info:
-                //((RFIDHomeActivity) getActivity()).aboutClicked();
-                return true;
-            case android.R.id.home:
-                onBackPressed();
                 return true;
 
             default:
@@ -489,11 +408,6 @@ public class DeviceDiscoverActivity extends BaseActivity implements Readers.RFID
             //super.onBackPressed();
         }
 
-        /*if(RFIDController.mConnectedReader == null) {
-            Intent intent = new Intent(this, DeviceDiscoverActivity.class);
-            intent.putExtra("enable_toolbar", false);
-            startActivity(intent);
-        }*/
         Fragment currentFragment = getSupportFragmentManager().findFragmentByTag(TAG_CONTENT_FRAGMENT);
         if (currentFragment != null && (currentFragment instanceof PairOperationsFragment) || currentFragment instanceof ReaderDetailsFragment) {
             setActionBarTitle(getResources().getString(R.string.title_empty_readers));
@@ -514,49 +428,6 @@ public class DeviceDiscoverActivity extends BaseActivity implements Readers.RFID
         startActivity(startMain);
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        //  setActionBarTitle(getResources().getString(R.string.title_empty_readers));
-
-    }
-
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.btn_rfid:
-                startRfidActivity();
-                break;
-            case R.id.btn_scanner:
-                //startScannerActivity();
-                break;
-            case R.id.btn_update_firmware:
-                startFirmwareUpdate();
-                break;
-            case R.id.btn_discovery:
-                // Yet to implement
-                break;
-            default:
-                break;
-        }
-    }
-
-    private void startRfidActivity() {
-    }
-
-
-    private void startFirmwareUpdate() {
-        if (Application.currentConnectedScannerID != -1 && Application.currentConnectedScanner != null) {
-            Intent intent = new Intent(this, UpdateFirmware.class);
-            intent.putExtra(Constants.SCANNER_ID, Application.currentConnectedScannerID);
-            intent.putExtra(Constants.SCANNER_NAME, Application.currentConnectedScanner.getScannerName());
-            intent.putExtra(Constants.FW_REBOOT, true);
-            //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            //startActivity(intent);
-            //setWaitingForFWReboot(false);
-        } else {
-            Toast.makeText(this, R.string.toast_scanner_not_attached, Toast.LENGTH_SHORT).show();
-        }
-    }
 
     @Override
     public void RFIDReaderAppeared(ReaderDevice readerDevice) {
@@ -629,16 +500,6 @@ public class DeviceDiscoverActivity extends BaseActivity implements Readers.RFID
         }
     }
 
-    /**
-     * method to know whether bluetooth is enabled or not
-     *
-     * @return - true if bluetooth enabled
-     * - false if bluetooth disabled
-     */
-    public static boolean isBluetoothEnabled() {
-        return BluetoothAdapter.getDefaultAdapter().isEnabled();
-    }
-
     @Override
     public boolean scannerHasAppeared(int scannerID) {
         return false;
@@ -680,7 +541,6 @@ public class DeviceDiscoverActivity extends BaseActivity implements Readers.RFID
     }
 
     private void connectedReaderDetails(ReaderDevice readerDevice) {
-
         mConnectedReaderDetails = readerDevice;
     }
 
@@ -716,18 +576,7 @@ public class DeviceDiscoverActivity extends BaseActivity implements Readers.RFID
 
     private NdefMessage createMessage() {
         String text = ("Hello there from another device!\n\n" + "Beam Time: " + System.currentTimeMillis());
-        NdefMessage msg = new NdefMessage(new NdefRecord[]{NdefRecord.createMime("application/com.bluefletch.nfcdemo.mimetype", text.getBytes())
-                /**
-                 * The Android Application Record (AAR) is commented out. When a device
-                 * receives a push with an AAR in it, the application specified in the AAR
-                 * is guaranteed to run. The AAR overrides the tag dispatch system.
-                 * You can add it back in to guarantee that this
-                 * activity starts when receiving a beamed message. For now, this code
-                 * uses the tag dispatch system.
-                */
-                //,NdefRecord.createApplicationRecord("com.example.android.beam")
-        });
-
+        NdefMessage msg = new NdefMessage(new NdefRecord[]{NdefRecord.createMime("application/com.bluefletch.nfcdemo.mimetype", text.getBytes())});
         return msg;
     }
 

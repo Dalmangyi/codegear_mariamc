@@ -455,7 +455,7 @@
     <string name="multiTag_locate_add_item_failed">태그 항목 추가 실패했습니다.</string>
     <string name="multiTag_locate_delete_item_success">태그 항목을 성공적으로 삭제했습니다.</string>
     <string name="multiTag_locate_delete_item_failed">태그 항목 삭제 실패</string>
-    <string name="warning_bt_enable_on_sled">슬레드 장치에서 블루투스를 켜주세요</string>
+    <string name="warning_bt_enable_on_sled">슬레드 장치의 블루투스를 켜주세요</string>
     <string name="title_activity_home">스캐너 제어</string>
 
 
@@ -790,7 +790,7 @@
     <string name="SCAN">스캔</string>
     <string name="scan_barcode_or_enter_value">장치의 시리얼코드 또는 블루투스 맥주소를 입력해 주세요.</string>
     <string name="start_PAIR">페어링 시작</string>
-    <string name="un_PAIR">선택된 기기 페어링 종료하기</string>
+    <string name="un_PAIR">선택된 기기 페어링 해제하기</string>
     <string name="Paired_Readers">페어링 된 기기 목록</string>
     <string name="generalSettings">일반</string>
     <string name="serialno">SERIAL: %1$s</string>

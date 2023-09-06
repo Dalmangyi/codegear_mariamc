@@ -67,11 +67,9 @@ public class CameraScanFragment extends Fragment {
     TextView failureText;
 
     public CameraScanFragment() {
-
     }
 
     public static CameraScanFragment newInstance() {
-
         return new CameraScanFragment();
     }
 
@@ -96,7 +94,7 @@ public class CameraScanFragment extends Fragment {
                 layoutCamera.setVisibility(View.VISIBLE);
                 setupCamera(view);
             } else {
-                Toast.makeText(requireActivity(), "Camera not found, this feature not supported", Toast.LENGTH_SHORT).show();
+                Toast.makeText(requireActivity(), "카메라를 찾을 수 없습니다. 이 기능은 지원되지 않습니다.", Toast.LENGTH_SHORT).show();
             }
 
         });
@@ -118,17 +116,12 @@ public class CameraScanFragment extends Fragment {
         previewView = view.findViewById(R.id.preview_view);
         cameraSelector = new CameraSelector.Builder().requireLensFacing(lensFacing).build();
 
-        new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().getApplication()))
-                .get(CameraXViewModel.class)
-                .getProcessCameraProvider()
-                .observe(
-                        getViewLifecycleOwner(),
-                        provider -> {
-                            cameraProvider = provider;
-                            if (checkPermission(Manifest.permission.CAMERA, CAMERA_PERMISSION_CODE)) {
-                                bindCameraUseCases();
-                            }
-                        });
+        new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().getApplication())).get(CameraXViewModel.class).getProcessCameraProvider().observe(getViewLifecycleOwner(), provider -> {
+            cameraProvider = provider;
+            if (checkPermission(Manifest.permission.CAMERA, CAMERA_PERMISSION_CODE)) {
+                bindCameraUseCases();
+            }
+        });
     }
 
     private void bindCameraUseCases() {
@@ -144,10 +137,7 @@ public class CameraScanFragment extends Fragment {
         if (previewUseCase != null) {
             cameraProvider.unbind(previewUseCase);
         }
-        previewUseCase = new Preview.Builder()
-                .setTargetAspectRatio(AspectRatio.RATIO_16_9)
-                .setTargetRotation(previewView.getDisplay().getRotation())
-                .build();
+        previewUseCase = new Preview.Builder().setTargetAspectRatio(AspectRatio.RATIO_16_9).setTargetRotation(previewView.getDisplay().getRotation()).build();
         previewUseCase.setSurfaceProvider(previewView.getSurfaceProvider());
         Camera camera = cameraProvider.bindToLifecycle(this, cameraSelector, previewUseCase);
         camera.getCameraControl().enableTorch(false);
@@ -164,12 +154,8 @@ public class CameraScanFragment extends Fragment {
             cameraProvider.unbind(analysisUseCase);
         }
 
-        analysisUseCase = new ImageAnalysis.Builder()
-                .setTargetAspectRatio(AspectRatio.RATIO_16_9)
-                .setTargetRotation(previewView.getDisplay().getRotation())
-                .build();
-
         ExecutorService executorService = Executors.newSingleThreadExecutor();
+        analysisUseCase = new ImageAnalysis.Builder().setTargetAspectRatio(AspectRatio.RATIO_16_9).setTargetRotation(previewView.getDisplay().getRotation()).build();
         analysisUseCase.setAnalyzer(executorService, new ImageAnalysis.Analyzer() {
             @Override
             public void analyze(@NonNull ImageProxy image) {
@@ -208,7 +194,7 @@ public class CameraScanFragment extends Fragment {
                                 } else if (barcode.getRawValue().length() == Defines.BT_ADDRESS_LENGTH) {
                                     Application.scanPair.barcodeDeviceNameConnect(barcode.getRawValue());
                                 } else {
-                                    Toast.makeText(getActivity(), barcode.getRawValue() + " is not valid BT address", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getActivity(), barcode.getRawValue() + " 코드는 블루투스 주소로 올바르지 않습니다.", Toast.LENGTH_SHORT).show();
                                 }
                             } else {
                                 Application.scanPair.barcodeDeviceNameConnect(barcode.getRawValue());
@@ -284,8 +270,7 @@ public class CameraScanFragment extends Fragment {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == CAMERA_PERMISSION_CODE) {
-            if (grantResults.length > 0
-                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 bindCameraUseCases();
             }
         }

@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import com.codegear.mariamc_rfid.ActiveDeviceActivity;
 import com.codegear.mariamc_rfid.application.Application;
@@ -898,5 +899,7 @@ public class BaseActivity extends AppCompatActivity implements ScannerAppEngine,
             }
         }
     };
+
+
 
 }

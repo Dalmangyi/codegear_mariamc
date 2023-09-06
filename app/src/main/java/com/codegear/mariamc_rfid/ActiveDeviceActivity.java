@@ -277,9 +277,6 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
     private ViewPager viewPager;
     ActiveDeviceAdapter mAdapter;
     TabLayout tabLayout;
-    private ExpandableListView expandableListView;
-    private HashMap<String, List<String>> listDataChild;
-    private List<String> listDataHeader;
     static int picklistMode;
     ExtendedFloatingActionButton inventoryBT = null;
     private static final int REQUEST_CODE_ASK_PERMISSIONS = 10;
@@ -319,7 +316,6 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
     DrawerLayout drawer;
     ImageView iv_batteryLevel, iv_headerImageView;
     TextView battery_percentage;
-    Button btn_disconnect;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -360,10 +356,10 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
 
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(mActiveDeviceActivity, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        toggle.syncState();
 
         iv_batteryLevel = (ImageView) findViewById(R.id.batterylevel);
         battery_percentage = (TextView) findViewById(R.id.battery_percentage);
-        btn_disconnect = findViewById(R.id.disconnect_btn);
 
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -392,13 +388,6 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
                 if (RFIDController.BatteryData != null) {
                     deviceStatusReceived(RFIDController.BatteryData.getLevel(), RFIDController.BatteryData.getCharging(), RFIDController.BatteryData.getCause());
                 }
-                if (mConnectedReader != null && mConnectedReader.isConnected()) {
-                    btn_disconnect.setEnabled(true);
-                    btn_disconnect.setText("연결해제하기\n" + mConnectedReader.getHostName());
-                } else {
-                    btn_disconnect.setEnabled(false);
-                    btn_disconnect.setText(R.string.disconnectrfid);
-                }
             }
 
             @Override
@@ -413,33 +402,7 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
 
             }
         });
-        toggle.syncState();
 
-        btn_disconnect.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mConnectedReader != null && mConnectedReader.isConnected()) {
-                    viewPager.setCurrentItem(READERS_TAB);
-                    Fragment fragment = getCurrentFragment(READERS_TAB);
-                    if (fragment instanceof PairOperationsFragment) {
-                        loadNextFragment(READER_LIST_TAB);
-                        fragment = getCurrentFragment(READERS_TAB);
-                    }
-                    if (fragment instanceof ReaderDetailsFragment) {
-                        loadNextFragment(READER_LIST_TAB);
-                        fragment = getCurrentFragment(READERS_TAB);
-                    }
-                    if (fragment instanceof RFIDReadersListFragment) {
-                        ((RFIDReadersListFragment) fragment).disconnectConnectedReader();
-                    }
-
-                    DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-                    if (drawer.isDrawerOpen(GravityCompat.START)) {
-                        drawer.closeDrawer(GravityCompat.START);
-                    }
-                }
-            }
-        });
 
         addDevConnectionsDelegate(mActiveDeviceActivity);
         scannerID = getIntent().getIntExtra(com.codegear.mariamc_rfid.scanner.helpers.Constants.SCANNER_ID, -1);
@@ -2376,7 +2339,7 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
                     break;
 
                 case READER_LIST_TAB:
-                    PageTitle = "장치들";
+                    PageTitle = "장치";
                     mAdapter.setReaderListMOde(READER_LIST_TAB);
                     getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(READERS_TAB)).commit();
                     break;
@@ -2538,14 +2501,10 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
 
             }
             setActionBarTitle(PageTitle);
-        } catch (NullPointerException ne) {
-            return;
-        } catch (IllegalStateException ise) {
-
+        } catch (NullPointerException | IllegalStateException ne) {
             return;
         }
 
-        //getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(RFID_TAB)).commit();
         getSupportFragmentManager().beginTransaction().addToBackStack(null);
         getSupportFragmentManager().executePendingTransactions();
         mAdapter.notifyDataSetChanged();
@@ -2553,8 +2512,6 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
 
 
     public Fragment getCurrentFragment(int position) {
-
-        //return mAdapter.getCurrentFragment();
         return mAdapter.getRegisteredFragment(position);
     }
 
@@ -2567,16 +2524,12 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
             Uri uri = Uri.parse("content://com.android.externalstorage.documents/document/primary:Download");
             createFile1(uri);
             // new DataExportTask(getApplicationContext(), tagsReadInventory, mConnectedReader.getHostName(), TOTAL_TAGS, UNIQUE_TAGS, mRRStartedTime).execute();
-
         }
     }
 
     public void resetFactoryDefault() throws InvalidUsageException, OperationFailureException {
-        Boolean btCon = false;
         try {
-
             if (mConnectedReader != null && mConnectedReader.getTransport() != null && mConnectedReader.getTransport().equals("BLUETOOTH")) {
-
                 mRFIDBaseActivity.resetFactoryDefault();
                 Thread.sleep(2000);
                 mRFIDBaseActivity.onFactoryReset(RFIDController.mConnectedDevice);
@@ -2618,7 +2571,6 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
                 }
             } else {
                 if (shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-                    //Toast.makeText(this,"Write to external storage permission needed to export inventory.",Toast.LENGTH_LONG).show();
                     showMessageOKCancel("Write to external storage permission needed to export the inventory.", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {

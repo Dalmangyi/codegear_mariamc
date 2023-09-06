@@ -27,29 +27,19 @@ import com.codegear.mariamc_rfid.rfidreader.reader_connection.ScanBarcodeAndPair
 
 import java.util.HashMap;
 
-/**
- * Class to handle the details about pair operations(No of Tabs, Class acting as UI for the tabs) etc..
- */
 public class PairOperationAdapter extends FragmentStatePagerAdapter {
-    //private static final int NO_OF_TABS = 4;
-    //String[] tabs = {"Tap", "직접 입력", "Barcode", "카메라 스캔"};
-    //int[] icons = {R.drawable.ic_tap_and_pair, R.drawable.ic_scan_and_pair, R.drawable.ic_sample_barcode, R.drawable.ic_scan_and_pair};
+
     private static final int NO_OF_TABS = 2;
     String[] tabs = {"직접 입력", "스캔 등록"};
     int[] icons = {R.drawable.ic_tap_and_pair, R.drawable.ic_scan_and_pair};
     Context mContext;
-    //Map to hold the references for currently active fragments so that we can acess them
     private HashMap<Integer, Fragment> currentlyActiveFragments;
 
-    /**
-     * Constructor. Handles the initialization
-     *
-     * @param fm - FragmentManager instance to be used for handling fragments
-     */
+
+
     public PairOperationAdapter(Context ctx, FragmentManager fm) {
         super(fm);
         this.mContext = ctx;
-
     }
 
     @Override
@@ -62,23 +52,12 @@ public class PairOperationAdapter extends FragmentStatePagerAdapter {
 
         switch (index) {
             case 0:
-//                Log.d(getClass().getSimpleName(), "1st Tab Selected");
-//                fragment = ScanAndPairFragment.newInstance();
-//                Bundle nfc_scan = new Bundle();
-//                nfc_scan.putBoolean("nfc_pair", true);
-//                fragment.setArguments(nfc_scan);
-//                break;
-//            case 1:
                 Log.d(getClass().getSimpleName(), "2nd Tab Selected");
                 fragment = ScanAndPairFragment.newInstance();
                 Bundle bt_scan = new Bundle();
                 bt_scan.putBoolean("bt_pair", true);
                 fragment.setArguments(bt_scan);
                 break;
-//            case 2:
-//                fragment = ScanBarcodeAndPairFragment.newInstance();
-//                break;
-//            case 3:
             case 1:
                 fragment = CameraScanFragment.newInstance();
                 break;
@@ -87,18 +66,11 @@ public class PairOperationAdapter extends FragmentStatePagerAdapter {
                 break;
         }
 
-        //Store the reference
         currentlyActiveFragments.put(index, fragment);
 
         return fragment;
     }
 
-    /**
-     * Get the active fragment at the given position
-     *
-     * @param key - Index to be used for fetching the fragment
-     * @return - {@link Fragment} at the given index
-     */
     public Fragment getFragment(int key) {
         if (currentlyActiveFragments != null) {
             return currentlyActiveFragments.get(key);
@@ -139,9 +111,6 @@ public class PairOperationAdapter extends FragmentStatePagerAdapter {
         spannable.setSpan(new ForegroundColorSpan(R.color.black_overlay), 0, title.length() + 2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         spannable.setSpan(imageSpan, 0, 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         return spannable;
-
-
-        // return tabs[position];
     }
 
 }

@@ -43,11 +43,7 @@ import static com.codegear.mariamc_rfid.rfidreader.rfid.RFIDController.mConnecte
  * Class to handle the UI for setting details like antenna config, singulation etc..
  * Hosts a fragment for UI.
  */
-public class SettingsDetailActivity extends AppCompatActivity implements
-        ResponseHandlerInterfaces.ReaderDeviceFoundHandler,
-        Readers.RFIDReaderEventHandler,
-        ResponseHandlerInterfaces.BatteryNotificationHandler,
-        AdvancedOptionItemFragment.OnAdvancedListFragmentInteractionListener, AdapterView.OnItemSelectedListener {
+public class SettingsDetailActivity extends AppCompatActivity implements ResponseHandlerInterfaces.ReaderDeviceFoundHandler, Readers.RFIDReaderEventHandler, ResponseHandlerInterfaces.BatteryNotificationHandler, AdvancedOptionItemFragment.OnAdvancedListFragmentInteractionListener, AdapterView.OnItemSelectedListener {
     //Tag to identify the currently displayed fragment
     protected static final String TAG_CONTENT_FRAGMENT = "ContentFragment";
     public static final int application_id = 0x1000001;
@@ -89,7 +85,7 @@ public class SettingsDetailActivity extends AppCompatActivity implements
      */
     protected void startFragment(Intent intent) {
         Fragment fragment = null;
-        if(RFIDController.mConnectedReader == null ){
+        if (RFIDController.mConnectedReader == null) {
             Toast.makeText(this, "연결된 장치가 없습니다.", Toast.LENGTH_SHORT).show();
             finish();
             return;
@@ -142,13 +138,12 @@ public class SettingsDetailActivity extends AppCompatActivity implements
             getSupportFragmentManager().beginTransaction().replace(R.id.settings_content_frame, fragment, TAG_CONTENT_FRAGMENT).commit();
 
         }
-        if( settingItemSelected == SettingsDetailActivity.application_id) {
+        if (settingItemSelected == SettingsDetailActivity.application_id) {
             setTitle("Application");
-        }
-        else {
-            if(settingItemSelected == R.id.battery){
+        } else {
+            if (settingItemSelected == R.id.battery) {
                 setTitle("Battery");
-            }else {
+            } else {
                 setTitle(SettingsContent.ITEM_MAP.get(settingItemSelected + "").content);
             }
         }
@@ -176,9 +171,9 @@ public class SettingsDetailActivity extends AppCompatActivity implements
         RFIDBaseActivity.removeBatteryNotificationHandler(this);
 
         Fragment fragment = getSupportFragmentManager().findFragmentByTag(TAG_CONTENT_FRAGMENT);
-        if(fragment instanceof ApplicationSettingsFragment) {
-        }else if (isFinishing() == false) {
-             finish();
+        if (fragment instanceof ApplicationSettingsFragment) {
+        } else if (isFinishing() == false) {
+            finish();
         }
 
     }
@@ -245,7 +240,7 @@ public class SettingsDetailActivity extends AppCompatActivity implements
             public void run() {
                 //if(!SettingsDetailActivity.super.isFinishing())
                 //    SettingsDetailActivity.super.onBackPressed();
-                if(isFinishing() == false) {
+                if (isFinishing() == false) {
                     finish();
                 }
             }
@@ -265,13 +260,11 @@ public class SettingsDetailActivity extends AppCompatActivity implements
                 if (d != null && d.isShowing()) {
                     sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, command + " timeout");
                     d.dismiss();
-                    if (ActiveDeviceActivity.isActivityVisible() && isPressBack)
-                        callBackPressed();
+                    if (ActiveDeviceActivity.isActivityVisible() && isPressBack) callBackPressed();
                 }
             }
         }, time);
     }
-
 
 
     @Override
@@ -337,7 +330,7 @@ public class SettingsDetailActivity extends AppCompatActivity implements
             i.putExtra(Constants.INTENT_DATA, data);
             startService(i);*/
 
-           NotificationUtil.displayNotificationforSettingsDeialActivity(this, action, data);
+            NotificationUtil.displayNotificationforSettingsDeialActivity(this, action, data);
         }
     }
 
@@ -440,37 +433,33 @@ public class SettingsDetailActivity extends AppCompatActivity implements
         String item = parent.getItemAtPosition(position).toString();
 
         // Showing selected spinner item
-        if(mConnectedReader == null )
-            return;
+        if (mConnectedReader == null) return;
 
         try {
-            switch(position)
-            {
+            switch (position) {
                 case 0:
-                   // Toast.makeText(parent.getContext(), "Trigger Selected: " + item, Toast.LENGTH_LONG).show();
+                    // Toast.makeText(parent.getContext(), "Trigger Selected: " + item, Toast.LENGTH_LONG).show();
                     mConnectedReader.Config.setKeylayoutType(ENUM_KEYLAYOUT_TYPE.UPPER_TRIGGER_FOR_RFID);
                     break;
                 case 1:
-                  //  Toast.makeText(parent.getContext(), "Trigger Selected: " + item, Toast.LENGTH_LONG).show();
+                    //  Toast.makeText(parent.getContext(), "Trigger Selected: " + item, Toast.LENGTH_LONG).show();
                     mConnectedReader.Config.setKeylayoutType(ENUM_KEYLAYOUT_TYPE.UPPER_TRIGGER_FOR_SCAN);
                     break;
                 case 2:
-                   // Toast.makeText(parent.getContext(), "Trigger Selected: " + item, Toast.LENGTH_LONG).show();
+                    // Toast.makeText(parent.getContext(), "Trigger Selected: " + item, Toast.LENGTH_LONG).show();
                     mConnectedReader.Config.setKeylayoutType(ENUM_KEYLAYOUT_TYPE.LOWER_TRIGGER_FOR_SLED_SCAN);
                     break;
                 case 3:
-                  //  Toast.makeText(parent.getContext(), "TriggerTrigger Selected: " + item, Toast.LENGTH_LONG).show();
+                    //  Toast.makeText(parent.getContext(), "TriggerTrigger Selected: " + item, Toast.LENGTH_LONG).show();
                     mConnectedReader.Config.setKeylayoutType(ENUM_KEYLAYOUT_TYPE.UPPER_TRIGGER_FOR_SLED_SCAN);
                     break;
             }
-            if(RFIDController.mConnectedReader.getHostName().startsWith("RFD40")) {
+            if (RFIDController.mConnectedReader.getHostName().startsWith("RFD40")) {
                 String SelectedKeyLayout = parent.getItemAtPosition(position).toString();
                 ApplicationSettingsFragment.SetSpinnerText(SelectedKeyLayout);
-            }
-
-            else{
+            } else {
                 String hostname = RFIDController.mConnectedReader.getHostName();
-                Toast.makeText(parent.getContext(), "Trigger Mapping feature is not supported for "+hostname , Toast.LENGTH_LONG).show();
+                Toast.makeText(parent.getContext(), "Trigger Mapping feature is not supported for " + hostname, Toast.LENGTH_LONG).show();
             }
             /*Adding to shared preference*/
             SharedPreferences settings = getSharedPreferences(Constants.APP_SETTINGS_STATUS, 0);
@@ -480,13 +469,12 @@ public class SettingsDetailActivity extends AppCompatActivity implements
 
 
         } catch (InvalidUsageException e) {
-           Log.d(TAG,  "Returned SDK Exception");
+            Log.d(TAG, "Returned SDK Exception");
         } catch (OperationFailureException e) {
-           Log.d(TAG,  "Returned SDK Exception");
+            Log.d(TAG, "Returned SDK Exception");
         }
 
     }
-
 
 
     @Override
@@ -500,8 +488,7 @@ public class SettingsDetailActivity extends AppCompatActivity implements
 
 
         Fragment fragment = getSupportFragmentManager().findFragmentByTag(TAG_CONTENT_FRAGMENT);
-        if(fragment instanceof ApplicationSettingsFragment)
-        {
+        if (fragment instanceof ApplicationSettingsFragment) {
             fragment.onActivityResult(requestCode, resultCode, data);
         }
     }
@@ -509,7 +496,7 @@ public class SettingsDetailActivity extends AppCompatActivity implements
 
     public void showProfileSettings(View view) {
         Fragment fragment = getSupportFragmentManager().findFragmentByTag(TAG_CONTENT_FRAGMENT);
-        if(fragment instanceof RegulatorySettingsFragment) {
+        if (fragment instanceof RegulatorySettingsFragment) {
             ((RegulatorySettingsFragment) fragment).setRegulatory();
         }
 
@@ -518,7 +505,7 @@ public class SettingsDetailActivity extends AppCompatActivity implements
     public void saveProfileSelection(View view) {
 
         Fragment fragment = getSupportFragmentManager().findFragmentByTag(TAG_CONTENT_FRAGMENT);
-        if(fragment instanceof ProfileFragment) {
+        if (fragment instanceof ProfileFragment) {
             SettingsDetailActivity.mSettingOnFactory = false;
             ((ProfileFragment) fragment).onBackPressed();
         }

@@ -58,8 +58,7 @@ public class ScanPair {
         activityObject = activity;
         this.fragment = fragment;
 
-        if(btConnection == null )
-            btConnection = new BluetoothHandler();
+        if (btConnection == null) btConnection = new BluetoothHandler();
 
         btConnection.init(activityObject, this);
 
@@ -96,13 +95,14 @@ public class ScanPair {
         }
         //super.onDestroy();
     }
-    public static String removePrefix(String s, String prefix)
-    {
+
+    public static String removePrefix(String s, String prefix) {
         if (s != null && prefix != null && s.startsWith(prefix)) {
             return s.substring(prefix.length());
         }
         return s;
     }
+
     //#####################################################
     public void barcodeDeviceNameConnect(String barcodeData) {
 
@@ -110,10 +110,10 @@ public class ScanPair {
 
         try {
             if (barcodeData == null) {
-                if(fragment instanceof  ScanAndPairFragment) {
-                    ((ScanAndPairFragment) fragment).processCompleted("Error while pairing");
-                }else if(fragment instanceof CameraScanFragment){
-                    ((CameraScanFragment) fragment).processCompleted("Error while pairing");
+                if (fragment instanceof ScanAndPairFragment) {
+                    ((ScanAndPairFragment) fragment).processCompleted("페어링 중 오류가 발생했습니다.");
+                } else if (fragment instanceof CameraScanFragment) {
+                    ((CameraScanFragment) fragment).processCompleted("페어링 중 오류가 발생했습니다.");
                 }
             } else {
                 if ((pairingConnectIdleFlag)) {
@@ -126,17 +126,17 @@ public class ScanPair {
                             if (btConnection.isValidMacAddress(recvdMacAddress))
                                 connecting_pairingFlag = pairConnect(recvdMacAddress, true);
                             else {
-                                showToast(recvdMacAddress + " 는 올바른 블루투스 주소가 아닙니다.");
+                                showToast(recvdMacAddress + " 올바른 블루투스 주소가 아닙니다. 다시 확인해주세요.");
                             }
                         } else if (barcodeData.length() > Defines.BT_ADDRESS_LENGTH) {
-                                recvdBarcodeName = /*Defines.NameStartString + */barcodeData;
+                            recvdBarcodeName = /*Defines.NameStartString + */barcodeData;
                             recvdBarcodeName = removePrefix(recvdBarcodeName, "S");
                             connecting_pairingFlag = pairConnect(recvdBarcodeName, false);
                         } else {
-                            if(fragment instanceof  ScanAndPairFragment) {
-                                ((ScanAndPairFragment) fragment).processCompleted(barcodeData + " 가 올바르지 않습니다.");
-                            }else if(fragment instanceof CameraScanFragment){
-                                ((CameraScanFragment) fragment).processCompleted(barcodeData + " 가 올바르지 않습니다.");
+                            if (fragment instanceof ScanAndPairFragment) {
+                                ((ScanAndPairFragment) fragment).processCompleted(barcodeData + " 올바른 주소가 아닙니다. 다시 확인해주세요.");
+                            } else if (fragment instanceof CameraScanFragment) {
+                                ((CameraScanFragment) fragment).processCompleted(barcodeData + " 올바른 주소가 아닙니다. 다시 확인해주세요.");
                             }
                         }
                     }
@@ -146,9 +146,9 @@ public class ScanPair {
                 }
             }
         } catch (Exception ex) {
-            if(fragment instanceof  ScanAndPairFragment) {
+            if (fragment instanceof ScanAndPairFragment) {
                 ((ScanAndPairFragment) fragment).processCompleted("페어링 중 오류가 발생했습니다.");
-            }else if(fragment instanceof CameraScanFragment){
+            } else if (fragment instanceof CameraScanFragment) {
                 ((CameraScanFragment) fragment).processCompleted("페어링 중 오류가 발생했습니다.");
             }
             //showToast("EXCEPTION(ScanPair) - 'barcodeDeviceNameConnect'");
@@ -161,8 +161,8 @@ public class ScanPair {
     private boolean pairConnect(String data, boolean isMacAddress) {
         boolean connecting_pairingFlag = false;
         RFIDController.AUTO_RECONNECT_READERS = false;
-        if(Application.prevPairData.equals(data))  {
-        //    return false;
+        if (Application.prevPairData.equals(data)) {
+            //    return false;
         } else {
             Application.prevPairData = data;
         }
@@ -208,22 +208,18 @@ public class ScanPair {
                 if (isMacAddress) {
                     showToast(Defines.INFO_PAIRING + recvdMacAddress);
                     mPairTask = new PairTask(activityObject, recvdMacAddress).execute();
-                    /*btConnection.pair(recvdMacAddress);
-                    isDevicePairing = true;*/
                 } else {
-
-                        mProgressDlg = new CustomProgressDialog(activityObject, "스캔중... (" + recvdBarcodeName + ")");
-                        //mProgressDlg.setMessage("Scanning... (" + recvdBarcodeName + ")");
-                        mProgressDlg.show();
-                    /* mProgressDlg.setCancelable(false);
-                    mProgressDlg.setCanceledOnTouchOutside(false);*/
+                    mProgressDlg = new CustomProgressDialog(activityObject, "스캔중... (" + recvdBarcodeName + ")");
+                    mProgressDlg.show();
                     btConnection.scanningDevices(recvdBarcodeName, false);
                 }
 
                 connecting_pairingFlag = true;
             }
         } catch (Exception ex) {
-            if( ex!= null && ex.getStackTrace().length>0){ Log.e(TAG, ex.getStackTrace()[0].toString()); }
+            if (ex != null && ex.getStackTrace().length > 0) {
+                Log.e(TAG, ex.getStackTrace()[0].toString());
+            }
             //showToast(ex.getMessage());
         }
 
@@ -238,9 +234,9 @@ public class ScanPair {
         if (pairTaskDailog != null && pairTaskDailog.isShowing()) {
             pairTaskDailog.dismiss();
         }
-        if(fragment instanceof  ScanAndPairFragment) {
+        if (fragment instanceof ScanAndPairFragment) {
             ((ScanAndPairFragment) fragment).connectDevice(rdDevice.getName(), b);
-        }else if(fragment instanceof  CameraScanFragment){
+        } else if (fragment instanceof CameraScanFragment) {
             ((CameraScanFragment) fragment).connectDevice(rdDevice.getName(), b);
         }
     }
@@ -257,8 +253,7 @@ public class ScanPair {
             readers.add(device.getName());
             Log.d(TAG, device.getName());
         }
-        if(fragment instanceof  ScanAndPairFragment)
-            ((ScanAndPairFragment) fragment).refreshList();
+        if (fragment instanceof ScanAndPairFragment) ((ScanAndPairFragment) fragment).refreshList();
         //RFIDController.btReadrsList = availableReaders;
     }
 
@@ -279,9 +274,9 @@ public class ScanPair {
         if ((pairTaskDailog != null && pairTaskDailog.isShowing())) {
             pairTaskDailog.dismiss();
         }
-        if(fragment instanceof  ScanAndPairFragment) {
+        if (fragment instanceof ScanAndPairFragment) {
             ((ScanAndPairFragment) fragment).processCompleted(message);
-        }else if(fragment instanceof CameraScanFragment){
+        } else if (fragment instanceof CameraScanFragment) {
             ((CameraScanFragment) fragment).processCompleted(message);
         }
     }
@@ -290,8 +285,7 @@ public class ScanPair {
     public void btScanningDone(ArrayList<BluetoothDevice> btDeviceList, boolean isMacAddress) {
         BluetoothDevice tmpBTDevice = null;
 
-        if (mProgressDlg != null && mProgressDlg.isShowing())
-            mProgressDlg.dismiss();
+        if (mProgressDlg != null && mProgressDlg.isShowing()) mProgressDlg.dismiss();
         if ((pairTaskDailog != null && pairTaskDailog.isShowing())) {
             pairTaskDailog.dismiss();
         }
@@ -318,20 +312,20 @@ public class ScanPair {
                 }
 
                 if (tmpBTDevice != null) {
-                    String tmpStr = "Done scanning. Device found.\n\r" +
-                            "Name: " + tmpBTDevice.getName() + "\n\r" +
-                            "MAC Address: " + tmpBTDevice.getAddress();
+                    String tmpStr = "Done scanning. Device found.\n\r" + "Name: " + tmpBTDevice.getName() + "\n\r" + "MAC Address: " + tmpBTDevice.getAddress();
                     //showToast(tmpStr);
 
                     mPairTask = new PairTask(activityObject, tmpBTDevice).execute();
                 } else {
-                  //  showToast("Done scanning. Device NOT found.");
+                    //  showToast("Done scanning. Device NOT found.");
                 }
             } else {
                 showToast("스캔 완료. 장치를 찾을 수 없습니다(ex).");
             }
         } catch (Exception ex) {
-            if( ex!= null && ex.getStackTrace().length>0){ Log.e(TAG, ex.getStackTrace()[0].toString()); }
+            if (ex != null && ex.getStackTrace().length > 0) {
+                Log.e(TAG, ex.getStackTrace()[0].toString());
+            }
             //showToast("EXCEPTION -Scanning failed!" + ex.getMessage());
         }
     }
@@ -373,7 +367,9 @@ public class ScanPair {
                 showToast("에러 - 페어링 실패!");
             }
         } catch (Exception ex) {
-            if( ex!= null && ex.getStackTrace().length>0){ Log.e(TAG, ex.getStackTrace()[0].toString()); }
+            if (ex != null && ex.getStackTrace().length > 0) {
+                Log.e(TAG, ex.getStackTrace()[0].toString());
+            }
             //showToast("EXCEPTION(ScanPair) - 'btPairingDone'");
 
         }
@@ -391,7 +387,7 @@ public class ScanPair {
 
             if (successFlag) {
                 showToast("페어링 해제 완료");
-                if(fragment instanceof  ScanAndPairFragment) {
+                if (fragment instanceof ScanAndPairFragment) {
                     ((ScanAndPairFragment) fragment).removeDevice(unPairDevice);
                 }
 
@@ -402,7 +398,9 @@ public class ScanPair {
 
 
         } catch (Exception ex) {
-            if( ex!= null && ex.getStackTrace().length>0){ Log.e(TAG, ex.getStackTrace()[0].toString()); }
+            if (ex != null && ex.getStackTrace().length > 0) {
+                Log.e(TAG, ex.getStackTrace()[0].toString());
+            }
             //showToast("EXCEPTION(ScanPair) - 'btUnpairingDone'");
 
         }
@@ -413,10 +411,10 @@ public class ScanPair {
     public void unpair(String readerDevice) {
         Application.prevPairData = "";
         unPairDevice = readerDevice;
-        if(btConnection.unpairReader(readerDevice)==Defines.NO_ERROR){
+        if (btConnection.unpairReader(readerDevice) == Defines.NO_ERROR) {
 
             //for (ReaderDevice device : RFIDController.readersList) {
-            for(int i = 0 ; i < RFIDController.readersList.size();i++){
+            for (int i = 0; i < RFIDController.readersList.size(); i++) {
                 ReaderDevice device = RFIDController.readersList.get(i);
                 if (device.getName().equalsIgnoreCase(readerDevice)) {
                     RFIDController.readersList.remove(device);
@@ -476,8 +474,6 @@ public class ScanPair {
                     }
                     //showToast(errorCode);
                     updatePairedDevList();
-
-
                 }
             } catch (Exception ex) {
                 //showToast("EXCEPTION(ScanPair) - 'UnpairTask.onPostExecute'");
@@ -510,11 +506,9 @@ public class ScanPair {
         }
 
         protected void onPreExecute() {
-            if(devName.contains("RFD8500")) {
-                pairTaskDailog.setMessage("" + devName + " 페어링 진행중..." +
-                    "RFD8500 장치의 블루투스 버튼 LED가 빠르게 깜박일 때, 노란색 트리거 버튼을 누르면 페어링이 완료됩니다!"
-                );
-            }  else {
+            if (devName.contains("RFD8500")) {
+                pairTaskDailog.setMessage("" + devName + " 페어링 진행중..." + "RFD8500 장치의 블루투스 버튼 LED가 빠르게 깜박일 때, 노란색 트리거 버튼을 누르면 페어링이 완료됩니다!");
+            } else {
                 pairTaskDailog.setMessage("" + devName + " 페어링 진행중...");
             }
             pairTaskDailog.show();
@@ -529,8 +523,7 @@ public class ScanPair {
                 if (mMacAddress == null) {
                     mLastToPairedDevice = mBtDevice;
                     retValue = btConnection.pair(mBtDevice, true);
-                } else
-                    retValue = btConnection.pair(mMacAddress);
+                } else retValue = btConnection.pair(mMacAddress);
                 switch (retValue) {
                     case Defines.NO_ERROR:
                         break;

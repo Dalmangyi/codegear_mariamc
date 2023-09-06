@@ -380,19 +380,16 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler, Navigat
             return Application.DEVICE_PREMIUM_PLUS_MODE;
         } else if (modelName.startsWith("RFD40")) {
             String[] splitStr = modelName.split("-");
-
             if (splitStr[0].equals("RFD4030")) {
                 if (splitStr[1].contains("G0")) {
                     return Application.DEVICE_STD_MODE;
                 }
-
             } else if (splitStr[0].equals("RFD4031")) {
                 if (splitStr[1].contains("G0")) {
                     return Application.DEVICE_STD_MODE;
                 } else if (splitStr[1].contains("G1")) {
                     return Application.DEVICE_PREMIUM_PLUS_MODE;
                 }
-
             }
         } else if (modelName.startsWith("RFD8500")) {
             String ScannerVersionInfo = Application.versionInfo.get("PL33");

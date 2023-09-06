@@ -54,71 +54,52 @@ public class PairedReaderListAdapter extends RecyclerView.Adapter<PairedReaderLi
         //modelName = reader.getRFIDReader().ReaderCapabilities.getModelName();
 
         String model = reader.getDeviceCapability(modelName);
-        if(model.equals("STANDARD") || model.equals("RFD8500") || model.startsWith("MC33")) {
+        if (model.equals("STANDARD") || model.equals("RFD8500") || model.startsWith("MC33")) {
             holder.icon.setImageResource(R.drawable.ic_standard);
-        } else if(model.equals("PREMIUM (WiFi)")) {
+        } else if (model.equals("PREMIUM (WiFi)")) {
             holder.icon.setImageResource(R.drawable.ic_premium);
         } else {
             holder.icon.setImageResource(R.drawable.ic_premium_plus);
         }
-        holder.readermodel.setText(String.format(context.getResources().getString(R.string.readermodel).toString(),model));
+        holder.readermodel.setText(String.format(context.getResources().getString(R.string.readermodel).toString(), model));
 
 
-        if(model.equals("RFD8500")){
+        if (model.equals("RFD8500")) {
             String serialno[] = modelName.split(model);
-            holder.serialNo.setText("SERIAL: "+serialno[1]);
+            holder.serialNo.setText("SERIAL: " + serialno[1]);
         }
-        if(model.startsWith("MC33")){
+        if (model.startsWith("MC33")) {
             String serialno[] = modelName.split("R");
-            holder.serialNo.setText("SERIAL: "+serialno[1]);
+            holder.serialNo.setText("SERIAL: " + serialno[1]);
         }
-        if(modelName.startsWith("RFD40")){
+        if (modelName.startsWith("RFD40")) {
             String[] splitStr = modelName.split("-");
 
-            if(splitStr[0].startsWith("RFD40+") || splitStr[0].startsWith("RFD40P")){
+            if (splitStr[0].startsWith("RFD40+") || splitStr[0].startsWith("RFD40P")) {
                 String serialno[] = modelName.split("_");
                 int length = serialno.length;
-                holder.serialNo.setText("SERIAL: "+serialno[length-1]);
+                holder.serialNo.setText("SERIAL: " + serialno[length - 1]);
             }
-            if(splitStr[0].equals("RFD4030") || splitStr[0].equals("RFD4031") ){
+            if (splitStr[0].equals("RFD4030") || splitStr[0].equals("RFD4031")) {
                 String ser_no[] = reader.getSerialNumber().split("S/N:");
-                holder.serialNo.setText("SERIAL: "+ser_no[1]);
+                holder.serialNo.setText("SERIAL: " + ser_no[1]);
             }
 
         }
-        if(modelName.startsWith("RFD90")) {
+        if (modelName.startsWith("RFD90")) {
             String[] splitStr = modelName.split("-");
-            if(splitStr[0].startsWith("RFD90+") || splitStr[0].startsWith("RFD90P")){
+            if (splitStr[0].startsWith("RFD90+") || splitStr[0].startsWith("RFD90P")) {
                 String serialno[] = modelName.split("_");
                 int length = serialno.length;
-                holder.serialNo.setText("SERIAL: "+serialno[length-1]);
-            }else if(splitStr[0].startsWith("RFD90")){
+                holder.serialNo.setText("SERIAL: " + serialno[length - 1]);
+            } else if (splitStr[0].startsWith("RFD90")) {
                 String ser_no[] = reader.getSerialNumber().split("S/N:");
-                holder.serialNo.setText("SERIAL: "+ser_no[1]);
+                holder.serialNo.setText("SERIAL: " + ser_no[1]);
             }
         }
 
 
-
-        /*if (rfidReader.getTransport() == "BLUETOOTH") {
-            holder.icon.setImageResource(R.drawable.ic_action_bluetooth_connected);
-        } else if (rfidReader.getTransport() == "SERVICE_SERIAL") {
-            holder.icon.setImageResource(R.drawable.ic_serial_connection);
-        } else {
-            holder.icon.setImageResource(R.drawable.ic_action_usb);
-        }
-        if (rfidReader.ReaderCapabilities != null && rfidReader.ReaderCapabilities.getBDAddress() != null) {
-            if (rfidReader.getTransport() == "BLUETOOTH") {
-                holder.icon.setImageResource(R.drawable.ic_action_bluetooth_connected);
-            } else if (rfidReader.getTransport() == "SERVICE_SERIAL") {
-                holder.icon.setImageResource(R.drawable.ic_serial_connection);
-            } else {
-                holder.icon.setImageResource(R.drawable.ic_action_usb);
-            }
-        }*/
-
-        holder.serialNo.setVisibility(Constants.showSerialNo? View.VISIBLE:View.GONE);
-
+        holder.serialNo.setVisibility(Constants.showSerialNo ? View.VISIBLE : View.GONE);
         holder.options_menu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -138,10 +119,9 @@ public class PairedReaderListAdapter extends RecyclerView.Adapter<PairedReaderLi
                                 mOnClickListener.unPair(position, rfidReader.getTransport());
                                 break;
                             case R.id.reader_details:
-
-                                if(context instanceof ActiveDeviceActivity) {
+                                if (context instanceof ActiveDeviceActivity) {
                                     ((ActiveDeviceActivity) context).loadReaderDetails(reader);
-                                } else if(context instanceof DeviceDiscoverActivity) {
+                                } else if (context instanceof DeviceDiscoverActivity) {
                                     ((DeviceDiscoverActivity) context).loadReaderDetails(reader);
                                 }
                                 break;
@@ -157,7 +137,7 @@ public class PairedReaderListAdapter extends RecyclerView.Adapter<PairedReaderLi
 
     @Override
     public int getItemCount() {
-       return readersList.size();
+        return readersList.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -182,29 +162,18 @@ public class PairedReaderListAdapter extends RecyclerView.Adapter<PairedReaderLi
                     mOnClickListener.ConnectReader(getAdapterPosition());
                 }
             });
-
-            //options_menu.setOnClickListener(this);
-            // itemView.setOnClickListener(this);
         }
 
     }
 
     interface ListItemClickListener {
         void onListItemClick(View view);
+
         public void ConnectReader(int position);
-        void unPair(int position,String transportType);
+
+        void unPair(int position, String transportType);
 
     }
 
 
-    /**
-     * method to get connect password for the reader
-     *
-     * @param address - device BT address
-     * @return connect password of the reader
-     */
-    private String getReaderPassword(String address) {
-        SharedPreferences sharedPreferences = context.getSharedPreferences(Constants.READER_PASSWORDS, 0);
-        return sharedPreferences.getString(address, null);
-    }
 }

@@ -27,6 +27,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -89,7 +90,7 @@ public class RFIDReadersListFragment extends Fragment implements IRFIDConnectTas
     private boolean isOnStopCalled = false;
     private ScanConnectTask scanConnectTask;
     private AvailableScanner curAvailableScanner;
-    private ExtendedFloatingActionButton fabPairReader;
+    private Button fabPairReader;
     public IRFIDConnectTaskHandlers handlers;
     private boolean mConnectioninProgress = false;
     RelativeLayout rl_myLayout;
@@ -209,8 +210,9 @@ public class RFIDReadersListFragment extends Fragment implements IRFIDConnectTas
 
 
         refreshDeviceList(null, false);
-        fabPairReader = (ExtendedFloatingActionButton) getActivity().findViewById(R.id.fab_pair_reader);
         pairedReaderListAdapter.notifyDataSetChanged();
+
+        fabPairReader = (Button) getActivity().findViewById(R.id.fab_pair_reader);
         fabPairReader.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

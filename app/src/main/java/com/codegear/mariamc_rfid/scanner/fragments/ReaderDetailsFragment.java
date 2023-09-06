@@ -27,24 +27,13 @@ import com.zebra.rfid.api3.OperationFailureException;
 import com.zebra.rfid.api3.RFIDResults;
 import com.zebra.rfid.api3.ReaderDevice;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link ReaderDetailsFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class ReaderDetailsFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-    TextView tv_name, tv_serialno, tv_model, tv_mac;
+    TextView tv_name, tv_serialno, tv_model;
     TextView tv_wifi, tv_rfid, tv_scan;
-    Bundle readerdetailsBundle;
     ReaderDevice mReaderDevice;
     ImageView iconRenameReader;
 
@@ -68,10 +57,6 @@ public class ReaderDetailsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
         setHasOptionsMenu(true);
     }
 
@@ -197,41 +182,33 @@ public class ReaderDetailsFragment extends Fragment {
         } catch (InvalidUsageException | OperationFailureException e) {
             Log.e(TAG, e.getStackTrace()[0].toString());
         }
-        builder.setView(view).setTitle("장치 이름 변경")
-            .setNegativeButton("취소", (dialogInterface, i) -> {
+        builder.setView(view).setTitle("장치 이름 변경").setNegativeButton("취소", (dialogInterface, i) -> {
 
-            })
-            .setPositiveButton("확인", (dialogInterface, i) -> {
-                String newName = etRenameReader.getText().toString();
-                try {
-                    RFIDResults rfidResults = mConnectedReader.Config.setFriendlyName(newName);
+        }).setPositiveButton("확인", (dialogInterface, i) -> {
+            String newName = etRenameReader.getText().toString();
+            try {
+                RFIDResults rfidResults = mConnectedReader.Config.setFriendlyName(newName);
 
-                    if (rfidResults == RFIDResults.RFID_API_SUCCESS) {
-                        Toast.makeText(getActivity(),
-                            "이름 변경 성공. 변경 사항을 보려면"
-                            + "\nUSB 연결인 경우: 장치를 분리하고 다시 연결해주세요. "
-                            + "\n블루투스 연결인 경우: 장치를 페어링 해제 후, 다시 페어링해주세요.",
-                            Toast.LENGTH_LONG
-                        ).show();
-                        requireActivity().onBackPressed();
-                    } else if (rfidResults == RFIDResults.RFID_COMMAND_OPTION_WITHOUT_DELIMITER) {
-                        Toast.makeText(getActivity(), "이름 변경 실패하였습니다. 단어 사이에 공백을 포함하지 마세요.", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(getActivity(), "이름 변경 실패. 알 수 없는 에러.", Toast.LENGTH_SHORT).show();
-                    }
-                } catch (InvalidUsageException e) {
-                    if (e.getStackTrace().length > 0) {
-                        Log.e(TAG, e.getStackTrace()[0].toString());
-                        Log.e(TAG, e.getInfo());
-                        Toast.makeText(getActivity(), e.getInfo(), Toast.LENGTH_SHORT).show();
-                    }
-                } catch (OperationFailureException e) {
-                    if (e.getStackTrace().length > 0) {
-                        Log.e(TAG, e.getStackTrace()[0].toString());
-                    }
+                if (rfidResults == RFIDResults.RFID_API_SUCCESS) {
+                    Toast.makeText(getActivity(), "이름 변경 성공. 변경 사항을 보려면" + "\nUSB 연결인 경우: 장치를 분리하고 다시 연결해주세요. " + "\n블루투스 연결인 경우: 장치를 페어링 해제 후, 다시 페어링해주세요.", Toast.LENGTH_LONG).show();
+                    requireActivity().onBackPressed();
+                } else if (rfidResults == RFIDResults.RFID_COMMAND_OPTION_WITHOUT_DELIMITER) {
+                    Toast.makeText(getActivity(), "이름 변경 실패하였습니다. 단어 사이에 공백을 포함하지 마세요.", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getActivity(), "이름 변경 실패. 알 수 없는 에러.", Toast.LENGTH_SHORT).show();
+                }
+            } catch (InvalidUsageException e) {
+                if (e.getStackTrace().length > 0) {
+                    Log.e(TAG, e.getStackTrace()[0].toString());
+                    Log.e(TAG, e.getInfo());
+                    Toast.makeText(getActivity(), e.getInfo(), Toast.LENGTH_SHORT).show();
+                }
+            } catch (OperationFailureException e) {
+                if (e.getStackTrace().length > 0) {
+                    Log.e(TAG, e.getStackTrace()[0].toString());
                 }
             }
-        );
+        });
         builder.show();
     }
 
