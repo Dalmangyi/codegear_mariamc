@@ -129,7 +129,7 @@
         <androidx.appcompat.widget.AppCompatButton
             android:layout_width="wrap_content"
             android:layout_height="40dp"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="30dp"
             android:background="@drawable/button_default_background"
             android:text="스캔"
             android:textColor="@color/white"

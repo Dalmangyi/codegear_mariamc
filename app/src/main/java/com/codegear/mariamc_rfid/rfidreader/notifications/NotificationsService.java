@@ -40,15 +40,15 @@ public class NotificationsService extends IntentService {
         Intent broadcast = new Intent(action);
         broadcast.putExtra(Constants.NOTIFICATIONS_TEXT, descText);
         broadcast.putExtra(Constants.NOTIFICATIONS_ID, INTENT_ID++);
-        sendOrderedBroadcast(broadcast,
-                null,
-                new NotificationsReceiver(),
-                null,
-                AppCompatActivity.RESULT_OK,
-                null,
-                null);
-
-
+        sendOrderedBroadcast(
+            broadcast,
+            null,
+            new NotificationsReceiver(),
+            null,
+            AppCompatActivity.RESULT_OK,
+            null,
+            null
+        );
     }
 
 }

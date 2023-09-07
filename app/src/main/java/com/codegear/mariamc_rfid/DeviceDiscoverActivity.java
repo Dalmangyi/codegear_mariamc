@@ -10,7 +10,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.hardware.usb.UsbDevice;
@@ -27,42 +26,34 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
-import androidx.core.view.MenuItemCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
 import com.codegear.mariamc_rfid.application.Application;
-import com.codegear.mariamc_rfid.cowchronicle.activities.WebviewActivity;
-import com.codegear.mariamc_rfid.cowchronicle.utils.PixelUtil;
+import com.codegear.mariamc_rfid.cowchronicle.utils.CustomDisconnectedDrawer;
+import com.codegear.mariamc_rfid.cowchronicle.utils.PermissionUtil;
 import com.codegear.mariamc_rfid.rfidreader.home.RFIDEventHandler;
 import com.codegear.mariamc_rfid.rfidreader.reader_connection.InitReadersListFragment;
 import com.codegear.mariamc_rfid.rfidreader.reader_connection.PasswordDialog;
-import com.codegear.mariamc_rfid.rfidreader.settings.SettingsContent;
 import com.codegear.mariamc_rfid.scanner.helpers.Constants;
-import com.google.android.material.navigation.NavigationView;
 import com.codegear.mariamc_rfid.discover_connect.nfc.PairOperationsFragment;
 import com.codegear.mariamc_rfid.rfidreader.common.ResponseHandlerInterfaces;
 import com.codegear.mariamc_rfid.rfidreader.notifications.NotificationUtil;
 import com.codegear.mariamc_rfid.rfidreader.rfid.RFIDController;
 import com.codegear.mariamc_rfid.rfidreader.settings.BatteryFragment;
-import com.codegear.mariamc_rfid.rfidreader.settings.SettingsDetailActivity;
 import com.codegear.mariamc_rfid.scanner.activities.BaseActivity;
 import com.codegear.mariamc_rfid.scanner.activities.UpdateFirmware;
 import com.codegear.mariamc_rfid.scanner.fragments.ReaderDetailsFragment;
 import com.codegear.mariamc_rfid.scanner.helpers.ScannerAppEngine;
+import com.permissionx.guolindev.PermissionX;
 import com.zebra.rfid.api3.ENUM_TRANSPORT;
 import com.zebra.rfid.api3.InvalidUsageException;
 import com.zebra.rfid.api3.OperationFailureException;
@@ -74,7 +65,6 @@ import java.util.Locale;
 public class DeviceDiscoverActivity extends BaseActivity implements Readers.RFIDReaderEventHandler, ResponseHandlerInterfaces.ReaderDeviceFoundHandler, ResponseHandlerInterfaces.BatteryNotificationHandler, ScannerAppEngine.IScannerAppEngineDevConnectionsDelegate {
 
     protected static final String TAG_CONTENT_FRAGMENT = "ContentFragment";
-    private static final int BLUETOOTH_PERMISSION_REQUEST_CODE = 100;
     DrawerLayout mDrawerLayout;
     Fragment fragment = null;
     public static RFIDEventHandler mEventHandler;
@@ -86,10 +76,14 @@ public class DeviceDiscoverActivity extends BaseActivity implements Readers.RFID
     private int productId = 0x1701;
     private static final String INTENT_ACTION_GRANT_USB = "com.zebra.rfid.app.USB_PERMISSION";
 
+    private Context mContext;
+
+    private CustomDisconnectedDrawer mCustomDrawer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mContext = this;
         mDeviceDiscoverActivity = this;
         mSavedInstanceState = savedInstanceState;
         if (mConnectedReader != null) {
@@ -97,62 +91,10 @@ public class DeviceDiscoverActivity extends BaseActivity implements Readers.RFID
         }
         setContentView(R.layout.activity_discover);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.dis_toolbar);
-        setSupportActionBar(toolbar);
+        //Drawer & ActionBar 세팅
+        mCustomDrawer = new CustomDisconnectedDrawer(this);
         getSupportActionBar().setTitle(getResources().getString(R.string.title_empty_readers));
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.discover_drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        toggle.syncState(); //ActionBarDrawerToggle 누를때 앱 종료되는 현상 막기.
 
-        //사이즈 측정
-        View vDisMainMenu = getLayoutInflater().inflate(R.layout.dis_main_menu, null, false);
-        vDisMainMenu.measure(0, 0);
-        int disMainMenuHeight = vDisMainMenu.getMeasuredHeight();
-        int screenHeight = PixelUtil.getScreenHeightPx(this);
-        int navigationViewMenuHeight = (int) getResources().getDimension(R.dimen.drawer_navigationview_item_height);
-
-        //NavigationView의 특정 Menu에 사이즈 적용
-        NavigationView navigationView = (NavigationView) findViewById(R.id.disnav_view);
-        navigationView.setNavigationItemSelectedListener(this::onOptionsItemSelected);
-        MenuItem menuItem = navigationView.getMenu().findItem(R.id.menu_empty);
-        final View v = getLayoutInflater().inflate(R.layout.drawer_menu_custom_item, null);
-        v.addOnAttachStateChangeListener(new View.OnAttachStateChangeListener() {
-            int originalHeight = 0;
-
-            @Override
-            public void onViewAttachedToWindow(View v) {
-                View parent = (View) v.getParent();
-                if (parent != null) parent = (View) parent.getParent();
-
-                if (parent != null) {
-                    ViewGroup.LayoutParams p = parent.getLayoutParams();
-                    originalHeight = p.height;
-                    int drawerMenuCustomItemHeight = screenHeight - disMainMenuHeight - (navigationViewMenuHeight * 5);
-                    if (drawerMenuCustomItemHeight < 0) {
-                        drawerMenuCustomItemHeight = 0;
-                    }
-                    p.height = drawerMenuCustomItemHeight;
-                    parent.setLayoutParams(p);
-                }
-            }
-
-            @Override
-            public void onViewDetachedFromWindow(View v) {
-                if (originalHeight != 0) {
-                    View parent = (View) v.getParent();
-                    if (parent != null) parent = (View) parent.getParent();
-
-                    if (parent != null) {
-                        ViewGroup.LayoutParams p = parent.getLayoutParams();
-                        p.height = originalHeight;
-                    }
-                }
-            }
-        });
-        menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-        menuItem.setActionView(v);
-        menuItem.setIcon(null);
-        menuItem.setTitle(null);
 
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -164,36 +106,39 @@ public class DeviceDiscoverActivity extends BaseActivity implements Readers.RFID
         // attach to reader list handler
         RFIDController.readers.attach(this);
         if (savedInstanceState == null) {
-            //loadReaders(this);
             mEventHandler = new RFIDEventHandler();
         }
-        //Scanner Initializations
-        //Handling Runtime BT permissions for Android 12 and higher
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.BLUETOOTH_SCAN, Manifest.permission.BLUETOOTH_CONNECT}, BLUETOOTH_PERMISSION_REQUEST_CODE);
-            } else {
-                initialize();
-            }
 
-        } else {
+
+        //블루투스 권한 요청
+        PermissionUtil.reqPermissions(this, () -> {
+            //모두 허가되었다면, 초기화 진행하기
             initialize();
-        }
+        }, Manifest.permission.BLUETOOTH_SCAN, Manifest.permission.BLUETOOTH_CONNECT);
 
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
 
-        if (requestCode == BLUETOOTH_PERMISSION_REQUEST_CODE) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                initialize();
-            } else {
-                Toast.makeText(this, "Bluetooth Permissions not granted", Toast.LENGTH_SHORT).show();
-            }
-        }
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+    void reqPermission() {
+
+        PermissionX.init(this)
+            .permissions(Manifest.permission.BLUETOOTH_SCAN, Manifest.permission.BLUETOOTH_CONNECT)
+            .onExplainRequestReason((scope, deniedList, beforeRequest) -> {
+                scope.showRequestReasonDialog(deniedList, "앱을 사용하기 위해 아래 권한 허용이 필요합니다.", "허용");
+            })
+            .onForwardToSettings((scope, deniedList) -> {
+                scope.showForwardToSettingsDialog(deniedList, "설정에서 다음 권한을 허용해주세요", "허용");
+            })
+            .request((allGranted, grantedList, deniedList) -> {
+                if (!allGranted) {
+                    Toast.makeText(mContext, "다음 권한들을 허용해주세요.：" + deniedList, Toast.LENGTH_SHORT).show();
+                }
+                else{
+                }
+            });
     }
+
 
     @Override
     protected void onNewIntent(Intent intent) {
@@ -348,37 +293,15 @@ public class DeviceDiscoverActivity extends BaseActivity implements Readers.RFID
         return super.onCreateOptionsMenu(menu);
     }
 
+
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        mDrawerLayout.closeDrawer(GravityCompat.START);
-        switch (item.getItemId()) {
-            case R.id.menu_cowchronicle:
-                Intent webviewIntent = new Intent(this, WebviewActivity.class);
-                webviewIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(webviewIntent);
-                return true;
-
-            case R.id.menu_readers:
-                return true;
-
-            case R.id.nav_fw_update:
-                if (mConnectedReader != null && mConnectedReader.isConnected()) {
-                    loadUpdateFirmware(MenuItemCompat.getActionView(item));
-                } else {
-                    Toast.makeText(this, "연결된 장치가 없습니다.", Toast.LENGTH_SHORT).show();
-                }
-                return true;
-
-            case R.id.nav_battery_statics:
-                Intent detailsIntent = new Intent(this, SettingsDetailActivity.class);
-                detailsIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                detailsIntent.putExtra(com.codegear.mariamc_rfid.rfidreader.common.Constants.SETTING_ITEM_ID, Integer.parseInt(SettingsContent.ITEMS.get(3).id));
-                startActivity(detailsIntent);
-                return true;
-
-            default:
-                return super.onOptionsItemSelected(item);
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        Boolean ret = mCustomDrawer.onOptionsItemSelected(item);
+        if (ret != null){
+            return ret;
         }
+
+        return super.onOptionsItemSelected(item);
     }
 
     public void loadUpdateFirmware(View actionView) {
