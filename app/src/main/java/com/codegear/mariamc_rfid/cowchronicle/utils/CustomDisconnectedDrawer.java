@@ -31,7 +31,6 @@ public class CustomDisconnectedDrawer {
 
         Toolbar toolbar = (Toolbar)mActivity.findViewById(R.id.dis_toolbar);
         mActivity.setSupportActionBar(toolbar);
-        mActivity.getSupportActionBar().setTitle(mActivity.getResources().getString(R.string.title_empty_readers));
         mDrawerLayout = (DrawerLayout)activity.findViewById(R.id.discover_drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(mActivity, mDrawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         toggle.syncState(); //ActionBarDrawerToggle 누를때 앱 종료되는 현상 막기.

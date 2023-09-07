@@ -1,6 +1,7 @@
 package com.codegear.mariamc_rfid.cowchronicle.activities;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -26,6 +27,7 @@ import com.codegear.mariamc_rfid.cowchronicle.storage.UserStorage;
 import com.codegear.mariamc_rfid.cowchronicle.utils.CustomDialog;
 import com.codegear.mariamc_rfid.cowchronicle.utils.CustomDisconnectedDrawer;
 import com.codegear.mariamc_rfid.cowchronicle.utils.MD5Util;
+import com.codegear.mariamc_rfid.cowchronicle.utils.PermissionUtil;
 import com.codegear.mariamc_rfid.scanner.activities.BaseActivity;
 import com.permissionx.guolindev.PermissionX;
 
@@ -103,33 +105,20 @@ public class UserLoginActivity extends BaseActivity {
             }
         });
 
+        //Drawer, ActionBar 세팅
         mCustomDrawer = new CustomDisconnectedDrawer(this);
+        getSupportActionBar().setTitle(getResources().getString(R.string.app_name));
 
-        reqPermission();
+        //GPS 권한 요청
+        PermissionUtil.reqPermissions(this, () -> {
+            //모두 허가되었다면, 자동로그인 시도하기
+            checkAutoLogin();
+        }, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION);
     }
 
-    void reqPermission() {
-
-        PermissionX.init(this)
-            .permissions(Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION)
-            .onExplainRequestReason((scope, deniedList, beforeRequest) -> {
-                scope.showRequestReasonDialog(deniedList, "앱을 사용하기 위해 아래 권한 허용이 필요합니다.", "허용");
-            })
-            .onForwardToSettings((scope, deniedList) -> {
-                scope.showForwardToSettingsDialog(deniedList, "설정에서 다음 권한을 허용해주세요", "허용");
-            })
-            .request((allGranted, grantedList, deniedList) -> {
-                if (!allGranted) {
-                    Toast.makeText(mContext, "다음 권한들을 허용해주세요.：" + deniedList, Toast.LENGTH_SHORT).show();
-                }
-                else{
-                    //모두 허가되었다면, 자동로그인 시도하기
-                    checkAutoLogin();
-                }
-            });
-    }
 
     void checkAutoLogin(){
+        dialogLoading.show();
 
         UserStorage userStorage = UserStorage.getInstance();
         boolean isAutoLogin = userStorage.getPrevLoginIsAuto();
@@ -180,14 +169,7 @@ public class UserLoginActivity extends BaseActivity {
 
         //위치 정보 가져오기
         LocationManager lm = (LocationManager) mContext.getSystemService(Context.LOCATION_SERVICE);
-        if (ActivityCompat.checkSelfPermission(mContext,
-                Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                || ActivityCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
-        {
-            reqPermission();
-            return;
-        }
-        Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        @SuppressLint("MissingPermission") Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
         double latitude = location.getLatitude();
         double longitude = location.getLongitude();
 
@@ -258,13 +240,13 @@ public class UserLoginActivity extends BaseActivity {
     }
 
     private void goIntentCowChronicle(){
-        finish();
+        finishAffinity();
         Intent intent = new Intent(UserLoginActivity.this, WebviewActivity.class);
         startActivity(intent);
     }
 
     private void goIntentDeviceDiscover(){
-        finish();
+        finishAffinity();
         Intent intent = new Intent(UserLoginActivity.this, DeviceDiscoverActivity.class);
         startActivity(intent);
     }
@@ -278,6 +260,5 @@ public class UserLoginActivity extends BaseActivity {
         }
 
         return super.onOptionsItemSelected(item);
-
     }
 }
