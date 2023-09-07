@@ -44,14 +44,12 @@ public class WebviewActivity extends AppCompatActivity implements AdvancedWebVie
     protected void onResume() {
         super.onResume();
         mWebView.onResume();
-        // ...
     }
 
     @SuppressLint("NewApi")
     @Override
     protected void onPause() {
         mWebView.onPause();
-        // ...
         super.onPause();
     }
 

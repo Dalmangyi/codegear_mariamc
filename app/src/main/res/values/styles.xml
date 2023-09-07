@@ -526,4 +526,10 @@
     <style name="NavigationTheme" parent="AppTheme">
         <item name="listPreferredItemHeightSmall">@dimen/drawer_navigationview_item_height</item>
     </style>
+
+    <!-- ButtonCustom   -->
+    <style name="SelectableButtonTheme">
+        <item name="background">@drawable/selector_navigation_bottom_button_background</item>
+    </style>
+
 </resources>

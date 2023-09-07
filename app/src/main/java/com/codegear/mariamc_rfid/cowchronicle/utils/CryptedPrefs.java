@@ -16,10 +16,6 @@ public class CryptedPrefs {
 
 
 
-    public static final String IS_AUTO_LOGIN = "is_auto_login";
-
-
-
 
     public CryptedPrefs(Context context){
         this.mContext = context;

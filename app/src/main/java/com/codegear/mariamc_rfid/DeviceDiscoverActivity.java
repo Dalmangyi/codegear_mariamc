@@ -3,7 +3,6 @@ package com.codegear.mariamc_rfid;
 import static com.codegear.mariamc_rfid.rfidreader.rfid.RFIDController.mConnectedReader;
 
 import android.Manifest;
-import android.app.ActivityManager;
 import android.app.PendingIntent;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothManager;
@@ -29,11 +28,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.view.WindowManager;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -52,14 +47,12 @@ import androidx.fragment.app.Fragment;
 import com.codegear.mariamc_rfid.application.Application;
 import com.codegear.mariamc_rfid.cowchronicle.activities.WebviewActivity;
 import com.codegear.mariamc_rfid.cowchronicle.utils.PixelUtil;
-import com.codegear.mariamc_rfid.rfidreader.common.CustomProgressDialog;
 import com.codegear.mariamc_rfid.rfidreader.home.RFIDEventHandler;
 import com.codegear.mariamc_rfid.rfidreader.reader_connection.InitReadersListFragment;
 import com.codegear.mariamc_rfid.rfidreader.reader_connection.PasswordDialog;
 import com.codegear.mariamc_rfid.rfidreader.settings.SettingsContent;
 import com.codegear.mariamc_rfid.scanner.helpers.Constants;
 import com.google.android.material.navigation.NavigationView;
-import com.codegear.mariamc_rfid.R;
 import com.codegear.mariamc_rfid.discover_connect.nfc.PairOperationsFragment;
 import com.codegear.mariamc_rfid.rfidreader.common.ResponseHandlerInterfaces;
 import com.codegear.mariamc_rfid.rfidreader.notifications.NotificationUtil;
@@ -67,10 +60,8 @@ import com.codegear.mariamc_rfid.rfidreader.rfid.RFIDController;
 import com.codegear.mariamc_rfid.rfidreader.settings.BatteryFragment;
 import com.codegear.mariamc_rfid.rfidreader.settings.SettingsDetailActivity;
 import com.codegear.mariamc_rfid.scanner.activities.BaseActivity;
-import com.codegear.mariamc_rfid.scanner.activities.NavigationHelpActivity;
 import com.codegear.mariamc_rfid.scanner.activities.UpdateFirmware;
 import com.codegear.mariamc_rfid.scanner.fragments.ReaderDetailsFragment;
-import com.codegear.mariamc_rfid.scanner.helpers.AvailableScanner;
 import com.codegear.mariamc_rfid.scanner.helpers.ScannerAppEngine;
 import com.zebra.rfid.api3.ENUM_TRANSPORT;
 import com.zebra.rfid.api3.InvalidUsageException;
@@ -104,14 +95,11 @@ public class DeviceDiscoverActivity extends BaseActivity implements Readers.RFID
         if (mConnectedReader != null) {
             Log.d(TAG, "There is no way you can come here ");
         }
-        setContentView(R.layout.discover_activity_layout);
+        setContentView(R.layout.activity_discover);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.dis_toolbar);
         setSupportActionBar(toolbar);
-        toolbar = (Toolbar) findViewById(R.id.dis_toolbar);
-        setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(getResources().getString(R.string.title_empty_readers));
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.discover_drawer_layout);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.discover_drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         toggle.syncState(); //ActionBarDrawerToggle 누를때 앱 종료되는 현상 막기.

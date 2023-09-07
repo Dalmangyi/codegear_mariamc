@@ -61,7 +61,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="젖소/한우 통합관리 플랫품, 카우클로니클"
+            android:text="젖소/한우 통합관리 플랫품, 카우크로니클"
             android:textSize="16dp" />
 
         <androidx.appcompat.widget.AppCompatTextView

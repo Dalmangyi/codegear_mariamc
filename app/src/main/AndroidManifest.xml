@@ -47,7 +47,8 @@
         tools:replace="android:allowBackup, android:appComponentFactory"
         android:usesCleartextTraffic="true">
 
-        <!-- 카우클로니클 시작 액티비티 : UserLoginActivity -->
+
+        <!-- 카우크로니클 시작 액티비티 : UserLoginActivity -->
         <activity
             android:name="com.codegear.mariamc_rfid.cowchronicle.activities.UserLoginActivity"
             android:configChanges="keyboardHidden|screenSize|fontScale"
@@ -61,7 +62,7 @@
             </intent-filter>
         </activity>
 
-        <!-- 카우클로니클 설정용 액티비티 : DeviceDiscoverActivity -->
+        <!-- 카우크로니클 설정용 액티비티 : DeviceDiscoverActivity -->
         <activity
             android:name="com.codegear.mariamc_rfid.DeviceDiscoverActivity"
             android:configChanges="keyboardHidden|screenSize|fontScale"
@@ -134,11 +135,6 @@
             android:launchMode="singleTask"
             android:parentActivityName="com.codegear.mariamc_rfid.scanner.activities.ScannersActivity"
             android:screenOrientation="portrait" />
-
-        <activity
-            android:name="com.codegear.mariamc_rfid.scanner.activities.SplashScreenActivity"
-            android:label="@string/title_activity_home"
-            android:theme="@android:style/Theme.Black.NoTitleBar" />
 
         <activity
             android:name="com.codegear.mariamc_rfid.scanner.activities.AboutActivity"

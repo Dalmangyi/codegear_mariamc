@@ -652,7 +652,7 @@ public class InitReadersListFragment extends Fragment implements IRFIDConnectTas
      */
     public void ReaderDeviceConnFailed(ReaderDevice device) {
 
-        Toast.makeText(getActivity(), "장치 연결 실패하였습니다.", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), "장치 연결에 실패하였습니다.", Toast.LENGTH_SHORT).show();
         if (isVisible() && progressDialog != null && progressDialog.isShowing())
             progressDialog.dismiss();
         if (deviceConnectTask != null) {

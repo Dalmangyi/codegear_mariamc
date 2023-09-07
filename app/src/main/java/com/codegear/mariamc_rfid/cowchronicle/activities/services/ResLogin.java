@@ -16,19 +16,19 @@ import java.util.Map;
 
 public class ResLogin {
     @SerializedName("bigo")
-    private String bigo;
+    public String bigo;
     @SerializedName("cmpy")
-    private String cmpy;
+    public String cmpy;
     @SerializedName("farm_list")
-    private String[] res_farm_list;
+    public String[] res_farm_list;
     @SerializedName("membership_nm")
-    private String membership_nm;
+    public String membership_nm;
     @SerializedName("success")
-    private int success;
+    public int success;
     @SerializedName("usr_nm")
-    private String usr_nm;
+    public String usr_nm;
 
-    private ArrayList<Map<String, String>> mFarmList = new ArrayList<>();
+    public ArrayList<Map<String, String>> mFarmList = new ArrayList<>();
 
     public void convertData(){
 
@@ -56,6 +56,10 @@ public class ResLogin {
                 }
             }
         }
+    }
+
+    public void saveData(){
+
     }
 
 }

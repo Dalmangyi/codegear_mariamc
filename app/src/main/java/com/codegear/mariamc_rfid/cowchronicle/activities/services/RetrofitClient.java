@@ -10,8 +10,8 @@ public class RetrofitClient {
 
     private static final String BASE_URL = "http://marivet.co.kr:5139/v2/ahebf/chalet/";
 
-    public static CowChronicleService getApiService(){
-        return getInstance().create(CowChronicleService.class);
+    public static CowChronicleAPI getApiService(){
+        return getInstance().create(CowChronicleAPI.class);
     }
 
     private static Retrofit getInstance(){

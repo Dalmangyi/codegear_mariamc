@@ -5,23 +5,15 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical"
-    android:paddingLeft="@dimen/app_margin_left"
-    android:paddingTop="@dimen/app_margin_left"
-    android:paddingRight="@dimen/app_margin_right"
-    android:paddingBottom="@dimen/app_margin_left"
+    android:gravity="center"
     tools:context="com.codegear.mariamc_rfid.cowchronicle.activities.UserInfoActivity">
 
     <View
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:minHeight="100dp" />
+        android:layout_weight="1"/>
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <androidx.appcompat.widget.LinearLayoutCompat
+    <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/app_margin"
@@ -56,8 +48,7 @@
                 <View
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:minHeight="100dp" />
+                    android:layout_weight="1" />
 
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="0dp"
@@ -106,6 +97,7 @@
                         android:layout_marginTop="@dimen/margin"
                         android:background="@color/colorPrimary"
                         android:text="Sign In"
+                        android:textAllCaps="false"
                         android:textColor="@color/white" />
 
                     <androidx.appcompat.widget.AppCompatCheckBox
@@ -113,7 +105,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:buttonTint="@color/colorPrimary"
-                        android:checked="true"
+                        android:checked="false"
                         android:text="자동 로그인"
                         android:textSize="16dp" />
 
@@ -122,59 +114,60 @@
                 <View
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:minHeight="100dp" />
+                    android:layout_weight="1" />
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 
-
-
         </androidx.appcompat.widget.LinearLayoutCompat>
-
-
-    </ScrollView>
 
     <View
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:minHeight="100dp" />
+        android:layout_weight="1" />
 
-    <androidx.appcompat.widget.LinearLayoutCompat
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="500dp"
+            android:layout_height="wrap_content"
+            android:background="#DFDFDF"
+            android:orientation="vertical"
+            android:layout_margin="@dimen/margin"
+            android:padding="@dimen/app_padding"
+            android:gravity="center">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="카우크로니클은 젖소, 한우 통합 통합관리 플랫폼입니다."
+                android:textSize="16dp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="회원가입 및 사용은 아래 연락처로 문의 바랍니다."
+                android:textSize="16dp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/app_margin"
+                android:gravity="center"
+                android:text="031-332-4309"
+                android:textSize="16dp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="enb8375@gmail.com"
+                android:textSize="16dp" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    <include
+        layout="@layout/bottom_direct_move_buttons"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#DFDFDF"
-        android:orientation="vertical"
-        android:padding="@dimen/app_padding">
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="카우클로니클은 젖소, 한우 통합 통합관리 플랫폼입니다."
-            android:textSize="14dp" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="회원가입 및 사용은 아래 연락처로 문의바랍니다."
-            android:textSize="14dp" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/app_margin"
-            android:gravity="center"
-            android:text="031-332-4309"
-            android:textSize="16dp" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="enb8375@gmail.com"
-            android:textSize="16dp" />
-    </androidx.appcompat.widget.LinearLayoutCompat>
+        android:layout_height="wrap_content"/>
 
 </LinearLayout>

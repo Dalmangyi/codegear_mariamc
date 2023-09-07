@@ -308,10 +308,6 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
 
     static MyAsyncTask cmdExecTask = null;
     Button btnFindScanner = null;
-    static final int ENABLE_FIND_NEW_SCANNER = 1;
-    static int[] icon = {R.drawable.nav_available_scanners, R.drawable.nav_pair_new_bt_scanner, R.drawable.ic_firmware_update, R.drawable.nav_about};
-    static int[] managexx_icon = {R.drawable.ic_reset_factory, R.drawable.ic_btn_reset, R.drawable.ic_logging, R.drawable.ic_export_config, R.drawable.ic_report};
-
     List<Integer> ssaSupportedAttribs;
     DrawerLayout drawer;
     ImageView iv_batteryLevel, iv_headerImageView;
