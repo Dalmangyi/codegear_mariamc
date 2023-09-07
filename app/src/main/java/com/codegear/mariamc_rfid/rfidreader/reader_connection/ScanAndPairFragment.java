@@ -105,7 +105,6 @@ public class ScanAndPairFragment extends DialogFragment implements GoogleApiClie
         if (bundle != null) deviceId = bundle.getString("device_id");
 
 
-        Application.scanPair.Init((AppCompatActivity) getActivity(), this);
 
         View view = inflater.inflate(R.layout.fragment_scan_pair, container, false);
         txtvwTitleInstruction = (TextView) view.findViewById(R.id.txtvw_title_instruction);
@@ -113,6 +112,7 @@ public class ScanAndPairFragment extends DialogFragment implements GoogleApiClie
         if (Application.scanPair == null) {
             Application.scanPair = new ScanPair();
         }
+        Application.scanPair.Init((AppCompatActivity) getActivity(), this);
         scanCode = view.findViewById(R.id.editText);
         scanCode.setOnKeyListener(new View.OnKeyListener() {
             @Override

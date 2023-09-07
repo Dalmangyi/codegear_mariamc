@@ -27,7 +27,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -53,7 +52,6 @@ import com.codegear.mariamc_rfid.scanner.activities.BaseActivity;
 import com.codegear.mariamc_rfid.scanner.activities.UpdateFirmware;
 import com.codegear.mariamc_rfid.scanner.fragments.ReaderDetailsFragment;
 import com.codegear.mariamc_rfid.scanner.helpers.ScannerAppEngine;
-import com.permissionx.guolindev.PermissionX;
 import com.zebra.rfid.api3.ENUM_TRANSPORT;
 import com.zebra.rfid.api3.InvalidUsageException;
 import com.zebra.rfid.api3.OperationFailureException;
@@ -65,7 +63,6 @@ import java.util.Locale;
 public class DeviceDiscoverActivity extends BaseActivity implements Readers.RFIDReaderEventHandler, ResponseHandlerInterfaces.ReaderDeviceFoundHandler, ResponseHandlerInterfaces.BatteryNotificationHandler, ScannerAppEngine.IScannerAppEngineDevConnectionsDelegate {
 
     protected static final String TAG_CONTENT_FRAGMENT = "ContentFragment";
-    DrawerLayout mDrawerLayout;
     Fragment fragment = null;
     public static RFIDEventHandler mEventHandler;
     private DeviceDiscoverActivity mDeviceDiscoverActivity;
@@ -118,26 +115,6 @@ public class DeviceDiscoverActivity extends BaseActivity implements Readers.RFID
 
     }
 
-
-
-    void reqPermission() {
-
-        PermissionX.init(this)
-            .permissions(Manifest.permission.BLUETOOTH_SCAN, Manifest.permission.BLUETOOTH_CONNECT)
-            .onExplainRequestReason((scope, deniedList, beforeRequest) -> {
-                scope.showRequestReasonDialog(deniedList, "앱을 사용하기 위해 아래 권한 허용이 필요합니다.", "허용");
-            })
-            .onForwardToSettings((scope, deniedList) -> {
-                scope.showForwardToSettingsDialog(deniedList, "설정에서 다음 권한을 허용해주세요", "허용");
-            })
-            .request((allGranted, grantedList, deniedList) -> {
-                if (!allGranted) {
-                    Toast.makeText(mContext, "다음 권한들을 허용해주세요.：" + deniedList, Toast.LENGTH_SHORT).show();
-                }
-                else{
-                }
-            });
-    }
 
 
     @Override
@@ -313,12 +290,6 @@ public class DeviceDiscoverActivity extends BaseActivity implements Readers.RFID
 
     @Override
     public void onBackPressed() {
-        if (mDrawerLayout != null && mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
-            mDrawerLayout.closeDrawer(GravityCompat.START);
-        } else {
-            //super.onBackPressed();
-        }
-
         Fragment currentFragment = getSupportFragmentManager().findFragmentByTag(TAG_CONTENT_FRAGMENT);
         if (currentFragment != null && (currentFragment instanceof PairOperationsFragment) || currentFragment instanceof ReaderDetailsFragment) {
             setActionBarTitle(getResources().getString(R.string.title_empty_readers));
@@ -328,7 +299,6 @@ public class DeviceDiscoverActivity extends BaseActivity implements Readers.RFID
             }
         } else {
             minimizeApp();
-
         }
     }
 

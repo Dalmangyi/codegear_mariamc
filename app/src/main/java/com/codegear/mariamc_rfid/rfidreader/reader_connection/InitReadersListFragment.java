@@ -68,7 +68,7 @@ public class InitReadersListFragment extends Fragment implements IRFIDConnectTas
     LinearLayout ll_pairedreader, linearLayout;
     private CustomProgressDialog progressDialog;
     private DeviceDiscoverActivity activity = null;
-    private static InitReadersListFragment rlf = null;
+    private static InitReadersListFragment initReadersListFragment = null;
     private ScanAndPairFragment scanAndPairFragment;
     private boolean isOnStopCalled = false;
     private ScanConnectTask scanConnectTask;
@@ -84,6 +84,15 @@ public class InitReadersListFragment extends Fragment implements IRFIDConnectTas
     private BluetoothHandler btConnection = null;
     TextView serialNo;
 
+    public static InitReadersListFragment newInstance() {
+        return new InitReadersListFragment();
+    }
+
+    public static InitReadersListFragment getInstance() {
+        if (initReadersListFragment == null)
+            initReadersListFragment = new InitReadersListFragment();
+        return initReadersListFragment;
+    }
 
     public void CancelReconnect() {
         if (RFIDBaseActivity.DisconnectTask != null && AUTO_RECONNECT_READERS) {
@@ -110,15 +119,6 @@ public class InitReadersListFragment extends Fragment implements IRFIDConnectTas
         // Required empty public constructor
     }
 
-    public static InitReadersListFragment newInstance() {
-        return new InitReadersListFragment();
-    }
-
-    public static InitReadersListFragment getInstance() {
-        if (rlf == null) rlf = new InitReadersListFragment();
-        return rlf;
-    }
-
 
     @Override
     public void onAttach(Context context) {
@@ -133,7 +133,6 @@ public class InitReadersListFragment extends Fragment implements IRFIDConnectTas
         setHasOptionsMenu(true);
         handlers = this;
         initializeStoredSettings();
-        // registerReceivers();
     }
 
     @Override
@@ -414,8 +413,6 @@ public class InitReadersListFragment extends Fragment implements IRFIDConnectTas
             }
         }
         capabilitiesRecievedforDevice();
-
-
     }
 
     @Override
@@ -829,7 +826,6 @@ public class InitReadersListFragment extends Fragment implements IRFIDConnectTas
         NON_MATCHING = settings.getBoolean(Constants.NON_MATCHING, false);
         LAST_CONNECTED_READER = settings.getString(Constants.LAST_READER, "");
     }
-
 
 
     @Override

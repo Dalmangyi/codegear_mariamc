@@ -5,10 +5,4 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".rfidreader.home.MainActivity">
 
-<!--    <item
-        android:id="@+id/action_info"
-        android:icon="@drawable/ic_action_about"
-        android:title="About"
-        app:showAsAction="always" />-->
-
 </menu>
