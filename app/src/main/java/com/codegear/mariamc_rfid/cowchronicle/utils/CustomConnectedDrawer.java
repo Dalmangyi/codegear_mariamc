@@ -21,17 +21,17 @@ import com.codegear.mariamc_rfid.rfidreader.settings.SettingsContent;
 import com.codegear.mariamc_rfid.rfidreader.settings.SettingsDetailActivity;
 import com.google.android.material.navigation.NavigationView;
 
-public class CustomDisconnectedDrawer {
+public class CustomConnectedDrawer {
 
     private AppCompatActivity mActivity;
     private DrawerLayout mDrawerLayout;
 
-    public CustomDisconnectedDrawer(AppCompatActivity activity){
+    public CustomConnectedDrawer(AppCompatActivity activity){
         mActivity = activity;
 
         Toolbar toolbar = (Toolbar)mActivity.findViewById(R.id.dis_toolbar);
         mActivity.setSupportActionBar(toolbar);
-        mDrawerLayout = (DrawerLayout)activity.findViewById(R.id.discover_drawer_layout);
+        mDrawerLayout = (DrawerLayout)activity.findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(mActivity, mDrawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         toggle.syncState(); //ActionBarDrawerToggle 누를때 앱 종료되는 현상 막기.
 
@@ -42,8 +42,13 @@ public class CustomDisconnectedDrawer {
         int screenHeight = PixelUtil.getScreenHeightPx(mActivity);
         int navigationViewMenuHeight = (int) mActivity.getResources().getDimension(R.dimen.drawer_navigationview_item_height);
 
+        //
+        View rlNavigationDeviceState = mActivity.findViewById(R.id.rlNavigationDeviceState);
+        rlNavigationDeviceState.measure(0, 0);
+        int rlNavigationDeviceStateHeight = vDisMainMenu.getMeasuredHeight();
+
         //NavigationView의 특정 Menu에 사이즈 적용
-        NavigationView navigationView = (NavigationView) mActivity.findViewById(R.id.disnav_view);
+        NavigationView navigationView = (NavigationView) mActivity.findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(mActivity::onOptionsItemSelected);
         MenuItem menuItem = navigationView.getMenu().findItem(R.id.menu_empty);
         final View v = mActivity.getLayoutInflater().inflate(R.layout.drawer_menu_custom_item, null);
@@ -58,7 +63,7 @@ public class CustomDisconnectedDrawer {
                 if (parent != null) {
                     ViewGroup.LayoutParams p = parent.getLayoutParams();
                     originalHeight = p.height;
-                    int drawerMenuCustomItemHeight = screenHeight - disMainMenuHeight - (navigationViewMenuHeight * 5);
+                    int drawerMenuCustomItemHeight = screenHeight - disMainMenuHeight - rlNavigationDeviceStateHeight - (navigationViewMenuHeight * 5);
                     if (drawerMenuCustomItemHeight < 0) {
                         drawerMenuCustomItemHeight = 0;
                     }

@@ -224,13 +224,13 @@
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/bt_clear"
-            style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@id/rr_inventoryButton"
             android:text="Clear"
             android:textSize="15dp"
+            android:background="@color/colorPrimary"
             app:srcCompat="@drawable/ic_btn_reset" />
 
         <TextView

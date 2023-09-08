@@ -19,7 +19,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
-        app:headerLayout="@layout/dis_main_menu"
+        app:headerLayout="@layout/main_menu"
         app:menu="@menu/disactivity_home_drawer">
 
         <RelativeLayout

@@ -81,7 +81,7 @@ public class FarmSearchDialogCompat<T extends Searchable> extends BaseSearchDial
     @LayoutRes
     @Override
     protected int getLayoutResId() {
-        return ir.mirrajabi.searchdialog.R.layout.search_dialog_compat;
+        return R.layout.dialog_farm_search_list;
     }
 
     @IdRes

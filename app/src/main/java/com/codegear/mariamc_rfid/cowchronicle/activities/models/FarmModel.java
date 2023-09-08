@@ -4,16 +4,11 @@ import ir.mirrajabi.searchdialog.core.Searchable;
 
 public class FarmModel implements Searchable {
     private String mName;
-    private String mImageUrl;
+    private String mFarmCode;
 
-    public FarmModel(String name) {
+    public FarmModel(String name, String farmCode) {
         mName = name;
-        mImageUrl = null;
-    }
-
-    public FarmModel(String name, String imageUrl) {
-        mName = name;
-        mImageUrl = imageUrl;
+        mFarmCode = farmCode;
     }
 
     @Override
@@ -30,12 +25,12 @@ public class FarmModel implements Searchable {
         return this;
     }
 
-    public String getImageUrl() {
-        return mImageUrl;
+    public String getFarmCode() {
+        return mFarmCode;
     }
 
-    public FarmModel setImageUrl(String imageUrl) {
-        mImageUrl = imageUrl;
+    public FarmModel setFarmCode(String farmCode) {
+        mFarmCode = farmCode;
         return this;
     }
 }

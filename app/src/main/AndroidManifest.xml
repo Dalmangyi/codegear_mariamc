@@ -77,6 +77,20 @@
             </intent-filter>
         </activity>
 
+        <!-- 카우클로니클 사용자 페이지 -->
+        <activity
+            android:name="com.codegear.mariamc_rfid.cowchronicle.activities.CowChronicleActivity"
+            android:configChanges="keyboardHidden|screenSize|fontScale"
+            android:exported="true"
+            android:label="Cow Tag"
+            android:theme="@style/AppTheme.NoActionBar" >
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
 
 
         <activity
@@ -85,20 +99,6 @@
             android:exported="true"
             android:label="WebView"
             android:theme="@style/AppTheme.NoActionBar">
-        </activity>
-
-        <activity
-            android:name="com.codegear.mariamc_rfid.cowchronicle.activities.CowTagActivity"
-            android:configChanges="keyboardHidden|screenSize|fontScale"
-            android:exported="true"
-            android:label="cow tag"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
-
-            <!--            <intent-filter>-->
-            <!--                <action android:name="android.intent.action.MAIN" />-->
-            <!--                <category android:name="android.intent.category.LAUNCHER" />-->
-            <!--            </intent-filter>-->
         </activity>
 
         <activity
@@ -412,7 +412,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
-            android:name="com.codegear.mariamc_rfid.cowchronicle.activities.UserInfoActivity"
+            android:name="com.codegear.mariamc_rfid.cowchronicle.activities.UserInfoFragment"
             android:configChanges="orientation|screenSize"
             android:label="@string/title_activity_userinfo" />
 

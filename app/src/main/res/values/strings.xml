@@ -843,7 +843,8 @@
 
     <!-- 카우크로니클 -->
     <string name="title_activity_userinfo">사용자 정보</string>
-
+    <string name="contact_phone">031-332-4309</string>
+    <string name="contact_email">enb8375@gmail.com</string>
 
 
 

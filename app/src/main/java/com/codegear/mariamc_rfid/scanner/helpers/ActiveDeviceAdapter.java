@@ -112,7 +112,10 @@ public class ActiveDeviceAdapter extends FragmentStatePagerAdapter {
     public static final int SCAN_TAB = 2;
     public static final int BARCODE_TAB = SCAN_TAB;
 
-    public static final int COWCHRONICLE_TAB = 200;
+    public static final int COW_CHRONICLE_TAB = 200;
+    public static final int COW_CHRONICLE_USER_INFO_TAB = 201;
+    public static final int COW_CHRONICLE_FARM_TAB = 202;
+    public static final int COW_CHRONICLE_COW_LIST_TAB = 201;
 
 
 
@@ -487,7 +490,7 @@ public class ActiveDeviceAdapter extends FragmentStatePagerAdapter {
            //     Constants.logAsMessage(TYPE_DEBUG, getClass().getSimpleName(), "3rd Tab Selected");
            //     return AdvancedFragment.newInstance();
 
-            case COWCHRONICLE_TAB:
+            case COW_CHRONICLE_TAB:
             default:
                 return null;
         }

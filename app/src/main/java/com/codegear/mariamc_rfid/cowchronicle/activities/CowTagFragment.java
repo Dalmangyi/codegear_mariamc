@@ -1,11 +1,15 @@
 package com.codegear.mariamc_rfid.cowchronicle.activities;
 
+import android.app.Activity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import com.codegear.mariamc_rfid.R;
 import com.codegear.mariamc_rfid.cowchronicle.activities.farms.FarmSearchDialogCompat;
@@ -15,53 +19,49 @@ import com.codegear.mariamc_rfid.cowchronicle.tableview.TableViewListener;
 import com.codegear.mariamc_rfid.cowchronicle.tableview.TableViewModel;
 import com.codegear.mariamc_rfid.cowchronicle.utils.SoundSearcher;
 import com.evrencoskun.tableview.TableView;
-import com.evrencoskun.tableview.filter.Filter;
-import com.evrencoskun.tableview.pagination.Pagination;
 
 import java.util.ArrayList;
 
 import ir.mirrajabi.searchdialog.core.BaseFilter;
 
-public class CowTagActivity extends AppCompatActivity {
+public class CowTagFragment extends Fragment {
 
 //    private UsersService mUsersService;
 
     private ArrayList<FarmModel> mFarmList;
     private FarmModel mSelectedFarmModel = null;
 
+    private Activity mActivity;
+    private View mMainView;
+
     private TableView mTableView;
 
+    @Nullable
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cow_tags);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        mActivity = getActivity();
+        mMainView = inflater.inflate(R.layout.fragment_cow_tags, null, false);
+
 
         mFarmList = createSampleContacts();
         if(mFarmList.size() > 0){
             mSelectedFarmModel = mFarmList.get(0);
         }
 
-        mTableView = findViewById(R.id.tbCowTags);
+        mTableView = mMainView.findViewById(R.id.tbCowTags);
 
         initializeTableView();
 
+        return mMainView;
     }
+
 
     private void initializeTableView(){
 
-        // Create TableView View model class  to group view models of TableView
         TableViewModel tableViewModel = new TableViewModel();
-
-        // Create TableView Adapter
         TableViewAdapter tableViewAdapter = new TableViewAdapter(tableViewModel);
-
         mTableView.setAdapter(tableViewAdapter);
         mTableView.setTableViewListener(new TableViewListener(mTableView));
-
-        // Create an instance of a Filter and pass the TableView.
-        //mTableFilter = new Filter(mTableView);
-
-        // Load the dummy data to the TableView
         tableViewAdapter.setAllItems(
                 tableViewModel.getColumnHeaderList(),
                 tableViewModel.getRowHeaderList(),
@@ -73,16 +73,16 @@ public class CowTagActivity extends AppCompatActivity {
 
     public void clickFarmSearch(View view) {
         final FarmSearchDialogCompat<FarmModel> searchDialog = new FarmSearchDialogCompat<>(
-            CowTagActivity.this,
+            mActivity,
             "목장 리스트",
             "검색어를 입력해주세요.",
             null,
                 mFarmList,
             (dialog, item, position) -> {
-                Toast.makeText(CowTagActivity.this, item.getTitle(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(mActivity, item.getTitle(), Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
 
-                mSelectedFarmModel = item;
+//                mSelectedFarmModel = item;
             }
         );
         BaseFilter apiFilter = new BaseFilter() {
