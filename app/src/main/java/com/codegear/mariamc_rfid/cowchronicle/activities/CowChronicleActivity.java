@@ -21,8 +21,7 @@ import com.codegear.mariamc_rfid.cowchronicle.utils.CustomConnectedDrawer;
 public class CowChronicleActivity extends AppCompatActivity {
 
     public static final String FLAG_FRAGMENT_START_PAGE = "fragment_start_page";
-    public static final String FRAGMENT_START_PAGE_WEBVIEW = "fragment_webview";
-    public static final String FRAGMENT_START_PAGE_FARM_SELECT = "fragment_farm_select";
+
 
     private CustomConnectedDrawer mCustomDrawer;
     private FragmentManager mFragmentManager;
@@ -65,16 +64,25 @@ public class CowChronicleActivity extends AppCompatActivity {
     }
 
     private void initFragment(){
-        String strFragmentStartPage = getIntent().getExtras().getString(FLAG_FRAGMENT_START_PAGE);
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null){
+            String strFragmentStartPage = bundle.getString(FLAG_FRAGMENT_START_PAGE);
+            CowChronicleFragmentEnum fragmentEnum = CowChronicleFragmentEnum.valueOf(strFragmentStartPage);
 
-        switch(strFragmentStartPage){
-            case FRAGMENT_START_PAGE_WEBVIEW:
-                replaceFragment(new WebviewFragment(), false);
-                break;
-            default:
-                replaceFragment(new FarmSelectFragment(), false);
+            switch(fragmentEnum){
+                case WEBVIEW:
+                    replaceFragment(new WebviewFragment(), false);
+                    break;
+                case COW_TAGS:
+                    replaceFragment(new CowTagsFragment(), false);
+                    break;
+                default:
+                    replaceFragment(new FarmSelectFragment(), false);
+            }
         }
-
+        else {
+            replaceFragment(new WebviewFragment(), false);
+        }
     }
 
     public void replaceFragment(Fragment fragment, boolean needBackStack){

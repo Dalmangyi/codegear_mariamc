@@ -1,5 +1,7 @@
 package com.codegear.mariamc_rfid.cowchronicle.activities;
 
+import static com.codegear.mariamc_rfid.cowchronicle.activities.CowChronicleActivity.FLAG_FRAGMENT_START_PAGE;
+
 import android.Manifest;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -30,6 +32,7 @@ import com.codegear.mariamc_rfid.cowchronicle.utils.CustomDialog;
 import com.codegear.mariamc_rfid.cowchronicle.utils.CustomDisconnectedDrawer;
 import com.codegear.mariamc_rfid.cowchronicle.utils.MD5Util;
 import com.codegear.mariamc_rfid.cowchronicle.utils.PermissionUtil;
+import com.codegear.mariamc_rfid.rfidreader.rfid.RFIDController;
 import com.codegear.mariamc_rfid.scanner.activities.BaseActivity;
 
 import java.net.UnknownHostException;
@@ -221,7 +224,14 @@ public class UserLoginActivity extends BaseActivity {
                         goIntentCowChronicle();
                         break;
                     case PAGE_NUM_2:
-                        goIntentDeviceDiscover();
+
+                        //연결된 기기가 있다면, 목장선택 화면으로 이동.
+                        if (RFIDController.mConnectedReader != null && RFIDController.mConnectedReader.isConnected()) {
+                            goIntentFarmSelect();
+                        }
+                        else{
+                            goIntentDeviceDiscover();
+                        }
                         break;
                     default:
                         CustomDialog.showSimpleError(mContext, "잘못된 접근입니다.");
@@ -246,16 +256,29 @@ public class UserLoginActivity extends BaseActivity {
         });
     }
 
+    //카우크로니클 웹뷰로 이동
     private void goIntentCowChronicle(){
-        Intent intent = new Intent(UserLoginActivity.this, CowChronicleActivity.class);
-        intent.putExtra(CowChronicleActivity.FLAG_FRAGMENT_START_PAGE, CowChronicleActivity.FRAGMENT_START_PAGE_WEBVIEW);
+        Intent intent = new Intent(this, CowChronicleActivity.class);
+        intent.putExtra(CowChronicleActivity.FLAG_FRAGMENT_START_PAGE, CowChronicleFragmentEnum.WEBVIEW.toString());
         startActivity(intent);
     }
 
+
+    //장치검색 화면으로 이동
     private void goIntentDeviceDiscover(){
-        Intent intent = new Intent(UserLoginActivity.this, DeviceDiscoverActivity.class);
+        Intent intent = new Intent(this, DeviceDiscoverActivity.class);
+        intent.putExtra(DeviceDiscoverActivity.DESTINATION_SCREEN_IS_COWCHRONICLE, true);
         startActivity(intent);
     }
+
+    //목장 선택 화면으로 이동
+    private void goIntentFarmSelect(){
+        Intent intent = new Intent(this, CowChronicleActivity.class);
+        intent.putExtra(FLAG_FRAGMENT_START_PAGE, CowChronicleFragmentEnum.FARM_SELECT.toString());
+        startActivity(intent);
+    }
+
+
 
 
     @Override

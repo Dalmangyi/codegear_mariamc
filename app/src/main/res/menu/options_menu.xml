@@ -4,10 +4,12 @@
         android:id="@+id/connect"
         android:icon="@drawable/ic_connect"
         android:title="연결하기" />
+
     <item
         android:id="@+id/unpair"
         android:icon="@drawable/ic_unpair"
         android:title="페어링 해제" />
+
     <item
         android:id="@+id/reader_details"
         android:icon="@drawable/ic_reader_details"

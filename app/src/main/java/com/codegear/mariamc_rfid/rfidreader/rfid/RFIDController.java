@@ -41,7 +41,7 @@ import static java.util.concurrent.TimeUnit.SECONDS;
  */
 public class RFIDController {
 
-    public  static RFIDReader mConnectedReader;
+    public static RFIDReader mConnectedReader;
     public static ReaderDevice mConnectedDevice;
     public static ArrayList<ReaderDevice> readersList = new ArrayList<>();
     //public static ArrayList<ReaderBTDevice> btReadrsList;

@@ -32,8 +32,6 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
 import com.codegear.mariamc_rfid.application.Application;
@@ -72,6 +70,9 @@ public class DeviceDiscoverActivity extends BaseActivity implements Readers.RFID
     private int vendorId = 0x05E0;
     private int productId = 0x1701;
     private static final String INTENT_ACTION_GRANT_USB = "com.zebra.rfid.app.USB_PERMISSION";
+
+    public static final String DESTINATION_SCREEN_IS_COWCHRONICLE = "destination_screen_is_cowchronicle";
+    public static final String DISABLE_AUTO_CONNECT_DEVICE = "disable_auto_connect_device";
 
     private Context mContext;
 
@@ -258,6 +259,12 @@ public class DeviceDiscoverActivity extends BaseActivity implements Readers.RFID
 
         if (mSavedInstanceState == null) {
             fragment = InitReadersListFragment.getInstance();
+            if(getIntent().getBooleanExtra(DESTINATION_SCREEN_IS_COWCHRONICLE, false)){
+                ((InitReadersListFragment)fragment).setDestinationScreenCowChronicle();
+            }
+            if(getIntent().getBooleanExtra(DISABLE_AUTO_CONNECT_DEVICE, false)){
+                ((InitReadersListFragment)fragment).disableAutoConnectDevice();
+            }
             switchToFragment(fragment);
         }
     }

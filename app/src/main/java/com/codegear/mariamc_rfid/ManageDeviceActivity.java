@@ -120,18 +120,7 @@ public class ManageDeviceActivity extends AppCompatActivity implements Readers.R
 
     @Override
     public void onBackPressed() {
-        ///super.onBackPressed();
         finish();
-        return;
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        //mRfidBaseActivity.resetReaderstatuscallback();
-        //mRfidBaseActivity.resetEventcallback(this);
-        //finish();
-
     }
 
     @Override

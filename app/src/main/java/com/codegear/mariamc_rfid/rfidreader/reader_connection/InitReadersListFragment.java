@@ -31,6 +31,8 @@ import com.codegear.mariamc_rfid.ActiveDeviceActivity;
 import com.codegear.mariamc_rfid.DeviceDiscoverActivity;
 import com.codegear.mariamc_rfid.R;
 import com.codegear.mariamc_rfid.application.Application;
+import com.codegear.mariamc_rfid.cowchronicle.activities.CowChronicleActivity;
+import com.codegear.mariamc_rfid.cowchronicle.activities.CowChronicleFragmentEnum;
 import com.codegear.mariamc_rfid.discover_connect.nfc.PairOperationsFragment;
 import com.codegear.mariamc_rfid.rfidreader.common.Constants;
 import com.codegear.mariamc_rfid.rfidreader.common.CustomProgressDialog;
@@ -47,6 +49,7 @@ import java.util.ArrayList;
 import static android.os.AsyncTask.Status.FINISHED;
 import static com.codegear.mariamc_rfid.application.Application.AUTORECONNECT_DELAY;
 import static com.codegear.mariamc_rfid.application.Application.TAG_LIST_MATCH_MODE;
+import static com.codegear.mariamc_rfid.cowchronicle.activities.CowChronicleActivity.FLAG_FRAGMENT_START_PAGE;
 import static com.codegear.mariamc_rfid.rfidreader.rfid.RFIDController.AUTO_DETECT_READERS;
 import static com.codegear.mariamc_rfid.rfidreader.rfid.RFIDController.AUTO_RECONNECT_READERS;
 import static com.codegear.mariamc_rfid.rfidreader.rfid.RFIDController.EXPORT_DATA;
@@ -83,6 +86,9 @@ public class InitReadersListFragment extends Fragment implements IRFIDConnectTas
     ImageView connectedImgView, iv_pairedreader_icon;
     private BluetoothHandler btConnection = null;
     TextView serialNo;
+    private boolean isDestinationScreenCowChronicle = false;
+    private boolean enableAutoConnectDevice = true;
+
 
     public static InitReadersListFragment newInstance() {
         return new InitReadersListFragment();
@@ -92,6 +98,18 @@ public class InitReadersListFragment extends Fragment implements IRFIDConnectTas
         if (initReadersListFragment == null)
             initReadersListFragment = new InitReadersListFragment();
         return initReadersListFragment;
+    }
+
+    //카우크로니클로 시작한 앱은 카우크로니클 화면으로 다시 돌아가게 만들기.
+    public void setDestinationScreenCowChronicle(){
+        //카우크로니클로 시작한 경우, 장치 페어링후, 장치 연결하게 되면 이동되는 페이지가,
+        //ActiveDeviceActivity가 아니고, CowchronicleActivity로 가야됨.
+        isDestinationScreenCowChronicle = true;
+    }
+
+    //특정 상황일때, 기기 자동연결을 끄는 기능
+    public void disableAutoConnectDevice(){
+        enableAutoConnectDevice = false;
     }
 
     public void CancelReconnect() {
@@ -260,7 +278,11 @@ public class InitReadersListFragment extends Fragment implements IRFIDConnectTas
                         ll_pairedreader.setVisibility(View.GONE);
                     }
                     pairedReaderListAdapter.notifyDataSetChanged();
-                    autoConnectDevice();
+
+                    //기기 자동접속
+                    if(enableAutoConnectDevice){
+                        autoConnectDevice();
+                    }
                 }
 
 
@@ -515,26 +537,35 @@ public class InitReadersListFragment extends Fragment implements IRFIDConnectTas
             }
         }
 
-        Intent intent = new Intent(getActivity(), ActiveDeviceActivity.class);
-        if (RFIDController.regionNotSet == true) {
-            intent.putExtra(com.codegear.mariamc_rfid.scanner.helpers.Constants.REGULATORY_SET, false);
+        if(isDestinationScreenCowChronicle){
+            Intent intent = new Intent(getActivity(), CowChronicleActivity.class);
+            intent.putExtra(FLAG_FRAGMENT_START_PAGE, CowChronicleFragmentEnum.FARM_SELECT.toString());
+            startActivity(intent);
         }
-
-        if ((curAvailableScanner != null) && (curAvailableScanner.isConnected())) {
-            //Intent intent = new Intent(getActivity(), ActiveDeviceActivity.class);
-            intent.putExtra(com.codegear.mariamc_rfid.scanner.helpers.Constants.SCANNER_NAME, curAvailableScanner.getScannerName());
-            intent.putExtra(com.codegear.mariamc_rfid.scanner.helpers.Constants.SCANNER_ADDRESS, curAvailableScanner.getScannerAddress());
-            intent.putExtra(com.codegear.mariamc_rfid.scanner.helpers.Constants.SCANNER_ID, curAvailableScanner.getScannerId());
-            intent.putExtra(com.codegear.mariamc_rfid.scanner.helpers.Constants.AUTO_RECONNECTION, curAvailableScanner.isAutoReconnection());
-            intent.putExtra(com.codegear.mariamc_rfid.scanner.helpers.Constants.CONNECTED, true);
+        else {
+            Intent intent = new Intent(getActivity(), ActiveDeviceActivity.class);
             if (RFIDController.regionNotSet == true) {
                 intent.putExtra(com.codegear.mariamc_rfid.scanner.helpers.Constants.REGULATORY_SET, false);
             }
-            startActivity(intent);
 
-        } else {
-            startActivity(intent);
+            if ((curAvailableScanner != null) && (curAvailableScanner.isConnected())) {
+                //Intent intent = new Intent(getActivity(), ActiveDeviceActivity.class);
+                intent.putExtra(com.codegear.mariamc_rfid.scanner.helpers.Constants.SCANNER_NAME, curAvailableScanner.getScannerName());
+                intent.putExtra(com.codegear.mariamc_rfid.scanner.helpers.Constants.SCANNER_ADDRESS, curAvailableScanner.getScannerAddress());
+                intent.putExtra(com.codegear.mariamc_rfid.scanner.helpers.Constants.SCANNER_ID, curAvailableScanner.getScannerId());
+                intent.putExtra(com.codegear.mariamc_rfid.scanner.helpers.Constants.AUTO_RECONNECTION, curAvailableScanner.isAutoReconnection());
+                intent.putExtra(com.codegear.mariamc_rfid.scanner.helpers.Constants.CONNECTED, true);
+                if (RFIDController.regionNotSet == true) {
+                    intent.putExtra(com.codegear.mariamc_rfid.scanner.helpers.Constants.REGULATORY_SET, false);
+                }
+                startActivity(intent);
+
+            } else {
+                startActivity(intent);
+            }
         }
+
+
 
         if (progressDialog != null) {
             progressDialog.cancel();
@@ -545,8 +576,6 @@ public class InitReadersListFragment extends Fragment implements IRFIDConnectTas
 
         scanConnectTask = null;
         getActivity().finish();
-
-
     }
 
     @Override

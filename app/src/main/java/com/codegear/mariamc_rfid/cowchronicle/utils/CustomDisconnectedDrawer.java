@@ -13,6 +13,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.codegear.mariamc_rfid.DeviceDiscoverActivity;
 import com.codegear.mariamc_rfid.R;
 import com.codegear.mariamc_rfid.cowchronicle.activities.UserLoginActivity;
 import com.codegear.mariamc_rfid.cowchronicle.activities.WebviewFragment;
@@ -91,10 +92,39 @@ public class CustomDisconnectedDrawer {
     public Boolean onOptionsItemSelected(MenuItem item) {
         mDrawerLayout.closeDrawer(GravityCompat.START);
 
-        //네비게이션 기능을 사용하기 전에, 로그인 먼저 해야됨을 안내.
-        if(!UserStorage.getInstance().isLogin()){
-            CustomDialog.showSimple(mActivity, R.string.login_need_login_process);
 
+
+        //네비게이션 메뉴 아이디에 따른 행동.
+        switch (item.getItemId()) {
+            case R.id.menu_cowchronicle:
+            case R.id.menu_readers:
+            case R.id.nav_user_info:
+                guideLogin();
+                return true;
+
+            case R.id.nav_battery_statics:
+            case R.id.nav_fw_update:
+                CustomDialog.showSimple(mActivity, "장치 설정에서 장치를 연결 후 진행 하실 수 있습니다.");
+                return true;
+
+            case R.id.nav_settings:
+                if(!(mActivity instanceof DeviceDiscoverActivity)) {
+                    Intent deviceDiscoverIntent = new Intent(mActivity, DeviceDiscoverActivity.class);
+                    deviceDiscoverIntent.putExtra(DeviceDiscoverActivity.DISABLE_AUTO_CONNECT_DEVICE, true); //자동연결 끄기
+                    deviceDiscoverIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    mActivity.startActivity(deviceDiscoverIntent);
+                }
+                return true;
+
+            default:
+                return null;
+        }
+    }
+
+
+    //네비게이션 기능을 사용하기 전에, 로그인 먼저 해야됨을 안내.
+    private void guideLogin(){
+        if(!UserStorage.getInstance().isLogin()){
             //로그인 페이지가 아니면, 로그인페이지로 이동
             if(!(mActivity instanceof UserLoginActivity)){
                 Intent intent = new Intent(mActivity, UserLoginActivity.class);
@@ -102,41 +132,6 @@ public class CustomDisconnectedDrawer {
                 mActivity.startActivity(intent);
                 mActivity.finishAffinity();
             }
-            return true;
-        }
-
-        //네비게이션 메뉴 아이디에 따른 행동.
-        switch (item.getItemId()) {
-            case R.id.menu_cowchronicle:
-                Intent webviewIntent = new Intent(mActivity, WebviewFragment.class);
-                webviewIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                mActivity.startActivity(webviewIntent);
-                return true;
-
-            case R.id.menu_readers:
-                return true;
-
-            case R.id.nav_user_info:
-                return true;
-
-            case R.id.nav_battery_statics:
-                Intent detailsIntent = new Intent(mActivity, SettingsDetailActivity.class);
-                detailsIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                detailsIntent.putExtra(com.codegear.mariamc_rfid.rfidreader.common.Constants.SETTING_ITEM_ID, Integer.parseInt(SettingsContent.ITEMS.get(3).id));
-                mActivity.startActivity(detailsIntent);
-                return true;
-
-            case R.id.nav_fw_update:
-                if (mConnectedReader != null || !mConnectedReader.isConnected()) {
-                    CustomDialog.showSimple(mActivity, "연결된 장치가 없습니다.");
-                }
-                return true;
-
-            case R.id.nav_settings:
-                return true;
-
-            default:
-                return null;
         }
     }
 }
