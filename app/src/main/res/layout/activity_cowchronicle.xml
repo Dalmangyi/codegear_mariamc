@@ -8,6 +8,38 @@
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
 
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/dis_toolbar"
+            style="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorPrimary"
+            android:elevation="4dp"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark"
+            app:navigationIcon="@drawable/ic_hamburger"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:titleTextColor="@color/white" />
+
+        <FrameLayout
+            android:id="@+id/flFragment"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@android:color/white" />
+
+        <include
+            layout="@layout/bottom_direct_move_buttons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
         android:layout_width="wrap_content"
@@ -26,7 +58,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
                 android:layout_alignParentBottom="true"
-                android:layout_margin="@dimen/margin">
+                android:layout_margin="@dimen/margin"
+                android:background="@color/white">
 
                 <TextView
                     android:id="@+id/battery_life"
@@ -73,34 +106,4 @@
         </RelativeLayout>
     </com.google.android.material.navigation.NavigationView>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/dis_toolbar"
-            style="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@color/colorPrimary"
-            android:elevation="4dp"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark"
-            app:navigationIcon="@drawable/ic_hamburger"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-            app:titleTextColor="@color/white" />
-
-        <FrameLayout
-            android:id="@+id/flFragment"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:background="@android:color/white" />
-
-        <include
-            layout="@layout/bottom_direct_move_buttons"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-    </LinearLayout>
 </androidx.drawerlayout.widget.DrawerLayout>

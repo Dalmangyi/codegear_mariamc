@@ -1,76 +1,112 @@
 package com.codegear.mariamc_rfid.cowchronicle.tableview;
 
-import android.text.Html;
-
-import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 
 
-import com.codegear.mariamc_rfid.R;
 import com.codegear.mariamc_rfid.cowchronicle.tableview.model.Cell;
 import com.codegear.mariamc_rfid.cowchronicle.tableview.model.ColumnHeader;
 import com.codegear.mariamc_rfid.cowchronicle.tableview.model.RowHeader;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
+import java.util.Map;
 
 
 public class TableViewModel {
-
+    private List<String> resKeyList;
+    private List<String> columnKeyList;
+    private ArrayList<Map<String, String>> mInputResList = new ArrayList<Map<String, String>>();
     private final ArrayList<ColumnHeader> mColumnList = new ArrayList<ColumnHeader>();
-    private final ArrayList<String[]> mRowList = new ArrayList<String[]>();
+    private final ArrayList<List<Cell>> mRowList = new ArrayList<List<Cell>>();
 
-    public TableViewModel() {
-        initColumnList();
-        initRowList();
+    public TableViewModel(ArrayList<Map<String, String>> inputResList, List resKeyList, List<String> columnKeyList) {
+        this.resKeyList = resKeyList;
+        this.columnKeyList = columnKeyList;
+        this.mInputResList = inputResList;
+
+        makeColumnList();
+        makeRowList();
     }
 
-    private void initColumnList(){
+    private void makeColumnList(){
+
+        mColumnList.clear();
+
         int i = 0;
-        mColumnList.add(new ColumnHeader(String.valueOf(i++), "목장이표"));
-        mColumnList.add(new ColumnHeader(String.valueOf(i++), "성별(월령)"));
-        mColumnList.add(new ColumnHeader(String.valueOf(i++), "산차"));
-        mColumnList.add(new ColumnHeader(String.valueOf(i++), "번식상태"));
-        mColumnList.add(new ColumnHeader(String.valueOf(i++), "전자이표"));
-        mColumnList.add(new ColumnHeader(String.valueOf(i++), "Count"));
-        mColumnList.add(new ColumnHeader(String.valueOf(i++), "RSSI"));
+        for (String strColumn:columnKeyList){
+            mColumnList.add(new ColumnHeader(String.valueOf(i++), strColumn));
+        }
     }
 
-    private void initRowList(){
-        mRowList.add(new String[]{"002123456789", "165", "암(40)", "2","임신","5574651132","15","-50"});
-        mRowList.add(new String[]{"002123456788", "160", "암(23)", "5","공태","65456504657","5","-39"});
-        mRowList.add(new String[]{"002123456787", "161", "수(12)", "2","임신","5574651132","115","-11"});
-        mRowList.add(new String[]{"002123456781", "161", "수(12)", "2","임신","5574651132","115","-11"});
-        mRowList.add(new String[]{"002123456782", "161", "수(12)", "2","임신","5574651132","115","-11"});
-        mRowList.add(new String[]{"002123456783", "161", "수(12)", "2","임신","5574651132","115","-11"});
-        mRowList.add(new String[]{"002123456784", "161", "수(12)", "2","임신","5574651132","115","-11"});
-        mRowList.add(new String[]{"002123456785", "161", "수(12)", "2","임신","5574651132","115","-11"});
-        mRowList.add(new String[]{"002123456786", "161", "수(12)", "2","임신","5574651132","115","-11"});
-        mRowList.add(new String[]{"002123456787", "161", "수(12)", "2","임신","5574651132","115","-11"});
-        mRowList.add(new String[]{"002123456788", "161", "수(12)", "2","임신","5574651132","115","-11"});
-        mRowList.add(new String[]{"002123456789", "161", "수(12)", "2","임신","5574651132","115","-11"});
-        mRowList.add(new String[]{"002123456700", "161", "수(12)", "2","임신","5574651132","115","-11"});
-        mRowList.add(new String[]{"002123456701", "161", "수(12)", "2","임신","5574651132","115","-11"});
-        mRowList.add(new String[]{"002123456702", "161", "수(12)", "2","임신","5574651132","115","-11"});
-        mRowList.add(new String[]{"002123456703", "161", "수(12)", "2","임신","5574651132","115","-11"});
-        mRowList.add(new String[]{"002123456704", "161", "수(12)", "2","임신","5574651132","115","-11"});
-        mRowList.add(new String[]{"002123456705", "161", "수(12)", "2","임신","5574651132","115","-11"});
-        mRowList.add(new String[]{"002123456706", "161", "수(12)", "2","임신","5574651132","115","-11"});
+    private void makeRowList(){
+
+        mRowList.clear();
+
+
+        for (int i = 0; i < mInputResList.size(); i++) {
+
+            Map<String, String> mapInputResItem = mInputResList.get(i);
+
+            List<Cell> cellList = new ArrayList<>();
+
+            int j = 0;
+            for (String resKey : resKeyList) {
+
+                final String id = resKey + "-" + (j++);
+                String strValue = "";
+
+                if (resKey.contains("+")){
+                    String[] subKeys = resKey.split("\\+");
+                    int subKeyIdx = 0;
+                    for (String subKey:subKeys){
+
+                        String tempValue = mapInputResItem.get(subKey);
+                        if(tempValue == null){
+                            tempValue = "";
+                        }
+
+                        if(subKeyIdx == 0){
+                            strValue += tempValue;
+                        }
+                        else{
+                            strValue += "("+tempValue+")";
+                        }
+
+                        subKeyIdx++;
+                    }
+                }
+                else{
+                    String tempValue = mapInputResItem.get(resKey);
+                    if(tempValue == null){
+                        tempValue = "";
+                    }
+                    strValue = tempValue;
+                }
+
+                Cell cell = new Cell(id, strValue);
+                cellList.add(cell);
+            }
+            mRowList.add(cellList);
+        }
+
     }
+
+
+
 
 
     @NonNull
-    private List<RowHeader> getSimpleRowHeaderList() {
-
+    public List<ColumnHeader> getColumnHeaderList() {
+        return mColumnList;
+    }
+    @NonNull
+    public List<RowHeader> getRowHeaderList() {
         List<RowHeader> list = new ArrayList<>();
         for (int i = 0; i < mRowList.size(); i++) {
 
             String strRowHeader = "";
             try{
-                String temp = mRowList.get(i)[0];
-
-//                strRowHeader = Html.fromHtml(temp);
+                String temp = (String)mRowList.get(i).get(0).getData();
                 strRowHeader = temp;
             }
             catch (Exception e){
@@ -86,38 +122,7 @@ public class TableViewModel {
 
 
     @NonNull
-    private List<List<Cell>> getCellListForSortingTest() {
-        List<List<Cell>> list = new ArrayList<>();
-        for (int i = 0; i < mRowList.size(); i++) {
-            String[] rowItem = mRowList.get(i);
-            List<Cell> cellList = new ArrayList<>();
-            for (int j = 0; j < mColumnList.size(); j++) {
-
-                String id = j + "-" + i;
-                Object text = rowItem[j+1];
-
-                Cell cell = new Cell(id, text);
-                cellList.add(cell);
-            }
-            list.add(cellList);
-        }
-
-        return list;
-    }
-
-
-    @NonNull
     public List<List<Cell>> getCellList() {
-        return getCellListForSortingTest();
-    }
-
-    @NonNull
-    public List<RowHeader> getRowHeaderList() {
-        return getSimpleRowHeaderList();
-    }
-
-    @NonNull
-    public List<ColumnHeader> getColumnHeaderList() {
-        return mColumnList;
+        return mRowList;
     }
 }

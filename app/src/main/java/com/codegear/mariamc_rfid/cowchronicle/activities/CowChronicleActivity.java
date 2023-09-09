@@ -1,7 +1,12 @@
 package com.codegear.mariamc_rfid.cowchronicle.activities;
 
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,6 +20,10 @@ import com.codegear.mariamc_rfid.cowchronicle.utils.CustomConnectedDrawer;
 
 public class CowChronicleActivity extends AppCompatActivity {
 
+    public static final String FLAG_FRAGMENT_START_PAGE = "fragment_start_page";
+    public static final String FRAGMENT_START_PAGE_WEBVIEW = "fragment_webview";
+    public static final String FRAGMENT_START_PAGE_FARM_SELECT = "fragment_farm_select";
+
     private CustomConnectedDrawer mCustomDrawer;
     private FragmentManager mFragmentManager;
 
@@ -25,6 +34,12 @@ public class CowChronicleActivity extends AppCompatActivity {
 
         mCustomDrawer = new CustomConnectedDrawer(this);
         mFragmentManager = getSupportFragmentManager();
+
+        Button btnNavigationBottom1 = findViewById(R.id.btnNavigationBottom1);
+        Button btnNavigationBottom2 = findViewById(R.id.btnNavigationBottom2);
+        btnNavigationBottom1.setOnClickListener(v -> replaceFragment(new WebviewFragment(), false));
+        btnNavigationBottom2.setOnClickListener(v -> replaceFragment(new FarmSelectFragment(), false));
+
 
         initFragment();
     }
@@ -50,7 +65,16 @@ public class CowChronicleActivity extends AppCompatActivity {
     }
 
     private void initFragment(){
-        replaceFragment(new FarmSelectFragment(), false);
+        String strFragmentStartPage = getIntent().getExtras().getString(FLAG_FRAGMENT_START_PAGE);
+
+        switch(strFragmentStartPage){
+            case FRAGMENT_START_PAGE_WEBVIEW:
+                replaceFragment(new WebviewFragment(), false);
+                break;
+            default:
+                replaceFragment(new FarmSelectFragment(), false);
+        }
+
     }
 
     public void replaceFragment(Fragment fragment, boolean needBackStack){
@@ -62,5 +86,22 @@ public class CowChronicleActivity extends AppCompatActivity {
         transaction.commit();
     }
 
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        View focusView = getCurrentFocus();
+        if (focusView != null) {
+            Rect rect = new Rect();
+            focusView.getGlobalVisibleRect(rect);
+            int x = (int) ev.getX(), y = (int) ev.getY();
+            if (!rect.contains(x, y)) {
+                InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                if (imm != null)
+                    imm.hideSoftInputFromWindow(focusView.getWindowToken(), 0);
+                focusView.clearFocus();
+            }
+        }
+        return super.dispatchTouchEvent(ev);
+    }
 
 }

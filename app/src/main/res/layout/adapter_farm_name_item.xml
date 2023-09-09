@@ -12,7 +12,7 @@
         android:layout_gravity="center_vertical"
         android:gravity="center_vertical"
         android:textSize="16dp"
-        tools:text="소농장 - 가나다"
+        tools:text="소목장 - 가나다"
         android:padding="@dimen/app_padding"
         />
 

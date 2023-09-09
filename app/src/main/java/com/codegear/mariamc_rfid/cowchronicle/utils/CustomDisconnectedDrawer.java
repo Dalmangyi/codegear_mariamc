@@ -15,7 +15,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.codegear.mariamc_rfid.R;
 import com.codegear.mariamc_rfid.cowchronicle.activities.UserLoginActivity;
-import com.codegear.mariamc_rfid.cowchronicle.activities.WebviewActivity;
+import com.codegear.mariamc_rfid.cowchronicle.activities.WebviewFragment;
 import com.codegear.mariamc_rfid.cowchronicle.storage.UserStorage;
 import com.codegear.mariamc_rfid.rfidreader.settings.SettingsContent;
 import com.codegear.mariamc_rfid.rfidreader.settings.SettingsDetailActivity;
@@ -108,7 +108,7 @@ public class CustomDisconnectedDrawer {
         //네비게이션 메뉴 아이디에 따른 행동.
         switch (item.getItemId()) {
             case R.id.menu_cowchronicle:
-                Intent webviewIntent = new Intent(mActivity, WebviewActivity.class);
+                Intent webviewIntent = new Intent(mActivity, WebviewFragment.class);
                 webviewIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 mActivity.startActivity(webviewIntent);
                 return true;

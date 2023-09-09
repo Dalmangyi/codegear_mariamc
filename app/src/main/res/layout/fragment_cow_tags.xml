@@ -9,7 +9,7 @@
     android:paddingTop="@dimen/app_margin_left"
     android:paddingRight="@dimen/app_margin_right"
     android:paddingBottom="@dimen/app_margin_left"
-    tools:context="com.codegear.mariamc_rfid.cowchronicle.activities.CowTagFragment">
+    tools:context="com.codegear.mariamc_rfid.cowchronicle.activities.CowTagsFragment">
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"

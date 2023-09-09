@@ -14,8 +14,14 @@ import androidx.fragment.app.Fragment;
 import com.codegear.mariamc_rfid.R;
 import com.codegear.mariamc_rfid.cowchronicle.activities.farms.FarmSearchDialogCompat;
 import com.codegear.mariamc_rfid.cowchronicle.activities.models.FarmModel;
+import com.codegear.mariamc_rfid.cowchronicle.activities.services.ResLogin;
+import com.codegear.mariamc_rfid.cowchronicle.storage.UserStorage;
+import com.codegear.mariamc_rfid.cowchronicle.utils.SoundSearcher;
 
 import java.util.ArrayList;
+import java.util.Map;
+
+import ir.mirrajabi.searchdialog.core.BaseFilter;
 
 
 public class FarmSelectFragment extends Fragment {
@@ -33,43 +39,88 @@ public class FarmSelectFragment extends Fragment {
         mActivity.getSupportActionBar().setTitle("목장선택");
 
 
-        mFarmSelectFragmentView.findViewById(R.id.btnCurrentFarm).setOnClickListener(this::clickFarmSearch);
+        mFarmSelectFragmentView.findViewById(R.id.btnCurrentFarm).setOnClickListener(this::showFarmSearchDialog);
 
         return mFarmSelectFragmentView;
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
+
+    private void showFarmSearchDialog(View v) {
+
+        ArrayList<FarmModel> mFarmList = createSampleContacts();
 
 
+        FarmSearchDialogCompat searchDialogCompat = new FarmSearchDialogCompat<FarmModel>(
+            mActivity,
+            "목장 리스트", "목장 이름을 적어 검색해 보세요.",
+            null,
+            mFarmList,
+            (dialog, item, position) -> {
+                goNextIntent(item.getFarmCode());
+                dialog.dismiss();
+            }
+        );
 
+        BaseFilter apiFilter = new BaseFilter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence charSequence) {
+                doBeforeFiltering();
+                FilterResults results = new FilterResults();
+                results.values = new ArrayList<FarmModel>();
+                results.count = 0;
 
-    private void clickFarmSearch(View v) {
-        new FarmSearchDialogCompat<>(mActivity, "목장 리스트", "목장 이름을 적어 검색해 보세요.", null, createSampleContacts(), (dialog, item, position) -> {
-            Toast.makeText(mActivity, item.getTitle(), Toast.LENGTH_SHORT).show();
-            goNextIntent();
-            dialog.dismiss();
-        }).show();
+                ArrayList<FarmModel> filteredList = new ArrayList<FarmModel>();
+                for(FarmModel farmModel: mFarmList){
+                    boolean isMatch = SoundSearcher.matchString(farmModel.getName(), charSequence.toString());
+                    if (isMatch){
+                        filteredList.add(farmModel);
+                    }
+                }
+                results.values = filteredList;
+                results.count = filteredList.size();
+
+                return results;
+            }
+
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+                if (filterResults != null) {
+                    ArrayList<FarmModel> filtered = (ArrayList<FarmModel>) filterResults.values;
+                    if (filtered != null) {
+                        searchDialogCompat.getFilterResultListener().onFilter(filtered);
+                    }
+                    doAfterFiltering();
+                }
+            }
+        };
+        searchDialogCompat.setFilter(apiFilter).show();
     }
 
     private ArrayList<FarmModel> createSampleContacts() {
+
         ArrayList<FarmModel> items = new ArrayList<>();
-        // Thanks to https://randomuser.me for the images
-        items.add(new FarmModel("First item", "https://randomuser.me/api/portraits/women/93.jpg"));
-        items.add(new FarmModel("Second item", "https://randomuser.me/api/portraits/women/79.jpg"));
-//        items.add(new FarmModel("Third item", "https://randomuser.me/api/portraits/women/56.jpg"));
-//        items.add(new FarmModel("The ultimate item", "https://randomuser.me/api/portraits/women/44.jpg"));
-//        items.add(new FarmModel("Last item", "https://randomuser.me/api/portraits/women/82.jpg"));
-//        items.add(new FarmModel("Lorem ipsum", "https://randomuser.me/api/portraits/lego/3.jpg"));
-//        items.add(new FarmModel("Dolor sit", "https://randomuser.me/api/portraits/women/60.jpg"));
-//        items.add(new FarmModel("Some random word", "https://randomuser.me/api/portraits/women/32.jpg"));
-//        items.add(new FarmModel("guess who's back", "https://randomuser.me/api/portraits/women/67.jpg"));
+
+        //로그인 정보를 통해서, 목장정보 가져오기
+        ResLogin resLogin = UserStorage.getInstance().getResLogin();
+        if (resLogin != null && resLogin.success == 1){
+            for(Map<String, String> mapFarmModel : resLogin.mConvertedFarmList){
+                String farm = ""+mapFarmModel.get("farm");
+                String code = ""+String.valueOf(mapFarmModel.get("code"));
+                String name = ""+mapFarmModel.get("name");
+                items.add(new FarmModel(farm, code, name));
+            }
+        }
+        else{
+            items.add(new FarmModel("샘플 목장1", "26","김ㅇㅇ"));
+            items.add(new FarmModel("샘플 목장2", "219","정ㅇㅇ"));
+        }
+
         return items;
     }
 
-    private void goNextIntent(){
-        ((CowChronicleActivity)mActivity).replaceFragment(new CowTagFragment(), true);
+    private void goNextIntent(String farmCode){
+        CowTagsFragment cowTagsFragment = new CowTagsFragment();
+        cowTagsFragment.setSelectFarmCode(farmCode);
+        ((CowChronicleActivity)mActivity).replaceFragment(cowTagsFragment, true);
     }
 }

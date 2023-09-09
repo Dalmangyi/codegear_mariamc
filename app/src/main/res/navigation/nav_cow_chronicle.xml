@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/fragment_farm_select"
-        android:label="농장 선택"
+        android:label="목장 선택"
         >
         <action
             android:id="@+id/action_farm_select_to_cow_list"

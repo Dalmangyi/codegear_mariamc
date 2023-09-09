@@ -51,11 +51,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:background="@drawable/button_default_background"
-                    android:text=""
+                    android:text="목장을 선택해주세요."
                     android:textColor="@color/white"
                     android:drawableStart="@drawable/baseline_arrow_drop_down_24"
                     android:drawableTint="@color/white"
-                    tools:text="목장을 선택해주세요."
                     android:layout_marginTop="5dp"/>
 
             </androidx.appcompat.widget.LinearLayoutCompat>

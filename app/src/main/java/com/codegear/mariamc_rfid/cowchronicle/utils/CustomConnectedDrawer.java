@@ -12,10 +12,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
 
+import com.codegear.mariamc_rfid.DeviceDiscoverActivity;
 import com.codegear.mariamc_rfid.R;
+import com.codegear.mariamc_rfid.cowchronicle.activities.CowChronicleActivity;
+import com.codegear.mariamc_rfid.cowchronicle.activities.FarmSelectFragment;
+import com.codegear.mariamc_rfid.cowchronicle.activities.UserInfoFragment;
 import com.codegear.mariamc_rfid.cowchronicle.activities.UserLoginActivity;
-import com.codegear.mariamc_rfid.cowchronicle.activities.WebviewActivity;
+import com.codegear.mariamc_rfid.cowchronicle.activities.WebviewFragment;
 import com.codegear.mariamc_rfid.cowchronicle.storage.UserStorage;
 import com.codegear.mariamc_rfid.rfidreader.settings.SettingsContent;
 import com.codegear.mariamc_rfid.rfidreader.settings.SettingsDetailActivity;
@@ -113,15 +118,15 @@ public class CustomConnectedDrawer {
         //네비게이션 메뉴 아이디에 따른 행동.
         switch (item.getItemId()) {
             case R.id.menu_cowchronicle:
-                Intent webviewIntent = new Intent(mActivity, WebviewActivity.class);
-                webviewIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                mActivity.startActivity(webviewIntent);
+                replaceFragment(new WebviewFragment(), true);
                 return true;
 
             case R.id.menu_readers:
+                replaceFragment(new FarmSelectFragment(), true);
                 return true;
 
             case R.id.nav_user_info:
+                replaceFragment(new UserInfoFragment(), true);
                 return true;
 
             case R.id.nav_battery_statics:
@@ -143,5 +148,9 @@ public class CustomConnectedDrawer {
             default:
                 return null;
         }
+    }
+
+    private void replaceFragment(Fragment fragment, boolean needBackStack){
+        ((CowChronicleActivity)mActivity).replaceFragment(fragment, needBackStack);
     }
 }

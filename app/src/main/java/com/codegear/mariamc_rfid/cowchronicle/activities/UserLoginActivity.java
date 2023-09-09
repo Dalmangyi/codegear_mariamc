@@ -1,20 +1,22 @@
 package com.codegear.mariamc_rfid.cowchronicle.activities;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Rect;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
@@ -29,7 +31,6 @@ import com.codegear.mariamc_rfid.cowchronicle.utils.CustomDisconnectedDrawer;
 import com.codegear.mariamc_rfid.cowchronicle.utils.MD5Util;
 import com.codegear.mariamc_rfid.cowchronicle.utils.PermissionUtil;
 import com.codegear.mariamc_rfid.scanner.activities.BaseActivity;
-import com.permissionx.guolindev.PermissionX;
 
 import java.net.UnknownHostException;
 import java.util.HashMap;
@@ -61,7 +62,8 @@ public class UserLoginActivity extends BaseActivity {
         return new UserLoginActivity();
     }
 
-    public UserLoginActivity() { }
+    public UserLoginActivity() {
+    }
 
 
     @Override
@@ -79,27 +81,24 @@ public class UserLoginActivity extends BaseActivity {
         cbIsAutoLogin = findViewById(R.id.cbIsAutoLogin);
 
 
-
         btnNavigationBottom1 = findViewById(R.id.btnNavigationBottom1);
         btnNavigationBottom2 = findViewById(R.id.btnNavigationBottom2);
         btnNavigationBottom1.setSelected(false);
         btnNavigationBottom2.setSelected(false);
         btnNavigationBottom1.setOnClickListener(v -> {
-            if (btnNavigationBottom1.isSelected()){
+            if (btnNavigationBottom1.isSelected()) {
                 btnNavigationBottom1.setSelected(false);
                 btnNavigationBottom2.setSelected(false);
-            }
-            else{
+            } else {
                 btnNavigationBottom1.setSelected(true);
                 btnNavigationBottom2.setSelected(false);
             }
         });
         btnNavigationBottom2.setOnClickListener(v -> {
-            if (btnNavigationBottom2.isSelected()){
+            if (btnNavigationBottom2.isSelected()) {
                 btnNavigationBottom1.setSelected(false);
                 btnNavigationBottom2.setSelected(false);
-            }
-            else {
+            } else {
                 btnNavigationBottom1.setSelected(false);
                 btnNavigationBottom2.setSelected(true);
             }
@@ -117,13 +116,12 @@ public class UserLoginActivity extends BaseActivity {
     }
 
 
-    void checkAutoLogin(){
-        dialogLoading.show();
+    void checkAutoLogin() {
 
         UserStorage userStorage = UserStorage.getInstance();
         boolean isAutoLogin = userStorage.getPrevLoginIsAuto();
 
-        if (isAutoLogin){
+        if (isAutoLogin) {
             String strLoginId = userStorage.getPrevLoginId();
             String strLoginPwd = userStorage.getPrevLoginPwd();
             login(strLoginId, strLoginPwd, true, PAGE_NUM_1);
@@ -140,14 +138,13 @@ public class UserLoginActivity extends BaseActivity {
 
         //TODO - DebugCode
         strId = "farmtest2";
-        strPwd = "111";
+//        strPwd = "111";
 
-        if(!btnNavigationBottom1.isSelected() && !btnNavigationBottom2.isSelected()){
+        if (!btnNavigationBottom1.isSelected() && !btnNavigationBottom2.isSelected()) {
             dialogLoading.dismiss();
             CustomDialog.showSimple(mContext, R.string.login_need_select_page_button);
             return;
-        }
-        else if (strId.isEmpty() || strPwd.isEmpty()) {
+        } else if (strId.isEmpty() || strPwd.isEmpty()) {
             dialogLoading.dismiss();
             CustomDialog.showSimple(mContext, "아이디 또는 비밀번호를 입력해주세요.");
             return;
@@ -155,9 +152,9 @@ public class UserLoginActivity extends BaseActivity {
 
         //페이지 번호
         int pageNum = PAGE_NUM_1;
-        if(btnNavigationBottom1.isSelected()){
+        if (btnNavigationBottom1.isSelected()) {
             pageNum = PAGE_NUM_1;
-        }else if(btnNavigationBottom2.isSelected()){
+        } else if (btnNavigationBottom2.isSelected()) {
             pageNum = PAGE_NUM_2;
         }
 
@@ -169,9 +166,19 @@ public class UserLoginActivity extends BaseActivity {
 
         //위치 정보 가져오기
         LocationManager lm = (LocationManager) mContext.getSystemService(Context.LOCATION_SERVICE);
-        @SuppressLint("MissingPermission") Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-        double latitude = location.getLatitude();
-        double longitude = location.getLongitude();
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            PermissionUtil.reqPermissions(this, () -> {
+                //모두 허가되었다면, 로그인 다시 시도하기
+                login(strId, strPwd, isAutoLogin, movePageNumber);
+            }, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION);
+            return;
+        }
+        Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        if(location != null){
+            location = lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+        }
+        double latitude = 0.0f; //location.getLatitude();
+        double longitude = 0.0f; //location.getLongitude();
 
         //비밀번호 해쉬화
         String strHashedPwd = MD5Util.convert(strPwd);
@@ -240,13 +247,12 @@ public class UserLoginActivity extends BaseActivity {
     }
 
     private void goIntentCowChronicle(){
-        finishAffinity();
-        Intent intent = new Intent(UserLoginActivity.this, WebviewActivity.class);
+        Intent intent = new Intent(UserLoginActivity.this, CowChronicleActivity.class);
+        intent.putExtra(CowChronicleActivity.FLAG_FRAGMENT_START_PAGE, CowChronicleActivity.FRAGMENT_START_PAGE_WEBVIEW);
         startActivity(intent);
     }
 
     private void goIntentDeviceDiscover(){
-        finishAffinity();
         Intent intent = new Intent(UserLoginActivity.this, DeviceDiscoverActivity.class);
         startActivity(intent);
     }
@@ -260,5 +266,22 @@ public class UserLoginActivity extends BaseActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        View focusView = getCurrentFocus();
+        if (focusView != null) {
+            Rect rect = new Rect();
+            focusView.getGlobalVisibleRect(rect);
+            int x = (int) ev.getX(), y = (int) ev.getY();
+            if (!rect.contains(x, y)) {
+                InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                if (imm != null)
+                    imm.hideSoftInputFromWindow(focusView.getWindowToken(), 0);
+                focusView.clearFocus();
+            }
+        }
+        return super.dispatchTouchEvent(ev);
     }
 }

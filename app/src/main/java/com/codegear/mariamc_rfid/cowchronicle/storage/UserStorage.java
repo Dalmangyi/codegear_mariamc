@@ -2,10 +2,13 @@ package com.codegear.mariamc_rfid.cowchronicle.storage;
 
 import android.content.Context;
 
+import com.codegear.mariamc_rfid.cowchronicle.activities.services.ResCowList;
 import com.codegear.mariamc_rfid.cowchronicle.activities.services.ResLogin;
 import com.codegear.mariamc_rfid.cowchronicle.utils.CryptedKeys;
 import com.codegear.mariamc_rfid.cowchronicle.utils.CryptedKeys.*;
 import com.codegear.mariamc_rfid.cowchronicle.utils.CryptedPrefs;
+
+import java.util.Map;
 
 public class UserStorage {
     private static final UserStorage mInstance = new UserStorage();
@@ -21,7 +24,7 @@ public class UserStorage {
 
 
     //저장용 데이터
-    private ResLogin mResLogin;
+    private ResLogin mResLogin; 
 
 
     private UserStorage() {
@@ -43,7 +46,7 @@ public class UserStorage {
         this.mResLogin = resLogin;
     }
 
-    public void saveLogout(){
+    public void doLogout(){
         this.mResLogin = null;
         mPrefs.setValue(CryptedKeys.LOGIN_IS_AUTO, false);
     }

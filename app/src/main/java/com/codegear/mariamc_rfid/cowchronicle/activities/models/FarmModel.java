@@ -3,25 +3,27 @@ package com.codegear.mariamc_rfid.cowchronicle.activities.models;
 import ir.mirrajabi.searchdialog.core.Searchable;
 
 public class FarmModel implements Searchable {
-    private String mName;
+    private String mFarmName;
     private String mFarmCode;
+    private String mOwnerName;
 
-    public FarmModel(String name, String farmCode) {
-        mName = name;
+    public FarmModel(String farmName, String farmCode, String ownerName) {
+        mFarmName = farmName;
         mFarmCode = farmCode;
+        mOwnerName = ownerName;
     }
 
     @Override
     public String getTitle() {
-        return mName;
+        return mFarmName+" - "+mOwnerName;
     }
 
     public String getName() {
-        return mName;
+        return mFarmName;
     }
 
     public FarmModel setName(String name) {
-        mName = name;
+        mFarmName = name;
         return this;
     }
 
@@ -32,5 +34,9 @@ public class FarmModel implements Searchable {
     public FarmModel setFarmCode(String farmCode) {
         mFarmCode = farmCode;
         return this;
+    }
+
+    public String getOwnerName(){
+        return mOwnerName;
     }
 }

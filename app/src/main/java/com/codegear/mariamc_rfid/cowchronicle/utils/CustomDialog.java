@@ -27,7 +27,7 @@ public class CustomDialog {
 
     public static void showSimpleError(Context context, String msg){
         new MaterialDialog.Builder(context)
-            .title("에러")
+            .title("통신 에러")
             .content(msg)
             .negativeText("닫기")
             .negativeColor(Color.RED)

@@ -3,7 +3,6 @@ package com.codegear.mariamc_rfid.cowchronicle.activities.services;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import org.json.JSONArray;
@@ -14,7 +13,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
 
-public class ResLogin {
+public class ResLogin extends ResCommon {
     @SerializedName("bigo")
     public String bigo;
     @SerializedName("cmpy")
@@ -28,13 +27,14 @@ public class ResLogin {
     @SerializedName("usr_nm")
     public String usr_nm;
 
-    public ArrayList<Map<String, String>> mFarmList = new ArrayList<>();
+    public ArrayList<Map<String, String>> mConvertedFarmList = new ArrayList<>();
 
+    @Override
     public void convertData(){
 
         //res_farm_list => farm_list
         if (res_farm_list != null && res_farm_list.length > 0){
-            mFarmList.clear();
+            mConvertedFarmList.clear();
             ObjectMapper mapper = new ObjectMapper();
             for (String farm:res_farm_list){
                 try {
@@ -43,7 +43,7 @@ public class ResLogin {
                     {
                         JSONObject jsonObj = jsonArray.getJSONObject(i);
                         Map<String, String> map = mapper.readValue(jsonObj.toString(), Map.class);
-                        mFarmList.add(map);
+                        mConvertedFarmList.add(map);
                     }
                 } catch (JSONException e) {
                     throw new RuntimeException(e);
@@ -58,8 +58,5 @@ public class ResLogin {
         }
     }
 
-    public void saveData(){
-
-    }
 
 }

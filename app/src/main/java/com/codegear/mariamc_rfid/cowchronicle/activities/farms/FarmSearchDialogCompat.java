@@ -11,9 +11,12 @@ import androidx.annotation.LayoutRes;
 import androidx.annotation.Nullable;
 
 import com.codegear.mariamc_rfid.R;
+import com.codegear.mariamc_rfid.cowchronicle.activities.models.FarmModel;
+import com.codegear.mariamc_rfid.cowchronicle.utils.SoundSearcher;
 
 import java.util.ArrayList;
 
+import ir.mirrajabi.searchdialog.core.BaseFilter;
 import ir.mirrajabi.searchdialog.core.BaseSearchDialogCompat;
 import ir.mirrajabi.searchdialog.core.FilterResultListener;
 import ir.mirrajabi.searchdialog.core.SearchResultListener;
@@ -35,11 +38,12 @@ public class FarmSearchDialogCompat<T extends Searchable> extends BaseSearchDial
         mSearchResultListener = searchResultListener;
     }
 
+
     @Override
     protected void getView(View view) {
         setContentView(view);
         getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-        setCancelable(true);
+        setCancelable(false);
         TextView txtTitle = (TextView) view.findViewById(ir.mirrajabi.searchdialog.R.id.txt_title);
         final EditText searchBox = (EditText) view.findViewById(getSearchBoxId());
         txtTitle.setText(mTitle);
@@ -61,6 +65,13 @@ public class FarmSearchDialogCompat<T extends Searchable> extends BaseSearchDial
             }
         });
         setAdapter(adapter);
+
+        view.findViewById(R.id.btnClose).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dismiss();
+            }
+        });
     }
 
     public FarmSearchDialogCompat setTitle(String title) {
