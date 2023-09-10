@@ -6,15 +6,6 @@
     android:orientation="vertical"
     tools:context="com.codegear.mariamc_rfid.rfidreader.rapidread.RapidReadFragment">
 
-    <!-- <TextView
-         android:id="@+id/tv_prefilter_enabled"
-         android:layout_width="match_parent"
-         android:layout_height="wrap_content"
-         android:textSize="8dp"
-         android:gravity="center"
-         android:textColor="#ff0000"
-         android:text="Pre filter is enabled"/>
- -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -25,7 +16,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:ignore="MissingConstraints">
-
 
             <include layout="@layout/matching_progress_view"></include>
 
@@ -228,9 +218,9 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@id/rr_inventoryButton"
+            android:background="@color/colorPrimary"
             android:text="Clear"
             android:textSize="15dp"
-            android:background="@color/colorPrimary"
             app:srcCompat="@drawable/ic_btn_reset" />
 
         <TextView

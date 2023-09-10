@@ -79,7 +79,7 @@
     <dimen name="tableview_row_text_size">14sp</dimen>
     <dimen name="tableview_cell_height">40dp</dimen>
     <!-- TableView Library에서 Overriding하기 때문에 name을 바꾸면 다른 name으로 안됨.-->
-    <dimen name="default_row_header_width">150dp</dimen>
+    <dimen name="default_row_header_width">200dp</dimen>
     <dimen name="default_column_header_height">40dp</dimen>
 
     <!--  Drawer  -->

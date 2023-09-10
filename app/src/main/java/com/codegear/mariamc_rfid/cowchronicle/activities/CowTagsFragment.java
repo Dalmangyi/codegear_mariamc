@@ -1,18 +1,22 @@
 package com.codegear.mariamc_rfid.cowchronicle.activities;
 
+import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.RFID_TAB;
+
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import com.codegear.mariamc_rfid.ActiveDeviceActivity;
 import com.codegear.mariamc_rfid.R;
+import com.codegear.mariamc_rfid.application.Application;
 import com.codegear.mariamc_rfid.cowchronicle.activities.farms.FarmSearchDialogCompat;
 import com.codegear.mariamc_rfid.cowchronicle.activities.models.FarmModel;
 import com.codegear.mariamc_rfid.cowchronicle.activities.services.ResCowList;
@@ -22,8 +26,23 @@ import com.codegear.mariamc_rfid.cowchronicle.storage.UserStorage;
 import com.codegear.mariamc_rfid.cowchronicle.tableview.TableViewAdapter;
 import com.codegear.mariamc_rfid.cowchronicle.tableview.TableViewListener;
 import com.codegear.mariamc_rfid.cowchronicle.tableview.TableViewModel;
+import com.codegear.mariamc_rfid.cowchronicle.utils.CustomDialog;
 import com.codegear.mariamc_rfid.cowchronicle.utils.SoundSearcher;
+import com.codegear.mariamc_rfid.rfidreader.home.RFIDBaseActivity;
+import com.codegear.mariamc_rfid.rfidreader.locate_tag.LocateOperationsFragment;
+import com.codegear.mariamc_rfid.rfidreader.locate_tag.multitag_locate.MultiTagLocateResponseHandlerTask;
+import com.codegear.mariamc_rfid.rfidreader.rfid.RFIDController;
+import com.codegear.mariamc_rfid.rfidreader.rfid.RfidListeners;
 import com.evrencoskun.tableview.TableView;
+import com.zebra.rfid.api3.ACCESS_OPERATION_CODE;
+import com.zebra.rfid.api3.ACCESS_OPERATION_STATUS;
+import com.zebra.rfid.api3.InvalidUsageException;
+import com.zebra.rfid.api3.OperationFailureException;
+import com.zebra.rfid.api3.Readers;
+import com.zebra.rfid.api3.RfidEventsListener;
+import com.zebra.rfid.api3.RfidReadEvents;
+import com.zebra.rfid.api3.RfidStatusEvents;
+import com.zebra.rfid.api3.TagData;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -34,12 +53,14 @@ import retrofit2.Call;
 
 public class CowTagsFragment extends Fragment {
 
+    private final String TAG = "CowTagsFragment";
+
     //UI
     private AppCompatActivity mActivity;
     private View mMainView;
 
     private TableView mTableView;
-    private Button btnCurrentFarm;
+    private Button btnCurrentFarm, btnScan;
 
 
     //Data
@@ -56,11 +77,19 @@ public class CowTagsFragment extends Fragment {
 
         mActivity.getSupportActionBar().setTitle("전자이표");
 
-        mFarmList = createSampleContacts();
+        mFarmList = loadFarmModel();
 
         btnCurrentFarm = mMainView.findViewById(R.id.btnCurrentFarm);
         btnCurrentFarm.setOnClickListener(v -> {
             showFarmSearchDialog(v);
+        });
+
+        btnScan = mMainView.findViewById(R.id.btnScan);
+        btnScan.setOnClickListener(v -> {
+            boolean isSelected = v.isSelected();
+            v.setSelected(!isSelected);
+
+            setScanRunning(!isSelected);
         });
 
 
@@ -145,14 +174,14 @@ public class CowTagsFragment extends Fragment {
         mTableView.setAdapter(tableViewAdapter);
         mTableView.setTableViewListener(new TableViewListener(mTableView));
         tableViewAdapter.setAllItems(
-                tableViewModel.getColumnHeaderList(),
-                tableViewModel.getRowHeaderList(),
-                tableViewModel.getCellList()
+            tableViewModel.getColumnHeaderList(),
+            tableViewModel.getRowHeaderList(),
+            tableViewModel.getCellList()
         );
 
     }
 
-
+    //목장 검색 다이얼로그 표시
     public void showFarmSearchDialog(View view) {
 
         BaseFilter apiFilter = new BaseFilter() {
@@ -190,24 +219,20 @@ public class CowTagsFragment extends Fragment {
 
 
         new FarmSearchDialogCompat<>(
-                mActivity,
-                "목장 리스트",
-                "검색어를 입력해주세요.",
-                null,
-                mFarmList,
-                (dialog, item, position) -> {
-                    dialog.dismiss();
+            mActivity, "목장 리스트","검색어를 입력해주세요.",null, mFarmList,
+            (dialog, item, position) -> {
+                dialog.dismiss();
 
-                    setSelectFarmCode(item.getFarmCode());
-                    initSelectFarm();
-                    loadCowList();
-                }
+                setSelectFarmCode(item.getFarmCode());
+                initSelectFarm();
+                loadCowList();
+            }
         ).setFilter(apiFilter).show();
     }
 
 
-
-    private ArrayList<FarmModel> createSampleContacts() {
+    //목장 정보 가져오기
+    private ArrayList<FarmModel> loadFarmModel() {
 
         ArrayList<FarmModel> items = new ArrayList<>();
 
@@ -228,4 +253,123 @@ public class CowTagsFragment extends Fragment {
 
         return items;
     }
+
+
+    //스캔 버튼 상태 갱신
+    private void setScanRunning(boolean running){
+        btnScan.setSelected(running);
+
+        if(running){
+            btnScan.setText("정지");
+            startScanInventory();
+        }else{
+            btnScan.setText("스캔");
+            stopScanInventory();
+        }
+    }
+
+    private void initEventListener(){
+        EventHandler eventHandler = new EventHandler();
+
+        try {
+            if (RFIDController.mConnectedReader != null && RFIDController.mConnectedReader.Events != null) {
+                RFIDController.mConnectedReader.Events.removeEventsListener(eventHandler);
+                RFIDController.mConnectedReader.Events.addEventsListener(eventHandler);
+                RFIDController.mConnectedReader.Events.setHandheldEvent(true);
+                RFIDController.mConnectedReader.reinitTransport();
+            }
+        } catch (InvalidUsageException e) {
+            if (e != null && e.getStackTrace().length > 0) {
+                Log.e(TAG, e.getStackTrace()[0].toString());
+            }
+        } catch (OperationFailureException e) {
+            if (e != null && e.getStackTrace().length > 0) {
+                Log.e(TAG, e.getStackTrace()[0].toString());
+            }
+        } catch (ClassCastException e) {
+            if (e != null && e.getStackTrace().length > 0) {
+                Log.e(TAG, e.getStackTrace()[0].toString());
+            }
+        }
+    }
+
+    private void startScanInventory(){
+        RFIDController.clearAllInventoryData();
+        initEventListener();
+        RFIDController.getInstance().performInventory(new RfidListeners() {
+            @Override
+            public void onSuccess(Object object) {
+            }
+
+            @Override
+            public void onFailure(Exception exception) {
+                setScanRunning(false);
+                CustomDialog.showSimpleError(mActivity, "스캔 시작 에러 : "+exception.getMessage());
+            }
+
+            @Override
+            public void onFailure(String message) {
+                setScanRunning(false);
+                CustomDialog.showSimpleError(mActivity, "스캔 시작 에러 : "+message);
+            }
+        });
+    }
+
+    private void stopScanInventory(){
+        RFIDController.getInstance().stopInventory(new RfidListeners() {
+            @Override
+            public void onSuccess(Object object) {
+            }
+
+            @Override
+            public void onFailure(Exception exception) {
+                CustomDialog.showSimpleError(mActivity, "스캔 정지 에러 : "+exception.getMessage());
+            }
+
+            @Override
+            public void onFailure(String message) {
+                CustomDialog.showSimpleError(mActivity, "스캔 정지 에러 : "+message);
+            }
+        });
+    }
+
+
+    public class EventHandler implements RfidEventsListener {
+
+
+        public EventHandler( ) {
+        }
+
+
+        @Override
+        public void eventReadNotify(RfidReadEvents e) {
+
+            final int READ_COUNT = 100;
+            TagData[] myTags = null;
+            if (RFIDController.mConnectedReader != null) {
+                if (!RFIDController.mConnectedReader.Actions.MultiTagLocate.isMultiTagLocatePerforming()) {
+                    myTags = RFIDController.mConnectedReader.Actions.getReadTags(READ_COUNT);
+                } else {
+                    myTags = RFIDController.mConnectedReader.Actions.getMultiTagLocateTagInfo(READ_COUNT);
+                }
+            }
+
+            if (myTags != null) {
+                for (TagData tagData : myTags) {
+                    String tagId = tagData.getTagID();
+                    short rssi = tagData.getPeakRSSI();
+
+                    Log.d(TAG, "tag("+tagId+"):"+rssi);
+                }
+            }
+        }
+
+        @Override
+        public void eventStatusNotify(RfidStatusEvents rfidStatusEvents) {
+            Log.d(TAG, "Status Notification: " + rfidStatusEvents.StatusEventData.getStatusEventType());
+        }
+
+    }
+
+
 }
