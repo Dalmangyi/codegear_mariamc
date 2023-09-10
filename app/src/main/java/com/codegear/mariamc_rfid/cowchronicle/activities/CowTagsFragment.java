@@ -1,7 +1,6 @@
 package com.codegear.mariamc_rfid.cowchronicle.activities;
 
-import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.RFID_TAB;
-
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,31 +13,27 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-import com.codegear.mariamc_rfid.ActiveDeviceActivity;
 import com.codegear.mariamc_rfid.R;
-import com.codegear.mariamc_rfid.application.Application;
 import com.codegear.mariamc_rfid.cowchronicle.activities.farms.FarmSearchDialogCompat;
 import com.codegear.mariamc_rfid.cowchronicle.activities.models.FarmModel;
 import com.codegear.mariamc_rfid.cowchronicle.activities.services.ResCowList;
 import com.codegear.mariamc_rfid.cowchronicle.activities.services.ResLogin;
 import com.codegear.mariamc_rfid.cowchronicle.activities.services.RetrofitClient;
+import com.codegear.mariamc_rfid.cowchronicle.device.DeviceTaskSettings;
 import com.codegear.mariamc_rfid.cowchronicle.storage.UserStorage;
 import com.codegear.mariamc_rfid.cowchronicle.tableview.TableViewAdapter;
 import com.codegear.mariamc_rfid.cowchronicle.tableview.TableViewListener;
 import com.codegear.mariamc_rfid.cowchronicle.tableview.TableViewModel;
 import com.codegear.mariamc_rfid.cowchronicle.utils.CustomDialog;
 import com.codegear.mariamc_rfid.cowchronicle.utils.SoundSearcher;
-import com.codegear.mariamc_rfid.rfidreader.home.RFIDBaseActivity;
-import com.codegear.mariamc_rfid.rfidreader.locate_tag.LocateOperationsFragment;
-import com.codegear.mariamc_rfid.rfidreader.locate_tag.multitag_locate.MultiTagLocateResponseHandlerTask;
 import com.codegear.mariamc_rfid.rfidreader.rfid.RFIDController;
 import com.codegear.mariamc_rfid.rfidreader.rfid.RfidListeners;
+import com.codegear.mariamc_rfid.rfidreader.settings.ProfileContent;
 import com.evrencoskun.tableview.TableView;
-import com.zebra.rfid.api3.ACCESS_OPERATION_CODE;
-import com.zebra.rfid.api3.ACCESS_OPERATION_STATUS;
+import com.xw.repo.BubbleSeekBar;
+import com.zebra.rfid.api3.Antennas;
 import com.zebra.rfid.api3.InvalidUsageException;
 import com.zebra.rfid.api3.OperationFailureException;
-import com.zebra.rfid.api3.Readers;
 import com.zebra.rfid.api3.RfidEventsListener;
 import com.zebra.rfid.api3.RfidReadEvents;
 import com.zebra.rfid.api3.RfidStatusEvents;
@@ -46,6 +41,7 @@ import com.zebra.rfid.api3.TagData;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 import ir.mirrajabi.searchdialog.core.BaseFilter;
@@ -53,35 +49,58 @@ import retrofit2.Call;
 
 public class CowTagsFragment extends Fragment {
 
+
     private final String TAG = "CowTagsFragment";
+
+    private final String[] TABLEVIEW_KEYS = new String[] {"COW_ID_NUM", "SNM", "SEX+MONTHS", "PRTY", "PRN_STTS", "TAGNO", "COUNT", "RSSI"};
+    private final String[] TABLEVIEW_NAMES = new String[] {"이력제번호", "목장이표", "성별(월령)", "산차", "번식상태", "전자이표", "Count", "RSSI"};
+
 
     //UI
     private AppCompatActivity mActivity;
     private View mMainView;
 
     private TableView mTableView;
-    private Button btnCurrentFarm, btnScan;
+    private Button btnCurrentFarm, btnDistancePowerApply, btnScan;
+    private BubbleSeekBar bsbDistancePower;
+
+
 
 
     //Data
     private String mSelectedFarmCode;
     private ArrayList<FarmModel> mFarmList;
     private ArrayList<Map<String, String>> mCowList;
+    private int[] antennaPowerLevels = null;
+    private DeviceTaskSettings.SaveAntennaConfigurationTask antennaTask = null;
+
+
 
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mActivity = (AppCompatActivity)getActivity();
-        mMainView = inflater.inflate(R.layout.fragment_cow_tags, null, false);
-
         mActivity.getSupportActionBar().setTitle("전자이표");
 
-        mFarmList = loadFarmModel();
+
+        mMainView = inflater.inflate(R.layout.fragment_cow_tags, null, false);
 
         btnCurrentFarm = mMainView.findViewById(R.id.btnCurrentFarm);
         btnCurrentFarm.setOnClickListener(v -> {
             showFarmSearchDialog(v);
+        });
+
+        bsbDistancePower = mMainView.findViewById(R.id.bsbDistancePower);
+        btnDistancePowerApply = mMainView.findViewById(R.id.btnDistancePowerApply);
+        btnDistancePowerApply.setOnClickListener(v -> {
+
+            if(antennaPowerLevels != null){
+                int powerIndex = antennaPowerLevels[bsbDistancePower.getProgress()];
+
+                antennaTask = new DeviceTaskSettings.SaveAntennaConfigurationTask(powerIndex, mActivity);
+                antennaTask.execute();
+            }
         });
 
         btnScan = mMainView.findViewById(R.id.btnScan);
@@ -91,9 +110,13 @@ public class CowTagsFragment extends Fragment {
 
             setScanRunning(!isSelected);
         });
-
-
         mTableView = mMainView.findViewById(R.id.tbCowTags);
+
+
+
+        initProfiles();
+        mFarmList = loadFarmModel();
+
 
         return mMainView;
     }
@@ -105,8 +128,28 @@ public class CowTagsFragment extends Fragment {
 
         initSelectFarm();
         loadCowList();
+        loadCurrentAntennaConfig();
     }
 
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        stopScanInventory();
+        if(antennaTask != null && antennaTask.getStatus() == AsyncTask.Status.RUNNING){
+            antennaTask.cancel(true);
+            antennaTask = null;
+        }
+    }
+
+    //프로필 초기화
+    private void initProfiles(){
+        //작업 미 수행시, 안테나 파워와 같은 설정값 저장 불가함.
+        ProfileContent content = new ProfileContent(mActivity);
+        content.LoadDefaultProfiles();
+    }
+
+    //목장 선택 설정
     public void setSelectFarmCode(String farmCode){
         mSelectedFarmCode = farmCode;
     }
@@ -143,31 +186,13 @@ public class CowTagsFragment extends Fragment {
         });
     }
 
-
+    //테이블뷰 리셋
     private void resetTableView(){
 
         TableViewModel tableViewModel = new TableViewModel(
                 mCowList,
-                Arrays.asList(
-                        "COW_ID_NUM",
-                        "SNM",
-                        "SEX+MONTHS",
-                        "PRTY",
-                        "PRN_STTS",
-                        "TAGNO",
-                        "COUNT",
-                        "RSSI"
-                ),
-                Arrays.asList(
-                        "이력제번호",
-                        "목장이표",
-                        "성별(월령)",
-                        "산차",
-                        "번식상태",
-                        "전자이표",
-                        "Count",
-                        "RSSI"
-                )
+                Arrays.asList(TABLEVIEW_KEYS),
+                Arrays.asList(TABLEVIEW_NAMES)
         );
 
         TableViewAdapter tableViewAdapter = new TableViewAdapter();
@@ -268,7 +293,8 @@ public class CowTagsFragment extends Fragment {
         }
     }
 
-    private void initEventListener(){
+    //태그 이벤트 리스너
+    private void initTagEventListener(){
         EventHandler eventHandler = new EventHandler();
 
         try {
@@ -293,9 +319,10 @@ public class CowTagsFragment extends Fragment {
         }
     }
 
+    //스캔 시작
     private void startScanInventory(){
         RFIDController.clearAllInventoryData();
-        initEventListener();
+        initTagEventListener();
         RFIDController.getInstance().performInventory(new RfidListeners() {
             @Override
             public void onSuccess(Object object) {
@@ -315,31 +342,34 @@ public class CowTagsFragment extends Fragment {
         });
     }
 
+    //스캔 중지
     private void stopScanInventory(){
-        RFIDController.getInstance().stopInventory(new RfidListeners() {
-            @Override
-            public void onSuccess(Object object) {
-            }
 
-            @Override
-            public void onFailure(Exception exception) {
-                CustomDialog.showSimpleError(mActivity, "스캔 정지 에러 : "+exception.getMessage());
-            }
+        if (RFIDController.mIsInventoryRunning){
+            RFIDController.getInstance().stopInventory(new RfidListeners() {
+                @Override
+                public void onSuccess(Object object) {
+                }
 
-            @Override
-            public void onFailure(String message) {
-                CustomDialog.showSimpleError(mActivity, "스캔 정지 에러 : "+message);
-            }
-        });
+                @Override
+                public void onFailure(Exception exception) {
+                    CustomDialog.showSimpleError(mActivity, "스캔 정지 에러 : "+exception.getMessage());
+                }
+
+                @Override
+                public void onFailure(String message) {
+                    CustomDialog.showSimpleError(mActivity, "스캔 정지 에러 : "+message);
+                }
+            });
+        }
     }
+
 
 
     public class EventHandler implements RfidEventsListener {
 
-
         public EventHandler( ) {
         }
-
 
         @Override
         public void eventReadNotify(RfidReadEvents e) {
@@ -368,7 +398,29 @@ public class CowTagsFragment extends Fragment {
         public void eventStatusNotify(RfidStatusEvents rfidStatusEvents) {
             Log.d(TAG, "Status Notification: " + rfidStatusEvents.StatusEventData.getStatusEventType());
         }
+    }
 
+    //안테나 설정값 불러오기
+    private void loadCurrentAntennaConfig(){
+
+        Antennas.AntennaRfConfig antennaRfConfig;
+        try {
+            antennaRfConfig = RFIDController.mConnectedReader.Config.Antennas.getAntennaRfConfig(1);
+
+            antennaPowerLevels = RFIDController.mConnectedReader.ReaderCapabilities.getTransmitPowerLevelValues();
+            int powerIndex = antennaRfConfig.getTransmitPowerIndex();
+
+            bsbDistancePower.getConfigBuilder()
+                    .max(antennaPowerLevels[antennaPowerLevels.length-1])
+                    .min(antennaPowerLevels[0])
+                    .progress(antennaPowerLevels[powerIndex])
+                    .build();
+
+        } catch (InvalidUsageException e) {
+            throw new RuntimeException(e);
+        } catch (OperationFailureException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 

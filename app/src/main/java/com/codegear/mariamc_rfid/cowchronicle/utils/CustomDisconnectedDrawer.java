@@ -111,6 +111,7 @@ public class CustomDisconnectedDrawer {
                 if(!(mActivity instanceof DeviceDiscoverActivity)) {
                     Intent deviceDiscoverIntent = new Intent(mActivity, DeviceDiscoverActivity.class);
                     deviceDiscoverIntent.putExtra(DeviceDiscoverActivity.DISABLE_AUTO_CONNECT_DEVICE, true); //자동연결 끄기
+                    deviceDiscoverIntent.putExtra(DeviceDiscoverActivity.DESTINATION_SCREEN_IS_COWCHRONICLE, false); //연결후 카우크로니클로 가지 않게 하기.
                     deviceDiscoverIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     mActivity.startActivity(deviceDiscoverIntent);
                 }

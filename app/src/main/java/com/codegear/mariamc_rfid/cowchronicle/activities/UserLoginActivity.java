@@ -1,6 +1,9 @@
 package com.codegear.mariamc_rfid.cowchronicle.activities;
 
 import static com.codegear.mariamc_rfid.cowchronicle.activities.CowChronicleActivity.FLAG_FRAGMENT_START_PAGE;
+import static com.codegear.mariamc_rfid.rfidreader.rfid.RFIDController.TAG;
+import static com.codegear.mariamc_rfid.rfidreader.rfid.RFIDController.mConnectedDevice;
+import static com.codegear.mariamc_rfid.rfidreader.rfid.RFIDController.mConnectedReader;
 
 import android.Manifest;
 import android.app.AlertDialog;
@@ -25,6 +28,7 @@ import androidx.core.app.ActivityCompat;
 
 import com.codegear.mariamc_rfid.DeviceDiscoverActivity;
 import com.codegear.mariamc_rfid.R;
+import com.codegear.mariamc_rfid.application.Application;
 import com.codegear.mariamc_rfid.cowchronicle.activities.services.ResLogin;
 import com.codegear.mariamc_rfid.cowchronicle.activities.services.RetrofitClient;
 import com.codegear.mariamc_rfid.cowchronicle.storage.UserStorage;
@@ -32,8 +36,11 @@ import com.codegear.mariamc_rfid.cowchronicle.utils.CustomDialog;
 import com.codegear.mariamc_rfid.cowchronicle.utils.CustomDisconnectedDrawer;
 import com.codegear.mariamc_rfid.cowchronicle.utils.MD5Util;
 import com.codegear.mariamc_rfid.cowchronicle.utils.PermissionUtil;
+import com.codegear.mariamc_rfid.rfidreader.common.Constants;
 import com.codegear.mariamc_rfid.rfidreader.rfid.RFIDController;
 import com.codegear.mariamc_rfid.scanner.activities.BaseActivity;
+import com.zebra.rfid.api3.InvalidUsageException;
+import com.zebra.rfid.api3.OperationFailureException;
 
 import java.net.UnknownHostException;
 import java.util.HashMap;
@@ -118,6 +125,28 @@ public class UserLoginActivity extends BaseActivity {
         }, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if (RFIDController.mConnectedReader != null && RFIDController.mConnectedReader.isConnected() ) {
+            RFIDController.is_disconnection_requested = true;
+            try {
+
+                if (RFIDController.mIsInventoryRunning)
+                    RFIDController.mConnectedReader.Actions.Inventory.stop();
+
+                RFIDController.mConnectedReader.disconnect();
+                RFIDController.mConnectedReader.Dispose();
+            } catch (InvalidUsageException e) {
+                Log.d(TAG, "Returned SDK Exception");
+            } catch (OperationFailureException e) {
+                Log.d(TAG, "Returned SDK Exception");
+            } catch (Exception e) {
+            }
+            RFIDController.mConnectedReader = null;
+        }
+    }
 
     void checkAutoLogin() {
 
