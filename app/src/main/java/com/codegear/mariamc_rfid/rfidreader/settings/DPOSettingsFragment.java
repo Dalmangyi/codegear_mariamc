@@ -143,7 +143,7 @@ public class DPOSettingsFragment extends BackPressedFragment {
             if (!result) {
                 if (invalidUsageException != null) {
                     if(getActivity() instanceof SettingsDetailActivity)
-                    ((SettingsDetailActivity) getActivity()).sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, getString(R.string.status_failure_message) + "\n" + invalidUsageException.getVendorMessage());
+                        ((SettingsDetailActivity) getActivity()).sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, getString(R.string.status_failure_message) + "\n" + invalidUsageException.getVendorMessage());
                     if(getActivity() instanceof ActiveDeviceActivity)
                         ((ActiveDeviceActivity) getActivity()).sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, getString(R.string.status_failure_message) + "\n" + invalidUsageException.getVendorMessage());
 

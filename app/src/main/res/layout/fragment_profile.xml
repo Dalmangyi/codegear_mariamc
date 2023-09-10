@@ -152,24 +152,5 @@
                 android:gravity="center" />
         </TableRow>
 
-
-        <!--<TableRow-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content">-->
-
-        <!--<Button-->
-        <!--android:layout_width="0dp"-->
-        <!--android:layout_weight="50"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginRight="10dp"-->
-        <!--android:text="RESTORE">-->
-        <!--</Button>-->
-
-        <!--<Button-->
-        <!--android:layout_width="0dp"-->
-        <!--android:layout_weight="50"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="SAVE"></Button>-->
-        <!--</TableRow>-->
     </LinearLayout>
 </LinearLayout>

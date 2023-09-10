@@ -355,7 +355,7 @@
     <string name="cancel_title">취소</string>
     <string name="connect_title">연결</string>
     <string name="battery_charging_message">상태: 충전 중</string>
-    <string name="start_stop_progress_title">시작 \\ 정지 트리거 저장 중...</string>
+    <string name="start_stop_progress_title">시작 / 정지 트리거 저장 중...</string>
     <string name="regulatory_progress_title">규정 설정 저장 중...</string>
     <string name="antenna_progress_title">안테나 설정 저장 중...</string>
     <string name="singulation_progress_title">싱귤레이션 설정 저장 중...</string>
