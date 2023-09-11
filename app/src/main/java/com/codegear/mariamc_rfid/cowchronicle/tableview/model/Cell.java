@@ -11,7 +11,7 @@ public class Cell implements ISortableModel, IFilterableModel {
     @NonNull
     private final String mId;
     @Nullable
-    private final Object mData;
+    private Object mData;
     @NonNull
     private final String mFilterKeyword;
 
@@ -50,5 +50,9 @@ public class Cell implements ISortableModel, IFilterableModel {
     @Override
     public String getFilterableKeyword() {
         return mFilterKeyword;
+    }
+
+    public void setData(Object obj){
+        this.mData = obj;
     }
 }

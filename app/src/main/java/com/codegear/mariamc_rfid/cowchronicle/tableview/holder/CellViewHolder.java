@@ -29,7 +29,7 @@ public class CellViewHolder extends AbstractViewHolder {
     public void setCell(@Nullable Cell cell) {
         cell_textview.setText(String.valueOf(cell.getData()));
 
-        cell_container.getLayoutParams().width = LinearLayout.LayoutParams.WRAP_CONTENT;
+//        cell_container.getLayoutParams().width = LinearLayout.LayoutParams.WRAP_CONTENT;
         cell_textview.requestLayout();
     }
 
@@ -50,4 +50,5 @@ public class CellViewHolder extends AbstractViewHolder {
                 break;
         }
     }
+
 }

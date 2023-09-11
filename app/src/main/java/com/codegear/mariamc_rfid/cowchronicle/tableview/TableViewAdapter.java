@@ -27,21 +27,6 @@ public class TableViewAdapter extends AbstractTableAdapter<ColumnHeader, RowHead
         super();
     }
 
-    @NonNull
-    @Override
-    public AbstractViewHolder onCreateCellViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View layout;
-
-        layout = inflater.inflate(R.layout.tableview_cell_layout, parent, false);
-        return new CellViewHolder(layout);
-    }
-
-    @Override
-    public void onBindCellViewHolder(@NonNull AbstractViewHolder holder, @Nullable Cell cellItemModel, int columnPosition, int rowPosition) {
-        CellViewHolder viewHolder = (CellViewHolder) holder;
-        viewHolder.setCell(cellItemModel);
-    }
 
     @NonNull
     @Override
@@ -75,6 +60,22 @@ public class TableViewAdapter extends AbstractTableAdapter<ColumnHeader, RowHead
     public View onCreateCornerView(@NonNull ViewGroup parent) {
         View corner = LayoutInflater.from(parent.getContext()).inflate(R.layout.tableview_corner_layout, null, false);
         return corner;
+    }
+
+    @NonNull
+    @Override
+    public AbstractViewHolder onCreateCellViewHolder(@NonNull ViewGroup parent, int viewType) {
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        View layout;
+
+        layout = inflater.inflate(R.layout.tableview_cell_layout, parent, false);
+        return new CellViewHolder(layout);
+    }
+
+    @Override
+    public void onBindCellViewHolder(@NonNull AbstractViewHolder holder, @Nullable Cell cellItemModel, int columnPosition, int rowPosition) {
+        CellViewHolder viewHolder = (CellViewHolder) holder;
+        viewHolder.setCell(cellItemModel);
     }
 
     @Override

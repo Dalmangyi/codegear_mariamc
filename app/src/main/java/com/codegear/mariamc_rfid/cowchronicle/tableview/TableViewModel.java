@@ -6,8 +6,10 @@ import androidx.annotation.NonNull;
 import com.codegear.mariamc_rfid.cowchronicle.tableview.model.Cell;
 import com.codegear.mariamc_rfid.cowchronicle.tableview.model.ColumnHeader;
 import com.codegear.mariamc_rfid.cowchronicle.tableview.model.RowHeader;
+import com.zebra.rfid.api3.TagData;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -18,11 +20,13 @@ public class TableViewModel {
     private ArrayList<Map<String, String>> mInputResList = new ArrayList<Map<String, String>>();
     private final ArrayList<ColumnHeader> mColumnList = new ArrayList<ColumnHeader>();
     private final ArrayList<List<Cell>> mRowList = new ArrayList<List<Cell>>();
+    private final ArrayList<TagData> mTagList;
 
-    public TableViewModel(ArrayList<Map<String, String>> inputResList, List resKeyList, List<String> columnKeyList) {
+    public TableViewModel(ArrayList<Map<String, String>> inputResList, List resKeyList, List<String> columnKeyList, ArrayList<TagData> tagList) {
         this.resKeyList = resKeyList;
         this.columnKeyList = columnKeyList;
         this.mInputResList = inputResList;
+        this.mTagList = tagList;
 
         makeColumnList();
         makeRowList();
@@ -88,9 +92,7 @@ public class TableViewModel {
             }
             mRowList.add(cellList);
         }
-
     }
-
 
 
 
@@ -99,6 +101,9 @@ public class TableViewModel {
     public List<ColumnHeader> getColumnHeaderList() {
         return mColumnList;
     }
+
+
+
     @NonNull
     public List<RowHeader> getRowHeaderList() {
         List<RowHeader> list = new ArrayList<>();
@@ -123,6 +128,75 @@ public class TableViewModel {
 
     @NonNull
     public List<List<Cell>> getCellList() {
+
+        if(mTagList != null){
+            //태그 정보 복사
+            ArrayList<TagData> copiedTagList = new ArrayList<>(mTagList);
+            mTagList.clear();
+
+            //태그 데이터 추출
+            Map<String, Integer> mapTagCount = new HashMap<>();
+            Map<String, String> mapTagRSSI = new HashMap<>();
+            for(TagData tagData:copiedTagList){
+                String tagId = tagData.getTagID();
+                int tagRssi = tagData.getPeakRSSI();
+                tagData.getChannelIndex();
+                tagData.getPhase();
+
+                //태그 개수 세기
+                Integer tagCount = mapTagCount.get(tagId);
+                if (tagCount == null){
+                    tagCount = 0;
+                }
+                tagCount++;
+                mapTagCount.put(tagId, tagCount);
+
+                //태그 최근 RSSI
+                mapTagRSSI.put(tagId, ""+tagRssi);
+            }
+
+            //태그 반영 index 찾기
+            int tagNoIndex = resKeyList.indexOf("TAGNO");
+            int countIndex = resKeyList.indexOf("COUNT");
+            int rssiIndex = resKeyList.indexOf("RSSI");
+
+            //태그 데이터 반영
+            for (int i = 0; i < mRowList.size(); i++) {
+                List<Cell> cellList = mRowList.get(i);
+
+                ArrayList<Cell> newCellList = new ArrayList<>();
+                for(Cell cell:cellList){
+                    Cell newCell = new Cell(cell.getId(), cell.getData());
+                    newCellList.add(newCell);
+                }
+
+                String tagId = (String) newCellList.get(tagNoIndex).getData();
+                if(mapTagCount.containsKey(tagId) && mapTagRSSI.containsKey(tagId)){
+
+                    //count
+                    int tagCount = (int)mapTagCount.get(tagId);
+                    Cell countCell = newCellList.get(countIndex);
+                    if(countCell != null){
+                        countCell.setData("" + tagCount);
+                    }
+
+
+                    //rssi
+                    String tagRssi = mapTagRSSI.get(tagId);
+                    Cell rssiCell = newCellList.get(rssiIndex);
+                    if(rssiCell != null){
+                        rssiCell.setData("" + tagRssi);
+                    }
+                }else {
+                    newCellList.get(countIndex).setData("");
+                    newCellList.get(rssiIndex).setData("");
+                }
+
+                mRowList.remove(i);
+                mRowList.add(i, newCellList);
+            }
+        }
+
         return mRowList;
     }
 }

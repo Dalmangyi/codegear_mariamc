@@ -19,7 +19,7 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnCurrentFarm"
-            android:layout_width="200dp"
+            android:layout_width="300dp"
             android:layout_height="50dp"
             android:background="@drawable/button_default_background"
             android:onClick="clickFarmSearch"
@@ -53,7 +53,9 @@
             app:bsb_show_thumb_text="true"
             app:bsb_track_color="@color/light_grey"
             android:layout_marginLeft="32dp"
-            android:layout_marginRight="16dp"/>
+            android:layout_marginRight="16dp"
+            app:bsb_touch_to_seek="true"
+            app:bsb_track_size="4dp"/>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnDistancePowerApply"
@@ -86,7 +88,6 @@
             app:allow_click_inside_cell="true"
             app:allow_click_inside_column_header="true"
             app:allow_click_inside_row_header="true"
-            app:selected_color="@color/colorHighlight"
             android:background="@color/white"/>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
@@ -98,6 +99,7 @@
         android:orientation="horizontal">
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnClear"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:background="@drawable/button_default_background"
