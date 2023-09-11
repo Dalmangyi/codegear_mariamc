@@ -104,54 +104,5 @@
 
     <include layout="@layout/normal_divider" />
 
-  <!--  <TableRow
-        android:id="@+id/tbl_row_beeper_sequence"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/white">
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="60dp"
-            android:layout_marginLeft="@dimen/app_margin_left"
-            android:layout_weight="60"
-            android:background="@android:color/transparent"
-            android:gravity="center_vertical"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/txt_beeper_sequence"
-                style="@style/roboto_medium_16dp"
-                android:layout_height="wrap_content"
-                android:text="@string/beeper_sequence" />
-
-        </LinearLayout>
-
-    </TableRow>
-
-    <com.codegear.mariamc_rfid.scanner.helpers.ZNumberPicker
-        style="@style/roboto_medium_16dp"
-        android:id="@+id/beeperPicker"
-        android:layout_gravity="center"
-        android:background="@color/white"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <TableRow
-        style="@style/white_background_row"
-        android:layout_height="91dp"
-        android:layout_width="match_parent"
-        android:gravity="center_vertical|center_horizontal">
-        <Button
-            style="@style/style_blue_button"
-            android:text="@string/test_beeper"
-            android:textSize="24sp"
-            android:onClick="beeperAction"
-            android:layout_height="55dp"
-            android:layout_width="match_parent"
-            android:layout_marginLeft="45dp"
-            android:layout_marginRight="45dp"
-            android:layout_marginBottom="18dp"
-            android:layout_marginTop="18dp" />
-    </TableRow>-->
     </LinearLayout>
 </ScrollView>
