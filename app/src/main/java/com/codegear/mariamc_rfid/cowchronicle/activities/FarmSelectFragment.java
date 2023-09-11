@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -28,20 +29,51 @@ public class FarmSelectFragment extends Fragment {
 
     private AppCompatActivity mActivity;
     private View mFarmSelectFragmentView;
+    private TextView tvMemberName;
 
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mActivity = (AppCompatActivity) getActivity();
-        mFarmSelectFragmentView = inflater.inflate(R.layout.fragment_farm_select, null, false);
-
         mActivity.getSupportActionBar().setTitle("목장선택");
 
 
+        mFarmSelectFragmentView = inflater.inflate(R.layout.fragment_farm_select, null, false);
+
+
+        tvMemberName = mFarmSelectFragmentView.findViewById(R.id.tvMemberName);
+
         mFarmSelectFragmentView.findViewById(R.id.btnCurrentFarm).setOnClickListener(this::showFarmSearchDialog);
 
+        initUserInfo();
+
         return mFarmSelectFragmentView;
+    }
+
+
+    //가입자 정보
+    private void initUserInfo(){
+
+        ResLogin resLogin = UserStorage.getInstance().getResLogin();
+
+        if(resLogin!=null){
+
+            String membership = resLogin.membership_nm;
+            String company = resLogin.cmpy;
+            String user_name = resLogin.usr_nm;
+            String strMemberName = "";
+            if(membership.equals("Premium")){
+                //프리미엄 사용자
+                strMemberName += user_name + "\n";
+                strMemberName += "(프리미엄 회원)";
+            }else{
+                strMemberName += user_name + "\n";
+                strMemberName += "("+membership+" 회원)";
+            }
+
+            tvMemberName.setText(strMemberName);
+        }
     }
 
 
@@ -52,7 +84,7 @@ public class FarmSelectFragment extends Fragment {
 
         FarmSearchDialogCompat searchDialogCompat = new FarmSearchDialogCompat<FarmModel>(
             mActivity,
-            "목장 리스트", "목장 이름을 적어 검색해 보세요.",
+            "목장 리스트", "검색어를 입력해주세요.",
             null,
             mFarmList,
             (dialog, item, position) -> {

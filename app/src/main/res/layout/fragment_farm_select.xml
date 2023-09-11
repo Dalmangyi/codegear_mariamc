@@ -41,14 +41,15 @@
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="0dp"
-                android:layout_weight="1"
+                android:layout_weight="2"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                android:gravity="center"
                 android:padding="@dimen/app_padding">
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btnCurrentFarm"
-                    android:layout_width="match_parent"
+                    android:layout_width="200dp"
                     android:layout_height="40dp"
                     android:background="@drawable/button_default_background"
                     android:text="목장을 선택해주세요."
@@ -56,6 +57,17 @@
                     android:drawableStart="@drawable/baseline_arrow_drop_down_24"
                     android:drawableTint="@color/white"
                     android:layout_marginTop="5dp"/>
+
+                <TextView
+                    android:id="@+id/tvMemberName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18dp"
+                    tools:text="안치오 회원\n(프리미엄 회원)"
+                    android:layout_marginTop="30dp"
+                    android:gravity="center"
+                    />
+
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -76,7 +88,7 @@
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="500dp"
         android:layout_height="wrap_content"
-        android:background="#DFDFDF"
+        android:background="@color/white"
         android:orientation="vertical"
         android:layout_margin="@dimen/margin"
         android:padding="@dimen/app_padding"
@@ -111,5 +123,10 @@
             android:text="@string/contact_email"
             android:textSize="16dp" />
     </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
 </LinearLayout>
