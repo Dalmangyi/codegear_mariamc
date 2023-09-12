@@ -154,8 +154,8 @@ public class UserLoginActivity extends BaseActivity {
         Boolean isAutoLogin = cbIsAutoLogin.isChecked();
 
         //TODO - DebugCode
-        strId = "farmtest2";
-//        strPwd = "111";
+        strId = "chalet2cha";
+        strPwd = "1519";
 
         if (!btnNavigationBottom1.isSelected() && !btnNavigationBottom2.isSelected()) {
             dialogLoading.dismiss();
@@ -200,7 +200,7 @@ public class UserLoginActivity extends BaseActivity {
         //비밀번호 해쉬화
         String strHashedPwd = MD5Util.convert(strPwd);
         //TODO - DebugCode
-        strHashedPwd = "408bad4df16b6df0997573f3d65f8f13";
+//        strHashedPwd = "408bad4df16b6df0997573f3d65f8f13";
 
         //Request Query Map
         Map reqMap = new HashMap();
@@ -216,7 +216,8 @@ public class UserLoginActivity extends BaseActivity {
         call.enqueue(new Callback<ResLogin>() {
             @Override
             public void onResponse(@NonNull Call<ResLogin> call, @NonNull Response<ResLogin> response) {
-                Log.e(TAG,"UserLoginActivity LoginAPI success. code:"+response.code()+",res:"+response.body());
+                Log.e(TAG,"UserLoginActivity LoginAPI success. url:"+response.raw().request().url()+"code:"+response.code()+",res:"+response.body());
+
                 dialogLoading.dismiss();
 
                 if (!response.isSuccessful()) {

@@ -351,7 +351,7 @@ public class CowTagsFragment extends Fragment {
             @Override
             public void tags(TagData[] tagList) {
                 if (tagList != null) {
-                    mTagList.addAll(Arrays.asList(tagList));
+                    mTagList.addAll(Arrays.asList(tagList)); 
 
                     //case1
                     tableViewAdapter.setCellItems(tableViewModel.getCellList());
