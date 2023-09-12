@@ -1,7 +1,5 @@
 package com.codegear.mariamc_rfid.cowchronicle.utils;
 
-import static com.codegear.mariamc_rfid.rfidreader.rfid.RFIDController.mConnectedReader;
-
 import android.content.Intent;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,10 +14,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.codegear.mariamc_rfid.DeviceDiscoverActivity;
 import com.codegear.mariamc_rfid.R;
 import com.codegear.mariamc_rfid.cowchronicle.activities.UserLoginActivity;
-import com.codegear.mariamc_rfid.cowchronicle.activities.WebviewFragment;
 import com.codegear.mariamc_rfid.cowchronicle.storage.UserStorage;
-import com.codegear.mariamc_rfid.rfidreader.settings.SettingsContent;
-import com.codegear.mariamc_rfid.rfidreader.settings.SettingsDetailActivity;
 import com.google.android.material.navigation.NavigationView;
 
 public class CustomDisconnectedDrawer {
@@ -110,8 +105,8 @@ public class CustomDisconnectedDrawer {
             case R.id.nav_settings:
                 if(!(mActivity instanceof DeviceDiscoverActivity)) {
                     Intent deviceDiscoverIntent = new Intent(mActivity, DeviceDiscoverActivity.class);
-                    deviceDiscoverIntent.putExtra(DeviceDiscoverActivity.DISABLE_AUTO_CONNECT_DEVICE, true); //자동연결 끄기
-                    deviceDiscoverIntent.putExtra(DeviceDiscoverActivity.DESTINATION_SCREEN_IS_COWCHRONICLE, false); //연결후 카우크로니클로 가지 않게 하기.
+                    deviceDiscoverIntent.putExtra(DeviceDiscoverActivity.DESTINATION_SCREEN_IS_COWCHRONICLE, false); //연결후 카우크로니클로 가게 하기.
+                    deviceDiscoverIntent.putExtra(DeviceDiscoverActivity.ENABLE_AUTO_CONNECT_DEVICE, false); //자동연결 켜기
                     deviceDiscoverIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     mActivity.startActivity(deviceDiscoverIntent);
                 }

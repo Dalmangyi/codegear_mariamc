@@ -88,6 +88,7 @@ public class InitReadersListFragment extends Fragment implements IRFIDConnectTas
     TextView serialNo;
     private boolean isDestinationScreenCowChronicle = false;
     private boolean enableAutoConnectDevice = true;
+    private String cowchronicleStartPageName = null;
 
 
     public static InitReadersListFragment newInstance() {
@@ -101,15 +102,19 @@ public class InitReadersListFragment extends Fragment implements IRFIDConnectTas
     }
 
     //카우크로니클로 시작한 앱은 카우크로니클 화면으로 다시 돌아가게 만들기.
-    public void setDestinationScreenCowChronicle(){
+    public void setDestinationScreenCowChronicle(boolean active){
         //카우크로니클로 시작한 경우, 장치 페어링후, 장치 연결하게 되면 이동되는 페이지가,
         //ActiveDeviceActivity가 아니고, CowchronicleActivity로 가야됨.
-        isDestinationScreenCowChronicle = true;
+        isDestinationScreenCowChronicle = active;
     }
 
     //특정 상황일때, 기기 자동연결을 끄는 기능
-    public void disableAutoConnectDevice(){
-        enableAutoConnectDevice = false;
+    public void enableAutoConnectDevice(boolean enable){
+        enableAutoConnectDevice = enable;
+    }
+
+    public void cowchronicleStartPage(String pageName){
+        cowchronicleStartPageName = pageName;
     }
 
     public void CancelReconnect() {
@@ -539,7 +544,12 @@ public class InitReadersListFragment extends Fragment implements IRFIDConnectTas
 
         if(isDestinationScreenCowChronicle){
             Intent intent = new Intent(getActivity(), CowChronicleActivity.class);
-            intent.putExtra(FLAG_FRAGMENT_START_PAGE, CowChronicleFragmentEnum.FARM_SELECT.toString());
+            if (cowchronicleStartPageName != null){
+                intent.putExtra(FLAG_FRAGMENT_START_PAGE, cowchronicleStartPageName);
+                cowchronicleStartPageName = null;
+            }else {
+                intent.putExtra(FLAG_FRAGMENT_START_PAGE, CowChronicleFragmentEnum.FARM_SELECT.toString());
+            }
             startActivity(intent);
         }
         else {

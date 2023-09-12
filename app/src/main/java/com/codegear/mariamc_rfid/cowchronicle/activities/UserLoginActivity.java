@@ -31,6 +31,7 @@ import com.codegear.mariamc_rfid.R;
 import com.codegear.mariamc_rfid.application.Application;
 import com.codegear.mariamc_rfid.cowchronicle.activities.services.ResLogin;
 import com.codegear.mariamc_rfid.cowchronicle.activities.services.RetrofitClient;
+import com.codegear.mariamc_rfid.cowchronicle.device.RFIDSingleton;
 import com.codegear.mariamc_rfid.cowchronicle.storage.UserStorage;
 import com.codegear.mariamc_rfid.cowchronicle.utils.CustomDialog;
 import com.codegear.mariamc_rfid.cowchronicle.utils.CustomDisconnectedDrawer;
@@ -129,23 +130,7 @@ public class UserLoginActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
 
-        if (RFIDController.mConnectedReader != null && RFIDController.mConnectedReader.isConnected() ) {
-            RFIDController.is_disconnection_requested = true;
-            try {
-
-                if (RFIDController.mIsInventoryRunning)
-                    RFIDController.mConnectedReader.Actions.Inventory.stop();
-
-                RFIDController.mConnectedReader.disconnect();
-                RFIDController.mConnectedReader.Dispose();
-            } catch (InvalidUsageException e) {
-                Log.d(TAG, "Returned SDK Exception");
-            } catch (OperationFailureException e) {
-                Log.d(TAG, "Returned SDK Exception");
-            } catch (Exception e) {
-            }
-            RFIDController.mConnectedReader = null;
-        }
+        RFIDSingleton.deviceDisconnect();
     }
 
     void checkAutoLogin() {
@@ -296,7 +281,8 @@ public class UserLoginActivity extends BaseActivity {
     //장치검색 화면으로 이동
     private void goIntentDeviceDiscover(){
         Intent intent = new Intent(this, DeviceDiscoverActivity.class);
-        intent.putExtra(DeviceDiscoverActivity.DESTINATION_SCREEN_IS_COWCHRONICLE, true);
+        intent.putExtra(DeviceDiscoverActivity.DESTINATION_SCREEN_IS_COWCHRONICLE, true); //연결후 카우크로니클로 가게 하기
+        intent.putExtra(DeviceDiscoverActivity.ENABLE_AUTO_CONNECT_DEVICE, true); //자동연결 켜기
         startActivity(intent);
     }
 

@@ -35,6 +35,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.codegear.mariamc_rfid.application.Application;
+import com.codegear.mariamc_rfid.cowchronicle.activities.CowChronicleActivity;
+import com.codegear.mariamc_rfid.cowchronicle.activities.CowChronicleFragmentEnum;
 import com.codegear.mariamc_rfid.cowchronicle.utils.CustomDisconnectedDrawer;
 import com.codegear.mariamc_rfid.cowchronicle.utils.PermissionUtil;
 import com.codegear.mariamc_rfid.rfidreader.home.RFIDEventHandler;
@@ -72,7 +74,7 @@ public class DeviceDiscoverActivity extends BaseActivity implements Readers.RFID
     private static final String INTENT_ACTION_GRANT_USB = "com.zebra.rfid.app.USB_PERMISSION";
 
     public static final String DESTINATION_SCREEN_IS_COWCHRONICLE = "destination_screen_is_cowchronicle";
-    public static final String DISABLE_AUTO_CONNECT_DEVICE = "disable_auto_connect_device";
+    public static final String ENABLE_AUTO_CONNECT_DEVICE = "disable_auto_connect_device";
 
     private Context mContext;
 
@@ -259,12 +261,10 @@ public class DeviceDiscoverActivity extends BaseActivity implements Readers.RFID
 
         if (mSavedInstanceState == null) {
             fragment = InitReadersListFragment.getInstance();
-            if(getIntent().getBooleanExtra(DESTINATION_SCREEN_IS_COWCHRONICLE, false)){
-                ((InitReadersListFragment)fragment).setDestinationScreenCowChronicle();
-            }
-            if(getIntent().getBooleanExtra(DISABLE_AUTO_CONNECT_DEVICE, false)){
-                ((InitReadersListFragment)fragment).disableAutoConnectDevice();
-            }
+            ((InitReadersListFragment)fragment).setDestinationScreenCowChronicle(getIntent().getBooleanExtra(DESTINATION_SCREEN_IS_COWCHRONICLE, false));
+            ((InitReadersListFragment)fragment).cowchronicleStartPage(getIntent().getStringExtra(CowChronicleActivity.FLAG_FRAGMENT_START_PAGE));
+            ((InitReadersListFragment)fragment).enableAutoConnectDevice(getIntent().getBooleanExtra(ENABLE_AUTO_CONNECT_DEVICE, false));
+
             switchToFragment(fragment);
         }
     }

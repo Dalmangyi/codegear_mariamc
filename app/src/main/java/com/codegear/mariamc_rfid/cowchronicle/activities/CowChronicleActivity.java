@@ -1,5 +1,6 @@
 package com.codegear.mariamc_rfid.cowchronicle.activities;
 
+import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -15,13 +16,20 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.codegear.mariamc_rfid.DeviceDiscoverActivity;
 import com.codegear.mariamc_rfid.R;
+import com.codegear.mariamc_rfid.cowchronicle.device.IRFIDSingletonTag;
+import com.codegear.mariamc_rfid.cowchronicle.device.RFIDSingleton;
+import com.codegear.mariamc_rfid.cowchronicle.storage.UserStorage;
 import com.codegear.mariamc_rfid.cowchronicle.utils.CustomConnectedDrawer;
+import com.codegear.mariamc_rfid.rfidreader.rfid.RFIDController;
+import com.zebra.rfid.api3.TagData;
 
 public class CowChronicleActivity extends AppCompatActivity {
 
     public static final String FLAG_FRAGMENT_START_PAGE = "fragment_start_page";
 
+    private RFIDSingleton rfidSingleton = RFIDSingleton.getInstance();
 
     private CustomConnectedDrawer mCustomDrawer;
     private FragmentManager mFragmentManager;
@@ -36,11 +44,24 @@ public class CowChronicleActivity extends AppCompatActivity {
 
         Button btnNavigationBottom1 = findViewById(R.id.btnNavigationBottom1);
         Button btnNavigationBottom2 = findViewById(R.id.btnNavigationBottom2);
-        btnNavigationBottom1.setOnClickListener(v -> replaceFragment(new WebviewFragment(), false));
-        btnNavigationBottom2.setOnClickListener(v -> replaceFragment(new FarmSelectFragment(), false));
-
+        btnNavigationBottom1.setOnClickListener(v -> {
+            replaceFragment(new WebviewFragment(), false);
+        });
+        btnNavigationBottom2.setOnClickListener(v -> {
+            if (RFIDController.mConnectedReader == null || !RFIDController.mConnectedReader.isConnected()) {
+                goDeviceDiscoverActivity();
+            } else{
+                replaceFragment(new FarmSelectFragment(), false);
+            }
+        });
 
         initFragment();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        rfidSingleton.init();
     }
 
     @Override
@@ -76,6 +97,8 @@ public class CowChronicleActivity extends AppCompatActivity {
                 case COW_TAGS:
                     replaceFragment(new CowTagsFragment(), false);
                     break;
+                case USER_INFO:
+                    replaceFragment(new UserInfoFragment(), false);
                 default:
                     replaceFragment(new FarmSelectFragment(), false);
             }
@@ -94,6 +117,21 @@ public class CowChronicleActivity extends AppCompatActivity {
         transaction.commit();
     }
 
+    private void goDeviceDiscoverActivity(){
+        Intent intent = new Intent(this, DeviceDiscoverActivity.class);
+
+        //로그인 경우만 자동연결,
+        if(UserStorage.getInstance().isLogin()){
+            intent.putExtra(DeviceDiscoverActivity.ENABLE_AUTO_CONNECT_DEVICE, true); //자동연결 하기.
+            intent.putExtra(DeviceDiscoverActivity.DESTINATION_SCREEN_IS_COWCHRONICLE, true); //연결후 카우크로니클로 가게 하기.
+            intent.putExtra(CowChronicleActivity.FLAG_FRAGMENT_START_PAGE, CowChronicleFragmentEnum.FARM_SELECT.toString());
+        }
+        else {
+            intent.putExtra(DeviceDiscoverActivity.ENABLE_AUTO_CONNECT_DEVICE, true); //자동연결 끄기
+            intent.putExtra(DeviceDiscoverActivity.DESTINATION_SCREEN_IS_COWCHRONICLE, false); //연결후 카우크로니클로 가지 않게 하기.
+        }
+        startActivity(intent);
+    }
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {

@@ -22,6 +22,8 @@ import com.codegear.mariamc_rfid.cowchronicle.activities.services.ResCowList;
 import com.codegear.mariamc_rfid.cowchronicle.activities.services.ResLogin;
 import com.codegear.mariamc_rfid.cowchronicle.activities.services.RetrofitClient;
 import com.codegear.mariamc_rfid.cowchronicle.device.DeviceTaskSettings;
+import com.codegear.mariamc_rfid.cowchronicle.device.IRFIDSingletonTag;
+import com.codegear.mariamc_rfid.cowchronicle.device.RFIDSingleton;
 import com.codegear.mariamc_rfid.cowchronicle.storage.UserStorage;
 import com.codegear.mariamc_rfid.cowchronicle.tableview.TableViewAdapter;
 import com.codegear.mariamc_rfid.cowchronicle.tableview.TableViewListener;
@@ -343,7 +345,26 @@ public class CowTagsFragment extends Fragment {
     //스캔 시작
     private void startScanInventory(){
         RFIDController.clearAllInventoryData();
-        initTagEventListener();
+//        initTagEventListener();
+
+        RFIDSingleton.getInstance().setIrfidSingleton(new IRFIDSingletonTag() {
+            @Override
+            public void tags(TagData[] tagList) {
+                if (tagList != null) {
+                    mTagList.addAll(Arrays.asList(tagList));
+
+                    //case1
+                    tableViewAdapter.setCellItems(tableViewModel.getCellList());
+                    new Handler(Looper.getMainLooper()).post(new Runnable() {
+                        public void run() {
+                            tableViewAdapter.notifyDataSetChanged();
+                        }
+                    });
+ 
+
+                }
+            }
+        });
         RFIDController.getInstance().performInventory(new RfidListeners() {
             @Override
             public void onSuccess(Object object) {

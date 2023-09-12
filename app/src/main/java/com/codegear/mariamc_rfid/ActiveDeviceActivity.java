@@ -180,6 +180,10 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import com.codegear.mariamc_rfid.cowchronicle.activities.CowChronicleActivity;
+import com.codegear.mariamc_rfid.cowchronicle.activities.CowChronicleFragmentEnum;
+import com.codegear.mariamc_rfid.cowchronicle.activities.UserLoginActivity;
+import com.codegear.mariamc_rfid.cowchronicle.storage.UserStorage;
 import com.codegear.mariamc_rfid.rfidreader.common.Constants;
 import com.codegear.mariamc_rfid.rfidreader.common.CustomProgressDialog;
 import com.codegear.mariamc_rfid.rfidreader.locate_tag.LocateOperationsFragment;
@@ -827,8 +831,6 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
         int position = getCurrentTabPosition();
         Fragment fragment = getCurrentFragment(position);
         switch (position) {
-
-
             case READERS_TAB:
                 if (fragment instanceof PairOperationsFragment || fragment instanceof ReaderDetailsFragment || fragment instanceof ReaderWifiSettingsFragment) {
                     loadNextFragment(READER_LIST_TAB);
@@ -1309,6 +1311,48 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
             case android.R.id.home:
                 onBackPressed();
                 return true;
+            case R.id.menu_cowchronicle:
+                if(UserStorage.getInstance().isLogin()){
+                    finishAffinity();
+                    Intent intent = new Intent(this, CowChronicleActivity.class);
+                    intent.putExtra(CowChronicleActivity.FLAG_FRAGMENT_START_PAGE, CowChronicleFragmentEnum.WEBVIEW.toString());
+                    startActivity(intent);
+                }
+                else{
+                    finishAffinity();
+                    Intent intent = new Intent(this, UserLoginActivity.class);
+                    startActivity(intent);
+                }
+                break;
+            case R.id.menu_readers:
+                if(UserStorage.getInstance().isLogin()){
+                    finishAffinity();
+                    Intent intent = new Intent(this, CowChronicleActivity.class);
+                    intent.putExtra(CowChronicleActivity.FLAG_FRAGMENT_START_PAGE, CowChronicleFragmentEnum.FARM_SELECT.toString());
+                    startActivity(intent);
+                }
+                else{
+                    finishAffinity();
+                    Intent intent = new Intent(this, UserLoginActivity.class);
+                    startActivity(intent);
+                }
+                break;
+            case R.id.nav_user_info:
+                if(UserStorage.getInstance().isLogin()){
+                    finishAffinity();
+                    Intent intent = new Intent(this, CowChronicleActivity.class);
+                    intent.putExtra(CowChronicleActivity.FLAG_FRAGMENT_START_PAGE, CowChronicleFragmentEnum.USER_INFO.toString());
+                    startActivity(intent);
+                }
+                else{
+                    finishAffinity();
+                    Intent intent = new Intent(this, UserLoginActivity.class);
+                    startActivity(intent);
+                }
+                break;
+            case R.id.nav_battery_statics:
+                showBatteryStats();
+                break;
             case R.id.nav_fw_update:
                 if (mConnectedReader != null && mConnectedReader.isConnected()) {
                     loadUpdateFirmware(MenuItemCompat.getActionView(item));
@@ -1316,25 +1360,13 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
                     Toast.makeText(this, "연결된 장치가 없습니다. ", Toast.LENGTH_SHORT).show();
                 }
                 break;
-            case R.id.nav_battery_statics:
-                showBatteryStats();
-                break;
-            case R.id.nav_about:
-                showDeviceInfoClicked(MenuItemCompat.getActionView(item));
+            case R.id.nav_connection_help:
+                Intent helpIntent = new Intent(this, NavigationHelpActivity.class);
+                startActivity(helpIntent);
                 break;
             case R.id.nav_settings:
                 viewPager.setCurrentItem(mAdapter.getSettingsTab());
                 loadNextFragment(MAIN_HOME_SETTINGS_TAB);
-                break;
-            case R.id.menu_readers:
-                Fragment fragment = getCurrentFragment(READERS_TAB);
-                if (fragment instanceof PairOperationsFragment)
-                    loadNextFragment(READER_LIST_TAB);
-                viewPager.setCurrentItem(READERS_TAB);
-                break;
-            case R.id.nav_connection_help:
-                Intent helpIntent = new Intent(this, NavigationHelpActivity.class);
-                startActivity(helpIntent);
                 break;
 
         }

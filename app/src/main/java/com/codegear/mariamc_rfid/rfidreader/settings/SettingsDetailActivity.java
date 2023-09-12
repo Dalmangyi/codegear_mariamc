@@ -29,12 +29,14 @@ import com.codegear.mariamc_rfid.rfidreader.home.RFIDBaseActivity;
 import com.codegear.mariamc_rfid.rfidreader.notifications.NotificationUtil;
 import com.codegear.mariamc_rfid.rfidreader.reader_connection.RFIDReadersListFragment;
 import com.codegear.mariamc_rfid.rfidreader.rfid.RFIDController;
+import com.codegear.mariamc_rfid.scanner.activities.UpdateFirmware;
 import com.zebra.rfid.api3.ENUM_KEYLAYOUT_TYPE;
 import com.zebra.rfid.api3.ENUM_TRANSPORT;
 import com.zebra.rfid.api3.InvalidUsageException;
 import com.zebra.rfid.api3.OperationFailureException;
 import com.zebra.rfid.api3.ReaderDevice;
 import com.zebra.rfid.api3.Readers;
+import com.zebra.scannercontrol.DCSSDKDefs;
 
 import static com.codegear.mariamc_rfid.rfidreader.common.Constants.SETTING_ON_FACTORY;
 import static com.codegear.mariamc_rfid.rfidreader.rfid.RFIDController.mConnectedReader;
@@ -90,18 +92,16 @@ public class SettingsDetailActivity extends AppCompatActivity implements Respons
             finish();
             return;
         }
-        int settingItemSelected = intent.getIntExtra(Constants.SETTING_ITEM_ID, R.id.readers_list);
+
         //Show the selected item
+        int settingItemSelected = intent.getIntExtra(Constants.SETTING_ITEM_ID, R.id.readers_list);
         switch (settingItemSelected) {
             case 0:
 //                fragment = InventoryFragment.newInstance();
                 break;
             case R.id.readers_list:
                 fragment = RFIDReadersListFragment.getInstance();
-                //Intent deviceListIntent = new Intent(this, AvailableReaderActivity.class);
-                //startActivity(deviceListIntent);
                 break;
-            //case R.id.application:
             case SettingsDetailActivity.application_id:
                 fragment = ApplicationSettingsFragment.newInstance();
                 break;
@@ -132,6 +132,9 @@ public class SettingsDetailActivity extends AppCompatActivity implements Respons
             case R.id.usb_mifi:
                 fragment = UsbMiFiFragment.newInstance();
                 break;
+            case R.id.firmware_update:
+                fragment = UpdateFirmware.newInstance();
+                break;
         }
         if (fragment != null) {
 
@@ -142,7 +145,9 @@ public class SettingsDetailActivity extends AppCompatActivity implements Respons
             setTitle("Application");
         } else {
             if (settingItemSelected == R.id.battery) {
-                setTitle("Battery");
+                setTitle("배터리 상태");
+            } else if (settingItemSelected == R.id.firmware_update) {
+                setTitle("펌웨어 업데이트");
             } else {
                 setTitle(SettingsContent.ITEM_MAP.get(settingItemSelected + "").content);
             }
@@ -180,11 +185,6 @@ public class SettingsDetailActivity extends AppCompatActivity implements Respons
 
     @Override
     protected void onDestroy() {
-        // deattach to reader list handler
-        //RFIDController.readers.deattach(this);
-        // remove notification handlers
-        //RFIDBaseActivity.removeReaderDeviceFoundHandler(this);
-        //RFIDBaseActivity.removeBatteryNotificationHandler(this);
         RFIDBaseActivity.getInstance().resetReaderstatuscallback();
         super.onDestroy();
 
@@ -218,9 +218,6 @@ public class SettingsDetailActivity extends AppCompatActivity implements Respons
 
     @Override
     public void onBackPressed() {
-        //We are handling back pressed for saving settings(if any). Notify the appropriate fragment.
-        //{@link BaseReceiverActivity # onBackPressed should be called by the fragment when the processing is done}
-        //super.onBackPressed();
         Fragment fragment = getSupportFragmentManager().findFragmentByTag(TAG_CONTENT_FRAGMENT);
         if (fragment != null && fragment instanceof BackPressedFragment) {
             ((BackPressedFragment) fragment).onBackPressed();
@@ -509,7 +506,21 @@ public class SettingsDetailActivity extends AppCompatActivity implements Respons
             SettingsDetailActivity.mSettingOnFactory = false;
             ((ProfileFragment) fragment).onBackPressed();
         }
+    }
 
-
+    public boolean executeCommand(DCSSDKDefs.DCSSDK_COMMAND_OPCODE opCode, String inXML, StringBuilder outXML, int scannerID) {
+        if (Application.sdkHandler != null)
+        {
+            if(outXML == null){
+                outXML = new StringBuilder();
+            }
+            DCSSDKDefs.DCSSDK_RESULT result=Application.sdkHandler.dcssdkExecuteCommandOpCodeInXMLForScanner(opCode,inXML,outXML,scannerID);
+            Log.d(TAG, "execute command returned " + result.toString() );
+            if(result== DCSSDKDefs.DCSSDK_RESULT.DCSSDK_RESULT_SUCCESS)
+                return true;
+            else if(result==DCSSDKDefs.DCSSDK_RESULT.DCSSDK_RESULT_FAILURE)
+                return false;
+        }
+        return false;
     }
 }

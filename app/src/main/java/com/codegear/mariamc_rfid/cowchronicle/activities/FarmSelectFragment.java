@@ -1,5 +1,6 @@
 package com.codegear.mariamc_rfid.cowchronicle.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,12 +13,14 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import com.codegear.mariamc_rfid.DeviceDiscoverActivity;
 import com.codegear.mariamc_rfid.R;
 import com.codegear.mariamc_rfid.cowchronicle.activities.farms.FarmSearchDialogCompat;
 import com.codegear.mariamc_rfid.cowchronicle.activities.models.FarmModel;
 import com.codegear.mariamc_rfid.cowchronicle.activities.services.ResLogin;
 import com.codegear.mariamc_rfid.cowchronicle.storage.UserStorage;
 import com.codegear.mariamc_rfid.cowchronicle.utils.SoundSearcher;
+import com.codegear.mariamc_rfid.rfidreader.rfid.RFIDController;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -78,6 +81,17 @@ public class FarmSelectFragment extends Fragment {
 
 
     private void showFarmSearchDialog(View v) {
+
+        //기기연결 먼저하기.
+        if(RFIDController.mConnectedReader == null || !RFIDController.mConnectedReader.isConnected()){
+            Intent intent = new Intent(mActivity, DeviceDiscoverActivity.class);
+            intent.putExtra(DeviceDiscoverActivity.ENABLE_AUTO_CONNECT_DEVICE, true); //자동연결 하기.
+            intent.putExtra(DeviceDiscoverActivity.DESTINATION_SCREEN_IS_COWCHRONICLE, true); //연결후 카우크로니클로 가게 하기.
+            intent.putExtra(CowChronicleActivity.FLAG_FRAGMENT_START_PAGE, CowChronicleFragmentEnum.FARM_SELECT.toString());
+            mActivity.startActivity(intent);
+            return;
+        }
+
 
         ArrayList<FarmModel> mFarmList = createSampleContacts();
 

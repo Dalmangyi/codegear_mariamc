@@ -1,8 +1,12 @@
 package com.codegear.mariamc_rfid.scanner.activities;
 
+import static com.codegear.mariamc_rfid.application.Application.DEVICE_STD_MODE;
+import static com.codegear.mariamc_rfid.application.Application.RFD_DEVICE_MODE;
 import static com.codegear.mariamc_rfid.rfidreader.rfid.RFIDController.mConnectedDevice;
 import static com.codegear.mariamc_rfid.rfidreader.rfid.RFIDController.mConnectedReader;
 import static com.codegear.mariamc_rfid.rfidreader.rfid.RFIDController.mIsInventoryRunning;
+import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.SCAN_TAB;
+import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.SETTINGS_TAB;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -26,6 +30,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -33,6 +38,10 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -43,6 +52,7 @@ import androidx.fragment.app.Fragment;
 import com.codegear.mariamc_rfid.ActiveDeviceActivity;
 import com.codegear.mariamc_rfid.application.Application;
 import com.codegear.mariamc_rfid.rfidreader.reader_connection.ScanPair;
+import com.codegear.mariamc_rfid.rfidreader.settings.SettingsDetailActivity;
 import com.codegear.mariamc_rfid.scanner.helpers.CustomProgressDialog;
 import com.codegear.mariamc_rfid.scanner.helpers.DotsProgressBar;
 import com.google.android.material.navigation.NavigationView;
@@ -140,6 +150,11 @@ public class UpdateFirmware extends Fragment implements NavigationView.OnNavigat
 
         selectFirmwareRow = (TableRow) rootview.findViewById(R.id.tbl_row_select_firmware);
         selectFirmwareRow.setVisibility(View.VISIBLE);
+
+        Button btn_select_firmware = (Button)rootview.findViewById(R.id.btn_select_firmware);
+        btn_select_firmware.setOnClickListener(v -> {
+            selectFirmware(v);
+        });
 
         tblRowFW = (TableRow) rootview.findViewById(R.id.tbl_row_fw_update);
         tblRowFW.setVisibility(View.GONE);
@@ -803,7 +818,13 @@ public class UpdateFirmware extends Fragment implements NavigationView.OnNavigat
     private String getScannerFirmwareVersion(int scannerID) {
         String in_xml = "<inArgs><scannerID>" + scannerID + "</scannerID><cmdArgs><arg-xml><attrib_list>20012</attrib_list></arg-xml></cmdArgs></inArgs>";
         StringBuilder outXML = new StringBuilder();
-        ((ActiveDeviceActivity) getActivity()).executeCommand(DCSSDKDefs.DCSSDK_COMMAND_OPCODE.DCSSDK_RSM_ATTR_GET, in_xml, outXML, scannerID);
+        Activity activity = getActivity();
+        if(activity instanceof ActiveDeviceActivity){
+            ((ActiveDeviceActivity) activity).executeCommand(DCSSDKDefs.DCSSDK_COMMAND_OPCODE.DCSSDK_RSM_ATTR_GET, in_xml, outXML, scannerID);
+        }else if(activity instanceof SettingsDetailActivity){
+            ((SettingsDetailActivity) activity).executeCommand(DCSSDKDefs.DCSSDK_COMMAND_OPCODE.DCSSDK_RSM_ATTR_GET, in_xml, outXML, scannerID);
+        }
+
         return getSingleStringValue(outXML);
     }
 
@@ -841,7 +862,12 @@ public class UpdateFirmware extends Fragment implements NavigationView.OnNavigat
     private String getScannerModelNumber(int scannerID) {
         String in_xml = "<inArgs><scannerID>" + scannerID + "</scannerID><cmdArgs><arg-xml><attrib_list>533</attrib_list></arg-xml></cmdArgs></inArgs>";
         StringBuilder outXML = new StringBuilder();
-        ((ActiveDeviceActivity) getActivity()).executeCommand(DCSSDKDefs.DCSSDK_COMMAND_OPCODE.DCSSDK_RSM_ATTR_GET, in_xml, outXML, scannerID);
+        Activity activity = getActivity();
+        if(activity instanceof ActiveDeviceActivity){
+            ((ActiveDeviceActivity) activity).executeCommand(DCSSDKDefs.DCSSDK_COMMAND_OPCODE.DCSSDK_RSM_ATTR_GET, in_xml, outXML, scannerID);
+        }else if(activity instanceof SettingsDetailActivity){
+            ((SettingsDetailActivity) activity).executeCommand(DCSSDKDefs.DCSSDK_COMMAND_OPCODE.DCSSDK_RSM_ATTR_GET, in_xml, outXML, scannerID);
+        }
         return getSingleStringValue(outXML);
     }
 
@@ -1015,33 +1041,11 @@ public class UpdateFirmware extends Fragment implements NavigationView.OnNavigat
         }
     }
 
-    public static int dpToPx(int dp) {
-        return (int) (dp * Resources.getSystem().getDisplayMetrics().density);
-    }
-
-    public static int pxToDp(int px) {
-        return (int) (px / Resources.getSystem().getDisplayMetrics().density);
-    }
 
     private int getY() {
         final float scale = this.getResources().getDisplayMetrics().density;
         int y = (int) (dialogFWProgessY * scale + 0.5f);
         return y;
-    }
-
-    private int getYReconnection() {
-        final float scale = this.getResources().getDisplayMetrics().density;
-        int y = (int) (dialogFWReconnectionY * scale + 0.5f);
-        return y;
-    }
-
-    private int getXReconnection() {
-        final float scale = this.getResources().getDisplayMetrics().density;
-        int x = (int) (dialogFWReconnectionX * scale + 0.5f);
-        Point size = new Point();
-        getActivity().getWindowManager().getDefaultDisplay().getSize(size);
-        int width = size.x;
-        return width - x;
     }
 
     private int getX() {
@@ -1153,6 +1157,50 @@ public class UpdateFirmware extends Fragment implements NavigationView.OnNavigat
         tblRowFW.setVisibility(View.VISIBLE);
     }
 
+    public void selectFirmware(View view) {
+        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        intent.setType("*/*");
+        Uri uri = Uri.parse("content://com.android.externalstorage.documents/document/primary:Download");
+        intent.putExtra("DocumentsContract.EXTRA_INITIAL_URI", uri);
+        intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        activityResultLauncher.launch(intent);
+    }
+
+    ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>()
+            {
+        @Override
+        public void onActivityResult(ActivityResult result) {
+            if (result.getResultCode() == Activity.RESULT_OK) {
+                Intent data = result.getData();
+                Uri documentUri;
+                if (data != null) {
+                    if (data.getData().toString().contains("content://com.android.providers")) {
+                        getActivity().runOnUiThread(this::ShowPlugInPathChangeDialog);
+                    } else {
+                        int setTab = RFD_DEVICE_MODE == DEVICE_STD_MODE ? SCAN_TAB : SETTINGS_TAB;
+                        documentUri = data.getData();
+                        selectedFile(documentUri);
+                    }
+                }
+            }
+        }
+
+        private void ShowPlugInPathChangeDialog() {
+            if (!getActivity().isFinishing()) {
+                final Dialog dialog = new Dialog(getActivity());
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                dialog.setContentView(R.layout.dialog_plugin_path_change);
+                dialog.setCancelable(false);
+                dialog.setCanceledOnTouchOutside(false);
+                dialog.show();
+                TextView declineButton = (TextView) dialog.findViewById(R.id.btn_ok);
+                declineButton.setOnClickListener(v -> dialog.dismiss());
+            }
+        }
+    });
 
     public void updateFirmware(View view) {
 
@@ -1305,13 +1353,26 @@ public class UpdateFirmware extends Fragment implements NavigationView.OnNavigat
     private void TurnOnLEDPattern() {
         String inXML = "<inArgs><scannerID>" + scannerID + "</scannerID><cmdArgs><arg-int>" + 85 + "</arg-int></cmdArgs></inArgs>";
         StringBuilder outXML = new StringBuilder();
-        ((ActiveDeviceActivity) getActivity()).executeCommand(DCSSDKDefs.DCSSDK_COMMAND_OPCODE.DCSSDK_SET_ACTION, inXML, outXML, scannerID);
+
+        Activity activity = getActivity();
+        if(activity instanceof ActiveDeviceActivity){
+            ((ActiveDeviceActivity) activity).executeCommand(DCSSDKDefs.DCSSDK_COMMAND_OPCODE.DCSSDK_SET_ACTION, inXML, outXML, scannerID);
+        }else if(activity instanceof SettingsDetailActivity){
+            ((SettingsDetailActivity) activity).executeCommand(DCSSDKDefs.DCSSDK_COMMAND_OPCODE.DCSSDK_SET_ACTION, inXML, outXML, scannerID);
+        }
+
     }
 
     private void TurnOffLEDPattern() {
         String inXML = "<inArgs><scannerID>" + scannerID + "</scannerID><cmdArgs><arg-int>" + 90 + "</arg-int></cmdArgs></inArgs>";
         StringBuilder outXML = new StringBuilder();
-        ((ActiveDeviceActivity) getActivity()).executeCommand(DCSSDKDefs.DCSSDK_COMMAND_OPCODE.DCSSDK_SET_ACTION, inXML, outXML, scannerID);
+
+        Activity activity = getActivity();
+        if(activity instanceof ActiveDeviceActivity){
+            ((ActiveDeviceActivity) activity).executeCommand(DCSSDKDefs.DCSSDK_COMMAND_OPCODE.DCSSDK_SET_ACTION, inXML, outXML, scannerID);
+        }else if(activity instanceof SettingsDetailActivity){
+            ((SettingsDetailActivity) activity).executeCommand(DCSSDKDefs.DCSSDK_COMMAND_OPCODE.DCSSDK_SET_ACTION, inXML, outXML, scannerID);
+        }
     }
 
     @Override
@@ -1398,7 +1459,14 @@ public class UpdateFirmware extends Fragment implements NavigationView.OnNavigat
                         } catch (InterruptedException e) {
                             Log.d(TAG, "Returned SDK Exception");
                         }
-                        ((ActiveDeviceActivity) getActivity()).executeCommand(DCSSDKDefs.DCSSDK_COMMAND_OPCODE.DCSSDK_START_NEW_FIRMWARE, in_xml, outXML, firmwareUpdateEvent.getScannerInfo().getScannerID());
+
+                        Activity activity = getActivity();
+                        if(activity instanceof ActiveDeviceActivity){
+                            ((ActiveDeviceActivity) activity).executeCommand(DCSSDKDefs.DCSSDK_COMMAND_OPCODE.DCSSDK_START_NEW_FIRMWARE, in_xml, outXML, firmwareUpdateEvent.getScannerInfo().getScannerID());
+                        }else if(activity instanceof SettingsDetailActivity){
+                            ((SettingsDetailActivity) activity).executeCommand(DCSSDKDefs.DCSSDK_COMMAND_OPCODE.DCSSDK_START_NEW_FIRMWARE, in_xml, outXML, firmwareUpdateEvent.getScannerInfo().getScannerID());
+                        }
+
                         isWaitingForFWUpdateToComplete = true;
                         Application.isFirmwareUpdateSuccess = true;
                         tblRowFW.setVisibility(View.GONE);
@@ -1565,7 +1633,12 @@ public class UpdateFirmware extends Fragment implements NavigationView.OnNavigat
         @Override
         protected Boolean doInBackground(String... strings) {
 
-            return ((ActiveDeviceActivity) getActivity()).executeCommand(opcode, strings[0], outXML, scannerId);
+            Activity activity = getActivity();
+            if(activity instanceof SettingsDetailActivity){
+                return ((SettingsDetailActivity) activity).executeCommand(opcode, strings[0], outXML, scannerId);
+            } else{
+                return ((ActiveDeviceActivity) activity).executeCommand(opcode, strings[0], outXML, scannerId);
+            }
         }
 
         @Override

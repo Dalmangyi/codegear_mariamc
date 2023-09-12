@@ -264,30 +264,45 @@
                 android:onClick="loadLedActions"
                 android:visibility="invisible">
 
-                <TextView
-                    style="@style/roboto_medium_16dp"
-                    android:layout_height="60dp"
-                    android:layout_marginLeft="18dp"
-                    android:layout_weight="0"
-                    android:text="@string/led_control" />
 
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@android:color/white"
-                    android:orientation="vertical"></LinearLayout>
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="20dp"
-                    android:layout_gravity="center|right"
-                    android:layout_marginRight="18dp"
-                    android:layout_weight="0"
-                    app:srcCompat="@drawable/right" />
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/roboto_medium_16dp"
+                            android:layout_height="60dp"
+                            android:layout_marginLeft="18dp"
+                            android:layout_weight="0"
+                            android:text="@string/led_control" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@android:color/white"
+                            android:orientation="vertical"></LinearLayout>
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="20dp"
+                            android:layout_gravity="center|right"
+                            android:layout_marginRight="18dp"
+                            android:layout_weight="0"
+                            app:srcCompat="@drawable/right" />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <include layout="@layout/normal_divider" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
             </TableRow>
 
-            <include layout="@layout/normal_divider" />
 
             <TableRow
                 android:id="@+id/vibration_feedback_tbl_row"
@@ -297,31 +312,45 @@
                 android:onClick="vibrationFeedback"
                 android:visibility="invisible">
 
-                <TextView
-                    android:id="@+id/vibration_feedback_text"
-                    style="@style/roboto_medium_16dp"
-                    android:layout_height="60dp"
-                    android:layout_marginLeft="18dp"
-                    android:layout_weight="0"
-                    android:text="@string/vibration_feedback" />
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@android:color/white"
-                    android:orientation="vertical"></LinearLayout>
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="20dp"
-                    android:layout_gravity="center|right"
-                    android:layout_marginRight="18dp"
-                    android:layout_weight="0"
-                    app:srcCompat="@drawable/right" />
+                        <TextView
+                            android:id="@+id/vibration_feedback_text"
+                            style="@style/roboto_medium_16dp"
+                            android:layout_height="60dp"
+                            android:layout_marginLeft="18dp"
+                            android:layout_weight="0"
+                            android:text="@string/vibration_feedback" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@android:color/white"
+                            android:orientation="vertical"></LinearLayout>
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="20dp"
+                            android:layout_gravity="center|right"
+                            android:layout_marginRight="18dp"
+                            android:layout_weight="0"
+                            app:srcCompat="@drawable/right" />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <include layout="@layout/normal_divider" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
             </TableRow>
 
-            <include layout="@layout/normal_divider" />
 
             <LinearLayout
                 android:layout_width="0dp"
