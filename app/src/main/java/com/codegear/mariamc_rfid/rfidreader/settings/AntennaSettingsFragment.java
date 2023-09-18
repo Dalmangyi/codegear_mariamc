@@ -29,14 +29,6 @@ import com.zebra.rfid.api3.OperationFailureException;
 import com.zebra.rfid.api3.RFModeTableEntry;
 import com.codegear.mariamc_rfid.R;
 
-/**
- * A simple {@link android.support.v4.app.Fragment} subclass.
- * <p/>
- * Use the {@link AntennaSettingsFragment#newInstance} factory method to
- * create an instance of this fragment.
- * <p/>
- * Fragment to handle setting and showing of antenna settings.
- */
 public class AntennaSettingsFragment extends BackPressedFragment {
 
     private ArrayAdapter<String> linkAdapter;
@@ -229,20 +221,16 @@ public class AntennaSettingsFragment extends BackPressedFragment {
 
     @Override
     public void onBackPressed() {
-        if (!isSettingsChanged()) {
-            return;
-        }
+//        if (!isSettingsChanged()) {
+//            return;
+//        }
         //    Toast.makeText(getActivity(), "Setting applied successfully. ", Toast.LENGTH_LONG).show();
     }
 
     public static void replaceFragment(@NonNull FragmentManager fragmentManager, @NonNull Fragment fragment, int frameId) {
     }
 
-    /**
-     * method to know whether settings has changed
-     *
-     * @return true if settings has changed or false if settings has not changed
-     */
+
     private boolean isSettingsChanged() {
         boolean isSettingsChanged = false;
         if (RFIDController.antennaRfConfig != null) {
@@ -251,7 +239,7 @@ public class AntennaSettingsFragment extends BackPressedFragment {
                 try {
                     powerLevelIndex = getPowerLevelIndex(Integer.parseInt(powerLevel.getText().toString()));
                 } catch (NumberFormatException e) {
-                    Toast.makeText(getActivity(), "Please enter a valid value for Power Level", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), "전력 수준에 유효한 값을 입력하십시오.", Toast.LENGTH_LONG).show();
                 }
                 if (powerLevelIndex == -1) {
                     if (getActivity() instanceof SettingsDetailActivity)
@@ -276,7 +264,7 @@ public class AntennaSettingsFragment extends BackPressedFragment {
                         if (rfModeTableEntry.getMinTariValue() == tariValue) tariValue = 0;
                     }
                 } catch (NumberFormatException e) {
-                    Toast.makeText(getActivity(), "Please enter a valid value for Tari Value", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), "Tari 값에 유효한 값을 입력하십시오.", Toast.LENGTH_LONG).show();
                 }
                 if (tariValue == -1) {
                     if (getActivity() instanceof SettingsDetailActivity)
@@ -385,7 +373,7 @@ public class AntennaSettingsFragment extends BackPressedFragment {
                 if (getActivity() instanceof SettingsDetailActivity)
                     Toast.makeText((SettingsDetailActivity) getActivity(), R.string.status_success_message, Toast.LENGTH_SHORT).show();
                 else if (current_context instanceof ActiveDeviceActivity)
-                    Toast.makeText((ActiveDeviceActivity) current_context, "Setting applied successfully", Toast.LENGTH_SHORT).show();
+                    Toast.makeText((ActiveDeviceActivity) current_context, "설정이 성공적으로 적용되었습니다.", Toast.LENGTH_SHORT).show();
             }
             super.onPostExecute(result);
             //AdvancedOptionItemFragment fragment = AdvancedOptionItemFragment.newInstance();
@@ -421,5 +409,12 @@ public class AntennaSettingsFragment extends BackPressedFragment {
                 linkProfileSpinner.setAdapter(null);
             }
         });
+    }
+
+    //수동 저장
+    public void saveConfigClicked(View v){
+        if(isSettingsChanged()){
+            return;
+        }
     }
 }

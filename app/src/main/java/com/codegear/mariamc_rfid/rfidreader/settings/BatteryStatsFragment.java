@@ -70,7 +70,7 @@ public class BatteryStatsFragment extends Fragment {
     private void fetchAndUpdateBatteryStats() {
 
         if (RFIDController.mConnectedReader == null) {
-            Toast.makeText(getActivity(), "연결된 장치가 없습니다. ", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "연결된 장치가 없습니다.", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -83,11 +83,11 @@ public class BatteryStatsFragment extends Fragment {
                 Log.e(TAG, e.getStackTrace()[0].toString());
             } catch (OperationFailureException e) {
                 if (e.getResults() == RFIDResults.RFID_OPERATION_IN_PROGRESS) {
-                    Toast.makeText(getActivity(), "Operation in progress, Battery statistics cannot be fetched", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "작업이 진행 중입니다. 배터리 통계를 가져올 수 없습니다.", Toast.LENGTH_SHORT).show();
                 }
             }
         } else {
-            Toast.makeText(getActivity(), "Inventory is in progress, Battery statistics cannot be fetched", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "인벤토리가 진행 중입니다. 배터리 통계를 가져올 수 없습니다.", Toast.LENGTH_SHORT).show();
         }
         String header = "배터리 자산 정보";
         List<String> itemTitle = new ArrayList<>();

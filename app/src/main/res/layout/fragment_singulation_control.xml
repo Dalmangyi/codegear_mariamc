@@ -100,12 +100,19 @@
 
     <include layout="@layout/normal_divider" />
 
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
     <TextView
         android:id="@+id/tv_preFilterEnabled"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:gravity="bottom|center"
         android:padding="10dp"
         android:text="사전 필터 옵션이 활성화되었습니다." />
+
+    <include layout="@layout/save_config_button"/>
 
 </LinearLayout>

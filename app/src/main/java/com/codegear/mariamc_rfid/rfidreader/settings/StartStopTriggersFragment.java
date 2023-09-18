@@ -39,14 +39,6 @@ import com.zebra.rfid.api3.StartTrigger;
 import com.zebra.rfid.api3.StopTrigger;
 
 
-/**
- * A simple {@link android.support.v4.app.Fragment} subclass.
- * <p/>
- * Use the {@link StartStopTriggersFragment#newInstance} factory method to
- * create an instance of this fragment.
- * <p/>
- * Fragment to handle trigger operations and UI changes.
- */
 public class StartStopTriggersFragment extends BackPressedFragment implements Spinner.OnItemSelectedListener, CompoundButton.OnCheckedChangeListener {
 
     private static final String IMMEDIATE = "Immediate";
@@ -80,12 +72,7 @@ public class StartStopTriggersFragment extends BackPressedFragment implements Sp
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @return A new instance of fragment StartStopTriggersFragment.
-     */
+
     public static StartStopTriggersFragment newInstance() {
         return new StartStopTriggersFragment();
     }
@@ -117,19 +104,13 @@ public class StartStopTriggersFragment extends BackPressedFragment implements Sp
         //        WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
         startTriggerSpinner = (Spinner) getActivity().findViewById(R.id.startTriggerSpinner);
-        // Create an ArrayAdapter using the string array and a default spinner layout
         startTriggerAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.start_trigger_array, R.layout.custom_spinner_layout);
-        // Specify the layout to use when the list of choices appears
         startTriggerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // Apply the adapter to the spinner
         startTriggerSpinner.setAdapter(startTriggerAdapter);
 
         stopTriggerSpinner = (Spinner) getActivity().findViewById(R.id.stopTriggerSpinner);
-        // Create an ArrayAdapter using the string array and a default spinner layout
         stopTriggerAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.stop_trigger_array, R.layout.custom_spinner_layout);
-        // Specify the layout to use when the list of choices appears
         stopTriggerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // Apply the adapter to the spinner
         stopTriggerSpinner.setAdapter(stopTriggerAdapter);
 
         if (RFIDController.settings_startTrigger != null) {
@@ -303,8 +284,17 @@ public class StartStopTriggersFragment extends BackPressedFragment implements Sp
 
     @Override
     public void onBackPressed() {
+//        if (!isSettingsChanged()) {
+//            AdvancedOptionItemFragment fragment = AdvancedOptionItemFragment.newInstance();
+//            replaceFragment(getFragmentManager(), fragment, R.id.settings_content_frame);
+//            if (getActivity() instanceof ActiveDeviceActivity)
+//                ((ActiveDeviceActivity) getActivity()).loadNextFragment(RFID_ADVANCED_OPTIONS_TAB);
+//        }
+    }
+
+    //수동 저장
+    public void saveConfigClicked(View v){
         if (!isSettingsChanged()) {
-            //((SettingsDetailActivity) getActivity()).callBackPressed();
             AdvancedOptionItemFragment fragment = AdvancedOptionItemFragment.newInstance();
             replaceFragment(getFragmentManager(), fragment, R.id.settings_content_frame);
             if (getActivity() instanceof ActiveDeviceActivity)
@@ -354,11 +344,8 @@ public class StartStopTriggersFragment extends BackPressedFragment implements Sp
         return tempStopTrigger;
     }
 
-    /**
-     * method to know whether start/stop trigger settings has changed
-     *
-     * @return true if settings has changed or false if settings has not changed
-     */
+
+
     private boolean isSettingsChanged() {
         boolean isSettingsChanged = false;
         if (RFIDController.mConnectedReader == null || RFIDController.settings_startTrigger == null)

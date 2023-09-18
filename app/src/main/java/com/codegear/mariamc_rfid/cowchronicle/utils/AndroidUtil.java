@@ -16,14 +16,7 @@ public class AndroidUtil {
                     context.getContentResolver(),
                     Settings.Secure.ANDROID_ID);
         } else {
-            final TelephonyManager mTelephony = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-            if (mTelephony.getDeviceId() != null) {
-                deviceId = mTelephony.getDeviceId();
-            } else {
-                deviceId = Settings.Secure.getString(
-                        context.getContentResolver(),
-                        Settings.Secure.ANDROID_ID);
-            }
+            deviceId = "null";
         }
 
         return deviceId;

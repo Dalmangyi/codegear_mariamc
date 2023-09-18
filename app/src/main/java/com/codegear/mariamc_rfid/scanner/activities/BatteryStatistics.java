@@ -449,9 +449,9 @@ public class BatteryStatistics extends BaseActivity implements NavigationView.On
             startActivity(intent);
         }else if (id == R.id.nav_find_cabled_scanner) {
             AlertDialog.Builder dlg = new  AlertDialog.Builder(this);
-            dlg.setTitle("This will disconnect your current scanner");
+            dlg.setTitle("현재 스캐너의 연결이 끊어집니다.");
             //dlg.setIcon(android.R.drawable.ic_dialog_alert);
-            dlg.setPositiveButton("Continue", new DialogInterface.OnClickListener() {
+            dlg.setPositiveButton("계속", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int arg) {
 
                     disconnect(scannerID);
@@ -463,7 +463,7 @@ public class BatteryStatistics extends BaseActivity implements NavigationView.On
                 }
             });
 
-            dlg.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            dlg.setNegativeButton("취소", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int arg) {
 
                 }

@@ -38,12 +38,6 @@ import static com.codegear.mariamc_rfid.rfidreader.rfid.RFIDController.isLocatin
 import static com.codegear.mariamc_rfid.rfidreader.rfid.RFIDController.mConnectedReader;
 import static com.codegear.mariamc_rfid.rfidreader.rfid.RFIDController.mIsInventoryRunning;
 
-/**
- * A fragment representing a list of Items.
- * <p/>
- * <p>
- * interface.
- */
 public class ProfileFragment extends BackPressedFragment implements ProfileRecyclerViewAdapter.OnListFragmentInteractionListener {
 
     private ProfileRecyclerViewAdapter.OnListFragmentInteractionListener mListener;
@@ -52,10 +46,8 @@ public class ProfileFragment extends BackPressedFragment implements ProfileRecyc
     private ProfileRecyclerViewAdapter profileViewAdapter;
     private LinkProfileUtil linkProfileUtil;
 
-    /**
-     * Mandatory empty constructor for the fragment manager to instantiate the
-     * fragment (e.g. upon screen orientation changes).
-     */
+
+
     public ProfileFragment() {
     }
 
@@ -72,10 +64,10 @@ public class ProfileFragment extends BackPressedFragment implements ProfileRecyc
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile_list, container, false);
         RecyclerView recyclerView = view.findViewById(R.id.readerprofilelist);
+
         // Set the adapter
         if (recyclerView instanceof RecyclerView) {
             Context context = view.getContext();
@@ -83,8 +75,7 @@ public class ProfileFragment extends BackPressedFragment implements ProfileRecyc
             recyclerView.setLayoutManager(mLayoutManager);
             profileViewAdapter = new ProfileRecyclerViewAdapter(ProfileContent.ITEMS, mListener);
             recyclerView.setAdapter(profileViewAdapter);
-            DividerItemDecoration mDividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),
-                    mLayoutManager.getOrientation());
+            DividerItemDecoration mDividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(), mLayoutManager.getOrientation());
             mDividerItemDecoration.setDrawable((getContext().getResources().getDrawable(R.drawable.profile_divider)));
             recyclerView.addItemDecoration(mDividerItemDecoration);
         }
@@ -112,7 +103,7 @@ public class ProfileFragment extends BackPressedFragment implements ProfileRecyc
 
         profileViewAdapter.mLinkProfileAdapter = linkAdapter;
         profileViewAdapter.mSessionAdapter = sessionAdapter;
-        if(SettingsDetailActivity.mSettingOnFactory == false) {
+        if (SettingsDetailActivity.mSettingOnFactory == false) {
             Button button = getActivity().findViewById(R.id.profilelistbutton);
             button.setVisibility(View.INVISIBLE);
         }
@@ -126,8 +117,7 @@ public class ProfileFragment extends BackPressedFragment implements ProfileRecyc
 
     @Override
     public void onBackPressed() {
-        if(SettingsDetailActivity.mSettingOnFactory == true)
-            return;
+        if (SettingsDetailActivity.mSettingOnFactory == true) return;
 
         if (mConnectedReader != null && mConnectedReader.isConnected()) {
             if (!(mIsInventoryRunning || isLocatingTag) && mConnectedReader.Config.Antennas != null) {
@@ -150,8 +140,7 @@ public class ProfileFragment extends BackPressedFragment implements ProfileRecyc
         }
         if (getActivity() instanceof SettingsDetailActivity)
             ((SettingsDetailActivity) getActivity()).callBackPressed();
-        else
-            ((ActiveDeviceActivity) getActivity()).callBackPressed();
+        else ((ActiveDeviceActivity) getActivity()).callBackPressed();
         //
     }
 
@@ -198,8 +187,7 @@ public class ProfileFragment extends BackPressedFragment implements ProfileRecyc
                     // DPO
                     if (item.DPO_On)
                         mConnectedReader.Config.setDPOState(DYNAMIC_POWER_OPTIMIZATION.ENABLE);
-                    else
-                        mConnectedReader.Config.setDPOState(DYNAMIC_POWER_OPTIMIZATION.DISABLE);
+                    else mConnectedReader.Config.setDPOState(DYNAMIC_POWER_OPTIMIZATION.DISABLE);
                     dynamicPowerSettings = mConnectedReader.Config.getDPOState();
 
                     // store profile

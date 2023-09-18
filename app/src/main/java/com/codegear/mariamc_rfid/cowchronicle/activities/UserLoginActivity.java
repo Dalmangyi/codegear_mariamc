@@ -33,6 +33,7 @@ import com.codegear.mariamc_rfid.cowchronicle.activities.services.ResLogin;
 import com.codegear.mariamc_rfid.cowchronicle.activities.services.RetrofitClient;
 import com.codegear.mariamc_rfid.cowchronicle.device.RFIDSingleton;
 import com.codegear.mariamc_rfid.cowchronicle.storage.UserStorage;
+import com.codegear.mariamc_rfid.cowchronicle.utils.AndroidUtil;
 import com.codegear.mariamc_rfid.cowchronicle.utils.CustomDialog;
 import com.codegear.mariamc_rfid.cowchronicle.utils.CustomDisconnectedDrawer;
 import com.codegear.mariamc_rfid.cowchronicle.utils.MD5Util;
@@ -124,6 +125,11 @@ public class UserLoginActivity extends BaseActivity {
             //모두 허가되었다면, 자동로그인 시도하기
             checkAutoLogin();
         }, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION);
+
+
+        //기기 고유값
+        String deviceId = AndroidUtil.getDeviceId(this);
+        Log.d(TAG, "DeviceId : "+deviceId);
     }
 
     @Override

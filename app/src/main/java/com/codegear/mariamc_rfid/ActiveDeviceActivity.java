@@ -2447,12 +2447,12 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
                     getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
                     break;
                 case SINGULATION_CONTROL_TAB:
-                    PageTitle = "싱귤레이션";
+                    PageTitle = "싱귤레이션 제어";
                     mAdapter.setSettingsMode(SINGULATION_CONTROL_TAB);
                     getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
                     break;
                 case START_STOP_TRIGGER_TAB:
-                    PageTitle = "시작 / 정지";
+                    PageTitle = "시작 / 정지 트리거";
                     mAdapter.setSettingsMode(START_STOP_TRIGGER_TAB);
                     getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
                     break;
@@ -2462,12 +2462,12 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
                     getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
                     break;
                 case SAVE_CONFIG_TAB:
-                    PageTitle = "저장";
+                    PageTitle = "구성 저장";
                     mAdapter.setSettingsMode(SAVE_CONFIG_TAB);
                     getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
                     break;
                 case DPO_SETTING_TAB:
-                    PageTitle = "전력";
+                    PageTitle = "전원 관리";
                     mAdapter.setSettingsMode(DPO_SETTING_TAB);
                     getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
                     break;

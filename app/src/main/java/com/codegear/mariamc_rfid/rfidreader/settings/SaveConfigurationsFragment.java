@@ -34,14 +34,6 @@ import java.util.ArrayList;
 import static com.codegear.mariamc_rfid.rfidreader.rfid.RFIDController.mConnectedReader;
 import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.RFID_ADVANCED_OPTIONS_TAB;
 
-/**
- * A simple {@link android.support.v4.app.Fragment} subclass.
- * <p/>
- * Use the {@link SaveConfigurationsFragment#newInstance} factory method to
- * create an instance of this fragment.
- * <p/>
- * Fragment to handle save configuration operation and UI
- */
 public class SaveConfigurationsFragment extends BackPressedFragment {
     ArrayList<String> linkedProfiles = new ArrayList<>();
     private TextView antennaPower;
@@ -83,21 +75,11 @@ public class SaveConfigurationsFragment extends BackPressedFragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @return A new instance of fragment SaveConfigurationsFragment.
-     */
     public static SaveConfigurationsFragment newInstance() {
         return new SaveConfigurationsFragment();
     }
 
     public static void replaceFragment(@NonNull FragmentManager fragmentManager, @NonNull Fragment fragment, int frameId) {
-        //   FragmentTransaction transaction = fragmentManager.beginTransaction();
-        //   transaction.replace(frameId, fragment);
-        //   transaction.disallowAddToBackStack();
-        //   transaction.commit();
     }
 
     @Override
@@ -416,19 +398,7 @@ public class SaveConfigurationsFragment extends BackPressedFragment {
 
 
                     triggerKeyMapping.setText("Upper trigger - " + upper + " Lower trigger " + lower);
-/*
-                if(keylayoutType.equals(ENUM_KEYLAYOUT_TYPE.UPPER_TRIGGER_FOR_RFID)){
-                    triggerKeyMapping.setText("Upper(RFID)Lower(Host Scan)");
 
-                }else if(keylayoutType.equals(ENUM_KEYLAYOUT_TYPE.UPPER_TRIGGER_FOR_SCAN)) {
-                    triggerKeyMapping.setText("Upper(Host Scan)Lower(RFID)");
-
-                }else if(keylayoutType.equals(ENUM_KEYLAYOUT_TYPE.LOWER_TRIGGER_FOR_SLED_SCAN)) {
-                    triggerKeyMapping.setText("Upper(RFID)Lower(Sled Scan)");
-
-                }else if(keylayoutType.equals(ENUM_KEYLAYOUT_TYPE.UPPER_TRIGGER_FOR_SLED_SCAN)){
-                    triggerKeyMapping.setText("Upper(Sled Scan) & Lower(RFID)");
-                }*/
                 }
             }
         } catch (InvalidUsageException e) {
@@ -446,10 +416,8 @@ public class SaveConfigurationsFragment extends BackPressedFragment {
         switch (pos) {
             case 0:
                 return "RFID";
-
             case 1:
                 return "SLED_SCAN";
-
             case 2:
                 return "TERMINAL_SCAN";
             case 3:

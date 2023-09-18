@@ -701,7 +701,8 @@
                     android:gravity="right|center_vertical" />
             </TableRow>
 
-            <include layout="@layout/normal_divider" />
+            <include layout="@layout/normal_divider"
+                android:visibility="gone"/>
 
             <TableRow style="@style/save_config_setting_detail_background">
 

@@ -33,14 +33,6 @@ import static com.codegear.mariamc_rfid.rfidreader.rfid.RFIDController.isSimpleP
 import static com.codegear.mariamc_rfid.rfidreader.rfid.RFIDController.mConnectedReader;
 import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.RFID_ADVANCED_OPTIONS_TAB;
 
-/**
- * A simple {@link android.support.v4.app.Fragment} subclass.
- * <p/>
- * Use the {@link SingulationControlFragment#newInstance} factory method to
- * create an instance of this fragment.
- * <p/>
- * Fragment to handle singulation operations and UI.
- */
 public class SingulationControlFragment extends BackPressedFragment implements Spinner.OnItemSelectedListener {
 
     private TextView tv_preFilterEnabled;
@@ -53,18 +45,12 @@ public class SingulationControlFragment extends BackPressedFragment implements S
     private Context context;
     private static final String TAG = "SingulationControlFragment";
 
-//    private Antennas.SingulationControl singulationControl;
 
     public SingulationControlFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @return A new instance of fragment SingulationControlFragment.
-     */
+
     public static SingulationControlFragment newInstance() {
         return new SingulationControlFragment();
     }
@@ -75,8 +61,7 @@ public class SingulationControlFragment extends BackPressedFragment implements S
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_singulation_control, container, false);
     }
@@ -92,35 +77,23 @@ public class SingulationControlFragment extends BackPressedFragment implements S
         super.onActivityCreated(savedInstanceState);
 
         tv_preFilterEnabled = (TextView) getActivity().findViewById(R.id.tv_preFilterEnabled);
-
         sessionSpinner = (Spinner) getActivity().findViewById(R.id.session);
-        // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> sessionAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.session_array, R.layout.custom_spinner_layout);
-        // Specify the layout to use when the list of choices appears
         sessionAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // Apply the adapter to the spinner
         sessionSpinner.setAdapter(sessionAdapter);
         tagPopulationSpinner = (Spinner) getActivity().findViewById(R.id.tagPopulation);
-        // Create an ArrayAdapter using the string array and a default spinner layout
         tagPopulationAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.tag_population_array, R.layout.custom_spinner_layout);
-        // Specify the layout to use when the list of choices appears
         tagPopulationAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // Apply the adapter to the spinner
         tagPopulationSpinner.setAdapter(tagPopulationAdapter);
         inventoryStateSpinner = (Spinner) getActivity().findViewById(R.id.inventoryState);
-        // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> inventoryAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.inventory_state_array, R.layout.custom_spinner_layout);
-        // Specify the layout to use when the list of choices appears
         inventoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // Apply the adapter to the spinner
         inventoryStateSpinner.setAdapter(inventoryAdapter);
         slFlagSpinner = (Spinner) getActivity().findViewById(R.id.slFlag);
-        // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> slAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.sl_flags_array, R.layout.custom_spinner_layout);
-        // Specify the layout to use when the list of choices appears
         slAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // Apply the adapter to the spinner
         slFlagSpinner.setAdapter(slAdapter);
+
         // defaults
         sessionSpinner.setSelection(0, false);
         tagPopulationSpinner.setSelection(0, false);
@@ -157,14 +130,13 @@ public class SingulationControlFragment extends BackPressedFragment implements S
 
         SharedPreferences settings = getActivity().getSharedPreferences(Constants.APP_SETTINGS_STATUS, 0);
         boolean showAdvancedOptions = settings.getBoolean(Constants.PREFILTER_ADV_OPTIONS, false);
-        if(showAdvancedOptions)
-            enableSLOptions = true;
+        if (showAdvancedOptions) enableSLOptions = true;
 
 
         sessionSpinner.setEnabled(enableSLOptions);
         inventoryStateSpinner.setEnabled(enableSLOptions);
         slFlagSpinner.setEnabled(enableSLOptions);
-        getActivity().findViewById(R.id.tv_preFilterEnabled).setVisibility(enableSLOptions ? View.GONE: View.VISIBLE);
+        getActivity().findViewById(R.id.tv_preFilterEnabled).setVisibility(enableSLOptions ? View.GONE : View.VISIBLE);
         fragmentActivity = getActivity();
 
     }
@@ -184,23 +156,16 @@ public class SingulationControlFragment extends BackPressedFragment implements S
     }
 
     public void onBackPressed() {
-        if ((sessionSpinner.getSelectedItem() != null && tagPopulationSpinner.getSelectedItem() != null && inventoryStateSpinner.getSelectedItem() != null
-                && slFlagSpinner.getSelectedItem() != null)) {
-            if (isSettingsChanged()) {
-                new Task_SaveSingulationConfiguration(sessionSpinner.getSelectedItemPosition(), tagPopulationSpinner.getSelectedItemPosition(), inventoryStateSpinner.getSelectedItemPosition(), slFlagSpinner.getSelectedItemPosition(), context).execute();
-            }else{
-
-                    ((ActiveDeviceActivity) context).loadNextFragment(RFID_ADVANCED_OPTIONS_TAB);
-            }
-
-        }
+//        if ((sessionSpinner.getSelectedItem() != null && tagPopulationSpinner.getSelectedItem() != null && inventoryStateSpinner.getSelectedItem() != null && slFlagSpinner.getSelectedItem() != null)) {
+//            if (isSettingsChanged()) {
+//                new Task_SaveSingulationConfiguration(sessionSpinner.getSelectedItemPosition(), tagPopulationSpinner.getSelectedItemPosition(), inventoryStateSpinner.getSelectedItemPosition(), slFlagSpinner.getSelectedItemPosition(), context).execute();
+//            } else {
+//                ((ActiveDeviceActivity) context).loadNextFragment(RFID_ADVANCED_OPTIONS_TAB);
+//            }
+//        }
     }
 
-    /**
-     * method to know whether singulation control settings has changed
-     *
-     * @return true if settings has changed or false if settings has not changed
-     */
+
     private boolean isSettingsChanged() {
         if (RFIDController.singulationControl != null) {
             if (RFIDController.singulationControl.getSession().getValue() != sessionSpinner.getSelectedItemPosition())
@@ -285,10 +250,14 @@ public class SingulationControlFragment extends BackPressedFragment implements S
                 ProfileContent.UpdateActiveProfile();
                 return true;
             } catch (InvalidUsageException e) {
-                if( e!= null && e.getStackTrace().length>0){ Log.e(TAG, e.getStackTrace()[0].toString()); }
+                if (e != null && e.getStackTrace().length > 0) {
+                    Log.e(TAG, e.getStackTrace()[0].toString());
+                }
                 invalidUsageException = e;
             } catch (OperationFailureException e) {
-                if( e!= null && e.getStackTrace().length>0){ Log.e(TAG, e.getStackTrace()[0].toString()); }
+                if (e != null && e.getStackTrace().length > 0) {
+                    Log.e(TAG, e.getStackTrace()[0].toString());
+                }
                 operationFailureException = e;
             }
             return false;
@@ -298,17 +267,17 @@ public class SingulationControlFragment extends BackPressedFragment implements S
         protected void onPostExecute(Boolean result) {
 
             progressDialog.cancel();
-            if (!result ) {
+            if (!result) {
                 if (invalidUsageException != null) {
-                    if(current_context instanceof ActiveDeviceActivity)
+                    if (current_context instanceof ActiveDeviceActivity)
                         ((ActiveDeviceActivity) current_context).sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, getString(R.string.status_failure_message) + "\n" + invalidUsageException.getVendorMessage());
                 }
                 if (operationFailureException != null) {
-                    if(current_context instanceof ActiveDeviceActivity)
+                    if (current_context instanceof ActiveDeviceActivity)
                         ((ActiveDeviceActivity) current_context).sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, getString(R.string.status_failure_message) + "\n" + operationFailureException.getVendorMessage());
                 }
             }
-            if (invalidUsageException == null && operationFailureException == null && fragmentActivity != null )
+            if (invalidUsageException == null && operationFailureException == null && fragmentActivity != null)
                 Toast.makeText(((ActiveDeviceActivity) current_context), R.string.status_success_message, Toast.LENGTH_SHORT).show();
             ((ActiveDeviceActivity) current_context).runOnUiThread(new Runnable() {
                 @Override
@@ -357,6 +326,18 @@ public class SingulationControlFragment extends BackPressedFragment implements S
                 slFlagSpinner.setSelection(0, false);
             }
         });
+    }
+
+
+    //수동 저장
+    public void saveConfigClicked(View v){
+        if ((sessionSpinner.getSelectedItem() != null && tagPopulationSpinner.getSelectedItem() != null && inventoryStateSpinner.getSelectedItem() != null && slFlagSpinner.getSelectedItem() != null)) {
+            if (isSettingsChanged()) {
+                new Task_SaveSingulationConfiguration(sessionSpinner.getSelectedItemPosition(), tagPopulationSpinner.getSelectedItemPosition(), inventoryStateSpinner.getSelectedItemPosition(), slFlagSpinner.getSelectedItemPosition(), context).execute();
+            } else {
+                ((ActiveDeviceActivity) context).loadNextFragment(RFID_ADVANCED_OPTIONS_TAB);
+            }
+        }
     }
 
 }
