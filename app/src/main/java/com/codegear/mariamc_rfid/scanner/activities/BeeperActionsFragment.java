@@ -73,7 +73,7 @@ import org.xmlpull.v1.XmlPullParser;
 import java.io.StringReader;
 import java.util.ArrayList;
 
-public class BeeperActionsFragment extends Fragment implements NavigationView.OnNavigationItemSelectedListener,ScannerAppEngine.IScannerAppEngineDevConnectionsDelegate, SeekBar.OnSeekBarChangeListener {
+public class BeeperActionsFragment extends Fragment implements NavigationView.OnNavigationItemSelectedListener, ScannerAppEngine.IScannerAppEngineDevConnectionsDelegate, SeekBar.OnSeekBarChangeListener {
     private static final String TAG = "BeeperActionsFragment";
     private static BeeperActionsFragment mBeeperActionsFragment;
     private NumberPicker beeperPicker;
@@ -98,10 +98,9 @@ public class BeeperActionsFragment extends Fragment implements NavigationView.On
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        final View rootview = inflater.inflate(R.layout.content_beeper_actions,  container, false);
+        final View rootview = inflater.inflate(R.layout.content_beeper_actions, container, false);
 
         scannerID = Application.currentScannerId;
 
@@ -142,7 +141,7 @@ public class BeeperActionsFragment extends Fragment implements NavigationView.On
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         seekBarVolume = (SeekBar) getView().findViewById(R.id.seek_beeper_volume);
-        if(seekBarVolume !=null) {
+        if (seekBarVolume != null) {
             seekBarVolume.setProgress(getBeeperVolume(scannerID));
             drawLines();
             seekBarVolume.setOnSeekBarChangeListener(this);
@@ -153,7 +152,7 @@ public class BeeperActionsFragment extends Fragment implements NavigationView.On
         int beeperVolume = 0;
         String in_xml = "<inArgs><scannerID>" + scannerID + "</scannerID><cmdArgs><arg-xml><attrib_list>140</attrib_list></arg-xml></cmdArgs></inArgs>";
         StringBuilder outXML = new StringBuilder();
-        ((ActiveDeviceActivity)getActivity()).executeCommand(DCSSDKDefs.DCSSDK_COMMAND_OPCODE.DCSSDK_RSM_ATTR_GET,in_xml,outXML,scannerID);
+        ((ActiveDeviceActivity) getActivity()).executeCommand(DCSSDKDefs.DCSSDK_COMMAND_OPCODE.DCSSDK_RSM_ATTR_GET, in_xml, outXML, scannerID);
         try {
             XmlPullParser parser = Xml.newPullParser();
 
@@ -179,11 +178,11 @@ public class BeeperActionsFragment extends Fragment implements NavigationView.On
         } catch (Exception e) {
             Log.e(TAG, e.toString());
         }
-        if(beeperVolume == 0){
+        if (beeperVolume == 0) {
             return 100;
-        }else if(beeperVolume == 1){
+        } else if (beeperVolume == 1) {
             return 50;
-        }else{
+        } else {
             return 0;
         }
     }
@@ -191,7 +190,7 @@ public class BeeperActionsFragment extends Fragment implements NavigationView.On
     private void drawLines() {
         int indent = 20;
 
-        seekBarVolume.setPadding(indent*2,0,indent*2,0);
+        seekBarVolume.setPadding(indent * 2, 0, indent * 2, 0);
         //Get the width of the main view.
         Display display = getActivity().getWindowManager().getDefaultDisplay();
         Point displaysize = new Point();
@@ -217,11 +216,11 @@ public class BeeperActionsFragment extends Fragment implements NavigationView.On
         paint.setStrokeWidth(10); //Stoke width
 
         int point = 0; //initiate the point variable
-        canvas.drawLine((indent*2), 100, (indent*2), 0, paint);
+        canvas.drawLine((indent * 2), 100, (indent * 2), 0, paint);
         point = point + seekbarpoints;
         canvas.drawLine(point, 100, point, 0, paint);
         point = point + seekbarpoints;
-        canvas.drawLine(point-(indent*2), 100, point-(indent*2), 0, paint);
+        canvas.drawLine(point - (indent * 2), 100, point - (indent * 2), 0, paint);
 
 
         //Create a new Drawable
@@ -239,28 +238,10 @@ public class BeeperActionsFragment extends Fragment implements NavigationView.On
     }
 
 
-
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater){
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         // Inflate the menu; this adds items to the action bar if it is present.
         inflater.inflate(R.menu.no_items, menu);
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-       // removeDevConnectiosDelegate(this);
-    }
-    @Override
-    public void onResume() {
-        super.onResume();
-        //addDevConnectionsDelegate(this);
-    /*    beeperPicker = (NumberPicker) getView().findViewById(R.id.beeperPicker);
-        beeperPicker.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
-        beeperPicker.setDisplayedValues(getResources().getStringArray(R.array.beeper_actions));
-        beeperPicker.setMaxValue(26);
-        beeperPicker.setMinValue(0);
-        beeperPicker.setValue(26);*/
     }
 
 
@@ -268,11 +249,10 @@ public class BeeperActionsFragment extends Fragment implements NavigationView.On
         int value = beeperPicker.getValue();
         Integer actionVal = (Integer) beeperActions.get(value);
 
-        String inXML = "<inArgs><scannerID>" + Application.currentScannerId + "</scannerID><cmdArgs><arg-int>" +
-                + actionVal +"</arg-int></cmdArgs></inArgs>";
+        String inXML = "<inArgs><scannerID>" + Application.currentScannerId + "</scannerID><cmdArgs><arg-int>" + +actionVal + "</arg-int></cmdArgs></inArgs>";
         StringBuilder outXML = new StringBuilder();
 
-        new MyAsyncTask(Application.currentScannerId, DCSSDKDefs.DCSSDK_COMMAND_OPCODE.DCSSDK_SET_ACTION,outXML).execute(new String[]{inXML});
+        new MyAsyncTask(Application.currentScannerId, DCSSDKDefs.DCSSDK_COMMAND_OPCODE.DCSSDK_SET_ACTION, outXML).execute(new String[]{inXML});
     }
 
     @Override
@@ -280,8 +260,8 @@ public class BeeperActionsFragment extends Fragment implements NavigationView.On
         int id = item.getItemId();
         Intent intent;
         if (id == R.id.nav_pair_device) {
-            ((ActiveDeviceActivity)getActivity()).disconnect(scannerID);
-           // barcodeQueue.clear();
+            ((ActiveDeviceActivity) getActivity()).disconnect(scannerID);
+            // barcodeQueue.clear();
             Application.currentScannerId = Application.SCANNER_ID_NONE;
             //finish();
             intent = new Intent(getActivity(), ScannerHomeActivity.class);
@@ -291,14 +271,14 @@ public class BeeperActionsFragment extends Fragment implements NavigationView.On
             intent = new Intent(getActivity(), ScannersActivity.class);
 
             startActivity(intent);
-        }else if (id == R.id.nav_find_cabled_scanner) {
-            AlertDialog.Builder dlg = new  AlertDialog.Builder(getActivity());
-            dlg.setTitle("This will disconnect your current scanner");
+        } else if (id == R.id.nav_find_cabled_scanner) {
+            AlertDialog.Builder dlg = new AlertDialog.Builder(getActivity());
+            dlg.setTitle("현재 장치의 연결이 끊어집니다.");
             //dlg.setIcon(android.R.drawable.ic_dialog_alert);
-            dlg.setPositiveButton("Continue", new DialogInterface.OnClickListener() {
+            dlg.setPositiveButton("계속", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int arg) {
 
-                    ((ActiveDeviceActivity)getActivity()).disconnect(scannerID);
+                    ((ActiveDeviceActivity) getActivity()).disconnect(scannerID);
                     //Application.barcodeData.clear();
                     Application.currentScannerId = Application.SCANNER_ID_NONE;
                     //finish();
@@ -307,13 +287,13 @@ public class BeeperActionsFragment extends Fragment implements NavigationView.On
                 }
             });
 
-            dlg.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            dlg.setNegativeButton("취소", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int arg) {
 
                 }
             });
             dlg.show();
-        }else if (id == R.id.nav_connection_help) {
+        } else if (id == R.id.nav_connection_help) {
             intent = new Intent(getActivity(), ConnectionHelpActivity2.class);
             startActivity(intent);
         } else if (id == R.id.nav_settings) {
@@ -366,54 +346,54 @@ public class BeeperActionsFragment extends Fragment implements NavigationView.On
     @Override
     public void onStopTrackingTouch(SeekBar seekBar) {
         int mProgress = seekBar.getProgress();
-        if(mProgress > 0 & mProgress < 26) {
+        if (mProgress > 0 & mProgress < 26) {
             seekBar.setProgress(0);
-        } else if(mProgress > 25 & mProgress < 76) {
+        } else if (mProgress > 25 & mProgress < 76) {
             seekBar.setProgress(50);
         } else seekBar.setProgress(100);
 
         int i = seekBar.getProgress();
         int beeperVolume = 0;
-        if(i == 50){
+        if (i == 50) {
             beeperVolume = 1;
-        }else if(i==0){
+        } else if (i == 0) {
             beeperVolume = 2;
         }
         String inXML = "<inArgs><scannerID>" + Application.currentScannerId + "</scannerID><cmdArgs><arg-xml><attrib_list><attribute><id>140</id><datatype>B</datatype><value>" + beeperVolume + "</value></attribute></attrib_list></arg-xml></cmdArgs></inArgs>";
         StringBuilder outXML = new StringBuilder();
-        new MyAsyncTask(Application.currentScannerId, DCSSDKDefs.DCSSDK_COMMAND_OPCODE.DCSSDK_RSM_ATTR_SET,outXML).execute(new String[]{inXML});
+        new MyAsyncTask(Application.currentScannerId, DCSSDKDefs.DCSSDK_COMMAND_OPCODE.DCSSDK_RSM_ATTR_SET, outXML).execute(new String[]{inXML});
     }
 
-    private class MyAsyncTask extends AsyncTask<String,Integer,Boolean> {
+    private class MyAsyncTask extends AsyncTask<String, Integer, Boolean> {
         int scannerId;
         private CustomProgressDialog progressDialog;
         DCSSDKDefs.DCSSDK_COMMAND_OPCODE opcode;
         StringBuilder outXML;
 
-        public MyAsyncTask(int scannerId,  DCSSDKDefs.DCSSDK_COMMAND_OPCODE opcode, StringBuilder outXML){
-            this.scannerId=scannerId;
-            this.opcode=opcode;
+        public MyAsyncTask(int scannerId, DCSSDKDefs.DCSSDK_COMMAND_OPCODE opcode, StringBuilder outXML) {
+            this.scannerId = scannerId;
+            this.opcode = opcode;
             this.outXML = outXML;
         }
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            progressDialog = new CustomProgressDialog(getActivity(), "Executing beeper action..");
+            progressDialog = new CustomProgressDialog(getActivity(), "신호음 실행 중..");
             progressDialog.show();
         }
 
         @Override
         protected Boolean doInBackground(String... strings) {
-            return  ((ActiveDeviceActivity)getActivity()).executeCommand(opcode,strings[0],outXML,scannerId);
+            return ((ActiveDeviceActivity) getActivity()).executeCommand(opcode, strings[0], outXML, scannerId);
         }
 
         @Override
         protected void onPostExecute(Boolean b) {
             super.onPostExecute(b);
-            if (progressDialog != null && progressDialog.isShowing())
-                progressDialog.dismiss();
-            if(!b){
-                Toast.makeText(getActivity(), "Cannot perform beeper action", Toast.LENGTH_SHORT).show();
+            if (progressDialog != null && progressDialog.isShowing()) progressDialog.dismiss();
+            if (!b) {
+                Toast.makeText(getActivity(), "신호음 작업을 수행할 수 없습니다.", Toast.LENGTH_SHORT).show();
             }
         }
     }

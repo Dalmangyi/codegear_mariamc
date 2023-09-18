@@ -2,10 +2,10 @@
     style="@style/base_layout_style"
     android:orientation="vertical">
 
-
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -331,6 +331,9 @@
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
+
+    <include layout="@layout/save_config_button"/>
+
 </LinearLayout>
 
 

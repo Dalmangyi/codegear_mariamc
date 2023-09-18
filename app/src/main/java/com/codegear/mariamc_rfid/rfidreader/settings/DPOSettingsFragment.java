@@ -45,8 +45,7 @@ public class DPOSettingsFragment extends BackPressedFragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_dpo, container, false);
 
@@ -59,32 +58,32 @@ public class DPOSettingsFragment extends BackPressedFragment {
 
 
         if (RFIDController.dynamicPowerSettings != null) {
-            if (RFIDController.dynamicPowerSettings.getValue() == 0)
-                dynamicPower.setChecked(false);
+            if (RFIDController.dynamicPowerSettings.getValue() == 0) dynamicPower.setChecked(false);
             else if (RFIDController.dynamicPowerSettings.getValue() == 1)
                 dynamicPower.setChecked(true);
         }
 
-//        if (dynamicPower.isChecked())
-//            actionBar.setIcon(R.drawable.dl_dpo_enabled);
-//        else
-//            actionBar.setIcon(R.drawable.dl_dpo_disabled);
+
+        getActivity().findViewById(R.id.saveConfigButton).setOnClickListener(v -> {
+            saveConfigClicked(v);
+        });
     }
 
     @Override
     public void onBackPressed() {
+        if (getActivity() instanceof ActiveDeviceActivity)
+            ((ActiveDeviceActivity) getActivity()).loadNextFragment(RFID_ADVANCED_OPTIONS_TAB);
+    }
+
+    //수동 저장
+    public void saveConfigClicked(View v) {
         if (isSettingsChanged())
             new Task_SaveDynamicPowerSetting(dynamicPower.isChecked()).execute();
-        else{
-            AdvancedOptionItemFragment fragment = AdvancedOptionItemFragment.newInstance();
-            replaceFragment(getFragmentManager(), fragment, R.id.settings_content_frame);
-            if(getActivity() instanceof ActiveDeviceActivity)
-                ((ActiveDeviceActivity)getActivity()).loadNextFragment(RFID_ADVANCED_OPTIONS_TAB);
-
-        }
-
-
     }
+
+
+
+
 
     public boolean isSettingsChanged() {
         if (RFIDController.dynamicPowerSettings != null && !((dynamicPower.isChecked() && RFIDController.dynamicPowerSettings.getValue() == 1) || (!dynamicPower.isChecked() && RFIDController.dynamicPowerSettings.getValue() != 1))) {
@@ -125,11 +124,15 @@ public class DPOSettingsFragment extends BackPressedFragment {
                 RFIDController.dynamicPowerSettings = RFIDController.mConnectedReader.Config.getDPOState();
                 ProfileContent.UpdateActiveProfile();
             } catch (InvalidUsageException e) {
-                if( e!= null && e.getStackTrace().length>0){ Log.e(TAG, e.getStackTrace()[0].toString()); }
+                if (e != null && e.getStackTrace().length > 0) {
+                    Log.e(TAG, e.getStackTrace()[0].toString());
+                }
                 invalidUsageException = e;
                 bResult = false;
             } catch (OperationFailureException e) {
-                if( e!= null && e.getStackTrace().length>0){ Log.e(TAG, e.getStackTrace()[0].toString()); }
+                if (e != null && e.getStackTrace().length > 0) {
+                    Log.e(TAG, e.getStackTrace()[0].toString());
+                }
                 operationFailureException = e;
                 bResult = false;
             }
@@ -142,16 +145,16 @@ public class DPOSettingsFragment extends BackPressedFragment {
             progressDialog.cancel();
             if (!result) {
                 if (invalidUsageException != null) {
-                    if(getActivity() instanceof SettingsDetailActivity)
+                    if (getActivity() instanceof SettingsDetailActivity)
                         ((SettingsDetailActivity) getActivity()).sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, getString(R.string.status_failure_message) + "\n" + invalidUsageException.getVendorMessage());
-                    if(getActivity() instanceof ActiveDeviceActivity)
+                    if (getActivity() instanceof ActiveDeviceActivity)
                         ((ActiveDeviceActivity) getActivity()).sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, getString(R.string.status_failure_message) + "\n" + invalidUsageException.getVendorMessage());
 
                 }
                 if (operationFailureException != null) {
-                    if(getActivity() instanceof SettingsDetailActivity)
-                     ((SettingsDetailActivity) getActivity()).sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, getString(R.string.status_failure_message) + "\n" + operationFailureException.getVendorMessage());
-                    if(getActivity() instanceof ActiveDeviceActivity)
+                    if (getActivity() instanceof SettingsDetailActivity)
+                        ((SettingsDetailActivity) getActivity()).sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, getString(R.string.status_failure_message) + "\n" + operationFailureException.getVendorMessage());
+                    if (getActivity() instanceof ActiveDeviceActivity)
                         ((ActiveDeviceActivity) getActivity()).sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, getString(R.string.status_failure_message) + "\n" + operationFailureException.getVendorMessage());
 
                 }
@@ -161,8 +164,8 @@ public class DPOSettingsFragment extends BackPressedFragment {
             AdvancedOptionItemFragment fragment = AdvancedOptionItemFragment.newInstance();
             replaceFragment(getFragmentManager(), fragment, R.id.settings_content_frame);
             //((SettingsDetailActivity) getActivity()).callBackPressed();
-            if(getActivity() instanceof ActiveDeviceActivity)
-                ((ActiveDeviceActivity)getActivity()).loadNextFragment(RFID_ADVANCED_OPTIONS_TAB);
+            if (getActivity() instanceof ActiveDeviceActivity)
+                ((ActiveDeviceActivity) getActivity()).loadNextFragment(RFID_ADVANCED_OPTIONS_TAB);
 
         }
     }
@@ -189,27 +192,11 @@ public class DPOSettingsFragment extends BackPressedFragment {
             }
         });
     }
-    public static void replaceFragment (@NonNull FragmentManager fragmentManager,
-                                        @NonNull Fragment fragment, int frameId){
+
+    public static void replaceFragment(@NonNull FragmentManager fragmentManager, @NonNull Fragment fragment, int frameId) {
 //        FragmentTransaction transaction = fragmentManager.beginTransaction();
 //        transaction.replace(frameId, fragment);
 //        transaction.disallowAddToBackStack();
 //        transaction.commit();
     }
-   /* @Override
-    public void handleStatusResponse(final Response_Status statusData) {
-        String command = statusData.command.trim();
-        if (command.equalsIgnoreCase(Constants.COMMAND_DYNAMICPOWER))
-            getActivity().runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    if (statusData.Status.trim().equalsIgnoreCase("OK")) {
-                        ((BaseReceiverActivity) getActivity()).sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, getString(R.string.status_success_message));
-                    } else
-                        ((BaseReceiverActivity) getActivity()).sendNotification(Constants.ACTION_READER_STATUS_OBTAINED, getString(R.string.status_failure_message) + "\n" + statusData.Status);
-
-                    ((SettingsDetailActivity) getActivity()).callBackPressed();
-                }
-            });
-    }*/
 }

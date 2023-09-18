@@ -39,12 +39,6 @@ public class ChargeTerminalFragment extends BackPressedFragment {
 
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @return A new instance of fragment ChargeTerminalFragment.
-     */
     public static ChargeTerminalFragment newInstance() {
         return new ChargeTerminalFragment();
     }
@@ -72,6 +66,11 @@ public class ChargeTerminalFragment extends BackPressedFragment {
             checkBoxCT.setEnabled(true);
         }
 
+
+        view.findViewById(R.id.saveConfigButton).setOnClickListener(v -> {
+            saveConfigClicked(v);
+        });
+
         return view;
     }
 
@@ -86,17 +85,21 @@ public class ChargeTerminalFragment extends BackPressedFragment {
 
     @Override
     public void onBackPressed() {
-        if (chargeTerminalState != checkBoxCT.isChecked()) {
-            saveCTState();
-        } else {
-            if (getActivity() instanceof SettingsDetailActivity)
-                ((SettingsDetailActivity) getActivity()).callBackPressed();
-            if (getActivity() instanceof ActiveDeviceActivity) {
-                ((ActiveDeviceActivity) getActivity()).callBackPressed();
-                ((ActiveDeviceActivity) getActivity()).loadNextFragment(MAIN_RFID_SETTINGS_TAB);
-            }
+        if (getActivity() instanceof SettingsDetailActivity)
+            ((SettingsDetailActivity) getActivity()).callBackPressed();
+        if (getActivity() instanceof ActiveDeviceActivity) {
+            ((ActiveDeviceActivity) getActivity()).callBackPressed();
+            ((ActiveDeviceActivity) getActivity()).loadNextFragment(MAIN_RFID_SETTINGS_TAB);
         }
     }
+
+    //수동 저장
+    public void saveConfigClicked(View v){
+        if (chargeTerminalState != checkBoxCT.isChecked()) {
+            saveCTState();
+        }
+    }
+
 
     private void saveCTState() {
         progressDialog = new CustomProgressDialog(getActivity(), getString(R.string.ct_settings));

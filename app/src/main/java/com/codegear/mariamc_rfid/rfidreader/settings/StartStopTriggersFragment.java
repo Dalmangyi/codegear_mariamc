@@ -168,6 +168,11 @@ public class StartStopTriggersFragment extends BackPressedFragment implements Sp
         stopNObserveAttempts.setFilters(new InputFilter[]{new InputFilterMax()});
         stopNObserveTimeout.setFilters(new InputFilter[]{new InputFilterMax()});
 
+
+        getActivity().findViewById(R.id.saveConfigButton).setOnClickListener(v -> {
+            saveConfigClicked(v);
+        });
+
         loadTriggerStates();
     }
 
@@ -278,28 +283,18 @@ public class StartStopTriggersFragment extends BackPressedFragment implements Sp
     public void onNothingSelected(AdapterView<?> adapterView) {
     }
 
-    /**
-     * Method to be called when back button is pressed by the user
-     */
 
     @Override
     public void onBackPressed() {
-//        if (!isSettingsChanged()) {
-//            AdvancedOptionItemFragment fragment = AdvancedOptionItemFragment.newInstance();
-//            replaceFragment(getFragmentManager(), fragment, R.id.settings_content_frame);
-//            if (getActivity() instanceof ActiveDeviceActivity)
-//                ((ActiveDeviceActivity) getActivity()).loadNextFragment(RFID_ADVANCED_OPTIONS_TAB);
-//        }
+        AdvancedOptionItemFragment fragment = AdvancedOptionItemFragment.newInstance();
+        replaceFragment(getFragmentManager(), fragment, R.id.settings_content_frame);
+        if (getActivity() instanceof ActiveDeviceActivity)
+            ((ActiveDeviceActivity) getActivity()).loadNextFragment(RFID_ADVANCED_OPTIONS_TAB);
     }
 
     //수동 저장
     public void saveConfigClicked(View v){
-        if (!isSettingsChanged()) {
-            AdvancedOptionItemFragment fragment = AdvancedOptionItemFragment.newInstance();
-            replaceFragment(getFragmentManager(), fragment, R.id.settings_content_frame);
-            if (getActivity() instanceof ActiveDeviceActivity)
-                ((ActiveDeviceActivity) getActivity()).loadNextFragment(RFID_ADVANCED_OPTIONS_TAB);
-        }
+        isSettingsChanged();
     }
 
     private StartTrigger getDefaultStartTrigger() {

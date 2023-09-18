@@ -9,7 +9,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="77"
+        android:layout_weight="1"
         android:fillViewport="true">
 
         <LinearLayout
@@ -754,12 +754,12 @@
         android:id="@+id/saveConfigButton"
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="70dp"
         android:layout_gravity="bottom"
-        android:layout_weight="10"
         android:gravity="center"
         android:onClick="saveConfigClicked"
         android:text="@string/save_to_sled" />
+
 </LinearLayout>
 
 

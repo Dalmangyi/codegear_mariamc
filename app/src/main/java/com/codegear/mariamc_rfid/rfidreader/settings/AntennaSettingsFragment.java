@@ -1,5 +1,7 @@
 package com.codegear.mariamc_rfid.rfidreader.settings;
 
+import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.RFID_ADVANCED_OPTIONS_TAB;
+
 import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
@@ -206,6 +208,11 @@ public class AntennaSettingsFragment extends BackPressedFragment {
         linkProfileSpinner.setEnabled(false);
         PIESpinner = (Spinner) getActivity().findViewById(R.id.PIE);
         PIESpinner.setEnabled(false);
+
+
+        getActivity().findViewById(R.id.saveConfigButton).setOnClickListener(v -> {
+            saveConfigClicked(v);
+        });
     }
 
     @Override
@@ -221,11 +228,19 @@ public class AntennaSettingsFragment extends BackPressedFragment {
 
     @Override
     public void onBackPressed() {
-//        if (!isSettingsChanged()) {
-//            return;
-//        }
-        //    Toast.makeText(getActivity(), "Setting applied successfully. ", Toast.LENGTH_LONG).show();
+        if (getActivity() instanceof ActiveDeviceActivity)
+            ((ActiveDeviceActivity) getActivity()).loadNextFragment(RFID_ADVANCED_OPTIONS_TAB);
     }
+
+
+    //수동 저장
+    public void saveConfigClicked(View v){
+        if(isSettingsChanged()){
+            Toast.makeText(getActivity(), "설정이 성공적으로 반영되었습니다.", Toast.LENGTH_LONG).show();
+        }
+    }
+
+
 
     public static void replaceFragment(@NonNull FragmentManager fragmentManager, @NonNull Fragment fragment, int frameId) {
     }
@@ -411,10 +426,4 @@ public class AntennaSettingsFragment extends BackPressedFragment {
         });
     }
 
-    //수동 저장
-    public void saveConfigClicked(View v){
-        if(isSettingsChanged()){
-            return;
-        }
-    }
 }

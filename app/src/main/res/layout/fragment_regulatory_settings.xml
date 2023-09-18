@@ -9,8 +9,7 @@
     <TextView
         android:id="@+id/regulatorySettingsCurrentRegion"
         style="@style/style_normal_font"
-        android:layout_height="0dp"
-        android:layout_weight="7"
+        android:layout_height="60dp"
         android:background="@color/transparent_grey"
         android:gravity="center_vertical"
         android:paddingLeft="@dimen/default_padding"
@@ -21,17 +20,15 @@
     <Spinner
         android:id="@+id/currentRegionSpinner"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginBottom="@dimen/default_bottom_margin"
-        android:layout_weight="8" />
+        android:layout_height="60dp"
+        android:layout_marginBottom="@dimen/default_bottom_margin" />
 
     <include layout="@layout/divider" />
 
     <TextView
         android:id="@+id/regulatorySettingsChannelSelectionTitle"
         style="@style/style_normal_font"
-        android:layout_height="0dp"
-        android:layout_weight="7"
+        android:layout_height="60dp"
         android:background="@color/transparent_grey"
         android:gravity="center_vertical"
         android:paddingLeft="@dimen/default_padding"
@@ -42,21 +39,21 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="45">
+        android:layout_weight="1">
 
         <LinearLayout
             android:id="@+id/regChannelCheckBoxes"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"/>
+            android:orientation="vertical" />
 
     </ScrollView>
 
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/rl_warning"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="18">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/selectCountryWarningText"
@@ -70,7 +67,7 @@
         <Button
             android:id="@+id/regulatoryButton"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:layout_alignParentBottom="true"
             android:layout_margin="@dimen/default_margin"
             android:onClick="showProfileSettings"
@@ -78,7 +75,7 @@
             android:textColor="@color/white"
             app:backgroundTint="@color/blue"
             app:iconTint="@color/white" />
-    </RelativeLayout>
+    </LinearLayout>
 
 </LinearLayout>
 

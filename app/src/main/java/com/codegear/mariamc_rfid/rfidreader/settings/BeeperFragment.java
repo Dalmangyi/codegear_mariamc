@@ -27,14 +27,7 @@ import com.codegear.mariamc_rfid.rfidreader.rfid.RFIDController;
 
 import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.MAIN_RFID_SETTINGS_TAB;
 
-/**
- * A simple {@link android.support.v4.app.Fragment} subclass.
- * <p/>
- * Use the {@link BeeperFragment#newInstance} factory method to
- * create an instance of this fragment.
- * <p/>
- * Fragment to show the UI for Beeper settings.
- */
+
 public class BeeperFragment extends BackPressedFragment {
     private CheckBox sledBeeper;
     private CheckBox hostBeeper;
@@ -46,12 +39,7 @@ public class BeeperFragment extends BackPressedFragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @return A new instance of fragment BeeperFragment.
-     */
+
     public static BeeperFragment newInstance() {
         return new BeeperFragment();
     }
@@ -192,10 +180,26 @@ public class BeeperFragment extends BackPressedFragment {
                 }
             }
         }
+
+
+        getActivity().findViewById(R.id.saveConfigButton).setOnClickListener(v -> {
+            saveConfigClicked(v);
+        });
     }
 
 
     public void onBackPressed() {
+        if (getActivity() instanceof SettingsDetailActivity)
+            ((SettingsDetailActivity) getActivity()).callBackPressed();
+        if (getActivity() instanceof ActiveDeviceActivity) {
+            ((ActiveDeviceActivity) getActivity()).callBackPressed();
+            ((ActiveDeviceActivity) getActivity()).loadNextFragment(MAIN_RFID_SETTINGS_TAB);
+        }
+    }
+
+
+    //수동 저장
+    public void saveConfigClicked(View v){
         if (RFIDController.mConnectedReader != null) {
             if ((hostBeeper.isChecked() && RFIDController.beeperVolume != null && RFIDController.beeperVolume.getValue() != volumeSpinner.getSelectedItemPosition()) || (sledBeeper.isEnabled() && sledBeeper.isChecked() && RFIDController.sledBeeperVolume != null && RFIDController.sledBeeperVolume.getValue() != volumeSpinner.getSelectedItemPosition())) {
                 new Task_SetVolume(volumeSpinner.getSelectedItemPosition()).execute();
@@ -231,16 +235,9 @@ public class BeeperFragment extends BackPressedFragment {
                 }
 
             }
-        } else {
-            if (getActivity() instanceof SettingsDetailActivity)
-                ((SettingsDetailActivity) getActivity()).callBackPressed();
-            if (getActivity() instanceof ActiveDeviceActivity) {
-                ((ActiveDeviceActivity) getActivity()).callBackPressed();
-                ((ActiveDeviceActivity) getActivity()).loadNextFragment(MAIN_RFID_SETTINGS_TAB);
-            }
-
         }
     }
+
 
 
     /**

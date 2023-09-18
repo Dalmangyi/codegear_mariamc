@@ -498,8 +498,6 @@ public class SaveConfigurationsFragment extends BackPressedFragment {
 
     @Override
     public void onBackPressed() {
-        AdvancedOptionItemFragment fragment = AdvancedOptionItemFragment.newInstance();
-        //replaceFragment(getFragmentManager(), fragment, R.id.settings_content_frame);
         if (getActivity() instanceof ActiveDeviceActivity)
             ((ActiveDeviceActivity) getActivity()).loadNextFragment(RFID_ADVANCED_OPTIONS_TAB);
     }

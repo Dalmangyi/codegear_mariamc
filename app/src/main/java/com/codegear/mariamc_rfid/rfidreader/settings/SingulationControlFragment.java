@@ -139,6 +139,10 @@ public class SingulationControlFragment extends BackPressedFragment implements S
         getActivity().findViewById(R.id.tv_preFilterEnabled).setVisibility(enableSLOptions ? View.GONE : View.VISIBLE);
         fragmentActivity = getActivity();
 
+
+        getActivity().findViewById(R.id.saveConfigButton).setOnClickListener(v -> {
+            saveConfigClicked(v);
+        });
     }
 
     @Override
@@ -156,13 +160,17 @@ public class SingulationControlFragment extends BackPressedFragment implements S
     }
 
     public void onBackPressed() {
-//        if ((sessionSpinner.getSelectedItem() != null && tagPopulationSpinner.getSelectedItem() != null && inventoryStateSpinner.getSelectedItem() != null && slFlagSpinner.getSelectedItem() != null)) {
-//            if (isSettingsChanged()) {
-//                new Task_SaveSingulationConfiguration(sessionSpinner.getSelectedItemPosition(), tagPopulationSpinner.getSelectedItemPosition(), inventoryStateSpinner.getSelectedItemPosition(), slFlagSpinner.getSelectedItemPosition(), context).execute();
-//            } else {
-//                ((ActiveDeviceActivity) context).loadNextFragment(RFID_ADVANCED_OPTIONS_TAB);
-//            }
-//        }
+        if (getActivity() instanceof ActiveDeviceActivity)
+            ((ActiveDeviceActivity) getActivity()).loadNextFragment(RFID_ADVANCED_OPTIONS_TAB);
+    }
+
+    //수동 저장
+    public void saveConfigClicked(View v){
+        if ((sessionSpinner.getSelectedItem() != null && tagPopulationSpinner.getSelectedItem() != null && inventoryStateSpinner.getSelectedItem() != null && slFlagSpinner.getSelectedItem() != null)) {
+            if (isSettingsChanged()) {
+                new Task_SaveSingulationConfiguration(sessionSpinner.getSelectedItemPosition(), tagPopulationSpinner.getSelectedItemPosition(), inventoryStateSpinner.getSelectedItemPosition(), slFlagSpinner.getSelectedItemPosition(), context).execute();
+            }
+        }
     }
 
 
@@ -329,15 +337,5 @@ public class SingulationControlFragment extends BackPressedFragment implements S
     }
 
 
-    //수동 저장
-    public void saveConfigClicked(View v){
-        if ((sessionSpinner.getSelectedItem() != null && tagPopulationSpinner.getSelectedItem() != null && inventoryStateSpinner.getSelectedItem() != null && slFlagSpinner.getSelectedItem() != null)) {
-            if (isSettingsChanged()) {
-                new Task_SaveSingulationConfiguration(sessionSpinner.getSelectedItemPosition(), tagPopulationSpinner.getSelectedItemPosition(), inventoryStateSpinner.getSelectedItemPosition(), slFlagSpinner.getSelectedItemPosition(), context).execute();
-            } else {
-                ((ActiveDeviceActivity) context).loadNextFragment(RFID_ADVANCED_OPTIONS_TAB);
-            }
-        }
-    }
 
 }

@@ -45,14 +45,7 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * A simple {@link android.support.v4.app.Fragment} subclass.
- * <p/>
- * Use the {@link ApplicationSettingsFragment#newInstance} factory method to
- * create an instance of this fragment.
- * <p/>
- * Fragment to show the Connection Settings UI
- */
+
 public class ApplicationSettingsFragment extends Fragment {
 
     public static String TAG = "ApplicationSettingsFragment";

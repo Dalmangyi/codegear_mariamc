@@ -912,7 +912,7 @@ public class UpdateFirmware extends Fragment implements NavigationView.OnNavigat
             AlertDialog.Builder dlg = new AlertDialog.Builder(getActivity());
             dlg.setTitle("현재 장치의 연결이 끊어집니다.");
             //dlg.setIcon(android.R.drawable.ic_dialog_alert);
-            dlg.setPositiveButton("계속하기", new DialogInterface.OnClickListener() {
+            dlg.setPositiveButton("계속", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int arg) {
 
                     ((ActiveDeviceActivity) getActivity()).disconnect(scannerID);

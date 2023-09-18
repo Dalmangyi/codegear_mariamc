@@ -36,14 +36,7 @@ import com.zebra.rfid.api3.USB_BATCH_MODE;
 
 import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.RFID_ADVANCED_OPTIONS_TAB;
 
-/**
- * A simple {@link androidx.core.app.Fragment} subclass.
- * <p/>
- * Use the {@link TagReportingFragment#newInstance} factory method to
- * create an instance of this fragment.
- * <p/>
- * Fragment to handle tag reporting operations and UI
- */
+
 public class TagReportingFragment extends BackPressedFragment implements View.OnClickListener {
     private boolean pcChecked, pcfield;
     private boolean rssiChecked, rssifield;
@@ -64,12 +57,7 @@ public class TagReportingFragment extends BackPressedFragment implements View.On
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @return A new instance of fragment TagReportingFragment.
-     */
+
     public static TagReportingFragment newInstance() {
         return new TagReportingFragment();
     }
@@ -81,7 +69,6 @@ public class TagReportingFragment extends BackPressedFragment implements View.On
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_tag_reporting, container, false);
         CheckBox pc = (CheckBox) view.findViewById(R.id.incPC);
         pc.setOnClickListener(this);
@@ -98,6 +85,7 @@ public class TagReportingFragment extends BackPressedFragment implements View.On
         brandidET = view.findViewById(R.id.brandidET);
         epcLenET = view.findViewById(R.id.epcET);
         cb_ignorechk = view.findViewById(R.id.brandIDCheck);
+
         // loadBrandIdValues();
         brandidET.setText(Application.strBrandID);
         epcLenET.setText(Application.iBrandIDLen + "");
@@ -203,6 +191,11 @@ public class TagReportingFragment extends BackPressedFragment implements View.On
             else if (RFIDController.reportUniquetags.getValue() == 0)
                 beepOnUniqueTag.setChecked(false);
         }
+
+
+        getActivity().findViewById(R.id.saveConfigButton).setOnClickListener(v -> {
+            saveConfigClicked(v);
+        });
     }
 
     @Override
@@ -250,15 +243,17 @@ public class TagReportingFragment extends BackPressedFragment implements View.On
 
     @Override
     public void onBackPressed() {
-        if (!isSettingsChanged()) {
-            //((SettingsDetailActivity) getActivity()).callBackPressed();
-            AdvancedOptionItemFragment fragment = AdvancedOptionItemFragment.newInstance();
-            replaceFragment(getFragmentManager(), fragment, R.id.settings_content_frame);
-            if (getActivity() instanceof ActiveDeviceActivity)
-                ((ActiveDeviceActivity) getActivity()).loadNextFragment(RFID_ADVANCED_OPTIONS_TAB);
-
-        }
+        if (getActivity() instanceof ActiveDeviceActivity)
+            ((ActiveDeviceActivity) getActivity()).loadNextFragment(RFID_ADVANCED_OPTIONS_TAB);
     }
+
+
+    //수동 저장
+    public void saveConfigClicked(View v){
+        isSettingsChanged();
+    }
+
+
 
     private boolean isSettingsChanged() {
         boolean isSettingsChanged = false;
