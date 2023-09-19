@@ -6,6 +6,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import android.app.AlertDialog;
 
+import com.codegear.mariamc_rfid.R;
 import com.codegear.mariamc_rfid.cowchronicle.utils.CustomDialog;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -44,7 +45,7 @@ public class RetrofitClient {
             dialogLoading = alertDialog;
         }
         else{
-            dialogLoading = new SpotsDialog.Builder().setContext(mContext).build();
+            dialogLoading = new SpotsDialog.Builder().setContext(mContext).setTheme(R.style.CustomAlertDialog).build();
             dialogLoading.show();
         }
 

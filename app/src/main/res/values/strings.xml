@@ -784,7 +784,7 @@
     <string name="batterylife">배터리 수명</string>
     <string name="disconnectrfid">Disconnect RFIDXX</string>
     <string name="serial_no">시리얼번호 보기</string>
-    <string name="readermodel">MODEL: %1$s</string>
+    <string name="readermodel">모델 : %1$s</string>
     <string name="device_register">장치 등록</string>
     <string name="RFID">RFID</string>
     <string name="SCAN">스캔</string>
