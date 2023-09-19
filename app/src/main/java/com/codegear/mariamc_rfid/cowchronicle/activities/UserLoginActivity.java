@@ -77,7 +77,10 @@ public class UserLoginActivity extends BaseActivity {
         setContentView(R.layout.activity_user_login);
         mContext = this;
 
-        dialogLoading = new SpotsDialog.Builder().setContext(mContext).build();
+        dialogLoading = new SpotsDialog.Builder()
+                .setContext(mContext)
+                .setTheme(R.style.CustomAlertDialog)
+                .build();
 
         etLoginId = findViewById(R.id.etLoginId);
         etLoginPassword = findViewById(R.id.etLoginPassword);

@@ -532,5 +532,10 @@
         <item name="background">@drawable/selector_navigation_bottom_button_background</item>
     </style>
 
-
+    <style name="CustomAlertDialog" parent="@style/ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+        <item name="DialogTitleAppearance">@android:style/TextAppearance.Small</item>
+        <item name="DialogTitleText">로딩중…</item>
+        <item name="DialogSpotColor">@color/colorPrimary</item>
+        <item name="DialogSpotCount">4</item>
+    </style>
 </resources>

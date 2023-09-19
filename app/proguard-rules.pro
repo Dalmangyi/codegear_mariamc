@@ -27,3 +27,8 @@
 # AdvancedWebView
 -keep class * extends android.webkit.WebChromeClient { *; }
 -dontwarn im.delight.android.webview.**
+
+# SpotDialog
+-keep class dmax.dialog.** {
+    *;
+}
