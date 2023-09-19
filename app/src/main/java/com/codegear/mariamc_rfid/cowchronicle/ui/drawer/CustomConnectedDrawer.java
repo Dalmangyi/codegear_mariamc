@@ -1,12 +1,14 @@
 package com.codegear.mariamc_rfid.cowchronicle.ui.drawer;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -32,6 +34,10 @@ import com.codegear.mariamc_rfid.rfidreader.common.Constants;
 import com.codegear.mariamc_rfid.rfidreader.rfid.RFIDController;
 import com.codegear.mariamc_rfid.rfidreader.settings.SettingsDetailActivity;
 import com.google.android.material.navigation.NavigationView;
+import com.zebra.rfid.api3.BatteryStatistics;
+import com.zebra.rfid.api3.InvalidUsageException;
+import com.zebra.rfid.api3.OperationFailureException;
+import com.zebra.rfid.api3.RFIDResults;
 
 public class CustomConnectedDrawer {
 
@@ -41,6 +47,8 @@ public class CustomConnectedDrawer {
     private TextView tvBatteryPercentage;
     private ImageView ivBatterylevel;
     private Button btnDisconnect;
+
+    private int batteryPercent = 0;
 
     public CustomConnectedDrawer(AppCompatActivity activity){
         mActivity = activity;
@@ -53,6 +61,10 @@ public class CustomConnectedDrawer {
             RFIDSingleton.deviceDisconnect();
             mDrawerLayout.closeDrawer(GravityCompat.START);
         });
+
+        //배터리 퍼센트 가져오기
+        loadBatteryPercent();
+
 
 
         //툴바, 네비게이션바 세팅
@@ -79,15 +91,12 @@ public class CustomConnectedDrawer {
                     rlNavigationDeviceContainer.setVisibility(View.VISIBLE);
 
                     //배터리 정보 업데이트
-                    if (RFIDController.BatteryData != null) {
-                        int batteryLevel = RFIDController.BatteryData.getLevel();
-                        tvBatteryPercentage.setText(String.valueOf(batteryLevel) + "%");
-                        ivBatterylevel.setImageLevel(batteryLevel);
-                    }
+                    loadBatteryPercent();
+                    applyBatteryPercent();
 
                     //기기 이름
                     String strDeviceHostName = RFIDController.mConnectedReader.getHostName();
-                    btnDisconnect.setText("Disconnect\n"+strDeviceHostName);
+                    btnDisconnect.setText("연결 해제하기\n"+strDeviceHostName);
                 }
                 else {
                     rlNavigationDeviceContainer.setVisibility(View.GONE);
@@ -290,5 +299,39 @@ public class CustomConnectedDrawer {
         }
         
         return true;
+    }
+
+    //배터리 퍼센트 가져오기
+    private void loadBatteryPercent(){
+
+        if (RFIDController.mConnectedReader == null) {
+            //Toast.makeText(getActivity(), "연결된 장치가 없습니다.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (!RFIDController.mIsInventoryRunning) {
+            try {
+                if (RFIDController.mConnectedReader.Config != null) {
+                    BatteryStatistics batteryStats = RFIDController.mConnectedReader.Config.getBatteryStats();
+                    batteryPercent = batteryStats.getPercentage();
+                }
+                else return;
+            } catch (InvalidUsageException | NullPointerException e) {
+                //Log.e(TAG, e.getStackTrace()[0].toString());
+            } catch (OperationFailureException e) {
+                if (e.getResults() == RFIDResults.RFID_OPERATION_IN_PROGRESS) {
+                    //Toast.makeText(getActivity(), "작업이 진행 중입니다. 배터리 통계를 가져올 수 없습니다.", Toast.LENGTH_SHORT).show();
+                }
+            }
+        } else {
+            //Toast.makeText(getActivity(), "인벤토리가 진행 중입니다. 배터리 통계를 가져올 수 없습니다.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    //배터리 퍼센트 적용하기
+    private void applyBatteryPercent(){
+        int batteryLevel = batteryPercent;
+        tvBatteryPercentage.setText(String.valueOf(batteryLevel) + "%");
+        ivBatterylevel.setImageLevel(batteryLevel);
     }
 }
