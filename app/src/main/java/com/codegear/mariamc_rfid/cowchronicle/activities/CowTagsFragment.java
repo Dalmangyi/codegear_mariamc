@@ -419,7 +419,7 @@ public class CowTagsFragment extends Fragment {
 
     }
 
-    
+
     //소 상세정보 보기
     private void goCowDetail(String cowIdNum){
         WebviewCowDetailFragment cowDetailFragment = new WebviewCowDetailFragment();

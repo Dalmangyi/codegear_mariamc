@@ -67,12 +67,7 @@
             android:exported="true"
             android:label="@string/app_setting_name"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="adjustResize">
-
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:windowSoftInputMode="adjustResize"> 
         </activity>
 
         <!-- 카우크로니클 사용자 페이지 -->
