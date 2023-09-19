@@ -91,20 +91,26 @@ public class CowTagsModel {
 
 
 
+    public void resetTagData(){
+        this.mTagList.clear();
+
+        for(CowTagCell cell : mCowTagList){
+            cell.COUNT = 0;
+            cell.RSSI = 0;
+        }
+
+    }
 
     @NonNull
-    public void refreshTagData(ArrayList<TagData> tagList) {
+    public void appendTagData(TagData[] tagList) {
 
-        //테그 데이터 초기화
-        this.mTagList.clear();
-        this.mTagList.addAll(tagList);
 
-        //테그 데이터 반영
-        if(mTagList != null){
+        //태그 데이터 반영
+        if(tagList.length > 0){
 
             //태그 정보 복사
+            this.mTagList.addAll(Arrays.asList(tagList));
             ArrayList<TagData> copiedTagList = new ArrayList<>(mTagList);
-            mTagList.clear();
 
             //태그 데이터 추출
             Map<String, Integer> mapTagCount = new HashMap<>();
@@ -112,8 +118,6 @@ public class CowTagsModel {
             for(TagData tagData:copiedTagList){
                 String tagId = tagData.getTagID();
                 int tagRssi = tagData.getPeakRSSI();
-                tagData.getChannelIndex();
-                tagData.getPhase();
 
                 //태그 개수 세기
                 Integer tagCount = mapTagCount.get(tagId);
@@ -142,7 +146,7 @@ public class CowTagsModel {
 
             //태그 데이터 반영 (RSSI)
             for (String tagId : mapTagRSSI.keySet()){
-                Integer value = mapTagCount.get(tagId);
+                Integer value = mapTagRSSI.get(tagId);
                 List<CowTagCell> filteredCowTagCells = mCowTagList.stream()
                     .filter(item -> item.TAGNO.equals(tagId))
                     .collect(Collectors.toList());

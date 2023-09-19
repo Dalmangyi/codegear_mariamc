@@ -94,6 +94,8 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             tools:listitem="@layout/item_cowtags_row"
+            android:scrollbars="vertical"
+            android:scrollbarFadeDuration="500"
             android:background="@color/white"/>
 
 <!--        <com.evrencoskun.tableview.TableView-->

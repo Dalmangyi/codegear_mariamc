@@ -4,7 +4,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +23,6 @@ import com.codegear.mariamc_rfid.cowchronicle.services.ResCowList;
 import com.codegear.mariamc_rfid.cowchronicle.services.ResLogin;
 import com.codegear.mariamc_rfid.cowchronicle.services.RetrofitClient;
 import com.codegear.mariamc_rfid.cowchronicle.device.DeviceTaskSettings;
-import com.codegear.mariamc_rfid.cowchronicle.device.IRFIDSingletonTag;
 import com.codegear.mariamc_rfid.cowchronicle.device.RFIDSingleton;
 import com.codegear.mariamc_rfid.cowchronicle.storage.UserStorage;
 import com.codegear.mariamc_rfid.cowchronicle.ui.tableview.CowTagRowAdapter;
@@ -38,13 +36,8 @@ import com.xw.repo.BubbleSeekBar;
 import com.zebra.rfid.api3.Antennas;
 import com.zebra.rfid.api3.InvalidUsageException;
 import com.zebra.rfid.api3.OperationFailureException;
-import com.zebra.rfid.api3.RfidEventsListener;
-import com.zebra.rfid.api3.RfidReadEvents;
-import com.zebra.rfid.api3.RfidStatusEvents;
-import com.zebra.rfid.api3.TagData;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Map;
 
 import ir.mirrajabi.searchdialog.core.BaseFilter;
@@ -74,7 +67,6 @@ public class CowTagsFragment extends Fragment {
     private int[] antennaPowerLevels = null;
     private DeviceTaskSettings.SaveAntennaConfigurationTask antennaTask = null;
     private CowTagsModel cowTagsModel = new CowTagsModel();
-    private ArrayList<TagData> mTagList = new ArrayList<>();
 
 
 
@@ -131,9 +123,8 @@ public class CowTagsFragment extends Fragment {
         mRecyclerView = mMainView.findViewById(R.id.tbCowTags);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
         mRecyclerView.setAdapter(cowTagRowAdapter);
-        cowTagRowAdapter.setOnItemClickListener(pos -> {
-//            pos;
-            goCowDetail("1212");
+        cowTagRowAdapter.setOnItemClickListener(cell -> {
+            goCowDetail(""+cell.COW_ID_NUM);
         });
 
         initProfiles();
@@ -212,6 +203,15 @@ public class CowTagsFragment extends Fragment {
             @Override
             public void OnSuccess(ResCowList res) {
                 mCowList = res.data;
+
+                //TODO - TEST
+                for(int i=0; i<mCowList.size(); i++){
+                    if(i%2==0){
+                        Map<String, String> cowItem = mCowList.get(i);
+                        cowItem.put("TAGNO","0541100000001666");
+                    }
+                }
+
                 refreshRecyclerView();
             }
         });
@@ -219,14 +219,13 @@ public class CowTagsFragment extends Fragment {
 
     //테이블뷰 새로고침
     private void refreshRecyclerView(){
-        cowTagsModel.makeRowList(mCowList);
 
+        cowTagsModel.makeRowList(mCowList);
+        cowTagsModel.resetTagData();
 
         new Handler(Looper.getMainLooper()).post(new Runnable() {
             public void run() {
-                CowTagRowAdapter adapter = (CowTagRowAdapter)mRecyclerView.getAdapter();
-                adapter.notifyDataSetChanged();
-                mRecyclerView.setAdapter(adapter);
+                cowTagRowAdapter.notifyDataSetChanged();
             }
         });
     }
@@ -318,53 +317,23 @@ public class CowTagsFragment extends Fragment {
         }
     }
 
-    //태그 이벤트 리스너
-    private void initTagEventListener(){
-        EventHandler eventHandler = new EventHandler();
-
-        try {
-            if (RFIDController.mConnectedReader != null && RFIDController.mConnectedReader.Events != null) {
-                RFIDController.mConnectedReader.Events.removeEventsListener(eventHandler);
-                RFIDController.mConnectedReader.Events.addEventsListener(eventHandler);
-                RFIDController.mConnectedReader.Events.setHandheldEvent(true);
-                RFIDController.mConnectedReader.reinitTransport();
-            }
-        } catch (InvalidUsageException e) {
-            if (e != null && e.getStackTrace().length > 0) {
-                Log.e(TAG, e.getStackTrace()[0].toString());
-            }
-        } catch (OperationFailureException e) {
-            if (e != null && e.getStackTrace().length > 0) {
-                Log.e(TAG, e.getStackTrace()[0].toString());
-            }
-        } catch (ClassCastException e) {
-            if (e != null && e.getStackTrace().length > 0) {
-                Log.e(TAG, e.getStackTrace()[0].toString());
-            }
-        }
-    }
 
     //스캔 시작
     private void startScanInventory(){
         RFIDController.clearAllInventoryData();
-//        initTagEventListener();
 
-        RFIDSingleton.getInstance().setIrfidSingleton(new IRFIDSingletonTag() {
-            @Override
-            public void tags(TagData[] tagList) {
-                if (tagList != null) {
-                    mTagList.addAll(Arrays.asList(tagList)); 
+        RFIDSingleton.getInstance().setIrfidSingleton(tagList -> {
+            if (tagList != null && tagList.length > 0) {
 
-                    //case1
-//                    tableViewAdapter.setCellItems(cowTagsModel.getCellList());
-//                    new Handler(Looper.getMainLooper()).post(new Runnable() {
-//                        public void run() {
-//                            cowTagRowAdapter.notifyDataSetChanged();
-//                        }
-//                    });
- 
+                //case1
+                cowTagsModel.appendTagData(tagList);
+                new Handler(Looper.getMainLooper()).post(new Runnable() {
+                    public void run() {
+                        cowTagRowAdapter.notifyDataSetChanged();
+                    }
+                });
 
-                }
+
             }
         });
         RFIDController.getInstance().performInventory(new RfidListeners() {
@@ -410,91 +379,16 @@ public class CowTagsFragment extends Fragment {
 
 
     private void refreshTagList(){
-        mTagList.clear();
-//        tableViewAdapter.setCellItems(cowTagsModel.getCellList());
-//        new Handler(Looper.getMainLooper()).post(new Runnable() {
-//            public void run() {
-//                cowTagRowAdapter.notifyDataSetChanged();
-//            }
-//        });
-    }
 
-    private void testTagList(){
-        TagData tagData = new TagData();
-    }
-
-    public class EventHandler implements RfidEventsListener {
-
-        public EventHandler( ) {
-        }
-
-        @Override
-        public void eventReadNotify(RfidReadEvents e) {
-
-            final int READ_COUNT = 100;
-            TagData[] myTags = null;
-            if (RFIDController.mConnectedReader != null) {
-                if (!RFIDController.mConnectedReader.Actions.MultiTagLocate.isMultiTagLocatePerforming()) {
-                    myTags = RFIDController.mConnectedReader.Actions.getReadTags(READ_COUNT);
-                } else {
-                    myTags = RFIDController.mConnectedReader.Actions.getMultiTagLocateTagInfo(READ_COUNT);
-                }
+        cowTagsModel.resetTagData();
+        new Handler(Looper.getMainLooper()).post(new Runnable() {
+            public void run() {
+                cowTagRowAdapter.notifyDataSetChanged();
             }
-
-            if (myTags != null) {
-                mTagList.addAll(Arrays.asList(myTags));
-
-                //case1
-//                tableViewAdapter.setCellItems(cowTagsModel.getCellList());
-//                new Handler(Looper.getMainLooper()).post(new Runnable() {
-//                    public void run() {
-//                        cowTagRowAdapter.notifyDataSetChanged();
-//                    }
-//                });
-
-
-
-                //case2
-//                List<List<Cell>> newCellList = cowTagsModel.getCellList();
-//
-//                //태그 반영 index 찾기
-//                int tagNoIndex = TABLEVIEW_KEYS.indexOf("TAGNO");
-//                int countIndex = TABLEVIEW_KEYS.indexOf("COUNT");
-//                int rssiIndex = TABLEVIEW_KEYS.indexOf("RSSI");
-//
-//                //태그 데이터 반영
-//                for (int i = 0; i < newCellList.size(); i++) {
-//
-//                    List<Cell> subCellList = newCellList.get(i);
-//
-//                    Cell countCell = subCellList.get(countIndex);
-//                    Cell newCountCell = new Cell(""+i, countCell.getData());
-//                    tableViewAdapter.changeCellItem(countIndex, i, newCountCell);
-//
-//                    Cell rssiCell = subCellList.get(rssiIndex);
-//                    Cell newRssiCell = new Cell(""+i, rssiCell.getData());
-//                    tableViewAdapter.changeCellItem(rssiIndex, i, newRssiCell);
-//                }
-//
-//                tableViewAdapter.setAllItems(
-//                        cowTagsModel.getColumnHeaderList(),
-//                        cowTagsModel.getRowHeaderList(),
-//                        cowTagsModel.getCellList()
-//                );
-//                new Handler(Looper.getMainLooper()).post(new Runnable() {
-//                    public void run() {
-//                        tableViewAdapter.notifyDataSetChanged();
-//                    }
-//                });
-
-            }
-        }
-
-        @Override
-        public void eventStatusNotify(RfidStatusEvents rfidStatusEvents) {
-            Log.d(TAG, "Status Notification: " + rfidStatusEvents.StatusEventData.getStatusEventType());
-        }
+        });
     }
+
+
 
     //안테나 설정값 불러오기
     private void loadCurrentAntennaConfig(){
@@ -525,12 +419,11 @@ public class CowTagsFragment extends Fragment {
 
     }
 
-
-
-
-    private void goCowDetail(String cowNumber){
+    
+    //소 상세정보 보기
+    private void goCowDetail(String cowIdNum){
         WebviewCowDetailFragment cowDetailFragment = new WebviewCowDetailFragment();
-        cowDetailFragment.cowNumber = cowNumber;
+        cowDetailFragment.cowIdNum = cowIdNum;
         ((CowChronicleActivity)mActivity).replaceFragment(cowDetailFragment, true);
     }
 

@@ -41,7 +41,7 @@ public class CowTagRowAdapter extends RecyclerView.Adapter<CowTagViewHolder> {
 
         holder.view.setOnClickListener(v -> {
             if(onItemClickListener != null){
-                onItemClickListener.onItemClick(holder.getAbsoluteAdapterPosition());
+                onItemClickListener.onItemClick(cowTagCell);
             }
         });
 
@@ -76,7 +76,7 @@ public class CowTagRowAdapter extends RecyclerView.Adapter<CowTagViewHolder> {
     }
 
     public interface OnItemClickListener {
-        void onItemClick(int pos);
+        void onItemClick(CowTagCell cell);
     }
 
     public void setOnItemClickListener(OnItemClickListener listener) {

@@ -21,7 +21,7 @@ public class WebviewCowDetailFragment extends Fragment implements AdvancedWebVie
     private AppCompatActivity activity;
     private AdvancedWebView mWebView;
 
-    public String cowNumber;
+    public String cowIdNum;
 
     @Nullable
     @Override
@@ -36,7 +36,7 @@ public class WebviewCowDetailFragment extends Fragment implements AdvancedWebVie
         mWebView.setListener(getActivity(), this);
         mWebView.setMixedContentAllowed(false);
         
-        mWebView.loadUrl("http://marivet.co.kr/v2/ahebf/chalet/fetch_data.php?var1="+ cowNumber);
+        mWebView.loadUrl("http://marivet.co.kr/v2/ahebf/chalet/fetch_data.php?var1="+ cowIdNum);
 
         return view;
     }
