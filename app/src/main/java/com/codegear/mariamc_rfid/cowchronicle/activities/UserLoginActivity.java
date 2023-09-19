@@ -208,7 +208,8 @@ public class UserLoginActivity extends BaseActivity {
         Map reqMap = new HashMap();
         reqMap.put("userid",strId);
         reqMap.put("password",strHashedPwd);
-        reqMap.put("snkey","KKEF-33FKE-KLMN");
+//        reqMap.put("snkey","KKEF-33FKE-KLMN");
+        reqMap.put("snkey", AndroidUtil.getDeviceId(mContext));
         reqMap.put("latitude",""+latitude);
         reqMap.put("lontitude",""+longitude);
 
