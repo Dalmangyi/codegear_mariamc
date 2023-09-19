@@ -2,7 +2,7 @@ package com.codegear.mariamc_rfid.cowchronicle.models;
 
 import androidx.annotation.NonNull;
 
-import com.codegear.mariamc_rfid.cowchronicle.ui.tableview.CowTagCell;
+import com.codegear.mariamc_rfid.cowchronicle.ui.cowtags.CowTagCell;
 import com.zebra.rfid.api3.TagData;
 
 import java.util.ArrayList;

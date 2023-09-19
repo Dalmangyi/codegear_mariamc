@@ -1,4 +1,4 @@
-package com.codegear.mariamc_rfid.cowchronicle.utils;
+package com.codegear.mariamc_rfid.cowchronicle.ui.drawer;
 
 import android.content.Intent;
 import android.view.MenuItem;
@@ -15,6 +15,8 @@ import com.codegear.mariamc_rfid.DeviceDiscoverActivity;
 import com.codegear.mariamc_rfid.R;
 import com.codegear.mariamc_rfid.cowchronicle.activities.UserLoginActivity;
 import com.codegear.mariamc_rfid.cowchronicle.storage.UserStorage;
+import com.codegear.mariamc_rfid.cowchronicle.ui.dialog.CustomDialog;
+import com.codegear.mariamc_rfid.cowchronicle.utils.PixelUtil;
 import com.google.android.material.navigation.NavigationView;
 
 public class CustomDisconnectedDrawer {

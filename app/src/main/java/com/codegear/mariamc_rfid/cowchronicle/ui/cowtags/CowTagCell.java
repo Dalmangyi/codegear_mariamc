@@ -1,4 +1,4 @@
-package com.codegear.mariamc_rfid.cowchronicle.ui.tableview;
+package com.codegear.mariamc_rfid.cowchronicle.ui.cowtags;
 
 public class CowTagCell {
 

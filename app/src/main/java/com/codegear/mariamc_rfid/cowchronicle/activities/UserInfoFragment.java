@@ -16,7 +16,7 @@ import androidx.fragment.app.Fragment;
 import com.codegear.mariamc_rfid.R;
 import com.codegear.mariamc_rfid.cowchronicle.services.ResLogin;
 import com.codegear.mariamc_rfid.cowchronicle.storage.UserStorage;
-import com.codegear.mariamc_rfid.cowchronicle.utils.CustomDialog;
+import com.codegear.mariamc_rfid.cowchronicle.ui.dialog.CustomDialog;
 
 import java.util.Map;
 

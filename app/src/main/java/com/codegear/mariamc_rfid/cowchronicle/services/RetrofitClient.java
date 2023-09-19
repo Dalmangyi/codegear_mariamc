@@ -7,7 +7,7 @@ import androidx.annotation.NonNull;
 import android.app.AlertDialog;
 
 import com.codegear.mariamc_rfid.R;
-import com.codegear.mariamc_rfid.cowchronicle.utils.CustomDialog;
+import com.codegear.mariamc_rfid.cowchronicle.ui.dialog.CustomDialog;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 

@@ -36,8 +36,7 @@ import androidx.fragment.app.Fragment;
 
 import com.codegear.mariamc_rfid.application.Application;
 import com.codegear.mariamc_rfid.cowchronicle.activities.CowChronicleActivity;
-import com.codegear.mariamc_rfid.cowchronicle.activities.CowChronicleFragmentEnum;
-import com.codegear.mariamc_rfid.cowchronicle.utils.CustomDisconnectedDrawer;
+import com.codegear.mariamc_rfid.cowchronicle.ui.drawer.CustomDisconnectedDrawer;
 import com.codegear.mariamc_rfid.cowchronicle.utils.PermissionUtil;
 import com.codegear.mariamc_rfid.rfidreader.home.RFIDEventHandler;
 import com.codegear.mariamc_rfid.rfidreader.reader_connection.InitReadersListFragment;

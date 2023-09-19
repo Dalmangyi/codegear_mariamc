@@ -1,4 +1,4 @@
-package com.codegear.mariamc_rfid.cowchronicle.utils;
+package com.codegear.mariamc_rfid.cowchronicle.ui.dialog;
 
 import android.content.Context;
 import android.graphics.Color;

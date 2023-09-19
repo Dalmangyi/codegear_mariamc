@@ -1,4 +1,4 @@
-package com.codegear.mariamc_rfid.cowchronicle.activities.farms;
+package com.codegear.mariamc_rfid.cowchronicle.ui.farms;
 
 import android.content.Context;
 import android.view.View;
