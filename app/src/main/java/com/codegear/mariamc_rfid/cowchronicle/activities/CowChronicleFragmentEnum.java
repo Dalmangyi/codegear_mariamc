@@ -5,6 +5,7 @@ public enum CowChronicleFragmentEnum {
     FARM_SELECT("FARM_SELECT"),
     WEBVIEW("WEBVIEW"),
     COW_TAGS("COW_TAGS"),
+    COW_TAG_DETAIL("COW_TAG_DETAIL"),
     USER_INFO("USER_INFO");
 
 

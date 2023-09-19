@@ -1,4 +1,4 @@
-package com.codegear.mariamc_rfid.cowchronicle.activities.models;
+package com.codegear.mariamc_rfid.cowchronicle.models;
 
 import ir.mirrajabi.searchdialog.core.Searchable;
 

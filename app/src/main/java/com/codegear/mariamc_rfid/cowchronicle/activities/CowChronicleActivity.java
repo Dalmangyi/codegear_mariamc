@@ -18,15 +18,14 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.codegear.mariamc_rfid.DeviceDiscoverActivity;
 import com.codegear.mariamc_rfid.R;
-import com.codegear.mariamc_rfid.cowchronicle.device.IRFIDSingletonTag;
 import com.codegear.mariamc_rfid.cowchronicle.device.RFIDSingleton;
 import com.codegear.mariamc_rfid.cowchronicle.storage.UserStorage;
 import com.codegear.mariamc_rfid.cowchronicle.utils.CustomConnectedDrawer;
 import com.codegear.mariamc_rfid.rfidreader.rfid.RFIDController;
-import com.zebra.rfid.api3.TagData;
 
 public class CowChronicleActivity extends AppCompatActivity {
 
+    public static final String FLAG_WEB_URL = "activity_flag_web_url";
     public static final String FLAG_FRAGMENT_START_PAGE = "fragment_start_page";
 
     private RFIDSingleton rfidSingleton = RFIDSingleton.getInstance();
@@ -45,7 +44,7 @@ public class CowChronicleActivity extends AppCompatActivity {
         Button btnNavigationBottom1 = findViewById(R.id.btnNavigationBottom1);
         Button btnNavigationBottom2 = findViewById(R.id.btnNavigationBottom2);
         btnNavigationBottom1.setOnClickListener(v -> {
-            replaceFragment(new WebviewFragment(), false);
+            replaceFragment(new WebviewHomeFragment(), false);
         });
         btnNavigationBottom2.setOnClickListener(v -> {
             if (RFIDController.mConnectedReader == null || !RFIDController.mConnectedReader.isConnected()) {
@@ -92,10 +91,13 @@ public class CowChronicleActivity extends AppCompatActivity {
 
             switch(fragmentEnum){
                 case WEBVIEW:
-                    replaceFragment(new WebviewFragment(), false);
+                    replaceFragment(new WebviewHomeFragment(), false);
                     break;
                 case COW_TAGS:
                     replaceFragment(new CowTagsFragment(), false);
+                    break;
+                case COW_TAG_DETAIL:
+                    replaceFragment(new WebviewCowDetailFragment(), true);
                     break;
                 case USER_INFO:
                     replaceFragment(new UserInfoFragment(), false);
@@ -104,7 +106,7 @@ public class CowChronicleActivity extends AppCompatActivity {
             }
         }
         else {
-            replaceFragment(new WebviewFragment(), false);
+            replaceFragment(new WebviewHomeFragment(), false);
         }
     }
 

@@ -11,12 +11,9 @@ import androidx.annotation.LayoutRes;
 import androidx.annotation.Nullable;
 
 import com.codegear.mariamc_rfid.R;
-import com.codegear.mariamc_rfid.cowchronicle.activities.models.FarmModel;
-import com.codegear.mariamc_rfid.cowchronicle.utils.SoundSearcher;
 
 import java.util.ArrayList;
 
-import ir.mirrajabi.searchdialog.core.BaseFilter;
 import ir.mirrajabi.searchdialog.core.BaseSearchDialogCompat;
 import ir.mirrajabi.searchdialog.core.FilterResultListener;
 import ir.mirrajabi.searchdialog.core.SearchResultListener;

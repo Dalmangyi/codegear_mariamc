@@ -19,28 +19,14 @@
         android:background="@color/white"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/txt_file_path"
+            style="@style/roboto_regular_14dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/txt_file_path"
-                style="@style/roboto_regular_14dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="5dp"
-                android:textAlignment="gravity" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/app_margin_left"
-            android:background="@color/white"
-            android:orientation="horizontal"></LinearLayout>
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:textAlignment="gravity" />
 
         <TableRow
             android:layout_width="match_parent"
@@ -50,7 +36,6 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/app_margin_left"
                 android:layout_weight="85"
                 android:background="@android:color/transparent"
                 android:gravity="center_vertical"
@@ -67,6 +52,7 @@
                     android:layout_height="wrap_content" />
             </LinearLayout>
         </TableRow>
+
         <TableRow
             android:id="@+id/tbl_row_fw_status"
             android:layout_width="match_parent"
@@ -79,8 +65,8 @@
             <ImageView
                 android:layout_width="45dp"
                 android:layout_height="45dp"
-                android:layout_marginBottom="10dp"
                 android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
                 android:background="@color/white"
                 android:padding="10dp"
                 app:srcCompat="@drawable/error_red" />
@@ -96,11 +82,12 @@
                 android:text="@string/update_failed"
                 android:textAlignment="gravity" />
         </TableRow>
+
         <TableRow
             android:id="@+id/tbl_row_select_firmware"
             style="@style/white_background_row"
             android:layout_width="match_parent"
-            android:layout_height="91dp"
+            android:layout_height="wrap_content"
             android:gravity="center_vertical|center_horizontal">
 
             <Button
@@ -116,11 +103,12 @@
                 android:textAlignment="center"
                 android:textSize="22sp" />
         </TableRow>
+
         <TableRow
             android:id="@+id/tbl_row_fw_update"
             style="@style/white_background_row"
             android:layout_width="match_parent"
-            android:layout_height="91dp"
+            android:layout_height="wrap_content"
             android:gravity="center_vertical|center_horizontal">
 
             <Button
@@ -128,13 +116,13 @@
                 style="@style/style_blue_gray_button"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
-                android:layout_marginBottom="5dp"
                 android:layout_marginLeft="45dp"
-                android:layout_marginRight="45dp"
                 android:layout_marginTop="5dp"
+                android:layout_marginRight="45dp"
+                android:layout_marginBottom="5dp"
                 android:onClick="updateFirmware"
-                android:textAlignment="center"
                 android:text="@string/updateFirmware"
+                android:textAlignment="center"
                 android:textSize="22sp" />
         </TableRow>
 
@@ -151,10 +139,10 @@
                 style="@style/roboto_medium_22dp_white"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
-                android:layout_marginBottom="5dp"
                 android:layout_marginLeft="45dp"
-                android:layout_marginRight="45dp"
                 android:layout_marginTop="5dp"
+                android:layout_marginRight="45dp"
+                android:layout_marginBottom="5dp"
                 android:background="@color/green"
                 android:text="@string/firmware_updated"
                 android:textAlignment="center" />

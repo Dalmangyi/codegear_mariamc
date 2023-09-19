@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,8 +15,8 @@ import androidx.fragment.app.Fragment;
 import com.codegear.mariamc_rfid.DeviceDiscoverActivity;
 import com.codegear.mariamc_rfid.R;
 import com.codegear.mariamc_rfid.cowchronicle.activities.farms.FarmSearchDialogCompat;
-import com.codegear.mariamc_rfid.cowchronicle.activities.models.FarmModel;
-import com.codegear.mariamc_rfid.cowchronicle.activities.services.ResLogin;
+import com.codegear.mariamc_rfid.cowchronicle.models.FarmModel;
+import com.codegear.mariamc_rfid.cowchronicle.services.ResLogin;
 import com.codegear.mariamc_rfid.cowchronicle.storage.UserStorage;
 import com.codegear.mariamc_rfid.cowchronicle.utils.SoundSearcher;
 import com.codegear.mariamc_rfid.rfidreader.rfid.RFIDController;

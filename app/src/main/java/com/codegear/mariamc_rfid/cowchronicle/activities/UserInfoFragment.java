@@ -11,15 +11,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
 import com.codegear.mariamc_rfid.R;
-import com.codegear.mariamc_rfid.cowchronicle.activities.services.ResLogin;
+import com.codegear.mariamc_rfid.cowchronicle.services.ResLogin;
 import com.codegear.mariamc_rfid.cowchronicle.storage.UserStorage;
 import com.codegear.mariamc_rfid.cowchronicle.utils.CustomDialog;
-
-import org.llrp.ltk.generated.parameters.Custom;
 
 import java.util.Map;
 

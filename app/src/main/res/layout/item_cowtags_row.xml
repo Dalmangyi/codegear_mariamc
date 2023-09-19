@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/llItem"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/default_column_header_height"
+    android:background="@color/white"
+    android:gravity="center"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/tvCOW_ID_NUM"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:textColor="@color/tableview_default_text_color"
+        android:textSize="@dimen/tableview_text_size"
+        android:bufferType="spannable"
+        tools:text="이력제번호" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/tableview_border_line_color" />
+
+    <TextView
+        android:id="@+id/tvSNM"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:textColor="@color/tableview_default_text_color"
+        android:textSize="@dimen/tableview_text_size"
+        tools:text="목장이표" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/tableview_border_line_color" />
+
+    <TextView
+        android:id="@+id/tvSexAndMonths"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:textColor="@color/tableview_default_text_color"
+        android:textSize="@dimen/tableview_text_size"
+        tools:text="성별(월령)" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/tableview_border_line_color" />
+
+    <TextView
+        android:id="@+id/tvPRTY"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:textColor="@color/tableview_default_text_color"
+        android:textSize="@dimen/tableview_text_size"
+        tools:text="산차" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/tableview_border_line_color" />
+
+    <TextView
+        android:id="@+id/tvPRN_STTS"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:textColor="@color/tableview_default_text_color"
+        android:textSize="@dimen/tableview_text_size"
+        tools:text="번식상태" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/tableview_border_line_color" />
+
+    <TextView
+        android:id="@+id/tvTAGNO"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:textColor="@color/tableview_default_text_color"
+        android:textSize="@dimen/tableview_text_size"
+        tools:text="전자이표" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/tableview_border_line_color" />
+
+    <TextView
+        android:id="@+id/tvCOUNT"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:textColor="@color/tableview_default_text_color"
+        android:textSize="@dimen/tableview_text_size"
+        tools:text="Count" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/tableview_border_line_color" />
+
+    <TextView
+        android:id="@+id/tvRSSI"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:textColor="@color/tableview_default_text_color"
+        android:textSize="@dimen/tableview_text_size"
+        tools:text="RSSI" />
+
+
+</LinearLayout>

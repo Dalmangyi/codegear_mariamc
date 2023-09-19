@@ -1,4 +1,4 @@
-package com.codegear.mariamc_rfid.cowchronicle.activities.services;
+package com.codegear.mariamc_rfid.cowchronicle.services;
 
 import java.util.Map;
 

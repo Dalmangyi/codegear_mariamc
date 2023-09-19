@@ -1,4 +1,4 @@
-package com.codegear.mariamc_rfid.cowchronicle.tableview.model;
+package com.codegear.mariamc_rfid.cowchronicle.ui.tableview.model;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

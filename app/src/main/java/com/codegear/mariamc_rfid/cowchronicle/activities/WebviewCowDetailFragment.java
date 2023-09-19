@@ -15,10 +15,13 @@ import com.codegear.mariamc_rfid.R;
 
 import im.delight.android.webview.AdvancedWebView;
 
-public class WebviewFragment extends Fragment implements AdvancedWebView.Listener  {
+public class WebviewCowDetailFragment extends Fragment implements AdvancedWebView.Listener  {
+
 
     private AppCompatActivity activity;
     private AdvancedWebView mWebView;
+
+    public String cowNumber;
 
     @Nullable
     @Override
@@ -32,7 +35,8 @@ public class WebviewFragment extends Fragment implements AdvancedWebView.Listene
         mWebView = view.findViewById(R.id.webview);
         mWebView.setListener(getActivity(), this);
         mWebView.setMixedContentAllowed(false);
-        mWebView.loadUrl("http://www.naver.com/");
+        
+        mWebView.loadUrl("http://marivet.co.kr/v2/ahebf/chalet/fetch_data.php?var1="+ cowNumber);
 
         return view;
     }

@@ -1,7 +1,6 @@
 package com.codegear.mariamc_rfid.cowchronicle.utils;
 
 import android.content.Intent;
-import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,15 +23,13 @@ import com.codegear.mariamc_rfid.cowchronicle.activities.CowChronicleActivity;
 import com.codegear.mariamc_rfid.cowchronicle.activities.FarmSelectFragment;
 import com.codegear.mariamc_rfid.cowchronicle.activities.UserInfoFragment;
 import com.codegear.mariamc_rfid.cowchronicle.activities.UserLoginActivity;
-import com.codegear.mariamc_rfid.cowchronicle.activities.WebviewFragment;
+import com.codegear.mariamc_rfid.cowchronicle.activities.WebviewHomeFragment;
 import com.codegear.mariamc_rfid.cowchronicle.device.RFIDSingleton;
 import com.codegear.mariamc_rfid.cowchronicle.storage.UserStorage;
 import com.codegear.mariamc_rfid.rfidreader.common.Constants;
 import com.codegear.mariamc_rfid.rfidreader.rfid.RFIDController;
 import com.codegear.mariamc_rfid.rfidreader.settings.SettingsDetailActivity;
 import com.google.android.material.navigation.NavigationView;
-import com.zebra.rfid.api3.InvalidUsageException;
-import com.zebra.rfid.api3.OperationFailureException;
 
 public class CustomConnectedDrawer {
 
@@ -203,7 +200,7 @@ public class CustomConnectedDrawer {
         switch (item.getItemId()) {
             case R.id.menu_cowchronicle:
                 if(isLoginWithGoPage()){
-                    replaceFragment(new WebviewFragment(), true);
+                    replaceFragment(new WebviewHomeFragment(), true);
                 }
                 return true;
 

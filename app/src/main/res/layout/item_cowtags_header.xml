@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/default_column_header_height"
+    android:background="#EAEAEA"
+    android:orientation="horizontal"
+    android:gravity="center">
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:text="이력제번호"
+        android:textStyle="bold"
+        android:textColor="@color/tableview_default_text_color"
+        android:gravity="center"
+        android:textSize="@dimen/tableview_text_size"/>
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/tableview_border_line_color"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:text="목장이표"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textColor="@color/tableview_default_text_color"
+        android:textSize="@dimen/tableview_text_size"/>
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/tableview_border_line_color"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:text="성별(월령)"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textColor="@color/tableview_default_text_color"
+        android:textSize="@dimen/tableview_text_size"/>
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/tableview_border_line_color"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:text="산차"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textColor="@color/tableview_default_text_color"
+        android:textSize="@dimen/tableview_text_size"/>
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/tableview_border_line_color"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:text="번식상태"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textColor="@color/tableview_default_text_color"
+        android:textSize="@dimen/tableview_text_size"/>
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/tableview_border_line_color"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:text="전자이표"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textColor="@color/tableview_default_text_color"
+        android:textSize="@dimen/tableview_text_size"/>
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/tableview_border_line_color"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:text="Count"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textColor="@color/tableview_default_text_color"
+        android:textSize="@dimen/tableview_text_size"/>
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/tableview_border_line_color"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="RSSI"
+        android:textStyle="bold"
+        android:textColor="@color/tableview_default_text_color"
+        android:textSize="@dimen/tableview_text_size"/>
+
+
+</LinearLayout>

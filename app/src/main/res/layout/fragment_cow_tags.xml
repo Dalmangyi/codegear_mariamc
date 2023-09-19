@@ -75,20 +75,36 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:padding="1dp"
-        android:background="@color/light_grey"
+        android:padding="2dp"
+        android:background="@drawable/bg_cowtags"
         android:layout_marginBottom="@dimen/margin"
-        android:layout_marginTop="@dimen/margin">
+        android:layout_marginTop="@dimen/margin"
+        android:orientation="vertical">
 
-        <com.evrencoskun.tableview.TableView
+        <include layout="@layout/item_cowtags_header"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#CCCCCC"/>
+
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/tbCowTags"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
             android:layout_weight="1"
-            app:allow_click_inside_cell="true"
-            app:allow_click_inside_column_header="true"
-            app:allow_click_inside_row_header="true"
+            tools:listitem="@layout/item_cowtags_row"
             android:background="@color/white"/>
+
+<!--        <com.evrencoskun.tableview.TableView-->
+<!--            android:id="@+id/tbCowTags"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_weight="1"-->
+<!--            app:allow_click_inside_cell="true"-->
+<!--            app:allow_click_inside_column_header="true"-->
+<!--            app:allow_click_inside_row_header="true"-->
+<!--            android:background="@color/white"/>-->
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

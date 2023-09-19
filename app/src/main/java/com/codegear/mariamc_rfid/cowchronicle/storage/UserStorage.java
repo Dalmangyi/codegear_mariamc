@@ -2,13 +2,9 @@ package com.codegear.mariamc_rfid.cowchronicle.storage;
 
 import android.content.Context;
 
-import com.codegear.mariamc_rfid.cowchronicle.activities.services.ResCowList;
-import com.codegear.mariamc_rfid.cowchronicle.activities.services.ResLogin;
+import com.codegear.mariamc_rfid.cowchronicle.services.ResLogin;
 import com.codegear.mariamc_rfid.cowchronicle.utils.CryptedKeys;
-import com.codegear.mariamc_rfid.cowchronicle.utils.CryptedKeys.*;
 import com.codegear.mariamc_rfid.cowchronicle.utils.CryptedPrefs;
-
-import java.util.Map;
 
 public class UserStorage {
     private static final UserStorage mInstance = new UserStorage();

@@ -14,26 +14,26 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.codegear.mariamc_rfid.R;
 import com.codegear.mariamc_rfid.cowchronicle.activities.farms.FarmSearchDialogCompat;
-import com.codegear.mariamc_rfid.cowchronicle.activities.models.FarmModel;
-import com.codegear.mariamc_rfid.cowchronicle.activities.services.ResCowList;
-import com.codegear.mariamc_rfid.cowchronicle.activities.services.ResLogin;
-import com.codegear.mariamc_rfid.cowchronicle.activities.services.RetrofitClient;
+import com.codegear.mariamc_rfid.cowchronicle.models.FarmModel;
+import com.codegear.mariamc_rfid.cowchronicle.services.ResCowList;
+import com.codegear.mariamc_rfid.cowchronicle.services.ResLogin;
+import com.codegear.mariamc_rfid.cowchronicle.services.RetrofitClient;
 import com.codegear.mariamc_rfid.cowchronicle.device.DeviceTaskSettings;
 import com.codegear.mariamc_rfid.cowchronicle.device.IRFIDSingletonTag;
 import com.codegear.mariamc_rfid.cowchronicle.device.RFIDSingleton;
 import com.codegear.mariamc_rfid.cowchronicle.storage.UserStorage;
-import com.codegear.mariamc_rfid.cowchronicle.tableview.TableViewAdapter;
-import com.codegear.mariamc_rfid.cowchronicle.tableview.TableViewListener;
-import com.codegear.mariamc_rfid.cowchronicle.tableview.TableViewModel;
+import com.codegear.mariamc_rfid.cowchronicle.ui.tableview.CowTagRowAdapter;
+import com.codegear.mariamc_rfid.cowchronicle.models.CowTagsModel;
 import com.codegear.mariamc_rfid.cowchronicle.utils.CustomDialog;
 import com.codegear.mariamc_rfid.cowchronicle.utils.SoundSearcher;
 import com.codegear.mariamc_rfid.rfidreader.rfid.RFIDController;
 import com.codegear.mariamc_rfid.rfidreader.rfid.RfidListeners;
 import com.codegear.mariamc_rfid.rfidreader.settings.ProfileContent;
-import com.evrencoskun.tableview.TableView;
 import com.xw.repo.BubbleSeekBar;
 import com.zebra.rfid.api3.Antennas;
 import com.zebra.rfid.api3.InvalidUsageException;
@@ -49,21 +49,18 @@ import java.util.Map;
 
 import ir.mirrajabi.searchdialog.core.BaseFilter;
 import retrofit2.Call;
-import retrofit2.http.Tag;
 
 public class CowTagsFragment extends Fragment {
 
 
     private final String TAG = "CowTagsFragment";
 
-    private final ArrayList<String> TABLEVIEW_KEYS = new ArrayList<>(Arrays.asList("COW_ID_NUM", "SNM", "SEX+MONTHS", "PRTY", "PRN_STTS", "TAGNO", "COUNT", "RSSI"));
-    private final ArrayList<String> TABLEVIEW_NAMES = new ArrayList<>(Arrays.asList("이력제번호", "목장이표", "성별(월령)", "산차", "번식상태", "전자이표", "Count", "RSSI"));
-
 
     //UI
     private AppCompatActivity mActivity;
     private View mMainView;
-    private TableView mTableView;
+    private RecyclerView mRecyclerView;
+    private CowTagRowAdapter cowTagRowAdapter;
     private Button btnCurrentFarm, btnDistancePowerApply, btnClear, btnScan;
     private BubbleSeekBar bsbDistancePower;
 
@@ -76,8 +73,7 @@ public class CowTagsFragment extends Fragment {
     private ArrayList<Map<String, String>> mCowList;
     private int[] antennaPowerLevels = null;
     private DeviceTaskSettings.SaveAntennaConfigurationTask antennaTask = null;
-    private TableViewAdapter tableViewAdapter;
-    private TableViewModel tableViewModel;
+    private CowTagsModel cowTagsModel = new CowTagsModel();
     private ArrayList<TagData> mTagList = new ArrayList<>();
 
 
@@ -130,9 +126,15 @@ public class CowTagsFragment extends Fragment {
 
             setScanRunning(!isSelected);
         });
-        mTableView = mMainView.findViewById(R.id.tbCowTags);
 
-
+        cowTagRowAdapter = new CowTagRowAdapter(cowTagsModel);
+        mRecyclerView = mMainView.findViewById(R.id.tbCowTags);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
+        mRecyclerView.setAdapter(cowTagRowAdapter);
+        cowTagRowAdapter.setOnItemClickListener(pos -> {
+//            pos;
+            goCowDetail("1212");
+        });
 
         initProfiles();
         mFarmList = loadFarmModel();
@@ -204,29 +206,29 @@ public class CowTagsFragment extends Fragment {
     //소 리스트 불러오기
     private void loadCowList(){
 
-        Call<ResCowList> call = RetrofitClient.getApiService().getCowList(mSelectedFarmCode);
+//        Call<ResCowList> call = RetrofitClient.getApiService().getCowList(mSelectedFarmCode);
+        Call<ResCowList> call = RetrofitClient.getApiService().getCowList("219");
         RetrofitClient.commonCall(ResCowList.class, mActivity, call, null, new RetrofitClient.OnStateListener<ResCowList>() {
             @Override
             public void OnSuccess(ResCowList res) {
                 mCowList = res.data;
-                resetTableView();
+                refreshRecyclerView();
             }
         });
     }
 
-    //테이블뷰 리셋
-    private void resetTableView(){
+    //테이블뷰 새로고침
+    private void refreshRecyclerView(){
+        cowTagsModel.makeRowList(mCowList);
 
-        tableViewModel = new TableViewModel(mCowList, TABLEVIEW_KEYS, TABLEVIEW_NAMES, mTagList);
-        tableViewAdapter = new TableViewAdapter();
-        mTableView.setAdapter(tableViewAdapter);
-        mTableView.setTableViewListener(new TableViewListener(mTableView));
-        tableViewAdapter.setAllItems(
-                tableViewModel.getColumnHeaderList(),
-                tableViewModel.getRowHeaderList(),
-                tableViewModel.getCellList()
-        );
 
+        new Handler(Looper.getMainLooper()).post(new Runnable() {
+            public void run() {
+                CowTagRowAdapter adapter = (CowTagRowAdapter)mRecyclerView.getAdapter();
+                adapter.notifyDataSetChanged();
+                mRecyclerView.setAdapter(adapter);
+            }
+        });
     }
 
     //목장 검색 다이얼로그 표시
@@ -354,12 +356,12 @@ public class CowTagsFragment extends Fragment {
                     mTagList.addAll(Arrays.asList(tagList)); 
 
                     //case1
-                    tableViewAdapter.setCellItems(tableViewModel.getCellList());
-                    new Handler(Looper.getMainLooper()).post(new Runnable() {
-                        public void run() {
-                            tableViewAdapter.notifyDataSetChanged();
-                        }
-                    });
+//                    tableViewAdapter.setCellItems(cowTagsModel.getCellList());
+//                    new Handler(Looper.getMainLooper()).post(new Runnable() {
+//                        public void run() {
+//                            cowTagRowAdapter.notifyDataSetChanged();
+//                        }
+//                    });
  
 
                 }
@@ -409,12 +411,12 @@ public class CowTagsFragment extends Fragment {
 
     private void refreshTagList(){
         mTagList.clear();
-        tableViewAdapter.setCellItems(tableViewModel.getCellList());
-        new Handler(Looper.getMainLooper()).post(new Runnable() {
-            public void run() {
-                tableViewAdapter.notifyDataSetChanged();
-            }
-        });
+//        tableViewAdapter.setCellItems(cowTagsModel.getCellList());
+//        new Handler(Looper.getMainLooper()).post(new Runnable() {
+//            public void run() {
+//                cowTagRowAdapter.notifyDataSetChanged();
+//            }
+//        });
     }
 
     private void testTagList(){
@@ -443,17 +445,17 @@ public class CowTagsFragment extends Fragment {
                 mTagList.addAll(Arrays.asList(myTags));
 
                 //case1
-                tableViewAdapter.setCellItems(tableViewModel.getCellList());
-                new Handler(Looper.getMainLooper()).post(new Runnable() {
-                    public void run() {
-                        tableViewAdapter.notifyDataSetChanged();
-                    }
-                });
+//                tableViewAdapter.setCellItems(cowTagsModel.getCellList());
+//                new Handler(Looper.getMainLooper()).post(new Runnable() {
+//                    public void run() {
+//                        cowTagRowAdapter.notifyDataSetChanged();
+//                    }
+//                });
 
 
 
                 //case2
-//                List<List<Cell>> newCellList = tableViewModel.getCellList();
+//                List<List<Cell>> newCellList = cowTagsModel.getCellList();
 //
 //                //태그 반영 index 찾기
 //                int tagNoIndex = TABLEVIEW_KEYS.indexOf("TAGNO");
@@ -475,9 +477,9 @@ public class CowTagsFragment extends Fragment {
 //                }
 //
 //                tableViewAdapter.setAllItems(
-//                        tableViewModel.getColumnHeaderList(),
-//                        tableViewModel.getRowHeaderList(),
-//                        tableViewModel.getCellList()
+//                        cowTagsModel.getColumnHeaderList(),
+//                        cowTagsModel.getRowHeaderList(),
+//                        cowTagsModel.getCellList()
 //                );
 //                new Handler(Looper.getMainLooper()).post(new Runnable() {
 //                    public void run() {
@@ -523,5 +525,13 @@ public class CowTagsFragment extends Fragment {
 
     }
 
+
+
+
+    private void goCowDetail(String cowNumber){
+        WebviewCowDetailFragment cowDetailFragment = new WebviewCowDetailFragment();
+        cowDetailFragment.cowNumber = cowNumber;
+        ((CowChronicleActivity)mActivity).replaceFragment(cowDetailFragment, true);
+    }
 
 }

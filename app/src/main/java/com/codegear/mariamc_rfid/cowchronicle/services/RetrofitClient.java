@@ -1,4 +1,4 @@
-package com.codegear.mariamc_rfid.cowchronicle.activities.services;
+package com.codegear.mariamc_rfid.cowchronicle.services;
 
 import android.app.Activity;
 import android.util.Log;
@@ -9,9 +9,8 @@ import android.app.AlertDialog;
 import com.codegear.mariamc_rfid.cowchronicle.utils.CustomDialog;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
 
-import java.lang.reflect.Type;
+import java.io.IOException;
 import java.net.UnknownHostException;
 
 import dmax.dialog.SpotsDialog;
@@ -49,7 +48,7 @@ public class RetrofitClient {
             dialogLoading.show();
         }
 
-        boolean debug = true;
+        boolean debug = false;
         if (debug){
             String tempJson;
             {
@@ -76,7 +75,13 @@ public class RetrofitClient {
                 finalDialogLoading.dismiss();
 
                 if (!response.isSuccessful()) {
-                    CustomDialog.showSimpleError(mContext, "서버 담당자에게 문의해주세요. ("+response.code()+")\n"+response.message());
+                    String errMessage = "";
+                    try {
+                        errMessage = response.errorBody().string();
+                    } catch (IOException e) {
+//                        throw new RuntimeException(e);
+                    }
+                    CustomDialog.showSimpleError(mContext, "서버 담당자에게 문의해주세요. ("+response.code()+")\n"+response.message()+"\n"+errMessage);
                     return;
                 }
 
