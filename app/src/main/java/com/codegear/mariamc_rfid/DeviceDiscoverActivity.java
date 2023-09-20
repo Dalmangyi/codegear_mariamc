@@ -36,7 +36,7 @@ import androidx.fragment.app.Fragment;
 
 import com.codegear.mariamc_rfid.application.Application;
 import com.codegear.mariamc_rfid.cowchronicle.activities.CowChronicleActivity;
-import com.codegear.mariamc_rfid.cowchronicle.ui.drawer.CustomDisconnectedDrawer;
+import com.codegear.mariamc_rfid.cowchronicle.ui.drawer.CustomDiscoverDrawer;
 import com.codegear.mariamc_rfid.cowchronicle.utils.PermissionUtil;
 import com.codegear.mariamc_rfid.rfidreader.home.RFIDEventHandler;
 import com.codegear.mariamc_rfid.rfidreader.reader_connection.InitReadersListFragment;
@@ -77,7 +77,7 @@ public class DeviceDiscoverActivity extends BaseActivity implements Readers.RFID
 
     private Context mContext;
 
-    private CustomDisconnectedDrawer mCustomDrawer;
+    private CustomDiscoverDrawer mCustomDrawer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,7 +91,7 @@ public class DeviceDiscoverActivity extends BaseActivity implements Readers.RFID
         setContentView(R.layout.activity_discover);
 
         //Drawer & ActionBar 세팅
-        mCustomDrawer = new CustomDisconnectedDrawer(this);
+        mCustomDrawer = new CustomDiscoverDrawer(this);
         getSupportActionBar().setTitle(getResources().getString(R.string.title_empty_readers));
 
 

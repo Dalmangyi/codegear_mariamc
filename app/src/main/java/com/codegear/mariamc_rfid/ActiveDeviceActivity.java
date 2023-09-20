@@ -149,16 +149,14 @@ import android.os.Parcelable;
 import android.provider.DocumentsContract;
 import android.util.Log;
 import android.util.Xml;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
-import android.widget.ExpandableListView;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -183,7 +181,9 @@ import androidx.viewpager.widget.ViewPager;
 import com.codegear.mariamc_rfid.cowchronicle.activities.CowChronicleActivity;
 import com.codegear.mariamc_rfid.cowchronicle.activities.CowChronicleFragmentEnum;
 import com.codegear.mariamc_rfid.cowchronicle.activities.UserLoginActivity;
+import com.codegear.mariamc_rfid.cowchronicle.device.RFIDSingleton;
 import com.codegear.mariamc_rfid.cowchronicle.storage.UserStorage;
+import com.codegear.mariamc_rfid.cowchronicle.utils.PixelUtil;
 import com.codegear.mariamc_rfid.rfidreader.common.Constants;
 import com.codegear.mariamc_rfid.rfidreader.common.CustomProgressDialog;
 import com.codegear.mariamc_rfid.rfidreader.locate_tag.LocateOperationsFragment;
@@ -195,7 +195,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
-import com.codegear.mariamc_rfid.R;
 import com.codegear.mariamc_rfid.application.Application;
 import com.codegear.mariamc_rfid.discover_connect.nfc.PairOperationsFragment;
 import com.codegear.mariamc_rfid.rfidreader.access_operations.AccessOperationsFragment;
@@ -270,7 +269,6 @@ import java.io.StringReader;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
@@ -313,9 +311,11 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
     static MyAsyncTask cmdExecTask = null;
     Button btnFindScanner = null;
     List<Integer> ssaSupportedAttribs;
-    DrawerLayout drawer;
+    DrawerLayout mDrawerLayout;
+    RelativeLayout rlNavigationDeviceContainer;
     ImageView iv_batteryLevel, iv_headerImageView;
     TextView battery_percentage;
+    Button btnDisconnect;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -354,12 +354,19 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(getResources().getString(R.string.title_empty_readers));
 
-        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(mActiveDeviceActivity, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(mActiveDeviceActivity, mDrawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         toggle.syncState();
 
-        iv_batteryLevel = (ImageView) findViewById(R.id.batterylevel);
-        battery_percentage = (TextView) findViewById(R.id.battery_percentage);
+
+        rlNavigationDeviceContainer = findViewById(R.id.rlNavigationDeviceContainer);
+        iv_batteryLevel = (ImageView) findViewById(R.id.ivBatterylevel);
+        battery_percentage = (TextView) findViewById(R.id.tvBatteryPercentage);
+        btnDisconnect = findViewById(R.id.btnDisconnect);
+        btnDisconnect.setOnClickListener(v -> {
+            RFIDSingleton.deviceDisconnect();
+            mDrawerLayout.closeDrawer(GravityCompat.START);
+        });
 
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -369,12 +376,12 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
         iv_headerImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (drawer.isDrawerOpen(GravityCompat.START)) {
-                    drawer.closeDrawer(GravityCompat.START);
+                if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+                    mDrawerLayout.closeDrawer(GravityCompat.START);
                 }
             }
         });
-        drawer.addDrawerListener(new DrawerLayout.DrawerListener() {
+        mDrawerLayout.addDrawerListener(new DrawerLayout.DrawerListener() {
             @Override
             public void onDrawerSlide(@NonNull View drawerView, float slideOffset) {
 
@@ -387,6 +394,21 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
                 }
                 if (RFIDController.BatteryData != null) {
                     deviceStatusReceived(RFIDController.BatteryData.getLevel(), RFIDController.BatteryData.getCharging(), RFIDController.BatteryData.getCause());
+                }
+
+
+                refreshEmptyMenuItemHeight();
+
+                //연결 상태 확인
+                if (RFIDController.mConnectedReader != null) {
+                    rlNavigationDeviceContainer.setVisibility(View.VISIBLE);
+
+                    //기기 이름
+                    String strDeviceHostName = RFIDController.mConnectedReader.getHostName();
+                    btnDisconnect.setText("연결 해제하기\n"+strDeviceHostName);
+                }
+                else {
+                    rlNavigationDeviceContainer.setVisibility(View.GONE);
                 }
             }
 
@@ -615,6 +637,79 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
         createDWProfile();
     }
 
+    private void refreshEmptyMenuItemHeight(){
+        //사이즈 측정
+        View vDisMainMenu = getLayoutInflater().inflate(R.layout.main_menu, null, false);
+        vDisMainMenu.measure(0, 0);
+        int disMainMenuHeight = vDisMainMenu.getMeasuredHeight();
+        int screenHeight = PixelUtil.getScreenHeightPx(this);
+        int navigationViewMenuHeight = (int) getResources().getDimension(R.dimen.drawer_navigationview_item_height);
+
+        //하단 기기정보 사이즈 측정
+        rlNavigationDeviceContainer.measure(0, 0);
+        int rlNavigationDeviceContainerHeight = vDisMainMenu.getMeasuredHeight();
+        ViewGroup.MarginLayoutParams rlNavigationDeviceContainerMarginLayoutParams = (ViewGroup.MarginLayoutParams) rlNavigationDeviceContainer.getLayoutParams();
+        int rlNavigationDeviceContainerTotalHeight= rlNavigationDeviceContainerHeight + rlNavigationDeviceContainerMarginLayoutParams.bottomMargin;
+
+
+        //기기로그인이 안되어 있다면, 기기정보 사이즈를 0으로 설정.
+        if (RFIDController.mConnectedReader == null || !RFIDController.mConnectedReader.isConnected()) {
+            rlNavigationDeviceContainerTotalHeight = 0;
+        }
+
+
+        //NavigationView의 특정 Menu에 사이즈 적용
+        NavigationView navigationView = (NavigationView)findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+        int finalRlNavigationDeviceContainerTotalHeight = rlNavigationDeviceContainerTotalHeight;
+
+
+        final View v = getLayoutInflater().inflate(R.layout.drawer_menu_custom_item, null);
+        v.addOnAttachStateChangeListener(new View.OnAttachStateChangeListener() {
+            int originalHeight = 0;
+
+            @Override
+            public void onViewAttachedToWindow(View v) {
+                View parent = (View) v.getParent();
+                if (parent != null) parent = (View) parent.getParent();
+
+                if (parent != null) {
+                    ViewGroup.LayoutParams p = parent.getLayoutParams();
+                    originalHeight = p.height;
+                    int drawerMenuCustomItemHeight = 0;
+                    if(RFIDController.mConnectedReader != null && RFIDController.mConnectedReader.isConnected()){
+                        drawerMenuCustomItemHeight = screenHeight - disMainMenuHeight - finalRlNavigationDeviceContainerTotalHeight - (navigationViewMenuHeight * 5);
+                    }else{
+                        drawerMenuCustomItemHeight = screenHeight - disMainMenuHeight - (navigationViewMenuHeight * 5);
+                    }
+
+                    if (drawerMenuCustomItemHeight < 0) {
+                        drawerMenuCustomItemHeight = 0;
+                    }
+                    p.height = drawerMenuCustomItemHeight;
+                    parent.setLayoutParams(p);
+                }
+            }
+
+            @Override
+            public void onViewDetachedFromWindow(View v) {
+                if (originalHeight != 0) {
+                    View parent = (View) v.getParent();
+                    if (parent != null) parent = (View) parent.getParent();
+
+                    if (parent != null) {
+                        ViewGroup.LayoutParams p = parent.getLayoutParams();
+                        p.height = originalHeight;
+                    }
+                }
+            }
+        });
+        MenuItem menuItem = navigationView.getMenu().findItem(R.id.menu_empty);
+        menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+        menuItem.setActionView(v);
+        menuItem.setIcon(null);
+        menuItem.setTitle(null);
+    }
 
     public void initBatchRequest(View v) {
         String inXML = "<inArgs><scannerID>" + scannerID + "</scannerID></inArgs>";
@@ -1301,7 +1396,7 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        drawer.closeDrawer(GravityCompat.START);
+        mDrawerLayout.closeDrawer(GravityCompat.START);
         int id = item.getItemId();
         if (item.getItemId() == android.R.id.home) {
             finish();
@@ -1351,7 +1446,11 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
                 }
                 break;
             case R.id.nav_battery_statics:
-                showBatteryStats();
+                if (mConnectedReader != null && mConnectedReader.isConnected()) {
+                    showBatteryStats();
+                } else {
+                    Toast.makeText(this, "연결된 장치가 없습니다. ", Toast.LENGTH_SHORT).show();
+                }
                 break;
             case R.id.nav_fw_update:
                 if (mConnectedReader != null && mConnectedReader.isConnected()) {

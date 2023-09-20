@@ -31,7 +31,7 @@ import com.codegear.mariamc_rfid.cowchronicle.device.RFIDSingleton;
 import com.codegear.mariamc_rfid.cowchronicle.storage.UserStorage;
 import com.codegear.mariamc_rfid.cowchronicle.utils.AndroidUtil;
 import com.codegear.mariamc_rfid.cowchronicle.ui.dialog.CustomDialog;
-import com.codegear.mariamc_rfid.cowchronicle.ui.drawer.CustomDisconnectedDrawer;
+import com.codegear.mariamc_rfid.cowchronicle.ui.drawer.CustomDiscoverDrawer;
 import com.codegear.mariamc_rfid.cowchronicle.utils.MD5Util;
 import com.codegear.mariamc_rfid.cowchronicle.utils.PermissionUtil;
 import com.codegear.mariamc_rfid.rfidreader.rfid.RFIDController;
@@ -58,7 +58,7 @@ public class UserLoginActivity extends BaseActivity {
     final int PAGE_NUM_1 = 1, PAGE_NUM_2 = 2;
 
     private AlertDialog dialogLoading;
-    private CustomDisconnectedDrawer mCustomDrawer;
+    private CustomDiscoverDrawer mCustomDrawer;
 
 
     private static String TAG = "UserLoginActivity";
@@ -113,7 +113,7 @@ public class UserLoginActivity extends BaseActivity {
         });
 
         //Drawer, ActionBar 세팅
-        mCustomDrawer = new CustomDisconnectedDrawer(this);
+        mCustomDrawer = new CustomDiscoverDrawer(this);
         getSupportActionBar().setTitle(getResources().getString(R.string.app_name));
 
         //GPS 권한 요청

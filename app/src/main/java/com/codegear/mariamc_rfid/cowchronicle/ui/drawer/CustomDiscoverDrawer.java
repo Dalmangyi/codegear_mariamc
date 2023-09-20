@@ -19,12 +19,12 @@ import com.codegear.mariamc_rfid.cowchronicle.ui.dialog.CustomDialog;
 import com.codegear.mariamc_rfid.cowchronicle.utils.PixelUtil;
 import com.google.android.material.navigation.NavigationView;
 
-public class CustomDisconnectedDrawer {
+public class CustomDiscoverDrawer {
 
     private AppCompatActivity mActivity;
     private DrawerLayout mDrawerLayout;
 
-    public CustomDisconnectedDrawer(AppCompatActivity activity){
+    public CustomDiscoverDrawer(AppCompatActivity activity){
         mActivity = activity;
 
         Toolbar toolbar = (Toolbar)mActivity.findViewById(R.id.dis_toolbar);

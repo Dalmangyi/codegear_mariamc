@@ -22,53 +22,7 @@
         app:headerLayout="@layout/main_menu"
         app:menu="@menu/disactivity_home_drawer">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="@dimen/margin">
+        <include layout="@layout/navigation_device_container"/>
 
-            <TextView
-                android:id="@+id/battery_life"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_above="@+id/battery_percentage"
-                android:paddingBottom="@dimen/nav_viewpadding"
-                android:text="@string/batterylife"
-                android:textAppearance="@style/TextAppearance.AppCompat.Small" />
-
-            <TextView
-                android:id="@+id/battery_percentage"
-                style="@style/style_bold_font"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_above="@+id/disconnect_btn"
-                android:padding="@dimen/nav_viewpadding"
-                android:paddingBottom="@dimen/default_padding"
-                android:text="0%"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
-
-            <ImageView
-                android:id="@+id/batterylevel"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_above="@+id/disconnect_btn"
-                android:layout_alignParentRight="true"
-                android:paddingRight="@dimen/margin"
-                android:paddingBottom="@dimen/default_padding"
-                app:srcCompat="@drawable/sled_battery_level" />
-
-            <Button
-                android:id="@+id/disconnect_btn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_marginRight="@dimen/margin"
-                android:layout_marginBottom="@dimen/margin"
-                android:backgroundTint="@color/blue"
-                android:gravity="center"
-                android:paddingBottom="@dimen/marginbottom"
-                android:text="@string/disconnectrfid" />
-
-        </RelativeLayout>
     </com.google.android.material.navigation.NavigationView>
 </androidx.drawerlayout.widget.DrawerLayout>
