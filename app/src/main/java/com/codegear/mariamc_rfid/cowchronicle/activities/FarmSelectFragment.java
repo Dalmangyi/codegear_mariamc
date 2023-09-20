@@ -65,14 +65,8 @@ public class FarmSelectFragment extends Fragment {
             String company = resLogin.cmpy;
             String user_name = resLogin.usr_nm;
             String strMemberName = "";
-            if(membership.equals("Premium")){
-                //프리미엄 사용자
-                strMemberName += user_name + "\n";
-                strMemberName += "(프리미엄 회원)";
-            }else{
-                strMemberName += user_name + "\n";
-                strMemberName += "("+membership+" 회원)";
-            }
+            strMemberName += user_name + "\n";
+            strMemberName += "("+membership+" 회원)";
 
             tvMemberName.setText(strMemberName);
         }
