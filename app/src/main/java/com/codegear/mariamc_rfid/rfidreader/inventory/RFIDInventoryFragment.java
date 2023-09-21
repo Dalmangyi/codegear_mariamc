@@ -315,7 +315,7 @@ public class RFIDInventoryFragment extends Fragment implements Spinner.OnItemSel
         switch (v.getId()) {
             case R.id.matchModeButton:
                 if (RFIDController.mIsInventoryRunning) {
-                    Toast.makeText(getActivity(), "보관함이 실행중 입니다.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "인벤토리가 실행중 입니다.", Toast.LENGTH_SHORT).show();
                 } else {
 
                     Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
@@ -336,7 +336,7 @@ public class RFIDInventoryFragment extends Fragment implements Spinner.OnItemSel
                 break;
             case R.id.resetButton:
                 if (RFIDController.mIsInventoryRunning) {
-                    Toast.makeText(getActivity(), "보관함이 실행중 입니다.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "인벤토리가 실행중 입니다.", Toast.LENGTH_SHORT).show();
                 } else {
                     Application.cycleCountProfileData = null;
                     RFIDController.getInstance().clearAllInventoryData();

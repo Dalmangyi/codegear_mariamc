@@ -1205,7 +1205,7 @@ public class UpdateFirmware extends Fragment implements NavigationView.OnNavigat
     public void updateFirmware(View view) {
 
         if (mIsInventoryRunning) {
-            Toast.makeText(getActivity(), "보관함이 실행되는 동안에는 펌웨어 업데이트가 허용되지 않습니다.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "인벤토리가 실행되는 동안에는 펌웨어 업데이트가 허용되지 않습니다.", Toast.LENGTH_SHORT).show();
             return;
         }
 

@@ -720,31 +720,6 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler, Navigat
         return true;
     }
 
-    /**
-     * Method called on the click of a NavigationDrawer item to update the UI with the new selection
-     *
-     * @param position - postion of the item selected
-     */
-
-    /**
-     * method to get currently displayed action bar icon
-     *
-     * @return resource id of the action bar icon
-     */
-    private int getActionBarIcon() {
-        //Fragment fragment = mActivity.getSupportFragmentManager().findFragmentByTag(TAG_RFID_FRAGMENT);
-        Fragment fragment = mActivity.getCurrentFragment(RFID_TAB);
-        if (fragment instanceof RapidReadFragment) return R.drawable.dl_rr;
-        else if (fragment instanceof RFIDInventoryFragment) return R.drawable.dl_inv;
-        else if (fragment instanceof LocateOperationsFragment) return R.drawable.dl_loc;
-        else if (fragment instanceof SettingListFragment) return R.drawable.dl_sett;
-        else if (fragment instanceof AccessOperationsFragment) return R.drawable.dl_access;
-        else if (fragment instanceof PreFilterFragment) return R.drawable.dl_filters;
-        else if (fragment instanceof RFIDReadersListFragment) return R.drawable.dl_rdl;
-        else if (fragment instanceof AboutFragment) return R.drawable.dl_about;
-        else return -1;
-    }
-
 
     public void onResume() {
         activityResumed();
@@ -757,16 +732,6 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler, Navigat
 
     public void onPause() {
         activityPaused();
-    }
-
-    /**
-     * When using the ActionBarDrawerToggle, you must call it during
-     * onPostCreate() and onConfigurationChanged()...
-     */
-
-    protected void onPostCreate(Bundle savedInstanceState) {
-        // Sync the toggle state after onRestoreInstanceState has occurred.
-        //mDrawerToggle.syncState();
     }
 
     /**
@@ -802,7 +767,7 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler, Navigat
                 if (DisconnectTask != null) DisconnectTask.cancel(true);
 
                 //Alert Dialog
-                showMessageOKCancel("Do you want to close this application?", new DialogInterface.OnClickListener() {
+                showMessageOKCancel("이 애플리케이션을 닫으시겠습니까?", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
@@ -862,7 +827,7 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler, Navigat
             return;
         }
         if (Application.mIsMultiTagLocatingRunning == true) {
-            Toast.makeText(mActivity.getApplicationContext(), "Operation in progress-command not allowed", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mActivity.getApplicationContext(), "작업 진행 중 - 명령이 허용되지 않음.", Toast.LENGTH_SHORT).show();
             return;
         }
         //Fragment fragment = mActivity.getSupportFragmentManager().findFragmentByTag(TAG_RFID_FRAGMENT);
@@ -1347,12 +1312,6 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler, Navigat
             Log.d(TAG, "PrepareMatchModeList done");
         }
     }
-    /**
-     * Method to call when we want inventory to happen with memory bank parameters
-     *
-     * @param memoryBankID id of the memory bank
-     */
-
 
     /**
      * Method called when read button in AccessOperationsFragment is clicked
@@ -1379,19 +1338,19 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler, Navigat
         if (RFIDController.asciiMode == true) tagValue = asciitohex.convert(tagId);
         else tagValue = tagId;
         if (RFIDController.mConnectedReader == null || !RFIDController.mConnectedReader.isConnected()) {
-            Toast.makeText(mActivity.getApplicationContext(), "No Active Connection with Reader", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mActivity.getApplicationContext(), "활성 연결된 장치가 없습니다.", Toast.LENGTH_SHORT).show();
             progressDialog.dismiss();
         } else if (!RFIDController.mConnectedReader.isCapabilitiesReceived()) {
-            Toast.makeText(mActivity.getApplicationContext(), "Reader capabilities not updated", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mActivity.getApplicationContext(), "장치 기능이 업데이트되지 않았습니다.", Toast.LENGTH_SHORT).show();
             progressDialog.dismiss();
         } else if (tagValue.isEmpty()) {
-            Toast.makeText(mActivity.getApplicationContext(), "Please fill Tag Id", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mActivity.getApplicationContext(), "태그 ID를 입력하세요.", Toast.LENGTH_SHORT).show();
             progressDialog.dismiss();
         } else if (offsetText.isEmpty()) {
-            Toast.makeText(mActivity.getApplicationContext(), "Please fill offset", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mActivity.getApplicationContext(), "offset을 채워주세요.", Toast.LENGTH_SHORT).show();
             progressDialog.dismiss();
         } else if (lengthText.isEmpty()) {
-            Toast.makeText(mActivity.getApplicationContext(), "Please fill length", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mActivity.getApplicationContext(), "length를 채워주세요.", Toast.LENGTH_SHORT).show();
             progressDialog.dismiss();
         } else
             RFIDController.getInstance().accessOperationsRead(tagId, offsetText, lengthText, accessRWpassword, bankItem, new RfidListeners() {
@@ -1450,19 +1409,19 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler, Navigat
         if (RFIDController.asciiMode == true) tagValue = asciitohex.convert(tagId);
         else tagValue = tagId;
         if (RFIDController.mConnectedReader == null || !RFIDController.mConnectedReader.isConnected()) {
-            Toast.makeText(mActivity.getApplicationContext(), "No Active Connection with Reader", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mActivity.getApplicationContext(), "활성 연결된 장치가 없습니다.", Toast.LENGTH_SHORT).show();
             progressDialog.dismiss();
         } else if (!RFIDController.mConnectedReader.isCapabilitiesReceived()) {
-            Toast.makeText(mActivity.getApplicationContext(), "Reader capabilities not updated", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mActivity.getApplicationContext(), "장치 기능이 업데이트되지 않았습니다.", Toast.LENGTH_SHORT).show();
             progressDialog.dismiss();
         } else if (tagValue.isEmpty()) {
-            Toast.makeText(mActivity.getApplicationContext(), "Please fill Tag Id", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mActivity.getApplicationContext(), "태그ID를 채워주세요.", Toast.LENGTH_SHORT).show();
             progressDialog.dismiss();
         } else if (offsetText.isEmpty()) {
-            Toast.makeText(mActivity.getApplicationContext(), "Please fill offset", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mActivity.getApplicationContext(), "offset을 채워주세요.", Toast.LENGTH_SHORT).show();
             progressDialog.dismiss();
         } else if (lengthText.isEmpty()) {
-            Toast.makeText(mActivity.getApplicationContext(), "Please fill length", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mActivity.getApplicationContext(), "length를 채워주세요.", Toast.LENGTH_SHORT).show();
             progressDialog.dismiss();
         } else
             RFIDController.getInstance().accessOperationsWrite(tagValue, offsetText, lengthText, accessRWData, accessRWpassword, bankItem, new RfidListeners() {
@@ -1536,13 +1495,13 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler, Navigat
         if (RFIDController.asciiMode == true) tagValue = asciitohex.convert(tagId);
         else tagValue = tagId;
         if (RFIDController.mConnectedReader == null || !RFIDController.mConnectedReader.isConnected()) {
-            Toast.makeText(mActivity.getApplicationContext(), "No Active Connection with Reader", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mActivity.getApplicationContext(), "활성 연결된 장치가 없습니다.", Toast.LENGTH_SHORT).show();
             progressDialog.dismiss();
         } else if (!RFIDController.mConnectedReader.isCapabilitiesReceived()) {
-            Toast.makeText(mActivity.getApplicationContext(), "Reader capabilities not updated", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mActivity.getApplicationContext(), "장치 기능이 업데이트되지 않았습니다.", Toast.LENGTH_SHORT).show();
             progressDialog.dismiss();
         } else if (tagValue.isEmpty()) {
-            Toast.makeText(mActivity.getApplicationContext(), "Please fill Tag Id", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mActivity.getApplicationContext(), "태그ID를 채워주세요.", Toast.LENGTH_SHORT).show();
             progressDialog.dismiss();
         } else
             RFIDController.getInstance().accessOperationLock(tagValue, accessRWpassword, lockDataField, lockPrivilege, ALL_Memory_Bank, new RfidListeners() {
@@ -1591,13 +1550,13 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler, Navigat
         if (RFIDController.asciiMode == true) tagValue = asciitohex.convert(tagId);
         else tagValue = tagId;
         if (RFIDController.mConnectedReader == null || !RFIDController.mConnectedReader.isConnected()) {
-            Toast.makeText(mActivity.getApplicationContext(), "No Active Connection with Reader", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mActivity.getApplicationContext(), "활성 연결된 장치가 없습니다.", Toast.LENGTH_SHORT).show();
             progressDialog.dismiss();
         } else if (!RFIDController.mConnectedReader.isCapabilitiesReceived()) {
-            Toast.makeText(mActivity.getApplicationContext(), "Reader capabilities not updated", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mActivity.getApplicationContext(), "장치 기능이 업데이트되지 않았습니다.", Toast.LENGTH_SHORT).show();
             progressDialog.dismiss();
         } else if (tagValue.isEmpty()) {
-            Toast.makeText(mActivity.getApplicationContext(), "Please fill Tag Id", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mActivity.getApplicationContext(), "태그Id를 채워주세요.", Toast.LENGTH_SHORT).show();
             progressDialog.dismiss();
         } else
             RFIDController.getInstance().accessOperationsKill(tagValue, accessRWpassword, new RfidListeners() {
@@ -1634,7 +1593,7 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler, Navigat
     public synchronized void locationingButtonClicked(final View v) {
 
         if (Application.mIsMultiTagLocatingRunning == true) {
-            Toast.makeText(mActivity.getApplicationContext(), "Operation In Progress-Command Not Allowed", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mActivity.getApplicationContext(), "작업 진행 중 - 명령이 허용되지 않음", Toast.LENGTH_SHORT).show();
             return;
         }
         FloatingActionButton btn_locate = mActivity.findViewById(R.id.btn_locate);
@@ -1783,7 +1742,7 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler, Navigat
             if (ContextCompat.checkSelfPermission(mActivity, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
                 // No explanation needed, we can request the permission.
 
-                showMessageOKCancel("Write to external storage permission needed to export the inventory.", new DialogInterface.OnClickListener() {
+                showMessageOKCancel("인벤토리를 내보내려면 외부 저장소에 쓰기 권한이 필요합니다.", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         ActivityCompat.requestPermissions(mActivity, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, code);
@@ -1832,7 +1791,7 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler, Navigat
     }
 
     private void showMessageOKCancel(String message, DialogInterface.OnClickListener okListener) {
-        new AlertDialog.Builder(mActivity).setMessage(message).setPositiveButton("OK", okListener).setNegativeButton("Cancel", null).create().show();
+        new AlertDialog.Builder(mActivity).setMessage(message).setPositiveButton("확인", okListener).setNegativeButton("취소", null).create().show();
     }
 
     /**
@@ -2361,7 +2320,7 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler, Navigat
                 ((RegulatorySettingsFragment) fragment).deviceDisconnected();
             }
 
-            Toast.makeText(mActivity.getApplicationContext(), "ReaderDisappeared", Toast.LENGTH_LONG).show();
+            Toast.makeText(mActivity.getApplicationContext(), "장치가 사라졌습니다", Toast.LENGTH_LONG).show();
 
         });
     }
@@ -2841,9 +2800,6 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler, Navigat
                         if (tagData.getOpStatus().toString().equalsIgnoreCase("ACCESS_SUCCESS")) {
                             memoryBank = tagData.getMemoryBank().toString();
                             memoryBankData = tagData.getMemoryBankData().toString();
-                            ;
-                            //  memoryBank = MEMORY_BANK.MEMORY_BANK_EPC.toString();
-                            // memoryBankData = tagData.getTagID();
                         } else {
                             return false;
                         }

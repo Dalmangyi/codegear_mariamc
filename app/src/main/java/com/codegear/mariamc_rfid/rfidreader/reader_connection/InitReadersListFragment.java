@@ -698,7 +698,7 @@ public class InitReadersListFragment extends Fragment implements IRFIDConnectTas
         else
             Constants.logAsMessage(Constants.TYPE_ERROR, "ReadersListFragment", "장치 이름이 올바르지 않거나 비어 있습니다.");
 
-        sendNotification(Constants.ACTION_READER_CONN_FAILED, "연결 실패!!로 수신되었습니다.");
+        sendNotification(Constants.ACTION_READER_CONN_FAILED, "연결 실패!!");
         RFIDController.mConnectedReader = null;
         RFIDController.mConnectedDevice = null;
         //unpair the device

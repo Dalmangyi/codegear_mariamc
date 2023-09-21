@@ -220,10 +220,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:layout_margin="@dimen/default_margin"
+            android:layout_marginStart="@dimen/default_margin"
+            android:layout_marginTop="@dimen/default_margin"
+            android:layout_marginEnd="@dimen/default_margin"
+            android:layout_marginBottom="@dimen/default_margin"
             android:onClick="inventoryStartOrStop"
             android:textColor="@color/white"
-            app:backgroundTint="@color/blue"
+            app:backgroundTint="@color/colorPrimary"
             app:icon="@android:drawable/ic_media_play"
             app:iconTint="@color/white" />
 
@@ -245,7 +248,9 @@
             android:layout_margin="@dimen/default_margin"
             android:layout_toRightOf="@id/inventoryButton"
             android:onClick="inventoryStartOrStop"
-            app:backgroundTint="#008080"
+            android:textColor="@color/white"
+            app:iconTint="@color/white"
+            app:backgroundTint="@color/colorPrimary"
             app:srcCompat="@drawable/ic_btn_add" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -256,7 +261,9 @@
             android:layout_margin="@dimen/default_margin"
             android:layout_toRightOf="@id/matchModeButton"
             android:onClick="inventoryStartOrStop"
-            app:backgroundTint="#008080"
+            app:backgroundTint="@color/colorPrimary"
+            android:textColor="@color/white"
+            app:iconTint="@color/white"
             app:srcCompat="@drawable/ic_btn_reset" />
 
         <TextView
