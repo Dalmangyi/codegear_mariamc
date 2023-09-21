@@ -13,10 +13,10 @@
         android:visibility="visible">
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:orientation="vertical"
-            android:layout_gravity="center">
+            android:gravity="center_horizontal|bottom">
 
             <View
                 android:layout_width="0dp"
@@ -27,7 +27,6 @@
                 android:id="@+id/drawerIcon"
                 android:layout_width="400dp"
                 android:layout_height="400dp"
-                android:padding="@dimen/default_padding"
                 android:scaleType="fitXY"
                 app:srcCompat="@drawable/ic_scanning" />
             <View
@@ -35,21 +34,21 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"/>
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/scan_button"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_gravity="center"
-                android:text="스캔등록"/>
-            <View
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1"/>
+                android:layout_marginBottom="30dp"
+                android:background="@drawable/button_default_background"
+                android:text="스캔등록"
+                android:textColor="@color/white" />
+
         </LinearLayout>
 
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/failure_text"
             android:textColor="@color/black_dark"
