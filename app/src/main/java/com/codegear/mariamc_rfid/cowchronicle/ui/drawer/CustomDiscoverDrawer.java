@@ -124,8 +124,19 @@ public class CustomDiscoverDrawer {
                 return true;
 
             case R.id.nav_settings:
-                CustomDialog.showSimple(mActivity, "장치를 연결을 진행해주세요.");
-                mDrawerLayout.closeDrawer(GravityCompat.START);
+                if(mActivity instanceof UserLoginActivity){
+                    Intent intent = new Intent(mActivity, DeviceDiscoverActivity.class);
+                    intent.putExtra(DeviceDiscoverActivity.ENABLE_AUTO_CONNECT_DEVICE, true); //자동연결 끄기
+                    intent.putExtra(DeviceDiscoverActivity.DESTINATION_SCREEN_IS_COWCHRONICLE, false); //연결후 카우크로니클로 가지 않게 하기.
+                    mActivity.startActivity(intent);
+                }
+                else if(mActivity instanceof DeviceDiscoverActivity){
+                    mDrawerLayout.closeDrawer(GravityCompat.START);
+                }
+                else {
+                    CustomDialog.showSimple(mActivity, "장치를 연결을 진행해주세요.");
+                    mDrawerLayout.closeDrawer(GravityCompat.START);
+                }
                 return true;
 
             default:
