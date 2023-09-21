@@ -10,6 +10,12 @@ public class CowTagCell {
     public String TAGNO = "";
     public int COUNT = 0;
     public int RSSI = 0;
+    public int PHASE = 0;
+    public int CHANNEL = 0;
+
+    public String EPD_VAL = "";
+    public String TID_VAL = "";
+    public String OTHER_VAL = "";
 
 
 

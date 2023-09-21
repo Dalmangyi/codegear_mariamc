@@ -2425,7 +2425,7 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
                     getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(RFID_TAB)).commit();
                     break;
                 case INVENTORY_TAB:
-                    PageTitle = "태그 보관함";
+                    PageTitle = "태그 인벤토리";
                     mAdapter.setRFIDMOde(INVENTORY_TAB);
                     getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(RFID_TAB)).commit();
                     break;

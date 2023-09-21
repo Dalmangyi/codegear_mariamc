@@ -73,38 +73,43 @@ public class RetrofitClient {
             @Override
             public void onResponse(@NonNull Call<E> call, @NonNull Response<E> response) {
                 Log.e(TAG,"API success. code:"+response.code()+",res:"+response.body());
-                finalDialogLoading.dismiss();
+                try{
+                    finalDialogLoading.dismiss();
 
-                if (!response.isSuccessful()) {
-                    String errMessage = "";
-                    try {
-                        errMessage = response.errorBody().string();
-                    } catch (IOException e) {
+                    if (!response.isSuccessful()) {
+                        String errMessage = "";
+                        try {
+                            errMessage = response.errorBody().string();
+                        } catch (IOException e) {
 //                        throw new RuntimeException(e);
+                        }
+                        CustomDialog.showSimpleError(mContext, "서버 담당자에게 문의해주세요. ("+response.code()+")\n"+response.message()+"\n"+errMessage);
+                        return;
                     }
-                    CustomDialog.showSimpleError(mContext, "서버 담당자에게 문의해주세요. ("+response.code()+")\n"+response.message()+"\n"+errMessage);
-                    return;
-                }
 
-                //성공
-                if(onStateListener != null){
-                    ((ResCommon)response.body()).convertData();
-                    onStateListener.OnSuccess(response.body());
-                }
+                    //성공
+                    if(onStateListener != null){
+                        ((ResCommon)response.body()).convertData();
+                        onStateListener.OnSuccess(response.body());
+                    }
+                }catch (Exception e){}
+
             }
 
             @Override
             public void onFailure(@NonNull Call<E> call, @NonNull Throwable t) {
                 Log.e(TAG,"API onFailure. "+t.getMessage());
-                finalDialogLoading.dismiss();
+                try{
+                    finalDialogLoading.dismiss();
 
-                if (t instanceof UnknownHostException){
-                    CustomDialog.showSimpleError(mContext, "네트워크 연결을 확인해주세요.");
+                    if (t instanceof UnknownHostException){
+                        CustomDialog.showSimpleError(mContext, "네트워크 연결을 확인해주세요.");
+                    }
+                    else{
+                        CustomDialog.showSimpleError(mContext, t.getMessage());
+                    }
+                }catch(Exception e){
                 }
-                else{
-                    CustomDialog.showSimpleError(mContext, t.getMessage());
-                }
-
             }
         });
     }

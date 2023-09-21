@@ -17,6 +17,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.codegear.mariamc_rfid.R;
+import com.codegear.mariamc_rfid.cowchronicle.services.ReqInsertTagData;
+import com.codegear.mariamc_rfid.cowchronicle.services.ResInsertTagData;
+import com.codegear.mariamc_rfid.cowchronicle.ui.cowtags.CowTagCell;
 import com.codegear.mariamc_rfid.cowchronicle.ui.farms.FarmSearchDialogCompat;
 import com.codegear.mariamc_rfid.cowchronicle.models.FarmModel;
 import com.codegear.mariamc_rfid.cowchronicle.services.ResCowList;
@@ -32,6 +35,7 @@ import com.codegear.mariamc_rfid.cowchronicle.utils.SoundSearcher;
 import com.codegear.mariamc_rfid.rfidreader.rfid.RFIDController;
 import com.codegear.mariamc_rfid.rfidreader.rfid.RfidListeners;
 import com.codegear.mariamc_rfid.rfidreader.settings.ProfileContent;
+import com.google.gson.Gson;
 import com.xw.repo.BubbleSeekBar;
 import com.zebra.rfid.api3.Antennas;
 import com.zebra.rfid.api3.InvalidUsageException;
@@ -212,6 +216,7 @@ public class CowTagsFragment extends Fragment {
                     }
                 }
 
+                //리스트 새로고침
                 refreshRecyclerView();
             }
         });
@@ -358,6 +363,7 @@ public class CowTagsFragment extends Fragment {
     //스캔 중지
     private void stopScanInventory(){
 
+        //중지
         if (RFIDController.mIsInventoryRunning){
             RFIDController.getInstance().stopInventory(new RfidListeners() {
                 @Override
@@ -375,6 +381,9 @@ public class CowTagsFragment extends Fragment {
                 }
             });
         }
+
+        //데이터 전송
+        sendReadingData();
     }
 
 
@@ -414,9 +423,44 @@ public class CowTagsFragment extends Fragment {
     }
 
     //RFID 리딩 값 전송.
-    private void callInsertData(){
+    private void sendReadingData(){
+
+        ArrayList<CowTagCell> cowTagList = cowTagsModel.getCowTagList();
+        if (cowTagList.size() == 0){
+            return;
+        }
+
+        //데이터 준비 (리더기 정보)
+        String strDeviceHostName = RFIDController.mConnectedReader.getHostName();
+
+        //데이터 준비 (태그 데이터)
+        ArrayList<ReqInsertTagData> reqInsertTagList = new ArrayList<>();
+        for (CowTagCell cell : cowTagList){
+            if(cell.COUNT > 0){
+                ReqInsertTagData reqInsertTagData = new ReqInsertTagData(cell);
+                reqInsertTagData.READER_SERIAL_NO = strDeviceHostName;
+                reqInsertTagList.add(reqInsertTagData);
+            }
+        }
+        if(reqInsertTagList.size() == 0){
+            return;
+        }
+
+        //전송데이터로 변환
+        Gson gson = new Gson();
+        String postBody = gson.toJson(reqInsertTagList);
+
+        //데이터 전송
+        Call<ResInsertTagData> call = RetrofitClient.getApiService().insertTagData(postBody);
+        RetrofitClient.commonCall(ResInsertTagData.class, mActivity, call, null, new RetrofitClient.OnStateListener<ResInsertTagData>() {
+            @Override
+            public void OnSuccess(ResInsertTagData res) {
 
 
+
+
+            }
+        });
     }
 
 
