@@ -38,14 +38,17 @@ public class ResLogin extends ResCommon {
             ObjectMapper mapper = new ObjectMapper();
             for (String farm:res_farm_list){
                 try {
-                    //response 문제가 많음.
+                    //TODO - response 문제가 많음. (서버측 json 변환에 신경써야됨)
                     String enoughFarm = farm
                             .replaceAll("\":", "\":\"")
                             .replaceAll("\\},\\{", "\"\\},\\{")
                             .replaceAll(",\"", "\",\"")
                             .replaceAll("\":\" \\}", "\":\"\"\\}");
 
-
+                    String lastString = enoughFarm.substring(enoughFarm.length()-2, enoughFarm.length());
+                    if(!lastString.equals("}")){
+                        enoughFarm = enoughFarm.substring(0, enoughFarm.length()-1) + "\"}";
+                    }
 
                     JSONArray jsonArray = new JSONArray("["+enoughFarm+"]");
                     for (int i = 0; i < jsonArray.length(); i++)
