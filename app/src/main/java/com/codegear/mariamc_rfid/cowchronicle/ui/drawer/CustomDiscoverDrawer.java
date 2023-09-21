@@ -13,7 +13,9 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.codegear.mariamc_rfid.DeviceDiscoverActivity;
 import com.codegear.mariamc_rfid.R;
+import com.codegear.mariamc_rfid.cowchronicle.activities.CowChronicleActivity;
 import com.codegear.mariamc_rfid.cowchronicle.activities.UserLoginActivity;
+import com.codegear.mariamc_rfid.cowchronicle.consts.CowChronicleScreenEnum;
 import com.codegear.mariamc_rfid.cowchronicle.storage.UserStorage;
 import com.codegear.mariamc_rfid.cowchronicle.ui.dialog.CustomDialog;
 import com.codegear.mariamc_rfid.cowchronicle.utils.PixelUtil;
@@ -87,49 +89,78 @@ public class CustomDiscoverDrawer {
 
 
     public Boolean onOptionsItemSelected(MenuItem item) {
-        mDrawerLayout.closeDrawer(GravityCompat.START);
-
-
 
         //네비게이션 메뉴 아이디에 따른 행동.
         switch (item.getItemId()) {
             case R.id.menu_cowchronicle:
+                mDrawerLayout.closeDrawer(GravityCompat.START);
+                if(UserStorage.getInstance().isLogin()){
+                    goCowChronicleWebview();
+                }else{
+                    goUserLoginActivity();
+                }
+                return true;
             case R.id.menu_readers:
+                mDrawerLayout.closeDrawer(GravityCompat.START);
+                if(UserStorage.getInstance().isLogin()){
+                    CustomDialog.showSimple(mActivity, "장치를 연결 후 진행 하실 수 있습니다.");
+                }else{
+                    goUserLoginActivity();
+                }
+                return true;
             case R.id.nav_user_info:
-                guideLogin();
+                mDrawerLayout.closeDrawer(GravityCompat.START);
+                if(UserStorage.getInstance().isLogin()){
+                    goCowChronicleUserInfo();
+                }else{
+                    goUserLoginActivity();
+                }
                 return true;
 
             case R.id.nav_battery_statics:
             case R.id.nav_fw_update:
                 CustomDialog.showSimple(mActivity, "장치 설정에서 장치를 연결 후 진행 하실 수 있습니다.");
+                mDrawerLayout.closeDrawer(GravityCompat.START);
                 return true;
 
             case R.id.nav_settings:
-                if(!(mActivity instanceof DeviceDiscoverActivity)) {
-                    Intent deviceDiscoverIntent = new Intent(mActivity, DeviceDiscoverActivity.class);
-                    deviceDiscoverIntent.putExtra(DeviceDiscoverActivity.DESTINATION_SCREEN_IS_COWCHRONICLE, false); //연결후 카우크로니클로 가게 하기.
-                    deviceDiscoverIntent.putExtra(DeviceDiscoverActivity.ENABLE_AUTO_CONNECT_DEVICE, false); //자동연결 켜기
-                    deviceDiscoverIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    mActivity.startActivity(deviceDiscoverIntent);
-                }
+                CustomDialog.showSimple(mActivity, "장치를 연결을 진행해주세요.");
+                mDrawerLayout.closeDrawer(GravityCompat.START);
                 return true;
 
             default:
+                mDrawerLayout.closeDrawer(GravityCompat.START);
                 return null;
         }
     }
 
 
     //네비게이션 기능을 사용하기 전에, 로그인 먼저 해야됨을 안내.
-    private void guideLogin(){
-        if(!UserStorage.getInstance().isLogin()){
-            //로그인 페이지가 아니면, 로그인페이지로 이동
-            if(!(mActivity instanceof UserLoginActivity)){
-                Intent intent = new Intent(mActivity, UserLoginActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                mActivity.startActivity(intent);
-                mActivity.finishAffinity();
-            }
-        }
+    private void goUserLoginActivity(){
+        Intent intent = new Intent(mActivity, UserLoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        mActivity.startActivity(intent);
+        mActivity.finishAffinity();
+    }
+
+    //카우크로니클 웹뷰로 이동하기
+    private void goCowChronicleWebview(){
+        Intent intent = new Intent(mActivity, CowChronicleActivity.class);
+        intent.putExtra(CowChronicleActivity.FLAG_FRAGMENT_START_PAGE, CowChronicleScreenEnum.WEBVIEW.toString());
+        mActivity.startActivity(intent);
+    }
+
+    //카우크로니클 농장선택으로 이동하기
+    private void goCowChronicleFarmSelect(){
+        Intent intent = new Intent(mActivity, CowChronicleActivity.class);
+        intent.putExtra(CowChronicleActivity.FLAG_FRAGMENT_START_PAGE, CowChronicleScreenEnum.FARM_SELECT.toString());
+        mActivity.startActivity(intent);
+    }
+
+    //카우크로니클 사용자 정보로 이동하기
+    private void goCowChronicleUserInfo(){
+        Intent intent = new Intent(mActivity, CowChronicleActivity.class);
+        intent.putExtra(CowChronicleActivity.FLAG_FRAGMENT_START_PAGE, CowChronicleScreenEnum.USER_INFO.toString());
+        mActivity.startActivity(intent);
     }
 }

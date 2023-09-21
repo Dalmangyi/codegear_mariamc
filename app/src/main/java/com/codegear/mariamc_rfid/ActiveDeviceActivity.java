@@ -179,6 +179,8 @@ import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.codegear.mariamc_rfid.cowchronicle.activities.CowChronicleActivity;
+import com.codegear.mariamc_rfid.cowchronicle.activities.FarmSelectFragment;
+import com.codegear.mariamc_rfid.cowchronicle.activities.WebviewHomeFragment;
 import com.codegear.mariamc_rfid.cowchronicle.consts.CowChronicleScreenEnum;
 import com.codegear.mariamc_rfid.cowchronicle.activities.UserLoginActivity;
 import com.codegear.mariamc_rfid.cowchronicle.device.RFIDSingleton;
@@ -617,7 +619,7 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
             nMgr.cancel(NotificationsReceiver.DEFAULT_NOTIFICATION_ID);
         }
 
-        setActionBarTitle("전자이표");
+        setActionBarTitle("장치 설정");
         viewPager.setCurrentItem(RFID_TAB);
         mAdapter.setCurrentActivePosition(RFID_TAB);
 
@@ -635,6 +637,51 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
         initScanner();
         setParentActivity(this);
         createDWProfile();
+
+
+//        Button btnNavigationBottom1 = findViewById(R.id.btnNavigationBottom1);
+//        Button btnNavigationBottom2 = findViewById(R.id.btnNavigationBottom2);
+//        btnNavigationBottom1.setOnClickListener(v -> {
+//            goIntentCowChronicle();
+//        });
+//        btnNavigationBottom2.setOnClickListener(v -> {
+//            goIntentCowTags();
+//        });
+    }
+
+
+    //카우크로니클 웹뷰로 이동
+    private void goIntentCowChronicle(){
+        //로그인 했을 경우만 웹뷰로 이동.
+        if(UserStorage.getInstance().isLogin()){
+            finishAffinity();
+            Intent intent = new Intent(this, CowChronicleActivity.class);
+            intent.putExtra(CowChronicleActivity.FLAG_FRAGMENT_START_PAGE, CowChronicleScreenEnum.WEBVIEW.toString());
+            startActivity(intent);
+        }
+        //로그인 안했으면, 로그인 페이지로 이동.
+        else{
+            finishAffinity();
+            Intent intent = new Intent(this, UserLoginActivity.class);
+            startActivity(intent);
+        }
+    }
+
+    //전자이표 화면으로 이동
+    private void goIntentCowTags(){
+        //로그인 했을 경우, 농장 선택화면으로 이동.
+        if(UserStorage.getInstance().isLogin()){
+            finishAffinity();
+            Intent intent = new Intent(this, CowChronicleActivity.class);
+            intent.putExtra(CowChronicleActivity.FLAG_FRAGMENT_START_PAGE, CowChronicleScreenEnum.FARM_SELECT.toString());
+            startActivity(intent);
+        }
+        //로그인 안했으면, 로그인 페이지로 이동.
+        else{
+            finishAffinity();
+            Intent intent = new Intent(this, UserLoginActivity.class);
+            startActivity(intent);
+        }
     }
 
     private void refreshEmptyMenuItemHeight(){

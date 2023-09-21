@@ -102,6 +102,7 @@ public class CowChronicleActivity extends AppCompatActivity {
                     break;
                 case USER_INFO:
                     replaceFragment(new UserInfoFragment(), false);
+                    break;
                 default:
                     replaceFragment(new FarmSelectFragment(), false);
             }

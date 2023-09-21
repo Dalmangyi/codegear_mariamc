@@ -780,7 +780,7 @@
     <string name="Export_Logs">로그 내보내기</string>
     <string name="sdkversiontitle">SDK 버전:</string>
     <string name="scannerversiontitle">스캐너 버전:</string>
-    <string name="title_empty_readers">전자이표</string>
+    <string name="title_empty_readers">장치설정</string>
     <string name="batterylife">배터리 수명</string>
     <string name="disconnectrfid">Disconnect RFIDXX</string>
     <string name="serial_no">시리얼번호 보기</string>

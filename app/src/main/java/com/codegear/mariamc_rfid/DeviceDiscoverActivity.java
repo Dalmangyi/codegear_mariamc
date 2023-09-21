@@ -27,6 +27,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -36,6 +37,10 @@ import androidx.fragment.app.Fragment;
 
 import com.codegear.mariamc_rfid.application.Application;
 import com.codegear.mariamc_rfid.cowchronicle.activities.CowChronicleActivity;
+import com.codegear.mariamc_rfid.cowchronicle.activities.UserLoginActivity;
+import com.codegear.mariamc_rfid.cowchronicle.consts.CowChronicleScreenEnum;
+import com.codegear.mariamc_rfid.cowchronicle.storage.UserStorage;
+import com.codegear.mariamc_rfid.cowchronicle.ui.dialog.CustomDialog;
 import com.codegear.mariamc_rfid.cowchronicle.ui.drawer.CustomDiscoverDrawer;
 import com.codegear.mariamc_rfid.cowchronicle.utils.PermissionUtil;
 import com.codegear.mariamc_rfid.rfidreader.home.RFIDEventHandler;
@@ -115,6 +120,54 @@ public class DeviceDiscoverActivity extends BaseActivity implements Readers.RFID
             initialize();
         }, Manifest.permission.BLUETOOTH_SCAN, Manifest.permission.BLUETOOTH_CONNECT);
 
+        Button btnNavigationBottom1 = findViewById(R.id.btnNavigationBottom1);
+        Button btnNavigationBottom2 = findViewById(R.id.btnNavigationBottom2);
+        btnNavigationBottom1.setOnClickListener(v -> {
+            goIntentCowChronicle();
+        });
+        btnNavigationBottom2.setOnClickListener(v -> {
+            goIntentCowTags();
+        });
+    }
+
+
+    //카우크로니클 웹뷰로 이동
+    private void goIntentCowChronicle(){
+        //로그인 했을 경우만 웹뷰로 이동.
+        if(UserStorage.getInstance().isLogin()){
+            finishAffinity();
+            Intent intent = new Intent(this, CowChronicleActivity.class);
+            intent.putExtra(CowChronicleActivity.FLAG_FRAGMENT_START_PAGE, CowChronicleScreenEnum.WEBVIEW.toString());
+            startActivity(intent);
+        }
+        //로그인 안했으면, 로그인 페이지로 이동.
+        else{
+            finishAffinity();
+            Intent intent = new Intent(this, UserLoginActivity.class);
+            startActivity(intent);
+        }
+    }
+
+    //전자이표 화면으로 이동
+    private void goIntentCowTags(){
+        //로그인 안했을 경우, 로그인 화면으로 이동.
+        if(!UserStorage.getInstance().isLogin()){
+            finishAffinity();
+            Intent intent = new Intent(this, UserLoginActivity.class);
+            startActivity(intent);
+        }
+        else {
+            //로그인 했고 기기가 연결 되어 있다면, 농장 선택화면으로 이동
+            if (RFIDController.mConnectedReader != null && RFIDController.mConnectedReader.isConnected()) {
+                finishAffinity();
+                Intent intent = new Intent(this, UserLoginActivity.class);
+                startActivity(intent);
+            }
+            //로그인 했고 기기가 연결 안 되어있다면, 안내메세지 출력
+            else {
+                CustomDialog.showSimple(this, "기기를 연결해주세요.");
+            }
+        }
     }
 
 
