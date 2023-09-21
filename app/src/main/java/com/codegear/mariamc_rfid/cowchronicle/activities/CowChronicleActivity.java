@@ -18,6 +18,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.codegear.mariamc_rfid.DeviceDiscoverActivity;
 import com.codegear.mariamc_rfid.R;
+import com.codegear.mariamc_rfid.cowchronicle.consts.CowChronicleScreenEnum;
 import com.codegear.mariamc_rfid.cowchronicle.device.RFIDSingleton;
 import com.codegear.mariamc_rfid.cowchronicle.storage.UserStorage;
 import com.codegear.mariamc_rfid.cowchronicle.ui.drawer.CustomConnectedDrawer;
@@ -87,7 +88,7 @@ public class CowChronicleActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         if (bundle != null){
             String strFragmentStartPage = bundle.getString(FLAG_FRAGMENT_START_PAGE);
-            CowChronicleFragmentEnum fragmentEnum = CowChronicleFragmentEnum.valueOf(strFragmentStartPage);
+            CowChronicleScreenEnum fragmentEnum = CowChronicleScreenEnum.valueOf(strFragmentStartPage);
 
             switch(fragmentEnum){
                 case WEBVIEW:
@@ -126,7 +127,7 @@ public class CowChronicleActivity extends AppCompatActivity {
         if(UserStorage.getInstance().isLogin()){
             intent.putExtra(DeviceDiscoverActivity.ENABLE_AUTO_CONNECT_DEVICE, true); //자동연결 하기.
             intent.putExtra(DeviceDiscoverActivity.DESTINATION_SCREEN_IS_COWCHRONICLE, true); //연결후 카우크로니클로 가게 하기.
-            intent.putExtra(CowChronicleActivity.FLAG_FRAGMENT_START_PAGE, CowChronicleFragmentEnum.FARM_SELECT.toString());
+            intent.putExtra(CowChronicleActivity.FLAG_FRAGMENT_START_PAGE, CowChronicleScreenEnum.FARM_SELECT.toString());
         }
         else {
             intent.putExtra(DeviceDiscoverActivity.ENABLE_AUTO_CONNECT_DEVICE, true); //자동연결 끄기

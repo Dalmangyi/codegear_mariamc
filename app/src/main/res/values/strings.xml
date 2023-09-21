@@ -846,10 +846,12 @@
     <string name="contact_phone">031-332-4309</string>
     <string name="contact_email">enb8375@gmail.com</string>
 
-
-
-    <!-- Tableview -->
-    <string name="tableview_sort_ascending">오름차순 정렬</string>
-    <string name="tableview_sort_descending">내림차순 정렬</string>
-
+    <!-- MemoryBankIds -->
+    <string-array name="memory_bank_id_array">
+        <item>NONE</item>
+        <item>RESERVED</item>
+        <item>EPC</item>
+        <item>TID</item>
+        <item>USER</item>
+    </string-array>
 </resources>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.AppCompatTextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:toosl="http://schemas.android.com/tools"
+    android:padding="8dp"
+    android:textSize="16sp"
+    toosl:text="NONE"
+    android:textColor="@color/white"
+    android:background="@color/colorPrimary">
+
+</androidx.appcompat.widget.AppCompatTextView>

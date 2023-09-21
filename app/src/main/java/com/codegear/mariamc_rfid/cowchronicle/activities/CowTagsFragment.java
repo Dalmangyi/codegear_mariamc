@@ -4,20 +4,28 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.SpinnerAdapter;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatSpinner;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.codegear.mariamc_rfid.R;
+import com.codegear.mariamc_rfid.cowchronicle.consts.MemoryBankIdEnum;
 import com.codegear.mariamc_rfid.cowchronicle.services.ReqInsertTagData;
+import com.codegear.mariamc_rfid.cowchronicle.services.ResCommon;
 import com.codegear.mariamc_rfid.cowchronicle.services.ResInsertTagData;
 import com.codegear.mariamc_rfid.cowchronicle.ui.cowtags.CowTagCell;
 import com.codegear.mariamc_rfid.cowchronicle.ui.farms.FarmSearchDialogCompat;
@@ -31,21 +39,35 @@ import com.codegear.mariamc_rfid.cowchronicle.storage.UserStorage;
 import com.codegear.mariamc_rfid.cowchronicle.ui.cowtags.CowTagRowAdapter;
 import com.codegear.mariamc_rfid.cowchronicle.models.CowTagsModel;
 import com.codegear.mariamc_rfid.cowchronicle.ui.dialog.CustomDialog;
+import com.codegear.mariamc_rfid.cowchronicle.utils.PixelUtil;
 import com.codegear.mariamc_rfid.cowchronicle.utils.SoundSearcher;
 import com.codegear.mariamc_rfid.rfidreader.rfid.RFIDController;
 import com.codegear.mariamc_rfid.rfidreader.rfid.RfidListeners;
 import com.codegear.mariamc_rfid.rfidreader.settings.ProfileContent;
 import com.google.gson.Gson;
+import com.skydoves.powerspinner.IconSpinnerAdapter;
+import com.skydoves.powerspinner.IconSpinnerItem;
+import com.skydoves.powerspinner.OnSpinnerItemSelectedListener;
+import com.skydoves.powerspinner.PowerSpinnerView;
 import com.xw.repo.BubbleSeekBar;
 import com.zebra.rfid.api3.Antennas;
 import com.zebra.rfid.api3.InvalidUsageException;
 import com.zebra.rfid.api3.OperationFailureException;
 
+import org.json.JSONArray;
+import org.llrp.ltk.generated.parameters.Custom;
+
+import java.io.IOException;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 import ir.mirrajabi.searchdialog.core.BaseFilter;
 import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class CowTagsFragment extends Fragment {
 
@@ -60,6 +82,7 @@ public class CowTagsFragment extends Fragment {
     private CowTagRowAdapter cowTagRowAdapter;
     private Button btnCurrentFarm, btnDistancePowerApply, btnClear, btnScan;
     private BubbleSeekBar bsbDistancePower;
+    private PowerSpinnerView spMemoryBankIds;
 
 
 
@@ -72,6 +95,7 @@ public class CowTagsFragment extends Fragment {
     private DeviceTaskSettings.SaveAntennaConfigurationTask antennaTask = null;
     private CowTagsModel cowTagsModel = new CowTagsModel();
 
+    private boolean mScanRunning = false;
 
 
 
@@ -130,6 +154,43 @@ public class CowTagsFragment extends Fragment {
         cowTagRowAdapter.setOnItemClickListener(cell -> {
             goCowDetail(""+cell.COW_ID_NUM);
         });
+
+        List<IconSpinnerItem> iconSpinnerItems = new ArrayList<>();
+        for (Enum memoryBankIdEnum:MemoryBankIdEnum.values()){
+            CharSequence charSequence = memoryBankIdEnum.toString();
+            iconSpinnerItems.add(new IconSpinnerItem(charSequence, ContextCompat.getDrawable(mActivity, R.drawable.ic_transparent)));
+        }
+
+
+        spMemoryBankIds = mMainView.findViewById(R.id.spMemoryBankIds);
+        spMemoryBankIds.setSpinnerAdapter(new IconSpinnerAdapter(spMemoryBankIds));
+        spMemoryBankIds.setItems(iconSpinnerItems);
+        spMemoryBankIds.setLifecycleOwner(mActivity);
+
+        spMemoryBankIds.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mScanRunning){
+                    CustomDialog.showSimple(mActivity, "스캔을 정지하고 변경할 수 있습니다.");
+                }
+                else{
+                    spMemoryBankIds.showOrDismiss(0, PixelUtil.ConvertDpToPx(mActivity, 20));
+                }
+
+            }
+        });
+        spMemoryBankIds.setOnSpinnerItemSelectedListener(new OnSpinnerItemSelectedListener<Object>() {
+            @Override
+            public void onItemSelected(int oldPos, @Nullable Object o, int pos, Object t1) {
+
+                MemoryBankIdEnum memoryBankIdEnum = MemoryBankIdEnum.values()[pos];
+
+                //Title
+                spMemoryBankIds.setText("MemoryBank\n"+memoryBankIdEnum.toString());
+            }
+        });
+        spMemoryBankIds.selectItemByIndex(0);
+
 
         initProfiles();
         mFarmList = loadFarmModel();
@@ -311,6 +372,7 @@ public class CowTagsFragment extends Fragment {
 
     //스캔 버튼 상태 갱신
     private void setScanRunning(boolean running){
+        mScanRunning = running;
         btnScan.setSelected(running);
 
         if(running){
@@ -325,23 +387,29 @@ public class CowTagsFragment extends Fragment {
 
     //스캔 시작
     private void startScanInventory(){
+
         RFIDController.clearAllInventoryData();
-
         RFIDSingleton.getInstance().setIrfidSingleton(tagList -> {
-            if (tagList != null && tagList.length > 0) {
 
-                //case1
-                cowTagsModel.appendTagData(tagList);
-                new Handler(Looper.getMainLooper()).post(new Runnable() {
-                    public void run() {
-                        cowTagRowAdapter.notifyDataSetChanged();
-                    }
-                });
+            if(mScanRunning){
 
-
+                //신규 태그 정보
+                if (tagList != null && tagList.length > 0) {
+                    cowTagsModel.appendTagData(tagList); //기존 태그 리스트에 신규 태그 리스트 추가하기.
+                    new Handler(Looper.getMainLooper()).post(new Runnable() {
+                        public void run() {
+                            cowTagRowAdapter.notifyDataSetChanged();
+                        }
+                    });
+                }
             }
+
         });
-        RFIDController.getInstance().performInventory(new RfidListeners() {
+
+        int memoryBankIdIdx = spMemoryBankIds.getSelectedIndex();
+        MemoryBankIdEnum memoryBankIdEnum = MemoryBankIdEnum.values()[memoryBankIdIdx];
+
+        RfidListeners rfidListeners = new RfidListeners() {
             @Override
             public void onSuccess(Object object) {
             }
@@ -357,7 +425,13 @@ public class CowTagsFragment extends Fragment {
                 setScanRunning(false);
                 CustomDialog.showSimpleError(mActivity, "스캔 시작 에러 : "+message);
             }
-        });
+        };
+
+        if(memoryBankIdEnum == MemoryBankIdEnum.NONE){
+            RFIDController.getInstance().performInventory(rfidListeners);
+        }else{
+            RFIDController.getInstance().inventoryWithMemoryBank(memoryBankIdEnum.toString(), rfidListeners);
+        }
     }
 
     //스캔 중지
@@ -440,27 +514,23 @@ public class CowTagsFragment extends Fragment {
                 ReqInsertTagData reqInsertTagData = new ReqInsertTagData(cell);
                 reqInsertTagData.READER_SERIAL_NO = strDeviceHostName;
                 reqInsertTagList.add(reqInsertTagData);
+                break;
             }
         }
         if(reqInsertTagList.size() == 0){
             return;
         }
 
-        //전송데이터로 변환
-        Gson gson = new Gson();
-        String postBody = gson.toJson(reqInsertTagList);
 
         //데이터 전송
-        Call<ResInsertTagData> call = RetrofitClient.getApiService().insertTagData(postBody);
+        Call<ResInsertTagData> call = RetrofitClient.getApiService().insertTagData(reqInsertTagList);
         RetrofitClient.commonCall(ResInsertTagData.class, mActivity, call, null, new RetrofitClient.OnStateListener<ResInsertTagData>() {
             @Override
             public void OnSuccess(ResInsertTagData res) {
 
-
-
-
             }
         });
+
     }
 
 

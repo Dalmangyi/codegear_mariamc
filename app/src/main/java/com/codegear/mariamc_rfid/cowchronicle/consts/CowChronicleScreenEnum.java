@@ -1,6 +1,6 @@
-package com.codegear.mariamc_rfid.cowchronicle.activities;
+package com.codegear.mariamc_rfid.cowchronicle.consts;
 
-public enum CowChronicleFragmentEnum {
+public enum CowChronicleScreenEnum {
 
     FARM_SELECT("FARM_SELECT"),
     WEBVIEW("WEBVIEW"),
@@ -11,7 +11,7 @@ public enum CowChronicleFragmentEnum {
 
 
     private final String name;
-    private CowChronicleFragmentEnum(String str){
+    private CowChronicleScreenEnum(String str){
         name = str;
     }
 

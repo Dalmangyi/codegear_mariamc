@@ -32,7 +32,7 @@ import com.codegear.mariamc_rfid.DeviceDiscoverActivity;
 import com.codegear.mariamc_rfid.R;
 import com.codegear.mariamc_rfid.application.Application;
 import com.codegear.mariamc_rfid.cowchronicle.activities.CowChronicleActivity;
-import com.codegear.mariamc_rfid.cowchronicle.activities.CowChronicleFragmentEnum;
+import com.codegear.mariamc_rfid.cowchronicle.consts.CowChronicleScreenEnum;
 import com.codegear.mariamc_rfid.discover_connect.nfc.PairOperationsFragment;
 import com.codegear.mariamc_rfid.rfidreader.common.Constants;
 import com.codegear.mariamc_rfid.rfidreader.common.CustomProgressDialog;
@@ -548,7 +548,7 @@ public class InitReadersListFragment extends Fragment implements IRFIDConnectTas
                 intent.putExtra(FLAG_FRAGMENT_START_PAGE, cowchronicleStartPageName);
                 cowchronicleStartPageName = null;
             }else {
-                intent.putExtra(FLAG_FRAGMENT_START_PAGE, CowChronicleFragmentEnum.FARM_SELECT.toString());
+                intent.putExtra(FLAG_FRAGMENT_START_PAGE, CowChronicleScreenEnum.FARM_SELECT.toString());
             }
             startActivity(intent);
         }

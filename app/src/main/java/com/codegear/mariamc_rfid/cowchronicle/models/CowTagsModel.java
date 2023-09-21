@@ -2,7 +2,10 @@ package com.codegear.mariamc_rfid.cowchronicle.models;
 
 import androidx.annotation.NonNull;
 
+import com.codegear.mariamc_rfid.cowchronicle.consts.MemoryBankIdEnum;
 import com.codegear.mariamc_rfid.cowchronicle.ui.cowtags.CowTagCell;
+import com.zebra.rfid.api3.ACCESS_OPERATION_CODE;
+import com.zebra.rfid.api3.ACCESS_OPERATION_STATUS;
 import com.zebra.rfid.api3.MEMORY_BANK;
 import com.zebra.rfid.api3.TagData;
 
@@ -116,14 +119,42 @@ public class CowTagsModel {
                 //태그 데이터 추출
                 Map<String, Integer> mapTagCount = new HashMap<>();
                 for(TagData tagData:copiedTagList){
+
+                    //기본 데이터 조회
                     String tagId = tagData.getTagID();
                     int tagRssi = tagData.getPeakRSSI();
                     int tagChannel = tagData.getChannelIndex();
                     int tagPhase = tagData.getPhase();
 
-                    String tid = MEMORY_BANK.GetMemoryBankValue("tid").toString();
-                    String epc = MEMORY_BANK.GetMemoryBankValue("epc").toString();
-                    String memorybank = tagData.getMemoryBankData();
+
+                    //메모리 뱅크 데이터 조회
+                    MemoryBankIdEnum memoryBankIdEnum = MemoryBankIdEnum.NONE;
+                    String memoryBankData = "";
+                    ACCESS_OPERATION_CODE opCode = tagData.getOpCode();
+                    ACCESS_OPERATION_STATUS opStatus = tagData.getOpStatus();
+                    if (opCode != null && opCode.toString().equalsIgnoreCase(ACCESS_OPERATION_CODE.ACCESS_OPERATION_READ.toString())) {
+                        if (opStatus != null && opStatus.toString().equalsIgnoreCase(ACCESS_OPERATION_STATUS.ACCESS_SUCCESS.toString())) {
+
+                            //저장된 타입 찾기
+                            String memoryBankName = tagData.getMemoryBank().toString();
+                            if(memoryBankName.contains(MemoryBankIdEnum.RESERVED.toString())){
+                                memoryBankIdEnum = MemoryBankIdEnum.RESERVED;
+                            }
+                            else if(memoryBankName.contains(MemoryBankIdEnum.EPC.toString())){
+                                memoryBankIdEnum = MemoryBankIdEnum.EPC;
+                            }
+                            else if(memoryBankName.contains(MemoryBankIdEnum.TID.toString())){
+                                memoryBankIdEnum = MemoryBankIdEnum.TID;
+                            }
+                            else if(memoryBankName.contains(MemoryBankIdEnum.USER.toString())){
+                                memoryBankIdEnum = MemoryBankIdEnum.USER;
+                            }
+
+                            //저장된 데이터 가져오기
+                            memoryBankData = tagData.getMemoryBankData();
+                        }
+                    }
+
 
                     //태그 개수 세기
                     Integer tagCount = mapTagCount.get(tagId);
@@ -143,6 +174,24 @@ public class CowTagsModel {
                         cell.RSSI = tagRssi;
                         cell.PHASE = tagPhase;
                         cell.CHANNEL = tagChannel;
+
+                        switch(memoryBankIdEnum){
+                            case NONE:
+                                break;
+                            case RESERVED:
+                                cell.OTHER_VAL = memoryBankData;
+                                break;
+                            case TID:
+                                cell.TID_VAL = memoryBankData;
+                                break;
+                            case EPC:
+                                cell.EPC_VAL = memoryBankData;
+                                cell.EPD_VAL = memoryBankData;
+                                break;
+                            case USER:
+                                cell.OTHER_VAL = memoryBankData;
+                                break;
+                        }
                     }
                 }
             }

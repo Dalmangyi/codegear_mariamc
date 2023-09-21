@@ -25,6 +25,7 @@ import androidx.core.app.ActivityCompat;
 
 import com.codegear.mariamc_rfid.DeviceDiscoverActivity;
 import com.codegear.mariamc_rfid.R;
+import com.codegear.mariamc_rfid.cowchronicle.consts.CowChronicleScreenEnum;
 import com.codegear.mariamc_rfid.cowchronicle.services.ResLogin;
 import com.codegear.mariamc_rfid.cowchronicle.services.RetrofitClient;
 import com.codegear.mariamc_rfid.cowchronicle.device.RFIDSingleton;
@@ -277,7 +278,7 @@ public class UserLoginActivity extends BaseActivity {
     //카우크로니클 웹뷰로 이동
     private void goIntentCowChronicle(){
         Intent intent = new Intent(this, CowChronicleActivity.class);
-        intent.putExtra(CowChronicleActivity.FLAG_FRAGMENT_START_PAGE, CowChronicleFragmentEnum.WEBVIEW.toString());
+        intent.putExtra(CowChronicleActivity.FLAG_FRAGMENT_START_PAGE, CowChronicleScreenEnum.WEBVIEW.toString());
         startActivity(intent);
     }
 
@@ -293,7 +294,7 @@ public class UserLoginActivity extends BaseActivity {
     //목장 선택 화면으로 이동
     private void goIntentFarmSelect(){
         Intent intent = new Intent(this, CowChronicleActivity.class);
-        intent.putExtra(FLAG_FRAGMENT_START_PAGE, CowChronicleFragmentEnum.FARM_SELECT.toString());
+        intent.putExtra(FLAG_FRAGMENT_START_PAGE, CowChronicleScreenEnum.FARM_SELECT.toString());
         startActivity(intent);
     }
 

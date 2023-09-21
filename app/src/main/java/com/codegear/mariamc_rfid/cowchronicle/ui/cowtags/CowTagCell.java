@@ -13,9 +13,10 @@ public class CowTagCell {
     public int PHASE = 0;
     public int CHANNEL = 0;
 
-    public String EPD_VAL = "";
-    public String TID_VAL = "";
-    public String OTHER_VAL = "";
+    public String EPC_VAL = "null";
+    public String EPD_VAL = "null";
+    public String TID_VAL = "null";
+    public String OTHER_VAL = "null";
 
 
 

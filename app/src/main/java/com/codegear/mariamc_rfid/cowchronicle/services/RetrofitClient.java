@@ -15,6 +15,8 @@ import java.io.IOException;
 import java.net.UnknownHostException;
 
 import dmax.dialog.SpotsDialog;
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -31,10 +33,19 @@ public class RetrofitClient {
     }
 
     private static Retrofit getInstance(){
+
+        //Client
+        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
+
+        //Gson
         Gson gson = new GsonBuilder().setLenient().create();
+
         return new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create(gson))
+                .client(client)
                 .build();
     }
 
@@ -48,24 +59,6 @@ public class RetrofitClient {
             dialogLoading = new SpotsDialog.Builder().setContext(mContext).setTheme(R.style.CustomAlertDialog).build();
             dialogLoading.show();
         }
-
-        boolean debug = false;
-        if (debug){
-            String tempJson;
-            {
-                tempJson = "{ \"rowcnt \": 115,  \"success\": 1, \"data\":[{\"COW_ID_NUM\":\"002173840724\",\"TAGNO\":\"0541100000001185\",\"KIND\":\"한우\",\"SEX\":\"거세\",\"SNM\":\"4072\",\"BIRTHDT\":\"2022-05-04\",\"MONTHS\":\"16\",\"PRTY\":\" \",\"PRN_STTS\":\" \",\"BREDKND\":\"비육우\",\"REGNO\":\" \"}]}";
-            }
-            Gson gson = new Gson();
-            E e = (E)gson.fromJson(tempJson, clazz);
-
-            dialogLoading.dismiss();
-            if(onStateListener != null){
-                onStateListener.OnSuccess(e);
-            }
-
-            return;
-        }
-
 
 
         AlertDialog finalDialogLoading = dialogLoading;
@@ -92,7 +85,9 @@ public class RetrofitClient {
                         ((ResCommon)response.body()).convertData();
                         onStateListener.OnSuccess(response.body());
                     }
-                }catch (Exception e){}
+                }catch (Exception e){
+                    Log.e(TAG, "RetrofitClient Exception onResponse:"+e.toString());
+                }
 
             }
 
@@ -109,6 +104,7 @@ public class RetrofitClient {
                         CustomDialog.showSimpleError(mContext, t.getMessage());
                     }
                 }catch(Exception e){
+                    Log.e(TAG, "RetrofitClient Exception onFailure:"+e.toString());
                 }
             }
         });

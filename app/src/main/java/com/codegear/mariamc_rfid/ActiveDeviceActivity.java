@@ -179,7 +179,7 @@ import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.codegear.mariamc_rfid.cowchronicle.activities.CowChronicleActivity;
-import com.codegear.mariamc_rfid.cowchronicle.activities.CowChronicleFragmentEnum;
+import com.codegear.mariamc_rfid.cowchronicle.consts.CowChronicleScreenEnum;
 import com.codegear.mariamc_rfid.cowchronicle.activities.UserLoginActivity;
 import com.codegear.mariamc_rfid.cowchronicle.device.RFIDSingleton;
 import com.codegear.mariamc_rfid.cowchronicle.storage.UserStorage;
@@ -1410,7 +1410,7 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
                 if(UserStorage.getInstance().isLogin()){
                     finishAffinity();
                     Intent intent = new Intent(this, CowChronicleActivity.class);
-                    intent.putExtra(CowChronicleActivity.FLAG_FRAGMENT_START_PAGE, CowChronicleFragmentEnum.WEBVIEW.toString());
+                    intent.putExtra(CowChronicleActivity.FLAG_FRAGMENT_START_PAGE, CowChronicleScreenEnum.WEBVIEW.toString());
                     startActivity(intent);
                 }
                 else{
@@ -1423,7 +1423,7 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
                 if(UserStorage.getInstance().isLogin()){
                     finishAffinity();
                     Intent intent = new Intent(this, CowChronicleActivity.class);
-                    intent.putExtra(CowChronicleActivity.FLAG_FRAGMENT_START_PAGE, CowChronicleFragmentEnum.FARM_SELECT.toString());
+                    intent.putExtra(CowChronicleActivity.FLAG_FRAGMENT_START_PAGE, CowChronicleScreenEnum.FARM_SELECT.toString());
                     startActivity(intent);
                 }
                 else{
@@ -1436,7 +1436,7 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
                 if(UserStorage.getInstance().isLogin()){
                     finishAffinity();
                     Intent intent = new Intent(this, CowChronicleActivity.class);
-                    intent.putExtra(CowChronicleActivity.FLAG_FRAGMENT_START_PAGE, CowChronicleFragmentEnum.USER_INFO.toString());
+                    intent.putExtra(CowChronicleActivity.FLAG_FRAGMENT_START_PAGE, CowChronicleScreenEnum.USER_INFO.toString());
                     startActivity(intent);
                 }
                 else{

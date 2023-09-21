@@ -1,5 +1,6 @@
 package com.codegear.mariamc_rfid.cowchronicle.services;
 
+import java.util.List;
 import java.util.Map;
 
 import retrofit2.Call;
@@ -34,5 +35,5 @@ public interface CowChronicleAPI {
     RFID리더기(장치)로 읽은 태그 데이터를 소 정보와 함께 서버에 저장
      */
     @POST("insert_data")
-    Call<ResInsertTagData> insertTagData(@Body String reqInsertTagListJson);
+    Call<ResInsertTagData> insertTagData(@Body List<ReqInsertTagData> reqInsertTagList);
 }

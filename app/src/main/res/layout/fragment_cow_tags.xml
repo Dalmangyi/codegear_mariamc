@@ -68,6 +68,29 @@
             android:paddingLeft="@dimen/app_padding"
             android:paddingRight="@dimen/app_padding"/>
 
+        <com.skydoves.powerspinner.PowerSpinnerView
+            android:id="@+id/spMemoryBankIds"
+            android:layout_width="160dp"
+            android:layout_height="50dp"
+            android:background="@drawable/button_default_background"
+            android:gravity="center"
+            android:hint="Memory Bank\nNone"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:textSize="16sp"
+            app:spinner_arrow_drawable="@drawable/baseline_arrow_drop_down_24"
+            app:spinner_arrow_tint="@color/white"
+            app:spinner_arrow_gravity="end"
+            app:spinner_arrow_padding="8dp"
+            app:spinner_divider_color="@color/white"
+            app:spinner_divider_show="false"
+            app:spinner_item_array="@array/memory_bank_id_array"
+            app:spinner_item_height="50dp"
+            app:spinner_popup_animation="dropdown"
+            app:spinner_popup_background="@color/colorHighlight"
+            app:spinner_popup_elevation="14dp"
+            android:layout_marginLeft="@dimen/app_margin"/>
+
     </androidx.appcompat.widget.LinearLayoutCompat>
 
 
@@ -116,10 +139,18 @@
         android:gravity="center"
         android:orientation="horizontal">
 
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:gravity="left">
+
+        </LinearLayout>
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnClear"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_height="50dp"
             android:background="@drawable/button_default_background"
             android:text="초기화"
             android:textColor="@color/white"
@@ -128,13 +159,22 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnScan"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_height="50dp"
             android:layout_marginLeft="30dp"
             android:background="@drawable/button_default_background"
             android:text="스캔"
             android:textColor="@color/white"
             android:textSize="16dp" />
 
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:gravity="right">
+
+
+        </LinearLayout>
     </androidx.appcompat.widget.LinearLayoutCompat>
 
 
