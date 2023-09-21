@@ -16,14 +16,6 @@ import com.codegear.mariamc_rfid.rfidreader.rfid.RFIDController;
 
 import java.util.Timer;
 
-/**
- * A simple {@link android.support.v4.app.Fragment} subclass.
- * <p/>
- * Use the {@link BatteryFragment#newInstance} factory method to
- * create an instance of this fragment.
- * <p/>
- * Fragment to show the battery information.
- */
 public class BatteryFragment extends Fragment {
     private ImageView batteryLevelImage;
     private TextView batteryStatusText;
@@ -34,12 +26,6 @@ public class BatteryFragment extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @return A new instance of fragment BatteryFragment.
-     */
     public static BatteryFragment newInstance() {
         return new BatteryFragment();
     }
@@ -50,8 +36,7 @@ public class BatteryFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_battery, container, false);
     }
@@ -99,10 +84,8 @@ public class BatteryFragment extends Fragment {
                     if (charging) {
                         if (level >= Constants.BATTERY_FULL)
                             batteryStatusText.setText(R.string.battery_full_message);
-                        else
-                            batteryStatusText.setText(R.string.battery_charging_message);
-                    } else
-                        batteryStatusText.setText(R.string.battery_discharging_message);
+                        else batteryStatusText.setText(R.string.battery_charging_message);
+                    } else batteryStatusText.setText(R.string.battery_discharging_message);
                     batteryStatusText.setTextAppearance(getActivity(), R.style.style_green_font);
                 }
                 batteryLevel.setVisibility(View.VISIBLE);
