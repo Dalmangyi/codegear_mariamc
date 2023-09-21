@@ -131,7 +131,11 @@ public class PairOperationsFragment extends Fragment {
         mAdapter.notifyDataSetChanged();
 
 
-        ((DeviceDiscoverActivity) getActivity()).setActionBarTitle(getResources().getString(R.string.device_register));
+        if(getActivity() instanceof DeviceDiscoverActivity){
+            ((DeviceDiscoverActivity) getActivity()).setActionBarTitle(getResources().getString(R.string.device_register));
+        }else if(getActivity() instanceof ActiveDeviceActivity){
+            ((ActiveDeviceActivity) getActivity()).setActionBarTitle(getResources().getString(R.string.device_register));
+        }
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
