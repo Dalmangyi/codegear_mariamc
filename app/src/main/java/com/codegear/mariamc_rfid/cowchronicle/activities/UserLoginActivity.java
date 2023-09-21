@@ -33,6 +33,7 @@ import com.codegear.mariamc_rfid.cowchronicle.storage.UserStorage;
 import com.codegear.mariamc_rfid.cowchronicle.utils.AndroidUtil;
 import com.codegear.mariamc_rfid.cowchronicle.ui.dialog.CustomDialog;
 import com.codegear.mariamc_rfid.cowchronicle.ui.drawer.CustomDiscoverDrawer;
+import com.codegear.mariamc_rfid.cowchronicle.utils.GPSTracker;
 import com.codegear.mariamc_rfid.cowchronicle.utils.MD5Util;
 import com.codegear.mariamc_rfid.cowchronicle.utils.PermissionUtil;
 import com.codegear.mariamc_rfid.rfidreader.rfid.RFIDController;
@@ -49,20 +50,30 @@ import retrofit2.Response;
 
 public class UserLoginActivity extends BaseActivity {
 
+
+    private static String TAG = "UserLoginActivity";
+    public final int PAGE_NUM_1 = 1, PAGE_NUM_2 = 2;
+
+
+
     private Context mContext;
 
     private EditText etLoginId, etLoginPassword;
     private Button btnLoginSignIn;
     private CheckBox cbIsAutoLogin;
-
     private Button btnNavigationBottom1, btnNavigationBottom2;
-    final int PAGE_NUM_1 = 1, PAGE_NUM_2 = 2;
 
     private AlertDialog dialogLoading;
     private CustomDiscoverDrawer mCustomDrawer;
 
 
-    private static String TAG = "UserLoginActivity";
+
+
+
+    private GPSTracker gpsTracker;
+
+
+
 
     public static UserLoginActivity newInstance() {
         return new UserLoginActivity();
@@ -77,6 +88,7 @@ public class UserLoginActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_login);
         mContext = this;
+        gpsTracker = new GPSTracker(mContext);
 
         dialogLoading = new SpotsDialog.Builder()
                 .setContext(mContext)
@@ -185,20 +197,14 @@ public class UserLoginActivity extends BaseActivity {
     private void login(final String strId, final String strPwd, final boolean isAutoLogin, final int movePageNumber) {
 
         //위치 정보 가져오기
-        LocationManager lm = (LocationManager) mContext.getSystemService(Context.LOCATION_SERVICE);
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            PermissionUtil.reqPermissions(this, () -> {
-                //모두 허가되었다면, 로그인 다시 시도하기
-                login(strId, strPwd, isAutoLogin, movePageNumber);
-            }, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION);
+
+        if(!gpsTracker.getIsGPSTrackingEnabled()){
+            gpsTracker.showSettingsAlert();
             return;
         }
-        Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-        if(location != null){
-            location = lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-        }
-        double latitude = 0.0f; //location.getLatitude();
-        double longitude = 0.0f; //location.getLongitude();
+
+        double latitude = gpsTracker.getLatitude();
+        double longitude = gpsTracker.getLongitude();
 
         //비밀번호 해쉬화
         String strHashedPwd = MD5Util.convert(strPwd);
