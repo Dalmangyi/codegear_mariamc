@@ -30,5 +30,6 @@ public class ReqInsertTagData {
                 this.EPD_VAL = cell.EPD_VAL;
                 this.TID_VAL = cell.TID_VAL;
                 this.OTHER_VAL = cell.OTHER_VAL;
+                this.READER_SERIAL_NO = cell.READER_SERIAL_NO;
         }
 }

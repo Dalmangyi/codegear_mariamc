@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 
 import com.codegear.mariamc_rfid.cowchronicle.consts.MemoryBankIdEnum;
 import com.codegear.mariamc_rfid.cowchronicle.ui.cowtags.CowTagCell;
+import com.codegear.mariamc_rfid.rfidreader.rfid.RFIDController;
 import com.zebra.rfid.api3.ACCESS_OPERATION_CODE;
 import com.zebra.rfid.api3.ACCESS_OPERATION_STATUS;
 import com.zebra.rfid.api3.MEMORY_BANK;
@@ -174,6 +175,12 @@ public class CowTagsModel {
                         cell.RSSI = tagRssi;
                         cell.PHASE = tagPhase;
                         cell.CHANNEL = tagChannel;
+
+                        try {
+                            if (RFIDController.mConnectedReader != null && RFIDController.mConnectedReader.isConnected()) {
+                                cell.READER_SERIAL_NO = RFIDController.mConnectedReader.getHostName();
+                            }
+                        }catch (Exception e){}
 
                         switch(memoryBankIdEnum){
                             case NONE:

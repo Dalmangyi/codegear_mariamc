@@ -437,6 +437,9 @@ public class CowTagsFragment extends Fragment {
     //스캔 중지
     private void stopScanInventory(){
 
+        //데이터 전송
+        sendReadingData();
+
         //중지
         if (RFIDController.mIsInventoryRunning){
             RFIDController.getInstance().stopInventory(new RfidListeners() {
@@ -456,8 +459,6 @@ public class CowTagsFragment extends Fragment {
             });
         }
 
-        //데이터 전송
-        sendReadingData();
     }
 
 
@@ -508,13 +509,14 @@ public class CowTagsFragment extends Fragment {
         String strDeviceHostName = RFIDController.mConnectedReader.getHostName();
 
         //데이터 준비 (태그 데이터)
+        ArrayList<String> hasTagIds = new ArrayList<>(); //TAGNO 중복 방지
         ArrayList<ReqInsertTagData> reqInsertTagList = new ArrayList<>();
         for (CowTagCell cell : cowTagList){
-            if(cell.COUNT > 0){
+
+            if(cell.COUNT > 0 && !hasTagIds.contains(cell.TAGNO)){
                 ReqInsertTagData reqInsertTagData = new ReqInsertTagData(cell);
-                reqInsertTagData.READER_SERIAL_NO = strDeviceHostName;
                 reqInsertTagList.add(reqInsertTagData);
-                break;
+                hasTagIds.add(cell.TAGNO);
             }
         }
         if(reqInsertTagList.size() == 0){
