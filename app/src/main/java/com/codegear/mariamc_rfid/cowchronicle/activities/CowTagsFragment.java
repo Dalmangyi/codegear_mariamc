@@ -262,8 +262,8 @@ public class CowTagsFragment extends Fragment {
     //소 리스트 불러오기
     private void loadCowList(){
 
-//        Call<ResCowList> call = RetrofitClient.getApiService().getCowList(mSelectedFarmCode);
-        Call<ResCowList> call = RetrofitClient.getApiService().getCowList("219");
+        Call<ResCowList> call = RetrofitClient.getApiService().getCowList(mSelectedFarmCode);
+//        Call<ResCowList> call = RetrofitClient.getApiService().getCowList("219"); //TODO - TEST API
         RetrofitClient.commonCall(ResCowList.class, mActivity, call, null, new RetrofitClient.OnStateListener<ResCowList>() {
             @Override
             public void OnSuccess(ResCowList res) {
