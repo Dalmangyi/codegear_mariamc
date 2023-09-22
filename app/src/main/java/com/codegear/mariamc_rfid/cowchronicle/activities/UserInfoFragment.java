@@ -79,20 +79,11 @@ public class UserInfoFragment extends Fragment {
         tvFarmNames.setText(strFarmList);
 
         //가입자 정보
-        String membership = resLogin.membership_nm;
         String company = resLogin.cmpy;
         String user_name = resLogin.usr_nm;
-        String strMemberName = "";
-        if(membership == "Premium"){
-            //프리미엄 사용자
-            strMemberName += user_name + "\n";
-            strMemberName += "(프리미엄 회원)";
-        }else{
-            strMemberName += user_name + "\n";
-            strMemberName += "("+membership+" 회원)";
-        }
-
-        tvMemberName.setText(strMemberName);
+        String membership = resLogin.membership_nm;
+        String strMemberShipName = "("+membership+" 회원)";
+        tvMemberName.setText(""+company+"\n"+user_name+"\n"+strMemberShipName);
     }
 
     private void goIntentLogin(){
