@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -168,10 +169,6 @@ public class UserLoginActivity extends BaseActivity {
         String strPwd = etLoginPassword.getText().toString().trim();
         Boolean isAutoLogin = cbIsAutoLogin.isChecked();
 
-        //TODO - DebugCode
-        strId = "chalet2cha";
-        strPwd = "1519";
-
         if (!btnNavigationBottom1.isSelected() && !btnNavigationBottom2.isSelected()) {
             dialogLoading.dismiss();
             CustomDialog.showSimple(mContext, R.string.login_need_select_page_button);
@@ -208,14 +205,11 @@ public class UserLoginActivity extends BaseActivity {
 
         //비밀번호 해쉬화
         String strHashedPwd = MD5Util.convert(strPwd);
-        //TODO - DebugCode
-//        strHashedPwd = "408bad4df16b6df0997573f3d65f8f13";
 
         //Request Query Map
         Map reqMap = new HashMap();
         reqMap.put("userid",strId);
         reqMap.put("password",strHashedPwd);
-//        reqMap.put("snkey","KKEF-33FKE-KLMN");
         reqMap.put("snkey", AndroidUtil.getDeviceId(mContext));
         reqMap.put("latitude",""+latitude);
         reqMap.put("lontitude",""+longitude);
