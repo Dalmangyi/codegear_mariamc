@@ -484,7 +484,9 @@ public class ScanAndPairFragment extends DialogFragment implements GoogleApiClie
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             pendingIntent = PendingIntent.getActivity(activity.getApplicationContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_MUTABLE);
         } else {
-            pendingIntent = PendingIntent.getActivity(activity.getApplicationContext(), 0, intent, 0);
+            //TODO - 무슨 의도...?
+            //pendingIntent = PendingIntent.getActivity(activity.getApplicationContext(), 0, intent, 0);
+            pendingIntent = PendingIntent.getActivity(activity.getApplicationContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         }
 
         // Notice that this is the same filter as in our manifest.

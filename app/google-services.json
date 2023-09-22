@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1076285326506",
+    "project_id": "cowcronicle",
+    "storage_bucket": "cowcronicle.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1076285326506:android:b6ba295ba5f9fa22d8fcd3",
+        "android_client_info": {
+          "package_name": "com.codegear.mariamc_rfid"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBuudQkdI9HAuGIW6I_lWuKUWldvMT2DUw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

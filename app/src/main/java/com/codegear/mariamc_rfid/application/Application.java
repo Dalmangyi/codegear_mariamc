@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.media.ToneGenerator;
 import android.nfc.NdefMessage;
 import android.nfc.NfcAdapter;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Parcelable;
 import android.util.ArrayMap;
@@ -26,6 +27,7 @@ import com.codegear.mariamc_rfid.rfidreader.settings.ProfileContent;
 import com.codegear.mariamc_rfid.scanner.helpers.AvailableScanner;
 import com.codegear.mariamc_rfid.scanner.helpers.Foreground;
 import com.codegear.mariamc_rfid.scanner.helpers.ScannerAppEngine;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.zebra.rfid.api3.Antennas;
 import com.zebra.rfid.api3.BEEPER_VOLUME;
 import com.zebra.rfid.api3.DYNAMIC_POWER_OPTIMIZATION;
@@ -273,10 +275,13 @@ public class Application extends android.app.Application {
 
 
     public static int minScreenWidth = 360;
+    private FirebaseAnalytics mFirebaseAnalytics;
 
     @Override
     public void onCreate() {
         super.onCreate();
+        // Obtain the FirebaseAnalytics instance.
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
         Foreground.init(this);
         //this keyword referring to Context of the sample application
         sdkHandler = new SDKHandler(this, false);
@@ -291,6 +296,10 @@ public class Application extends android.app.Application {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
+        Bundle bundle = new Bundle();
+        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "TEST APP");
+        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.APP_OPEN, bundle);
     }
 
     /**

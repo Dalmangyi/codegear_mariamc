@@ -21,11 +21,11 @@ android {
     }
 
     signingConfigs {
-        config {
-            storeFile file('../RFIDreaderX_KEYSTORE.jks')
-            keyAlias "RFID_READER_X"
-            storePassword System.getenv("KEY_STORE_PWD")
-            keyPassword System.getenv("KEY_PWD")
+        release {
+            storeFile file('mariamc.keystore')
+            storePassword "mariamc@2023"
+            keyAlias "key0"
+            keyPassword "mariamc@2023"
         }
     }
     compileSdkVersion 33
@@ -37,29 +37,29 @@ android {
         versionCode 1
         versionName "1.0.1"
         vectorDrawables.useSupportLibrary = true
-        signingConfig signingConfigs.config
+        signingConfig signingConfigs.release
     }
+
     buildTypes {
+        debug {
+            signingConfig signingConfigs.debug
+        }
+
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.config
+            signingConfig signingConfigs.release
             android.applicationVariants.all { variant ->
                 variant.outputs.all {
                     outputFileName = "MariAMC-" + defaultConfig.versionName + ".apk"
                 }
             }
         }
-
-        debug {
-            signingConfig signingConfigs.debug
-        }
     }
     compileOptions {
         sourceCompatibility = 11
         targetCompatibility = 11
     }
-//    buildToolsVersion '30.0.3'
     buildToolsVersion '33.0.1'
     namespace 'com.codegear.mariamc_rfid'
 
@@ -103,4 +103,5 @@ dependencies {
 
     implementation platform('com.google.firebase:firebase-bom:32.3.1')
     implementation("com.google.firebase:firebase-crashlytics")
+    implementation("com.google.firebase:firebase-analytics")
 }
