@@ -26,11 +26,15 @@
             android:text=""
             android:textSize="14dp"
             android:lines="2"
+            android:textAllCaps="false"
             android:textColor="@color/white"
             android:drawableEnd="@drawable/baseline_arrow_drop_down_24"
             android:drawableTint="@color/white"
-            tools:text="제2ㅇㅇ목장 - ㅇㅇㅇasdfasdfasdf asdf asdfasdfasdf111asdflk jas;dfklj asdf"
-            android:gravity="center"/>
+            tools:text="제2ㅇㅇ목장 - ㅇㅇㅇaslasdfsdfzzzzsdfsdkfiou jas;dfklj asdf"
+            android:gravity="center"
+            android:ellipsize="end"
+            android:breakStrategy="simple"
+            android:maxLines="2"/>
 
         <com.xw.repo.BubbleSeekBar
             android:id="@+id/bsbDistancePower"
