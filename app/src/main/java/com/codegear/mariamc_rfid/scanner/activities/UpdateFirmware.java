@@ -871,27 +871,6 @@ public class UpdateFirmware extends Fragment implements NavigationView.OnNavigat
         return getSingleStringValue(outXML);
     }
 
-    private void ShowNoPlugInFoundDialog() {
-        //if(!isFinishing())
-        {
-            final Dialog dialog = new Dialog(getActivity());
-            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-            dialog.setContentView(R.layout.dialog_no_plugin);
-            dialog.setCancelable(false);
-            dialog.setCanceledOnTouchOutside(false);
-            dialog.show();
-            TextView declineButton = (TextView) dialog.findViewById(R.id.btn_ok);
-            // if decline button is clicked, close the custom dialog
-            declineButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    // Close dialog
-                    dialog.dismiss();
-                }
-            });
-        }
-    }
-
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();

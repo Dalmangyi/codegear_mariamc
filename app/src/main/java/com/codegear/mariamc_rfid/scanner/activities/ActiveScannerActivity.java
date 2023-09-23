@@ -887,13 +887,6 @@ public class ActiveScannerActivity extends BaseActivity implements  /*Navigation
         new FindScannerTask(scannerID).execute();
     }
 
-    public void loadSampleBarcodes(View view) {
-        Intent intent = new Intent(this, SampleBarcodes.class);
-        intent.putExtra(Constants.SCANNER_ID, scannerID);
-        intent.putExtra(Constants.SCANNER_NAME, getIntent().getStringExtra(Constants.SCANNER_NAME));
-        startActivity(intent);
-    }
-
 
     private class MyAsyncTask extends AsyncTask<String, Integer, Boolean> {
         int scannerId;

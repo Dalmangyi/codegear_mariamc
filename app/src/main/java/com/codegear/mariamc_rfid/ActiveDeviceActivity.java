@@ -2276,13 +2276,6 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
         new FindScannerTask(scannerID).execute();
     }
 
-    public void loadSampleBarcodes(View view) {
-        Intent intent = new Intent(this, SampleBarcodes.class);
-        intent.putExtra(com.codegear.mariamc_rfid.scanner.helpers.Constants.SCANNER_ID, scannerID);
-        intent.putExtra(com.codegear.mariamc_rfid.scanner.helpers.Constants.SCANNER_NAME, getIntent().getStringExtra(com.codegear.mariamc_rfid.scanner.helpers.Constants.SCANNER_NAME));
-        startActivity(intent);
-    }
-
 
     private class MyAsyncTask extends AsyncTask<String, Integer, Boolean> {
         int scannerId;

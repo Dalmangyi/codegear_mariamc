@@ -222,54 +222,6 @@ public class PairNewScannerActivity extends BaseActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-    /*    // Handle navigation view item clicks here.
-        int id = item.getItemId();
-        Intent intent;
-        if(id==R.id.nav_pair_device){
-            if(Application.isAnyScannerConnected) {
-                AlertDialog.Builder dlg = new  AlertDialog.Builder(this);
-                dlg.setTitle("This will disconnect your current scanner");
-                //dlg.setIcon(android.R.drawable.ic_dialog_alert);
-                dlg.setPositiveButton("Continue", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int arg) {
-
-                        disconnect(Application.currentConnectedScannerID);
-                        Application.barcodeData.clear();
-                        Application.currentScannerId =Application.SCANNER_ID_NONE;
-                        finish();
-                        Intent intent = new Intent(PairNewScannerActivity.this, PairNewScannerActivity.class);
-                        startActivity(intent);
-                    }
-                });
-
-                dlg.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int arg) {
-
-                    } });
-                dlg.show();
-
-            }
-        }else if (id == R.id.nav_devices) {
-            intent = new Intent(this, ScannersActivity.class);
-            startActivity(intent);
-        }else if (id == R.id.nav_find_cabled_scanner) {
-            intent = new Intent(this, FindCabledScanner.class);
-            startActivity(intent);
-        }else if (id == R.id.nav_connection_help) {
-            intent = new Intent(this, ConnectionHelpActivity2.class);
-            startActivity(intent);
-        } else if (id == R.id.nav_settings) {
-            intent = new Intent(this, SettingsActivity.class);
-            startActivity(intent);
-        } else if (id == R.id.nav_about) {
-            intent = new Intent(this, AboutActivity.class);
-            startActivity(intent);
-        }
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-
-        return true;*/
         return false;
     }
 

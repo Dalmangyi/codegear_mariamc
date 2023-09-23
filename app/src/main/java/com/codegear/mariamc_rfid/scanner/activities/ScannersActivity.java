@@ -464,7 +464,7 @@ public class ScannersActivity extends BaseActivity implements NavigationView.OnN
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            progressDialog = new CustomProgressDialog(ScannersActivity.this, "Connecting To scanner. 잠시만 기다려주세요...");
+            progressDialog = new CustomProgressDialog(ScannersActivity.this, "장치 연결중입니다. 잠시만 기다려주세요...");
             progressDialog.setCancelable(false);
             progressDialog.show();
             progressDialog.setOnCancelListener(new ProgressDialog.OnCancelListener() {
