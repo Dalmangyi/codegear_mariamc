@@ -219,7 +219,7 @@ public class CowTagsFragment extends Fragment {
     public void onResume() {
         super.onResume();
 
-        stopScanInventory();
+//        stopScanInventory();
         initSelectFarm();
         loadCowList();
         loadCurrentAntennaConfig();
@@ -240,7 +240,7 @@ public class CowTagsFragment extends Fragment {
     public void onDestroy() {
         super.onDestroy();
 
-        stopScanInventory();
+//        stopScanInventory();
     }
 
     //프로필 초기화
@@ -284,13 +284,13 @@ public class CowTagsFragment extends Fragment {
             public void OnSuccess(ResCowList res) {
                 mCowList = res.data;
 
-                //TODO - TEST
-                for(int i=0; i<mCowList.size(); i++){
-                    if(i%2==0){
-                        Map<String, String> cowItem = mCowList.get(i);
-                        cowItem.put("TAGNO","0541100000001666");
-                    }
-                }
+//                TODO - TEST
+//                for(int i=0; i<mCowList.size(); i++){
+//                    if(i%2==0){
+//                        Map<String, String> cowItem = mCowList.get(i);
+//                        cowItem.put("TAGNO","0541100000001666");
+//                    }
+//                }
 
                 //리스트 새로고침
                 refreshRecyclerView();
