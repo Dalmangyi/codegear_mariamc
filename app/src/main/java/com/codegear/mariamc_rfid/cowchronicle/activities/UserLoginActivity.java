@@ -24,6 +24,7 @@ import android.widget.EditText;
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 
+import com.codegear.mariamc_rfid.BuildConfig;
 import com.codegear.mariamc_rfid.DeviceDiscoverActivity;
 import com.codegear.mariamc_rfid.R;
 import com.codegear.mariamc_rfid.cowchronicle.consts.CowChronicleScreenEnum;
@@ -171,6 +172,11 @@ public class UserLoginActivity extends BaseActivity {
         Boolean isAutoLogin = cbIsAutoLogin.isChecked();
 
 
+        if(BuildConfig.DEBUG){
+            strId = "chalet2cha";
+            strPwd = "1519";
+        }
+
         if (strId.isEmpty() || strPwd.isEmpty()) {
             dialogLoading.dismiss();
             CustomDialog.showSimple(mContext, "아이디 또는 비밀번호를 입력해주세요.");
@@ -194,7 +200,7 @@ public class UserLoginActivity extends BaseActivity {
         login(strId, strPwd, isAutoLogin, pageNum);
     }
 
-    private void login(final String strId, final String strPwd, final boolean isAutoLogin, final int movePageNumber) {
+    private void login(String strId, String strPwd, final boolean isAutoLogin, final int movePageNumber) {
 
         //위치 정보 가져오기
 
@@ -202,6 +208,8 @@ public class UserLoginActivity extends BaseActivity {
             gpsTracker.showSettingsAlert();
             return;
         }
+
+
 
         double latitude = gpsTracker.getLatitude();
         double longitude = gpsTracker.getLongitude();
