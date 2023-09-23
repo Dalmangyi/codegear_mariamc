@@ -40,6 +40,7 @@ import com.codegear.mariamc_rfid.cowchronicle.utils.PermissionUtil;
 import com.codegear.mariamc_rfid.rfidreader.rfid.RFIDController;
 import com.codegear.mariamc_rfid.scanner.activities.BaseActivity;
 
+import java.io.IOException;
 import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.Map;
@@ -169,13 +170,15 @@ public class UserLoginActivity extends BaseActivity {
         String strPwd = etLoginPassword.getText().toString().trim();
         Boolean isAutoLogin = cbIsAutoLogin.isChecked();
 
+
+        if (strId.isEmpty() || strPwd.isEmpty()) {
+            dialogLoading.dismiss();
+            CustomDialog.showSimple(mContext, "아이디 또는 비밀번호를 입력해주세요.");
+            return;
+        }
         if (!btnNavigationBottom1.isSelected() && !btnNavigationBottom2.isSelected()) {
             dialogLoading.dismiss();
             CustomDialog.showSimple(mContext, R.string.login_need_select_page_button);
-            return;
-        } else if (strId.isEmpty() || strPwd.isEmpty()) {
-            dialogLoading.dismiss();
-            CustomDialog.showSimple(mContext, "아이디 또는 비밀번호를 입력해주세요.");
             return;
         }
 
@@ -225,7 +228,14 @@ public class UserLoginActivity extends BaseActivity {
                 dialogLoading.dismiss();
 
                 if (!response.isSuccessful()) {
-                    CustomDialog.showSimpleError(mContext, "서버 담당자에게 문의해주세요. ("+response.code()+")\n"+response.message());
+
+                    String errMessage = "";
+                    try {
+                        errMessage = response.errorBody().string();
+                    } catch (IOException e) {
+//                        throw new RuntimeException(e);
+                    }
+                    CustomDialog.showSimpleError(mContext, "서버 담당자에게 문의해주세요. ("+response.code()+")\n"+errMessage);
                     return;
                 }
 

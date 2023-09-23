@@ -69,7 +69,7 @@
                         android:lines="1"
                         android:maxLines="1"
                         android:privateImeOptions="defaultInputmode=english;"
-                        android:text="chalet2cha"
+                        android:text=""
                         android:textColorHint="@color/light_grey"
                         android:textSize="16dp" />
 
@@ -86,7 +86,7 @@
                         android:lines="1"
                         android:maxLines="1"
                         android:privateImeOptions="defaultInputmode=english;"
-                        android:text="1519"
+                        android:text=""
                         android:textColorHint="@color/light_grey"
                         android:textSize="16dp" />
 
