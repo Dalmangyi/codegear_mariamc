@@ -39,7 +39,7 @@ public class FarmSelectFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mActivity = (AppCompatActivity) getActivity();
-        mActivity.getSupportActionBar().setTitle("목장선택");
+        mActivity.getSupportActionBar().setTitle("목장 선택");
 
 
         mFarmSelectFragmentView = inflater.inflate(R.layout.fragment_farm_select, null, false);

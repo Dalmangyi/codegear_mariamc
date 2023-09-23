@@ -390,10 +390,7 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
             }
 
             @Override
-            public void onDrawerOpened(@NonNull View drawerView) {
-                if (viewPager.getCurrentItem() != mAdapter.getCurrentActivePosition()) {
-                    viewPager.setCurrentItem(mAdapter.getCurrentActivePosition());
-                }
+            public void onDrawerOpened(@NonNull View drawerView) { 
                 if (RFIDController.BatteryData != null) {
                     deviceStatusReceived(RFIDController.BatteryData.getLevel(), RFIDController.BatteryData.getCharging(), RFIDController.BatteryData.getCause());
                 }
@@ -2506,7 +2503,7 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
                     break;
 
                 case READER_LIST_TAB:
-                    PageTitle = "장치";
+                    PageTitle = "장치 설정";
                     mAdapter.setReaderListMOde(READER_LIST_TAB);
                     getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(READERS_TAB)).commit();
                     break;
