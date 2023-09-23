@@ -123,6 +123,11 @@ public class CowTagsFragment extends Fragment {
         btnDistancePowerApply = mMainView.findViewById(R.id.btnDistancePowerApply);
         btnDistancePowerApply.setOnClickListener(v -> {
 
+            if (RFIDController.mConnectedReader == null || !RFIDController.mConnectedReader.isConnected()) {
+                CustomDialog.showSimple(mActivity, "장치 연결이 끊겨있습니다.\n장치설정 화면으로 이동해서 연결후 다시 시도해주세요.");
+                return;
+            }
+
             if(btnScan.isSelected()){
                 CustomDialog.showSimple(mActivity, "스캔을 정지 후, 다시 시도해 주세요.");
                 return;
@@ -142,8 +147,13 @@ public class CowTagsFragment extends Fragment {
         btnScan = mMainView.findViewById(R.id.btnScan);
         btnScan.setOnClickListener(v -> {
             boolean isSelected = v.isSelected();
+            if(!isSelected){
+                if (RFIDController.mConnectedReader == null || !RFIDController.mConnectedReader.isConnected()) {
+                    CustomDialog.showSimple(mActivity, "장치 연결이 끊겨있습니다.\n장치설정 화면으로 이동해서 연결후 다시 시도해주세요.");
+                    return;
+                }
+            }
             v.setSelected(!isSelected);
-
             setScanRunning(!isSelected);
         });
 
@@ -170,6 +180,11 @@ public class CowTagsFragment extends Fragment {
         spMemoryBankIds.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (RFIDController.mConnectedReader == null || !RFIDController.mConnectedReader.isConnected()) {
+                    CustomDialog.showSimple(mActivity, "장치 연결이 끊겨있습니다.\n장치설정 화면으로 이동해서 연결후 다시 시도해주세요..");
+                    return;
+                }
+
                 if(mScanRunning){
                     CustomDialog.showSimple(mActivity, "스캔을 정지하고 변경할 수 있습니다.");
                 }
@@ -215,10 +230,10 @@ public class CowTagsFragment extends Fragment {
         super.onStop();
 
         stopScanInventory();
-        if(antennaTask != null && antennaTask.getStatus() == AsyncTask.Status.RUNNING){
-            antennaTask.cancel(true);
-            antennaTask = null;
-        }
+//        if(antennaTask != null && antennaTask.getStatus() == AsyncTask.Status.RUNNING){
+//            antennaTask.cancel(true);
+//            antennaTask = null;
+//        }
     }
 
     @Override
@@ -441,24 +456,25 @@ public class CowTagsFragment extends Fragment {
         sendReadingData();
 
         //중지
-        if (RFIDController.mIsInventoryRunning){
-            RFIDController.getInstance().stopInventory(new RfidListeners() {
-                @Override
-                public void onSuccess(Object object) {
-                }
+        if (RFIDController.mConnectedReader != null && RFIDController.mConnectedReader.isConnected()) {
+            if (RFIDController.mIsInventoryRunning){
+                RFIDController.getInstance().stopInventory(new RfidListeners() {
+                    @Override
+                    public void onSuccess(Object object) {
+                    }
 
-                @Override
-                public void onFailure(Exception exception) {
-                    CustomDialog.showSimpleError(mActivity, "스캔 정지 에러 : "+exception.getMessage());
-                }
+                    @Override
+                    public void onFailure(Exception exception) {
+                        CustomDialog.showSimpleError(mActivity, "스캔 정지 에러 : "+exception.getMessage());
+                    }
 
-                @Override
-                public void onFailure(String message) {
-                    CustomDialog.showSimpleError(mActivity, "스캔 정지 에러 : "+message);
-                }
-            });
+                    @Override
+                    public void onFailure(String message) {
+                        CustomDialog.showSimpleError(mActivity, "스캔 정지 에러 : "+message);
+                    }
+                });
+            }
         }
-
     }
 
 
@@ -504,9 +520,6 @@ public class CowTagsFragment extends Fragment {
         if (cowTagList.size() == 0){
             return;
         }
-
-        //데이터 준비 (리더기 정보)
-        String strDeviceHostName = RFIDController.mConnectedReader.getHostName();
 
         //데이터 준비 (태그 데이터)
         ArrayList<String> hasTagIds = new ArrayList<>(); //TAGNO 중복 방지

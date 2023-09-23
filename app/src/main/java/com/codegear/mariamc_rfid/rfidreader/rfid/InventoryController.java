@@ -178,6 +178,7 @@ public class InventoryController {
 
             OperationFailureException exception;
             InvalidUsageException exceptionIN;
+            NullPointerException exceptionNull;
 
 
             @Override
@@ -204,6 +205,9 @@ public class InventoryController {
                     if( e!= null && e.getStackTrace().length>0){ Log.e(TAG, e.getStackTrace()[0].toString()); }
                     isSuccess = false;
                     exception = e;
+                } catch (NullPointerException e){
+                    isSuccess = false;
+                    exceptionNull = e;
                 }
                 return isSuccess;
             }
