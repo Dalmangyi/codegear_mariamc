@@ -7,7 +7,6 @@ import com.codegear.mariamc_rfid.cowchronicle.ui.cowtags.CowTagCell;
 import com.codegear.mariamc_rfid.rfidreader.rfid.RFIDController;
 import com.zebra.rfid.api3.ACCESS_OPERATION_CODE;
 import com.zebra.rfid.api3.ACCESS_OPERATION_STATUS;
-import com.zebra.rfid.api3.MEMORY_BANK;
 import com.zebra.rfid.api3.TagData;
 
 import java.util.ArrayList;
@@ -23,7 +22,7 @@ public class CowTagsModel {
     private final ArrayList<Map<String, String>> mInputResList = new ArrayList<Map<String, String>>(); //입력 데이터
     private final ArrayList<CowTagCell> mCowInfoList = new ArrayList<CowTagCell>(); //출력될 테이블 행
     private final ArrayList<TagData> mTagList = new ArrayList<TagData>(); //태그 데이터
-
+    private Map<String, Integer> mTagCountMap = new HashMap<>();
 
     /*
     inputResList
@@ -98,6 +97,7 @@ public class CowTagsModel {
 
     public void resetTagData(){
         this.mTagList.clear();
+        this.mTagCountMap.clear();
 
         for(CowTagCell cell : mCowInfoList){
             cell.COUNT = 0;
@@ -115,11 +115,9 @@ public class CowTagsModel {
 
                 //태그 정보 복사
                 this.mTagList.addAll(Arrays.asList(tagList));
-                ArrayList<TagData> copiedTagList = new ArrayList<>(mTagList);
 
                 //태그 데이터 추출
-                Map<String, Integer> mapTagCount = new HashMap<>();
-                for(TagData tagData:copiedTagList){
+                for(TagData tagData:tagList){
 
                     //기본 데이터 조회
                     String tagId = tagData.getTagID();
@@ -158,12 +156,12 @@ public class CowTagsModel {
 
 
                     //태그 개수 세기
-                    Integer tagCount = mapTagCount.get(tagId);
+                    Integer tagCount = mTagCountMap.get(tagId);
                     if (tagCount == null){
                         tagCount = 0;
                     }
                     tagCount++;
-                    mapTagCount.put(tagId, tagCount);
+                    mTagCountMap.put(tagId, tagCount);
 
                     //태그 데이터 반영 (COUNT)
                     List<CowTagCell> filteredCowTagCells = mCowInfoList.stream()
