@@ -22,14 +22,7 @@ import com.codegear.mariamc_rfid.rfidreader.rfid.RFIDController;
 
 import static com.codegear.mariamc_rfid.rfidreader.home.RFIDBaseActivity.filter;
 
-/**
- * A simple {@link android.support.v4.app.Fragment} subclass.
- * <p/>
- * Use the {@link AccessOperationsKillFragment#newInstance} factory method to
- * create an instance of this fragment.
- * <p/>
- * Fragment to handle the Access Kill operation.
- */
+
 public class AccessOperationsKillFragment extends Fragment implements AccessOperationsFragment.OnRefreshListener {
     private AutoCompleteTextView tagIDField;
     private ArrayAdapter<String> adapter;

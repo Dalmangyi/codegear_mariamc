@@ -348,7 +348,7 @@
     <string name="msg_read_succeed">읽기 성공</string>
     <string name="msg_write_succeed">쓰기 성공</string>
     <string name="msg_lock_succeed">잠금 성공</string>
-    <string name="msg_kill_succeed">죽이기 성공</string>
+    <string name="msg_kill_succeed">소멸 성공</string>
     <string name="err_access_op_failed">태그 쓰기 작업이 실패했습니다.</string>
     <string name="password_connection_title">연결 비밀번호가 필요합니다!</string>
     <string name="hint_password">비밀번호</string>

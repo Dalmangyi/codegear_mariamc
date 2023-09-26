@@ -24,15 +24,7 @@ import com.codegear.mariamc_rfid.rfidreader.common.hextoascii;
 import com.codegear.mariamc_rfid.rfidreader.rfid.RFIDController;
 
 import static com.codegear.mariamc_rfid.rfidreader.home.RFIDBaseActivity.filter;
-
-/**
- * A simple {@link android.support.v4.app.Fragment} subclass.
- * <p/>
- * Use the {@link AccessOperationsLockFragment#newInstance} factory method to
- * create an instance of this fragment.
- * <p/>
- * Fragment to handle the Access Lock Operation
- */
+ 
 public class AccessOperationsLockFragment extends Fragment implements AdapterView.OnItemSelectedListener, AccessOperationsFragment.OnRefreshListener {
     private LOCK_PRIVILEGE lockAccessPermission = LOCK_PRIVILEGE.LOCK_PRIVILEGE_READ_WRITE;
     private String lockMemoryBank = "epc";
@@ -125,21 +117,6 @@ public class AccessOperationsLockFragment extends Fragment implements AdapterVie
         super.onDetach();
     }
 
-    public void handleTagResponse(final TagData response_tagData) {
-        getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                ACCESS_OPERATION_STATUS readAccessOperation = null;
-
-                if (readAccessOperation != null) {
-                    if (response_tagData.getOpStatus() != null && !response_tagData.getOpStatus().equals(ACCESS_OPERATION_STATUS.ACCESS_SUCCESS)) {
-                        Toast.makeText(getActivity(), readAccessOperation.getValue(), Toast.LENGTH_SHORT).show();
-                    } else
-                        Toast.makeText(getActivity(), R.string.msg_lock_succeed, Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-    }
 
     /**
      * method to get lock access Permission type
@@ -165,7 +142,6 @@ public class AccessOperationsLockFragment extends Fragment implements AdapterVie
             switch (pos) {
                 case 0:
                     lockAccessPermission = LOCK_PRIVILEGE.LOCK_PRIVILEGE_READ_WRITE;
-                    ;
                     break;
                 case 1:
                     lockAccessPermission = LOCK_PRIVILEGE.LOCK_PRIVILEGE_PERMA_LOCK;

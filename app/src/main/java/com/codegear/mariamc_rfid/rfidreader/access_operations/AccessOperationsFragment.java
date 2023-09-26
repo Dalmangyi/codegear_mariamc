@@ -17,6 +17,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.codegear.mariamc_rfid.ActiveDeviceActivity;
 import com.codegear.mariamc_rfid.DeviceDiscoverActivity;
+import com.codegear.mariamc_rfid.cowchronicle.ui.activities.CowChronicleActivity;
 import com.codegear.mariamc_rfid.rfidreader.home.RFIDBaseActivity;
 import com.zebra.rfid.api3.ReaderDevice;
 import com.zebra.rfid.api3.TagData;
@@ -27,14 +28,6 @@ import com.codegear.mariamc_rfid.rfidreader.rfid.RFIDController;
 import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.INVENTORY_TAB;
 
 
-/**
- * A simple {@link androidx.fragment.app.Fragment} subclass.
- * <p/>
- * Use the {@link AccessOperationsFragment#newInstance} factory method to
- * create an instance of this fragment.
- * <p/>
- * Fragment to act as a Holder for Access Tabs(Read/Write, Lock and Kill)
- */
 public class AccessOperationsFragment extends Fragment {
     private ViewPager viewPager;
     private AccessOperationsAdapter mAdapter;
@@ -64,7 +57,34 @@ public class AccessOperationsFragment extends Fragment {
     }
 
     @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        setRetainInstance(true);
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_access_operations, container, false);
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        // Initialization
+        viewPager = (ViewPager) getActivity().findViewById(R.id.accessOperationsPager);
+        mAdapter = new AccessOperationsAdapter(getActivity().getSupportFragmentManager());
+        viewPager.setAdapter(mAdapter);
+        mAdapter.notifyDataSetChanged();
+        //
+        SharedPreferences settings = getActivity().getSharedPreferences(Constants.APP_SETTINGS_STATUS, 0);
+        rwAdvancedOptions = settings.getBoolean(Constants.ACCESS_ADV_OPTIONS, false);
+
+
+    }
+
+    @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        if(getActivity() instanceof CowChronicleActivity){
+            super.onCreateOptionsMenu(menu, inflater);
+            return;
+        }
+
         inflater.inflate(R.menu.menu_advanced_option, menu);
 
         menu.findItem(R.id.action_inventory).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
@@ -85,28 +105,6 @@ public class AccessOperationsFragment extends Fragment {
                 break;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        setRetainInstance(true);
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_access_operations, container, false);
-    }
-
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        // Initialization
-        viewPager = (ViewPager) getActivity().findViewById(R.id.accessOperationsPager);
-        mAdapter = new AccessOperationsAdapter(getActivity().getSupportFragmentManager());
-        viewPager.setAdapter(mAdapter);
-        mAdapter.notifyDataSetChanged();
-        //
-        SharedPreferences settings = getActivity().getSharedPreferences(Constants.APP_SETTINGS_STATUS, 0);
-        rwAdvancedOptions = settings.getBoolean(Constants.ACCESS_ADV_OPTIONS, false);
-
-
     }
 
     @Override

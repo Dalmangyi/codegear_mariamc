@@ -40,14 +40,6 @@ import java.util.TimerTask;
 
 import static com.codegear.mariamc_rfid.rfidreader.home.RFIDBaseActivity.filter;
 
-/**
- * A simple {@link android.support.v4.app.Fragment} subclass.
- * <p/>
- * Use the {@link AccessOperationsReadWriteFragment#newInstance} factory method to
- * create an instance of this fragment.
- * <p/>
- * Fragment to handle the Access Read/Write Operations.
- */
 public class AccessOperationsReadWriteFragment extends Fragment implements AccessOperationsFragment.OnRefreshListener {
 
     public static Timer tLED;

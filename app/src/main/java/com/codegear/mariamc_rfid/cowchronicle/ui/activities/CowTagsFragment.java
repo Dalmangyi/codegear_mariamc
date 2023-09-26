@@ -4,6 +4,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -34,6 +37,7 @@ import com.codegear.mariamc_rfid.cowchronicle.models.CowTagsModel;
 import com.codegear.mariamc_rfid.cowchronicle.ui.dialog.CustomDialog;
 import com.codegear.mariamc_rfid.cowchronicle.utils.PixelUtil;
 import com.codegear.mariamc_rfid.cowchronicle.utils.SoundSearcher;
+import com.codegear.mariamc_rfid.rfidreader.access_operations.AccessOperationsFragment;
 import com.codegear.mariamc_rfid.rfidreader.rfid.RFIDController;
 import com.codegear.mariamc_rfid.rfidreader.rfid.RfidListeners;
 import com.codegear.mariamc_rfid.rfidreader.settings.ProfileContent;
@@ -86,6 +90,7 @@ public class CowTagsFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
         mActivity = (AppCompatActivity)getActivity();
         mActivity.getSupportActionBar().setTitle("전자이표");
 
@@ -203,7 +208,6 @@ public class CowTagsFragment extends Fragment {
     public void onResume() {
         super.onResume();
 
-//        stopScanInventory();
         initSelectFarm();
         loadCowList();
         loadCurrentAntennaConfig();
@@ -214,10 +218,6 @@ public class CowTagsFragment extends Fragment {
         super.onStop();
 
         stopScanInventory();
-//        if(antennaTask != null && antennaTask.getStatus() == AsyncTask.Status.RUNNING){
-//            antennaTask.cancel(true);
-//            antennaTask = null;
-//        }
     }
 
     @Override
@@ -225,6 +225,23 @@ public class CowTagsFragment extends Fragment {
         super.onDestroy();
 
 //        stopScanInventory();
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_tag_write, menu);
+
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.action_tag_write:
+                goTagWrite("");
+                break;
+        }
+        return true;
     }
 
     //프로필 초기화
@@ -542,6 +559,12 @@ public class CowTagsFragment extends Fragment {
         WebviewCowDetailFragment cowDetailFragment = new WebviewCowDetailFragment();
         cowDetailFragment.cowIdNum = cowIdNum;
         ((CowChronicleActivity)mActivity).replaceFragment(cowDetailFragment, true);
+    }
+
+    //태그쓰기 화면으로 이동
+    private void goTagWrite(String tagId){
+        AccessOperationsFragment accessOperationsFragment = new AccessOperationsFragment();
+        ((CowChronicleActivity)mActivity).replaceFragment(accessOperationsFragment, true);
     }
 
 }

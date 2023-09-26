@@ -1,0 +1,11 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".scanner.activities.MainActivity">
+
+    <item
+        android:id="@+id/action_tag_write"
+        android:title="@string/tag_write"
+        android:iconTint="@color/white"
+        app:showAsAction="never" />
+</menu>

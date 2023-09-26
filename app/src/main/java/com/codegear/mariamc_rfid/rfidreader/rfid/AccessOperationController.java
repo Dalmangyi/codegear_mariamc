@@ -42,7 +42,7 @@ public class AccessOperationController {
             readAccessParams.setAccessPassword(Long.decode("0X" + accessRwPassword));
         } catch (NumberFormatException nfe) {
             if( nfe!= null){ Log.e(TAG, nfe.getMessage()); }
-            rfidListeners.onFailure("Password field is empty, defaulting to 00");
+            rfidListeners.onFailure("비밀번호 필드가 비어 있으며, 기본값은 00입니다.");
         }
         readAccessParams.setCount(Integer.parseInt(lengthText));
         readAccessParams.setMemoryBank(getAccessRWMemoryBank(bankItem));
@@ -83,8 +83,7 @@ public class AccessOperationController {
 
     }
 
-    public void accessOperationsWrite(final String tagValue, String offsetText, String lengthText, String accessRWData, String accessRwPassword,
-                                      String bankItem, final RfidListeners rfidListeners) {
+    public void accessOperationsWrite(final String tagValue, String offsetText, String lengthText, String accessRWData, String accessRwPassword, String bankItem, final RfidListeners rfidListeners) {
         RFIDController.isAccessCriteriaRead = true;
         TagAccess tagAccess = new TagAccess();
         final TagAccess.WriteAccessParams writeAccessParams = tagAccess.new WriteAccessParams();
@@ -92,7 +91,7 @@ public class AccessOperationController {
             writeAccessParams.setAccessPassword(Long.decode("0X" + accessRwPassword));
         } catch (NumberFormatException nfe) {
             if( nfe!= null){ Log.e(TAG, nfe.getMessage()); }
-            rfidListeners.onFailure("Password field is empty, defaulting to 00");
+            rfidListeners.onFailure("비밀번호 필드가 비어 있으며, 기본값은 00입니다.");
         }
         writeAccessParams.setMemoryBank(getAccessRWMemoryBank(bankItem));
         writeAccessParams.setOffset(Integer.parseInt(offsetText));
@@ -163,7 +162,7 @@ public class AccessOperationController {
             lockAccessParams.setAccessPassword(Long.decode("0X" + accessRwPassword));
         } catch (NumberFormatException nfe) {
             if( nfe!= null){ Log.e(TAG, nfe.getMessage()); }
-            rfidListeners.onFailure("Password field is empty, defaulting to 00");
+            rfidListeners.onFailure("비밀번호 필드가 비어 있으며, 기본값은 00입니다.");
         }
         new AsyncTask<Void, Void, Boolean>() {
             private InvalidUsageException invalidUsageException;
@@ -210,7 +209,7 @@ public class AccessOperationController {
             killAccessParams.setKillPassword(Long.decode("0X" + accessRWpassword));
         } catch (NumberFormatException nfe) {
             if( nfe!= null){ Log.e(TAG, nfe.getMessage()); }
-            rfidListeners.onFailure("Password field is empty, defaulting to 00");
+            rfidListeners.onFailure("비밀번호 필드가 비어 있으며, 기본값은 00입니다.");
         }
         new AsyncTask<Void, Void, Boolean>() {
             private InvalidUsageException invalidUsageException;
@@ -269,6 +268,8 @@ public class AccessOperationController {
             } catch (InvalidUsageException e) {
                 if( e!= null && e.getStackTrace().length>0){ Log.e(TAG, e.getStackTrace()[0].toString()); }
             } catch (OperationFailureException e) {
+                if( e!= null && e.getStackTrace().length>0){ Log.e(TAG, e.getStackTrace()[0].toString()); }
+            } catch (NullPointerException e){
                 if( e!= null && e.getStackTrace().length>0){ Log.e(TAG, e.getStackTrace()[0].toString()); }
             }
         }
