@@ -48,7 +48,7 @@
 
         <!-- 카우크로니클 시작 액티비티 : UserLoginActivity -->
         <activity
-            android:name="com.codegear.mariamc_rfid.cowchronicle.activities.UserLoginActivity"
+            android:name=".cowchronicle.ui.activities.UserLoginActivity"
             android:configChanges="keyboardHidden|screenSize|fontScale"
             android:exported="true"
             android:label="@string/app_name"
@@ -74,7 +74,7 @@
 
         <!-- 카우크로니클 사용자 페이지 -->
         <activity
-            android:name="com.codegear.mariamc_rfid.cowchronicle.activities.CowChronicleActivity"
+            android:name=".cowchronicle.ui.activities.CowChronicleActivity"
             android:configChanges="keyboardHidden|screenSize|fontScale"
             android:exported="true"
             android:label="Cow Tag"

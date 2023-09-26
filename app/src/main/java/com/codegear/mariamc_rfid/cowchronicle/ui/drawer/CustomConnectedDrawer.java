@@ -1,14 +1,12 @@
 package com.codegear.mariamc_rfid.cowchronicle.ui.drawer;
 
 import android.content.Intent;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -21,11 +19,11 @@ import androidx.fragment.app.Fragment;
 import com.codegear.mariamc_rfid.ActiveDeviceActivity;
 import com.codegear.mariamc_rfid.DeviceDiscoverActivity;
 import com.codegear.mariamc_rfid.R;
-import com.codegear.mariamc_rfid.cowchronicle.activities.CowChronicleActivity;
-import com.codegear.mariamc_rfid.cowchronicle.activities.FarmSelectFragment;
-import com.codegear.mariamc_rfid.cowchronicle.activities.UserInfoFragment;
-import com.codegear.mariamc_rfid.cowchronicle.activities.UserLoginActivity;
-import com.codegear.mariamc_rfid.cowchronicle.activities.WebviewHomeFragment;
+import com.codegear.mariamc_rfid.cowchronicle.ui.activities.CowChronicleActivity;
+import com.codegear.mariamc_rfid.cowchronicle.ui.activities.FarmSelectFragment;
+import com.codegear.mariamc_rfid.cowchronicle.ui.activities.UserInfoFragment;
+import com.codegear.mariamc_rfid.cowchronicle.ui.activities.UserLoginActivity;
+import com.codegear.mariamc_rfid.cowchronicle.ui.activities.WebviewHomeFragment;
 import com.codegear.mariamc_rfid.cowchronicle.device.RFIDSingleton;
 import com.codegear.mariamc_rfid.cowchronicle.storage.UserStorage;
 import com.codegear.mariamc_rfid.cowchronicle.ui.dialog.CustomDialog;

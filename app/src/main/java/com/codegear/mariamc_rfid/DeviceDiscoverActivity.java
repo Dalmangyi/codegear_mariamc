@@ -36,8 +36,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.codegear.mariamc_rfid.application.Application;
-import com.codegear.mariamc_rfid.cowchronicle.activities.CowChronicleActivity;
-import com.codegear.mariamc_rfid.cowchronicle.activities.UserLoginActivity;
+import com.codegear.mariamc_rfid.cowchronicle.ui.activities.CowChronicleActivity;
+import com.codegear.mariamc_rfid.cowchronicle.ui.activities.UserLoginActivity;
 import com.codegear.mariamc_rfid.cowchronicle.consts.CowChronicleScreenEnum;
 import com.codegear.mariamc_rfid.cowchronicle.storage.UserStorage;
 import com.codegear.mariamc_rfid.cowchronicle.ui.dialog.CustomDialog;

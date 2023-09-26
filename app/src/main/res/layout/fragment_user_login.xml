@@ -6,7 +6,7 @@
     android:background="@color/white"
     android:orientation="vertical"
     android:gravity="center"
-    tools:context="com.codegear.mariamc_rfid.cowchronicle.activities.UserInfoFragment">
+    tools:context=".cowchronicle.ui.activities.UserInfoFragment">
 
     <View
         android:layout_width="wrap_content"

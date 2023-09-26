@@ -9,7 +9,7 @@
     android:paddingTop="@dimen/app_margin_left"
     android:paddingRight="@dimen/app_margin_right"
     android:paddingBottom="@dimen/app_margin_left"
-    tools:context="com.codegear.mariamc_rfid.cowchronicle.activities.CowTagsFragment">
+    tools:context=".cowchronicle.ui.activities.CowTagsFragment">
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
@@ -22,7 +22,6 @@
             android:layout_width="300dp"
             android:layout_height="50dp"
             android:background="@drawable/button_default_background"
-            android:onClick="clickFarmSearch"
             android:text=""
             android:textSize="14dp"
             android:lines="2"
