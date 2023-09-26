@@ -40,7 +40,7 @@ public class FarmSearchDialogCompat<T extends Searchable> extends BaseSearchDial
     protected void getView(View view) {
         setContentView(view);
         getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-        setCancelable(false);
+        setCancelable(true);
         TextView txtTitle = (TextView) view.findViewById(ir.mirrajabi.searchdialog.R.id.txt_title);
         final EditText searchBox = (EditText) view.findViewById(getSearchBoxId());
         txtTitle.setText(mTitle);

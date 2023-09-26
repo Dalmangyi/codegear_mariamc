@@ -111,7 +111,8 @@ public class FarmSelectFragment extends Fragment {
 
                 ArrayList<FarmModel> filteredList = new ArrayList<FarmModel>();
                 for(FarmModel farmModel: mFarmList){
-                    boolean isMatch = SoundSearcher.matchString(farmModel.getName(), charSequence.toString());
+                    String listName = farmModel.getName() + " " + farmModel.getOwnerName();
+                    boolean isMatch = SoundSearcher.matchString(listName, charSequence.toString());
                     if (isMatch){
                         filteredList.add(farmModel);
                     }
