@@ -22,7 +22,7 @@ android {
 
     signingConfigs {
         release {
-            storeFile file('mariamc.keystore')
+            storeFile file('../mariamc.keystore')
             storePassword "mariamc@2023"
             keyAlias "key0"
             keyPassword "mariamc@2023"
