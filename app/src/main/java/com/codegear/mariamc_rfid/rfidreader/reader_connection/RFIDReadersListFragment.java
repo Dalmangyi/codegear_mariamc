@@ -793,7 +793,7 @@ public class RFIDReadersListFragment extends Fragment implements IRFIDConnectTas
         } else {
             Constants.logAsMessage(Constants.TYPE_ERROR, "ReadersListFragment", "장치 이름이 올바르지 않거나 비어 있습니다.");
         }
-        //RFIDController.clearSettings();
+        RFIDController.clearSettings();
         deviceDisconnected();
 
     }

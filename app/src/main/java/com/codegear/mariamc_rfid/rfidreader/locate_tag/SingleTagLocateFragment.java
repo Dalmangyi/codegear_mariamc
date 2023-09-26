@@ -31,14 +31,6 @@ import com.zebra.rfid.api3.RFIDResults;
 
 import static com.codegear.mariamc_rfid.rfidreader.home.RFIDBaseActivity.filter;
 
-/**
- * A simple {@link androidx.fragment.app.Fragment} subclass.
- * <p/>
- * Use the {@link SingleTagLocateFragment#newInstance} factory method to
- * create an instance of this fragment.
- * <p/>
- * Fragment to handle locationing
- */
 public class SingleTagLocateFragment extends Fragment implements ResponseHandlerInterfaces.TriggerEventHandler, ResponseHandlerInterfaces.ResponseStatusHandler, LocateOperationsFragment.OnRefreshListener {
     private RangeGraph locationBar;
     //private TextView distance;

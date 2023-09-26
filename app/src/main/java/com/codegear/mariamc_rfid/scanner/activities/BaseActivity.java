@@ -495,12 +495,6 @@ public class BaseActivity extends AppCompatActivity implements ScannerAppEngine,
      * @param scannerId data tobe used to retrieve barcodes
      */
     public ArrayList<Barcode> getBarcodeData(ArrayList<Barcode> barcodes, int scannerId){
-        //ArrayList<Barcode> barcodes=new ArrayList<Barcode>();
-//        for(Barcode barcode:barcodeQueue){
-//            if(barcode.getFromScannerID()==scannerId){
-//                barcodes.add(barcode);
-//            }
-//        }
         barcodes = barcodeQueue;
         return barcodes;
     }

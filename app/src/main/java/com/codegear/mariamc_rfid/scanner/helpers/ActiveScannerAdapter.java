@@ -10,7 +10,7 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 
 import com.codegear.mariamc_rfid.scanner.fragments.SettingsFragment;
 import com.codegear.mariamc_rfid.scanner.fragments.AdvancedFragment;
-import com.codegear.mariamc_rfid.scanner.fragments.BarcodeFargment;
+import com.codegear.mariamc_rfid.scanner.fragments.BarcodeFragment;
 
 /**
  * Adapter to give the tabs for Active Scanner
@@ -47,7 +47,7 @@ public class ActiveScannerAdapter extends FragmentStatePagerAdapter {
 
             case 1:
                 Constants.logAsMessage(Constants.DEBUG_TYPE.TYPE_DEBUG, getClass().getSimpleName(), "2nd Tab Selected");
-                return BarcodeFargment.newInstance();
+                return BarcodeFragment.newInstance();
 
             case 2:
                 Constants.logAsMessage(Constants.DEBUG_TYPE.TYPE_DEBUG, getClass().getSimpleName(), "3rd Tab Selected");

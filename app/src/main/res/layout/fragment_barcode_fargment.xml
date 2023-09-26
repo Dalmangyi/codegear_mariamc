@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/light_gray"
-    tools:context="com.codegear.mariamc_rfid.scanner.fragments.BarcodeFargment">
+    tools:context="com.codegear.mariamc_rfid.scanner.fragments.BarcodeFragment">
 
 
 

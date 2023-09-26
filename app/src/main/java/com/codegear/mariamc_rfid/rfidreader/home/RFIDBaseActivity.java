@@ -1811,6 +1811,9 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler, Navigat
         this.menu = menu;
         if (RFIDController.BatteryData != null)
             setActionBarBatteryStatus(RFIDController.BatteryData.getLevel());
+        else{
+            setActionBarBatteryStatus(0);
+        }
         return true;
     }
     /**
@@ -1906,6 +1909,9 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler, Navigat
                 //update battery status as well here
                 if (RFIDController.BatteryData != null) {
                     setActionBarBatteryStatus(RFIDController.BatteryData.getLevel());
+                }
+                else{
+                    setActionBarBatteryStatus(0);
                 }
             }
         } else try {

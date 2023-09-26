@@ -1,6 +1,5 @@
 package com.codegear.mariamc_rfid;
 
-import static com.codegear.mariamc_rfid.DeviceDiscoverActivity.TAG_CONTENT_FRAGMENT;
 import static com.codegear.mariamc_rfid.application.Application.DEVICE_PREMIUM_PLUS_MODE;
 import static com.codegear.mariamc_rfid.application.Application.DEVICE_STD_MODE;
 import static com.codegear.mariamc_rfid.application.Application.RFD_DEVICE_MODE;
@@ -188,7 +187,6 @@ import com.codegear.mariamc_rfid.cowchronicle.utils.PixelUtil;
 import com.codegear.mariamc_rfid.rfidreader.common.Constants;
 import com.codegear.mariamc_rfid.rfidreader.common.CustomProgressDialog;
 import com.codegear.mariamc_rfid.rfidreader.locate_tag.LocateOperationsFragment;
-import com.codegear.mariamc_rfid.rfidreader.reader_connection.InitReadersListFragment;
 import com.codegear.mariamc_rfid.rfidreader.settings.ApplicationSettingsFragment;
 import com.codegear.mariamc_rfid.scanner.activities.SsaSetSymbologyActivity;
 import com.codegear.mariamc_rfid.scanner.activities.SymbologiesFragment;
@@ -246,7 +244,7 @@ import com.codegear.mariamc_rfid.scanner.activities.ScanSpeedAnalyticsActivity;
 import com.codegear.mariamc_rfid.scanner.activities.UpdateFirmware;
 import com.codegear.mariamc_rfid.scanner.activities.VibrationFeedback;
 import com.codegear.mariamc_rfid.scanner.fragments.AdvancedFragment;
-import com.codegear.mariamc_rfid.scanner.fragments.BarcodeFargment;
+import com.codegear.mariamc_rfid.scanner.fragments.BarcodeFragment;
 import com.codegear.mariamc_rfid.scanner.fragments.ReaderDetailsFragment;
 import com.codegear.mariamc_rfid.scanner.fragments.SettingsFragment;
 import com.codegear.mariamc_rfid.scanner.fragments.Static_ipconfig;
@@ -306,7 +304,7 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
     private int scannerID;
     private int scannerType;
     TextView barcodeCount;
-    int iBarcodeCount;
+    public int iBarcodeCount;
 
 
     static MyAsyncTask cmdExecTask = null;
@@ -365,12 +363,15 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
         battery_percentage = (TextView) findViewById(R.id.tvBatteryPercentage);
         btnDisconnect = findViewById(R.id.btnDisconnect);
         btnDisconnect.setOnClickListener(v -> {
+            //연결 끊기.
+            RFIDBaseActivity.getInstance().ReaderDeviceDisConnected(RFIDController.mConnectedDevice);
+            deviceDisconnect();
 
-            RFIDSingleton.deviceDisconnect();
-
+            //현재 보고 있는 페이지 새로고침
             int viewPagerCurrentItem = viewPager.getCurrentItem();
             viewPager.setAdapter(mAdapter);
             viewPager.setCurrentItem(viewPagerCurrentItem);
+
 
             mDrawerLayout.closeDrawer(GravityCompat.START);
         });
@@ -580,8 +581,6 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
                             }
 
                             loadNextFragment(SCAN_DATAVIEW_TAB);
-                            barcodeCount = (TextView) findViewById(R.id.barcodesListCount);
-                            barcodeCount.setText("스캔된 바코드: " + Integer.toString(iBarcodeCount));
                             if (mAdapter.getReaderListMOde() == UPDATE_FIRMWARE_TAB) {
                                 getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(mAdapter.getSettingsTab())).commit();
                                 getSupportFragmentManager().beginTransaction().addToBackStack(null);
@@ -1317,10 +1316,10 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                BarcodeFargment barcodeFargment = (BarcodeFargment) mAdapter.getRegisteredFragment(BARCODE_TAB);
-                if (barcodeFargment != null) {
+                BarcodeFragment barcodeFragment = (BarcodeFragment) mAdapter.getRegisteredFragment(BARCODE_TAB);
+                if (barcodeFragment != null) {
 
-                    barcodeFargment.showBarCode();
+                    barcodeFragment.showBarCode();
 
                     barcodeCount = (TextView) findViewById(R.id.barcodesListCount);
                     barcodeCount.setText("스캔된 바코드: " + Integer.toString(++iBarcodeCount));
@@ -1355,9 +1354,9 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
     }
 
     public void clearList(View view) {
-        BarcodeFargment barcodeFargment = (BarcodeFargment) mAdapter.getRegisteredFragment(BARCODE_TAB);
-        if (barcodeFargment != null) {
-            barcodeFargment.clearList();
+        BarcodeFragment barcodeFragment = (BarcodeFragment) mAdapter.getRegisteredFragment(BARCODE_TAB);
+        if (barcodeFragment != null) {
+            barcodeFragment.clearList();
             barcodeCount = (TextView) findViewById(R.id.barcodesListCount);
             iBarcodeCount = 0;
             barcodeCount.setText("스캔된 바코드: " + Integer.toString(iBarcodeCount));
@@ -2482,7 +2481,7 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
                     getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(RFID_TAB)).commit();
                     break;
                 case RFID_ACCESS_TAB:
-                    PageTitle = "태그 작성";
+                    PageTitle = "태그 쓰기";
                     mAdapter.setRFIDMOde(RFID_ACCESS_TAB);
                     getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(RFID_TAB)).commit();
                     break;
@@ -2909,5 +2908,11 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
         }
     }
 
+    private void deviceDisconnect(){
+        RFIDSingleton.deviceDisconnect();
+        RFIDController.clearSettings();
 
+        ImageView batteryLevelImage = findViewById(R.id.appbar_batteryLevelImage);
+        batteryLevelImage.setImageLevel(0);
+    }
 }

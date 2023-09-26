@@ -16,18 +16,17 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:popupTheme="@style/AppTheme.PopupOverlay"
-            >
+            app:popupTheme="@style/AppTheme.PopupOverlay">
 
             <ImageView
                 android:id="@+id/appbar_batteryLevelImage"
                 android:layout_width="40dp"
                 android:layout_height="?attr/actionBarSize"
                 android:layout_gravity="right"
-                android:paddingVertical="10dp"
-
                 android:contentDescription="@string/battery_level_desc"
+                android:paddingVertical="10dp"
                 app:srcCompat="@drawable/sled_battery_level" />
+
         </com.google.android.material.appbar.MaterialToolbar>
 
     </com.google.android.material.appbar.AppBarLayout>

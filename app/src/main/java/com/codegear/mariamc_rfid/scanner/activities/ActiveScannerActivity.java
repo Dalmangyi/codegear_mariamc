@@ -87,7 +87,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabLayout;
 import com.codegear.mariamc_rfid.R;
 import com.codegear.mariamc_rfid.application.Application;
-import com.codegear.mariamc_rfid.scanner.fragments.BarcodeFargment;
+import com.codegear.mariamc_rfid.scanner.fragments.BarcodeFragment;
 import com.codegear.mariamc_rfid.scanner.helpers.ActiveScannerAdapter;
 import com.codegear.mariamc_rfid.scanner.helpers.Constants;
 import com.codegear.mariamc_rfid.scanner.helpers.CustomProgressDialog;
@@ -392,9 +392,9 @@ public class ActiveScannerActivity extends BaseActivity implements  /*Navigation
 
     @Override
     public void scannerBarcodeEvent(byte[] barcodeData, int barcodeType, int scannerID) {
-        BarcodeFargment barcodeFargment = (BarcodeFargment) mAdapter.getRegisteredFragment(1);
-        if (barcodeFargment != null) {
-            barcodeFargment.showBarCode();
+        BarcodeFragment barcodeFragment = (BarcodeFragment) mAdapter.getRegisteredFragment(1);
+        if (barcodeFragment != null) {
+            barcodeFragment.showBarCode();
             barcodeCount = (TextView) findViewById(R.id.barcodesListCount);
             barcodeCount.setText("스캔된 바코드: " + Integer.toString(++iBarcodeCount));
             if (iBarcodeCount > 0) {
@@ -422,9 +422,9 @@ public class ActiveScannerActivity extends BaseActivity implements  /*Navigation
     }
 
     public void clearList(View view) {
-        BarcodeFargment barcodeFargment = (BarcodeFargment) mAdapter.getRegisteredFragment(1);
-        if (barcodeFargment != null) {
-            barcodeFargment.clearList();
+        BarcodeFragment barcodeFragment = (BarcodeFragment) mAdapter.getRegisteredFragment(1);
+        if (barcodeFragment != null) {
+            barcodeFragment.clearList();
             barcodeCount = (TextView) findViewById(R.id.barcodesListCount);
             iBarcodeCount = 0;
             barcodeCount.setText("스캔된 바코드: " + Integer.toString(iBarcodeCount));
@@ -434,8 +434,8 @@ public class ActiveScannerActivity extends BaseActivity implements  /*Navigation
     }
 
     public void scanTrigger(View view) {
-        BarcodeFargment barcodeFargment = (BarcodeFargment) mAdapter.getRegisteredFragment(1);
-        if (barcodeFargment != null) {
+        BarcodeFragment barcodeFragment = (BarcodeFragment) mAdapter.getRegisteredFragment(1);
+        if (barcodeFragment != null) {
 
         }
 

@@ -49,7 +49,7 @@ import com.codegear.mariamc_rfid.scanner.activities.BeeperActionsFragment;
 import com.codegear.mariamc_rfid.scanner.activities.SymbologiesFragment;
 import com.codegear.mariamc_rfid.scanner.activities.UpdateFirmware;
 import com.codegear.mariamc_rfid.scanner.fragments.AdvancedFragment;
-import com.codegear.mariamc_rfid.scanner.fragments.BarcodeFargment;
+import com.codegear.mariamc_rfid.scanner.fragments.BarcodeFragment;
 import com.codegear.mariamc_rfid.scanner.fragments.ReaderDetailsFragment;
 import com.codegear.mariamc_rfid.scanner.fragments.SettingsFragment;
 import com.codegear.mariamc_rfid.scanner.fragments.Static_ipconfig;
@@ -433,7 +433,7 @@ public class ActiveDeviceAdapter extends FragmentStatePagerAdapter {
                     {
                         case SCAN_DATAVIEW_TAB:
                             Constants.logAsMessage(Constants.DEBUG_TYPE.TYPE_DEBUG, getClass().getSimpleName(), "2nd Tab Selected");
-                            mScannerFragment = BarcodeFargment.newInstance();
+                            mScannerFragment = BarcodeFragment.newInstance();
                             return mScannerFragment;
                         case SCAN_SETTINGS_TAB:
                             Constants.logAsMessage(Constants.DEBUG_TYPE.TYPE_DEBUG, getClass().getSimpleName(), "2nd Tab Selected");

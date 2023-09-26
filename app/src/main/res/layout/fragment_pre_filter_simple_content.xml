@@ -58,7 +58,7 @@
                 android:layout_marginEnd="5dp"
                 android:layout_marginBottom="5dp"
                 android:gravity="left"
-                android:text="오프" />
+                android:text="오프셋" />
 
             <androidx.appcompat.widget.AppCompatSeekBar
                 android:id="@+id/seekBar"
@@ -76,7 +76,7 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="5dp"
                 android:layout_marginBottom="5dp"
-                android:text="길" />
+                android:text="길이" />
 
             <androidx.appcompat.widget.AppCompatSeekBar
                 android:id="@+id/seekBar2"
