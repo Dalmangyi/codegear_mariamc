@@ -145,10 +145,10 @@ public class RFIDBaseActivity implements Readers.RFIDReaderEventHandler, Navigat
     //Tag to identify the currently displayed fragment
     protected static final String TAG_RFID_FRAGMENT = "RFIDHomeFragment";
     //Messages for progress bar
-    private static final String MSG_READ = "Reading Tags";
-    private static final String MSG_WRITE = "Writing Data";
-    private static final String MSG_LOCK = "Executing Lock Command";
-    private static final String MSG_KILL = "Executing Kill Command";
+    private static final String MSG_READ = "태그 데이터 읽기 명령 실행 중";
+    private static final String MSG_WRITE = "데이터 쓰기 명령 실행 중";
+    private static final String MSG_LOCK = "잠금 명령 실행 중";
+    private static final String MSG_KILL = "지우기 명령 실행 중";
     private static final int BEEP_DELAY_TIME_MIN = 0;
     private static final int BEEP_DELAY_TIME_MAX = 300;
     public static final String BRAND_ID = "brandid";

@@ -351,7 +351,7 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(getResources().getString(R.string.title_empty_readers));
+        getSupportActionBar().setTitle("빠른 태그");
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(mActiveDeviceActivity, mDrawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -622,7 +622,6 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
             nMgr.cancel(NotificationsReceiver.DEFAULT_NOTIFICATION_ID);
         }
 
-        setActionBarTitle("장치 설정");
         viewPager.setCurrentItem(RFID_TAB);
         mAdapter.setCurrentActivePosition(RFID_TAB);
 
@@ -2512,7 +2511,7 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
                     break;
 
                 case READER_LIST_TAB:
-                    PageTitle = "장치 설정";
+                    PageTitle = "장치 설정1";
                     mAdapter.setReaderListMOde(READER_LIST_TAB);
                     getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(READERS_TAB)).commit();
                     break;

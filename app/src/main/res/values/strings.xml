@@ -254,8 +254,8 @@
     <string name="write_title">쓰기</string>
     <string name="lock_privilege_title">잠금 권한</string>
     <string name="lock_title">잠금</string>
-    <string name="kill_pass_title">비밀번호 소멸</string>
-    <string name="kill_title">소멸</string>
+    <string name="kill_pass_title">비밀번호 지우기</string>
+    <string name="kill_title">지우기</string>
     <string name="offset_bits_title">Offset (words)</string>
     <string name="target_title">Target</string>
     <string name="action_title">Action</string>
@@ -348,7 +348,7 @@
     <string name="msg_read_succeed">읽기 성공</string>
     <string name="msg_write_succeed">쓰기 성공</string>
     <string name="msg_lock_succeed">잠금 성공</string>
-    <string name="msg_kill_succeed">소멸 성공</string>
+    <string name="msg_kill_succeed">지우기 성공</string>
     <string name="err_access_op_failed">태그 쓰기 작업이 실패했습니다.</string>
     <string name="password_connection_title">연결 비밀번호가 필요합니다!</string>
     <string name="hint_password">비밀번호</string>

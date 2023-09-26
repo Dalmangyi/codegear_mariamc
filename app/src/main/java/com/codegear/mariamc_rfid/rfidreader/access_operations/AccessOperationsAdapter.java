@@ -93,7 +93,7 @@ public class AccessOperationsAdapter extends FragmentStatePagerAdapter {
     @Nullable
     @Override
     public CharSequence getPageTitle(int position) {
-        String[] tabs = {"읽기 / 쓰기", "잠금", "소멸"};
+        String[] tabs = {"읽기 / 쓰기", "잠금", "지우기"};
         return tabs[position];
     }
 }

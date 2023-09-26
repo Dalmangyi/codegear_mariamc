@@ -20,7 +20,7 @@ import com.codegear.mariamc_rfid.R;
 public class ActiveDevicePremiumAdapter extends ActiveDeviceAdapter {
     private final FragmentManager mFragmentManager;
     private final int mFunctionCount;
-    String[] tabs = {"장치", "빠른태그", "스캔", "설정",};
+    String[] tabs = {"장치", "빠른 태그", "스캔", "설정",};
     int[] icons = {R.drawable.ic_rfid_reader, R.drawable.ic_rfid_tab, R.drawable.ic_barcode_tab, R.drawable.ic_tab_settings};
     private Context mContext;
 
