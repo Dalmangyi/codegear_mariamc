@@ -1,21 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/disconnect"
-        android:title="@string/Disconnect"
-        android:icon="@drawable/ic_disconnect"/>
-    <item android:id="@+id/reader_wifisettings"
+    <item
+        android:id="@+id/disconnect"
+        android:icon="@drawable/ic_disconnect"
+        android:title="@string/Disconnect" />
+
+    <item
+        android:id="@+id/reader_wifisettings"
+        android:icon="@drawable/ic_reader_wifi_settings"
         android:title="Reader Wifi Settings"
-        android:visible="false"
-        android:icon="@drawable/ic_reader_wifi_settings"/>
-    <item android:id="@+id/fw_update"
-        android:title="펌웨어 업데이트"
-        android:icon="@drawable/ic_firmware_update"/>
-    <item android:id="@+id/connected_reader_details"
-        android:title="장치 상세 정보"
-        android:icon="@drawable/ic_reader_details"/>
-    <item android:id="@+id/rename_reader"
+        android:visible="false" />
+
+    <item
+        android:id="@+id/fw_update"
+        android:icon="@drawable/ic_firmware_update"
+        android:title="펌웨어 업데이트" />
+
+    <item
+        android:id="@+id/connected_reader_details"
+        android:icon="@drawable/ic_reader_details"
+        android:title="장치 상세 정보" />
+
+    <item
+        android:id="@+id/rename_reader"
+        android:icon="@drawable/ic_rename_reader"
         android:title="장치 이름 변경"
-        android:visible="true"
-        android:icon="@drawable/ic_rename_reader"/>
+        android:visible="true" />
 
 </menu>

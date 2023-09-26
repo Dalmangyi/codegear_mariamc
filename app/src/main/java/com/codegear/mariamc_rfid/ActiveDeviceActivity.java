@@ -1,5 +1,6 @@
 package com.codegear.mariamc_rfid;
 
+import static com.codegear.mariamc_rfid.DeviceDiscoverActivity.TAG_CONTENT_FRAGMENT;
 import static com.codegear.mariamc_rfid.application.Application.DEVICE_PREMIUM_PLUS_MODE;
 import static com.codegear.mariamc_rfid.application.Application.DEVICE_STD_MODE;
 import static com.codegear.mariamc_rfid.application.Application.RFD_DEVICE_MODE;
@@ -187,6 +188,7 @@ import com.codegear.mariamc_rfid.cowchronicle.utils.PixelUtil;
 import com.codegear.mariamc_rfid.rfidreader.common.Constants;
 import com.codegear.mariamc_rfid.rfidreader.common.CustomProgressDialog;
 import com.codegear.mariamc_rfid.rfidreader.locate_tag.LocateOperationsFragment;
+import com.codegear.mariamc_rfid.rfidreader.reader_connection.InitReadersListFragment;
 import com.codegear.mariamc_rfid.rfidreader.settings.ApplicationSettingsFragment;
 import com.codegear.mariamc_rfid.scanner.activities.SsaSetSymbologyActivity;
 import com.codegear.mariamc_rfid.scanner.activities.SymbologiesFragment;
@@ -363,7 +365,13 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
         battery_percentage = (TextView) findViewById(R.id.tvBatteryPercentage);
         btnDisconnect = findViewById(R.id.btnDisconnect);
         btnDisconnect.setOnClickListener(v -> {
+
             RFIDSingleton.deviceDisconnect();
+
+            int viewPagerCurrentItem = viewPager.getCurrentItem();
+            viewPager.setAdapter(mAdapter);
+            viewPager.setCurrentItem(viewPagerCurrentItem);
+
             mDrawerLayout.closeDrawer(GravityCompat.START);
         });
 
@@ -515,6 +523,16 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
                 com.codegear.mariamc_rfid.scanner.helpers.Constants.logAsMessage(TYPE_DEBUG, getClass().getSimpleName(), " Position is --- " + position);
                 mAdapter.setCurrentActivePosition(position);
                 switch (position) {
+                    case READERS_TAB:
+                        if (mAdapter.getReaderListMOde() == UPDATE_FIRMWARE_TAB) {
+                            getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(mAdapter.getSettingsTab())).commit();
+                            getSupportFragmentManager().beginTransaction().addToBackStack(null);
+                            getSupportFragmentManager().executePendingTransactions();
+                            mAdapter.setReaderListMOde(MAIN_HOME_SETTINGS_TAB);
+                        }
+                        loadNextFragment(READER_LIST_TAB);
+                        break;
+
                     case RFID_TAB:
                         if (mAdapter.getReaderListMOde() == UPDATE_FIRMWARE_TAB) {
                             getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(mAdapter.getSettingsTab())).commit();
@@ -552,15 +570,7 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
                             loadNextFragment(RAPID_READ_TAB);
 
                         break;
-                    case READERS_TAB:
-                        if (mAdapter.getReaderListMOde() == UPDATE_FIRMWARE_TAB) {
-                            getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(mAdapter.getSettingsTab())).commit();
-                            getSupportFragmentManager().beginTransaction().addToBackStack(null);
-                            getSupportFragmentManager().executePendingTransactions();
-                            mAdapter.setReaderListMOde(MAIN_HOME_SETTINGS_TAB);
-                        }
-                        loadNextFragment(READER_LIST_TAB);
-                        break;
+
                     case SCAN_TAB:
                         if (RFD_DEVICE_MODE == DEVICE_PREMIUM_PLUS_MODE) {
                             if (getCurrentFragment(mAdapter.getSettingsTab()) != null) {
@@ -2256,6 +2266,9 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
      */
     public void cancelClicked(ReaderDevice readerDevice) {
         Fragment fragment = getSupportFragmentManager().findFragmentByTag(TAG_RFID_FRAGMENT);
+        if(fragment == null){
+            fragment = getCurrentFragment(viewPager.getCurrentItem());
+        }
         if (fragment instanceof RFIDReadersListFragment) {
             ((RFIDReadersListFragment) fragment).readerDisconnected(readerDevice, true);
         }

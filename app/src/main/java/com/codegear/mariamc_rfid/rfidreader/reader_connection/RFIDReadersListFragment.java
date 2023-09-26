@@ -80,7 +80,7 @@ public class RFIDReadersListFragment extends Fragment implements IRFIDConnectTas
     private DeviceConnectTask deviceConnectTask;
     private ReaderListAdapter readerListAdapter;
     private ListView pairedListView;
-    private TextView tv_emptyView, reader_description ,tv_emptyPairedReader,tv_serialNo;
+    private TextView tv_emptyView, reader_description, tv_emptyPairedReader, tv_serialNo;
     LinearLayout ll_pairedreader;
     private CustomProgressDialog progressDialog;
     private static ActiveDeviceActivity activity = null;
@@ -98,8 +98,8 @@ public class RFIDReadersListFragment extends Fragment implements IRFIDConnectTas
     private ImageView batteryLevelImage;
     private PairedReaderListAdapter pairedReaderListAdapter;
     private RecyclerView rv_pairedReader;
-    TextView updateConnectReader , tv_model;
-    ImageView connectedImgView, iv_pairedreader_icon ;
+    TextView updateConnectReader, tv_model;
+    ImageView connectedImgView, iv_pairedreader_icon;
     private ScanPair scanPair;
     private BluetoothHandler btConnection = null;
     private boolean mConnectionProgress = false;
@@ -115,7 +115,7 @@ public class RFIDReadersListFragment extends Fragment implements IRFIDConnectTas
                 try {
                     Thread.sleep(100);
                 } catch (InterruptedException e) {
-                   Log.d(TAG,  "Returned SDK Exception");
+                    Log.d(TAG, "Returned SDK Exception");
                 }
                 timeout--;
             }
@@ -142,8 +142,7 @@ public class RFIDReadersListFragment extends Fragment implements IRFIDConnectTas
     }
 
     public static RFIDReadersListFragment getInstance() {
-        if (rlf == null)
-            rlf = new RFIDReadersListFragment();
+        if (rlf == null) rlf = new RFIDReadersListFragment();
         return rlf;
     }
 
@@ -189,8 +188,7 @@ public class RFIDReadersListFragment extends Fragment implements IRFIDConnectTas
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_readers_list, container, false);
     }
@@ -201,7 +199,7 @@ public class RFIDReadersListFragment extends Fragment implements IRFIDConnectTas
         super.onActivityCreated(savedInstanceState);
         initializeViews();
         //readersList.clear();
-       pairedReaderListAdapter = new PairedReaderListAdapter(getActivity(),R.layout.paired_reader_list,RFIDController.readersList, this);
+        pairedReaderListAdapter = new PairedReaderListAdapter(getActivity(), R.layout.paired_reader_list, RFIDController.readersList, this);
 
         rv_pairedReader.setVisibility(View.VISIBLE);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
@@ -217,7 +215,7 @@ public class RFIDReadersListFragment extends Fragment implements IRFIDConnectTas
             @Override
             public void onClick(View v) {
                 if (!BluetoothAdapter.getDefaultAdapter().isEnabled()) {
-                  //  BluetoothAdapter.getDefaultAdapter().enable();
+                    //  BluetoothAdapter.getDefaultAdapter().enable();
                     Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
                     ((ActiveDeviceActivity) getActivity()).startActivityForResult(enableBtIntent, 1101);
                 }
@@ -227,26 +225,26 @@ public class RFIDReadersListFragment extends Fragment implements IRFIDConnectTas
         });
 
         batteryLevelImage = getActivity().findViewById(R.id.appbar_batteryLevelImage);
-        if (RFIDController.BatteryData != null){
+        if (RFIDController.BatteryData != null) {
             deviceStatusReceived(RFIDController.BatteryData.getLevel(), RFIDController.BatteryData.getCharging(), RFIDController.BatteryData.getCause());
         }
 
     }
 
     private void refreshDeviceList(Object o, boolean b) {
-        if (mConnectedDevice != null && mConnectedReader != null ) {
+        if (mConnectedDevice != null && mConnectedReader != null) {
             updateConnectReader.setText(mConnectedReader.getHostName());
             String model = mConnectedDevice.getDeviceCapability(mConnectedReader.getHostName());
             setImage(model);
-            tv_model.setText(String.format(getActivity().getResources().getString(R.string.readermodel),model));
+            tv_model.setText(String.format(getActivity().getResources().getString(R.string.readermodel), model));
 
-            if(readersList.contains(mConnectedDevice)) {
+            if (readersList.contains(mConnectedDevice)) {
                 int index = readersList.indexOf(mConnectedDevice);
                 readersList.remove(index);
                 updateConnectReader.setText(mConnectedReader.getHostName());
 
             }
-            if(pairedReaderListAdapter.getItemCount() == 0) {
+            if (pairedReaderListAdapter.getItemCount() == 0) {
                 tv_emptyPairedReader.setVisibility(View.VISIBLE);
                 tv_serialNo.setVisibility(View.GONE);
             } else {
@@ -257,9 +255,9 @@ public class RFIDReadersListFragment extends Fragment implements IRFIDConnectTas
     }
 
     private void setImage(String model) {
-        if(model.equals("STANDARD") || model.equals("RFD8500") || model.startsWith("MC33")) {
+        if (model.equals("STANDARD") || model.equals("RFD8500") || model.startsWith("MC33")) {
             iv_pairedreader_icon.setImageResource(R.drawable.ic_standard);
-        } else if(model.equals("PREMIUM (WiFi)")) {
+        } else if (model.equals("PREMIUM (WiFi)")) {
             iv_pairedreader_icon.setImageResource(R.drawable.ic_premium);
         } else {
             iv_pairedreader_icon.setImageResource(R.drawable.ic_premium_plus);
@@ -275,30 +273,29 @@ public class RFIDReadersListFragment extends Fragment implements IRFIDConnectTas
     private void refreshPairedDevices() {
 
 
-            Log.d(TAG, "loadAvailableReaders");
-            HashSet<BluetoothDevice> btAvailableReaders = new HashSet();
-            btConnection = new BluetoothHandler();
-            btConnection.getAvailableDevices(btAvailableReaders);
-            for (BluetoothDevice device : btAvailableReaders) {
-                int count = 0;
-                for(count = 0; count < readersList.size(); count++){
-                    if(readersList.get(count).getName().equals(device.getName())) break;
-                    //Missing paired device add it to the list
-                }
-                if( count >= readersList.size()){
-
-                    ReaderDevice readerDevice = new ReaderDevice(device.getName(), device.getAddress(), new RFIDReader(device.getName(), 0, 0, "ASCII", "BLUETOOTH"));
-                    if(readersList.contains(readerDevice) == false)
-                        readersList.add(readerDevice);
-                }
-
+        Log.d(TAG, "loadAvailableReaders");
+        HashSet<BluetoothDevice> btAvailableReaders = new HashSet();
+        btConnection = new BluetoothHandler();
+        btConnection.getAvailableDevices(btAvailableReaders);
+        for (BluetoothDevice device : btAvailableReaders) {
+            int count = 0;
+            for (count = 0; count < readersList.size(); count++) {
+                if (readersList.get(count).getName().equals(device.getName())) break;
+                //Missing paired device add it to the list
             }
+            if (count >= readersList.size()) {
+
+                ReaderDevice readerDevice = new ReaderDevice(device.getName(), device.getAddress(), new RFIDReader(device.getName(), 0, 0, "ASCII", "BLUETOOTH"));
+                if (readersList.contains(readerDevice) == false) readersList.add(readerDevice);
+            }
+
+        }
     }
 
     private void initializeViews() {
         linearLayout = (LinearLayout) getActivity().findViewById(R.id.ll_empty);
         rv_pairedReader = getActivity().findViewById(R.id.rv_pairedreaders);
-        updateConnectReader =  getActivity().findViewById(R.id.pairedreader_serialno);
+        updateConnectReader = getActivity().findViewById(R.id.pairedreader_serialno);
         rl_myLayout = getActivity().findViewById(R.id.rl_connectedreader);
         reader_description = getActivity().findViewById(R.id.reader_description);
         connectedImgView = getActivity().findViewById(R.id.options_menu);
@@ -316,7 +313,7 @@ public class RFIDReadersListFragment extends Fragment implements IRFIDConnectTas
             @Override
             public void onClick(View v) {
 
-                if(!Constants.showSerialNo) {
+                if (!Constants.showSerialNo) {
                     Constants.showSerialNo = true;
                     serialno.setText("시리얼 번호 숨기기");
                 } else {
@@ -340,7 +337,7 @@ public class RFIDReadersListFragment extends Fragment implements IRFIDConnectTas
             public void onClick(View v) {
                 PopupMenu menu = new PopupMenu(getActivity(), connectedImgView);
                 menu.inflate(R.menu.connected_options_menu);
-                if(mConnectedDevice != null) {
+                if (mConnectedDevice != null) {
                     String str = mConnectedDevice.getDeviceCapability(mConnectedReader.getHostName());
                     if (str.contains("PREMIUM")) {
                         //SetVisibility to true for enabling WifiReader Settings on premium devices
@@ -361,18 +358,18 @@ public class RFIDReadersListFragment extends Fragment implements IRFIDConnectTas
                                 disconnectConnectedReader();
                                 break;
                             case R.id.reader_wifisettings:
-                                if (getActivity() instanceof ActiveDeviceActivity ) {
-                                    ((ActiveDeviceActivity)getActivity()).loadWifiReaderSettings();
+                                if (getActivity() instanceof ActiveDeviceActivity) {
+                                    ((ActiveDeviceActivity) getActivity()).loadWifiReaderSettings();
                                 }
                                 break;
                             case R.id.fw_update:
                                 if (getActivity() instanceof ActiveDeviceActivity) {
-                                    ((ActiveDeviceActivity)getActivity()).loadUpdateFirmware(MenuItemCompat.getActionView(item));
+                                    ((ActiveDeviceActivity) getActivity()).loadUpdateFirmware(MenuItemCompat.getActionView(item));
                                 }
                                 break;
                             case R.id.connected_reader_details:
                                 ReaderDevice readerDevice = mConnectedDevice;
-                                ((ActiveDeviceActivity)getActivity()).loadReaderDetails( readerDevice);
+                                ((ActiveDeviceActivity) getActivity()).loadReaderDetails(readerDevice);
 
 
                                 break;
@@ -388,7 +385,7 @@ public class RFIDReadersListFragment extends Fragment implements IRFIDConnectTas
         });
     }
 
-    public void rename_reader( ){
+    public void rename_reader() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
         LayoutInflater inflater = getActivity().getLayoutInflater();
@@ -399,50 +396,40 @@ public class RFIDReadersListFragment extends Fragment implements IRFIDConnectTas
         } catch (InvalidUsageException | OperationFailureException e) {
             Log.e(TAG, e.getStackTrace()[0].toString());
         }
-        builder.setView(view)
-                .setTitle("장치 이름 변경")
-                .setNegativeButton("취소", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
+        builder.setView(view).setTitle("장치 이름 변경").setNegativeButton("취소", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
 
-                    }
-                })
-                .setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        newName = edit_Readername.getText().toString();
-                        try {
-                            RFIDResults rfidResults = mConnectedReader.Config.setFriendlyName(newName);
+            }
+        }).setPositiveButton("확인", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                newName = edit_Readername.getText().toString();
+                try {
+                    RFIDResults rfidResults = mConnectedReader.Config.setFriendlyName(newName);
 
-                            if(rfidResults == RFIDResults.RFID_API_SUCCESS){
-                                Toast.makeText(
-                                    getActivity(),
-                                    "이름 변경 성공. 변경 사항을 보려면"
-                                    + "\nUSB 연결인 경우: 장치를 분리하고 다시 연결해주세요. "
-                                    + "\n블루투스 연결인 경우: 장치를 페어링 해제 후, 다시 페어링해주세요.",
-                                    Toast.LENGTH_LONG
-                                ).show();
-                            }
-                            else if(rfidResults == RFIDResults.RFID_COMMAND_OPTION_WITHOUT_DELIMITER){
-                                Toast.makeText(getActivity(),"이름을 바꾸지 못했습니다. 단어 사이에 공백을 포함하지 마세요.", Toast.LENGTH_SHORT).show();
-                            }
-                            else {
-                                Toast.makeText(getActivity(),"이름 변경 실패. 알 수 없는 에러.",Toast.LENGTH_SHORT).show();
-                            }
-
-                        } catch (InvalidUsageException e) {
-                            if(e.getStackTrace().length>0) {
-                                Log.e(TAG, e.getStackTrace()[0].toString());
-                                Log.e(TAG, e.getInfo());
-                                Toast.makeText(getActivity(),e.getInfo(),Toast.LENGTH_SHORT).show();
-                            }
-                        } catch (OperationFailureException e) {
-                            if( e!= null && e.getStackTrace().length>0)
-                            { Log.e(TAG, e.getStackTrace()[0].toString()); }
-                        }
+                    if (rfidResults == RFIDResults.RFID_API_SUCCESS) {
+                        Toast.makeText(getActivity(), "이름 변경 성공. 변경 사항을 보려면" + "\nUSB 연결인 경우: 장치를 분리하고 다시 연결해주세요. " + "\n블루투스 연결인 경우: 장치를 페어링 해제 후, 다시 페어링해주세요.", Toast.LENGTH_LONG).show();
+                    } else if (rfidResults == RFIDResults.RFID_COMMAND_OPTION_WITHOUT_DELIMITER) {
+                        Toast.makeText(getActivity(), "이름을 바꾸지 못했습니다. 단어 사이에 공백을 포함하지 마세요.", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getActivity(), "이름 변경 실패. 알 수 없는 에러.", Toast.LENGTH_SHORT).show();
                     }
 
-                });
+                } catch (InvalidUsageException e) {
+                    if (e.getStackTrace().length > 0) {
+                        Log.e(TAG, e.getStackTrace()[0].toString());
+                        Log.e(TAG, e.getInfo());
+                        Toast.makeText(getActivity(), e.getInfo(), Toast.LENGTH_SHORT).show();
+                    }
+                } catch (OperationFailureException e) {
+                    if (e != null && e.getStackTrace().length > 0) {
+                        Log.e(TAG, e.getStackTrace()[0].toString());
+                    }
+                }
+            }
+
+        });
 
         builder.show();
 
@@ -450,8 +437,8 @@ public class RFIDReadersListFragment extends Fragment implements IRFIDConnectTas
     }
 
     public void disconnectConnectedReader() {
-        if(Application.mIsMultiTagLocatingRunning == true || RFIDController.isLocatingTag == true){
-            Toast.makeText(getActivity(),"태그 찾기가 실행 중일 때는 연결을 끊을 수 없습니다!", Toast.LENGTH_SHORT).show();
+        if (Application.mIsMultiTagLocatingRunning == true || RFIDController.isLocatingTag == true) {
+            Toast.makeText(getActivity(), "태그 찾기가 실행 중일 때는 연결을 끊을 수 없습니다!", Toast.LENGTH_SHORT).show();
             return;
         }
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
@@ -460,27 +447,27 @@ public class RFIDReadersListFragment extends Fragment implements IRFIDConnectTas
         alertDialog.setPositiveButton("연결해제", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                if (mConnectedReader.isConnected() ) {
+                if (mConnectedReader.isConnected()) {
                     activity.disconnect(Application.currentConnectedScannerID);
                     RFIDController.is_disconnection_requested = true;
                     try {
 
-                        if(RFIDController.mIsInventoryRunning)
+                        if (RFIDController.mIsInventoryRunning)
                             mConnectedReader.Actions.Inventory.stop();
 
                         mConnectedReader.disconnect();
                         mConnectedReader.Dispose();
                     } catch (InvalidUsageException e) {
-                       Log.d(TAG,  "Returned SDK Exception");
+                        Log.d(TAG, "Returned SDK Exception");
                     } catch (OperationFailureException e) {
-                       Log.d(TAG,  "Returned SDK Exception");
+                        Log.d(TAG, "Returned SDK Exception");
                     } catch (Exception e) {
                         //if( e!= null && e.getStackTrace().length>0){ Log.e(TAG, e.getStackTrace()[0].toString()); }
                     }
 
                     if (RFIDController.NOTIFY_READER_CONNECTION) {
                         if (mConnectedReader != null)
-                            sendNotification(Constants.ACTION_READER_DISCONNECTED, "" + mConnectedReader.getHostName()+"으로 부터 연결이 해제되었습니다.");
+                            sendNotification(Constants.ACTION_READER_DISCONNECTED, "" + mConnectedReader.getHostName() + "으로 부터 연결이 해제되었습니다.");
                     }
                     ReaderDeviceDisConnected(mConnectedDevice);
                     deviceDisconnected();
@@ -506,16 +493,16 @@ public class RFIDReadersListFragment extends Fragment implements IRFIDConnectTas
             @Override
             protected Boolean doInBackground(Void... params) {
                 try {
-                ArrayList<ReaderDevice> readersListArray = RFIDController.readers.GetAvailableRFIDReaderList();
-                readersList.addAll(readersListArray);
-                if (mConnectedDevice != null) {
-                    int index = readersList.indexOf(mConnectedDevice);
-                    readersList.remove(index);
-                    //pairedReaderListAdapter.notifyItemRemoved(index);
-                    pairedReaderListAdapter.notifyDataSetChanged();
-                    updateConnectReader.setText(mConnectedReader.getHostName());
+                    ArrayList<ReaderDevice> readersListArray = RFIDController.readers.GetAvailableRFIDReaderList();
+                    readersList.addAll(readersListArray);
+                    if (mConnectedDevice != null) {
+                        int index = readersList.indexOf(mConnectedDevice);
+                        readersList.remove(index);
+                        //pairedReaderListAdapter.notifyItemRemoved(index);
+                        pairedReaderListAdapter.notifyDataSetChanged();
+                        updateConnectReader.setText(mConnectedReader.getHostName());
 
-                }
+                    }
 
                 } catch (InvalidUsageException ex) {
                     exception = ex;
@@ -526,13 +513,13 @@ public class RFIDReadersListFragment extends Fragment implements IRFIDConnectTas
             @Override
             protected void onPostExecute(Boolean result) {
 
-                    if(pairedReaderListAdapter.getItemCount() == 0) {
-                        tv_emptyPairedReader.setVisibility(View.VISIBLE);
-                        tv_serialNo.setVisibility(View.GONE);
-                    } else {
-                        tv_emptyPairedReader.setVisibility(View.GONE);
-                        tv_serialNo.setVisibility(View.VISIBLE);
-                    }
+                if (pairedReaderListAdapter.getItemCount() == 0) {
+                    tv_emptyPairedReader.setVisibility(View.VISIBLE);
+                    tv_serialNo.setVisibility(View.GONE);
+                } else {
+                    tv_emptyPairedReader.setVisibility(View.GONE);
+                    tv_serialNo.setVisibility(View.VISIBLE);
+                }
 
             }
         }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
@@ -544,8 +531,7 @@ public class RFIDReadersListFragment extends Fragment implements IRFIDConnectTas
         if (getPosition("RFD8500" + id) != -1) {
 
             if (mConnectedDevice == null || !mConnectedDevice.getName().equals("RFD8500" + id)) {
-                if (readersList != null)
-                    readersList.clear();
+                if (readersList != null) readersList.clear();
                 refreshPairedDevices("RFD8500" + id, true);
             } else {
 
@@ -569,8 +555,7 @@ public class RFIDReadersListFragment extends Fragment implements IRFIDConnectTas
     private int getPosition(String name) {
 
         for (int i = 0; i < readersList.size(); i++) {
-            if (readersList.get(i).getName().equals(name))
-                return i;
+            if (readersList.get(i).getName().equals(name)) return i;
         }
 
         return -1;
@@ -585,8 +570,7 @@ public class RFIDReadersListFragment extends Fragment implements IRFIDConnectTas
     @Override
     public void onStart() {
         super.onStart();
-        if (scanCode != null)
-            scanCode.setInputType(0);
+        if (scanCode != null) scanCode.setInputType(0);
         isOnStopCalled = false;
     }
 
@@ -599,8 +583,7 @@ public class RFIDReadersListFragment extends Fragment implements IRFIDConnectTas
     @Override
     public void onResume() {
         super.onResume();
-        if (scanCode != null)
-            scanCode.setInputType(0);
+        if (scanCode != null) scanCode.setInputType(0);
         if (PasswordDialog.isDialogShowing) {
             if (passwordDialog == null || !passwordDialog.isShowing()) {
                 showPasswordDialog(RFIDController.mConnectedDevice);
@@ -608,13 +591,15 @@ public class RFIDReadersListFragment extends Fragment implements IRFIDConnectTas
         }
         capabilitiesRecievedforDevice();
         //pairedReaderListAdapter.notifyDataSetChanged();
-        if(mConnectedReader != null) {
-           rl_myLayout.setVisibility(View.VISIBLE);
+        if (mConnectedReader != null) {
+            rl_myLayout.setVisibility(View.VISIBLE);
         }
-        if(mConnectedReader == null) {
+        if (mConnectedReader == null) {
             rl_myLayout.setVisibility(View.GONE);
             reader_description.setVisibility(View.VISIBLE);
         }
+
+        loadUIData();
     }
 
     @Override
@@ -637,10 +622,7 @@ public class RFIDReadersListFragment extends Fragment implements IRFIDConnectTas
         // Intent intent = new Intent(this, ScannersActivity.class);
         //startActivity(intent);
 
-        scanConnectTask = new ScanConnectTask(activity, RFIDController.mConnectedDevice,
-                "Connecting with " + RFIDController.mConnectedDevice.getName(),
-                RFIDController.mConnectedDevice.getPassword(),
-                this);
+        scanConnectTask = new ScanConnectTask(activity, RFIDController.mConnectedDevice, "Connecting with " + RFIDController.mConnectedDevice.getName(), RFIDController.mConnectedDevice.getPassword(), this);
         scanConnectTask.execute();
 
     }
@@ -653,13 +635,11 @@ public class RFIDReadersListFragment extends Fragment implements IRFIDConnectTas
     public void reInit() {
 
 
-        if(activity != null )
-            activity.reInit();
+        if (activity != null) activity.reInit();
 
-        if( RFIDController.regionNotSet != true) {
+        if (RFIDController.regionNotSet != true) {
 
-        }else
-        {
+        } else {
             Intent detailsIntent = new Intent(getActivity().getApplicationContext(), SettingsDetailActivity.class);
             detailsIntent.addFlags(Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
             detailsIntent.putExtra(Constants.SETTING_ITEM_ID, R.id.regulatory);
@@ -678,25 +658,24 @@ public class RFIDReadersListFragment extends Fragment implements IRFIDConnectTas
         }
         if (RFIDController.BatteryData != null) {
             deviceStatusReceived(RFIDController.BatteryData.getLevel(), RFIDController.BatteryData.getCharging(), RFIDController.BatteryData.getCause());
-        } else if (mConnectedReader !=null  && mConnectedReader.isConnected() ) {
+        } else if (mConnectedReader != null && mConnectedReader.isConnected()) {
             final Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    if(RFIDController.BatteryData != null)
+                    if (RFIDController.BatteryData != null)
                         deviceStatusReceived(RFIDController.BatteryData.getLevel(), RFIDController.BatteryData.getCharging(), RFIDController.BatteryData.getCause());
                 }
             }, 1000);
 
         }
 
-        if(scanConnectTask != null )
-            scanConnectTask.cancel(true);
+        if (scanConnectTask != null) scanConnectTask.cancel(true);
 
         scanConnectTask = null;
-        if(mConnectedDevice != null && isAdded() && requireActivity().getApplication() != null) {
+        if (mConnectedDevice != null && isAdded() && requireActivity().getApplication() != null) {
             int tabCount = ((Application) requireActivity().getApplication()).getTabCount(mConnectedDevice);
-            if(Application.RFD_DEVICE_MODE != tabCount)
+            if (Application.RFD_DEVICE_MODE != tabCount)
                 ((ActiveDeviceActivity) requireActivity()).changeAdapter(tabCount);
 
         }
@@ -706,17 +685,15 @@ public class RFIDReadersListFragment extends Fragment implements IRFIDConnectTas
 
     public void removePairedDeviceList(ReaderDevice device) {
 
-       if( readersList.contains(device) == true)
-           readersList.remove(device);
+        if (readersList.contains(device) == true) readersList.remove(device);
 
-       pairedReaderListAdapter.notifyDataSetChanged();
+        pairedReaderListAdapter.notifyDataSetChanged();
 
     }
 
     public void addPairedDeviceList(ReaderDevice device) {
 
-        if(!readersList.contains(device))
-            readersList.add(device);
+        if (!readersList.contains(device)) readersList.add(device);
 
         pairedReaderListAdapter.notifyDataSetChanged();
     }
@@ -724,7 +701,7 @@ public class RFIDReadersListFragment extends Fragment implements IRFIDConnectTas
     public void disconnect(int scannerId) {
         if (Application.sdkHandler != null) {
             DCSSDKDefs.DCSSDK_RESULT ret = Application.sdkHandler.dcssdkTerminateCommunicationSession(scannerId);
-            curAvailableScanner=null;
+            curAvailableScanner = null;
             activity.updateScannersList();
         }
     }
@@ -738,13 +715,13 @@ public class RFIDReadersListFragment extends Fragment implements IRFIDConnectTas
     public void ReaderDeviceConnected(ReaderDevice device) {
         if (device != null) {
             updateConnectReader.setText(device.getName());
-            if(getActivity() != null) {
+            if (getActivity() != null) {
                 String model = device.getDeviceCapability(device.getName());
                 tv_model.setText(String.format(getActivity().getResources().getString(R.string.readermodel), model));
                 setImage(model);
             }
 
-            if (!Application.isReaderConnectedThroughBluetooth ||BluetoothHandler.isDevicePaired(device.getName())) {
+            if (!Application.isReaderConnectedThroughBluetooth || BluetoothHandler.isDevicePaired(device.getName())) {
                 RFIDController.mConnectedDevice = device;
                 RFIDController.mConnectedReader = device.getRFIDReader();
                 RFIDController.is_connection_requested = false;
@@ -753,12 +730,12 @@ public class RFIDReadersListFragment extends Fragment implements IRFIDConnectTas
                     int index = readersList.indexOf(mConnectedDevice);
                     updateConnectReader.setText(mConnectedReader.getHostName());
                     reader_description.setVisibility(View.GONE);
-                    if(index != -1) {
+                    if (index != -1) {
                         readersList.remove(index);
                         pairedReaderListAdapter.notifyItemRemoved(index);
                         pairedReaderListAdapter.notifyDataSetChanged();
                     }
-                    if(pairedReaderListAdapter.getItemCount() != 0) {
+                    if (pairedReaderListAdapter.getItemCount() != 0) {
                         tv_serialNo.setVisibility(View.VISIBLE);
                         tv_emptyPairedReader.setVisibility(View.GONE);
                     } else {
@@ -772,9 +749,9 @@ public class RFIDReadersListFragment extends Fragment implements IRFIDConnectTas
                 try {
                     mConnectedReader.disconnect();
                 } catch (InvalidUsageException e) {
-                   Log.d(TAG,  "Returned SDK Exception");
+                    Log.d(TAG, "Returned SDK Exception");
                 } catch (OperationFailureException e) {
-                   Log.d(TAG,  "Returned SDK Exception");
+                    Log.d(TAG, "Returned SDK Exception");
                 }
                 RFIDController.mConnectedReader = null;
                 clearConnectedReader();
@@ -795,17 +772,14 @@ public class RFIDReadersListFragment extends Fragment implements IRFIDConnectTas
 
     public void ReaderDeviceDisConnected(ReaderDevice device) {
         if (deviceConnectTask != null && !deviceConnectTask.isCancelled() && deviceConnectTask.getConnectingDevice().getName().equalsIgnoreCase(device.getName())) {
-            if (progressDialog != null && progressDialog.isShowing())
-                progressDialog.dismiss();
-            if (deviceConnectTask != null)
-                deviceConnectTask.cancel(true);
+            if (progressDialog != null && progressDialog.isShowing()) progressDialog.dismiss();
+            if (deviceConnectTask != null) deviceConnectTask.cancel(true);
         }
         if (device != null) {
-            if(readersList.contains(device) == false)
-                readersList.add(device);
+            if (readersList.contains(device) == false) readersList.add(device);
             rl_myLayout.setVisibility(View.GONE);
             reader_description.setVisibility(View.VISIBLE);
-            if(pairedReaderListAdapter.getItemCount() != 0 ) {
+            if (pairedReaderListAdapter.getItemCount() != 0) {
                 tv_serialNo.setVisibility(View.VISIBLE);
                 tv_emptyPairedReader.setVisibility(View.GONE);
             } else {
@@ -833,16 +807,13 @@ public class RFIDReadersListFragment extends Fragment implements IRFIDConnectTas
                     RFIDController.mConnectedReader = null;
 
                 } catch (InvalidUsageException e) {
-                   Log.d(TAG,  "Returned SDK Exception");
+                    Log.d(TAG, "Returned SDK InvalidUsageException");
                 } catch (OperationFailureException e) {
-                   Log.d(TAG,  "Returned SDK Exception");
+                    Log.d(TAG, "Returned SDK OperationFailureException");
                 } catch (Exception e) {
-                    //if( e!= null && e.getStackTrace().length>0){ Log.e(TAG, e.getStackTrace()[0].toString()); }
+                    Log.d(TAG, "Returned SDK Exception");
                 }
-
-
             }
-
         }
     }
 
@@ -855,21 +826,18 @@ public class RFIDReadersListFragment extends Fragment implements IRFIDConnectTas
     public void ReaderDeviceConnFailed(ReaderDevice device) {
         if (isVisible() && progressDialog != null && progressDialog.isShowing())
             progressDialog.dismiss();
-        if (deviceConnectTask != null)
-            deviceConnectTask.cancel(true);
+        if (deviceConnectTask != null) deviceConnectTask.cancel(true);
         if (device != null) {
             // changeTextStyle(device);
-        }
-        else {
+        } else {
             Constants.logAsMessage(Constants.TYPE_ERROR, "ReadersListFragment", "장치 이름이 올바르지 않거나 비어 있습니다.");
         }
         sendNotification(Constants.ACTION_READER_CONN_FAILED, "연결 실패!!로 수신됨.");
-        if ( device.getTransport() != null && device.getTransport().equalsIgnoreCase("BLUETOOTH") == true )
-        {
-            if(activity != null )
-                Toast.makeText(activity,"블루투스가 활성화 되어 있는지 확인해주세요.",Toast.LENGTH_SHORT).show();
+        if (device.getTransport() != null && device.getTransport().equalsIgnoreCase("BLUETOOTH") == true) {
+            if (activity != null)
+                Toast.makeText(activity, "블루투스가 활성화 되어 있는지 확인해주세요.", Toast.LENGTH_SHORT).show();
         }
-        
+
         RFIDController.is_connection_requested = false;
         RFIDController.mConnectedReader = null;
         RFIDController.mConnectedDevice = null;
@@ -879,13 +847,13 @@ public class RFIDReadersListFragment extends Fragment implements IRFIDConnectTas
     public void onTaskDataCleanUp() {
         deviceConnectTask = null;
         try {
-            if( (RFIDController.regionNotSet == false) && (RFIDController.mConnectedReader != null)) {
+            if ((RFIDController.regionNotSet == false) && (RFIDController.mConnectedReader != null)) {
                 RFIDController.getInstance().updateReaderConnection(false);
             }
         } catch (InvalidUsageException e) {
-           Log.d(TAG,  "Returned SDK Exception");
+            Log.d(TAG, "Returned SDK Exception");
         } catch (OperationFailureException e) {
-           Log.d(TAG,  "Returned SDK Exception");
+            Log.d(TAG, "Returned SDK Exception");
         }
     }
 
@@ -920,7 +888,7 @@ public class RFIDReadersListFragment extends Fragment implements IRFIDConnectTas
                 public void run() {
                     if (pairedReaderListAdapter != null && readerDevice != null) {
                         if (pairedReaderListAdapter.getItemCount() == 0) {
-                           // linearLayout.setVisibility(View.GONE);
+                            // linearLayout.setVisibility(View.GONE);
                             //pairedListView.setAdapter(readerListAdapter);
                         }
                         if (readersList.contains(readerDevice)) {
@@ -940,32 +908,29 @@ public class RFIDReadersListFragment extends Fragment implements IRFIDConnectTas
 
 
     private void autoConnectDevice(ReaderDevice readerDevice) {
-        int index = (pairedReaderListAdapter.getItemCount()-1);
+        int index = (pairedReaderListAdapter.getItemCount() - 1);
 
-        Log.d("autoConnectDevice", "mConnectionProgress = " + mConnectionProgress );
-        if(mConnectioninProgress == true) {
+        Log.d("autoConnectDevice", "mConnectionProgress = " + mConnectionProgress);
+        if (mConnectioninProgress == true) {
             return;
         }
 
-        if(AUTO_RECONNECT_READERS == false )
-            return;
+        if (AUTO_RECONNECT_READERS == false) return;
 
-        for(;index >= 0; index--)
-        {
-            if ( (AUTO_RECONNECT_READERS && readerDevice.getAddress().equalsIgnoreCase("USB_PORT") == true ) || (AUTO_RECONNECT_READERS && LAST_CONNECTED_READER != null && LAST_CONNECTED_READER.length() !=0 && LAST_CONNECTED_READER.equals(readersList.get(index).getName())))
-            {
+        for (; index >= 0; index--) {
+            if ((AUTO_RECONNECT_READERS && readerDevice.getAddress().equalsIgnoreCase("USB_PORT") == true) || (AUTO_RECONNECT_READERS && LAST_CONNECTED_READER != null && LAST_CONNECTED_READER.length() != 0 && LAST_CONNECTED_READER.equals(readersList.get(index).getName()))) {
                 int finalIndex = index;
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
 
                         ReaderDevice readerDevice = readersList.get(finalIndex);
-                        if(mConnectedReader !=null && mConnectedReader.isConnected()) {
-                            Toast.makeText(getActivity(),"계속 진행하려면, 기존에 연결된 장치의 연결을 해제해주세요.",Toast.LENGTH_SHORT).show();
+                        if (mConnectedReader != null && mConnectedReader.isConnected()) {
+                            Toast.makeText(getActivity(), "계속 진행하려면, 기존에 연결된 장치의 연결을 해제해주세요.", Toast.LENGTH_SHORT).show();
                             return;
 
                         }
-                        if(mConnectedReader ==null) {
+                        if (mConnectedReader == null) {
                             showProgressDialog(readerDevice);
                         }
                     }
@@ -973,7 +938,7 @@ public class RFIDReadersListFragment extends Fragment implements IRFIDConnectTas
 
                 new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
 
-                   @Override
+                    @Override
                     public void run() {
                         ConnectReader(finalIndex);
                     }
@@ -985,11 +950,10 @@ public class RFIDReadersListFragment extends Fragment implements IRFIDConnectTas
         }
 
     }
-    
+
     public void RFIDReaderDisappeared(final ReaderDevice readerDevice) {
 
-        if( readersList.contains(readerDevice) == true)
-            readersList.remove(readerDevice);
+        if (readersList.contains(readerDevice) == true) readersList.remove(readerDevice);
 
     }
 
@@ -1010,22 +974,19 @@ public class RFIDReadersListFragment extends Fragment implements IRFIDConnectTas
         if (ActiveDeviceActivity.isActivityVisible()) {
             passwordDialog = new PasswordDialog(activity, connectingDevice);
             passwordDialog.show();
-        } else
-            PasswordDialog.isDialogShowing = true;
+        } else PasswordDialog.isDialogShowing = true;
     }
 
 
-    public void showProgressDialog(ReaderDevice connectingDevice)
-    {
+    public void showProgressDialog(ReaderDevice connectingDevice) {
         if (progressDialog == null) {
 
-            progressDialog = new CustomProgressDialog(activity, "" + connectingDevice.getName() +" 연결중...");
+            progressDialog = new CustomProgressDialog(activity, "" + connectingDevice.getName() + " 연결중...");
             progressDialog.setCancelable(false);
             progressDialog.show();
 
         }
     }
-
 
 
     /**
@@ -1036,14 +997,12 @@ public class RFIDReadersListFragment extends Fragment implements IRFIDConnectTas
             progressDialog.cancel();
             progressDialog.dismiss();
         }
-        if (deviceConnectTask != null)
-            deviceConnectTask.cancel(true);
+        if (deviceConnectTask != null) deviceConnectTask.cancel(true);
     }
 
-    public void showScanProgressDialog(ReaderDevice connectingDevice)
-    {
-        if(progressDialog == null){
-            progressDialog =  new CustomProgressDialog(activity, "" + connectingDevice.getName() +" 장치에 연결 중...");
+    public void showScanProgressDialog(ReaderDevice connectingDevice) {
+        if (progressDialog == null) {
+            progressDialog = new CustomProgressDialog(activity, "" + connectingDevice.getName() + " 장치에 연결 중...");
             progressDialog.setCancelable(false);
             progressDialog.show();
 
@@ -1051,31 +1010,24 @@ public class RFIDReadersListFragment extends Fragment implements IRFIDConnectTas
     }
 
 
-
     /**
      * method to cancel progress pairTaskDailog
      */
     public void cancelScanProgressDialog() {
-        if (progressDialog != null && progressDialog.isShowing())
-            progressDialog.dismiss();
-        if (deviceConnectTask != null)
-            deviceConnectTask.cancel(true);
+        if (progressDialog != null && progressDialog.isShowing()) progressDialog.dismiss();
+        if (deviceConnectTask != null) deviceConnectTask.cancel(true);
     }
-
 
 
     public void ConnectwithPassword(String password, ReaderDevice readerDevice) {
         try {
-            if (mConnectedReader != null)
-                mConnectedReader.disconnect();
+            if (mConnectedReader != null) mConnectedReader.disconnect();
         } catch (InvalidUsageException e) {
-           Log.d(TAG,  "Returned SDK Exception");
+            Log.d(TAG, "Returned SDK Exception");
         } catch (OperationFailureException e) {
-           Log.d(TAG,  "Returned SDK Exception");
+            Log.d(TAG, "Returned SDK Exception");
         }
-        deviceConnectTask = new DeviceConnectTask((AppCompatActivity) getActivity(), readerDevice, "" + readerDevice.getName()+"를 연결중...",
-                password,
-                handlers);
+        deviceConnectTask = new DeviceConnectTask((AppCompatActivity) getActivity(), readerDevice, "" + readerDevice.getName() + "를 연결중...", password, handlers);
 
         deviceConnectTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
@@ -1088,18 +1040,15 @@ public class RFIDReadersListFragment extends Fragment implements IRFIDConnectTas
      */
     private String getReaderPassword(String address) {
         SharedPreferences sharedPreferences = activity.getSharedPreferences(Constants.READER_PASSWORDS, 0);
-        if(sharedPreferences != null)
-            return sharedPreferences.getString(address, null);
-        else
-            return "";
+        if (sharedPreferences != null) return sharedPreferences.getString(address, null);
+        else return "";
     }
 
     public void sendNotification(String action, String data) {
         if (activity != null) {
             if (activity.getTitle().toString().equalsIgnoreCase(getString(R.string.title_activity_settings_detail)) || activity.getTitle().toString().equalsIgnoreCase(getString(R.string.title_activity_readers_list)))
                 ((ActiveDeviceActivity) activity).sendNotification(action, data);
-            else
-                ((ActiveDeviceActivity) activity).sendNotification(action, data);
+            else ((ActiveDeviceActivity) activity).sendNotification(action, data);
         }
     }
 
@@ -1117,9 +1066,8 @@ public class RFIDReadersListFragment extends Fragment implements IRFIDConnectTas
                     editor.commit();
                 }
             }
-        }
-        catch (NullPointerException e){
-           Log.d(TAG,  "Returned SDK Exception");
+        } catch (NullPointerException e) {
+            Log.d(TAG, "Returned SDK Exception");
         }
     }
 
@@ -1132,7 +1080,7 @@ public class RFIDReadersListFragment extends Fragment implements IRFIDConnectTas
 
     public void deviceStatusReceived(final int level, final boolean charging, final String cause) {
 
-        if(getActivity() != null ) {
+        if (getActivity() != null) {
             getActivity().runOnUiThread(new Runnable() {
 
                 @Override
@@ -1142,6 +1090,7 @@ public class RFIDReadersListFragment extends Fragment implements IRFIDConnectTas
             });
         }
     }
+
     public void deviceDisconnected() {
         batteryLevelImage.setImageLevel(0);
     }
@@ -1152,32 +1101,26 @@ public class RFIDReadersListFragment extends Fragment implements IRFIDConnectTas
 
     @Override
     public void ConnectReader(int position) {
-        Log.d(TAG, "Connect Reader " + position  );
+        Log.d(TAG, "Connect Reader " + position);
         int tabCount = 0;
-        if(position >= readersList.size())
-            return;
+        if (position >= readersList.size()) return;
 
         ReaderDevice readerDevice = readersList.get(position);
 
-        if(mConnectedReader !=null && mConnectedReader.isConnected()) {
-            if( getActivity() != null )
-                Toast.makeText(getActivity(),"계속하려면 연결된 장치를 연결 해제하세요.",Toast.LENGTH_SHORT).show();
+        if (mConnectedReader != null && mConnectedReader.isConnected()) {
+            if (getActivity() != null)
+                Toast.makeText(getActivity(), "계속하려면 연결된 장치를 연결 해제하세요.", Toast.LENGTH_SHORT).show();
 
             return;
-        } else
-        if ((RFIDController.is_connection_requested != true)&&(RFIDController.mConnectedReader == null)) {
+        } else if ((RFIDController.is_connection_requested != true) && (RFIDController.mConnectedReader == null)) {
             if (deviceConnectTask == null || deviceConnectTask.isCancelled()) {
                 RFIDController.is_connection_requested = true;
                 mConnectionProgress = true;
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-                    deviceConnectTask = new DeviceConnectTask((AppCompatActivity) getActivity(), readerDevice, "" + readerDevice.getName() + "를 연결중..",
-                            getReaderPassword(readerDevice.getName()),
-                            handlers);
+                    deviceConnectTask = new DeviceConnectTask((AppCompatActivity) getActivity(), readerDevice, "" + readerDevice.getName() + "를 연결중..", getReaderPassword(readerDevice.getName()), handlers);
                     deviceConnectTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
                 } else {
-                    deviceConnectTask = new DeviceConnectTask((AppCompatActivity) getActivity(), readerDevice, "" + readerDevice.getName() + "를 연결중..",
-                            getReaderPassword(readerDevice.getName()),
-                            handlers);
+                    deviceConnectTask = new DeviceConnectTask((AppCompatActivity) getActivity(), readerDevice, "" + readerDevice.getName() + "를 연결중..", getReaderPassword(readerDevice.getName()), handlers);
                     deviceConnectTask.execute();
                 }
 
@@ -1188,18 +1131,18 @@ public class RFIDReadersListFragment extends Fragment implements IRFIDConnectTas
     }
 
     @Override
-    public void unPair(int position ,String transportType) {
-        if(transportType.equals("BLUETOOTH")) {
+    public void unPair(int position, String transportType) {
+        if (transportType.equals("BLUETOOTH")) {
             scanPair = new ScanPair();
             scanAndPairFragment = ScanAndPairFragment.newInstance();
-            scanPair.Init((AppCompatActivity) getActivity(),scanAndPairFragment);
+            scanPair.Init((AppCompatActivity) getActivity(), scanAndPairFragment);
             btConnection = new BluetoothHandler();
-            btConnection.init(getActivity(),scanPair);
+            btConnection.init(getActivity(), scanPair);
             ReaderDevice readerDevice = readersList.get(position);
             btConnection.unpairReader(readerDevice.getName());
-            ((ActiveDeviceActivity)getActivity()).nfcData = null;
+            ((ActiveDeviceActivity) getActivity()).nfcData = null;
         } else {
-            Toast.makeText(getActivity(),"블루투스 장치가 아닙니다.",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "블루투스 장치가 아닙니다.", Toast.LENGTH_SHORT).show();
             return;
         }
 

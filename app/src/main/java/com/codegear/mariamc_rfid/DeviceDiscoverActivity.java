@@ -321,14 +321,7 @@ public class DeviceDiscoverActivity extends BaseActivity implements Readers.RFID
         }
     }
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_app_home, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
+ 
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
