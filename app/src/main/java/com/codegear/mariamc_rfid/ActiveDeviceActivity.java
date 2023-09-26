@@ -178,11 +178,9 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-import com.codegear.mariamc_rfid.cowchronicle.activities.CowChronicleActivity;
-import com.codegear.mariamc_rfid.cowchronicle.activities.FarmSelectFragment;
-import com.codegear.mariamc_rfid.cowchronicle.activities.WebviewHomeFragment;
+import com.codegear.mariamc_rfid.cowchronicle.ui.activities.CowChronicleActivity;
 import com.codegear.mariamc_rfid.cowchronicle.consts.CowChronicleScreenEnum;
-import com.codegear.mariamc_rfid.cowchronicle.activities.UserLoginActivity;
+import com.codegear.mariamc_rfid.cowchronicle.ui.activities.UserLoginActivity;
 import com.codegear.mariamc_rfid.cowchronicle.device.RFIDSingleton;
 import com.codegear.mariamc_rfid.cowchronicle.storage.UserStorage;
 import com.codegear.mariamc_rfid.cowchronicle.utils.PixelUtil;
@@ -241,7 +239,6 @@ import com.codegear.mariamc_rfid.scanner.activities.ImageActivity;
 import com.codegear.mariamc_rfid.scanner.activities.IntelligentImageCaptureActivity;
 import com.codegear.mariamc_rfid.scanner.activities.LEDActivity;
 import com.codegear.mariamc_rfid.scanner.activities.NavigationHelpActivity;
-import com.codegear.mariamc_rfid.scanner.activities.SampleBarcodes;
 import com.codegear.mariamc_rfid.scanner.activities.ScaleActivity;
 import com.codegear.mariamc_rfid.scanner.activities.ScanSpeedAnalyticsActivity;
 import com.codegear.mariamc_rfid.scanner.activities.UpdateFirmware;
@@ -390,7 +387,7 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
             }
 
             @Override
-            public void onDrawerOpened(@NonNull View drawerView) { 
+            public void onDrawerOpened(@NonNull View drawerView) {
                 if (RFIDController.BatteryData != null) {
                     deviceStatusReceived(RFIDController.BatteryData.getLevel(), RFIDController.BatteryData.getCharging(), RFIDController.BatteryData.getCause());
                 }

@@ -76,10 +76,12 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_items"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="300dp"
                 android:layout_gravity="left"
                 android:layout_marginBottom="4dp"
                 android:fadingEdgeLength="4dp"
+                android:scrollbars="vertical"
+                android:scrollbarFadeDuration="0"
                 android:requiresFadingEdge="vertical" />
 
 

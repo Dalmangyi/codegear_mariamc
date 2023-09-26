@@ -1,22 +1,16 @@
-package com.codegear.mariamc_rfid.cowchronicle.activities;
+package com.codegear.mariamc_rfid.cowchronicle.ui.activities;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.SpinnerAdapter;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatSpinner;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -25,7 +19,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.codegear.mariamc_rfid.R;
 import com.codegear.mariamc_rfid.cowchronicle.consts.MemoryBankIdEnum;
 import com.codegear.mariamc_rfid.cowchronicle.services.ReqInsertTagData;
-import com.codegear.mariamc_rfid.cowchronicle.services.ResCommon;
 import com.codegear.mariamc_rfid.cowchronicle.services.ResInsertTagData;
 import com.codegear.mariamc_rfid.cowchronicle.ui.cowtags.CowTagCell;
 import com.codegear.mariamc_rfid.cowchronicle.ui.farms.FarmSearchDialogCompat;
@@ -44,7 +37,6 @@ import com.codegear.mariamc_rfid.cowchronicle.utils.SoundSearcher;
 import com.codegear.mariamc_rfid.rfidreader.rfid.RFIDController;
 import com.codegear.mariamc_rfid.rfidreader.rfid.RfidListeners;
 import com.codegear.mariamc_rfid.rfidreader.settings.ProfileContent;
-import com.google.gson.Gson;
 import com.skydoves.powerspinner.IconSpinnerAdapter;
 import com.skydoves.powerspinner.IconSpinnerItem;
 import com.skydoves.powerspinner.OnSpinnerItemSelectedListener;
@@ -54,20 +46,12 @@ import com.zebra.rfid.api3.Antennas;
 import com.zebra.rfid.api3.InvalidUsageException;
 import com.zebra.rfid.api3.OperationFailureException;
 
-import org.json.JSONArray;
-import org.llrp.ltk.generated.parameters.Custom;
-
-import java.io.IOException;
-import java.net.UnknownHostException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
 import ir.mirrajabi.searchdialog.core.BaseFilter;
 import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class CowTagsFragment extends Fragment {
 
@@ -314,6 +298,20 @@ public class CowTagsFragment extends Fragment {
     //목장 검색 다이얼로그 표시
     public void showFarmSearchDialog(View view) {
 
+        FarmSearchDialogCompat farmSearchDialogCompat = new FarmSearchDialogCompat<>(
+                mActivity, "목장 리스트",
+                "검색어를 입력해주세요.",
+                null,
+                mFarmList,
+                (dialog, item, position) -> {
+                    dialog.dismiss();
+
+                    setSelectFarmCode(item.getFarmCode());
+                    initSelectFarm();
+                    loadCowList();
+                }
+        );
+
         BaseFilter apiFilter = new BaseFilter() {
             @Override
             protected FilterResults performFiltering(CharSequence charSequence) {
@@ -340,24 +338,14 @@ public class CowTagsFragment extends Fragment {
                 if (filterResults != null) {
                     ArrayList<FarmModel> filtered = (ArrayList<FarmModel>) filterResults.values;
                     if (filtered != null) {
-                        getFilterResultListener().onFilter(filtered);
+                        farmSearchDialogCompat.getFilterResultListener().onFilter(filtered);
                     }
                     doAfterFiltering();
                 }
             }
         };
 
-
-        new FarmSearchDialogCompat<>(
-            mActivity, "목장 리스트","검색어를 입력해주세요.",null, mFarmList,
-            (dialog, item, position) -> {
-                dialog.dismiss();
-
-                setSelectFarmCode(item.getFarmCode());
-                initSelectFarm();
-                loadCowList();
-            }
-        ).setFilter(apiFilter).show();
+        farmSearchDialogCompat.setFilter(apiFilter).show();
     }
 
 
