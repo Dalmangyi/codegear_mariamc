@@ -1,6 +1,5 @@
 package com.codegear.mariamc_rfid.rfidreader.access_operations;
 
-import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -15,7 +14,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
@@ -42,21 +40,21 @@ import static com.codegear.mariamc_rfid.rfidreader.home.RFIDBaseActivity.filter;
 
 public class AccessOperationsReadWriteFragment extends Fragment implements AccessOperationsFragment.OnRefreshListener {
 
-    public static Timer tLED;
-    public Timer tbeep;
-    TextView textRWData;
-    private EditText offsetEditText;
-    private EditText lengthEditText;
-    private AutoCompleteTextView tagIDField;
+    private TextView textRWData;
+    private EditText etOffset;
+    private EditText etLength;
+    private AutoCompleteTextView tvTagIDField;
     private ArrayAdapter<String> adapter;
+    private Spinner rw_typespinner;
+
+
+    public Timer beepTimer;
     private boolean beepON = false;
-    private boolean LEDON = false;
-    private int LED_STOP_TIME = 500;
-    private NotificationManager notificationManager;
     private long BEEP_STOP_TIME = 20;
-    private CheckBox accessEnableAdvanceOptions;
     private boolean showAdvancedOptions;
-    Spinner rw_typespinner;
+
+
+
 
     public AccessOperationsReadWriteFragment() {
         // Required empty public constructor
@@ -114,47 +112,37 @@ public class AccessOperationsReadWriteFragment extends Fragment implements Acces
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-    }
-
-    @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
         initializeSpinner();
-        offsetEditText = (EditText) getActivity().findViewById(R.id.accessRWOffsetValue);
-        lengthEditText = (EditText) getActivity().findViewById(R.id.accessRWLengthValue);
-        tagIDField = ((AutoCompleteTextView) getActivity().findViewById(R.id.accessRWTagID));
+        tvTagIDField = ((AutoCompleteTextView) getActivity().findViewById(R.id.accessRWTagID));
+        etOffset = (EditText) getActivity().findViewById(R.id.accessRWOffsetValue);
+        etLength = (EditText) getActivity().findViewById(R.id.accessRWLengthValue);
         textRWData = (TextView) getActivity().findViewById(R.id.accessRWData);
-        offsetEditText.setHorizontallyScrolling(false);
-        lengthEditText.setHorizontallyScrolling(false);
+        etOffset.setHorizontallyScrolling(false);
+        etLength.setHorizontallyScrolling(false);
 
         //handle Seek Operations
         handleSeekOperations();
         RFIDController.getInstance().updateTagIDs();
         adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_dropdown_item_1line, Application.tagIDs);
-        tagIDField.setAdapter(adapter);
+        tvTagIDField.setAdapter(adapter);
         if (RFIDController.asciiMode == true) {
-            tagIDField.setFilters(new InputFilter[]{filter});
+            tvTagIDField.setFilters(new InputFilter[]{filter});
             textRWData.setFilters(new InputFilter[]{filter});
         } else {
-            tagIDField.setFilters(new InputFilter[]{filter, new InputFilter.AllCaps()});
+            tvTagIDField.setFilters(new InputFilter[]{filter, new InputFilter.AllCaps()});
             textRWData.setFilters(new InputFilter[]{filter, new InputFilter.AllCaps()});
 
         }
         if (RFIDController.accessControlTag != null) {
             if (RFIDController.asciiMode == true)
-                tagIDField.setText(hextoascii.convert(RFIDController.accessControlTag));
-            else tagIDField.setText((RFIDController.accessControlTag));
-            offsetEditText.setText("2");
+                tvTagIDField.setText(hextoascii.convert(RFIDController.accessControlTag));
+            else tvTagIDField.setText((RFIDController.accessControlTag));
+            etOffset.setText("2");
         } else {
-            offsetEditText.setText("0");
+            etOffset.setText("0");
         }
 
         //
@@ -172,10 +160,8 @@ public class AccessOperationsReadWriteFragment extends Fragment implements Acces
         if (advancedOptions != null) {
             if (Application.rwAdvancedOptions) {
                 advancedOptions.setVisibility(View.VISIBLE);
-                //getActivity().findViewById(R.id.seperaterData).setVisibility(View.GONE);
             } else {
                 advancedOptions.setVisibility(View.INVISIBLE);
-                //getActivity().findViewById(R.id.seperaterData).setVisibility(View.VISIBLE);
             }
         }
     }
@@ -184,8 +170,7 @@ public class AccessOperationsReadWriteFragment extends Fragment implements Acces
      * Method to initialize the seekbars
      */
     private void handleSeekOperations() {
-        //offsetEditText.setFilters(new InputFilter[]{new InputFilterMax(Long.valueOf(Constants.MAX_OFFSET))});
-        lengthEditText.setFilters(new InputFilter[]{new InputFilterMax(Long.valueOf(Constants.MAX_LEGTH))});
+        etLength.setFilters(new InputFilter[]{new InputFilterMax(Long.valueOf(Constants.MAX_LEGTH))});
     }
 
     private void initializeSpinner() {
@@ -203,21 +188,21 @@ public class AccessOperationsReadWriteFragment extends Fragment implements Acces
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     switch (position) {
                         case 0:
-                            offsetEditText.setText("2"); // EPC
-                            lengthEditText.setText("0");
+                            etOffset.setText("2"); // EPC
+                            etLength.setText("0");
                             break;
                         case 1:
                         case 2:
-                            offsetEditText.setText("0"); // TID USER
-                            lengthEditText.setText("0");
+                            etOffset.setText("0"); // TID USER
+                            etLength.setText("0");
                             break;
                         case 4:
-                            offsetEditText.setText("0"); // kill password
-                            lengthEditText.setText("2");
+                            etOffset.setText("0"); // kill password
+                            etLength.setText("2");
                             break;
                         case 3: // access password
-                            offsetEditText.setText("2");
-                            lengthEditText.setText("2");
+                            etOffset.setText("2");
+                            etLength.setText("2");
                             break;
                     }
                 }
@@ -228,11 +213,6 @@ public class AccessOperationsReadWriteFragment extends Fragment implements Acces
                 }
             });
         }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
     }
 
     @Override
@@ -258,7 +238,7 @@ public class AccessOperationsReadWriteFragment extends Fragment implements Acces
                                     text.setText(RFIDController.asciiMode == true ? hextoascii.convert(response_tagData.getMemoryBankData()) : response_tagData.getMemoryBankData());
                                 }
                                 Toast.makeText(getActivity(), R.string.msg_read_succeed, Toast.LENGTH_SHORT).show();
-                                startbeepingTimer();
+                                startBeepingTimer();
                             } else {
                             }
                         }
@@ -275,33 +255,33 @@ public class AccessOperationsReadWriteFragment extends Fragment implements Acces
 
     @Override
     public void onUpdate() {
-        if (isVisible() && tagIDField != null) {
-            RFIDController.accessControlTag = tagIDField.getText().toString();
+        if (isVisible() && tvTagIDField != null) {
+            RFIDController.accessControlTag = tvTagIDField.getText().toString();
         }
     }
 
     @Override
     public void onRefresh() {
-        if (RFIDController.accessControlTag != null && tagIDField != null) {
-            tagIDField.setText(RFIDController.accessControlTag);
+        if (RFIDController.accessControlTag != null && tvTagIDField != null) {
+            tvTagIDField.setText(RFIDController.accessControlTag);
         }
     }
 
-    public void startbeepingTimer() {
+    public void startBeepingTimer() {
         if (RFIDController.beeperVolume != BEEPER_VOLUME.QUIET_BEEP) {
             if (!beepON) {
                 beepON = true;
                 beep();
-                if (tbeep == null) {
+                if (beepTimer == null) {
                     TimerTask task = new TimerTask() {
                         @Override
                         public void run() {
-                            stopbeepingTimer();
+                            stopBeepingTimer();
                             beepON = false;
                         }
                     };
-                    tbeep = new Timer();
-                    tbeep.schedule(task, BEEP_STOP_TIME);
+                    beepTimer = new Timer();
+                    beepTimer.schedule(task, BEEP_STOP_TIME);
                 }
             }
         }
@@ -310,13 +290,13 @@ public class AccessOperationsReadWriteFragment extends Fragment implements Acces
     /**
      * method to stop timer
      */
-    public void stopbeepingTimer() {
-        if (tbeep != null) {
+    public void stopBeepingTimer() {
+        if (beepTimer != null) {
             if (RFIDController.toneGenerator != null) RFIDController.toneGenerator.stopTone();
-            tbeep.cancel();
-            tbeep.purge();
+            beepTimer.cancel();
+            beepTimer.purge();
         }
-        tbeep = null;
+        beepTimer = null;
     }
 
     public void beep() {
@@ -339,9 +319,9 @@ public class AccessOperationsReadWriteFragment extends Fragment implements Acces
 
     private void displayScanResult(Intent initiatingIntent) {
         String decodedData = initiatingIntent.getStringExtra(getResources().getString(R.string.datawedge_intent_key_data));
-        if (decodedData != null && tagIDField != null) {
-            tagIDField.setText(decodedData);
-            tagIDField.setSelection(decodedData.length());
+        if (decodedData != null && tvTagIDField != null) {
+            tvTagIDField.setText(decodedData);
+            tvTagIDField.setSelection(decodedData.length());
         }
     }
 }

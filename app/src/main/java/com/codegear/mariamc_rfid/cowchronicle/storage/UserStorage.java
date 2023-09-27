@@ -20,7 +20,10 @@ public class UserStorage {
 
 
     //저장용 데이터
-    private ResLogin mResLogin; 
+    private ResLogin mResLogin;
+
+    //임시 데이터
+    public String tempSelectTagNum;
 
 
     private UserStorage() {

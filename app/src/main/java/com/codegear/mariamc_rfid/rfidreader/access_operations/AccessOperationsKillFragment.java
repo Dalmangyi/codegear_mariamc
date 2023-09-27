@@ -48,7 +48,6 @@ public class AccessOperationsKillFragment extends Fragment implements AccessOper
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_access_operations_kill, container, false);
     }
 

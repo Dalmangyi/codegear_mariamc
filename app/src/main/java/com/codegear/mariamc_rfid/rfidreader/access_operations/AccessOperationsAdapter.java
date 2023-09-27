@@ -17,7 +17,6 @@ import java.util.HashMap;
 public class AccessOperationsAdapter extends FragmentStatePagerAdapter {
     private static final int NO_OF_TABS = 3;
 
-    //Map to hold the references for currently active fragments so that we can acess them
     private HashMap<Integer, Fragment> currentlyActiveFragments;
 
     /**

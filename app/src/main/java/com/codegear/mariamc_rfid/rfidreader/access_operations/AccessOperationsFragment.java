@@ -10,8 +10,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-
-import androidx.appcompat.app.ActionBar;
+ 
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
@@ -31,7 +30,6 @@ import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.INVE
 public class AccessOperationsFragment extends Fragment {
     private ViewPager viewPager;
     private AccessOperationsAdapter mAdapter;
-    private ActionBar actionBar;
     private int accessOperationCount = -1;
     private boolean rwAdvancedOptions = false;
 
@@ -59,23 +57,22 @@ public class AccessOperationsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         setRetainInstance(true);
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_access_operations, container, false);
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
         // Initialization
         viewPager = (ViewPager) getActivity().findViewById(R.id.accessOperationsPager);
         mAdapter = new AccessOperationsAdapter(getActivity().getSupportFragmentManager());
         viewPager.setAdapter(mAdapter);
         mAdapter.notifyDataSetChanged();
+
         //
         SharedPreferences settings = getActivity().getSharedPreferences(Constants.APP_SETTINGS_STATUS, 0);
         rwAdvancedOptions = settings.getBoolean(Constants.ACCESS_ADV_OPTIONS, false);
-
-
     }
 
     @Override

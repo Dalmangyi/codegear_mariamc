@@ -28,7 +28,7 @@ public class WebviewCowDetailFragment extends Fragment implements AdvancedWebVie
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         activity = (AppCompatActivity)getActivity();
-        activity.getSupportActionBar().setTitle("전자이표 상세");
+        activity.getSupportActionBar().setTitle("전자이표 상세 ("+cowIdNum+")");
 
         View view = inflater.inflate(R.layout.activity_webview, null, false);
 

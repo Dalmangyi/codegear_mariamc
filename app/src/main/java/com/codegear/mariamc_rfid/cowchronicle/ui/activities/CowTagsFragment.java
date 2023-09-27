@@ -21,8 +21,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.codegear.mariamc_rfid.R;
-import com.codegear.mariamc_rfid.cowchronicle.consts.CowFilterKeyEnum;
 import com.codegear.mariamc_rfid.cowchronicle.consts.MemoryBankIdEnum;
 import com.codegear.mariamc_rfid.cowchronicle.services.ReqInsertTagData;
 import com.codegear.mariamc_rfid.cowchronicle.services.ResInsertTagData;
@@ -153,7 +153,12 @@ public class CowTagsFragment extends Fragment {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
         mRecyclerView.setAdapter(cowTagRowAdapter);
         cowTagRowAdapter.setOnCowItemClickListener(cell -> {
-            goCowDetail(""+cell.COW_ID_NUM);
+
+            CustomDialog.showSelectDialog(mActivity,
+                "이력제번호 : "+cell.COW_ID_NUM, cell.toDetailString(),
+                "상세 정보 보기", (MaterialDialog.SingleButtonCallback) (dialog, which) -> goCowDetail(""+cell.COW_ID_NUM),
+                "태그 쓰기", (MaterialDialog.SingleButtonCallback) (dialog, which) -> goTagWrite(""+cell.TAGNO)
+            );
         });
 
         initMemoryBankLayout();
@@ -579,7 +584,9 @@ public class CowTagsFragment extends Fragment {
     }
 
     //태그쓰기 화면으로 이동
-    private void goTagWrite(String tagId){
+    private void goTagWrite(String tagNum){
+//        UserStorage.getInstance().tempSelectTagNum = tagNum;
+        RFIDController.accessControlTag = tagNum;
         AccessOperationsFragment accessOperationsFragment = new AccessOperationsFragment();
         ((CowChronicleActivity)mActivity).replaceFragment(accessOperationsFragment, true);
     }
