@@ -176,6 +176,13 @@
             android:orientation="horizontal"
             android:gravity="right">
 
+            <CheckBox
+                android:id="@+id/cbUseFilterCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="태그한 데이터만 보기"
+                android:checked="false"
+                android:buttonTint="@color/colorHighlight"/>
 
         </LinearLayout>
     </androidx.appcompat.widget.LinearLayoutCompat>

@@ -2,6 +2,7 @@ package com.codegear.mariamc_rfid.cowchronicle.models;
 
 import androidx.annotation.NonNull;
 
+import com.codegear.mariamc_rfid.cowchronicle.consts.CowFilterKeyEnum;
 import com.codegear.mariamc_rfid.cowchronicle.consts.MemoryBankIdEnum;
 import com.codegear.mariamc_rfid.cowchronicle.ui.cowtags.CowTagCell;
 import com.codegear.mariamc_rfid.rfidreader.rfid.RFIDController;
@@ -9,12 +10,16 @@ import com.zebra.rfid.api3.ACCESS_OPERATION_CODE;
 import com.zebra.rfid.api3.ACCESS_OPERATION_STATUS;
 import com.zebra.rfid.api3.TagData;
 
+import org.apache.commons.lang3.EnumUtils;
+
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 
 public class CowTagsModel {
@@ -24,9 +29,14 @@ public class CowTagsModel {
     private final ArrayList<TagData> mTagList = new ArrayList<TagData>(); //태그 데이터
     private Map<String, Integer> mTagCountMap = new HashMap<>();
 
-    /*
-    inputResList
-     */
+    //Filter
+    private Map<CowFilterKeyEnum, Object> mTagFilterMap = new HashMap<>();
+    private ArrayList<CowTagCell> mFilteredCowInfoList = new ArrayList<>();
+
+
+
+
+
     public CowTagsModel() {
     }
 
@@ -83,18 +93,10 @@ public class CowTagsModel {
         }
     }
 
-    public CowTagCell getPosition(int pos){
-        return this.mCowInfoList.get(pos);
-    }
-
-    public int getSize(){
-        return this.mCowInfoList.size();
-    }
 
 
 
-
-
+    //데이터 초기화
     public void resetTagData(){
         this.mTagList.clear();
         this.mTagCountMap.clear();
@@ -198,13 +200,76 @@ public class CowTagsModel {
                                 break;
                         }
                     }
+
+                    //필터링 해놓기.
+                    refreshFilteredCowInfoList();
                 }
             }
         }
         catch (Exception e){}
     }
 
+
     public ArrayList<CowTagCell> getCowTagList(){
+        if(mTagFilterMap.keySet().size() > 0){
+            return new ArrayList<>(mFilteredCowInfoList);
+        }
+
         return new ArrayList<>(mCowInfoList);
+    }
+
+
+    public CowTagCell getPosition(int pos){
+        if(mTagFilterMap.keySet().size() > 0){
+            return mFilteredCowInfoList.get(pos);
+        }
+
+        return this.mCowInfoList.get(pos);
+    }
+
+    public int getSize(){
+        if(mTagFilterMap.keySet().size() > 0){
+            return mFilteredCowInfoList.size();
+        }
+
+        return this.mCowInfoList.size();
+    }
+
+    //필터 정보 넣기
+    public void putFilterInfo(CowFilterKeyEnum key, @NonNull Object obj){
+        if(EnumUtils.isValidEnum(CowFilterKeyEnum.class, key.name())){
+            mTagFilterMap.put(key, obj);
+
+            refreshFilteredCowInfoList();
+        }
+    }
+
+    //필터 정보 빼기
+    public void delFilterInfo(CowFilterKeyEnum key){
+        if(EnumUtils.isValidEnum(CowFilterKeyEnum.class, key.name())){
+            mTagFilterMap.remove(key);
+
+            refreshFilteredCowInfoList();
+        }
+    }
+
+    //필터 배열 갱신하기
+    public void refreshFilteredCowInfoList(){
+        ArrayList<CowTagCell> cowTagCells = new ArrayList<>(this.mCowInfoList);
+        Stream<CowTagCell> stream = cowTagCells.stream();
+
+        for(CowFilterKeyEnum filterKey : mTagFilterMap.keySet()){
+            Object filterVal = mTagFilterMap.get(filterKey);
+
+            switch(filterKey){
+                case COUNT:
+                    stream = stream.filter(item -> item.COUNT > (int)filterVal);
+                    break;
+            }
+        }
+
+        List<CowTagCell> filteredCowTagCells = stream.collect(Collectors.toList());
+        this.mFilteredCowInfoList.clear();
+        this.mFilteredCowInfoList.addAll(filteredCowTagCells);
     }
 }

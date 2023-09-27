@@ -10,6 +10,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,6 +22,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.codegear.mariamc_rfid.R;
+import com.codegear.mariamc_rfid.cowchronicle.consts.CowFilterKeyEnum;
 import com.codegear.mariamc_rfid.cowchronicle.consts.MemoryBankIdEnum;
 import com.codegear.mariamc_rfid.cowchronicle.services.ReqInsertTagData;
 import com.codegear.mariamc_rfid.cowchronicle.services.ResInsertTagData;
@@ -71,7 +74,7 @@ public class CowTagsFragment extends Fragment {
     private Button btnCurrentFarm, btnDistancePowerApply, btnClear, btnScan;
     private BubbleSeekBar bsbDistancePower;
     private PowerSpinnerView spMemoryBankIds;
-
+    private CheckBox cbUseFilterCount;
 
 
 
@@ -82,7 +85,6 @@ public class CowTagsFragment extends Fragment {
     private int[] antennaPowerLevels = null;
     private DeviceTaskSettings.SaveAntennaConfigurationTask antennaTask = null;
     private CowTagsModel cowTagsModel = new CowTagsModel();
-
     private boolean mScanRunning = false;
 
 
@@ -150,50 +152,21 @@ public class CowTagsFragment extends Fragment {
         mRecyclerView = mMainView.findViewById(R.id.tbCowTags);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
         mRecyclerView.setAdapter(cowTagRowAdapter);
-        cowTagRowAdapter.setOnItemClickListener(cell -> {
+        cowTagRowAdapter.setOnCowItemClickListener(cell -> {
             goCowDetail(""+cell.COW_ID_NUM);
         });
 
-        List<IconSpinnerItem> iconSpinnerItems = new ArrayList<>();
-        for (Enum memoryBankIdEnum:MemoryBankIdEnum.values()){
-            CharSequence charSequence = memoryBankIdEnum.toString();
-            iconSpinnerItems.add(new IconSpinnerItem(charSequence, ContextCompat.getDrawable(mActivity, R.drawable.ic_transparent)));
-        }
+        initMemoryBankLayout();
 
-
-        spMemoryBankIds = mMainView.findViewById(R.id.spMemoryBankIds);
-        spMemoryBankIds.setSpinnerAdapter(new IconSpinnerAdapter(spMemoryBankIds));
-        spMemoryBankIds.setItems(iconSpinnerItems);
-        spMemoryBankIds.setLifecycleOwner(mActivity);
-
-        spMemoryBankIds.setOnClickListener(new View.OnClickListener() {
+        cbUseFilterCount = mMainView.findViewById(R.id.cbUseFilterCount);
+        cbUseFilterCount.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onClick(View v) {
-                if (RFIDController.mConnectedReader == null || !RFIDController.mConnectedReader.isConnected()) {
-                    CustomDialog.showSimple(mActivity, "장치 연결이 끊겨있습니다.\n장치설정 화면으로 이동해서 연결후 다시 시도해주세요..");
-                    return;
-                }
-
-                if(mScanRunning){
-                    CustomDialog.showSimple(mActivity, "스캔을 정지하고 변경할 수 있습니다.");
-                }
-                else{
-                    spMemoryBankIds.showOrDismiss(0, PixelUtil.ConvertDpToPx(mActivity, 20));
-                }
-
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                cowTagRowAdapter.setUseRSSIFilter(isChecked);
             }
         });
-        spMemoryBankIds.setOnSpinnerItemSelectedListener(new OnSpinnerItemSelectedListener<Object>() {
-            @Override
-            public void onItemSelected(int oldPos, @Nullable Object o, int pos, Object t1) {
+        cowTagRowAdapter.setUseRSSIFilter(cbUseFilterCount.isChecked());
 
-                MemoryBankIdEnum memoryBankIdEnum = MemoryBankIdEnum.values()[pos];
-
-                //Title
-                spMemoryBankIds.setText("MemoryBank\n"+memoryBankIdEnum.toString());
-            }
-        });
-        spMemoryBankIds.selectItemByIndex(0);
 
 
         initProfiles();
@@ -244,6 +217,50 @@ public class CowTagsFragment extends Fragment {
         return true;
     }
 
+    //메모리뱅크 레이아웃 초기화
+    private void initMemoryBankLayout(){
+
+        List<IconSpinnerItem> iconSpinnerItems = new ArrayList<>();
+        for (Enum memoryBankIdEnum:MemoryBankIdEnum.values()){
+            CharSequence charSequence = memoryBankIdEnum.toString();
+            iconSpinnerItems.add(new IconSpinnerItem(charSequence, ContextCompat.getDrawable(mActivity, R.drawable.ic_transparent)));
+        }
+
+        spMemoryBankIds = mMainView.findViewById(R.id.spMemoryBankIds);
+        spMemoryBankIds.setSpinnerAdapter(new IconSpinnerAdapter(spMemoryBankIds));
+        spMemoryBankIds.setItems(iconSpinnerItems);
+        spMemoryBankIds.setLifecycleOwner(mActivity);
+
+        spMemoryBankIds.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (RFIDController.mConnectedReader == null || !RFIDController.mConnectedReader.isConnected()) {
+                    CustomDialog.showSimple(mActivity, "장치 연결이 끊겨있습니다.\n장치설정 화면으로 이동해서 연결후 다시 시도해주세요..");
+                    return;
+                }
+
+                if(mScanRunning){
+                    CustomDialog.showSimple(mActivity, "스캔을 정지하고 변경할 수 있습니다.");
+                }
+                else{
+                    spMemoryBankIds.showOrDismiss(0, PixelUtil.ConvertDpToPx(mActivity, 20));
+                }
+
+            }
+        });
+        spMemoryBankIds.setOnSpinnerItemSelectedListener(new OnSpinnerItemSelectedListener<Object>() {
+            @Override
+            public void onItemSelected(int oldPos, @Nullable Object o, int pos, Object t1) {
+
+                MemoryBankIdEnum memoryBankIdEnum = MemoryBankIdEnum.values()[pos];
+
+                //Title
+                spMemoryBankIds.setText("MemoryBank\n"+memoryBankIdEnum.toString());
+            }
+        });
+        spMemoryBankIds.selectItemByIndex(0);
+    }
+
     //프로필 초기화
     private void initProfiles(){
         //작업 미 수행시, 안테나 파워와 같은 설정값 저장 불가함.
@@ -286,12 +303,12 @@ public class CowTagsFragment extends Fragment {
                 mCowList = res.data;
 
 //                TODO - TEST
-//                for(int i=0; i<mCowList.size(); i++){
-//                    if(i%2==0){
-//                        Map<String, String> cowItem = mCowList.get(i);
-//                        cowItem.put("TAGNO","0541100000001666");
-//                    }
-//                }
+                for(int i=0; i<mCowList.size(); i++){
+                    if(i%2==0){
+                        Map<String, String> cowItem = mCowList.get(i);
+                        cowItem.put("TAGNO","0541100000001184");
+                    }
+                }
 
                 //리스트 새로고침
                 refreshRecyclerView();
@@ -322,7 +339,6 @@ public class CowTagsFragment extends Fragment {
                 mFarmList,
                 (dialog, item, position) -> {
                     dialog.dismiss();
-
                     setSelectFarmCode(item.getFarmCode());
                     initSelectFarm();
                     loadCowList();

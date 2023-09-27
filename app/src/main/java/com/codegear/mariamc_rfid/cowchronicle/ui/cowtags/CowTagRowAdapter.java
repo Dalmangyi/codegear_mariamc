@@ -11,12 +11,17 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.codegear.mariamc_rfid.R;
+import com.codegear.mariamc_rfid.cowchronicle.consts.CowFilterKeyEnum;
 import com.codegear.mariamc_rfid.cowchronicle.models.CowTagsModel;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class CowTagRowAdapter extends RecyclerView.Adapter<CowTagViewHolder> {
 
 
-    private OnItemClickListener onItemClickListener = null;
+    private OnCowItemClickListener onCowItemClickListener = null;
     private CowTagsModel mCowTagsModel;
     public CowTagRowAdapter(CowTagsModel cowTagsModel) {
         this.mCowTagsModel = cowTagsModel;
@@ -40,8 +45,8 @@ public class CowTagRowAdapter extends RecyclerView.Adapter<CowTagViewHolder> {
         CowTagCell cowTagCell = mCowTagsModel.getPosition(position);
 
         holder.view.setOnClickListener(v -> {
-            if(onItemClickListener != null){
-                onItemClickListener.onItemClick(cowTagCell);
+            if(this.onCowItemClickListener != null){
+                this.onCowItemClickListener.onItemClick(cowTagCell);
             }
         });
 
@@ -72,15 +77,22 @@ public class CowTagRowAdapter extends RecyclerView.Adapter<CowTagViewHolder> {
 
     @Override
     public int getItemCount() {
-        return mCowTagsModel.getSize();
+        return this.mCowTagsModel.getSize();
     }
 
-    public interface OnItemClickListener {
-        void onItemClick(CowTagCell cell);
+    public void setOnCowItemClickListener(OnCowItemClickListener listener) {
+        this.onCowItemClickListener = listener;
     }
 
-    public void setOnItemClickListener(OnItemClickListener listener) {
-        this.onItemClickListener = listener;
+    public void setUseRSSIFilter(boolean filterValue){
+        if(filterValue){
+            mCowTagsModel.putFilterInfo(CowFilterKeyEnum.COUNT, 0);
+        }
+        else{
+            mCowTagsModel.delFilterInfo(CowFilterKeyEnum.COUNT);
+        }
+
+        this.notifyDataSetChanged();
     }
 
 }
