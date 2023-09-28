@@ -919,6 +919,15 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
         if (mRFIDBase != null) {
             mRFIDBase.onDestroy();
         }
+
+
+        if (RFIDController.mIsInventoryRunning) {
+            try {
+                RFIDController.mConnectedReader.Actions.Inventory.stop();
+            } catch (InvalidUsageException e) {
+            } catch (OperationFailureException e) {
+            }
+        }
     }
 
     //앱 초기화
