@@ -27,6 +27,7 @@ import com.codegear.mariamc_rfid.cowchronicle.services.ResLogin;
 import com.codegear.mariamc_rfid.cowchronicle.services.RetrofitClient;
 import com.codegear.mariamc_rfid.cowchronicle.device.RFIDSingleton;
 import com.codegear.mariamc_rfid.cowchronicle.storage.UserStorage;
+import com.codegear.mariamc_rfid.cowchronicle.ui.drawer.CustomConnectedDrawer;
 import com.codegear.mariamc_rfid.cowchronicle.utils.AndroidUtil;
 import com.codegear.mariamc_rfid.cowchronicle.ui.dialog.CustomDialog;
 import com.codegear.mariamc_rfid.cowchronicle.ui.drawer.CustomDiscoverDrawer;
@@ -48,37 +49,23 @@ import retrofit2.Response;
 
 public class UserLoginActivity extends BaseActivity {
 
-
+    //DATA
     private static String TAG = "UserLoginActivity";
     public final int PAGE_NUM_1 = 1, PAGE_NUM_2 = 2;
-
-
-
     private Context mContext;
-
-    private EditText etLoginId, etLoginPassword;
-    private Button btnLoginSignIn;
-    private CheckBox cbIsAutoLogin;
-    private Button btnNavigationBottom1, btnNavigationBottom2;
-
-    private AlertDialog dialogLoading;
-    private CustomDiscoverDrawer mCustomDrawer;
-
-
-
-
-
     private GPSTracker gpsTracker;
 
 
 
 
-    public static UserLoginActivity newInstance() {
-        return new UserLoginActivity();
-    }
+    //UI
+    private EditText etLoginId, etLoginPassword;
+    private Button btnLoginSignIn;
+    private CheckBox cbIsAutoLogin;
+    private Button btnNavigationBottom1, btnNavigationBottom2;
+    private AlertDialog dialogLoading;
+    private CustomConnectedDrawer mCustomDrawer;
 
-    public UserLoginActivity() {
-    }
 
 
     @Override
@@ -124,7 +111,7 @@ public class UserLoginActivity extends BaseActivity {
         });
 
         //Drawer, ActionBar 세팅
-        mCustomDrawer = new CustomDiscoverDrawer(this);
+        mCustomDrawer = new CustomConnectedDrawer(this);
         getSupportActionBar().setTitle(getResources().getString(R.string.app_name));
 
         //GPS 권한 요청
@@ -158,7 +145,7 @@ public class UserLoginActivity extends BaseActivity {
 
         String strId = etLoginId.getText().toString().trim();
         String strPwd = etLoginPassword.getText().toString().trim();
-        Boolean isAutoLogin = cbIsAutoLogin.isChecked();
+        boolean isAutoLogin = cbIsAutoLogin.isChecked();
 
 
         if(BuildConfig.DEBUG){
@@ -192,12 +179,10 @@ public class UserLoginActivity extends BaseActivity {
     private void login(String strId, String strPwd, final boolean isAutoLogin, final int movePageNumber) {
 
         //위치 정보 가져오기
-
         if(!gpsTracker.getIsGPSTrackingEnabled()){
             gpsTracker.showSettingsAlert();
             return;
         }
-
 
 
         double latitude = gpsTracker.getLatitude();

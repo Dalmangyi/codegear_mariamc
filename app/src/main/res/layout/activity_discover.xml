@@ -48,7 +48,7 @@
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/main_menu"
-        app:menu="@menu/disactivity_home_drawer">
+        app:menu="@menu/navigation_connected_drawer">
 
 
     </com.google.android.material.navigation.NavigationView>

@@ -19,6 +19,7 @@ import androidx.fragment.app.Fragment;
 import com.codegear.mariamc_rfid.ActiveDeviceActivity;
 import com.codegear.mariamc_rfid.DeviceDiscoverActivity;
 import com.codegear.mariamc_rfid.R;
+import com.codegear.mariamc_rfid.cowchronicle.consts.CowChronicleScreenEnum;
 import com.codegear.mariamc_rfid.cowchronicle.ui.activities.CowChronicleActivity;
 import com.codegear.mariamc_rfid.cowchronicle.ui.activities.FarmSelectFragment;
 import com.codegear.mariamc_rfid.cowchronicle.ui.activities.UserInfoFragment;
@@ -43,7 +44,7 @@ public class CustomConnectedDrawer {
     private DrawerLayout mDrawerLayout;
     private View rlNavigationDeviceContainer;
     private TextView tvBatteryPercentage;
-    private ImageView ivBatterylevel;
+    private ImageView ivBatteryLevel;
     private Button btnDisconnect;
 
     private int batteryPercent = 0;
@@ -53,7 +54,7 @@ public class CustomConnectedDrawer {
 
         rlNavigationDeviceContainer = mActivity.findViewById(R.id.rlNavigationDeviceContainer);
         tvBatteryPercentage = mActivity.findViewById(R.id.tvBatteryPercentage);
-        ivBatterylevel = mActivity.findViewById(R.id.ivBatterylevel);
+        ivBatteryLevel = mActivity.findViewById(R.id.ivBatterylevel);
         btnDisconnect = mActivity.findViewById(R.id.btnDisconnect);
         btnDisconnect.setOnClickListener(v -> {
             RFIDSingleton.deviceDisconnect();
@@ -191,37 +192,33 @@ public class CustomConnectedDrawer {
     public Boolean onOptionsItemSelected(MenuItem item) {
         mDrawerLayout.closeDrawer(GravityCompat.START);
 
-        //네비게이션 기능을 사용하기 전에, 로그인 먼저 해야됨을 안내.
-        if(!UserStorage.getInstance().isLogin()){
-            CustomDialog.showSimple(mActivity, R.string.login_need_login_process);
-
-            //로그인 페이지가 아니면, 로그인페이지로 이동
-            if(!(mActivity instanceof UserLoginActivity)){
-                Intent intent = new Intent(mActivity, UserLoginActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                mActivity.startActivity(intent);
-                mActivity.finishAffinity();
-            }
-            return true;
-        }
 
         //네비게이션 메뉴 아이디에 따른 행동.
         switch (item.getItemId()) {
             case R.id.menu_cowchronicle:
-                if(isLoginWithGoPage()){
-                    replaceFragment(new WebviewHomeFragment(), true);
+                if(UserStorage.getInstance().isLogin()){
+                    goScreen(CowChronicleScreenEnum.WEBVIEW, true);
+                }
+                else{
+                    goLoginScreen();
                 }
                 return true;
 
             case R.id.menu_readers:
-                if(isLoginWithGoPage()) {
-                    replaceFragment(new FarmSelectFragment(), true);
+                if(UserStorage.getInstance().isLogin()) {
+                    goScreen(CowChronicleScreenEnum.FARM_SELECT, true);
+                }
+                else{
+                    goLoginScreen();
                 }
                 return true;
 
             case R.id.nav_user_info:
-                if(isLoginWithGoPage()) {
-                    replaceFragment(new UserInfoFragment(), true);
+                if(UserStorage.getInstance().isLogin()) {
+                    goScreen(CowChronicleScreenEnum.USER_INFO, true);
+                }
+                else{
+                    goLoginScreen();
                 }
                 return true;
 
@@ -275,8 +272,28 @@ public class CustomConnectedDrawer {
         }
     }
 
-    private void replaceFragment(Fragment fragment, boolean needBackStack){
-        ((CowChronicleActivity)mActivity).replaceFragment(fragment, needBackStack);
+    private void goScreen(CowChronicleScreenEnum screenEnum, boolean needBackStack){
+        if(mActivity instanceof CowChronicleActivity){
+            Fragment fragment = null;
+            switch (screenEnum){
+                case FARM_SELECT:
+                    fragment = new FarmSelectFragment();
+                    break;
+                case WEBVIEW:
+                    fragment = new WebviewHomeFragment();
+                    break;
+                case USER_INFO:
+                    fragment = new UserInfoFragment();
+                    break;
+            }
+
+            ((CowChronicleActivity)mActivity).replaceFragment(fragment, needBackStack);
+        }
+        else {
+            Intent intent = new Intent(mActivity, CowChronicleActivity.class);
+            intent.putExtra(CowChronicleActivity.FLAG_FRAGMENT_START_PAGE, screenEnum.toString());
+            mActivity.startActivity(intent);
+        }
     }
 
     //로그인 확인 및 이동.
@@ -294,6 +311,17 @@ public class CustomConnectedDrawer {
         }
         
         return true;
+    }
+
+    private void goLoginScreen(){
+        if(!(mActivity instanceof UserLoginActivity)){
+            Intent intent = new Intent(mActivity, UserLoginActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            mActivity.startActivity(intent);
+            mActivity.finishAffinity();
+        }else {
+            CustomDialog.showSimple(mActivity, "로그인 먼저 해주세요.");
+        }
     }
 
     //배터리 퍼센트 가져오기
@@ -327,6 +355,6 @@ public class CustomConnectedDrawer {
     private void applyBatteryPercent(){
         int batteryLevel = batteryPercent;
         tvBatteryPercentage.setText(String.valueOf(batteryLevel) + "%");
-        ivBatterylevel.setImageLevel(batteryLevel);
+        ivBatteryLevel.setImageLevel(batteryLevel);
     }
 }

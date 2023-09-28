@@ -162,12 +162,7 @@
                 android:gravity="center"
                 android:text="enb8375@gmail.com"
                 android:textSize="16dp" />
+
         </androidx.appcompat.widget.LinearLayoutCompat>
-
-
-    <include
-        layout="@layout/bottom_direct_move_buttons"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
 
 </LinearLayout>

@@ -221,6 +221,7 @@ public class RapidReadFragment extends Fragment implements ResponseHandlerInterf
     }
 
     public void updateTexts() {
+        Log.d(TAG,"RapidReadFragment updateTexts "+Application.UNIQUE_TAGS+","+Application.TOTAL_TAGS);
         if (Application.TAG_LIST_MATCH_MODE) {
             if (tvUniqueTags != null && tvTotalTags != null) {
                 tvTotalTags.setText(String.valueOf(Application.matchingTags));
