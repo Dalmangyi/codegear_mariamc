@@ -88,7 +88,7 @@ public class CowTagsFragment extends Fragment {
     private PowerSpinnerView spMemoryBankIds;
     private CheckBox cbUseFilterCount;
 
-    private Handler mMainHandler = new Handler(Looper.getMainLooper()){
+    private Handler mAdapterHandler = new Handler(Looper.getMainLooper()){
         @Override
         public void handleMessage(@NonNull Message msg) {
             super.handleMessage(msg);
@@ -96,7 +96,7 @@ public class CowTagsFragment extends Fragment {
             Log.d(TAG,"CowTagsFragment handleMessage.");
 
             adapterCowTagRow.notifyDataSetChanged();
-            mMainHandler.removeMessages(0);
+            mAdapterHandler.removeMessages(0);
 
         }
     };
@@ -224,7 +224,7 @@ public class CowTagsFragment extends Fragment {
     public void onStop() {
         super.onStop();
 
-        mMainHandler.removeCallbacksAndMessages(0);
+        mAdapterHandler.removeCallbacksAndMessages(0);
 
         Application.useCowChronicleTagging = false;
 //        stopScanInventory(true);
@@ -269,7 +269,7 @@ public class CowTagsFragment extends Fragment {
                     cowTagsModel.appendTagData(tagList); //기존 태그 리스트에 신규 태그 리스트 추가하기.
                     CowTagsModel tempModel = adapterCowTagRow.getCowTagsModel();
 
-                    mMainHandler.sendEmptyMessage(0);
+                    mAdapterHandler.sendEmptyMessage(0);
                 }
             }
 
@@ -372,7 +372,7 @@ public class CowTagsFragment extends Fragment {
 
                 //리스트 새로고침
                 cowTagsModel.makeRowList(mCowList);
-                mMainHandler.sendEmptyMessage(0);
+                mAdapterHandler.sendEmptyMessage(0);
             }
         });
     }
@@ -554,7 +554,7 @@ public class CowTagsFragment extends Fragment {
     private void refreshTagList(){
 
         cowTagsModel.resetTagData();
-        mMainHandler.sendEmptyMessage(0);
+        mAdapterHandler.sendEmptyMessage(0);
     }
 
 
@@ -632,11 +632,7 @@ public class CowTagsFragment extends Fragment {
     private void goTagWrite(String tagNum){
         RFIDController.accessControlTag = tagNum;
 
-        //Fragment
-//        AccessOperationsFragment accessOperationsFragment = new AccessOperationsFragment();
-//        ((CowChronicleActivity)mActivity).replaceFragment(accessOperationsFragment, true);
-
-        //Activity (Fragment 형태로는 많은 함수가 연결되어 있어서 제대로 실행이 안되서 Activity형태로 열어야함........)
+        //Activity (Fragment 형태로는 많은 함수가 연결되어 있어서 동작이 안되기 때문에, Activity형태로 열어야 정상적으로 동작함........)
         Intent intent = new Intent(mActivity, ActiveDeviceActivity.class);
         intent.putExtra(INTENT_START_TAB, RFID_TAB);
         intent.putExtra(INTENT_NEXT_TAB, RFID_ACCESS_TAB);
