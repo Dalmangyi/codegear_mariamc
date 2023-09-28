@@ -2,17 +2,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="40dp">
+    android:layout_height="wrap_content">
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnNavigationBottom1"
         android:layout_width="0dp"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
         android:background="@drawable/selector_navigation_bottom_button_background"
         android:gravity="center"
         android:text="카우크로니클"
-        android:textSize="12dp"
         android:textColor="@color/white"/>
 
     <View
@@ -22,12 +21,11 @@
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnNavigationBottom2"
         android:layout_width="0dp"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
         android:background="@drawable/selector_navigation_bottom_button_background"
         android:gravity="center"
         android:text="전자이표"
-        android:textSize="12dp"
         android:textColor="@color/white"/>
 
 </LinearLayout>

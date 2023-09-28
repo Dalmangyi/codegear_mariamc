@@ -219,7 +219,6 @@ public class ReaderDetailsFragment extends Fragment {
         tv_rfid = view.findViewById(R.id.rfid_availabe);
         tv_scan = view.findViewById(R.id.scan_available);
         iconRenameReader = view.findViewById(R.id.icon_rename_reader);
-
     }
 
 }

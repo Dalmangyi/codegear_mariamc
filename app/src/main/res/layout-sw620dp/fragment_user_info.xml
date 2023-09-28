@@ -1,0 +1,153 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/darker_gray"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/app_margin_left"
+    android:paddingTop="@dimen/app_margin_left"
+    android:paddingRight="@dimen/app_margin_right"
+    android:paddingBottom="@dimen/app_margin_left"
+    tools:context=".cowchronicle.ui.activities.UserInfoFragment">
+
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:minHeight="20dp" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:minHeight="100dp" />
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:padding="@dimen/default_padding">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:padding="@dimen/default_padding"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/logo_cow_chronicle" />
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="140dp"
+                    android:fadeScrollbars="false"
+                    android:scrollbarAlwaysDrawVerticalTrack="true"
+                    android:scrollbarFadeDuration="50000"
+                    android:scrollbarThumbVertical="@color/colorPrimary"
+                    android:background="#F2F2F2"
+                    android:padding="5dp"
+                    android:visibility="gone">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvFarmNames"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:textColor="@color/black_dark"
+                        android:textSize="16dp"
+                        android:padding="5dp"
+                        tools:text="청우목장\n제2청우목장\n새원일목장\n밀키웨이목장\n제2청우목장\n새원일목장\n밀키웨이목장\n제2청우목장\n새원일목장\n밀키웨이목장\n제2청우목장\n새원일목장\n밀키웨이목장\n제2청우목장\n새원일목장\n밀키웨이목장\n제2청우목장\n새원일목장\n밀키웨이목장\n제2청우목장\n새원일목장\n밀키웨이목장\n제2청우목장\n새원일목장\n밀키웨이목장" />
+
+                </ScrollView>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvMemberName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:padding="@dimen/default_padding"
+                    android:textColor="@color/black_dark"
+                    android:textSize="16dp"
+                    tools:text="안치오 사장\n(프리미엄 회원)" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnUserInfoLogout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin"
+                    android:background="@color/colorPrimary"
+                    android:text="Log out"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:minHeight="100dp" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:minHeight="20dp" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="젖소/한우 통합관리 플랫품, 카우크로니클"
+                android:textSize="16dp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="사용계정 변경은 아래 연락처로 문의 바랍니다."
+                android:textSize="16dp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/app_margin"
+                android:gravity="center"
+                android:text="@string/contact_phone"
+                android:textSize="16dp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/contact_email"
+                android:textSize="16dp" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:minHeight="20dp" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+</LinearLayout>

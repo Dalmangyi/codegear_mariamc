@@ -151,7 +151,7 @@ public class CowTagsFragment extends Fragment {
                 antennaTask.execute();
             }
             else{
-                CustomDialog.showSimple(mActivity, "안태나 정보가 올바르지 않습니다. 다시 시도해 주세요.");
+                CustomDialog.showSimple(mActivity, "안테나 정보가 올바르지 않습니다. 다시 시도해 주세요.");
             }
         });
         btnClear = mMainView.findViewById(R.id.btnClear);

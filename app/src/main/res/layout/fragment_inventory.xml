@@ -1,27 +1,23 @@
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/inventoryFragment"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:context=".rfidreader.home.MainActivity">
+        android:orientation="vertical">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="15">
+            android:layout_height="wrap_content" >
 
             <LinearLayout
                 android:id="@+id/inventoryDataLayout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:background="@color/colorPrimaryLight"
                 android:baselineAligned="false">
 
@@ -142,8 +138,7 @@
         <LinearLayout
             android:id="@+id/inventoryHeaderRow"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="6"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
 
             android:paddingLeft="5dp"
@@ -180,21 +175,17 @@
                     android:paddingLeft="5dp"
                     android:text="RSSI" />
 
-
             </LinearLayout>
+
         </LinearLayout>
 
-        <View xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="fill_parent"
-            android:layout_height="0.25dip"
-            android:background="@color/light_grey" />
+        <include layout="@layout/normal_divider"/>
 
         <ListView
             android:id="@+id/inventoryList"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="74"
-            android:paddingBottom="20dp" />
+            android:layout_weight="1" />
 
         <TextView
             android:id="@+id/batchModeInventoryList"
@@ -208,77 +199,62 @@
             android:textColor="@color/dark_grey"
             android:visibility="gone" />
 
-    </LinearLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom">
-
-        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-            android:id="@+id/inventoryButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_marginStart="@dimen/default_margin"
-            android:layout_marginTop="@dimen/default_margin"
-            android:layout_marginEnd="@dimen/default_margin"
-            android:layout_marginBottom="@dimen/default_margin"
-            android:onClick="inventoryStartOrStop"
-            android:textColor="@color/white"
-            app:backgroundTint="@color/colorPrimary"
-            app:icon="@android:drawable/ic_media_play"
-            app:iconTint="@color/white" />
-
-        <!-- <android.support.v7.widget.AppCompatButton
-             android:id="@+id/bt_clear"
-             style="@style/Widget.AppCompat.Button.Colored"
-             android:layout_width="wrap_content"
-             android:layout_toRightOf="@id/inventoryButton"
-             android:layout_centerVertical="true"
-             android:layout_height="wrap_content"
-             android:text="Clear"
-             android:textSize="15dp" /-->
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/matchModeButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_margin="@dimen/default_margin"
-            android:layout_toRightOf="@id/inventoryButton"
-            android:onClick="inventoryStartOrStop"
-            android:textColor="@color/white"
-            app:iconTint="@color/white"
-            app:backgroundTint="@color/colorPrimary"
-            app:srcCompat="@drawable/ic_btn_add" />
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/resetButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_margin="@dimen/default_margin"
-            android:layout_toRightOf="@id/matchModeButton"
-            android:onClick="inventoryStartOrStop"
-            app:backgroundTint="@color/colorPrimary"
-            android:textColor="@color/white"
-            app:iconTint="@color/white"
-            app:srcCompat="@drawable/ic_btn_reset" />
-
         <TextView
             android:id="@+id/tv_prefilter_enabled"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/inventoryButton"
-            android:layout_gravity="bottom"
-            android:layout_marginTop="10dp"
             android:gravity="center"
-            android:text="Pre filter is enabled"
+            android:text="사전 필터가 활성화 되었습니다."
             android:textColor="#8F8888"
             android:textSize="15dp" />
+    </LinearLayout>
 
-    </RelativeLayout>
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/inventoryButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="@dimen/default_margin"
+        android:layout_marginTop="@dimen/default_margin"
+        android:layout_marginEnd="@dimen/default_margin"
+        android:layout_marginBottom="@dimen/default_margin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:onClick="inventoryStartOrStop"
+        android:textColor="@color/white"
+        app:backgroundTint="@color/colorPrimary"
+        app:icon="@android:drawable/ic_media_play"
+        app:iconTint="@color/white" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/matchModeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="@dimen/default_margin"
+        app:layout_constraintLeft_toRightOf="@id/inventoryButton"
+        app:layout_constraintTop_toTopOf="@id/inventoryButton"
+        android:onClick="inventoryStartOrStop"
+        android:textColor="@color/white"
+        app:iconTint="@color/white"
+        app:backgroundTint="@color/colorPrimary"
+        app:srcCompat="@drawable/ic_btn_add" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/resetButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="@dimen/default_margin"
+        app:layout_constraintTop_toTopOf="@id/matchModeButton"
+        app:layout_constraintLeft_toRightOf="@id/matchModeButton"
+        android:onClick="inventoryStartOrStop"
+        app:backgroundTint="@color/colorPrimary"
+        android:textColor="@color/white"
+        app:iconTint="@color/white"
+        app:srcCompat="@drawable/ic_btn_reset" />
 
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

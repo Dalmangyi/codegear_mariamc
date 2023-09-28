@@ -126,7 +126,7 @@ public class CustomConnectedDrawer {
         rlNavigationDeviceContainer.measure(0, 0);
         int rlNavigationDeviceContainerHeight = vDisMainMenu.getMeasuredHeight();
         ViewGroup.MarginLayoutParams rlNavigationDeviceContainerMarginLayoutParams = (ViewGroup.MarginLayoutParams) rlNavigationDeviceContainer.getLayoutParams();
-        int rlNavigationDeviceContainerTotalHeight= rlNavigationDeviceContainerHeight + rlNavigationDeviceContainerMarginLayoutParams.bottomMargin;
+        int rlNavigationDeviceContainerTotalHeight = rlNavigationDeviceContainerHeight;
 
 
         //기기로그인이 안되어 있다면, 기기정보 사이즈를 0으로 설정.

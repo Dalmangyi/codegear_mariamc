@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    style="@style/base_layout_style"
     android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     tools:context="com.codegear.mariamc_rfid.rfidreader.settings.DPOSettingsFragment">
 
     <TableRow
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/default_top_margin"
-        android:layout_marginBottom="@dimen/default_bottom_margin"
+        android:layout_margin="@dimen/app_margin"
         >
 
         <TextView
@@ -25,20 +25,23 @@
             android:layout_height="wrap_content"
             android:layout_weight="15"/>
     </TableRow>
+
     <include layout="@layout/normal_divider" />
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:paddingBottom="30dp">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            style="@style/style_dark_green_font"
-            android:layout_gravity="bottom"
-            android:text="@string/dpo_message_title" />
+        android:layout_weight="1">
+
      </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/style_dark_green_font"
+        android:layout_gravity="bottom"
+        android:layout_margin="@dimen/app_margin"
+        android:text="@string/dpo_message_title" />
 
     <include layout="@layout/save_config_button"/>
 

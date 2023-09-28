@@ -94,7 +94,7 @@ public class RapidReadFragment extends Fragment implements ResponseHandlerInterf
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_rr, container, false);
+        return inflater.inflate(R.layout.fragment_rapid_read, container, false);
     }
 
     @Override
@@ -193,7 +193,7 @@ public class RapidReadFragment extends Fragment implements ResponseHandlerInterf
             tvUniqueTags.setTextSize(45);
         }
         updateTexts();
-        getActivity().findViewById(R.id.tv_prefilter_enabled).setVisibility(RFIDController.getInstance().isPrefilterEnabled() ? View.VISIBLE : View.INVISIBLE);
+        getActivity().findViewById(R.id.tv_prefilter_enabled).setVisibility(RFIDController.getInstance().isPrefilterEnabled() ? View.VISIBLE : View.GONE);
         com.google.android.material.floatingactionbutton.FloatingActionButton bt_clear = getActivity().findViewById(R.id.bt_clear);
         bt_clear.setVisibility(ActiveProfile.id.equals("1") ? View.VISIBLE : View.INVISIBLE);
         bt_clear.setOnClickListener(new View.OnClickListener() {

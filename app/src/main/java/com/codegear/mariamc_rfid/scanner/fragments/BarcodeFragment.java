@@ -82,7 +82,6 @@ public class BarcodeFragment extends Fragment {
                     return true;
                 }
                 ((ActiveDeviceActivity) getActivity()).setCurrentTabFocus(SETTINGS_TAB, SCAN_SETTINGS_TAB);
-                //((ActiveDeviceActivity) getActivity()).loadNextFragment(SCAN_SETTINGS_TAB);
                 return true;
             }
         });
@@ -91,11 +90,9 @@ public class BarcodeFragment extends Fragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_barcode_fargment, container, false);
-        //barcodes=new ArrayList<Barcode>();
-        barcodes = ((ActiveDeviceActivity) requireActivity()).getBarcodeData(barcodes, ((ActiveDeviceActivity) requireActivity()).getScannerID());
 
+        barcodes = ((ActiveDeviceActivity) requireActivity()).getBarcodeData(barcodes, ((ActiveDeviceActivity) requireActivity()).getScannerID());
 
         return rootView;
     }
@@ -129,7 +126,7 @@ public class BarcodeFragment extends Fragment {
 
         Button btnClear = (Button) getActivity().findViewById(R.id.btnClearList);
 
-        if (barcodes == null || barcodes.size() <= 0) {
+        if (barcodes == null || barcodes.size() == 0) {
             btnClear.setEnabled(false);
 
         }

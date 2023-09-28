@@ -26,8 +26,9 @@
             <ImageView
                 android:id="@+id/drawerIcon"
                 android:layout_width="400dp"
-                android:layout_height="400dp"
-                android:scaleType="fitXY"
+                android:layout_height="0dp"
+                android:layout_weight="10"
+                android:scaleType="fitCenter"
                 app:srcCompat="@drawable/ic_scanning" />
             <View
                 android:layout_width="0dp"

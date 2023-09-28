@@ -8,11 +8,12 @@
     <RelativeLayout
         android:id="@+id/rlNavigationDeviceContainer"
         android:layout_width="match_parent"
-        android:layout_height="120dp"
+        android:layout_height="130dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="22dp"
-        android:layout_marginEnd="22dp"
-        android:layout_marginBottom="22dp"
+        android:paddingLeft="22dp"
+        android:paddingRight="22dp"
+        android:paddingBottom="22dp"
+        android:paddingTop="10dp"
         android:background="@color/white"
         android:visibility="gone"
         tools:visibility="visible">

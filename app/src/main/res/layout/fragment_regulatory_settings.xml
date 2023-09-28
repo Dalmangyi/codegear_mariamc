@@ -20,8 +20,7 @@
     <Spinner
         android:id="@+id/currentRegionSpinner"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginBottom="@dimen/default_bottom_margin" />
+        android:layout_height="60dp" />
 
     <include layout="@layout/divider" />
 
@@ -36,46 +35,46 @@
 
     <include layout="@layout/divider" />
 
-    <ScrollView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
 
-        <LinearLayout
-            android:id="@+id/regChannelCheckBoxes"
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical" />
+            android:fillViewport="true">
 
-    </ScrollView>
+            <LinearLayout
+                android:id="@+id/regChannelCheckBoxes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
 
-    <LinearLayout
-        android:id="@+id/rl_warning"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        </ScrollView>
 
         <TextView
             android:id="@+id/selectCountryWarningText"
             style="@style/style_red_font"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="@dimen/margin"
-            android:paddingTop="@dimen/margin"
+            android:layout_alignParentBottom="true"
+            android:gravity="center"
             android:text="@string/country_selection_warning" />
 
-        <Button
-            android:id="@+id/regulatoryButton"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_alignParentBottom="true"
-            android:layout_margin="@dimen/default_margin"
-            android:onClick="showProfileSettings"
-            android:text="@string/next"
-            android:textColor="@color/white"
-            app:backgroundTint="@color/blue"
-            app:iconTint="@color/white" />
-    </LinearLayout>
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/regulatoryButton"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:onClick="showProfileSettings"
+        android:text="@string/next"
+        android:textColor="@color/white"
+        app:backgroundTint="@color/blue"
+        app:iconTint="@color/white" />
 
 </LinearLayout>
 

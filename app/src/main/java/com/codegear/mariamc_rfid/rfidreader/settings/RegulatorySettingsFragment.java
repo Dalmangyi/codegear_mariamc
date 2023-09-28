@@ -68,14 +68,9 @@ public class RegulatorySettingsFragment extends BackPressedFragment implements S
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_regulatory_settings, container, false);
     }
 
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-    }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -131,12 +126,12 @@ public class RegulatorySettingsFragment extends BackPressedFragment implements S
             }
         }
         currentRegionSpinner.setOnItemSelectedListener(this);
-        if (SettingsDetailActivity.mSettingOnFactory == false) {
+
+        if (!SettingsDetailActivity.mSettingOnFactory) {
             Button button = getActivity().findViewById(R.id.regulatoryButton);
             button.setVisibility(View.GONE);
             TextView tv = getActivity().findViewById(R.id.selectCountryWarningText);
             tv.setGravity(Gravity.CENTER);
-
         }
     }
 
@@ -170,7 +165,6 @@ public class RegulatorySettingsFragment extends BackPressedFragment implements S
         if (currentRegionSpinner != null && currentRegionSpinner.getSelectedItem() != null) {
             scrollView.removeAllViews();
 
-            //  ((SettingsDetailActivity) getActivity()).getRegionDetails(currentRegionSpinner.getSelectedItem().toString());
             RegionInfo regionInfo = RFIDController.mConnectedReader.ReaderCapabilities.SupportedRegions.getRegionInfo(pos);
             try {
                 selectedRegionInfo = RFIDController.mConnectedReader.Config.getRegionInfo(regionInfo);
@@ -277,28 +271,24 @@ public class RegulatorySettingsFragment extends BackPressedFragment implements S
                     Collections.addAll(enabledChannels, RFIDController.regulatory.getEnabledchannels());
                 }
 
-                if (channels.length > 0) {
-                    for (String s : channels) {
-                        CheckBox checkBox = new CheckBox(getActivity());
-                        checkBox.setText(s);
-                        checkBox.setEnabled(hoppingConfigurable);
-                        if (enabledChannels != null && enabledChannels.contains(s)) {
-                            checkBox.setChecked(true);
-                        }
-                        checkBox.setOnClickListener(RegulatorySettingsFragment.this);
-                        scrollView.addView(checkBox);
+                for (String s : channels) {
+                    CheckBox checkBox = new CheckBox(getActivity());
+                    checkBox.setText(s);
+                    checkBox.setEnabled(hoppingConfigurable);
+                    if (enabledChannels.contains(s)) {
+                        checkBox.setChecked(true);
                     }
+                    checkBox.setOnClickListener(RegulatorySettingsFragment.this);
+                    scrollView.addView(checkBox);
                 }
             } else {
-                if (channels.length > 0) {
-                    for (String s : channels) {
-                        CheckBox checkBox = new CheckBox(getActivity());
-                        checkBox.setText(s);
-                        checkBox.setEnabled(hoppingConfigurable);
-                        checkBox.setChecked(true);
-                        checkBox.setOnClickListener(RegulatorySettingsFragment.this);
-                        scrollView.addView(checkBox);
-                    }
+                for (String s : channels) {
+                    CheckBox checkBox = new CheckBox(getActivity());
+                    checkBox.setText(s);
+                    checkBox.setEnabled(hoppingConfigurable);
+                    checkBox.setChecked(true);
+                    checkBox.setOnClickListener(RegulatorySettingsFragment.this);
+                    scrollView.addView(checkBox);
                 }
             }
         }
@@ -433,8 +423,6 @@ public class RegulatorySettingsFragment extends BackPressedFragment implements S
      * method to get channels for the selected region after device got connected in case reconnection
      */
     public void deviceConnected() {
-/*        if (getActivity() != null && currentRegionSpinner.getSelectedItem() != null)
-            ((SettingsDetailActivity) getActivity()).getRegionDetails(currentRegionSpinner.getSelectedItem().toString());*/
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -465,10 +453,7 @@ public class RegulatorySettingsFragment extends BackPressedFragment implements S
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                //if (RFIDController.regulatoryConfigResponse.SupportedChannels != null)
-                {
-                    scrollView.removeAllViews();
-                }
+                scrollView.removeAllViews();
                 currentRegionSpinner.setAdapter(null);
                 if (getActivity() instanceof ActiveDeviceActivity)
                     ((ActiveDeviceActivity) getActivity()).loadNextFragment(MAIN_RFID_SETTINGS_TAB);

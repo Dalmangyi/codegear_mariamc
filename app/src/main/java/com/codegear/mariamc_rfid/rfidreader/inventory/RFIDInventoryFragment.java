@@ -68,13 +68,6 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
-/**
- * <p/>
- * Use the {@link RFIDInventoryFragment#newInstance} factory method to
- * create an instance of this fragment.
- * <p/>
- * Fragment to handle inventory operations and UI.
- */
 public class RFIDInventoryFragment extends Fragment implements Spinner.OnItemSelectedListener, ResponseHandlerInterfaces.ResponseTagHandler, ResponseHandlerInterfaces.TriggerEventHandler, ResponseHandlerInterfaces.BatchModeEventHandler, ResponseHandlerInterfaces.ResponseStatusHandler, View.OnClickListener {
     private static final int TAGLIST_MATCH_MODE_IMPORT = 0;
     private String TAG = "RFIDInventoryFragment";
@@ -137,17 +130,9 @@ public class RFIDInventoryFragment extends Fragment implements Spinner.OnItemSel
     };
 
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @return A new instance of fragment InventoryFragment.
-     */
     public static RFIDInventoryFragment newInstance() {
-        // if(mInvemtoryFragmentHandle == null )
         mInvemtoryFragmentHandle = new RFIDInventoryFragment();
         return mInvemtoryFragmentHandle;
-
     }
 
     @Override
@@ -244,11 +229,10 @@ public class RFIDInventoryFragment extends Fragment implements Spinner.OnItemSel
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.fragment_inventory, container, false);
 
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_inventory, container, false);
         SearchManager searchManager = (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
-        SearchView searchView = view.findViewById(R.id.search_view);
+        SearchView searchView = rootView.findViewById(R.id.search_view);
         searchView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -275,31 +259,13 @@ public class RFIDInventoryFragment extends Fragment implements Spinner.OnItemSel
         });
 
 
-        return view;
+        return rootView;
     }
-
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        ActiveDeviceActivity activity = (ActiveDeviceActivity) getActivity();
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-    }
-
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         onRFIDFragmentSelected();
-
     }
 
     public void RFIDReaderDisappeared(final ReaderDevice readerDevice) {
@@ -326,12 +292,6 @@ public class RFIDInventoryFragment extends Fragment implements Spinner.OnItemSel
                     intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
                     intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                     activityResultLauncher.launch(intent);
-
-
-                   /* Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-                    intent.addCategory(Intent.CATEGORY_OPENABLE);
-                    intent.setType("text/*");
-                    startActivityForResult(Intent.createChooser(intent, "ChooseFile to upload"), TAGLIST_MATCH_MODE_IMPORT);*/
                 }
                 break;
             case R.id.resetButton:
@@ -596,9 +556,10 @@ public class RFIDInventoryFragment extends Fragment implements Spinner.OnItemSel
             totalNoOfTags.setText(String.valueOf(Application.missedTags));
             uniqueTags.setText(String.valueOf(Application.matchingTags));
         }
-
-
     }
+
+
+
 
     @Override
     public void handleTagResponse(InventoryListItem inventoryListItem, boolean isAddedToList) {
@@ -629,6 +590,9 @@ public class RFIDInventoryFragment extends Fragment implements Spinner.OnItemSel
             }
         });
     }
+
+
+
 
     //  @Override
     public void handleStatusResponse(final RFIDResults results) {
@@ -819,7 +783,7 @@ public class RFIDInventoryFragment extends Fragment implements Spinner.OnItemSel
         adapter.notifyDataSetChanged();
 
         //  getActivity().findViewById(R.id.fab_prefilter).setVisibility(isPreFilterSimpleEnabled ? View.VISIBLE : View.GONE);
-        getActivity().findViewById(R.id.tv_prefilter_enabled).setVisibility(RFIDController.getInstance().isPrefilterEnabled() ? View.VISIBLE : View.INVISIBLE);
+        getActivity().findViewById(R.id.tv_prefilter_enabled).setVisibility(RFIDController.getInstance().isPrefilterEnabled() ? View.VISIBLE : View.GONE);
 
         fabReset = (FloatingActionButton) getActivity().findViewById(R.id.resetButton);
         fabReset.setOnClickListener(this);
@@ -838,9 +802,6 @@ public class RFIDInventoryFragment extends Fragment implements Spinner.OnItemSel
         }
 
         settingsUtil = (ActiveDeviceActivity) getActivity();
-       /* if(Application.TAG_LIST_MATCH_MODE) {
-           settingsUtil.LoadTagListCSV();
-        }*/
         if (Application.MultiTagLocateTagListImport == true) {
             Application.multiTagLocateTagListMap.clear();
             Application.multiTagLocateActiveTagItemList.clear();

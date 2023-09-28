@@ -4,139 +4,153 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="@dimen/margin"
     tools:context="com.codegear.mariamc_rfid.scanner.fragments.ReaderDetailsFragment">
 
-    <TextView
-        android:id="@+id/readerName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="24dp"
-        android:text="장치 이름" />
-
-    <RelativeLayout
-        android:id="@+id/name"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/readerName">
+        android:fillViewport="true">
 
-        <TextView
-            android:id="@+id/readername_value"
-            android:layout_width="wrap_content"
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="@dimen/reader_list_item_padding"
-            android:paddingRight="48dp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textColor="@color/black_dark" />
+            android:paddingLeft="@dimen/margin"
+            android:orientation="vertical">
 
-        <ImageButton
-            android:id="@+id/icon_rename_reader"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:backgroundTint="@color/white"
-            android:paddingRight="18dp"
-            app:srcCompat="@drawable/ic_rename_reader" />
+            <TextView
+                android:id="@+id/readerName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="24dp"
+                android:text="장치 이름" />
 
-    </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/readerName">
+
+                <TextView
+                    android:id="@+id/readername_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="@dimen/reader_list_item_padding"
+                    android:paddingRight="48dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textColor="@color/black_dark" />
+
+                <ImageButton
+                    android:id="@+id/icon_rename_reader"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:backgroundTint="@color/white"
+                    android:paddingRight="18dp"
+                    app:srcCompat="@drawable/ic_rename_reader" />
+
+            </RelativeLayout>
 
 
-    <TextView
-        android:id="@+id/serial_no"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/name"
-        android:paddingTop="14dp"
-        android:text="시리얼 번호" />
+            <TextView
+                android:id="@+id/serial_no"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/name"
+                android:paddingTop="14dp"
+                android:text="시리얼 번호" />
 
-    <TextView
-        android:id="@+id/serialno_value"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/serial_no"
-        android:paddingTop="@dimen/reader_list_item_padding"
-        android:text="0000"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="@color/black_dark" />
+            <TextView
+                android:id="@+id/serialno_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/serial_no"
+                android:paddingTop="@dimen/reader_list_item_padding"
+                android:text="0000"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@color/black_dark" />
 
-    <TextView
-        android:id="@+id/model"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/serialno_value"
-        android:paddingTop="14dp"
-        android:text="모델 정보" />
+            <TextView
+                android:id="@+id/model"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/serialno_value"
+                android:paddingTop="14dp"
+                android:text="모델 정보" />
 
-    <TextView
-        android:id="@+id/model_value"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/model"
-        android:paddingTop="@dimen/reader_list_item_padding"
-        android:text="00000"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="@color/black_dark" />
+            <TextView
+                android:id="@+id/model_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/model"
+                android:paddingTop="@dimen/reader_list_item_padding"
+                android:text="00000"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@color/black_dark" />
 
-    <RelativeLayout
-        android:id="@+id/wifidetails"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/model_value"
-        android:paddingTop="24dp">
+            <RelativeLayout
+                android:id="@+id/wifidetails"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/model_value"
+                android:paddingTop="24dp">
 
-        <TextView
-            android:id="@+id/wifi"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="WIFI" />
+                <TextView
+                    android:id="@+id/wifi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="WIFI" />
 
-        <TextView
-            android:id="@+id/wifi_available"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/wifi"
-            android:paddingTop="@dimen/reader_list_item_padding"
-            android:text="사용 불가"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textColor="@color/black_dark" />
+                <TextView
+                    android:id="@+id/wifi_available"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/wifi"
+                    android:paddingTop="@dimen/reader_list_item_padding"
+                    android:text="사용 불가"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textColor="@color/black_dark" />
 
-        <TextView
-            android:id="@+id/rfid_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/wifi_available"
-            android:paddingTop="24dp"
-            android:text="RFID" />
+                <TextView
+                    android:id="@+id/rfid_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/wifi_available"
+                    android:paddingTop="24dp"
+                    android:text="RFID" />
 
-        <TextView
-            android:id="@+id/rfid_availabe"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/rfid_label"
-            android:paddingTop="@dimen/reader_list_item_padding"
-            android:text="사용가능"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textColor="@color/black_dark" />
+                <TextView
+                    android:id="@+id/rfid_availabe"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/rfid_label"
+                    android:paddingTop="@dimen/reader_list_item_padding"
+                    android:text="사용가능"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textColor="@color/black_dark" />
 
-        <TextView
-            android:id="@+id/scan_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/rfid_availabe"
-            android:paddingTop="24dp"
-            android:text="스캔" />
+                <TextView
+                    android:id="@+id/scan_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/rfid_availabe"
+                    android:paddingTop="24dp"
+                    android:text="스캔" />
 
-        <TextView
-            android:id="@+id/scan_available"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/scan_label"
-            android:paddingTop="@dimen/reader_list_item_padding"
-            android:text="사용가능"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textColor="@color/black_dark" />
+                <TextView
+                    android:id="@+id/scan_available"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/scan_label"
+                    android:paddingTop="@dimen/reader_list_item_padding"
+                    android:text="사용가능"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textColor="@color/black_dark" />
 
-    </RelativeLayout>
+            </RelativeLayout>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </ScrollView>
 
 </RelativeLayout>
 

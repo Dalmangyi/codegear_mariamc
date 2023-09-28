@@ -9,7 +9,7 @@
     <TextView
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="1"
+        android:layout_weight="2"
         android:text="이력제번호"
         android:textStyle="bold"
         android:textColor="@color/tableview_default_text_color"
@@ -24,7 +24,7 @@
     <TextView
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="1"
+        android:layout_weight="2"
         android:text="목장이표"
         android:gravity="center"
         android:textStyle="bold"
@@ -84,7 +84,7 @@
     <TextView
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="1"
+        android:layout_weight="2"
         android:text="전자이표"
         android:gravity="center"
         android:textStyle="bold"

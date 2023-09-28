@@ -355,10 +355,8 @@ public class DeviceDiscoverActivity extends BaseActivity implements Readers.RFID
     }
 
     private void minimizeApp() {
-        Intent startMain = new Intent(Intent.ACTION_MAIN);
-        startMain.addCategory(Intent.CATEGORY_HOME);
-        startMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(startMain);
+        Intent intent = new Intent(this, UserLoginActivity.class);
+        startActivity(intent);
     }
 
 

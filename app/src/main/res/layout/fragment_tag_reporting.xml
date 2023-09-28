@@ -1,23 +1,24 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/base_layout_style"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_height="wrap_content"
+        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="10dp">
 
             <TextView
                 style="@style/style_medium_font"
                 android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_marginTop="5dp"
-                android:layout_weight="10"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:gravity="bottom"
                 android:text="@string/tag_report_settings_title" />
 
@@ -157,9 +158,8 @@
             <TextView
                 style="@style/style_medium_font"
                 android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_marginTop="5dp"
-                android:layout_weight="10"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:gravity="bottom"
                 android:text="@string/batch_mode_settings_title" />
 
@@ -212,9 +212,8 @@
             <TextView
                 style="@style/style_medium_font"
                 android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_marginTop="5dp"
-                android:layout_weight="10"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:gravity="bottom"
                 android:text="@string/unique_tag_settings" />
 
@@ -247,9 +246,8 @@
             <TextView
                 style="@style/style_medium_font"
                 android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_marginTop="5dp"
-                android:layout_weight="10"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:gravity="bottom"
                 android:text="NXP BrandID 확인" />
 

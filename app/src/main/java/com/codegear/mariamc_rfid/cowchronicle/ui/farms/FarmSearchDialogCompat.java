@@ -2,6 +2,7 @@ package com.codegear.mariamc_rfid.cowchronicle.ui.farms;
 
 import android.content.Context;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Filter;
 import android.widget.TextView;
@@ -37,20 +38,28 @@ public class FarmSearchDialogCompat<T extends Searchable> extends BaseSearchDial
 
 
     @Override
-    protected void getView(View view) {
-        setContentView(view);
+    protected void getView(View rootView) {
+        setContentView(rootView);
+        getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+
         setCancelable(true);
-        TextView txtTitle = (TextView) view.findViewById(ir.mirrajabi.searchdialog.R.id.txt_title);
-        final EditText searchBox = (EditText) view.findViewById(getSearchBoxId());
-        txtTitle.setText(mTitle);
-        searchBox.setHint(mSearchHint);
-        view.findViewById(ir.mirrajabi.searchdialog.R.id.dummy_background).setOnClickListener(new View.OnClickListener() {
+        rootView.findViewById(ir.mirrajabi.searchdialog.R.id.dummy_background).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dismiss();
             }
         });
+
+
+
+        TextView txtTitle = (TextView) rootView.findViewById(ir.mirrajabi.searchdialog.R.id.txt_title);
+        txtTitle.setText(mTitle);
+
+        final EditText searchBox = (EditText) rootView.findViewById(getSearchBoxId());
+        searchBox.setHint(mSearchHint);
+
+
 
         final FarmModelAdapter adapter = new FarmModelAdapter<>(getContext(), R.layout.adapter_farm_name_item, getItems());
         adapter.setSearchResultListener(mSearchResultListener);
@@ -63,7 +72,7 @@ public class FarmSearchDialogCompat<T extends Searchable> extends BaseSearchDial
         });
         setAdapter(adapter);
 
-        view.findViewById(R.id.btnClose).setOnClickListener(new View.OnClickListener() {
+        rootView.findViewById(R.id.btnClose).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dismiss();
