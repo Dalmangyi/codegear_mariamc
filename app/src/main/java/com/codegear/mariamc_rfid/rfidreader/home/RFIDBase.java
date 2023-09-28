@@ -650,8 +650,17 @@ public class RFIDBase implements Readers.RFIDReaderEventHandler, NavigationView.
         mActivity.unregisterReceiver(mReceiver);
         disableBatterySaverModeChangeListner();
 
+        if(Application.RFIDBAseEventHandler != null){
+            try {
+                RFIDController.mConnectedReader.Events.removeEventsListener(Application.RFIDBAseEventHandler);
+            } catch (InvalidUsageException e) {
+                throw new RuntimeException(e);
+            } catch (OperationFailureException e) {
+                throw new RuntimeException(e);
+            }
+            Application.RFIDBAseEventHandler = null;
+        }
 
-        Application.RFIDBAseEventHandler = null;
         RFIDController.readers.deattach(this);
 
         if (myToast != null) myToast.cancel();
@@ -2338,20 +2347,15 @@ public class RFIDBase implements Readers.RFIDReaderEventHandler, NavigationView.
      * @param rfidStatusEvents - notification received from reader
      */
     private void notificationFromGenericReader(RfidStatusEvents rfidStatusEvents) {
-        //final Fragment fragment = getSupportFragmentManager().findFragmentByTag(TAG_RFID_FRAGMENT);
         final Fragment fragment = mActivity.getCurrentFragment(RFID_TAB);
         if (rfidStatusEvents.StatusEventData.getStatusEventType() == STATUS_EVENT_TYPE.DISCONNECTION_EVENT) {
-            // if ((mConnectedReader != null) && (mReaderDisappeared.getAddress().equals(mConnectedDevice.getAddress() )))
             String readername = rfidStatusEvents.StatusEventData.DisconnectionEventData.m_DisconnectionEvent.getreadername();
             if ((RFIDController.mConnectedReader != null) && (readername.equals(RFIDController.mConnectedDevice.getName())))
                 DisconnectTask = new UpdateDisconnectedStatusTask(RFIDController.mConnectedReader.getHostName()).execute();
         } else if (rfidStatusEvents.StatusEventData.getStatusEventType() == STATUS_EVENT_TYPE.INVENTORY_START_EVENT) {
             if (!RFIDController.isAccessCriteriaRead && !RFIDController.isLocatingTag && !Application.mIsMultiTagLocatingRunning) {
-                //if (!getRepeatTriggers() && InventoryTimer.getInstance().isTimerRunning()) {
                 RFIDController.mIsInventoryRunning = true;
                 InventoryTimer.getInstance().startTimer();
-
-                //}
             }
         } else if (rfidStatusEvents.StatusEventData.getStatusEventType() == STATUS_EVENT_TYPE.INVENTORY_STOP_EVENT) {
             if (progressDialog != null && progressDialog.isShowing()) progressDialog.dismiss();
@@ -2719,6 +2723,9 @@ public class RFIDBase implements Readers.RFIDReaderEventHandler, NavigationView.
             if (RFIDController.mConnectedReader != null) {
                 if (!RFIDController.mConnectedReader.Actions.MultiTagLocate.isMultiTagLocatePerforming()) {
                     final TagData[] myTags = RFIDController.mConnectedReader.Actions.getReadTags(100);
+                    final int tagCount = (myTags != null ? myTags.length : -1);
+                    Log.d(TAG, "RFIDBase eventReadNotify tagCount:"+tagCount);
+
                     if (myTags != null) {
                         Fragment fragment = mActivity.getCurrentFragment(RFID_TAB);
 
