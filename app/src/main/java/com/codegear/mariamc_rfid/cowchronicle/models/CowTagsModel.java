@@ -53,6 +53,7 @@ public class CowTagsModel {
             Map<String, String> inputResItem = mInputResList.get(i);
 
             CowTagCell cell = new CowTagCell();
+            cell.rowPosition = i;
             for (String resKey : resKeyList) {
 
                 //key에 따른 데이터 만들기.
@@ -91,6 +92,9 @@ public class CowTagsModel {
 
             mCowInfoList.add(cell);
         }
+
+        //태그 데이터 초기화
+        applyTagList(this.mTagList.toArray(new TagData[mTagList.size()]));
     }
 
 
@@ -118,97 +122,104 @@ public class CowTagsModel {
                 //태그 정보 복사
                 this.mTagList.addAll(Arrays.asList(tagList));
 
-                //태그 데이터 추출
-                for(TagData tagData:tagList){
-
-                    //기본 데이터 조회
-                    String tagId = tagData.getTagID();
-                    int tagRssi = tagData.getPeakRSSI();
-                    int tagChannel = tagData.getChannelIndex();
-                    int tagPhase = tagData.getPhase();
-
-
-                    //메모리 뱅크 데이터 조회
-                    MemoryBankIdEnum memoryBankIdEnum = MemoryBankIdEnum.NONE;
-                    String memoryBankData = "";
-                    ACCESS_OPERATION_CODE opCode = tagData.getOpCode();
-                    ACCESS_OPERATION_STATUS opStatus = tagData.getOpStatus();
-                    if (opCode != null && opCode.toString().equalsIgnoreCase(ACCESS_OPERATION_CODE.ACCESS_OPERATION_READ.toString())) {
-                        if (opStatus != null && opStatus.toString().equalsIgnoreCase(ACCESS_OPERATION_STATUS.ACCESS_SUCCESS.toString())) {
-
-                            //저장된 타입 찾기
-                            String memoryBankName = tagData.getMemoryBank().toString();
-                            if(memoryBankName.contains(MemoryBankIdEnum.RESERVED.toString())){
-                                memoryBankIdEnum = MemoryBankIdEnum.RESERVED;
-                            }
-                            else if(memoryBankName.contains(MemoryBankIdEnum.EPC.toString())){
-                                memoryBankIdEnum = MemoryBankIdEnum.EPC;
-                            }
-                            else if(memoryBankName.contains(MemoryBankIdEnum.TID.toString())){
-                                memoryBankIdEnum = MemoryBankIdEnum.TID;
-                            }
-                            else if(memoryBankName.contains(MemoryBankIdEnum.USER.toString())){
-                                memoryBankIdEnum = MemoryBankIdEnum.USER;
-                            }
-
-                            //저장된 데이터 가져오기
-                            memoryBankData = tagData.getMemoryBankData();
-                        }
-                    }
-
-
-                    //태그 개수 세기
-                    Integer tagCount = mTagCountMap.get(tagId);
-                    if (tagCount == null){
-                        tagCount = 0;
-                    }
-                    tagCount++;
-                    mTagCountMap.put(tagId, tagCount);
-
-                    //태그 데이터 반영 (COUNT)
-                    List<CowTagCell> filteredCowTagCells = mCowInfoList.stream()
-                            .filter(item -> item.TAGNO.equals(tagId))
-                            .collect(Collectors.toList());
-
-                    for(CowTagCell cell : filteredCowTagCells){
-                        cell.COUNT = tagCount;
-                        cell.RSSI = tagRssi;
-                        cell.PHASE = tagPhase;
-                        cell.CHANNEL = tagChannel;
-
-                        try {
-                            if (RFIDController.mConnectedReader != null && RFIDController.mConnectedReader.isConnected()) {
-                                cell.READER_SERIAL_NO = RFIDController.mConnectedReader.getHostName();
-                            }
-                        }catch (Exception e){}
-
-                        switch(memoryBankIdEnum){
-                            case NONE:
-                                break;
-                            case RESERVED:
-                                cell.OTHER_VAL = memoryBankData;
-                                break;
-                            case TID:
-                                cell.TID_VAL = memoryBankData;
-                                break;
-                            case EPC:
-                                cell.EPC_VAL = memoryBankData;
-                                cell.EPD_VAL = memoryBankData;
-                                break;
-                            case USER:
-                                cell.OTHER_VAL = memoryBankData;
-                                break;
-                        }
-                    }
-
-                    //필터링 해놓기.
-                    refreshFilteredCowInfoList();
-                }
+                //태그 데이터 적용
+                applyTagList(tagList);
             }
         }
         catch (Exception e){}
     }
 
+    //태그 데이터 적용
+    private void applyTagList(TagData[] tagList){
+
+        //태그 데이터 추출
+        for(TagData tagData:tagList){
+
+            //기본 데이터 조회
+            String tagId = tagData.getTagID();
+            int tagRssi = tagData.getPeakRSSI();
+            int tagChannel = tagData.getChannelIndex();
+            int tagPhase = tagData.getPhase();
+
+
+            //메모리 뱅크 데이터 조회
+            MemoryBankIdEnum memoryBankIdEnum = MemoryBankIdEnum.NONE;
+            String memoryBankData = "";
+            ACCESS_OPERATION_CODE opCode = tagData.getOpCode();
+            ACCESS_OPERATION_STATUS opStatus = tagData.getOpStatus();
+            if (opCode != null && opCode.toString().equalsIgnoreCase(ACCESS_OPERATION_CODE.ACCESS_OPERATION_READ.toString())) {
+                if (opStatus != null && opStatus.toString().equalsIgnoreCase(ACCESS_OPERATION_STATUS.ACCESS_SUCCESS.toString())) {
+
+                    //저장된 타입 찾기
+                    String memoryBankName = tagData.getMemoryBank().toString();
+                    if(memoryBankName.contains(MemoryBankIdEnum.RESERVED.toString())){
+                        memoryBankIdEnum = MemoryBankIdEnum.RESERVED;
+                    }
+                    else if(memoryBankName.contains(MemoryBankIdEnum.EPC.toString())){
+                        memoryBankIdEnum = MemoryBankIdEnum.EPC;
+                    }
+                    else if(memoryBankName.contains(MemoryBankIdEnum.TID.toString())){
+                        memoryBankIdEnum = MemoryBankIdEnum.TID;
+                    }
+                    else if(memoryBankName.contains(MemoryBankIdEnum.USER.toString())){
+                        memoryBankIdEnum = MemoryBankIdEnum.USER;
+                    }
+
+                    //저장된 데이터 가져오기
+                    memoryBankData = tagData.getMemoryBankData();
+                }
+            }
+
+
+            //태그 개수 세기
+            Integer tagCount = mTagCountMap.get(tagId);
+            if (tagCount == null){
+                tagCount = 0;
+            }
+            tagCount++;
+            mTagCountMap.put(tagId, tagCount);
+
+            //태그 데이터 반영 (COUNT)
+            List<CowTagCell> filteredCowTagCells = mCowInfoList.stream()
+                    .limit(1) //소 1마리당 유니크한 1개의 전자이표를 가진다는 가정. 로직상 N개 필터링 해도되지만 속도를 위해서 1개로 고정함.
+                    .filter(item -> item.TAGNO.equals(tagId))
+                    .collect(Collectors.toList());
+
+            for(CowTagCell cell : filteredCowTagCells){
+                cell.COUNT = tagCount;
+                cell.RSSI = tagRssi;
+                cell.PHASE = tagPhase;
+                cell.CHANNEL = tagChannel;
+
+                try {
+                    if (RFIDController.mConnectedReader != null && RFIDController.mConnectedReader.isConnected()) {
+                        cell.READER_SERIAL_NO = RFIDController.mConnectedReader.getHostName();
+                    }
+                }catch (Exception e){}
+
+                switch(memoryBankIdEnum){
+                    case NONE:
+                        break;
+                    case RESERVED:
+                        cell.OTHER_VAL = memoryBankData;
+                        break;
+                    case TID:
+                        cell.TID_VAL = memoryBankData;
+                        break;
+                    case EPC:
+                        cell.EPC_VAL = memoryBankData;
+                        cell.EPD_VAL = memoryBankData;
+                        break;
+                    case USER:
+                        cell.OTHER_VAL = memoryBankData;
+                        break;
+                }
+            }
+        }
+
+        //필터링 해놓기.
+        refreshFilteredCowInfoList();
+    }
 
     public ArrayList<CowTagCell> getCowTagList(){
         if(mTagFilterMap.keySet().size() > 0){
@@ -255,21 +266,25 @@ public class CowTagsModel {
 
     //필터 배열 갱신하기
     public void refreshFilteredCowInfoList(){
-        ArrayList<CowTagCell> cowTagCells = new ArrayList<>(this.mCowInfoList);
-        Stream<CowTagCell> stream = cowTagCells.stream();
+        if(mTagFilterMap.keySet().size() > 0){
+            ArrayList<CowTagCell> cowTagCells = new ArrayList<>(this.mCowInfoList);
+            Stream<CowTagCell> stream = cowTagCells.stream();
 
-        for(CowFilterKeyEnum filterKey : mTagFilterMap.keySet()){
-            Object filterVal = mTagFilterMap.get(filterKey);
+            for(CowFilterKeyEnum filterKey : mTagFilterMap.keySet()){
+                Object filterVal = mTagFilterMap.get(filterKey);
 
-            switch(filterKey){
-                case COUNT:
-                    stream = stream.filter(item -> item.COUNT > (int)filterVal);
-                    break;
+                switch(filterKey){
+                    case COUNT:
+                        stream = stream.filter(item -> item.COUNT > (int)filterVal);
+                        break;
+                }
             }
+
+            List<CowTagCell> filteredCowTagCells = stream.collect(Collectors.toList());
+            this.mFilteredCowInfoList.clear();
+            this.mFilteredCowInfoList.addAll(filteredCowTagCells);
         }
 
-        List<CowTagCell> filteredCowTagCells = stream.collect(Collectors.toList());
-        this.mFilteredCowInfoList.clear();
-        this.mFilteredCowInfoList.addAll(filteredCowTagCells);
+
     }
 }

@@ -31,12 +31,13 @@ import com.codegear.mariamc_rfid.ActiveDeviceActivity;
 import com.codegear.mariamc_rfid.DeviceDiscoverActivity;
 import com.codegear.mariamc_rfid.R;
 import com.codegear.mariamc_rfid.application.Application;
+import com.codegear.mariamc_rfid.cowchronicle.device.DeviceController;
 import com.codegear.mariamc_rfid.cowchronicle.ui.activities.CowChronicleActivity;
 import com.codegear.mariamc_rfid.cowchronicle.consts.CowChronicleScreenEnum;
 import com.codegear.mariamc_rfid.discover_connect.nfc.PairOperationsFragment;
 import com.codegear.mariamc_rfid.rfidreader.common.Constants;
 import com.codegear.mariamc_rfid.rfidreader.common.CustomProgressDialog;
-import com.codegear.mariamc_rfid.rfidreader.home.RFIDBaseActivity;
+import com.codegear.mariamc_rfid.rfidreader.home.RFIDBase;
 import com.codegear.mariamc_rfid.rfidreader.rfid.RFIDController;
 import com.codegear.mariamc_rfid.scanner.helpers.AvailableScanner;
 import com.zebra.rfid.api3.InvalidUsageException;
@@ -118,9 +119,9 @@ public class InitReadersListFragment extends Fragment implements IRFIDConnectTas
     }
 
     public void CancelReconnect() {
-        if (RFIDBaseActivity.DisconnectTask != null && AUTO_RECONNECT_READERS) {
+        if (RFIDBase.DisconnectTask != null && AUTO_RECONNECT_READERS) {
             int timeout = 20;
-            while (FINISHED != RFIDBaseActivity.DisconnectTask.getStatus() && timeout > 0) {
+            while (FINISHED != RFIDBase.DisconnectTask.getStatus() && timeout > 0) {
                 try {
                     Thread.sleep(100);
                 } catch (InterruptedException e) {
@@ -542,7 +543,25 @@ public class InitReadersListFragment extends Fragment implements IRFIDConnectTas
             }
         }
 
+        //기기 정지 후, 화면 이동.
+        DeviceController.stopInventory(activity, new DeviceController.OnControllerListener() {
+            @Override
+            public void done() {
+                scanFinish();
+            }
+
+            @Override
+            public void error() {
+                scanFinish();
+            }
+        });
+
+    }
+
+    private void scanFinish(){
         if(isDestinationScreenCowChronicle){
+
+            Log.d(TAG,"RFIDController.mISInventoryRunning:"+RFIDController.mIsInventoryRunning);
             Intent intent = new Intent(getActivity(), CowChronicleActivity.class);
             if (cowchronicleStartPageName != null){
                 intent.putExtra(FLAG_FRAGMENT_START_PAGE, cowchronicleStartPageName);

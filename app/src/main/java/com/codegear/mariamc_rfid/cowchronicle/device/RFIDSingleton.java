@@ -2,6 +2,7 @@ package com.codegear.mariamc_rfid.cowchronicle.device;
 
 import android.util.Log;
 
+import com.codegear.mariamc_rfid.application.Application;
 import com.codegear.mariamc_rfid.rfidreader.rfid.RFIDController;
 import com.zebra.rfid.api3.Events;
 import com.zebra.rfid.api3.InvalidUsageException;
@@ -57,7 +58,7 @@ public class RFIDSingleton implements RfidEventsListener {
         }
     }
 
-    public void setIrfidSingleton(IRFIDSingletonTag irfidSingletonTag){
+    public void setIRFIDSingletonTag(IRFIDSingletonTag irfidSingletonTag){
         this.irfidSingletonTag = irfidSingletonTag;
     }
 
@@ -65,6 +66,12 @@ public class RFIDSingleton implements RfidEventsListener {
 
     @Override
     public void eventReadNotify(RfidReadEvents e) {
+        Log.d(TAG, "RFIDSingleton eventReadNotify");
+
+        if(!Application.useCowChronicleTagging){
+            return;
+        }
+
         final int READ_COUNT = 100;
         TagData[] myTags = null;
         if (RFIDController.mConnectedReader != null) {
@@ -75,6 +82,8 @@ public class RFIDSingleton implements RfidEventsListener {
             }
         }
 
+        int tagCount = (myTags != null ? myTags.length : 0);
+        Log.d(TAG, "RFIDSingleton eventReadNotify :"+tagCount);
         if(irfidSingletonTag != null){
             irfidSingletonTag.tags(myTags);
         }

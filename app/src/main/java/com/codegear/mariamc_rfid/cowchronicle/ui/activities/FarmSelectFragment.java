@@ -1,7 +1,9 @@
 package com.codegear.mariamc_rfid.cowchronicle.ui.activities;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,24 +16,29 @@ import androidx.fragment.app.Fragment;
 
 import com.codegear.mariamc_rfid.DeviceDiscoverActivity;
 import com.codegear.mariamc_rfid.R;
+import com.codegear.mariamc_rfid.application.Application;
 import com.codegear.mariamc_rfid.cowchronicle.consts.CowChronicleScreenEnum;
+import com.codegear.mariamc_rfid.cowchronicle.ui.dialog.CustomDialog;
 import com.codegear.mariamc_rfid.cowchronicle.ui.farms.FarmSearchDialogCompat;
 import com.codegear.mariamc_rfid.cowchronicle.models.FarmModel;
 import com.codegear.mariamc_rfid.cowchronicle.services.ResLogin;
 import com.codegear.mariamc_rfid.cowchronicle.storage.UserStorage;
 import com.codegear.mariamc_rfid.cowchronicle.utils.SoundSearcher;
 import com.codegear.mariamc_rfid.rfidreader.rfid.RFIDController;
+import com.codegear.mariamc_rfid.rfidreader.rfid.RfidListeners;
 
 import java.util.ArrayList;
 import java.util.Map;
 
+import dmax.dialog.SpotsDialog;
 import ir.mirrajabi.searchdialog.core.BaseFilter;
 
 
 public class FarmSelectFragment extends Fragment {
 
+    private final String TAG = "FarmSelectFragment";
     private AppCompatActivity mActivity;
-    private View mFarmSelectFragmentView;
+    private View mRootView;
     private TextView tvMemberName;
 
 
@@ -42,17 +49,19 @@ public class FarmSelectFragment extends Fragment {
         mActivity.getSupportActionBar().setTitle("목장 선택");
 
 
-        mFarmSelectFragmentView = inflater.inflate(R.layout.fragment_farm_select, null, false);
+        mRootView = inflater.inflate(R.layout.fragment_farm_select, null, false);
 
 
-        tvMemberName = mFarmSelectFragmentView.findViewById(R.id.tvMemberName);
+        tvMemberName = mRootView.findViewById(R.id.tvMemberName);
 
-        mFarmSelectFragmentView.findViewById(R.id.btnCurrentFarm).setOnClickListener(this::showFarmSearchDialog);
+        mRootView.findViewById(R.id.btnCurrentFarm).setOnClickListener(this::showFarmSearchDialog);
 
         initUserInfo();
 
-        return mFarmSelectFragmentView;
+        return mRootView;
     }
+
+
 
 
     //가입자 정보

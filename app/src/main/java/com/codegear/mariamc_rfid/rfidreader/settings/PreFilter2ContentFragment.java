@@ -23,7 +23,7 @@ import com.codegear.mariamc_rfid.R;
 import com.codegear.mariamc_rfid.rfidreader.common.Constants;
 import com.codegear.mariamc_rfid.rfidreader.rfid.RFIDController;
 
-import static com.codegear.mariamc_rfid.rfidreader.home.RFIDBaseActivity.filter;
+import static com.codegear.mariamc_rfid.rfidreader.home.RFIDBase.filter;
 import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.RFID_PREFILTERS_TAB;
 
 /**

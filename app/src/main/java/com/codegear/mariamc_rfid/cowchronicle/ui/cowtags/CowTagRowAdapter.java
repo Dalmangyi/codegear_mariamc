@@ -95,4 +95,8 @@ public class CowTagRowAdapter extends RecyclerView.Adapter<CowTagViewHolder> {
         this.notifyDataSetChanged();
     }
 
+    public CowTagsModel getCowTagsModel(){
+        return mCowTagsModel;
+    }
+
 }

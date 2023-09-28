@@ -244,7 +244,7 @@
     <string name="rr_read_time_title">경과 시간</string>
     <string name="rr_read_rate_title">읽기 속도</string>
     <string name="stop_title">정지</string>
-    <string name="tag_pattern_title">태그 패턴</string>
+    <string name="tag_pattern_title">태그 ID 패턴</string>
     <string name="password_title">비밀번호</string>
     <string name="memory_bank_title">Memory Bank</string>
     <string name="offset_title">Offset (words)</string>
@@ -385,7 +385,7 @@
     <string name="batch_mode_title">BT 배치 모드</string>
     <string name="usb_batch_mode_title">USB 배치 모드</string>
     <string name="scan_batch_mode">스캔 배치 모드</string>
-    <string name="batch_mode_inventory_title">인벤토리 배치모드에서 실행중입니다.</string>
+    <string name="batch_mode_inventory_title">인벤토리 배치모드가 실행중입니다.</string>
     <string name="tag_report_settings_title">태그 리포트 설정</string>
     <string name="dpo_message_title">동적 전력 최적화는 최고의 배터리 수명을 위해 리더를 구성하고 사전 구성된 설정과 함께 작동합니다. 동적 전력 최적화는 재고 작업에만 작동합니다.</string>
     <string name="batch_mode_running_title">일괄 모드로 실행</string>

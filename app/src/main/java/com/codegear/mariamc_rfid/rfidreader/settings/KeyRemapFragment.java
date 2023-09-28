@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 import com.codegear.mariamc_rfid.ActiveDeviceActivity;
 import com.codegear.mariamc_rfid.R;
-import com.codegear.mariamc_rfid.rfidreader.home.RFIDBaseActivity;
+import com.codegear.mariamc_rfid.rfidreader.home.RFIDBase;
 import com.codegear.mariamc_rfid.rfidreader.rfid.RFIDController;
 import com.zebra.rfid.api3.ENUM_NEW_KEYLAYOUT_TYPE;
 import com.zebra.rfid.api3.InvalidUsageException;
@@ -223,179 +223,19 @@ public class KeyRemapFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        // RFIDBaseActivity.activityResumed();
+        // RFIDBase.activityResumed();
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        // RFIDBaseActivity.removeReaderDeviceFoundHandler(this);
+        // RFIDBase.removeReaderDeviceFoundHandler(this);
     }
 
     @Override
     public void onDestroy() {
-        RFIDBaseActivity.getInstance().resetReaderstatuscallback();
+        RFIDBase.getInstance().resetReaderstatuscallback();
 
         super.onDestroy();
     }
 }
-   /* ListView listView;
-    ArrayAdapter<String> adapter;
-    protected static final String TAG_CONTENT_FRAGMENT = "ContentFragment";
-    private static final String TAG = "KeyRemapFragment";
-
-    ActiveDeviceActivity mActivity;
-
-    String[] itemsPremiumPlus = {"Upper(RFID)Lower(Host Scan)",
-            "Upper(Host Scan)Lower(RFID)",
-            "Upper(RFID)Lower(Sled Scan)",
-            "Upper(Sled Scan) & Lower(RFID)"};
-
-    String[] itemsStandard = {"Upper(RFID)Lower(Host Scan)",
-            "Upper(Host Scan)Lower(RFID)"};
-
-    String[] items = null;
-
-    public static KeyRemapFragment newInstance() {
-        KeyRemapFragment fragment = new KeyRemapFragment();
-        return fragment;
-    }
-
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-
-        super.onCreate(savedInstanceState);
-
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        final View rootview = inflater.inflate(R.layout.activity_key_remap, container, false);
-        //getSupportActionBar().setTitle(R.string.KeyMapping);
-        listView = rootview.findViewById(R.id.keymaplist);
-        if (Application.RFD_DEVICE_MODE == DEVICE_STD_MODE)
-            items = itemsStandard;
-        else
-            items = itemsPremiumPlus;
-
-        adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_single_choice, items);
-        listView.setAdapter(adapter);
-        ENUM_KEYLAYOUT_TYPE keylayoutType = null;
-        int currentkeymapping;
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String item = parent.getItemAtPosition(position).toString();
-
-                try {
-                    if (mConnectedReader == null) return;
-
-                    if(!RFIDController.mIsInventoryRunning) {
-                        switch (position) {
-                            case 0:
-                                Toast.makeText(parent.getContext(), "Trigger Selected: " + item, Toast.LENGTH_SHORT).show();
-                                mConnectedReader.Config.setKeylayoutType(ENUM_KEYLAYOUT_TYPE.UPPER_TRIGGER_FOR_RFID);
-                                break;
-                            case 1:
-                                Toast.makeText(parent.getContext(), "Trigger Selected: " + item, Toast.LENGTH_SHORT).show();
-                                mConnectedReader.Config.setKeylayoutType(ENUM_KEYLAYOUT_TYPE.UPPER_TRIGGER_FOR_SCAN);
-                                break;
-                            case 2:
-                                Toast.makeText(parent.getContext(), "Trigger Selected: " + item, Toast.LENGTH_SHORT).show();
-                                mConnectedReader.Config.setKeylayoutType(ENUM_KEYLAYOUT_TYPE.LOWER_TRIGGER_FOR_SLED_SCAN);
-                                break;
-                            case 3:
-                                Toast.makeText(parent.getContext(), "TriggerTrigger Selected: " + item, Toast.LENGTH_SHORT).show();
-                                mConnectedReader.Config.setKeylayoutType(ENUM_KEYLAYOUT_TYPE.UPPER_TRIGGER_FOR_SLED_SCAN);
-                                break;
-                        }
-                        Application.keyLayoutType = position;
-                    } else {
-                        Toast.makeText(parent.getContext(),"Inventory inprogress TriggerMapping not allowed" ,Toast.LENGTH_SHORT).show();
-
-                        position = Application.keyLayoutType;
-                    }
-                    listView.setItemChecked(position, true);
-
-                } catch (InvalidUsageException e) {
-                    if( e!= null && e.getStackTrace().length>0){ Log.e(TAG, e.getStackTrace()[0].toString()); }
-                } catch (OperationFailureException e) {
-                    if( e!= null && e.getStackTrace().length>0){ Log.e(TAG, e.getStackTrace()[0].toString()); }
-                }
-
-            }
-        });
-
-        try {
-            if(!RFIDController.mIsInventoryRunning) {
-                keylayoutType = mConnectedReader.Config.getKeylayoutType();
-                currentkeymapping = keylayoutType.getEnumValue();
-                Application.keyLayoutType = currentkeymapping;
-            } else {
-                currentkeymapping = Application.keyLayoutType;
-            }
-            listView.setSelection(currentkeymapping);
-            if (currentkeymapping == -1) {
-                listView.setItemChecked(0, true);
-            } else {
-                listView.setItemChecked(currentkeymapping, true);
-            }
-
-        } catch (InvalidUsageException e) {
-            if( e!= null && e.getStackTrace().length>0){ Log.e(TAG, e.getStackTrace()[0].toString()); }
-        } catch (OperationFailureException e) {
-            if( e!= null && e.getStackTrace().length>0){ Log.e(TAG, e.getStackTrace()[0].toString()); }
-        }
-        return rootview;
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        // RFIDBaseActivity.activityResumed();
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        // RFIDBaseActivity.removeReaderDeviceFoundHandler(this);
-    }
-
-    @Override
-    public void onDestroy() {
-        RFIDBaseActivity.getInstance().resetReaderstatuscallback();
-
-        super.onDestroy();
-    }
-*//*
-    @Override
-    public void ReaderDeviceConnected(ReaderDevice device) {
-
-    }
-
-    @Override
-    public void ReaderDeviceDisConnected(ReaderDevice device) {
-
-        Fragment fragment = getSupportFragmentManager().findFragmentByTag(TAG_CONTENT_FRAGMENT);
-       /* if (fragment instanceof RFIDReadersListFragment) {
-            ((RFIDReadersListFragment) fragment).RFIDReaderAppeared(device);
-        }
-       if (RFIDController.NOTIFY_READER_AVAILABLE) {
-            if(!device.getName().equalsIgnoreCase("null"))
-                sendNotification(Constants.ACTION_READER_AVAILABLE, device.getName() + " is available.");
-        }* /
-
-    }
-
-    @Override
-    public void ReaderDeviceConnFailed(ReaderDevice device) {
-
-    }
-*//*
-}
-
-*/

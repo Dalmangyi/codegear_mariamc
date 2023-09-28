@@ -95,6 +95,10 @@ public class Constants {
     public static final String BEEPER_VOLUME = "beeper_volume";
     public static final String SSA_STATUS = "ssa_status";
     public static final String SCALE_STATUS = "scale_status";
+    public static final String INTENT_START_TAB = "intent.start_tab";
+    public static final String INTENT_NEXT_TAB = "intent.next_tab";
+    public static final String INTENT_OFF_MINIMIZE_APP = "intent.off_minimize_app";
+
 
     public static final String CONNECTION_HELP_TYPE = "connection_help";
     public static final int CONNECTION_HELP_TYPE_CS4070 = 0;

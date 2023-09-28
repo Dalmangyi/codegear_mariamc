@@ -36,7 +36,7 @@ import com.codegear.mariamc_rfid.rfidreader.rfid.RFIDController;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import static com.codegear.mariamc_rfid.rfidreader.home.RFIDBaseActivity.filter;
+import static com.codegear.mariamc_rfid.rfidreader.home.RFIDBase.filter;
 
 public class AccessOperationsReadWriteFragment extends Fragment implements AccessOperationsFragment.OnRefreshListener {
 
@@ -176,13 +176,10 @@ public class AccessOperationsReadWriteFragment extends Fragment implements Acces
     private void initializeSpinner() {
         Spinner memoryBankSpinner = (Spinner) getActivity().findViewById(R.id.accessRWMemoryBank);
         if (memoryBankSpinner != null) {
-            // Create an ArrayAdapter using the string array and a default spinner layout
+
             ArrayAdapter<CharSequence> memoryBankAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.acess_read_write_memory_bank_array, R.layout.custom_spinner_layout);
-            // Specify the layout to use when the list of choices appears
             memoryBankAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            // Apply the adapter to the spinner
             memoryBankSpinner.setAdapter(memoryBankAdapter);
-            //
             memoryBankSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {

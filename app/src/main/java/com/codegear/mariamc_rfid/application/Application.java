@@ -16,11 +16,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.security.crypto.EncryptedSharedPreferences;
 import androidx.security.crypto.MasterKey;
 
+import com.codegear.mariamc_rfid.BuildConfig;
 import com.codegear.mariamc_rfid.cowchronicle.storage.UserStorage;
 import com.codegear.mariamc_rfid.rfidreader.common.PreFilters;
 import com.codegear.mariamc_rfid.rfidreader.reader_connection.ScanPair;
 import com.codegear.mariamc_rfid.rfidreader.common.MaxLimitArrayList;
-import com.codegear.mariamc_rfid.rfidreader.home.RFIDBaseActivity;
+import com.codegear.mariamc_rfid.rfidreader.home.RFIDBase;
 import com.codegear.mariamc_rfid.rfidreader.inventory.InventoryListItem;
 import com.codegear.mariamc_rfid.rfidreader.locate_tag.multitag_locate.MultiTagLocateListItem;
 import com.codegear.mariamc_rfid.rfidreader.settings.ProfileContent;
@@ -28,6 +29,7 @@ import com.codegear.mariamc_rfid.scanner.helpers.AvailableScanner;
 import com.codegear.mariamc_rfid.scanner.helpers.Foreground;
 import com.codegear.mariamc_rfid.scanner.helpers.ScannerAppEngine;
 import com.google.firebase.analytics.FirebaseAnalytics;
+import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import com.zebra.rfid.api3.Antennas;
 import com.zebra.rfid.api3.BEEPER_VOLUME;
 import com.zebra.rfid.api3.DYNAMIC_POWER_OPTIMIZATION;
@@ -91,7 +93,7 @@ public class Application extends android.app.Application {
     public static int preFilterIndex = -1;
     //For Notification
     public static volatile int INTENT_ID = 100;
-    public static RFIDBaseActivity.EventHandler RFIDBAseEventHandler;
+    public static RFIDBase.EventHandler RFIDBAseEventHandler;
     public static TreeMap<String, Integer> inventoryList = new TreeMap<String, Integer>();
     public static HashMap<String, String> versionInfo = new HashMap<>(5);
 
@@ -113,6 +115,7 @@ public class Application extends android.app.Application {
     public static int missedTags = 0;
     public static int matchingTags = 0;
 
+    public static boolean useCowChronicleTagging = false; //Main UI Thread 동시사용 방지용 변수.
     public static boolean isGettingTags;
     public static boolean EXPORT_DATA;
     public static ReaderDevice mConnectedDevice;
@@ -280,8 +283,12 @@ public class Application extends android.app.Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        // Obtain the FirebaseAnalytics instance.
+
+        //Firebase Crashlytics
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+        FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(!BuildConfig.DEBUG);
+
+
         Foreground.init(this);
         //this keyword referring to Context of the sample application
         sdkHandler = new SDKHandler(this, false);

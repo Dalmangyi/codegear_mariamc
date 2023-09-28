@@ -67,6 +67,7 @@
             android:background="@drawable/button_default_background"
             android:onClick="clickFarmSearch"
             android:text="수신거리 적용"
+            android:stateListAnimator="@null"
             android:textColor="@color/white"
             android:paddingLeft="@dimen/app_padding"
             android:paddingRight="@dimen/app_padding"/>
@@ -115,7 +116,7 @@
             android:background="#CCCCCC"/>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/tbCowTags"
+            android:id="@+id/rvCowTags"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
@@ -123,16 +124,6 @@
             android:scrollbars="vertical"
             android:scrollbarFadeDuration="500"
             android:background="@color/white"/>
-
-<!--        <com.evrencoskun.tableview.TableView-->
-<!--            android:id="@+id/tbCowTags"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:layout_weight="1"-->
-<!--            app:allow_click_inside_cell="true"-->
-<!--            app:allow_click_inside_column_header="true"-->
-<!--            app:allow_click_inside_row_header="true"-->
-<!--            android:background="@color/white"/>-->
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -180,7 +171,7 @@
                 android:id="@+id/cbUseFilterCount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="태그한 데이터만 보기"
+                android:text="스캔한 데이터만 보기"
                 android:checked="false"
                 android:buttonTint="@color/colorHighlight"/>
 

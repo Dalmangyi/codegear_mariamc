@@ -1,6 +1,6 @@
 package com.codegear.mariamc_rfid.rfidreader.settings;
 
-import static com.codegear.mariamc_rfid.rfidreader.home.RFIDBaseActivity.filter;
+import static com.codegear.mariamc_rfid.rfidreader.home.RFIDBase.filter;
 import static com.codegear.mariamc_rfid.rfidreader.rfid.RFIDController.isLocatingTag;
 import static com.codegear.mariamc_rfid.rfidreader.rfid.RFIDController.mIsInventoryRunning;
 import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.INVENTORY_TAB;

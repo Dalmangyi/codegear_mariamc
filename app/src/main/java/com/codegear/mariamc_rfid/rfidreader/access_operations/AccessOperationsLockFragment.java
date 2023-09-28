@@ -10,20 +10,17 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
 import com.codegear.mariamc_rfid.application.Application;
-import com.zebra.rfid.api3.ACCESS_OPERATION_STATUS;
 import com.zebra.rfid.api3.LOCK_PRIVILEGE;
-import com.zebra.rfid.api3.TagData;
 import com.codegear.mariamc_rfid.R;
 import com.codegear.mariamc_rfid.rfidreader.common.asciitohex;
 import com.codegear.mariamc_rfid.rfidreader.common.hextoascii;
 import com.codegear.mariamc_rfid.rfidreader.rfid.RFIDController;
 
-import static com.codegear.mariamc_rfid.rfidreader.home.RFIDBaseActivity.filter;
+import static com.codegear.mariamc_rfid.rfidreader.home.RFIDBase.filter;
  
 public class AccessOperationsLockFragment extends Fragment implements AdapterView.OnItemSelectedListener, AccessOperationsFragment.OnRefreshListener {
     private LOCK_PRIVILEGE lockAccessPermission = LOCK_PRIVILEGE.LOCK_PRIVILEGE_READ_WRITE;

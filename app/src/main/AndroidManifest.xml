@@ -43,8 +43,10 @@
         android:resizeableActivity="false"
         android:theme="@style/AppTheme"
         tools:replace="android:allowBackup, android:appComponentFactory"
+        android:hardwareAccelerated="true"
         android:usesCleartextTraffic="true">
 
+        <profileable android:shell="true"/>
 
         <!-- 카우크로니클 시작 액티비티 : UserLoginActivity -->
         <activity

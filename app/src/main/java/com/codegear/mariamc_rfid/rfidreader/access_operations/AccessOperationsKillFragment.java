@@ -20,7 +20,7 @@ import com.codegear.mariamc_rfid.rfidreader.common.asciitohex;
 import com.codegear.mariamc_rfid.rfidreader.common.hextoascii;
 import com.codegear.mariamc_rfid.rfidreader.rfid.RFIDController;
 
-import static com.codegear.mariamc_rfid.rfidreader.home.RFIDBaseActivity.filter;
+import static com.codegear.mariamc_rfid.rfidreader.home.RFIDBase.filter;
 
 
 public class AccessOperationsKillFragment extends Fragment implements AccessOperationsFragment.OnRefreshListener {

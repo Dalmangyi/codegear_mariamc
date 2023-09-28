@@ -254,17 +254,14 @@ public class CustomConnectedDrawer {
                     if(!(mActivity instanceof DeviceDiscoverActivity)) {
                         Intent intent = new Intent(mActivity, DeviceDiscoverActivity.class);
 
-                        //로그인 경우만 자동연결,
-                        if(UserStorage.getInstance().isLogin()){
-                            intent.putExtra(DeviceDiscoverActivity.ENABLE_AUTO_CONNECT_DEVICE, true); //자동연결 하기.
-                            intent.putExtra(DeviceDiscoverActivity.DESTINATION_SCREEN_IS_COWCHRONICLE, true); //연결후 카우크로니클로 가게 하기.
-                        }
-                        else {
-                            intent.putExtra(DeviceDiscoverActivity.ENABLE_AUTO_CONNECT_DEVICE, true); //자동연결 끄기
-                            intent.putExtra(DeviceDiscoverActivity.DESTINATION_SCREEN_IS_COWCHRONICLE, false); //연결후 카우크로니클로 가지 않게 하기.
-                        }
+                        //자동연결 진행하고, 설정화면에 남아있게 만들기.
+                        intent.putExtra(DeviceDiscoverActivity.ENABLE_AUTO_CONNECT_DEVICE, true); //자동연결 하기.
+                        intent.putExtra(DeviceDiscoverActivity.DESTINATION_SCREEN_IS_COWCHRONICLE, false); //연결 후, 카우크로니클 이동 여부.
 
                         mActivity.startActivity(intent);
+                    }
+                    else{
+                        //nothing..
                     }
                 }
                 else if(!(mActivity instanceof ActiveDeviceActivity)) {

@@ -8,9 +8,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 
+import com.codegear.mariamc_rfid.rfidreader.home.RFIDBase;
 import com.codegear.mariamc_rfid.scanner.helpers.Constants;
-import com.codegear.mariamc_rfid.R;
-import com.codegear.mariamc_rfid.rfidreader.home.RFIDBaseActivity;
 import com.codegear.mariamc_rfid.rfidreader.manager.DeviceResetFragment;
 import com.codegear.mariamc_rfid.rfidreader.manager.FactoryResetFragment;
 import com.codegear.mariamc_rfid.rfidreader.rfid.RFIDController;
@@ -28,7 +27,7 @@ import com.zebra.rfid.api3.STATUS_EVENT_TYPE;
 public class ManageDeviceActivity extends AppCompatActivity implements Readers.RFIDReaderEventHandler, RfidEventsListener {
 
     private static final String MANAGEDEVICEFRAGMENT = "ManageDeviceFragment";
-    private RFIDBaseActivity mRfidBaseActivity;
+    private RFIDBase mRfidBase;
     Fragment fragment = null;
 
 
@@ -54,8 +53,8 @@ public class ManageDeviceActivity extends AppCompatActivity implements Readers.R
             }
         }
         FragmentManager fragmentManager = getSupportFragmentManager();
-        mRfidBaseActivity = RFIDBaseActivity.getInstance();
-        mRfidBaseActivity.setReaderstatuscallback(this);
+        mRfidBase = RFIDBase.getInstance();
+        mRfidBase.setReaderstatuscallback(this);
         if (fragment != null) {
             switchToFragment(fragment);
         }
@@ -75,11 +74,11 @@ public class ManageDeviceActivity extends AppCompatActivity implements Readers.R
 
     public void resetFactoryDefault() throws InvalidUsageException, OperationFailureException {
 
-        mRfidBaseActivity.resetFactoryDefault();
+        mRfidBase.resetFactoryDefault();
     }
 
     public boolean deviceReset(String commandString) throws InvalidUsageException, OperationFailureException {
-        return mRfidBaseActivity.deviceReset();
+        return mRfidBase.deviceReset();
     }
 
     @Override
@@ -126,7 +125,7 @@ public class ManageDeviceActivity extends AppCompatActivity implements Readers.R
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mRfidBaseActivity.resetReaderstatuscallback();
+        mRfidBase.resetReaderstatuscallback();
 
 
     }
@@ -134,7 +133,7 @@ public class ManageDeviceActivity extends AppCompatActivity implements Readers.R
     @Override
     protected void onResume() {
         super.onResume();
-        mRfidBaseActivity.setReaderstatuscallback(this);
+        mRfidBase.setReaderstatuscallback(this);
     }
 
     @Override

@@ -17,7 +17,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.codegear.mariamc_rfid.ActiveDeviceActivity;
 import com.codegear.mariamc_rfid.DeviceDiscoverActivity;
 import com.codegear.mariamc_rfid.cowchronicle.ui.activities.CowChronicleActivity;
-import com.codegear.mariamc_rfid.rfidreader.home.RFIDBaseActivity;
+import com.codegear.mariamc_rfid.rfidreader.home.RFIDBase;
 import com.zebra.rfid.api3.ReaderDevice;
 import com.zebra.rfid.api3.TagData;
 import com.codegear.mariamc_rfid.R;
@@ -114,7 +114,7 @@ public class AccessOperationsFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         RFIDController.isAccessCriteriaRead = false;
-        RFIDBaseActivity.setAccessProfile(false);
+        RFIDBase.setAccessProfile(false);
     }
 
     public void handleTagResponse(TagData tagData) {

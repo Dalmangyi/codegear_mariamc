@@ -50,13 +50,13 @@ public class RapidReadFragment extends Fragment implements ResponseHandlerInterf
     private static final String TAG = "RapidReadFragment";
     MatchModeProgressView progressView;
     private TextView tagReadRate;
-    private TextView uniqueTags;
-    private TextView totalTags;
-    private ExtendedFloatingActionButton inventoryButton;
+    private TextView tvUniqueTags;
+    private TextView tvTotalTags;
+    private ExtendedFloatingActionButton btnInventory;
     private TextView timeText;
-    private TextView uniqueTagTitle;
-    private TextView totalTagTitle;
-    private LinearLayout invtoryData;
+    private TextView tvUniqueTagTitle;
+    private TextView tvTotalTagTitle;
+    private LinearLayout inventoryData;
     private FrameLayout batchModeRR;
     boolean batchModeEventReceived = false;
     private ISettingsUtil settingsUtil;
@@ -140,34 +140,30 @@ public class RapidReadFragment extends Fragment implements ResponseHandlerInterf
         super.onActivityCreated(savedInstanceState);
         ActiveDeviceActivity mainActivity = (ActiveDeviceActivity) getActivity();
         mainActivity.getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
-        inventoryButton = (ExtendedFloatingActionButton) mainActivity.findViewById(R.id.rr_inventoryButton);
-        uniqueTags = (TextView) mainActivity.findViewById(R.id.uniqueTagContent);
-        uniqueTagTitle = (TextView) mainActivity.findViewById(R.id.uniqueTagTitle);
-        totalTags = (TextView) mainActivity.findViewById(R.id.totalTagContent);
-        totalTagTitle = (TextView) mainActivity.findViewById(R.id.totalTagTitle);
+        btnInventory = (ExtendedFloatingActionButton) mainActivity.findViewById(R.id.rr_inventoryButton);
+        tvUniqueTags = (TextView) mainActivity.findViewById(R.id.uniqueTagContent);
+        tvUniqueTagTitle = (TextView) mainActivity.findViewById(R.id.uniqueTagTitle);
+        tvTotalTags = (TextView) mainActivity.findViewById(R.id.totalTagContent);
+        tvTotalTagTitle = (TextView) mainActivity.findViewById(R.id.totalTagTitle);
         tagReadRate = (TextView) getActivity().findViewById(R.id.readRateContent);
         batchModeRR = (FrameLayout) getActivity().findViewById(R.id.batchModeRR);
-        invtoryData = (LinearLayout) getActivity().findViewById(R.id.inventoryDataLayout);
+        inventoryData = (LinearLayout) getActivity().findViewById(R.id.inventoryDataLayout);
         onRapidReadSelected();
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
 
     public void onRapidReadSelected() {
 
         if (RFIDController.mIsInventoryRunning) {
-            inventoryButton.setIconResource(R.drawable.ic_play_stop);
+            btnInventory.setIconResource(R.drawable.ic_play_stop);
         } else {
-            inventoryButton.setIconResource(android.R.drawable.ic_media_play);
+            btnInventory.setIconResource(android.R.drawable.ic_media_play);
         }
         if (RFIDController.isBatchModeInventoryRunning != null && RFIDController.isBatchModeInventoryRunning) {
-            invtoryData.setVisibility(View.GONE);
+            inventoryData.setVisibility(View.GONE);
             batchModeRR.setVisibility(View.VISIBLE);
         } else {
-            invtoryData.setVisibility(View.VISIBLE);
+            inventoryData.setVisibility(View.VISIBLE);
             batchModeRR.setVisibility(View.GONE);
         }
         if (RFIDController.mRRStartedTime == 0) Application.TAG_READ_RATE = 0;
@@ -194,7 +190,7 @@ public class RapidReadFragment extends Fragment implements ResponseHandlerInterf
         }
         if (Application.missedTags > 9999) {
             //orignal size is 60sp - reduced size 45sp
-            uniqueTags.setTextSize(45);
+            tvUniqueTags.setTextSize(45);
         }
         updateTexts();
         getActivity().findViewById(R.id.tv_prefilter_enabled).setVisibility(RFIDController.getInstance().isPrefilterEnabled() ? View.VISIBLE : View.INVISIBLE);
@@ -226,21 +222,25 @@ public class RapidReadFragment extends Fragment implements ResponseHandlerInterf
 
     public void updateTexts() {
         if (Application.TAG_LIST_MATCH_MODE) {
-            if (uniqueTags != null && totalTags != null) {
-                totalTags.setText(String.valueOf(Application.matchingTags));
-                uniqueTags.setText(String.valueOf(Application.missedTags));
+            if (tvUniqueTags != null && tvTotalTags != null) {
+                tvTotalTags.setText(String.valueOf(Application.matchingTags));
+                tvUniqueTags.setText(String.valueOf(Application.missedTags));
             }
-            if (totalTagTitle != null && uniqueTagTitle != null) {
-                totalTagTitle.setText(R.string.rr_total_tag_title_MM);
-                uniqueTagTitle.setText(R.string.rr_unique_tags_title_MM);
+            if (tvTotalTagTitle != null && tvUniqueTagTitle != null) {
+                tvTotalTagTitle.setText(R.string.rr_total_tag_title_MM);
+                tvUniqueTagTitle.setText(R.string.rr_unique_tags_title_MM);
             }
             updateProgressView();
         } else {
-            if (uniqueTags != null) uniqueTags.setText(String.valueOf(Application.UNIQUE_TAGS));
-            if (totalTags != null) totalTags.setText(String.valueOf(Application.TOTAL_TAGS));
-            if (totalTagTitle != null && uniqueTagTitle != null) {
-                totalTagTitle.setText(R.string.rr_total_tag_title);
-                uniqueTagTitle.setText(R.string.rr_unique_tags_title);
+            if (tvUniqueTags != null && tvTotalTags != null) {
+                tvUniqueTags.setText(String.valueOf(Application.UNIQUE_TAGS));
+                tvUniqueTags.postInvalidate();
+                tvTotalTags.setText(String.valueOf(Application.TOTAL_TAGS));
+                tvTotalTags.postInvalidate();
+            }
+            if (tvTotalTagTitle != null && tvUniqueTagTitle != null) {
+                tvTotalTagTitle.setText(R.string.rr_total_tag_title);
+                tvUniqueTagTitle.setText(R.string.rr_unique_tags_title);
             }
         }
     }
@@ -278,8 +278,6 @@ public class RapidReadFragment extends Fragment implements ResponseHandlerInterf
      * method to reset tags info on the screen before starting inventory operation
      */
     public void resetTagsInfo() {
-//        uniqueTags.setText(String.valueOf(RFIDController.UNIQUE_TAGS));
-//        totalTags.setText(String.valueOf(RFIDController.TOTAL_TAGS));
         updateTexts();
         progressView.bCompleted = false;
         tagReadRate.setText(Application.TAG_READ_RATE + Constants.TAGS_SEC);
@@ -327,22 +325,22 @@ public class RapidReadFragment extends Fragment implements ResponseHandlerInterf
             @Override
             public void run() {
                 if (results.equals(RFIDResults.RFID_BATCHMODE_IN_PROGRESS)) {
-                    if (uniqueTags != null) {
-                        invtoryData.setVisibility(View.GONE);
+                    if (tvUniqueTags != null) {
+                        inventoryData.setVisibility(View.GONE);
                         batchModeRR.setVisibility(View.VISIBLE);
                     }
                 } else if (results.equals(RFIDResults.RFID_OPERATION_IN_PROGRESS)) {
 
-                    if (inventoryButton != null) {
-                        inventoryButton.setIconResource(R.drawable.ic_play_stop);
-                        inventoryButton.setText(R.string.stop);
+                    if (btnInventory != null) {
+                        btnInventory.setIconResource(R.drawable.ic_play_stop);
+                        btnInventory.setText(R.string.stop);
                     }
                     mIsInventoryRunning = true;
 
                 } else if (!results.equals(RFIDResults.RFID_API_SUCCESS)) {
                     RFIDController.mIsInventoryRunning = false;
-                    if (inventoryButton != null) {
-                        inventoryButton.setIconResource(android.R.drawable.ic_media_play);
+                    if (btnInventory != null) {
+                        btnInventory.setIconResource(android.R.drawable.ic_media_play);
                     }
                     RFIDController.isBatchModeInventoryRunning = false;
                 }
@@ -368,11 +366,11 @@ public class RapidReadFragment extends Fragment implements ResponseHandlerInterf
             public void run() {
                 //if (!ActiveProfile.id.equals("1"))
                 {
-                    if (inventoryButton != null && !RFIDController.mIsInventoryRunning && (RFIDController.isBatchModeInventoryRunning == null || !RFIDController.isBatchModeInventoryRunning)) {
-                        inventoryButton.setIconResource(android.R.drawable.ic_media_play);
+                    if (btnInventory != null && !RFIDController.mIsInventoryRunning && (RFIDController.isBatchModeInventoryRunning == null || !RFIDController.isBatchModeInventoryRunning)) {
+                        btnInventory.setIconResource(android.R.drawable.ic_media_play);
                     }
-                    if (uniqueTags != null) {
-                        invtoryData.setVisibility(View.VISIBLE);
+                    if (tvUniqueTags != null) {
+                        inventoryData.setVisibility(View.VISIBLE);
                     }
                     if (Application.TAG_LIST_MATCH_MODE) progressView.setVisibility(View.VISIBLE);
 
@@ -391,16 +389,9 @@ public class RapidReadFragment extends Fragment implements ResponseHandlerInterf
     @Override
     public void batchModeEventReceived() {
         batchModeEventReceived = true;
-        if (inventoryButton != null) {
-            inventoryButton.setIconResource(R.drawable.ic_play_stop);
+        if (btnInventory != null) {
+            btnInventory.setIconResource(R.drawable.ic_play_stop);
         }
-//        if (uniqueTags != null) {
-//            invtoryData.setVisibility(View.GONE);
-//            progressView.setVisibility(View.GONE);
-//        }
-//        if (batchModeRR != null) {
-//            batchModeRR.setVisibility(View.VISIBLE);
-//        }
     }
 
     @Override

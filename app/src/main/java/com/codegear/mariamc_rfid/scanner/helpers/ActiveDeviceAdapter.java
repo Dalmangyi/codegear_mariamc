@@ -61,7 +61,7 @@ import com.codegear.mariamc_rfid.wifi.ReaderWifiSettingsFragment;
 public class ActiveDeviceAdapter extends FragmentStatePagerAdapter {
 
     public static final int READERS_TAB = 0;
-    public static final  int RFID_TAB = 1;
+    public static final int RFID_TAB = 1;
     public static final int SCAN_SETTINGS_TAB = 2;
     public static final int SCAN_DATAVIEW_TAB = 3;
     public static final int SCAN_ADVANCED_TAB = 4;
@@ -117,12 +117,11 @@ public class ActiveDeviceAdapter extends FragmentStatePagerAdapter {
 
 
 
-    private static int currentPostion = RFID_TAB;
+    private static int currentPosition = RFID_TAB;
     private static int mNextRFIDFragmentId = RAPID_READ_TAB;
     private static int mNextSCANFragmentId = SCAN_DATAVIEW_TAB;
-    private static int mNextRedaerListFragmentId = READER_LIST_TAB;
+    private static int mNextReaderListFragmentId = READER_LIST_TAB;
     private static int mNextSettingsFragmentId = MAIN_HOME_SETTINGS_TAB;
-//    private static int mNextCowChronicleFragmentId =
 
     private Fragment mRfidFragment;
     private Fragment mScannerFragment;
@@ -139,12 +138,9 @@ public class ActiveDeviceAdapter extends FragmentStatePagerAdapter {
         mFunctionCount= deviceMode;
         if(deviceMode == Application.DEVICE_STD_MODE)
         {
-
-
-        }else if(deviceMode == Application.DEVICE_PREMIUM_PLUS_MODE)
+        }
+        else if(deviceMode == Application.DEVICE_PREMIUM_PLUS_MODE)
         {
-
-
         }
 
     }
@@ -157,11 +153,11 @@ public class ActiveDeviceAdapter extends FragmentStatePagerAdapter {
     @Override
     public Fragment getItem(int position) {
 
-        currentPostion = position;
+        currentPosition = position;
         switch (position) {
             case READERS_TAB:
                 Constants.logAsMessage(Constants.DEBUG_TYPE.TYPE_DEBUG, getClass().getSimpleName(), "1st Tab Selected");
-                switch(mNextRedaerListFragmentId)
+                switch(mNextReaderListFragmentId)
                 {
                     case DEVICE_PAIR_TAB:
                         Constants.logAsMessage(Constants.DEBUG_TYPE.TYPE_DEBUG, getClass().getSimpleName(), "2nd Tab Selected");
@@ -186,132 +182,38 @@ public class ActiveDeviceAdapter extends FragmentStatePagerAdapter {
 
                 }
 
-            case SETTINGS_TAB:
-                switch(mNextSettingsFragmentId)
+
+            case RFID_TAB:
+                switch(mNextRFIDFragmentId)
                 {
-                    case MAIN_RFID_SETTINGS_TAB:
+                    case INVENTORY_TAB:
                         Constants.logAsMessage(Constants.DEBUG_TYPE.TYPE_DEBUG, getClass().getSimpleName(), "2nd Tab Selected");
-                        mMainSettingsFragment = SettingListFragment.newInstance();
-                        return mMainSettingsFragment;
-                    case MAIN_HOME_SETTINGS_TAB:
+                        mRfidFragment = RFIDInventoryFragment.newInstance();
+                        return mRfidFragment;
+                    case RAPID_READ_TAB:
                         Constants.logAsMessage(Constants.DEBUG_TYPE.TYPE_DEBUG, getClass().getSimpleName(), "2nd Tab Selected");
-                        mMainSettingsFragment = mainSettingsFragment.newInstance();
-                        return mMainSettingsFragment;
-                    case MAIN_GENERAL_SETTINGS_TAB:
+                        mRfidFragment =  RapidReadFragment.newInstance();
+                        return mRfidFragment;
+                    case LOCATE_TAG_TAB:
                         Constants.logAsMessage(Constants.DEBUG_TYPE.TYPE_DEBUG, getClass().getSimpleName(), "2nd Tab Selected");
-                        mMainSettingsFragment = ManagerFragment.newInstance();
-                        return mMainSettingsFragment;
-                    case SCAN_SETTINGS_TAB:
+                        mRfidFragment =  LocateOperationsFragment.newInstance();
+                        return mRfidFragment;
+                    case RFID_PREFILTERS_TAB:
                         Constants.logAsMessage(Constants.DEBUG_TYPE.TYPE_DEBUG, getClass().getSimpleName(), "2nd Tab Selected");
-                        mScannerFragment = SettingsFragment.newInstance();
-                        return mScannerFragment;
-                    case SCAN_ADVANCED_TAB:
-                        Constants.logAsMessage(Constants.DEBUG_TYPE.TYPE_DEBUG, getClass().getSimpleName(), "3rd Tab Selected");
-                        mScannerFragment = AdvancedFragment.newInstance();
-                        return mScannerFragment;
-                    case SCAN_HOME_SETTINGS_TAB:
-                        Constants.logAsMessage(Constants.DEBUG_TYPE.TYPE_DEBUG, getClass().getSimpleName(), "3rd Tab Selected");
-                        mScannerFragment = ScanHomeSettingsFragment.newInstance();
-                        return mScannerFragment;
-                    case APPLICATION_SETTINGS_TAB:
+                        mRfidFragment = PreFilterFragment.newInstance();
+                        return mRfidFragment;
+                    case RFID_ACCESS_TAB:
                         Constants.logAsMessage(Constants.DEBUG_TYPE.TYPE_DEBUG, getClass().getSimpleName(), "2nd Tab Selected");
-                        mMainSettingsFragment = ApplicationSettingsFragment.newInstance();
-                        return mMainSettingsFragment;
-                    case RFID_PROFILES_TAB:
-                        Constants.logAsMessage(Constants.DEBUG_TYPE.TYPE_DEBUG, getClass().getSimpleName(), "2nd Tab Selected");
-                        mMainSettingsFragment = ProfileFragment.newInstance();
-                        return mMainSettingsFragment;
-                    case RFID_ADVANCED_OPTIONS_TAB:
-                        Constants.logAsMessage(Constants.DEBUG_TYPE.TYPE_DEBUG, getClass().getSimpleName(), "2nd Tab Selected");
-                        mMainSettingsFragment = AdvancedOptionItemFragment.newInstance();
-                        return mMainSettingsFragment;
-                    case RFID_REGULATORY_TAB:
-                        Constants.logAsMessage(Constants.DEBUG_TYPE.TYPE_DEBUG, getClass().getSimpleName(), "2nd Tab Selected");
-                        mMainSettingsFragment = RegulatorySettingsFragment.newInstance();
-                        return mMainSettingsFragment;
-
-                    case RFID_BEEPER_TAB:
-                        Constants.logAsMessage(Constants.DEBUG_TYPE.TYPE_DEBUG, getClass().getSimpleName(), "2nd Tab Selected");
-                        mMainSettingsFragment = BeeperFragment.newInstance();
-                        return mMainSettingsFragment;
-                    case RFID_LED_TAB:
-                        Constants.logAsMessage(Constants.DEBUG_TYPE.TYPE_DEBUG, getClass().getSimpleName(), "2nd Tab Selected");
-                        mMainSettingsFragment = LedFragment.newInstance();
-                        return mMainSettingsFragment;
-                    case RFID_WIFI_TAB:
-                        Constants.logAsMessage(Constants.DEBUG_TYPE.TYPE_DEBUG, getClass().getSimpleName(), "2nd Tab Selected");
-                        mMainSettingsFragment = WifiFragment.newInstance();
-                        return mMainSettingsFragment;
-                    case CHARGE_TERMINAL_TAB:
-                        mMainSettingsFragment = ChargeTerminalFragment.newInstance();
-                        return mMainSettingsFragment;
-                    case ANTENNA_SETTINGS_TAB:
-                        mMainSettingsFragment = AntennaSettingsFragment.newInstance();
-                        return mMainSettingsFragment;
-                    case SINGULATION_CONTROL_TAB:
-                        mMainSettingsFragment = SingulationControlFragment.newInstance();
-                        return mMainSettingsFragment;
-                    case START_STOP_TRIGGER_TAB:
-                        mMainSettingsFragment = StartStopTriggersFragment.newInstance();
-                        return mMainSettingsFragment;
-                    case TAG_REPORTING_TAB:
-                        mMainSettingsFragment = TagReportingFragment.newInstance();
-                        return mMainSettingsFragment;
-                    case  SAVE_CONFIG_TAB:
-                        mMainSettingsFragment = SaveConfigurationsFragment.newInstance();
-                        return mMainSettingsFragment;
-                    case DPO_SETTING_TAB:
-                        mMainSettingsFragment = DPOSettingsFragment.newInstance();
-                        return mMainSettingsFragment;
-                    case FACTORY_RESET_FRAGMENT_TAB:
-                        mMainSettingsFragment = FactoryResetFragment.newInstance();
-                        return mMainSettingsFragment;
-                    case LOGGER_FRAGMENT_TAB:
-                        mMainSettingsFragment = LoggerFragment.newInstance();
-                        return mMainSettingsFragment;
-                    case DEVICE_RESET_TAB:
-                        mMainSettingsFragment = DeviceResetFragment.newInstance();
-                        return mMainSettingsFragment;
-                    case KEYREMAP_TAB:
-                        mMainSettingsFragment = KeyRemapFragment.newInstance();
-                        return mMainSettingsFragment;
-                    case UPDATE_FIRMWARE_TAB:
-                        mMainSettingsFragment = UpdateFirmware.newInstance();
-                        return mMainSettingsFragment;
-                    case ASSERT_DEVICE_INFO_TAB:
-                        mMainSettingsFragment = AssertFragment.newInstance();
-                        return mMainSettingsFragment;
-                    case STATIC_IP_CONFIG:
-                        mMainSettingsFragment = Static_ipconfig.newInstance();
-                        return  mMainSettingsFragment;
-
-                    case BARCODE_SYMBOLOGIES_TAB:
-                        mMainSettingsFragment = SymbologiesFragment.newInstance();
-                        return mMainSettingsFragment;
-                    case BEEPER_ACTION_TAB:
-                        mMainSettingsFragment = BeeperActionsFragment.newInstance();
-                        return mMainSettingsFragment;
+                        mRfidFragment = AccessOperationsFragment.newInstance();
+                        return mRfidFragment;
                     case RFID_SETTINGS_TAB:
                         Constants.logAsMessage(Constants.DEBUG_TYPE.TYPE_DEBUG, getClass().getSimpleName(), "2nd Tab Selected");
-                        mMainSettingsFragment = SettingListFragment.newInstance();
-                        return mMainSettingsFragment;
-                    case BATTERY_STATISTICS_TAB:
-                        if(mModelName.startsWith("RFD40") || mModelName.startsWith("RFD90"))
-                            mMainSettingsFragment = BatteryStatsFragment.newInstance();
-                        else
-                            mMainSettingsFragment = BatteryFragment.newInstance();
-
-                        return mMainSettingsFragment;
-                    case USB_MIFI_TAB:
-                        mMainSettingsFragment = UsbMiFiFragment.newInstance();
-                        return mMainSettingsFragment;
-
-                    default:
-                       // mNoImagerFragment= NoImagerFragment.newInstance();
-                        mNoImagerFragment= nonoperationFragment.newInstance();
-                        return mNoImagerFragment;
+                        mRfidFragment = SettingListFragment.newInstance();
+                        return mRfidFragment;
 
                 }
+                mRfidFragment = nonoperationFragment.newInstance();
+                return mRfidFragment;
 
             case SCAN_TAB:
                 if(Application.RFD_DEVICE_MODE == Application.DEVICE_STD_MODE){
@@ -452,40 +354,132 @@ public class ActiveDeviceAdapter extends FragmentStatePagerAdapter {
                     }
                 }
 
-            case RFID_TAB:
-                switch(mNextRFIDFragmentId)
+            case SETTINGS_TAB:
+                switch(mNextSettingsFragmentId)
                 {
-                    case INVENTORY_TAB:
+                    case MAIN_RFID_SETTINGS_TAB:
                         Constants.logAsMessage(Constants.DEBUG_TYPE.TYPE_DEBUG, getClass().getSimpleName(), "2nd Tab Selected");
-                        mRfidFragment = RFIDInventoryFragment.newInstance();
-                        return mRfidFragment;
-                    case RAPID_READ_TAB:
+                        mMainSettingsFragment = SettingListFragment.newInstance();
+                        return mMainSettingsFragment;
+                    case MAIN_HOME_SETTINGS_TAB:
                         Constants.logAsMessage(Constants.DEBUG_TYPE.TYPE_DEBUG, getClass().getSimpleName(), "2nd Tab Selected");
-                        mRfidFragment =  RapidReadFragment.newInstance();
-                        return mRfidFragment;
-                    case LOCATE_TAG_TAB:
+                        mMainSettingsFragment = mainSettingsFragment.newInstance();
+                        return mMainSettingsFragment;
+                    case MAIN_GENERAL_SETTINGS_TAB:
                         Constants.logAsMessage(Constants.DEBUG_TYPE.TYPE_DEBUG, getClass().getSimpleName(), "2nd Tab Selected");
-                        mRfidFragment =  LocateOperationsFragment.newInstance();
-                        return mRfidFragment;
-                    case RFID_PREFILTERS_TAB:
+                        mMainSettingsFragment = ManagerFragment.newInstance();
+                        return mMainSettingsFragment;
+                    case SCAN_SETTINGS_TAB:
                         Constants.logAsMessage(Constants.DEBUG_TYPE.TYPE_DEBUG, getClass().getSimpleName(), "2nd Tab Selected");
-                        mRfidFragment = PreFilterFragment.newInstance();
-                        return mRfidFragment;
-                    case RFID_ACCESS_TAB:
+                        mScannerFragment = SettingsFragment.newInstance();
+                        return mScannerFragment;
+                    case SCAN_ADVANCED_TAB:
+                        Constants.logAsMessage(Constants.DEBUG_TYPE.TYPE_DEBUG, getClass().getSimpleName(), "3rd Tab Selected");
+                        mScannerFragment = AdvancedFragment.newInstance();
+                        return mScannerFragment;
+                    case SCAN_HOME_SETTINGS_TAB:
+                        Constants.logAsMessage(Constants.DEBUG_TYPE.TYPE_DEBUG, getClass().getSimpleName(), "3rd Tab Selected");
+                        mScannerFragment = ScanHomeSettingsFragment.newInstance();
+                        return mScannerFragment;
+                    case APPLICATION_SETTINGS_TAB:
                         Constants.logAsMessage(Constants.DEBUG_TYPE.TYPE_DEBUG, getClass().getSimpleName(), "2nd Tab Selected");
-                        mRfidFragment = AccessOperationsFragment.newInstance();
-                        return mRfidFragment;
+                        mMainSettingsFragment = ApplicationSettingsFragment.newInstance();
+                        return mMainSettingsFragment;
+                    case RFID_PROFILES_TAB:
+                        Constants.logAsMessage(Constants.DEBUG_TYPE.TYPE_DEBUG, getClass().getSimpleName(), "2nd Tab Selected");
+                        mMainSettingsFragment = ProfileFragment.newInstance();
+                        return mMainSettingsFragment;
+                    case RFID_ADVANCED_OPTIONS_TAB:
+                        Constants.logAsMessage(Constants.DEBUG_TYPE.TYPE_DEBUG, getClass().getSimpleName(), "2nd Tab Selected");
+                        mMainSettingsFragment = AdvancedOptionItemFragment.newInstance();
+                        return mMainSettingsFragment;
+                    case RFID_REGULATORY_TAB:
+                        Constants.logAsMessage(Constants.DEBUG_TYPE.TYPE_DEBUG, getClass().getSimpleName(), "2nd Tab Selected");
+                        mMainSettingsFragment = RegulatorySettingsFragment.newInstance();
+                        return mMainSettingsFragment;
+
+                    case RFID_BEEPER_TAB:
+                        Constants.logAsMessage(Constants.DEBUG_TYPE.TYPE_DEBUG, getClass().getSimpleName(), "2nd Tab Selected");
+                        mMainSettingsFragment = BeeperFragment.newInstance();
+                        return mMainSettingsFragment;
+                    case RFID_LED_TAB:
+                        Constants.logAsMessage(Constants.DEBUG_TYPE.TYPE_DEBUG, getClass().getSimpleName(), "2nd Tab Selected");
+                        mMainSettingsFragment = LedFragment.newInstance();
+                        return mMainSettingsFragment;
+                    case RFID_WIFI_TAB:
+                        Constants.logAsMessage(Constants.DEBUG_TYPE.TYPE_DEBUG, getClass().getSimpleName(), "2nd Tab Selected");
+                        mMainSettingsFragment = WifiFragment.newInstance();
+                        return mMainSettingsFragment;
+                    case CHARGE_TERMINAL_TAB:
+                        mMainSettingsFragment = ChargeTerminalFragment.newInstance();
+                        return mMainSettingsFragment;
+                    case ANTENNA_SETTINGS_TAB:
+                        mMainSettingsFragment = AntennaSettingsFragment.newInstance();
+                        return mMainSettingsFragment;
+                    case SINGULATION_CONTROL_TAB:
+                        mMainSettingsFragment = SingulationControlFragment.newInstance();
+                        return mMainSettingsFragment;
+                    case START_STOP_TRIGGER_TAB:
+                        mMainSettingsFragment = StartStopTriggersFragment.newInstance();
+                        return mMainSettingsFragment;
+                    case TAG_REPORTING_TAB:
+                        mMainSettingsFragment = TagReportingFragment.newInstance();
+                        return mMainSettingsFragment;
+                    case  SAVE_CONFIG_TAB:
+                        mMainSettingsFragment = SaveConfigurationsFragment.newInstance();
+                        return mMainSettingsFragment;
+                    case DPO_SETTING_TAB:
+                        mMainSettingsFragment = DPOSettingsFragment.newInstance();
+                        return mMainSettingsFragment;
+                    case FACTORY_RESET_FRAGMENT_TAB:
+                        mMainSettingsFragment = FactoryResetFragment.newInstance();
+                        return mMainSettingsFragment;
+                    case LOGGER_FRAGMENT_TAB:
+                        mMainSettingsFragment = LoggerFragment.newInstance();
+                        return mMainSettingsFragment;
+                    case DEVICE_RESET_TAB:
+                        mMainSettingsFragment = DeviceResetFragment.newInstance();
+                        return mMainSettingsFragment;
+                    case KEYREMAP_TAB:
+                        mMainSettingsFragment = KeyRemapFragment.newInstance();
+                        return mMainSettingsFragment;
+                    case UPDATE_FIRMWARE_TAB:
+                        mMainSettingsFragment = UpdateFirmware.newInstance();
+                        return mMainSettingsFragment;
+                    case ASSERT_DEVICE_INFO_TAB:
+                        mMainSettingsFragment = AssertFragment.newInstance();
+                        return mMainSettingsFragment;
+                    case STATIC_IP_CONFIG:
+                        mMainSettingsFragment = Static_ipconfig.newInstance();
+                        return  mMainSettingsFragment;
+
+                    case BARCODE_SYMBOLOGIES_TAB:
+                        mMainSettingsFragment = SymbologiesFragment.newInstance();
+                        return mMainSettingsFragment;
+                    case BEEPER_ACTION_TAB:
+                        mMainSettingsFragment = BeeperActionsFragment.newInstance();
+                        return mMainSettingsFragment;
                     case RFID_SETTINGS_TAB:
                         Constants.logAsMessage(Constants.DEBUG_TYPE.TYPE_DEBUG, getClass().getSimpleName(), "2nd Tab Selected");
-                        mRfidFragment = SettingListFragment.newInstance();
-                        return mRfidFragment;
+                        mMainSettingsFragment = SettingListFragment.newInstance();
+                        return mMainSettingsFragment;
+                    case BATTERY_STATISTICS_TAB:
+                        if(mModelName.startsWith("RFD40") || mModelName.startsWith("RFD90"))
+                            mMainSettingsFragment = BatteryStatsFragment.newInstance();
+                        else
+                            mMainSettingsFragment = BatteryFragment.newInstance();
+
+                        return mMainSettingsFragment;
+                    case USB_MIFI_TAB:
+                        mMainSettingsFragment = UsbMiFiFragment.newInstance();
+                        return mMainSettingsFragment;
+
+                    default:
+                        // mNoImagerFragment= NoImagerFragment.newInstance();
+                        mNoImagerFragment= nonoperationFragment.newInstance();
+                        return mNoImagerFragment;
 
                 }
-                mRfidFragment = nonoperationFragment.newInstance();
-                return mRfidFragment;
-           // case 6:
-           //     Constants.logAsMessage(TYPE_DEBUG, getClass().getSimpleName(), "3rd Tab Selected");
-           //     return AdvancedFragment.newInstance();
 
             case COW_CHRONICLE_TAB:
             default:
@@ -494,7 +488,7 @@ public class ActiveDeviceAdapter extends FragmentStatePagerAdapter {
     }
 
     public void setCurrentActivePosition(int pos) {
-        currentPostion = pos;
+        currentPosition = pos;
     }
 
     /**
@@ -505,16 +499,15 @@ public class ActiveDeviceAdapter extends FragmentStatePagerAdapter {
         return mFunctionCount;
     }
 
-    public void setRFIDMOde(int fragmentType) {
+    public void setRFIDMode(int fragmentType) {
 
         mNextRFIDFragmentId = fragmentType;
         mNextSCANFragmentId = NONOPER_TAB;
-        mNextRedaerListFragmentId = NONOPER_TAB;
+        mNextReaderListFragmentId = NONOPER_TAB;
         mNextSettingsFragmentId = NONOPER_TAB;
     }
 
-    public int getRFIDMOde() {
-
+    public int getRFIDMode() {
         return mNextRFIDFragmentId;
     }
 
@@ -523,7 +516,7 @@ public class ActiveDeviceAdapter extends FragmentStatePagerAdapter {
 
     public void setSettingsMode(int settingsTab) {
         mNextSettingsFragmentId = settingsTab;
-        mNextRedaerListFragmentId = NONOPER_TAB;
+        mNextReaderListFragmentId = NONOPER_TAB;
         mNextSCANFragmentId = NONOPER_TAB;
         mNextRFIDFragmentId = NONOPER_TAB;
     }
@@ -532,24 +525,24 @@ public class ActiveDeviceAdapter extends FragmentStatePagerAdapter {
         return mNextSettingsFragmentId;
     }
 
-    public void setSCANMOde(int scanSettingsTab) {
+    public void setSCANMode(int scanSettingsTab) {
         mNextSCANFragmentId = scanSettingsTab;
         mNextRFIDFragmentId = NONOPER_TAB;
-        mNextRedaerListFragmentId = NONOPER_TAB;
+        mNextReaderListFragmentId = NONOPER_TAB;
         mNextSettingsFragmentId = NONOPER_TAB;
     }
 
-    public void setReaderListMOde(int devicePairTab) {
-        mNextRedaerListFragmentId = devicePairTab;
+    public void setReaderListMode(int devicePairTab) {
+        mNextReaderListFragmentId = devicePairTab;
         mNextSCANFragmentId = NONOPER_TAB;
         mNextRFIDFragmentId = NONOPER_TAB;
         mNextSettingsFragmentId = NONOPER_TAB;
     }
 
-    public int  getReaderListMOde() {  return mNextRedaerListFragmentId ;  }
+    public int getReaderListMode() {  return mNextReaderListFragmentId;  }
 
     public int getCurrentActivePosition() {
-        return currentPostion;
+        return currentPosition;
     }
 
     public Fragment getReadersFragment()

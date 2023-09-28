@@ -85,7 +85,7 @@ public class Constants {
     public static final String RFID_DEVICE = "RFID_DEVICE";
     public static final String GENX_DEVICE = "GENX_DEVICE";
     //toast messages
-    public static final String TAG_EMPTY = "Please fill Tag Id";
+    public static final String TAG_EMPTY = "태그 ID를 입력해주세요.";
     public static final int NO_OF_BITS = 16;
     public static final String TAGS_SEC = "";//" t/s";
     //max offset for prefilter and access

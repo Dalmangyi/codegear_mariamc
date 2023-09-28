@@ -29,7 +29,7 @@ import com.codegear.mariamc_rfid.rfidreader.common.hextoascii;
 import com.codegear.mariamc_rfid.rfidreader.rfid.RFIDController;
 import com.zebra.rfid.api3.RFIDResults;
 
-import static com.codegear.mariamc_rfid.rfidreader.home.RFIDBaseActivity.filter;
+import static com.codegear.mariamc_rfid.rfidreader.home.RFIDBase.filter;
 
 public class SingleTagLocateFragment extends Fragment implements ResponseHandlerInterfaces.TriggerEventHandler, ResponseHandlerInterfaces.ResponseStatusHandler, LocateOperationsFragment.OnRefreshListener {
     private RangeGraph locationBar;

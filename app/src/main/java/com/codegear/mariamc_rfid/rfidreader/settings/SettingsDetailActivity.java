@@ -20,12 +20,12 @@ import androidx.fragment.app.Fragment;
 
 import com.codegear.mariamc_rfid.ActiveDeviceActivity;
 import com.codegear.mariamc_rfid.application.Application;
+import com.codegear.mariamc_rfid.rfidreader.home.RFIDBase;
 import com.codegear.mariamc_rfid.rfidreader.reader_connection.PasswordDialog;
 import com.codegear.mariamc_rfid.R;
 import com.codegear.mariamc_rfid.rfidreader.common.Constants;
 import com.codegear.mariamc_rfid.rfidreader.common.CustomToast;
 import com.codegear.mariamc_rfid.rfidreader.common.ResponseHandlerInterfaces;
-import com.codegear.mariamc_rfid.rfidreader.home.RFIDBaseActivity;
 import com.codegear.mariamc_rfid.rfidreader.notifications.NotificationUtil;
 import com.codegear.mariamc_rfid.rfidreader.reader_connection.RFIDReadersListFragment;
 import com.codegear.mariamc_rfid.rfidreader.rfid.RFIDController;
@@ -61,9 +61,9 @@ public class SettingsDetailActivity extends AppCompatActivity implements Respons
         Application.contextSettingDetails = this;
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        RFIDBaseActivity.addReaderDeviceFoundHandler(this);
-        RFIDBaseActivity.addBatteryNotificationHandler(this);
-        RFIDBaseActivity.getInstance().setReaderstatuscallback(this);
+        RFIDBase.addReaderDeviceFoundHandler(this);
+        RFIDBase.addBatteryNotificationHandler(this);
+        RFIDBase.getInstance().setReaderstatuscallback(this);
         if (RFIDController.readers == null) {
             RFIDController.readers = new Readers(this, ENUM_TRANSPORT.ALL);
         }
@@ -158,7 +158,7 @@ public class SettingsDetailActivity extends AppCompatActivity implements Respons
     @Override
     public void onResume() {
         super.onResume();
-        RFIDBaseActivity.activityResumed();
+        RFIDBase.activityResumed();
         Application.contextSettingDetails = this;
     }
 
@@ -168,12 +168,12 @@ public class SettingsDetailActivity extends AppCompatActivity implements Respons
     @Override
     public void onPause() {
         super.onPause();
-        //RFIDBaseActivity.activityPaused();
+        //RFIDBase.activityPaused();
         Application.contextSettingDetails = null;
         RFIDController.readers.deattach(this);
         // remove notification handlers
-        RFIDBaseActivity.removeReaderDeviceFoundHandler(this);
-        RFIDBaseActivity.removeBatteryNotificationHandler(this);
+        RFIDBase.removeReaderDeviceFoundHandler(this);
+        RFIDBase.removeBatteryNotificationHandler(this);
 
         Fragment fragment = getSupportFragmentManager().findFragmentByTag(TAG_CONTENT_FRAGMENT);
         if (fragment instanceof ApplicationSettingsFragment) {
@@ -185,7 +185,7 @@ public class SettingsDetailActivity extends AppCompatActivity implements Respons
 
     @Override
     protected void onDestroy() {
-        RFIDBaseActivity.getInstance().resetReaderstatuscallback();
+        RFIDBase.getInstance().resetReaderstatuscallback();
         super.onDestroy();
 
     }

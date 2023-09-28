@@ -47,14 +47,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.codegear.mariamc_rfid.ActiveDeviceActivity;
 import com.codegear.mariamc_rfid.application.Application;
 import com.codegear.mariamc_rfid.rfidreader.common.CustomProgressDialog;
-import com.codegear.mariamc_rfid.rfidreader.common.Inventorytimer;
+import com.codegear.mariamc_rfid.rfidreader.common.InventoryTimer;
 import com.codegear.mariamc_rfid.rfidreader.settings.AdvancedOptionsContent;
 import com.codegear.mariamc_rfid.rfidreader.settings.SettingsDetailActivity;
 import com.codegear.mariamc_rfid.scanner.helpers.AvailableScanner;
-import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.codegear.mariamc_rfid.R;
 import com.codegear.mariamc_rfid.rfidreader.common.Constants;
-import com.codegear.mariamc_rfid.rfidreader.home.RFIDBaseActivity;
+import com.codegear.mariamc_rfid.rfidreader.home.RFIDBase;
 import com.codegear.mariamc_rfid.rfidreader.rfid.RFIDController;
 import com.zebra.rfid.api3.InvalidUsageException;
 import com.zebra.rfid.api3.OperationFailureException;
@@ -109,9 +108,9 @@ public class RFIDReadersListFragment extends Fragment implements IRFIDConnectTas
 
     @Override
     public void CancelReconnect() {
-        if (RFIDBaseActivity.DisconnectTask != null && AUTO_RECONNECT_READERS) {
+        if (RFIDBase.DisconnectTask != null && AUTO_RECONNECT_READERS) {
             int timeout = 20;
-            while (FINISHED != RFIDBaseActivity.DisconnectTask.getStatus() && timeout > 0) {
+            while (FINISHED != RFIDBase.DisconnectTask.getStatus() && timeout > 0) {
                 try {
                     Thread.sleep(100);
                 } catch (InterruptedException e) {
@@ -151,7 +150,7 @@ public class RFIDReadersListFragment extends Fragment implements IRFIDConnectTas
         RFIDController.clearAllInventoryData();
         RFIDController.stopTimer();
         getActivity().invalidateOptionsMenu();
-        Inventorytimer.getInstance().stopTimer();
+        InventoryTimer.getInstance().stopTimer();
         RFIDController.mIsInventoryRunning = false;
         if (RFIDController.mIsInventoryRunning) {
             RFIDController.isBatchModeInventoryRunning = false;

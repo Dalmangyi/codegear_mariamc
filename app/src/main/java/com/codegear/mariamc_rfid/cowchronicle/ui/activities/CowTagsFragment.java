@@ -1,8 +1,17 @@
 package com.codegear.mariamc_rfid.cowchronicle.ui.activities;
 
+import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.RFID_ACCESS_TAB;
+import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.RFID_TAB;
+import static com.codegear.mariamc_rfid.scanner.helpers.Constants.INTENT_NEXT_TAB;
+import static com.codegear.mariamc_rfid.scanner.helpers.Constants.INTENT_OFF_MINIMIZE_APP;
+import static com.codegear.mariamc_rfid.scanner.helpers.Constants.INTENT_START_TAB;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.os.Message;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -18,11 +27,14 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.codegear.mariamc_rfid.ActiveDeviceActivity;
 import com.codegear.mariamc_rfid.R;
+import com.codegear.mariamc_rfid.application.Application;
 import com.codegear.mariamc_rfid.cowchronicle.consts.MemoryBankIdEnum;
 import com.codegear.mariamc_rfid.cowchronicle.services.ReqInsertTagData;
 import com.codegear.mariamc_rfid.cowchronicle.services.ResInsertTagData;
@@ -40,7 +52,6 @@ import com.codegear.mariamc_rfid.cowchronicle.models.CowTagsModel;
 import com.codegear.mariamc_rfid.cowchronicle.ui.dialog.CustomDialog;
 import com.codegear.mariamc_rfid.cowchronicle.utils.PixelUtil;
 import com.codegear.mariamc_rfid.cowchronicle.utils.SoundSearcher;
-import com.codegear.mariamc_rfid.rfidreader.access_operations.AccessOperationsFragment;
 import com.codegear.mariamc_rfid.rfidreader.rfid.RFIDController;
 import com.codegear.mariamc_rfid.rfidreader.rfid.RfidListeners;
 import com.codegear.mariamc_rfid.rfidreader.settings.ProfileContent;
@@ -52,6 +63,7 @@ import com.xw.repo.BubbleSeekBar;
 import com.zebra.rfid.api3.Antennas;
 import com.zebra.rfid.api3.InvalidUsageException;
 import com.zebra.rfid.api3.OperationFailureException;
+import com.zebra.rfid.api3.TagData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,24 +81,37 @@ public class CowTagsFragment extends Fragment {
     //UI
     private AppCompatActivity mActivity;
     private View mMainView;
-    private RecyclerView mRecyclerView;
-    private CowTagRowAdapter cowTagRowAdapter;
+    private RecyclerView rvCowTags;
+    private CowTagRowAdapter adapterCowTagRow;
     private Button btnCurrentFarm, btnDistancePowerApply, btnClear, btnScan;
     private BubbleSeekBar bsbDistancePower;
     private PowerSpinnerView spMemoryBankIds;
     private CheckBox cbUseFilterCount;
+
+    private Handler mMainHandler = new Handler(Looper.getMainLooper()){
+        @Override
+        public void handleMessage(@NonNull Message msg) {
+            super.handleMessage(msg);
+
+            Log.d(TAG,"CowTagsFragment handleMessage.");
+
+            adapterCowTagRow.notifyDataSetChanged();
+            mMainHandler.removeMessages(0);
+
+        }
+    };
 
 
 
     //Data
     private String mSelectedFarmCode;
     private ArrayList<FarmModel> mFarmList;
-    private ArrayList<Map<String, String>> mCowList;
+    private ArrayList<Map<String, String>> mCowList = new ArrayList<>();
     private int[] antennaPowerLevels = null;
     private DeviceTaskSettings.SaveAntennaConfigurationTask antennaTask = null;
     private CowTagsModel cowTagsModel = new CowTagsModel();
     private boolean mScanRunning = false;
-
+    private RFIDSingleton rfidSingleton = RFIDSingleton.getInstance();
 
 
     @Nullable
@@ -148,11 +173,14 @@ public class CowTagsFragment extends Fragment {
             setScanRunning(!isSelected);
         });
 
-        cowTagRowAdapter = new CowTagRowAdapter(cowTagsModel);
-        mRecyclerView = mMainView.findViewById(R.id.tbCowTags);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
-        mRecyclerView.setAdapter(cowTagRowAdapter);
-        cowTagRowAdapter.setOnCowItemClickListener(cell -> {
+        adapterCowTagRow = new CowTagRowAdapter(cowTagsModel);
+        rvCowTags = mMainView.findViewById(R.id.rvCowTags);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(mActivity);
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(mActivity, layoutManager.getOrientation());
+        rvCowTags.addItemDecoration(dividerItemDecoration);
+        rvCowTags.setLayoutManager(layoutManager);
+        rvCowTags.setAdapter(adapterCowTagRow);
+        adapterCowTagRow.setOnCowItemClickListener(cell -> {
 
             CustomDialog.showSelectDialog(mActivity,
                 "이력제번호 : "+cell.COW_ID_NUM, cell.toDetailString(),
@@ -167,15 +195,16 @@ public class CowTagsFragment extends Fragment {
         cbUseFilterCount.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                cowTagRowAdapter.setUseRSSIFilter(isChecked);
+                adapterCowTagRow.setUseRSSIFilter(isChecked);
             }
         });
-        cowTagRowAdapter.setUseRSSIFilter(cbUseFilterCount.isChecked());
+        adapterCowTagRow.setUseRSSIFilter(cbUseFilterCount.isChecked());
 
 
 
         initProfiles();
         mFarmList = loadFarmModel();
+        initRFIDListener();
 
 
         return mMainView;
@@ -195,15 +224,12 @@ public class CowTagsFragment extends Fragment {
     public void onStop() {
         super.onStop();
 
-        stopScanInventory();
+        mMainHandler.removeCallbacksAndMessages(0);
+
+        Application.useCowChronicleTagging = false;
+//        stopScanInventory(true);
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-
-//        stopScanInventory();
-    }
 
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
@@ -222,11 +248,39 @@ public class CowTagsFragment extends Fragment {
         return true;
     }
 
+    private void initRFIDListener(){
+
+        Log.i(TAG,"initRFIDListener");
+        Application.useCowChronicleTagging = true;
+
+        rfidSingleton.setIRFIDSingletonTag(tagList -> {
+
+            if(mScanRunning){
+
+                //신규 태그 정보
+                if (tagList != null && tagList.length > 0) {
+
+
+                    for(TagData tagData:tagList) {
+                        String tagId = tagData.getTagID();
+                        Log.d(TAG,"Fx CowTagData tagId:"+tagId);
+                    }
+
+                    cowTagsModel.appendTagData(tagList); //기존 태그 리스트에 신규 태그 리스트 추가하기.
+                    CowTagsModel tempModel = adapterCowTagRow.getCowTagsModel();
+
+                    mMainHandler.sendEmptyMessage(0);
+                }
+            }
+
+        });
+    }
+
     //메모리뱅크 레이아웃 초기화
     private void initMemoryBankLayout(){
 
         List<IconSpinnerItem> iconSpinnerItems = new ArrayList<>();
-        for (Enum memoryBankIdEnum:MemoryBankIdEnum.values()){
+        for (MemoryBankIdEnum memoryBankIdEnum:MemoryBankIdEnum.values()){
             CharSequence charSequence = memoryBankIdEnum.toString();
             iconSpinnerItems.add(new IconSpinnerItem(charSequence, ContextCompat.getDrawable(mActivity, R.drawable.ic_transparent)));
         }
@@ -301,38 +355,28 @@ public class CowTagsFragment extends Fragment {
     private void loadCowList(){
 
         Call<ResCowList> call = RetrofitClient.getApiService().getCowList(mSelectedFarmCode);
-//        Call<ResCowList> call = RetrofitClient.getApiService().getCowList("219"); //TODO - TEST API
         RetrofitClient.commonCall(ResCowList.class, mActivity, call, null, new RetrofitClient.OnStateListener<ResCowList>() {
             @Override
             public void OnSuccess(ResCowList res) {
-                mCowList = res.data;
+                mCowList.clear();
+                mCowList.addAll(res.data);
 
 //                TODO - TEST
                 for(int i=0; i<mCowList.size(); i++){
                     if(i%2==0){
                         Map<String, String> cowItem = mCowList.get(i);
                         cowItem.put("TAGNO","0541100000001184");
+                        break;
                     }
                 }
 
                 //리스트 새로고침
-                refreshRecyclerView();
+                cowTagsModel.makeRowList(mCowList);
+                mMainHandler.sendEmptyMessage(0);
             }
         });
     }
 
-    //테이블뷰 새로고침
-    private void refreshRecyclerView(){
-
-        cowTagsModel.makeRowList(mCowList);
-        cowTagsModel.resetTagData();
-
-        new Handler(Looper.getMainLooper()).post(new Runnable() {
-            public void run() {
-                cowTagRowAdapter.notifyDataSetChanged();
-            }
-        });
-    }
 
     //목장 검색 다이얼로그 표시
     public void showFarmSearchDialog(View view) {
@@ -419,10 +463,11 @@ public class CowTagsFragment extends Fragment {
 
         if(running){
             btnScan.setText("정지");
+            initRFIDListener();
             startScanInventory();
         }else{
             btnScan.setText("스캔");
-            stopScanInventory();
+            stopScanInventory(true);
         }
     }
 
@@ -431,22 +476,7 @@ public class CowTagsFragment extends Fragment {
     private void startScanInventory(){
 
         RFIDController.clearAllInventoryData();
-        RFIDSingleton.getInstance().setIrfidSingleton(tagList -> {
 
-            if(mScanRunning){
-
-                //신규 태그 정보
-                if (tagList != null && tagList.length > 0) {
-                    cowTagsModel.appendTagData(tagList); //기존 태그 리스트에 신규 태그 리스트 추가하기.
-                    new Handler(Looper.getMainLooper()).post(new Runnable() {
-                        public void run() {
-                            cowTagRowAdapter.notifyDataSetChanged();
-                        }
-                    });
-                }
-            }
-
-        });
 
         int memoryBankIdIdx = spMemoryBankIds.getSelectedIndex();
         MemoryBankIdEnum memoryBankIdEnum = MemoryBankIdEnum.values()[memoryBankIdIdx];
@@ -454,6 +484,8 @@ public class CowTagsFragment extends Fragment {
         RfidListeners rfidListeners = new RfidListeners() {
             @Override
             public void onSuccess(Object object) {
+                RFIDController.tagListMatchNotice = false;
+                RFIDController.mIsInventoryRunning = true;
             }
 
             @Override
@@ -469,6 +501,7 @@ public class CowTagsFragment extends Fragment {
             }
         };
 
+        RFIDController.mIsInventoryRunning = true;
         if(memoryBankIdEnum == MemoryBankIdEnum.NONE){
             RFIDController.getInstance().performInventory(rfidListeners);
         }else{
@@ -477,10 +510,12 @@ public class CowTagsFragment extends Fragment {
     }
 
     //스캔 중지
-    private void stopScanInventory(){
+    private void stopScanInventory(boolean sendData){
 
         //데이터 전송
-        sendReadingData();
+        if(sendData) {
+            sendReadingData();
+        }
 
         //중지
         if (RFIDController.mConnectedReader != null && RFIDController.mConnectedReader.isConnected()) {
@@ -488,6 +523,17 @@ public class CowTagsFragment extends Fragment {
                 RFIDController.getInstance().stopInventory(new RfidListeners() {
                     @Override
                     public void onSuccess(Object object) {
+                        if (RFIDController.mIsInventoryRunning) {
+                            try {
+                                Thread.sleep(100);
+                            } catch (InterruptedException e) {
+                                if (e != null && e.getStackTrace().length > 0) {
+                                    Log.e(TAG, e.getStackTrace()[0].toString());
+                                }
+                            }
+                        }
+                        Application.bBrandCheckStarted = false;
+                        RFIDController.mIsInventoryRunning = false;
                     }
 
                     @Override
@@ -508,17 +554,16 @@ public class CowTagsFragment extends Fragment {
     private void refreshTagList(){
 
         cowTagsModel.resetTagData();
-        new Handler(Looper.getMainLooper()).post(new Runnable() {
-            public void run() {
-                cowTagRowAdapter.notifyDataSetChanged();
-            }
-        });
+        mMainHandler.sendEmptyMessage(0);
     }
 
 
 
     //안테나 설정값 불러오기
     private void loadCurrentAntennaConfig(){
+
+        boolean isRunning = RFIDController.mIsInventoryRunning;
+        Log.d(TAG, "isRunning:"+isRunning);
 
         Antennas.AntennaRfConfig antennaRfConfig;
         try {
@@ -585,10 +630,18 @@ public class CowTagsFragment extends Fragment {
 
     //태그쓰기 화면으로 이동
     private void goTagWrite(String tagNum){
-//        UserStorage.getInstance().tempSelectTagNum = tagNum;
         RFIDController.accessControlTag = tagNum;
-        AccessOperationsFragment accessOperationsFragment = new AccessOperationsFragment();
-        ((CowChronicleActivity)mActivity).replaceFragment(accessOperationsFragment, true);
+
+        //Fragment
+//        AccessOperationsFragment accessOperationsFragment = new AccessOperationsFragment();
+//        ((CowChronicleActivity)mActivity).replaceFragment(accessOperationsFragment, true);
+
+        //Activity (Fragment 형태로는 많은 함수가 연결되어 있어서 제대로 실행이 안되서 Activity형태로 열어야함........)
+        Intent intent = new Intent(mActivity, ActiveDeviceActivity.class);
+        intent.putExtra(INTENT_START_TAB, RFID_TAB);
+        intent.putExtra(INTENT_NEXT_TAB, RFID_ACCESS_TAB);
+        intent.putExtra(INTENT_OFF_MINIMIZE_APP, true);
+        startActivity(intent);
     }
 
 }

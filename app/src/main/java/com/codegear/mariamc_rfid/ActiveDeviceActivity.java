@@ -64,6 +64,7 @@ import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.TAG_
 import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.UPDATE_FIRMWARE_TAB;
 import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.USB_MIFI_TAB;
 import static com.codegear.mariamc_rfid.scanner.helpers.Constants.DEBUG_TYPE.TYPE_DEBUG;
+import static com.codegear.mariamc_rfid.scanner.helpers.Constants.INTENT_OFF_MINIMIZE_APP;
 import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_ACTION_HIGH_HIGH_LOW_LOW_BEEP;
 import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_DECODE_COUNT_2_OF_5;
 import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_DECODE_COUNT_AZTEC;
@@ -186,6 +187,7 @@ import com.codegear.mariamc_rfid.cowchronicle.storage.UserStorage;
 import com.codegear.mariamc_rfid.cowchronicle.utils.PixelUtil;
 import com.codegear.mariamc_rfid.rfidreader.common.Constants;
 import com.codegear.mariamc_rfid.rfidreader.common.CustomProgressDialog;
+import com.codegear.mariamc_rfid.rfidreader.home.RFIDBase;
 import com.codegear.mariamc_rfid.rfidreader.locate_tag.LocateOperationsFragment;
 import com.codegear.mariamc_rfid.rfidreader.settings.ApplicationSettingsFragment;
 import com.codegear.mariamc_rfid.scanner.activities.SsaSetSymbologyActivity;
@@ -199,7 +201,6 @@ import com.codegear.mariamc_rfid.application.Application;
 import com.codegear.mariamc_rfid.discover_connect.nfc.PairOperationsFragment;
 import com.codegear.mariamc_rfid.rfidreader.access_operations.AccessOperationsFragment;
 import com.codegear.mariamc_rfid.rfidreader.common.MatchModeFileLoader;
-import com.codegear.mariamc_rfid.rfidreader.home.RFIDBaseActivity;
 import com.codegear.mariamc_rfid.rfidreader.inventory.InventoryListItem;
 import com.codegear.mariamc_rfid.rfidreader.inventory.RFIDInventoryFragment;
 import com.codegear.mariamc_rfid.rfidreader.manager.FactoryResetFragment;
@@ -271,7 +272,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-public class ActiveDeviceActivity extends BaseActivity implements AdvancedOptionItemFragment.OnAdvancedListFragmentInteractionListener, ActionBar.TabListener, ScannerAppEngine.IScannerAppEngineDevEventsDelegate, ScannerAppEngine.IScannerAppEngineDevConnectionsDelegate, ISettingsUtil, NavigationView.OnNavigationItemSelectedListener, RFIDBaseActivity.CreateFileInterface {
+public class ActiveDeviceActivity extends BaseActivity implements AdvancedOptionItemFragment.OnAdvancedListFragmentInteractionListener, ActionBar.TabListener, ScannerAppEngine.IScannerAppEngineDevEventsDelegate, ScannerAppEngine.IScannerAppEngineDevConnectionsDelegate, ISettingsUtil, NavigationView.OnNavigationItemSelectedListener, RFIDBase.CreateFileInterface {
     private static final String TAG_RFID_FRAGMENT = "RFID_FRAGMENT";
     public static final String MIME_TEXT_PLAIN = "text/plain";
     private static boolean activityVisible;
@@ -282,7 +283,7 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
     ExtendedFloatingActionButton inventoryBT = null;
     private static final int REQUEST_CODE_ASK_PERMISSIONS = 10;
     private static final int REQUEST_CODE_ASK_PERMISSIONS_CSV = 11;
-    private static RFIDBaseActivity mRFIDBaseActivity;
+    private static RFIDBase mRFIDBase;
     private TabLayoutMediator mTabLayoutMediator;
     public static final String BRAND_ID = "brandid";
     public static final String EPC_LEN = "epclen";
@@ -364,7 +365,7 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
         btnDisconnect = findViewById(R.id.btnDisconnect);
         btnDisconnect.setOnClickListener(v -> {
             //연결 끊기.
-            RFIDBaseActivity.getInstance().ReaderDeviceDisConnected(RFIDController.mConnectedDevice);
+            RFIDBase.getInstance().ReaderDeviceDisConnected(RFIDController.mConnectedDevice);
             deviceDisconnect();
 
             //현재 보고 있는 페이지 새로고침
@@ -445,12 +446,12 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
         Application.currentScannerName = scannerName;
         Application.currentScannerAddress = address;
 
-        mRFIDBaseActivity = RFIDBaseActivity.getInstance();
-        mRFIDBaseActivity.onCreate(mActiveDeviceActivity);
+        mRFIDBase = RFIDBase.getInstance();
+        mRFIDBase.onCreate(mActiveDeviceActivity);
         viewPager = (ViewPager) findViewById(R.id.activeScannerPager);
 
         if (mConnectedReader != null) {
-            RFD_DEVICE_MODE = mRFIDBaseActivity.getDeviceMode(mConnectedReader.getHostName(), Application.currentScannerId);
+            RFD_DEVICE_MODE = mRFIDBase.getDeviceMode(mConnectedReader.getHostName(), Application.currentScannerId);
             if (RFD_DEVICE_MODE == DEVICE_STD_MODE)
                 mAdapter = new ActiveDeviceStandardAdapter(this, getSupportFragmentManager(), DEVICE_STD_MODE);
             else
@@ -478,9 +479,9 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
                 Log.d(TAG, tab.toString());
                 switch (tab.getPosition()) {
                     case RFID_TAB:
-                        if (mAdapter.getRFIDMOde() == RFID_ACCESS_TAB) {
+                        if (mAdapter.getRFIDMode() == RFID_ACCESS_TAB) {
                             // mAdapter.notifyDataSetChanged();
-                        } else if (mAdapter.getRFIDMOde() == INVENTORY_TAB) {
+                        } else if (mAdapter.getRFIDMode() == INVENTORY_TAB) {
                             // mAdapter.notifyDataSetChanged();
                             Fragment fragment = getCurrentFragment(RFID_TAB);
 
@@ -488,7 +489,7 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
                                 //  ((RFIDInventoryFragment)fragment).onRFIDFragmentSelected();
                             }
 
-                        } else if (mAdapter.getRFIDMOde() == RAPID_READ_TAB) {
+                        } else if (mAdapter.getRFIDMode() == RAPID_READ_TAB) {
                             Fragment fragment = getCurrentFragment(RFID_TAB);
                             if (fragment != null && fragment instanceof RapidReadFragment) {
                                 //       ((RapidReadFragment)fragment).onRapidReadSelected();
@@ -525,21 +526,21 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
                 mAdapter.setCurrentActivePosition(position);
                 switch (position) {
                     case READERS_TAB:
-                        if (mAdapter.getReaderListMOde() == UPDATE_FIRMWARE_TAB) {
+                        if (mAdapter.getReaderListMode() == UPDATE_FIRMWARE_TAB) {
                             getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(mAdapter.getSettingsTab())).commit();
                             getSupportFragmentManager().beginTransaction().addToBackStack(null);
                             getSupportFragmentManager().executePendingTransactions();
-                            mAdapter.setReaderListMOde(MAIN_HOME_SETTINGS_TAB);
+                            mAdapter.setReaderListMode(MAIN_HOME_SETTINGS_TAB);
                         }
                         loadNextFragment(READER_LIST_TAB);
                         break;
 
                     case RFID_TAB:
-                        if (mAdapter.getReaderListMOde() == UPDATE_FIRMWARE_TAB) {
+                        if (mAdapter.getReaderListMode() == UPDATE_FIRMWARE_TAB) {
                             getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(mAdapter.getSettingsTab())).commit();
                             getSupportFragmentManager().beginTransaction().addToBackStack(null);
                             getSupportFragmentManager().executePendingTransactions();
-                            mAdapter.setReaderListMOde(MAIN_HOME_SETTINGS_TAB);
+                            mAdapter.setReaderListMode(MAIN_HOME_SETTINGS_TAB);
 
                         } else {
 
@@ -555,19 +556,19 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
                         if ((mConnectedReader != null) && mConnectedReader.getHostName().startsWith("RFD8500"))
                             setTriggerMode(ENUM_TRIGGER_MODE.RFID_MODE);
 
-                        if (mAdapter.getRFIDMOde() == RAPID_READ_TAB)
+                        if (mAdapter.getRFIDMode() == RAPID_READ_TAB)
                             loadNextFragment(RAPID_READ_TAB);
-                        else if (mAdapter.getRFIDMOde() == INVENTORY_TAB)
+                        else if (mAdapter.getRFIDMode() == INVENTORY_TAB)
                             loadNextFragment(INVENTORY_TAB);
-                        else if (mAdapter.getRFIDMOde() == RFID_ACCESS_TAB)
+                        else if (mAdapter.getRFIDMode() == RFID_ACCESS_TAB)
                             loadNextFragment(RFID_ACCESS_TAB);
-                        else if (mAdapter.getRFIDMOde() == RFID_PREFILTERS_TAB)
+                        else if (mAdapter.getRFIDMode() == RFID_PREFILTERS_TAB)
                             loadNextFragment(RFID_PREFILTERS_TAB);
-                        else if (mAdapter.getRFIDMOde() == LOCATE_TAG_TAB)
+                        else if (mAdapter.getRFIDMode() == LOCATE_TAG_TAB)
                             loadNextFragment(LOCATE_TAG_TAB);
-                        else if (mAdapter.getRFIDMOde() == RFID_SETTINGS_TAB)
+                        else if (mAdapter.getRFIDMode() == RFID_SETTINGS_TAB)
                             loadNextFragment(RFID_SETTINGS_TAB);
-                        else if (mAdapter.getRFIDMOde() == NONOPER_TAB)
+                        else if (mAdapter.getRFIDMode() == NONOPER_TAB)
                             loadNextFragment(RAPID_READ_TAB);
 
                         break;
@@ -581,11 +582,11 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
                             }
 
                             loadNextFragment(SCAN_DATAVIEW_TAB);
-                            if (mAdapter.getReaderListMOde() == UPDATE_FIRMWARE_TAB) {
+                            if (mAdapter.getReaderListMode() == UPDATE_FIRMWARE_TAB) {
                                 getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(mAdapter.getSettingsTab())).commit();
                                 getSupportFragmentManager().beginTransaction().addToBackStack(null);
                                 getSupportFragmentManager().executePendingTransactions();
-                                mAdapter.setReaderListMOde(MAIN_HOME_SETTINGS_TAB);
+                                mAdapter.setReaderListMode(MAIN_HOME_SETTINGS_TAB);
                             }
                             if ((mConnectedReader != null) && mConnectedReader.getHostName().startsWith("RFD8500"))
                                 setTriggerMode(ENUM_TRIGGER_MODE.BARCODE_MODE);
@@ -622,8 +623,17 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
             nMgr.cancel(NotificationsReceiver.DEFAULT_NOTIFICATION_ID);
         }
 
-        viewPager.setCurrentItem(RFID_TAB);
-        mAdapter.setCurrentActivePosition(RFID_TAB);
+        //ViewPager 이동
+        final int startTAB = getIntent().getIntExtra(com.codegear.mariamc_rfid.scanner.helpers.Constants.INTENT_START_TAB, RFID_TAB);
+        viewPager.setCurrentItem(startTAB);
+        mAdapter.setCurrentActivePosition(startTAB);
+
+        //내부 Fragment 이동
+        final int nextTAB = getIntent().getIntExtra(com.codegear.mariamc_rfid.scanner.helpers.Constants.INTENT_NEXT_TAB, -1);
+        if(nextTAB != -1){
+            loadNextFragment(nextTAB);
+        }
+
 
         reInit();
 
@@ -640,15 +650,6 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
         setParentActivity(this);
         createDWProfile();
 
-
-//        Button btnNavigationBottom1 = findViewById(R.id.btnNavigationBottom1);
-//        Button btnNavigationBottom2 = findViewById(R.id.btnNavigationBottom2);
-//        btnNavigationBottom1.setOnClickListener(v -> {
-//            goIntentCowChronicle();
-//        });
-//        btnNavigationBottom2.setOnClickListener(v -> {
-//            goIntentCowTags();
-//        });
     }
 
 
@@ -806,7 +807,7 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
         }
         onSaveInstanceState = false;
 
-        mRFIDBaseActivity.activityResumed();
+        mRFIDBase.activityResumed();
         if (RFIDController.regionNotSet == true) {
 
             Intent detailsIntent = new Intent(getApplicationContext(), SettingsDetailActivity.class);
@@ -890,7 +891,7 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
         }
 
         scannerID = Application.currentConnectedScannerID;
-        mRFIDBaseActivity.reInit(this);
+        mRFIDBase.reInit(this);
         //SetTunnelMode(null);
     }
 
@@ -952,12 +953,17 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
         super.onDestroy();
         removeDevEventsDelegate(this);
         removeDevConnectiosDelegate(this);
-        if (mRFIDBaseActivity != null) {
-            mRFIDBaseActivity.onDestroy();
+        if (mRFIDBase != null) {
+            mRFIDBase.onDestroy();
         }
     }
 
     private void minimizeApp() {
+        if(getIntent().getBooleanExtra(INTENT_OFF_MINIMIZE_APP, false)){
+            finish();
+            return;
+        }
+
         Intent startMain = new Intent(Intent.ACTION_MAIN);
         startMain.addCategory(Intent.CATEGORY_HOME);
         startMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -1228,7 +1234,7 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
 
     public void setTriggerMode(ENUM_TRIGGER_MODE triggerMode) {
 
-        mRFIDBaseActivity.setTriggerMode(triggerMode);
+        mRFIDBase.setTriggerMode(triggerMode);
 
     }
 
@@ -1382,47 +1388,47 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
     }
 
     public void locationingButtonClicked(final View v) {
-        mRFIDBaseActivity.locationingButtonClicked(v);
+        mRFIDBase.locationingButtonClicked(v);
     }
 
     public void accessOperationsReadClicked(View v) {
-        mRFIDBaseActivity.accessOperationsReadClicked(v);
+        mRFIDBase.accessOperationsReadClicked(v);
     }
 
     public void accessOperationLockClicked(View v) {
-        mRFIDBaseActivity.accessOperationLockClicked(v);
+        mRFIDBase.accessOperationLockClicked(v);
     }
 
     public void accessOperationsWriteClicked(View v) {
-        mRFIDBaseActivity.accessOperationsWriteClicked(v);
+        mRFIDBase.accessOperationsWriteClicked(v);
     }
 
     public void accessOperationsKillClicked(View v) {
-        mRFIDBaseActivity.accessOperationsKillClicked(v);
+        mRFIDBase.accessOperationsKillClicked(v);
     }
 
     public synchronized void locationingButtonClicked(FloatingActionButton btn_locate) {
-        mRFIDBaseActivity.locationingButtonClicked(btn_locate);
+        mRFIDBase.locationingButtonClicked(btn_locate);
     }
 
     public synchronized void multiTagLocateStartOrStop(View view) {
-        mRFIDBaseActivity.multiTagLocateStartOrStop(view);
+        mRFIDBase.multiTagLocateStartOrStop(view);
     }
 
     public synchronized void multiTagLocateAddTagItem(View view) {
-        mRFIDBaseActivity.multiTagLocateAddTagItem(view);
+        mRFIDBase.multiTagLocateAddTagItem(view);
     }
 
     public synchronized void multiTagLocateDeleteTagItem(View view) {
-        mRFIDBaseActivity.multiTagLocateDeleteTagItem(view);
+        mRFIDBase.multiTagLocateDeleteTagItem(view);
     }
 
     public synchronized void multiTagLocateReset(View view) {
-        mRFIDBaseActivity.multiTagLocateReset(view);
+        mRFIDBase.multiTagLocateReset(view);
     }
 
     public synchronized void multiTagLocateClearTagItems(View view) {
-        mRFIDBaseActivity.multiTagLocateClearTagItems(view);
+        mRFIDBase.multiTagLocateClearTagItems(view);
     }
 
     public void showBatteryStatsClicked(View view) {
@@ -1436,7 +1442,7 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
 
 
     public void callBackPressed() {
-        mRFIDBaseActivity.callBackPressed();
+        mRFIDBase.callBackPressed();
     }
 
     public void selectItem(int i) {
@@ -1585,7 +1591,7 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
     }
 
     public void sendNotification(String actionReaderStatusObtained, String info) {
-        mRFIDBaseActivity.sendNotification(actionReaderStatusObtained, info);
+        mRFIDBase.sendNotification(actionReaderStatusObtained, info);
     }
 
     public void loadWifiReaderSettings() {
@@ -1703,7 +1709,7 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
     }
 
     public void onFactoryReset(ReaderDevice readerDevice) {
-        mRFIDBaseActivity.onFactoryReset(readerDevice);
+        mRFIDBase.onFactoryReset(readerDevice);
     }
 
     @Override
@@ -1900,7 +1906,7 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
                 Intent data = result.getData();
                 Uri uri = data.getData();
                 if (data != null) {
-                    mRFIDBaseActivity.exportData(uri);
+                    mRFIDBase.exportData(uri);
                 }
             }
         }
@@ -2450,7 +2456,7 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
     }
 
     public synchronized void inventoryStartOrStop(View view) {
-        mRFIDBaseActivity.inventoryStartOrStop();
+        mRFIDBase.inventoryStartOrStop();
     }
 
     public void loadNextFragment(int fragmentType) {
@@ -2461,27 +2467,27 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
             switch (fragmentType) {
                 case RAPID_READ_TAB:
                     PageTitle = "빠른 태그";
-                    mAdapter.setRFIDMOde(RAPID_READ_TAB);
+                    mAdapter.setRFIDMode(RAPID_READ_TAB);
                     getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(RFID_TAB)).commit();
                     break;
                 case LOCATE_TAG_TAB:
                     PageTitle = "태그 찾기";
-                    mAdapter.setRFIDMOde(LOCATE_TAG_TAB);
+                    mAdapter.setRFIDMode(LOCATE_TAG_TAB);
                     getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(RFID_TAB)).commit();
                     break;
                 case INVENTORY_TAB:
                     PageTitle = "태그 인벤토리";
-                    mAdapter.setRFIDMOde(INVENTORY_TAB);
+                    mAdapter.setRFIDMode(INVENTORY_TAB);
                     getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(RFID_TAB)).commit();
                     break;
                 case RFID_PREFILTERS_TAB:
                     PageTitle = "사전 필터";
-                    mAdapter.setRFIDMOde(RFID_PREFILTERS_TAB);
+                    mAdapter.setRFIDMode(RFID_PREFILTERS_TAB);
                     getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(RFID_TAB)).commit();
                     break;
                 case RFID_ACCESS_TAB:
                     PageTitle = "태그 쓰기";
-                    mAdapter.setRFIDMOde(RFID_ACCESS_TAB);
+                    mAdapter.setRFIDMode(RFID_ACCESS_TAB);
                     getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(RFID_TAB)).commit();
                     break;
                 case RFID_SETTINGS_TAB:
@@ -2496,38 +2502,38 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
                     break;
                 case SCAN_DATAVIEW_TAB:
                     PageTitle = "스캔 데이터";
-                    mAdapter.setSCANMOde(SCAN_DATAVIEW_TAB);
+                    mAdapter.setSCANMode(SCAN_DATAVIEW_TAB);
                     getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(SCAN_TAB)).commit();
                     break;
                 case SCAN_ADVANCED_TAB:
                     PageTitle = "고급 스캔";
-                    mAdapter.setReaderListMOde(SCAN_ADVANCED_TAB);
+                    mAdapter.setReaderListMode(SCAN_ADVANCED_TAB);
                     getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
                     break;
                 case SCAN_HOME_SETTINGS_TAB:
                     PageTitle = "설정";
-                    mAdapter.setReaderListMOde(SCAN_HOME_SETTINGS_TAB);
+                    mAdapter.setReaderListMode(SCAN_HOME_SETTINGS_TAB);
                     getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(settingsTab)).commit();
                     break;
 
                 case READER_LIST_TAB:
-                    PageTitle = "장치 설정1";
-                    mAdapter.setReaderListMOde(READER_LIST_TAB);
+                    PageTitle = "장치 설정";
+                    mAdapter.setReaderListMode(READER_LIST_TAB);
                     getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(READERS_TAB)).commit();
                     break;
                 case DEVICE_PAIR_TAB:
                     PageTitle = "스캔"; //"Pair";
-                    mAdapter.setReaderListMOde(DEVICE_PAIR_TAB);
+                    mAdapter.setReaderListMode(DEVICE_PAIR_TAB);
                     getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(READERS_TAB)).commit();
                     break;
                 case READER_DETAILS_TAB:
                     PageTitle = "장치 상세 정보";
-                    mAdapter.setReaderListMOde(READER_DETAILS_TAB);
+                    mAdapter.setReaderListMode(READER_DETAILS_TAB);
                     getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(READERS_TAB)).commit();
                     break;
                 case READER_WIFI_SETTINGS_TAB:
                     PageTitle = "Wi-Fi";
-                    mAdapter.setReaderListMOde(READER_WIFI_SETTINGS_TAB);
+                    mAdapter.setReaderListMode(READER_WIFI_SETTINGS_TAB);
                     getSupportFragmentManager().beginTransaction().remove(getCurrentFragment(READERS_TAB)).commit();
                     break;
                 case MAIN_RFID_SETTINGS_TAB:
@@ -2702,11 +2708,11 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
     public void resetFactoryDefault() throws InvalidUsageException, OperationFailureException {
         try {
             if (mConnectedReader != null && mConnectedReader.getTransport() != null && mConnectedReader.getTransport().equals("BLUETOOTH")) {
-                mRFIDBaseActivity.resetFactoryDefault();
+                mRFIDBase.resetFactoryDefault();
                 Thread.sleep(2000);
-                mRFIDBaseActivity.onFactoryReset(RFIDController.mConnectedDevice);
+                mRFIDBase.onFactoryReset(RFIDController.mConnectedDevice);
             } else if (RFIDController.mConnectedDevice != null) {
-                mRFIDBaseActivity.resetFactoryDefault();
+                mRFIDBase.resetFactoryDefault();
             }
 
         } catch (OperationFailureException e) {
@@ -2727,7 +2733,7 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
     }
 
     public boolean deviceReset(String commandString) throws InvalidUsageException, OperationFailureException {
-        return mRFIDBaseActivity.deviceReset();
+        return mRFIDBase.deviceReset();
     }
 
     void checkForExportPermission(final int code) {
@@ -2761,23 +2767,23 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
     }
 
     public void disableScanner() {
-        mRFIDBaseActivity.disableScanner();
+        mRFIDBase.disableScanner();
     }
 
     public void enableScanner() {
-        mRFIDBaseActivity.enableScanner();
+        mRFIDBase.enableScanner();
     }
 
     @Override
     public void LoadTagListCSV() {
         Log.d(TAG, "LoadTagListCSV");
-        mRFIDBaseActivity.LoadTagListCSV();
+        mRFIDBase.LoadTagListCSV();
 
     }
 
 
     public void startbeepingTimer() {
-        mRFIDBaseActivity.startbeepingTimer();
+        mRFIDBase.startbeepingTimer();
     }
 
     public void performtagmatchClick() {

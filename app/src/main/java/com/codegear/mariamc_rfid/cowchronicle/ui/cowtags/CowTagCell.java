@@ -5,7 +5,7 @@ public class CowTagCell {
     private final String EMPTY_VAL = "null";
 
 
-
+    public int rowPosition = -1;
     public String COW_ID_NUM = "";              //이력제번호
     public String SNM = "";                     //목장이표
     public String SEX_AND_MONTHS = "";          //성별+월령

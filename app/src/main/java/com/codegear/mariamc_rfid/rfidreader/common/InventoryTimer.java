@@ -18,17 +18,17 @@ import java.util.concurrent.TimeUnit;
 /**
  * Created by qvfr34 on 2/16/2015.
  */
-public class Inventorytimer {
+public class InventoryTimer {
     private static final int INV_UPDATE_INTERVAL = 500;
-    private static Inventorytimer inventorytimer;
+    private static InventoryTimer inventorytimer;
     private static long startedTime;
     private AppCompatActivity activity;
     private ScheduledExecutorService scheduler;
     private ScheduledFuture<?> rrTimer;
 
-    public static Inventorytimer getInstance() {
+    public static InventoryTimer getInstance() {
         if (inventorytimer == null)
-            inventorytimer = new Inventorytimer();
+            inventorytimer = new InventoryTimer();
         return inventorytimer;
     }
 
@@ -97,16 +97,6 @@ public class Inventorytimer {
                     if (readRate != null) {
                         readRate.setText(Application.TAG_READ_RATE + Constants.TAGS_SEC);
                     }
-                /*
-                if (uniqueTags != null) {
-                    uniqueTags.setText(String.valueOf(RFIDController.UNIQUE_TAGS));
-                    if (uniqueTags.getTextScaleX() > 0.5 && uniqueTags.getText().length() > 4)
-                        uniqueTags.setTextScaleX(uniqueTags.getTextScaleX() - (float) 0.1);
-                    else if (uniqueTags.getTextScaleX() > 0.4 && uniqueTags.getText().length() > 5)
-                        uniqueTags.setTextScaleX(uniqueTags.getTextScaleX() - (float) 0.03);
-                }
-                if (totalTags != null)
-                    totalTags.setText(String.valueOf(RFIDController.TOTAL_TAGS));*/
                     if (timeText != null) {
                         long displayTime = RFIDController.mRRStartedTime;
                         min = new StringBuilder(String.format("%d", TimeUnit.MILLISECONDS.toMinutes(displayTime)));

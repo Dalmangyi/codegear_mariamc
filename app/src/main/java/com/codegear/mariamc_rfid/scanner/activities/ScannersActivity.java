@@ -326,28 +326,6 @@ public class ScannersActivity extends BaseActivity implements NavigationView.OnN
         }
     }
 
-    @Override
-    public void onBackPressed() {
-        /*if(Application.isAnyScannerConnected){
-            Intent intent = new Intent(ScannersActivity.this, ActiveDeviceActivity.class);
-            intent.putExtra(Constants.SCANNER_NAME, curAvailableScanner.getScannerName());
-            intent.putExtra(Constants.SCANNER_ADDRESS, curAvailableScanner.getScannerAddress());
-            intent.putExtra(Constants.SCANNER_ID, curAvailableScanner.getScannerId());
-            intent.putExtra(Constants.AUTO_RECONNECTION, curAvailableScanner.isAutoReconnection());
-            intent.putExtra(Constants.CONNECTED, true);
-            startActivity(intent);
-        }else {
-            *//*if(launchFromFCS){
-                Intent mainIntent = new Intent(this, ScannerHomeActivity.class);
-                startActivity(mainIntent);
-            }else {
-                super.onBackPressed();
-            }*//*
-            Intent mainIntent = new Intent(this, DeviceDiscoverActivity.class);
-            startActivity(mainIntent);
-        }*/
-        super.onBackPressed();
-    }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {

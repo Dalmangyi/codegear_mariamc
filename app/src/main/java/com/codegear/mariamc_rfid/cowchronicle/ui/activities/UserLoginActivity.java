@@ -139,12 +139,6 @@ public class UserLoginActivity extends BaseActivity {
         Log.d(TAG, "DeviceId : "+deviceId);
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        RFIDSingleton.deviceDisconnect();
-    }
 
     void checkAutoLogin() {
 

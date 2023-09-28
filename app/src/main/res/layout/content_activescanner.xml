@@ -9,7 +9,7 @@
     tools:context="com.codegear.mariamc_rfid.scanner.activities.ActiveScannerActivity"
     tools:showIn="@layout/app_bar_activescanner">
 
-    <androidx.viewpager.widget.ViewPager xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.viewpager.widget.ViewPager
         android:id="@+id/activeScannerPager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -26,6 +26,6 @@
         app:tabMaxWidth="0dp"
         app:tabMode="fixed"
         app:tabSelectedTextColor="@color/white"
-        app:tabTextAppearance="@style/AppTabTextAppearance"/>
+        app:tabTextAppearance="@style/AppTabTextAppearance" />
 
 </LinearLayout>

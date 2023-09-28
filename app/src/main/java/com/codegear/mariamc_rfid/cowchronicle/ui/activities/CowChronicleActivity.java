@@ -29,7 +29,6 @@ public class CowChronicleActivity extends AppCompatActivity {
     public static final String FLAG_WEB_URL = "activity_flag_web_url";
     public static final String FLAG_FRAGMENT_START_PAGE = "fragment_start_page";
 
-    private RFIDSingleton rfidSingleton = RFIDSingleton.getInstance();
 
     private CustomConnectedDrawer mCustomDrawer;
     private FragmentManager mFragmentManager;
@@ -58,11 +57,6 @@ public class CowChronicleActivity extends AppCompatActivity {
         initFragment();
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        rfidSingleton.init();
-    }
 
     @Override
     public void onBackPressed() {

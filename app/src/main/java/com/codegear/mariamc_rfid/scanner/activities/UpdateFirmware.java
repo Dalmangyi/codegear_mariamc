@@ -13,7 +13,6 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.graphics.Point;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -51,13 +50,13 @@ import androidx.fragment.app.Fragment;
 
 import com.codegear.mariamc_rfid.ActiveDeviceActivity;
 import com.codegear.mariamc_rfid.application.Application;
+import com.codegear.mariamc_rfid.rfidreader.home.RFIDBase;
 import com.codegear.mariamc_rfid.rfidreader.reader_connection.ScanPair;
 import com.codegear.mariamc_rfid.rfidreader.settings.SettingsDetailActivity;
 import com.codegear.mariamc_rfid.scanner.helpers.CustomProgressDialog;
 import com.codegear.mariamc_rfid.scanner.helpers.DotsProgressBar;
 import com.google.android.material.navigation.NavigationView;
 import com.codegear.mariamc_rfid.R;
-import com.codegear.mariamc_rfid.rfidreader.home.RFIDBaseActivity;
 import com.codegear.mariamc_rfid.rfidreader.rfid.RFIDController;
 import com.codegear.mariamc_rfid.scanner.helpers.ScannerAppEngine;
 import com.zebra.rfid.api3.ReaderDevice;
@@ -117,7 +116,7 @@ public class UpdateFirmware extends Fragment implements NavigationView.OnNavigat
 
     TableRow selectFirmwareRow, tblRowFW;
 
-    private RFIDBaseActivity mRfidBaseActivity;
+    private RFIDBase mRfidBase;
     private int fwupdateState = -1;
     private String failureReason = "";
     private String TAG = "RFIDUpdateFrimware";
