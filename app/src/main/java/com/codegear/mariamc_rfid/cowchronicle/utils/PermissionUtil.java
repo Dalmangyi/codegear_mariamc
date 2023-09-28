@@ -25,11 +25,11 @@ public class PermissionUtil {
                 scope.showRequestReasonDialog(deniedList, "앱을 사용하기 위해 아래 권한 허용이 필요합니다.", "허용");
             })
             .onForwardToSettings((scope, deniedList) -> {
-                scope.showForwardToSettingsDialog(deniedList, "설정에서 다음 권한을 허용해주세요", "허용");
+                scope.showForwardToSettingsDialog(deniedList, "설정에서 다음 권한을 허용해 주세요", "허용");
             })
             .request((allGranted, grantedList, deniedList) -> {
                 if (!allGranted) {
-                    Toast.makeText(context, "다음 권한들을 허용해주세요.：" + deniedList, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "다음 권한들을 허용해 주세요.：" + deniedList, Toast.LENGTH_SHORT).show();
                 }
                 else{
                     //모두 허가 되었을때.

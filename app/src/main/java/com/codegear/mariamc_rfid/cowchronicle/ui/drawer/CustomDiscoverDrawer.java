@@ -134,7 +134,7 @@ public class CustomDiscoverDrawer {
                     mDrawerLayout.closeDrawer(GravityCompat.START);
                 }
                 else {
-                    CustomDialog.showSimple(mActivity, "장치를 연결을 진행해주세요.");
+                    CustomDialog.showSimple(mActivity, "장치를 연결을 진행해 주세요.");
                     mDrawerLayout.closeDrawer(GravityCompat.START);
                 }
                 return true;

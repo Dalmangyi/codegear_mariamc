@@ -408,7 +408,7 @@ public class RFIDReadersListFragment extends Fragment implements IRFIDConnectTas
                     RFIDResults rfidResults = mConnectedReader.Config.setFriendlyName(newName);
 
                     if (rfidResults == RFIDResults.RFID_API_SUCCESS) {
-                        Toast.makeText(getActivity(), "이름 변경 성공. 변경 사항을 보려면" + "\nUSB 연결인 경우: 장치를 분리하고 다시 연결해주세요. " + "\n블루투스 연결인 경우: 장치를 페어링 해제 후, 다시 페어링해주세요.", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity(), "이름 변경 성공. 변경 사항을 보려면" + "\nUSB 연결인 경우: 장치를 분리하고 다시 연결해 주세요. " + "\n블루투스 연결인 경우: 장치를 페어링 해제 후, 다시 페어링해 주세요.", Toast.LENGTH_LONG).show();
                     } else if (rfidResults == RFIDResults.RFID_COMMAND_OPTION_WITHOUT_DELIMITER) {
                         Toast.makeText(getActivity(), "이름을 바꾸지 못했습니다. 단어 사이에 공백을 포함하지 마세요.", Toast.LENGTH_SHORT).show();
                     } else {
@@ -834,7 +834,7 @@ public class RFIDReadersListFragment extends Fragment implements IRFIDConnectTas
         sendNotification(Constants.ACTION_READER_CONN_FAILED, "연결 실패!!로 수신됨.");
         if (device.getTransport() != null && device.getTransport().equalsIgnoreCase("BLUETOOTH") == true) {
             if (activity != null)
-                Toast.makeText(activity, "블루투스가 활성화 되어 있는지 확인해주세요.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(activity, "블루투스가 활성화 되어 있는지 확인해 주세요.", Toast.LENGTH_SHORT).show();
         }
 
         RFIDController.is_connection_requested = false;
@@ -925,7 +925,7 @@ public class RFIDReadersListFragment extends Fragment implements IRFIDConnectTas
 
                         ReaderDevice readerDevice = readersList.get(finalIndex);
                         if (mConnectedReader != null && mConnectedReader.isConnected()) {
-                            Toast.makeText(getActivity(), "계속 진행하려면, 기존에 연결된 장치의 연결을 해제해주세요.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "계속 진행하려면, 기존에 연결된 장치의 연결을 해제해 주세요.", Toast.LENGTH_SHORT).show();
                             return;
 
                         }

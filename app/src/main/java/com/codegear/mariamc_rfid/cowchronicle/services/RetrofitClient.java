@@ -76,7 +76,7 @@ public class RetrofitClient {
                         } catch (IOException e) {
 //                        throw new RuntimeException(e);
                         }
-                        CustomDialog.showSimpleError(mContext, "서버 담당자에게 문의해주세요. ("+response.code()+")\n"+response.message()+"\n"+errMessage);
+                        CustomDialog.showSimpleError(mContext, "서버 담당자에게 문의해 주세요. ("+response.code()+")\n"+response.message()+"\n"+errMessage);
                         return;
                     }
 
@@ -98,7 +98,7 @@ public class RetrofitClient {
                     finalDialogLoading.dismiss();
 
                     if (t instanceof UnknownHostException){
-                        CustomDialog.showSimpleError(mContext, "네트워크 연결을 확인해주세요.");
+                        CustomDialog.showSimpleError(mContext, "네트워크 연결을 확인해 주세요.");
                     }
                     else{
                         CustomDialog.showSimpleError(mContext, t.getMessage());

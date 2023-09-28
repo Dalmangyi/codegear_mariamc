@@ -189,7 +189,7 @@ public class ReaderDetailsFragment extends Fragment {
                 RFIDResults rfidResults = mConnectedReader.Config.setFriendlyName(newName);
 
                 if (rfidResults == RFIDResults.RFID_API_SUCCESS) {
-                    Toast.makeText(getActivity(), "이름 변경 성공. 변경 사항을 보려면" + "\nUSB 연결인 경우: 장치를 분리하고 다시 연결해주세요. " + "\n블루투스 연결인 경우: 장치를 페어링 해제 후, 다시 페어링해주세요.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), "이름 변경 성공. 변경 사항을 보려면" + "\nUSB 연결인 경우: 장치를 분리하고 다시 연결해 주세요. " + "\n블루투스 연결인 경우: 장치를 페어링 해제 후, 다시 페어링해 주세요.", Toast.LENGTH_LONG).show();
                     requireActivity().onBackPressed();
                 } else if (rfidResults == RFIDResults.RFID_COMMAND_OPTION_WITHOUT_DELIMITER) {
                     Toast.makeText(getActivity(), "이름 변경 실패하였습니다. 단어 사이에 공백을 포함하지 마세요.", Toast.LENGTH_SHORT).show();

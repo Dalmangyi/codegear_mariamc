@@ -181,7 +181,7 @@ public class CowTagsModel {
 
             //태그 데이터 반영 (COUNT)
             List<CowTagCell> filteredCowTagCells = mCowInfoList.stream()
-                    .limit(1) //소 1마리당 유니크한 1개의 전자이표를 가진다는 가정. 로직상 N개 필터링 해도되지만 속도를 위해서 1개로 고정함.
+//                    .limit(1) //소 1마리당 유니크한 1개의 전자이표를 가진다는 가정. 로직상 N개 필터링 해도되지만 속도 개선을 하려면 1개로 고정해서 사용하면 됨.
                     .filter(item -> item.TAGNO.equals(tagId))
                     .collect(Collectors.toList());
 

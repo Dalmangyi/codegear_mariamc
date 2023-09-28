@@ -340,7 +340,7 @@
     <string name="save_dpo_title">전력 관리</string>
     <string name="save_sled_beeper_volume_title">신호음 음량</string>
     <string name="off">끄기</string>
-    <string name="error_disconnected">장치와 활성된 연결이 없습니다.</string>
+    <string name="error_disconnected">장치를 연결해 주세요.</string>
     <string name="beeper_volume_title">음량</string>
     <string name="title_model">Model</string>
     <string name="title_serial">Serial</string>
@@ -718,7 +718,7 @@
     <string name="sample_barcodes_instructions">아래 목록에서 샘플 바코드를 스캔하거나 자신의 바코드를 스캔하세요.</string>
     <string name="upc">UPC:</string>
     <string name="multiple_plug_in_files_msg_1">다운로드 폴더에 여러 플러그인 파일이 있습니다. 플러그인 파일을 하나만 보관하고 다시 시도하십시오.</string>
-    <string name="get_bt_address_instruction1">블루투스 주소를 입력해주세요.</string>
+    <string name="get_bt_address_instruction1">블루투스 주소를 입력해 주세요.</string>
     <string name="get_bt_address_instruction_item_1">\"설정 > 휴대전화 정보 > 상태 > 블루투스 주소\"로 이동하거나</string>
     <string name="get_bt_address_instruction_item_2">블루투스 주소를 적어주세요.</string>
     <string name="get_bt_address_instruction_item_3">이 화면으로 돌아올 때까지 뒤로 버튼을 누르세요.</string>

@@ -126,7 +126,7 @@ public class ScanPair {
                             if (btConnection.isValidMacAddress(recvdMacAddress))
                                 connecting_pairingFlag = pairConnect(recvdMacAddress, true);
                             else {
-                                showToast(recvdMacAddress + " 올바른 블루투스 주소가 아닙니다. 다시 확인해주세요.");
+                                showToast(recvdMacAddress + " 올바른 블루투스 주소가 아닙니다. 다시 확인해 주세요.");
                             }
                         } else if (barcodeData.length() > Defines.BT_ADDRESS_LENGTH) {
                             recvdBarcodeName = /*Defines.NameStartString + */barcodeData;
@@ -134,9 +134,9 @@ public class ScanPair {
                             connecting_pairingFlag = pairConnect(recvdBarcodeName, false);
                         } else {
                             if (fragment instanceof ScanAndPairFragment) {
-                                ((ScanAndPairFragment) fragment).processCompleted(barcodeData + " 올바른 주소가 아닙니다. 다시 확인해주세요.");
+                                ((ScanAndPairFragment) fragment).processCompleted(barcodeData + " 올바른 주소가 아닙니다. 다시 확인해 주세요.");
                             } else if (fragment instanceof CameraScanFragment) {
-                                ((CameraScanFragment) fragment).processCompleted(barcodeData + " 올바른 주소가 아닙니다. 다시 확인해주세요.");
+                                ((CameraScanFragment) fragment).processCompleted(barcodeData + " 올바른 주소가 아닙니다. 다시 확인해 주세요.");
                             }
                         }
                     }

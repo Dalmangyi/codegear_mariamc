@@ -101,7 +101,7 @@ public class FarmSelectFragment extends Fragment {
 
         FarmSearchDialogCompat searchDialogCompat = new FarmSearchDialogCompat<FarmModel>(
             mActivity,
-            "목장 리스트", "검색어를 입력해주세요.",
+            "목장 리스트", "검색어를 입력해 주세요.",
             null,
             mFarmList,
             (dialog, item, position) -> {

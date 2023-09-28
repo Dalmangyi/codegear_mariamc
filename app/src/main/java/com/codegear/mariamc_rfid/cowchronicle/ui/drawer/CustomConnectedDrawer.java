@@ -224,7 +224,7 @@ public class CustomConnectedDrawer {
 
             case R.id.nav_battery_statics:
                 if (RFIDController.mConnectedReader == null || !RFIDController.mConnectedReader.isConnected()) {
-                    CustomDialog.showSimple(mActivity, "연결된 장치가 없어서 실행이 불가합니다.\n전자이표 또는 장치 설정을 눌러서 장치를 연결 후에 다시 시도해주세요.");
+                    CustomDialog.showSimple(mActivity, "연결된 장치가 없어서 실행이 불가합니다.\n전자이표 또는 장치 설정을 눌러서 장치를 연결 후에 다시 시도해 주세요.");
                 } else {
                     Intent batteryIntent = new Intent(mActivity, SettingsDetailActivity.class);
                     batteryIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -235,7 +235,7 @@ public class CustomConnectedDrawer {
 
             case R.id.nav_fw_update:
                 if (RFIDController.mConnectedReader == null || !RFIDController.mConnectedReader.isConnected()) {
-                    CustomDialog.showSimple(mActivity, "연결된 장치가 없어서 실행이 불가합니다.\n전자이표 또는 장치 설정을 눌러서 장치를 연결 후에 다시 시도해주세요.");
+                    CustomDialog.showSimple(mActivity, "연결된 장치가 없어서 실행이 불가합니다.\n전자이표 또는 장치 설정을 눌러서 장치를 연결 후에 다시 시도해 주세요.");
                 } else{
                     Intent fwIntent = new Intent(mActivity, SettingsDetailActivity.class);
                     fwIntent.addFlags(Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);

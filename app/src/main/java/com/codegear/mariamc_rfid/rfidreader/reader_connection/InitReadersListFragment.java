@@ -322,7 +322,7 @@ public class InitReadersListFragment extends Fragment implements IRFIDConnectTas
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(getActivity(), "계속하려면, 연결된 장치를 연결 해제해주세요.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "계속하려면, 연결된 장치를 연결 해제해 주세요.", Toast.LENGTH_SHORT).show();
                         }
                     });
                     return false;
@@ -898,7 +898,7 @@ public class InitReadersListFragment extends Fragment implements IRFIDConnectTas
 
         ReaderDevice readerDevice = readersList.get(position);
         if (mConnectedReader != null && mConnectedReader.isConnected()) {
-            Toast.makeText(getActivity(), "계속하려면, 연결된 장치를 연결 해제해주세요.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "계속하려면, 연결된 장치를 연결 해제해 주세요.", Toast.LENGTH_SHORT).show();
             return;
         } else if (RFIDController.mConnectedReader == null) {
             if (deviceConnectTask == null || deviceConnectTask.isCancelled()) {

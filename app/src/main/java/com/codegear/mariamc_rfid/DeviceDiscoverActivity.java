@@ -165,7 +165,7 @@ public class DeviceDiscoverActivity extends BaseActivity implements Readers.RFID
             }
             //로그인 했고 기기가 연결 안 되어있다면, 안내메세지 출력
             else {
-                CustomDialog.showSimple(this, "기기를 연결해주세요.");
+                CustomDialog.showSimple(this, "기기를 연결해 주세요.");
             }
         }
     }
@@ -321,7 +321,7 @@ public class DeviceDiscoverActivity extends BaseActivity implements Readers.RFID
         }
     }
 
- 
+
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {

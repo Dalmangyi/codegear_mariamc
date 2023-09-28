@@ -135,7 +135,7 @@ public class CowTagsFragment extends Fragment {
         btnAntennaPowerApply.setOnClickListener(v -> {
 
             if (RFIDController.mConnectedReader == null || !RFIDController.mConnectedReader.isConnected()) {
-                CustomDialog.showSimple(mActivity, "장치 연결이 끊겨있습니다.\n장치설정 화면으로 이동해서 연결후 다시 시도해주세요.");
+                CustomDialog.showSimple(mActivity, "장치 연결이 끊겨있습니다.\n장치설정 화면으로 이동해서 연결후 다시 시도해 주세요.");
                 return;
             }
 
@@ -163,7 +163,7 @@ public class CowTagsFragment extends Fragment {
             boolean isSelected = v.isSelected();
             if(!isSelected){
                 if (RFIDController.mConnectedReader == null || !RFIDController.mConnectedReader.isConnected()) {
-                    CustomDialog.showSimple(mActivity, "장치 연결이 끊겨있습니다.\n장치설정 화면으로 이동해서 연결후 다시 시도해주세요.");
+                    CustomDialog.showSimple(mActivity, "장치 연결이 끊겨있습니다.\n장치설정 화면으로 이동해서 연결후 다시 시도해 주세요.");
                     return;
                 }
             }
@@ -221,7 +221,7 @@ public class CowTagsFragment extends Fragment {
     public void onStop() {
         super.onStop();
 
-        mAdapterHandler.removeCallbacksAndMessages(0); 
+        mAdapterHandler.removeCallbacksAndMessages(0);
         stopScanInventory(true);
     }
 
@@ -275,7 +275,7 @@ public class CowTagsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (RFIDController.mConnectedReader == null || !RFIDController.mConnectedReader.isConnected()) {
-                    CustomDialog.showSimple(mActivity, "장치 연결이 끊겨있습니다.\n장치설정 화면으로 이동해서 연결후 다시 시도해주세요..");
+                    CustomDialog.showSimple(mActivity, "장치 연결이 끊겨있습니다.\n장치설정 화면으로 이동해서 연결후 다시 시도해 주세요..");
                     return;
                 }
 
@@ -365,7 +365,7 @@ public class CowTagsFragment extends Fragment {
 
         FarmSearchDialogCompat farmSearchDialogCompat = new FarmSearchDialogCompat<>(
                 mActivity, "목장 리스트",
-                "검색어를 입력해주세요.",
+                "검색어를 입력해 주세요.",
                 null,
                 mFarmList,
                 (dialog, item, position) -> {

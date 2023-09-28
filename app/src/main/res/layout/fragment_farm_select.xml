@@ -52,7 +52,7 @@
                     android:layout_width="220dp"
                     android:layout_height="50dp"
                     android:background="@drawable/button_default_background"
-                    android:text="목장을 선택해주세요."
+                    android:text="목장을 선택해 주세요."
                     android:textColor="@color/white"
                     android:drawableStart="@drawable/baseline_arrow_drop_down_24"
                     android:drawableTint="@color/white"

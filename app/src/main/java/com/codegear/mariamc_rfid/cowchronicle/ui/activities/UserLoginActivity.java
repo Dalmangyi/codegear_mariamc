@@ -155,7 +155,7 @@ public class UserLoginActivity extends BaseActivity {
 
         if (strId.isEmpty() || strPwd.isEmpty()) {
             dialogLoading.dismiss();
-            CustomDialog.showSimple(mContext, "아이디 또는 비밀번호를 입력해주세요.");
+            CustomDialog.showSimple(mContext, "아이디 또는 비밀번호를 입력해 주세요.");
             return;
         }
         if (!btnNavigationBottom1.isSelected() && !btnNavigationBottom2.isSelected()) {
@@ -217,7 +217,7 @@ public class UserLoginActivity extends BaseActivity {
                     } catch (IOException e) {
 //                        throw new RuntimeException(e);
                     }
-                    CustomDialog.showSimpleError(mContext, "서버 담당자에게 문의해주세요. ("+response.code()+")\n"+errMessage);
+                    CustomDialog.showSimpleError(mContext, "서버 담당자에게 문의해 주세요. ("+response.code()+")\n"+errMessage);
                     return;
                 }
 
@@ -257,7 +257,7 @@ public class UserLoginActivity extends BaseActivity {
                 dialogLoading.dismiss();
 
                 if (t instanceof UnknownHostException){
-                    CustomDialog.showSimpleError(mContext, "네트워크 연결을 확인해주세요.");
+                    CustomDialog.showSimpleError(mContext, "네트워크 연결을 확인해 주세요.");
                 }
                 else{
                     CustomDialog.showSimpleError(mContext, t.getMessage());
