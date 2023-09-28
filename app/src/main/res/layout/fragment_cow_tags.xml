@@ -61,7 +61,7 @@
             app:bsb_track_size="4dp"/>
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnDistancePowerApply"
+            android:id="@+id/btnAntennaPowerApply"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:background="@drawable/button_default_background"

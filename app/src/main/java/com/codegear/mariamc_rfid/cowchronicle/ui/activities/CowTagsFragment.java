@@ -59,10 +59,6 @@ import com.skydoves.powerspinner.IconSpinnerItem;
 import com.skydoves.powerspinner.OnSpinnerItemSelectedListener;
 import com.skydoves.powerspinner.PowerSpinnerView;
 import com.xw.repo.BubbleSeekBar;
-import com.zebra.rfid.api3.Antennas;
-import com.zebra.rfid.api3.InvalidUsageException;
-import com.zebra.rfid.api3.OperationFailureException;
-import com.zebra.rfid.api3.TagData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -82,7 +78,7 @@ public class CowTagsFragment extends Fragment {
     private View mMainView;
     private RecyclerView rvCowTags;
     private CowTagRowAdapter adapterCowTagRow;
-    private Button btnCurrentFarm, btnDistancePowerApply, btnClear, btnScan;
+    private Button btnCurrentFarm, btnAntennaPowerApply, btnClear, btnScan;
     private BubbleSeekBar bsbDistancePower;
     private PowerSpinnerView spMemoryBankIds;
     private CheckBox cbUseFilterCount;
@@ -135,8 +131,8 @@ public class CowTagsFragment extends Fragment {
         });
 
         bsbDistancePower = mMainView.findViewById(R.id.bsbDistancePower);
-        btnDistancePowerApply = mMainView.findViewById(R.id.btnDistancePowerApply);
-        btnDistancePowerApply.setOnClickListener(v -> {
+        btnAntennaPowerApply = mMainView.findViewById(R.id.btnAntennaPowerApply);
+        btnAntennaPowerApply.setOnClickListener(v -> {
 
             if (RFIDController.mConnectedReader == null || !RFIDController.mConnectedReader.isConnected()) {
                 CustomDialog.showSimple(mActivity, "장치 연결이 끊겨있습니다.\n장치설정 화면으로 이동해서 연결후 다시 시도해주세요.");
@@ -153,6 +149,9 @@ public class CowTagsFragment extends Fragment {
 
                 antennaTask = new DeviceTaskSettings.SaveAntennaConfigurationTask(powerIndex, mActivity);
                 antennaTask.execute();
+            }
+            else{
+                CustomDialog.showSimple(mActivity, "안태나 정보가 올바르지 않습니다. 다시 시도해 주세요.");
             }
         });
         btnClear = mMainView.findViewById(R.id.btnClear);
@@ -222,10 +221,8 @@ public class CowTagsFragment extends Fragment {
     public void onStop() {
         super.onStop();
 
-        mAdapterHandler.removeCallbacksAndMessages(0);
-
-        Application.useCowChronicleTagging = false;
-//        stopScanInventory(true);
+        mAdapterHandler.removeCallbacksAndMessages(0); 
+        stopScanInventory(true);
     }
 
 
@@ -250,7 +247,6 @@ public class CowTagsFragment extends Fragment {
 
         Log.i(TAG,"initRFIDListener");
 
-        Application.useCowChronicleTagging = true;
         rfidSingleton.setIRFIDSingletonTag(tagList -> {
             if(mScanRunning){
                 if (tagList != null && tagList.length > 0) {
@@ -461,12 +457,9 @@ public class CowTagsFragment extends Fragment {
     //스캔 시작
     private void startScanInventory(){
 
+        Application.useCowChronicleTagging = true;
+
         RFIDController.clearAllInventoryData();
-
-
-        int memoryBankIdIdx = spMemoryBankIds.getSelectedIndex();
-        MemoryBankIdEnum memoryBankIdEnum = MemoryBankIdEnum.values()[memoryBankIdIdx];
-
         RfidListeners rfidListeners = new RfidListeners() {
             @Override
             public void onSuccess(Object object) {
@@ -487,7 +480,9 @@ public class CowTagsFragment extends Fragment {
             }
         };
 
-        RFIDController.mIsInventoryRunning = true;
+
+        int memoryBankIdIdx = spMemoryBankIds.getSelectedIndex();
+        MemoryBankIdEnum memoryBankIdEnum = MemoryBankIdEnum.values()[memoryBankIdIdx];
         if(memoryBankIdEnum == MemoryBankIdEnum.NONE){
             RFIDController.getInstance().performInventory(rfidListeners);
         }else{
@@ -497,6 +492,8 @@ public class CowTagsFragment extends Fragment {
 
     //스캔 중지
     private void stopScanInventory(boolean sendData){
+
+        Application.useCowChronicleTagging = false;
 
         //데이터 전송
         if(sendData) {
@@ -551,23 +548,15 @@ public class CowTagsFragment extends Fragment {
         boolean isRunning = RFIDController.mIsInventoryRunning;
         Log.d(TAG, "isRunning:"+isRunning);
 
-        Antennas.AntennaRfConfig antennaRfConfig;
-        try {
-            antennaRfConfig = RFIDController.mConnectedReader.Config.Antennas.getAntennaRfConfig(1);
-
+        if (RFIDController.mConnectedReader != null && RFIDController.mConnectedReader.isConnected() && RFIDController.mConnectedReader.isCapabilitiesReceived() && RFIDController.antennaRfConfig != null) {
             antennaPowerLevels = RFIDController.mConnectedReader.ReaderCapabilities.getTransmitPowerLevelValues();
-            int powerIndex = antennaRfConfig.getTransmitPowerIndex();
+            int powerIndex = RFIDController.antennaRfConfig.getTransmitPowerIndex();
 
             bsbDistancePower.getConfigBuilder()
-                    .max(antennaPowerLevels[antennaPowerLevels.length-1])
+                    .max(antennaPowerLevels[antennaPowerLevels.length - 1])
                     .min(antennaPowerLevels[0])
                     .progress(antennaPowerLevels[powerIndex])
                     .build();
-
-        } catch (InvalidUsageException e) {
-            throw new RuntimeException(e);
-        } catch (OperationFailureException e) {
-            throw new RuntimeException(e);
         }
     }
 
