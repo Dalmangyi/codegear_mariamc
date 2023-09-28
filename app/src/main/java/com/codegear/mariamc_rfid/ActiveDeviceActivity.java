@@ -64,7 +64,6 @@ import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.TAG_
 import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.UPDATE_FIRMWARE_TAB;
 import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.USB_MIFI_TAB;
 import static com.codegear.mariamc_rfid.scanner.helpers.Constants.DEBUG_TYPE.TYPE_DEBUG;
-import static com.codegear.mariamc_rfid.scanner.helpers.Constants.INTENT_OFF_MINIMIZE_APP;
 import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_ACTION_HIGH_HIGH_LOW_LOW_BEEP;
 import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_DECODE_COUNT_2_OF_5;
 import static com.zebra.scannercontrol.RMDAttributes.RMD_ATTR_VALUE_SSA_DECODE_COUNT_AZTEC;
@@ -772,24 +771,6 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
 
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        // do your stuff here after SecondActivity finished.
-        Log.d(TAG, "Set regulatory done..");
-
-
-    }
-
-    public void setRFIDTab() {
-        viewPager.setCurrentItem(RFID_TAB);
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-    }
 
     @Override
     protected void onResume() {
@@ -861,19 +842,6 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
         dialogFwRebooting.show();
     }
 
-    public boolean isWaitingForFWReboot() {
-
-
-        if (waitingForFWReboot) {
-            setWaitingForFWReboot(false);
-            if (dialogFwRebooting != null) {
-                dialogFwRebooting.dismiss();
-                dialogFwRebooting = null;
-            }
-            return true;
-        }
-        return false;
-    }
 
 
     public void reInit() {
@@ -942,11 +910,6 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
 
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-    }
-
 
     @Override
     protected void onDestroy() {
@@ -958,16 +921,18 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
         }
     }
 
+    //앱 초기화
     private void minimizeApp() {
-        if(getIntent().getBooleanExtra(INTENT_OFF_MINIMIZE_APP, false)){
-            finish();
-            return;
+        //설정앱에선 초기화 였지만, 카우크로니클과 합쳐진 형태에선 초기화를 로그인화면으로 보내는 걸로 해야 로직상 깔끔함.
+        if(!UserStorage.getInstance().isLogin()){
+            Intent intent = new Intent(this, UserLoginActivity.class);
+            startActivity(intent);
+        }else{
+            //로그인을 했다면, 카우크로니클 화면으로 이동. SingleTask 여서, 마지막 화면으로 이동됨.
+            Intent intent = new Intent(this, CowChronicleActivity.class);
+            startActivity(intent);
         }
 
-        Intent startMain = new Intent(Intent.ACTION_MAIN);
-        startMain.addCategory(Intent.CATEGORY_HOME);
-        startMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(startMain);
     }
 
 
@@ -988,10 +953,23 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
                     minimizeApp();
                 }
                 break;
+            case RFID_TAB:
+                if (fragment instanceof PreFilterFragment) {
+                    ((PreFilterFragment) fragment).onBackPressed();
+                    loadNextFragment(INVENTORY_TAB);
+
+                } else if (fragment instanceof LocateOperationsFragment || fragment instanceof AccessOperationsFragment) {
+                    loadNextFragment(RAPID_READ_TAB);
+
+                } else {
+                    minimizeApp();
+                }
+                break;
             case SCAN_TAB:
                 if (RFD_DEVICE_MODE == DEVICE_PREMIUM_PLUS_MODE) {
                     minimizeApp();
                 }
+                break;
             case SETTINGS_TAB:
                 if (fragment != null && fragment instanceof BackPressedFragment) {
                     ((BackPressedFragment) fragment).onBackPressed();
@@ -1062,24 +1040,8 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
                 }
 
                 break;
-            case RFID_TAB:
-                if (fragment instanceof PreFilterFragment) {
-                    ((PreFilterFragment) fragment).onBackPressed();
-                    loadNextFragment(INVENTORY_TAB);
 
-                } else if (fragment instanceof LocateOperationsFragment || fragment instanceof AccessOperationsFragment) {
-                    loadNextFragment(RAPID_READ_TAB);
-
-                } else {
-                    minimizeApp();
-                }
-                break;
         }
-        // Fragment fragment = getCurrentFragment(SETTINGS_TAB);
-
-        return;
-
-
     }
 
 
@@ -1089,7 +1051,6 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
         // on tab selected
         // show respected fragment view
         viewPager.setCurrentItem(tab.getPosition());
-
     }
 
     @Override

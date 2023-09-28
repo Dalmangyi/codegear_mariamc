@@ -57,18 +57,6 @@ public class BaseActivity extends AppCompatActivity implements ScannerAppEngine,
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.scanactivity_main);
-
-//        Configuration configuration = getResources().getConfiguration();
-//        if(configuration.orientation == Configuration.ORIENTATION_LANDSCAPE){
-//            if(configuration.smallestScreenWidthDp<Application.minScreenWidth){
-//                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-//            }
-//        }else{
-//            if(configuration.screenWidthDp<Application.minScreenWidth){
-//                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-//            }
-//        }
 
     }
 

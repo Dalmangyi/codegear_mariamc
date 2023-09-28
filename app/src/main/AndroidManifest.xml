@@ -55,6 +55,7 @@
             android:exported="true"
             android:label="@string/app_name"
             android:screenOrientation="landscape"
+            android:launchMode="singleTask"
             android:theme="@style/AppTheme.NoActionBar">
 
             <intent-filter>
@@ -80,6 +81,7 @@
             android:configChanges="keyboardHidden|screenSize|fontScale"
             android:exported="true"
             android:label="Cow Tag"
+            android:launchMode="singleTask"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
 

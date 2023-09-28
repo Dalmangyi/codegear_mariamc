@@ -3,7 +3,6 @@ package com.codegear.mariamc_rfid.cowchronicle.ui.activities;
 import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.RFID_ACCESS_TAB;
 import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.RFID_TAB;
 import static com.codegear.mariamc_rfid.scanner.helpers.Constants.INTENT_NEXT_TAB;
-import static com.codegear.mariamc_rfid.scanner.helpers.Constants.INTENT_OFF_MINIMIZE_APP;
 import static com.codegear.mariamc_rfid.scanner.helpers.Constants.INTENT_START_TAB;
 
 import android.content.Intent;
@@ -189,7 +188,6 @@ public class CowTagsFragment extends Fragment {
             );
         });
 
-        initMemoryBankLayout();
 
         cbUseFilterCount = mMainView.findViewById(R.id.cbUseFilterCount);
         cbUseFilterCount.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -201,9 +199,9 @@ public class CowTagsFragment extends Fragment {
         adapterCowTagRow.setUseRSSIFilter(cbUseFilterCount.isChecked());
 
 
+        initMemoryBankLayout();
 
         initProfiles();
-        mFarmList = loadFarmModel();
         initRFIDListener();
 
 
@@ -251,28 +249,15 @@ public class CowTagsFragment extends Fragment {
     private void initRFIDListener(){
 
         Log.i(TAG,"initRFIDListener");
+
         Application.useCowChronicleTagging = true;
-
         rfidSingleton.setIRFIDSingletonTag(tagList -> {
-
             if(mScanRunning){
-
-                //신규 태그 정보
                 if (tagList != null && tagList.length > 0) {
-
-
-                    for(TagData tagData:tagList) {
-                        String tagId = tagData.getTagID();
-                        Log.d(TAG,"Fx CowTagData tagId:"+tagId);
-                    }
-
                     cowTagsModel.appendTagData(tagList); //기존 태그 리스트에 신규 태그 리스트 추가하기.
-                    CowTagsModel tempModel = adapterCowTagRow.getCowTagsModel();
-
                     mAdapterHandler.sendEmptyMessage(0);
                 }
             }
-
         });
     }
 
@@ -337,6 +322,7 @@ public class CowTagsFragment extends Fragment {
     private void initSelectFarm(){
 
         //목장 정보 불러오기
+        mFarmList = loadFarmModel();
         FarmModel selectedFarmModel = null;
         for(FarmModel farmModel:mFarmList){
             if(farmModel.getFarmCode().equals(mSelectedFarmCode)){
@@ -636,7 +622,6 @@ public class CowTagsFragment extends Fragment {
         Intent intent = new Intent(mActivity, ActiveDeviceActivity.class);
         intent.putExtra(INTENT_START_TAB, RFID_TAB);
         intent.putExtra(INTENT_NEXT_TAB, RFID_ACCESS_TAB);
-        intent.putExtra(INTENT_OFF_MINIMIZE_APP, true);
         startActivity(intent);
     }
 

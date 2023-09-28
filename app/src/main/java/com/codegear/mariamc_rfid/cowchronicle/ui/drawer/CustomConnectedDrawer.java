@@ -272,6 +272,7 @@ public class CustomConnectedDrawer {
         }
     }
 
+    //화면 이동
     private void goScreen(CowChronicleScreenEnum screenEnum, boolean needBackStack){
         if(mActivity instanceof CowChronicleActivity){
             Fragment fragment = null;

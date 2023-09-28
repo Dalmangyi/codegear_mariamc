@@ -62,6 +62,11 @@ public class ActiveDeviceAdapter extends FragmentStatePagerAdapter {
 
     public static final int READERS_TAB = 0;
     public static final int RFID_TAB = 1;
+    public static final int SCAN_TAB = 2;
+    public static final int SETTINGS_TAB = 3;
+
+
+
     public static final int SCAN_SETTINGS_TAB = 2;
     public static final int SCAN_DATAVIEW_TAB = 3;
     public static final int SCAN_ADVANCED_TAB = 4;
@@ -107,9 +112,7 @@ public class ActiveDeviceAdapter extends FragmentStatePagerAdapter {
     public static final int CHARGE_TERMINAL_TAB = 49;
     public static final int BATTERY_STATISTICS_TAB = 50;
     public static final int USB_MIFI_TAB = 51;
-    public static final int SETTINGS_TAB = 3;
 
-    public static final int SCAN_TAB = 2;
     public static final int BARCODE_TAB = SCAN_TAB;
 
     public static final int COW_CHRONICLE_TAB = 200;
