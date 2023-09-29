@@ -54,9 +54,19 @@ public class CowChronicleActivity extends AppCompatActivity {
             }
         });
 
-        initFragment();
+        initFragment(null);
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        initFragment(intent);
+    }
 
     @Override
     public void onBackPressed() {
@@ -78,36 +88,35 @@ public class CowChronicleActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void initFragment(){
-        Bundle bundle = getIntent().getExtras();
-        if (bundle != null){
-            String strFragmentStartPage = bundle.getString(FLAG_FRAGMENT_START_PAGE);
-            CowChronicleScreenEnum fragmentEnum = CowChronicleScreenEnum.valueOf(strFragmentStartPage);
-
-            switch(fragmentEnum){
-                case WEBVIEW:
-                    replaceFragment(new WebviewHomeFragment(), false);
-                    break;
-                case COW_TAGS:
-                    replaceFragment(new CowTagsFragment(), false);
-                    break;
-                case COW_TAG_DETAIL:
-                    replaceFragment(new WebviewCowDetailFragment(), true);
-                    break;
-                case USER_INFO:
-                    replaceFragment(new UserInfoFragment(), false);
-                    break;
-                default:
-                    replaceFragment(new FarmSelectFragment(), false);
-            }
+    private void initFragment(Intent intent){
+        if (intent == null){
+            intent = getIntent();
         }
-        else {
-            replaceFragment(new WebviewHomeFragment(), false);
+
+
+        String strFragmentStartPage = intent.getStringExtra(FLAG_FRAGMENT_START_PAGE);
+        CowChronicleScreenEnum fragmentEnum = CowChronicleScreenEnum.valueOf(strFragmentStartPage);
+
+        switch(fragmentEnum){
+            case WEBVIEW:
+                replaceFragment(new WebviewHomeFragment(), false);
+                break;
+            case COW_TAGS:
+                replaceFragment(new CowTagsFragment(), false);
+                break;
+            case COW_TAG_DETAIL:
+                replaceFragment(new WebviewCowDetailFragment(), true);
+                break;
+            case USER_INFO:
+                replaceFragment(new UserInfoFragment(), false);
+                break;
+            default:
+                replaceFragment(new FarmSelectFragment(), false);
         }
     }
 
     public void replaceFragment(Fragment fragment, boolean needBackStack){
-        FragmentTransaction transaction = mFragmentManager.beginTransaction();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.flFragment, fragment);
         if(needBackStack) {
             transaction.addToBackStack(null);
