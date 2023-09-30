@@ -1,5 +1,13 @@
 package com.codegear.mariamc_rfid.cowchronicle.ui.drawer;
 
+import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.BATTERY_STATISTICS_TAB;
+import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.RFID_ACCESS_TAB;
+import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.RFID_TAB;
+import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.SETTINGS_TAB;
+import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.UPDATE_FIRMWARE_TAB;
+import static com.codegear.mariamc_rfid.scanner.helpers.Constants.INTENT_NEXT_TAB;
+import static com.codegear.mariamc_rfid.scanner.helpers.Constants.INTENT_START_TAB;
+
 import android.content.Intent;
 import android.util.Log;
 import android.view.MenuItem;
@@ -245,10 +253,10 @@ public class CustomConnectedDrawer {
                 if (RFIDController.mConnectedReader == null || !RFIDController.mConnectedReader.isConnected()) {
                     CustomDialog.showSimple(mActivity, "연결된 장치가 없어서 실행이 불가합니다.\n전자이표 또는 장치 설정을 눌러서 장치를 연결 후에 다시 시도해 주세요.");
                 } else {
-                    Intent batteryIntent = new Intent(mActivity, SettingsDetailActivity.class);
-                    batteryIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    batteryIntent.putExtra(Constants.SETTING_ITEM_ID, R.id.battery);
-                    mActivity.startActivity(batteryIntent);
+                    Intent intent = new Intent(mActivity, ActiveDeviceActivity.class);
+                    intent.putExtra(INTENT_START_TAB, SETTINGS_TAB);
+                    intent.putExtra(INTENT_NEXT_TAB, BATTERY_STATISTICS_TAB);
+                    mActivity.startActivity(intent);
                 }
                 return true;
 
@@ -256,11 +264,10 @@ public class CustomConnectedDrawer {
                 if (RFIDController.mConnectedReader == null || !RFIDController.mConnectedReader.isConnected()) {
                     CustomDialog.showSimple(mActivity, "연결된 장치가 없어서 실행이 불가합니다.\n전자이표 또는 장치 설정을 눌러서 장치를 연결 후에 다시 시도해 주세요.");
                 } else{
-                    Intent fwIntent = new Intent(mActivity, SettingsDetailActivity.class);
-                    fwIntent.addFlags(Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
-                    fwIntent.putExtra(Constants.SETTING_ITEM_ID, R.id.firmware_update);
-                    fwIntent.putExtra(Constants.SETTING_ON_FACTORY, true);
-                    mActivity.startActivityForResult(fwIntent, 0);
+                    Intent intent = new Intent(mActivity, ActiveDeviceActivity.class);
+                    intent.putExtra(INTENT_START_TAB, SETTINGS_TAB);
+                    intent.putExtra(INTENT_NEXT_TAB, UPDATE_FIRMWARE_TAB);
+                    mActivity.startActivity(intent);
                 }
                 return true;
 

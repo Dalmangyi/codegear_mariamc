@@ -103,7 +103,7 @@ public class CustomDiscoverDrawer {
             case R.id.menu_readers:
                 mDrawerLayout.closeDrawer(GravityCompat.START);
                 if(UserStorage.getInstance().isLogin()){
-                    CustomDialog.showSimple(mActivity, "장치를 연결 후 진행 하실 수 있습니다.");
+                    CustomDialog.showSimple(mActivity, "장치 설정에서 장치를 연결 후 진행 하실 수 있습니다.");
                 }else{
                     goUserLoginActivity();
                 }
