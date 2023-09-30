@@ -170,33 +170,12 @@ public class UpdateFirmware extends Fragment implements NavigationView.OnNavigat
     }
 
     @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
-    }
-
-    @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         if ((getActivity() != null) && (viewCreated == false)) {
             initview((AppCompatActivity) getActivity());
             viewCreated = true;
         }
-    }
-
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
     }
 
     public static UpdateFirmware getmUpdateFirmwareInstance() {

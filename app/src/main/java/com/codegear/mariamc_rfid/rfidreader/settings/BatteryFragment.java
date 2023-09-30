@@ -37,15 +37,9 @@ public class BatteryFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_battery, container, false);
     }
 
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-
-    }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -58,10 +52,6 @@ public class BatteryFragment extends Fragment {
             deviceStatusReceived(RFIDController.BatteryData.getLevel(), RFIDController.BatteryData.getCharging(), RFIDController.BatteryData.getCause());
     }
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-    }
 
     public void deviceStatusReceived(final int level, final boolean charging, final String cause) {
         getActivity().runOnUiThread(new Runnable() {
