@@ -9,7 +9,7 @@
     android:paddingTop="@dimen/app_margin_left"
     android:paddingRight="@dimen/app_margin_right"
     android:paddingBottom="@dimen/app_margin_left"
-    tools:context=".cowchronicle.ui.activities.UserInfoFragment">
+    tools:context=".cowchronicle.ui.screens.UserInfoFragment">
 
 
     <androidx.appcompat.widget.LinearLayoutCompat

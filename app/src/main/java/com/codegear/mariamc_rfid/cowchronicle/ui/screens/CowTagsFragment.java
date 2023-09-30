@@ -1,4 +1,4 @@
-package com.codegear.mariamc_rfid.cowchronicle.ui.activities;
+package com.codegear.mariamc_rfid.cowchronicle.ui.screens;
 
 import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.RFID_ACCESS_TAB;
 import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.RFID_TAB;

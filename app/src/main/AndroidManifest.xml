@@ -50,7 +50,7 @@
 
         <!-- 카우크로니클 시작 액티비티 : UserLoginActivity -->
         <activity
-            android:name=".cowchronicle.ui.activities.UserLoginActivity"
+            android:name=".cowchronicle.ui.screens.UserLoginActivity"
             android:configChanges="keyboardHidden|screenSize|fontScale"
             android:exported="true"
             android:label="@string/app_name"
@@ -77,7 +77,7 @@
 
         <!-- 카우크로니클 사용자 페이지 -->
         <activity
-            android:name=".cowchronicle.ui.activities.CowChronicleActivity"
+            android:name=".cowchronicle.ui.screens.CowChronicleActivity"
             android:configChanges="keyboardHidden|screenSize|fontScale"
             android:exported="true"
             android:label="Cow Tag"

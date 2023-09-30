@@ -8,7 +8,7 @@
     <RelativeLayout
         android:id="@+id/rlNavigationDeviceContainer"
         android:layout_width="match_parent"
-        android:layout_height="130dp"
+        android:layout_height="140dp"
         android:layout_alignParentBottom="true"
         android:paddingLeft="22dp"
         android:paddingRight="22dp"
@@ -29,16 +29,17 @@
 
         <TextView
             android:id="@+id/tvBatteryPercentage"
-            style="@style/style_bold_font"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_above="@+id/btnDisconnect"
             android:padding="@dimen/nav_viewpadding"
             android:layout_marginBottom="5dp"
+            android:textSize="14dp"
+            android:textStyle="bold"
             android:text="0%" />
 
         <ImageView
-            android:id="@+id/ivBatterylevel"
+            android:id="@+id/ivBatteryLevel"
             android:layout_width="30dp"
             android:layout_height="40dp"
             android:layout_above="@+id/btnDisconnect"
@@ -49,13 +50,14 @@
         <Button
             android:id="@+id/btnDisconnect"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_alignParentBottom="true"
             android:background="@color/blue"
             android:backgroundTint="@color/blue"
             android:gravity="center_horizontal|center_vertical"
             android:padding="0dp"
             android:text="Disconnect\nRFDxxx"
+            android:textSize="14dp"
             android:textAllCaps="false" />
 
     </RelativeLayout>

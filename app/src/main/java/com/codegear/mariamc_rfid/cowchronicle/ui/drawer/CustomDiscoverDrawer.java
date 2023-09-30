@@ -13,8 +13,8 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.codegear.mariamc_rfid.DeviceDiscoverActivity;
 import com.codegear.mariamc_rfid.R;
-import com.codegear.mariamc_rfid.cowchronicle.ui.activities.CowChronicleActivity;
-import com.codegear.mariamc_rfid.cowchronicle.ui.activities.UserLoginActivity;
+import com.codegear.mariamc_rfid.cowchronicle.ui.screens.CowChronicleActivity;
+import com.codegear.mariamc_rfid.cowchronicle.ui.screens.UserLoginActivity;
 import com.codegear.mariamc_rfid.cowchronicle.consts.CowChronicleScreenEnum;
 import com.codegear.mariamc_rfid.cowchronicle.storage.UserStorage;
 import com.codegear.mariamc_rfid.cowchronicle.ui.dialog.CustomDialog;

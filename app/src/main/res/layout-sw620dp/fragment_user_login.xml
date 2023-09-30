@@ -6,7 +6,7 @@
     android:background="@color/white"
     android:orientation="vertical"
     android:gravity="center"
-    tools:context=".cowchronicle.ui.activities.UserInfoFragment">
+    tools:context=".cowchronicle.ui.screens.UserInfoFragment">
 
     <View
         android:layout_width="wrap_content"

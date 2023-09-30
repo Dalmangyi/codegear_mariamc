@@ -1,4 +1,4 @@
-package com.codegear.mariamc_rfid.cowchronicle.ui.activities;
+package com.codegear.mariamc_rfid.cowchronicle.ui.screens;
 
 import android.content.Intent;
 import android.graphics.Rect;
@@ -19,7 +19,6 @@ import androidx.fragment.app.FragmentTransaction;
 import com.codegear.mariamc_rfid.DeviceDiscoverActivity;
 import com.codegear.mariamc_rfid.R;
 import com.codegear.mariamc_rfid.cowchronicle.consts.CowChronicleScreenEnum;
-import com.codegear.mariamc_rfid.cowchronicle.device.RFIDSingleton;
 import com.codegear.mariamc_rfid.cowchronicle.storage.UserStorage;
 import com.codegear.mariamc_rfid.cowchronicle.ui.drawer.CustomConnectedDrawer;
 import com.codegear.mariamc_rfid.rfidreader.rfid.RFIDController;
@@ -36,7 +35,7 @@ public class CowChronicleActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cowchronicle);
+        setContentView(R.layout.activity_cow_chronicle);
 
         mCustomDrawer = new CustomConnectedDrawer(this);
         mFragmentManager = getSupportFragmentManager();

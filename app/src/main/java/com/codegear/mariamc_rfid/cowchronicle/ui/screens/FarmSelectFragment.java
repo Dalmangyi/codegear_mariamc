@@ -1,13 +1,10 @@
-package com.codegear.mariamc_rfid.cowchronicle.ui.activities;
+package com.codegear.mariamc_rfid.cowchronicle.ui.screens;
 
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -17,21 +14,17 @@ import androidx.fragment.app.Fragment;
 
 import com.codegear.mariamc_rfid.DeviceDiscoverActivity;
 import com.codegear.mariamc_rfid.R;
-import com.codegear.mariamc_rfid.application.Application;
 import com.codegear.mariamc_rfid.cowchronicle.consts.CowChronicleScreenEnum;
-import com.codegear.mariamc_rfid.cowchronicle.ui.dialog.CustomDialog;
 import com.codegear.mariamc_rfid.cowchronicle.ui.farms.FarmSearchDialogCompat;
 import com.codegear.mariamc_rfid.cowchronicle.models.FarmModel;
 import com.codegear.mariamc_rfid.cowchronicle.services.ResLogin;
 import com.codegear.mariamc_rfid.cowchronicle.storage.UserStorage;
 import com.codegear.mariamc_rfid.cowchronicle.utils.SoundSearcher;
 import com.codegear.mariamc_rfid.rfidreader.rfid.RFIDController;
-import com.codegear.mariamc_rfid.rfidreader.rfid.RfidListeners;
 
 import java.util.ArrayList;
 import java.util.Map;
 
-import dmax.dialog.SpotsDialog;
 import ir.mirrajabi.searchdialog.core.BaseFilter;
 
 

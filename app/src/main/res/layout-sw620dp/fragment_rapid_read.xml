@@ -210,7 +210,8 @@
             android:onClick="inventoryStartOrStop"
             app:backgroundTint="@color/blue"
             app:icon="@android:drawable/ic_media_play"
-            app:iconTint="@color/white" />
+            app:iconTint="@color/white"
+            android:layout_marginBottom="10dp"/>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/bt_clear"
@@ -235,8 +236,5 @@
             android:textColor="#8F8888"
             android:textSize="15dp" />
 
-
     </RelativeLayout>
-
-
 </LinearLayout>

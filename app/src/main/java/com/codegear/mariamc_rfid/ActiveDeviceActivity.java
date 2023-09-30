@@ -178,9 +178,9 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-import com.codegear.mariamc_rfid.cowchronicle.ui.activities.CowChronicleActivity;
+import com.codegear.mariamc_rfid.cowchronicle.ui.screens.CowChronicleActivity;
 import com.codegear.mariamc_rfid.cowchronicle.consts.CowChronicleScreenEnum;
-import com.codegear.mariamc_rfid.cowchronicle.ui.activities.UserLoginActivity;
+import com.codegear.mariamc_rfid.cowchronicle.ui.screens.UserLoginActivity;
 import com.codegear.mariamc_rfid.cowchronicle.device.RFIDSingleton;
 import com.codegear.mariamc_rfid.cowchronicle.storage.UserStorage;
 import com.codegear.mariamc_rfid.cowchronicle.utils.PixelUtil;
@@ -359,7 +359,7 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
 
 
         rlNavigationDeviceContainer = findViewById(R.id.rlNavigationDeviceContainer);
-        iv_batteryLevel = (ImageView) findViewById(R.id.ivBatterylevel);
+        iv_batteryLevel = (ImageView) findViewById(R.id.ivBatteryLevel);
         battery_percentage = (TextView) findViewById(R.id.tvBatteryPercentage);
         btnDisconnect = findViewById(R.id.btnDisconnect);
         btnDisconnect.setOnClickListener(v -> {

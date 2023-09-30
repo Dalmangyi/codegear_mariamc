@@ -1,6 +1,7 @@
 package com.codegear.mariamc_rfid.cowchronicle.ui.drawer;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,11 +21,11 @@ import com.codegear.mariamc_rfid.ActiveDeviceActivity;
 import com.codegear.mariamc_rfid.DeviceDiscoverActivity;
 import com.codegear.mariamc_rfid.R;
 import com.codegear.mariamc_rfid.cowchronicle.consts.CowChronicleScreenEnum;
-import com.codegear.mariamc_rfid.cowchronicle.ui.activities.CowChronicleActivity;
-import com.codegear.mariamc_rfid.cowchronicle.ui.activities.FarmSelectFragment;
-import com.codegear.mariamc_rfid.cowchronicle.ui.activities.UserInfoFragment;
-import com.codegear.mariamc_rfid.cowchronicle.ui.activities.UserLoginActivity;
-import com.codegear.mariamc_rfid.cowchronicle.ui.activities.WebviewHomeFragment;
+import com.codegear.mariamc_rfid.cowchronicle.ui.screens.CowChronicleActivity;
+import com.codegear.mariamc_rfid.cowchronicle.ui.screens.FarmSelectFragment;
+import com.codegear.mariamc_rfid.cowchronicle.ui.screens.UserInfoFragment;
+import com.codegear.mariamc_rfid.cowchronicle.ui.screens.UserLoginActivity;
+import com.codegear.mariamc_rfid.cowchronicle.ui.screens.WebviewHomeFragment;
 import com.codegear.mariamc_rfid.cowchronicle.device.RFIDSingleton;
 import com.codegear.mariamc_rfid.cowchronicle.storage.UserStorage;
 import com.codegear.mariamc_rfid.cowchronicle.ui.dialog.CustomDialog;
@@ -40,6 +41,9 @@ import com.zebra.rfid.api3.RFIDResults;
 
 public class CustomConnectedDrawer {
 
+    private final String TAG = "CustomConnectedDrawer";
+
+
     private AppCompatActivity mActivity;
     private DrawerLayout mDrawerLayout;
     private View rlNavigationDeviceContainer;
@@ -54,7 +58,7 @@ public class CustomConnectedDrawer {
 
         rlNavigationDeviceContainer = mActivity.findViewById(R.id.rlNavigationDeviceContainer);
         tvBatteryPercentage = mActivity.findViewById(R.id.tvBatteryPercentage);
-        ivBatteryLevel = mActivity.findViewById(R.id.ivBatterylevel);
+        ivBatteryLevel = mActivity.findViewById(R.id.ivBatteryLevel);
         btnDisconnect = mActivity.findViewById(R.id.btnDisconnect);
         btnDisconnect.setOnClickListener(v -> {
             RFIDSingleton.deviceDisconnect();
@@ -73,8 +77,11 @@ public class CustomConnectedDrawer {
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(mActivity, mDrawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         toggle.syncState(); //ActionBarDrawerToggle 누를때 앱 종료되는 현상 막기.
 
+
         //drawer 상태 리스너
         mDrawerLayout.addDrawerListener(new DrawerLayout.DrawerListener() {
+
+
             @Override
             public void onDrawerSlide(@NonNull View drawerView, float slideOffset) {
 
@@ -83,6 +90,28 @@ public class CustomConnectedDrawer {
             @Override
             public void onDrawerOpened(@NonNull View drawerView) {
 
+
+            }
+
+            @Override
+            public void onDrawerClosed(@NonNull View drawerView) {
+
+            }
+
+            @Override
+            public void onDrawerStateChanged(int newState) {
+                Log.d(TAG, "onDrawerStateChanged newState:"+newState);
+
+                if (newState == DrawerLayout.STATE_SETTLING) {
+                    if (!mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+                        // starts opening
+                        refreshDrawerLayout();
+                    }
+                }
+            }
+
+            //Drawer Layout 새로고침 (메뉴 사이즈, 연결상태, 배터리 정보, 기기 이름 등)
+            private void refreshDrawerLayout(){
                 refreshEmptyMenuItemHeight();
 
                 //연결 상태 확인
@@ -101,16 +130,6 @@ public class CustomConnectedDrawer {
                     rlNavigationDeviceContainer.setVisibility(View.GONE);
                 }
             }
-
-            @Override
-            public void onDrawerClosed(@NonNull View drawerView) {
-
-            }
-
-            @Override
-            public void onDrawerStateChanged(int newState) {
-
-            }
         });
     }
 
@@ -126,7 +145,7 @@ public class CustomConnectedDrawer {
         rlNavigationDeviceContainer.measure(0, 0);
         int rlNavigationDeviceContainerHeight = vDisMainMenu.getMeasuredHeight();
         ViewGroup.MarginLayoutParams rlNavigationDeviceContainerMarginLayoutParams = (ViewGroup.MarginLayoutParams) rlNavigationDeviceContainer.getLayoutParams();
-        int rlNavigationDeviceContainerTotalHeight = rlNavigationDeviceContainerHeight;
+        int rlNavigationDeviceContainerTotalHeight = rlNavigationDeviceContainerMarginLayoutParams.height;
 
 
         //기기로그인이 안되어 있다면, 기기정보 사이즈를 0으로 설정.

@@ -1,4 +1,4 @@
-package com.codegear.mariamc_rfid.cowchronicle.ui.activities;
+package com.codegear.mariamc_rfid.cowchronicle.ui.screens;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;

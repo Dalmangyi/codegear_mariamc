@@ -1,6 +1,6 @@
-package com.codegear.mariamc_rfid.cowchronicle.ui.activities;
+package com.codegear.mariamc_rfid.cowchronicle.ui.screens;
 
-import static com.codegear.mariamc_rfid.cowchronicle.ui.activities.CowChronicleActivity.FLAG_FRAGMENT_START_PAGE;
+import static com.codegear.mariamc_rfid.cowchronicle.ui.screens.CowChronicleActivity.FLAG_FRAGMENT_START_PAGE;
 
 import android.Manifest;
 import android.app.AlertDialog;
@@ -25,12 +25,10 @@ import com.codegear.mariamc_rfid.R;
 import com.codegear.mariamc_rfid.cowchronicle.consts.CowChronicleScreenEnum;
 import com.codegear.mariamc_rfid.cowchronicle.services.ResLogin;
 import com.codegear.mariamc_rfid.cowchronicle.services.RetrofitClient;
-import com.codegear.mariamc_rfid.cowchronicle.device.RFIDSingleton;
 import com.codegear.mariamc_rfid.cowchronicle.storage.UserStorage;
 import com.codegear.mariamc_rfid.cowchronicle.ui.drawer.CustomConnectedDrawer;
 import com.codegear.mariamc_rfid.cowchronicle.utils.AndroidUtil;
 import com.codegear.mariamc_rfid.cowchronicle.ui.dialog.CustomDialog;
-import com.codegear.mariamc_rfid.cowchronicle.ui.drawer.CustomDiscoverDrawer;
 import com.codegear.mariamc_rfid.cowchronicle.utils.GPSTracker;
 import com.codegear.mariamc_rfid.cowchronicle.utils.MD5Util;
 import com.codegear.mariamc_rfid.cowchronicle.utils.PermissionUtil;
