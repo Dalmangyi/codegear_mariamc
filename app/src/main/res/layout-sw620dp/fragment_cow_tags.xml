@@ -5,10 +5,10 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical"
-    android:paddingLeft="10dp"
-    android:paddingTop="10dp"
-    android:paddingRight="10dp"
-    android:paddingBottom="10dp"
+    android:paddingLeft="@dimen/app_margin_left"
+    android:paddingTop="@dimen/app_margin_left"
+    android:paddingRight="@dimen/app_margin_right"
+    android:paddingBottom="@dimen/app_margin_left"
     tools:context=".cowchronicle.ui.activities.CowTagsFragment">
 
     <androidx.appcompat.widget.LinearLayoutCompat
@@ -19,11 +19,11 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnCurrentFarm"
-            android:layout_width="200dp"
-            android:layout_height="40dp"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
             android:background="@drawable/button_default_background"
             android:text=""
-            android:textSize="12dp"
+            android:textSize="14dp"
             android:lines="2"
             android:textAllCaps="false"
             android:textColor="@color/white"
@@ -40,7 +40,8 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
             app:bsb_bubble_color="@color/colorHighlight"
             app:bsb_bubble_text_color="@color/white"
             app:bsb_max="300"
@@ -62,11 +63,10 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnAntennaPowerApply"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_height="50dp"
             android:background="@drawable/button_default_background"
             android:onClick="clickFarmSearch"
             android:text="수신거리 적용"
-            android:textSize="12dp"
             android:stateListAnimator="@null"
             android:textColor="@color/white"
             android:paddingLeft="@dimen/app_padding"
@@ -75,13 +75,13 @@
         <com.skydoves.powerspinner.PowerSpinnerView
             android:id="@+id/spMemoryBankIds"
             android:layout_width="160dp"
-            android:layout_height="40dp"
+            android:layout_height="50dp"
             android:background="@drawable/button_default_background"
             android:gravity="center"
             android:hint="Memory Bank\nNone"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
-            android:textSize="12dp"
+            android:textSize="16sp"
             app:spinner_arrow_drawable="@drawable/baseline_arrow_drop_down_24"
             app:spinner_arrow_tint="@color/white"
             app:spinner_arrow_gravity="end"
@@ -104,8 +104,8 @@
         android:layout_weight="1"
         android:padding="2dp"
         android:background="@drawable/bg_cowtags"
-        android:layout_marginBottom="5dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginBottom="@dimen/margin"
+        android:layout_marginTop="@dimen/margin"
         android:orientation="vertical">
 
         <include layout="@layout/item_cowtags_header"/>
@@ -144,25 +144,25 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnClear"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_height="50dp"
             android:background="@drawable/button_default_background"
             android:text="초기화"
             android:textColor="@color/white"
-            android:textSize="14dp" />
+            android:textSize="16dp" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnScan"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_height="50dp"
             android:layout_marginLeft="30dp"
             android:background="@drawable/button_default_background"
             android:text="스캔"
             android:textColor="@color/white"
-            android:textSize="14dp" />
+            android:textSize="16dp" />
 
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="horizontal"
             android:gravity="right">
@@ -172,7 +172,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="스캔한 데이터만 보기"
-                android:textSize="14dp"
                 android:checked="false"
                 android:buttonTint="@color/colorHighlight"/>
 

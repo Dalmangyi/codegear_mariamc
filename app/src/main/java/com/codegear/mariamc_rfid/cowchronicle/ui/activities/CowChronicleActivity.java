@@ -95,23 +95,25 @@ public class CowChronicleActivity extends AppCompatActivity {
 
 
         String strFragmentStartPage = intent.getStringExtra(FLAG_FRAGMENT_START_PAGE);
-        CowChronicleScreenEnum fragmentEnum = CowChronicleScreenEnum.valueOf(strFragmentStartPage);
+        if(strFragmentStartPage != null){
+            CowChronicleScreenEnum fragmentEnum = CowChronicleScreenEnum.valueOf(strFragmentStartPage);
 
-        switch(fragmentEnum){
-            case WEBVIEW:
-                replaceFragment(new WebviewHomeFragment(), false);
-                break;
-            case COW_TAGS:
-                replaceFragment(new CowTagsFragment(), false);
-                break;
-            case COW_TAG_DETAIL:
-                replaceFragment(new WebviewCowDetailFragment(), true);
-                break;
-            case USER_INFO:
-                replaceFragment(new UserInfoFragment(), false);
-                break;
-            default:
-                replaceFragment(new FarmSelectFragment(), false);
+            switch(fragmentEnum){
+                case WEBVIEW:
+                    replaceFragment(new WebviewHomeFragment(), false);
+                    break;
+                case COW_TAGS:
+                    replaceFragment(new CowTagsFragment(), false);
+                    break;
+                case COW_TAG_DETAIL:
+                    replaceFragment(new WebviewCowDetailFragment(), true);
+                    break;
+                case USER_INFO:
+                    replaceFragment(new UserInfoFragment(), false);
+                    break;
+                default:
+                    replaceFragment(new FarmSelectFragment(), false);
+            }
         }
     }
 
