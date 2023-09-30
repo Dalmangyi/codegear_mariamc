@@ -29,6 +29,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
@@ -251,9 +252,7 @@ public class UpdateFirmware extends Fragment implements NavigationView.OnNavigat
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         inflater.inflate(R.menu.firmware, menu);
-        return;
     }
 
     @Override
@@ -271,10 +270,14 @@ public class UpdateFirmware extends Fragment implements NavigationView.OnNavigat
                     dialogFWHelp.setContentView(R.layout.dialog_firmware_help);
                     dialogFWHelp.setCancelable(false);
                     dialogFWHelp.setCanceledOnTouchOutside(false);
+
+                    int width = (int)(getResources().getDisplayMetrics().widthPixels*0.60);
+                    int height = WindowManager.LayoutParams.WRAP_CONTENT;
+
+                    dialogFWHelp.getWindow().setLayout(width, height);
                     dialogFWHelp.show();
 
                     TextView declineButton = (TextView) dialogFWHelp.findViewById(R.id.btn_ok);
-                    // if decline button is clicked, close the custom dialog
                     declineButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
