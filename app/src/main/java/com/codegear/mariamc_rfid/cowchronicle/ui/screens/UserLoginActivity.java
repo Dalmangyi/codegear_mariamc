@@ -22,6 +22,7 @@ import androidx.annotation.NonNull;
 import com.codegear.mariamc_rfid.BuildConfig;
 import com.codegear.mariamc_rfid.DeviceDiscoverActivity;
 import com.codegear.mariamc_rfid.R;
+import com.codegear.mariamc_rfid.cowchronicle.consts.BottomNavEnum;
 import com.codegear.mariamc_rfid.cowchronicle.consts.CowChronicleScreenEnum;
 import com.codegear.mariamc_rfid.cowchronicle.services.ResLogin;
 import com.codegear.mariamc_rfid.cowchronicle.services.RetrofitClient;
@@ -49,7 +50,6 @@ public class UserLoginActivity extends BaseActivity {
 
     //DATA
     private static String TAG = "UserLoginActivity";
-    public final int PAGE_NUM_1 = 1, PAGE_NUM_2 = 2;
     private Context mContext;
     private GPSTracker gpsTracker;
 
@@ -85,11 +85,13 @@ public class UserLoginActivity extends BaseActivity {
         cbIsAutoLogin = findViewById(R.id.cbIsAutoLogin);
 
 
+
         btnNavigationBottom1 = findViewById(R.id.btnNavigationBottom1);
         btnNavigationBottom2 = findViewById(R.id.btnNavigationBottom2);
         btnNavigationBottom1.setSelected(false);
         btnNavigationBottom2.setSelected(false);
         btnNavigationBottom1.setOnClickListener(v -> {
+            UserStorage.getInstance().setBottomNavItem(BottomNavEnum.BN_COW_CHRONICLE);
             if (btnNavigationBottom1.isSelected()) {
                 btnNavigationBottom1.setSelected(false);
                 btnNavigationBottom2.setSelected(false);
@@ -99,6 +101,7 @@ public class UserLoginActivity extends BaseActivity {
             }
         });
         btnNavigationBottom2.setOnClickListener(v -> {
+            UserStorage.getInstance().setBottomNavItem(BottomNavEnum.BN_COW_TAGS);
             if (btnNavigationBottom2.isSelected()) {
                 btnNavigationBottom1.setSelected(false);
                 btnNavigationBottom2.setSelected(false);
@@ -107,6 +110,14 @@ public class UserLoginActivity extends BaseActivity {
                 btnNavigationBottom2.setSelected(true);
             }
         });
+        switch(UserStorage.getInstance().getBottomNavItem()){
+            case BN_COW_CHRONICLE:
+                btnNavigationBottom1.setSelected(true);
+                break;
+            case BN_COW_TAGS:
+                btnNavigationBottom2.setSelected(true);
+                break;
+        }
 
         //Drawer, ActionBar 세팅
         mCustomDrawer = new CustomConnectedDrawer(this);
@@ -133,7 +144,7 @@ public class UserLoginActivity extends BaseActivity {
         if (isAutoLogin) {
             String strLoginId = userStorage.getPrevLoginId();
             String strLoginPwd = userStorage.getPrevLoginPwd();
-            login(strLoginId, strLoginPwd, true, PAGE_NUM_1);
+            login(strLoginId, strLoginPwd, true, UserStorage.getInstance().getBottomNavItem());
         }
     }
 
@@ -163,18 +174,18 @@ public class UserLoginActivity extends BaseActivity {
         }
 
         //페이지 번호
-        int pageNum = PAGE_NUM_1;
+        BottomNavEnum bottomNavEnum = BottomNavEnum.BN_COW_TAGS;
         if (btnNavigationBottom1.isSelected()) {
-            pageNum = PAGE_NUM_1;
+            bottomNavEnum = BottomNavEnum.BN_COW_CHRONICLE;
         } else if (btnNavigationBottom2.isSelected()) {
-            pageNum = PAGE_NUM_2;
+            bottomNavEnum = BottomNavEnum.BN_COW_TAGS;
         }
 
         //로그인
-        login(strId, strPwd, isAutoLogin, pageNum);
+        login(strId, strPwd, isAutoLogin, bottomNavEnum);
     }
 
-    private void login(String strId, String strPwd, final boolean isAutoLogin, final int movePageNumber) {
+    private void login(String strId, String strPwd, final boolean isAutoLogin, final BottomNavEnum bottomNavEnum) {
 
         //위치 정보 가져오기
         if(!gpsTracker.getIsGPSTrackingEnabled()){
@@ -228,11 +239,11 @@ public class UserLoginActivity extends BaseActivity {
                 UserStorage.getInstance().saveLogin(strId, strPwd, isAutoLogin, resLogin);
 
                 //화면 이동
-                switch(movePageNumber){
-                    case PAGE_NUM_1:
+                switch(bottomNavEnum){
+                    case BN_COW_CHRONICLE:
                         goIntentCowChronicle();
                         break;
-                    case PAGE_NUM_2:
+                    case BN_COW_TAGS:
 
                         //연결된 기기가 있다면, 목장선택 화면으로 이동.
                         if (RFIDController.mConnectedReader != null && RFIDController.mConnectedReader.isConnected()) {

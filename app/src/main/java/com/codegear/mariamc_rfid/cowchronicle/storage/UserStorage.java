@@ -2,6 +2,7 @@ package com.codegear.mariamc_rfid.cowchronicle.storage;
 
 import android.content.Context;
 
+import com.codegear.mariamc_rfid.cowchronicle.consts.BottomNavEnum;
 import com.codegear.mariamc_rfid.cowchronicle.services.ResLogin;
 import com.codegear.mariamc_rfid.cowchronicle.utils.CryptedKeys;
 import com.codegear.mariamc_rfid.cowchronicle.utils.CryptedPrefs;
@@ -21,9 +22,6 @@ public class UserStorage {
 
     //저장용 데이터
     private ResLogin mResLogin;
-
-    //임시 데이터
-    public String tempSelectTagNum;
 
 
     private UserStorage() {
@@ -68,6 +66,24 @@ public class UserStorage {
 
     public ResLogin getResLogin(){
         return this.mResLogin;
+    }
+
+
+    public void setBottomNavItem(BottomNavEnum item){
+        mPrefs.setValue(CryptedKeys.BOTTOM_NAVIGATION_NAME, ""+item.name());
+    }
+
+    public BottomNavEnum getBottomNavItem(){
+        BottomNavEnum defaultEnum = BottomNavEnum.BN_COW_TAGS;
+        String itemName = mPrefs.getValue(CryptedKeys.BOTTOM_NAVIGATION_NAME, defaultEnum.name());
+
+        BottomNavEnum[] enums = BottomNavEnum.values();
+        for (int i = 0; i < enums.length; i++) {
+            BottomNavEnum targetEnum = enums[i];
+            if (itemName.equals(targetEnum.name()))
+                return targetEnum;
+        }
+        return defaultEnum;
     }
 
 
