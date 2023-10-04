@@ -33,7 +33,6 @@ import com.codegear.mariamc_rfid.cowchronicle.ui.dialog.CustomDialog;
 import com.codegear.mariamc_rfid.cowchronicle.utils.GPSTracker;
 import com.codegear.mariamc_rfid.cowchronicle.utils.MD5Util;
 import com.codegear.mariamc_rfid.cowchronicle.utils.PermissionUtil;
-import com.codegear.mariamc_rfid.rfidreader.rfid.RFIDController;
 import com.codegear.mariamc_rfid.scanner.activities.BaseActivity;
 
 import java.io.IOException;
@@ -91,7 +90,7 @@ public class UserLoginActivity extends BaseActivity {
         btnNavigationBottom1.setSelected(false);
         btnNavigationBottom2.setSelected(false);
         btnNavigationBottom1.setOnClickListener(v -> {
-            UserStorage.getInstance().setBottomNavItem(BottomNavEnum.BN_COW_CHRONICLE);
+            UserStorage.getInstance().setBottomNavItem(BottomNavEnum.BN_COW_CHRONICLE_WEBVIEW);
             if (btnNavigationBottom1.isSelected()) {
                 btnNavigationBottom1.setSelected(false);
                 btnNavigationBottom2.setSelected(false);
@@ -111,7 +110,7 @@ public class UserLoginActivity extends BaseActivity {
             }
         });
         switch(UserStorage.getInstance().getBottomNavItem()){
-            case BN_COW_CHRONICLE:
+            case BN_COW_CHRONICLE_WEBVIEW:
                 btnNavigationBottom1.setSelected(true);
                 break;
             case BN_COW_TAGS:
@@ -176,7 +175,7 @@ public class UserLoginActivity extends BaseActivity {
         //페이지 번호
         BottomNavEnum bottomNavEnum = BottomNavEnum.BN_COW_TAGS;
         if (btnNavigationBottom1.isSelected()) {
-            bottomNavEnum = BottomNavEnum.BN_COW_CHRONICLE;
+            bottomNavEnum = BottomNavEnum.BN_COW_CHRONICLE_WEBVIEW;
         } else if (btnNavigationBottom2.isSelected()) {
             bottomNavEnum = BottomNavEnum.BN_COW_TAGS;
         }
@@ -240,7 +239,7 @@ public class UserLoginActivity extends BaseActivity {
 
                 //화면 이동
                 switch(bottomNavEnum){
-                    case BN_COW_CHRONICLE:
+                    case BN_COW_CHRONICLE_WEBVIEW:
                         goIntentCowChronicle();
                         break;
                     case BN_COW_TAGS:

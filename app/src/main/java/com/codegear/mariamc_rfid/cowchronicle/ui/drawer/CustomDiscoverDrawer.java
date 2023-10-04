@@ -13,6 +13,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.codegear.mariamc_rfid.DeviceDiscoverActivity;
 import com.codegear.mariamc_rfid.R;
+import com.codegear.mariamc_rfid.cowchronicle.consts.BottomNavEnum;
 import com.codegear.mariamc_rfid.cowchronicle.ui.screens.CowChronicleActivity;
 import com.codegear.mariamc_rfid.cowchronicle.ui.screens.UserLoginActivity;
 import com.codegear.mariamc_rfid.cowchronicle.consts.CowChronicleScreenEnum;
@@ -95,6 +96,7 @@ public class CustomDiscoverDrawer {
             case R.id.menu_cowchronicle:
                 mDrawerLayout.closeDrawer(GravityCompat.START);
                 if(UserStorage.getInstance().isLogin()){
+                    UserStorage.getInstance().setBottomNavItem(BottomNavEnum.BN_COW_CHRONICLE_WEBVIEW);
                     goCowChronicleWebview();
                 }else{
                     goUserLoginActivity();
@@ -103,6 +105,7 @@ public class CustomDiscoverDrawer {
             case R.id.menu_readers:
                 mDrawerLayout.closeDrawer(GravityCompat.START);
                 if(UserStorage.getInstance().isLogin()){
+                    UserStorage.getInstance().setBottomNavItem(BottomNavEnum.BN_COW_TAGS);
                     goCowChronicleFarmSelect();
                 }else{
                     goUserLoginActivity();

@@ -16,16 +16,13 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.afollestad.materialdialogs.MaterialDialog;
 import com.codegear.mariamc_rfid.DeviceDiscoverActivity;
 import com.codegear.mariamc_rfid.R;
 import com.codegear.mariamc_rfid.cowchronicle.consts.BottomNavEnum;
 import com.codegear.mariamc_rfid.cowchronicle.consts.CowChronicleScreenEnum;
 import com.codegear.mariamc_rfid.cowchronicle.storage.UserStorage;
-import com.codegear.mariamc_rfid.cowchronicle.ui.dialog.CustomDialog;
 import com.codegear.mariamc_rfid.cowchronicle.ui.dialog.DialogUtil;
 import com.codegear.mariamc_rfid.cowchronicle.ui.drawer.CustomConnectedDrawer;
-import com.codegear.mariamc_rfid.rfidreader.rfid.RFIDController;
 
 public class CowChronicleActivity extends AppCompatActivity {
 
@@ -47,16 +44,10 @@ public class CowChronicleActivity extends AppCompatActivity {
         Button btnNavigationBottom1 = findViewById(R.id.btnNavigationBottom1);
         Button btnNavigationBottom2 = findViewById(R.id.btnNavigationBottom2);
         btnNavigationBottom1.setOnClickListener(v -> {
-            UserStorage.getInstance().setBottomNavItem(BottomNavEnum.BN_COW_CHRONICLE);
+            UserStorage.getInstance().setBottomNavItem(BottomNavEnum.BN_COW_CHRONICLE_WEBVIEW);
             replaceFragment(new WebviewHomeFragment(), false);
         });
         btnNavigationBottom2.setOnClickListener(v -> {
-//            if (RFIDController.mConnectedReader == null || !RFIDController.mConnectedReader.isConnected()) {
-//                goDeviceDiscoverActivity();
-//            } else{
-//                replaceFragment(new FarmSelectFragment(), false);
-//            }
-
             UserStorage.getInstance().setBottomNavItem(BottomNavEnum.BN_COW_TAGS);
             replaceFragment(new FarmSelectFragment(), false);
         });
@@ -107,9 +98,11 @@ public class CowChronicleActivity extends AppCompatActivity {
 
             switch(fragmentEnum){
                 case WEBVIEW:
+                    UserStorage.getInstance().setBottomNavItem(BottomNavEnum.BN_COW_CHRONICLE_WEBVIEW);
                     replaceFragment(new WebviewHomeFragment(), false);
                     break;
                 case COW_TAGS:
+                    UserStorage.getInstance().setBottomNavItem(BottomNavEnum.BN_COW_TAGS);
                     replaceFragment(new CowTagsFragment(), false);
                     break;
                 case COW_TAG_DETAIL:

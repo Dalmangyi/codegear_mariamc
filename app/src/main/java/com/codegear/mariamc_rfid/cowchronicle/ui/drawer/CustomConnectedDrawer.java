@@ -28,6 +28,7 @@ import androidx.fragment.app.Fragment;
 import com.codegear.mariamc_rfid.ActiveDeviceActivity;
 import com.codegear.mariamc_rfid.DeviceDiscoverActivity;
 import com.codegear.mariamc_rfid.R;
+import com.codegear.mariamc_rfid.cowchronicle.consts.BottomNavEnum;
 import com.codegear.mariamc_rfid.cowchronicle.consts.CowChronicleScreenEnum;
 import com.codegear.mariamc_rfid.cowchronicle.ui.screens.CowChronicleActivity;
 import com.codegear.mariamc_rfid.cowchronicle.ui.screens.FarmSelectFragment;
@@ -224,6 +225,7 @@ public class CustomConnectedDrawer {
         switch (item.getItemId()) {
             case R.id.menu_cowchronicle:
                 if(UserStorage.getInstance().isLogin()){
+                    UserStorage.getInstance().setBottomNavItem(BottomNavEnum.BN_COW_CHRONICLE_WEBVIEW);
                     goScreen(CowChronicleScreenEnum.WEBVIEW, true);
                 }
                 else{
@@ -233,6 +235,7 @@ public class CustomConnectedDrawer {
 
             case R.id.menu_readers:
                 if(UserStorage.getInstance().isLogin()) {
+                    UserStorage.getInstance().setBottomNavItem(BottomNavEnum.BN_COW_TAGS);
                     goScreen(CowChronicleScreenEnum.FARM_SELECT, true);
                 }
                 else{

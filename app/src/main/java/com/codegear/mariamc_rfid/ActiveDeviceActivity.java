@@ -178,6 +178,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import com.codegear.mariamc_rfid.cowchronicle.consts.BottomNavEnum;
 import com.codegear.mariamc_rfid.cowchronicle.ui.screens.CowChronicleActivity;
 import com.codegear.mariamc_rfid.cowchronicle.consts.CowChronicleScreenEnum;
 import com.codegear.mariamc_rfid.cowchronicle.ui.screens.UserLoginActivity;
@@ -1433,6 +1434,7 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
                 return true;
             case R.id.menu_cowchronicle:
                 if(UserStorage.getInstance().isLogin()){
+                    UserStorage.getInstance().setBottomNavItem(BottomNavEnum.BN_COW_CHRONICLE_WEBVIEW);
                     finishAffinity();
                     Intent intent = new Intent(this, CowChronicleActivity.class);
                     intent.putExtra(CowChronicleActivity.FLAG_FRAGMENT_START_PAGE, CowChronicleScreenEnum.WEBVIEW.toString());
@@ -1446,6 +1448,7 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
                 break;
             case R.id.menu_readers:
                 if(UserStorage.getInstance().isLogin()){
+                    UserStorage.getInstance().setBottomNavItem(BottomNavEnum.BN_COW_TAGS);
                     finishAffinity();
                     Intent intent = new Intent(this, CowChronicleActivity.class);
                     intent.putExtra(CowChronicleActivity.FLAG_FRAGMENT_START_PAGE, CowChronicleScreenEnum.FARM_SELECT.toString());
