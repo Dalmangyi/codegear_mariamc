@@ -653,10 +653,7 @@ public class RFIDBase implements Readers.RFIDReaderEventHandler, NavigationView.
         if(Application.RFIDBAseEventHandler != null){
             try {
                 RFIDController.mConnectedReader.Events.removeEventsListener(Application.RFIDBAseEventHandler);
-            } catch (InvalidUsageException e) {
-                throw new RuntimeException(e);
-            } catch (OperationFailureException e) {
-                throw new RuntimeException(e);
+            } catch (Exception e) {
             }
             Application.RFIDBAseEventHandler = null;
         }

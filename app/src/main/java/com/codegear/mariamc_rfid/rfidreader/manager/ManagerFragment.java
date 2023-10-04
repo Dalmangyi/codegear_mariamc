@@ -61,21 +61,6 @@ public class ManagerFragment extends Fragment {
 
     }
 
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-
-      /*  inflater.inflate(R.menu.disactivity_home_drawer, menu);
-        menu.findItem(android.R.id.home).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                ((ActiveDeviceActivity) getActivity()).loadNextFragment(MAIN_HOME_SETTINGS_TAB);
-                return true;
-            }
-        });*/
-    }
-
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
