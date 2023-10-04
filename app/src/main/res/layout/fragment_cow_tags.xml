@@ -56,6 +56,7 @@
             app:bsb_track_color="@color/light_grey"
             android:layout_marginLeft="32dp"
             android:layout_marginRight="16dp"
+            app:bsb_thumb_text_color="@color/colorHighlight"
             app:bsb_touch_to_seek="true"
             app:bsb_track_size="4dp"/>
 
@@ -70,7 +71,7 @@
             android:stateListAnimator="@null"
             android:textColor="@color/white"
             android:paddingLeft="@dimen/app_padding"
-            android:paddingRight="@dimen/app_padding"/>
+            android:paddingRight="@dimen/app_padding" />
 
         <com.skydoves.powerspinner.PowerSpinnerView
             android:id="@+id/spMemoryBankIds"

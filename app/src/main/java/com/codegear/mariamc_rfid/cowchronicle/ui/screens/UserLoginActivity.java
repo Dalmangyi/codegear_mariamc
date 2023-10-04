@@ -244,14 +244,7 @@ public class UserLoginActivity extends BaseActivity {
                         goIntentCowChronicle();
                         break;
                     case BN_COW_TAGS:
-
-                        //연결된 기기가 있다면, 목장선택 화면으로 이동.
-                        if (RFIDController.mConnectedReader != null && RFIDController.mConnectedReader.isConnected()) {
-                            goIntentFarmSelect();
-                        }
-                        else{
-                            goIntentDeviceDiscover();
-                        }
+                        goIntentFarmSelect();
                         break;
                     default:
                         CustomDialog.showSimpleError(mContext, "잘못된 접근입니다.");

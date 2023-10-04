@@ -80,14 +80,14 @@ public class FarmSelectFragment extends Fragment {
     private void showFarmSearchDialog(View v) {
 
         //기기연결 먼저하기.
-        if(RFIDController.mConnectedReader == null || !RFIDController.mConnectedReader.isConnected()){
-            Intent intent = new Intent(mActivity, DeviceDiscoverActivity.class);
-            intent.putExtra(DeviceDiscoverActivity.ENABLE_AUTO_CONNECT_DEVICE, true); //자동연결 하기.
-            intent.putExtra(DeviceDiscoverActivity.DESTINATION_SCREEN_IS_COWCHRONICLE, true); //연결후 카우크로니클로 가게 하기.
-            intent.putExtra(CowChronicleActivity.FLAG_FRAGMENT_START_PAGE, CowChronicleScreenEnum.FARM_SELECT.toString());
-            mActivity.startActivity(intent);
-            return;
-        }
+//        if(RFIDController.mConnectedReader == null || !RFIDController.mConnectedReader.isConnected()){
+//            Intent intent = new Intent(mActivity, DeviceDiscoverActivity.class);
+//            intent.putExtra(DeviceDiscoverActivity.ENABLE_AUTO_CONNECT_DEVICE, true); //자동연결 하기.
+//            intent.putExtra(DeviceDiscoverActivity.DESTINATION_SCREEN_IS_COWCHRONICLE, true); //연결후 카우크로니클로 가게 하기.
+//            intent.putExtra(CowChronicleActivity.FLAG_FRAGMENT_START_PAGE, CowChronicleScreenEnum.FARM_SELECT.toString());
+//            mActivity.startActivity(intent);
+//            return;
+//        }
 
 
         ArrayList<FarmModel> mFarmList = createSampleContacts();

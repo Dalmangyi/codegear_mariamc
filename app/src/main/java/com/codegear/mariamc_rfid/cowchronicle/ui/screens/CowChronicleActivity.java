@@ -16,10 +16,14 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.codegear.mariamc_rfid.DeviceDiscoverActivity;
 import com.codegear.mariamc_rfid.R;
+import com.codegear.mariamc_rfid.cowchronicle.consts.BottomNavEnum;
 import com.codegear.mariamc_rfid.cowchronicle.consts.CowChronicleScreenEnum;
 import com.codegear.mariamc_rfid.cowchronicle.storage.UserStorage;
+import com.codegear.mariamc_rfid.cowchronicle.ui.dialog.CustomDialog;
+import com.codegear.mariamc_rfid.cowchronicle.ui.dialog.DialogUtil;
 import com.codegear.mariamc_rfid.cowchronicle.ui.drawer.CustomConnectedDrawer;
 import com.codegear.mariamc_rfid.rfidreader.rfid.RFIDController;
 
@@ -43,14 +47,18 @@ public class CowChronicleActivity extends AppCompatActivity {
         Button btnNavigationBottom1 = findViewById(R.id.btnNavigationBottom1);
         Button btnNavigationBottom2 = findViewById(R.id.btnNavigationBottom2);
         btnNavigationBottom1.setOnClickListener(v -> {
+            UserStorage.getInstance().setBottomNavItem(BottomNavEnum.BN_COW_CHRONICLE);
             replaceFragment(new WebviewHomeFragment(), false);
         });
         btnNavigationBottom2.setOnClickListener(v -> {
-            if (RFIDController.mConnectedReader == null || !RFIDController.mConnectedReader.isConnected()) {
-                goDeviceDiscoverActivity();
-            } else{
-                replaceFragment(new FarmSelectFragment(), false);
-            }
+//            if (RFIDController.mConnectedReader == null || !RFIDController.mConnectedReader.isConnected()) {
+//                goDeviceDiscoverActivity();
+//            } else{
+//                replaceFragment(new FarmSelectFragment(), false);
+//            }
+
+            UserStorage.getInstance().setBottomNavItem(BottomNavEnum.BN_COW_TAGS);
+            replaceFragment(new FarmSelectFragment(), false);
         });
 
         initFragment(null);
@@ -139,6 +147,10 @@ public class CowChronicleActivity extends AppCompatActivity {
             intent.putExtra(DeviceDiscoverActivity.DESTINATION_SCREEN_IS_COWCHRONICLE, false); //연결후 카우크로니클로 가지 않게 하기.
         }
         startActivity(intent);
+    }
+
+    public void guideDeviceConnect(){
+        DialogUtil.guideDeviceConnect(this, true);
     }
 
     @Override

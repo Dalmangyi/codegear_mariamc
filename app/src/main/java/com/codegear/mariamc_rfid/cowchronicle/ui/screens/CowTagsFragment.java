@@ -32,6 +32,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.codegear.mariamc_rfid.ActiveDeviceActivity;
+import com.codegear.mariamc_rfid.DeviceDiscoverActivity;
 import com.codegear.mariamc_rfid.R;
 import com.codegear.mariamc_rfid.application.Application;
 import com.codegear.mariamc_rfid.cowchronicle.consts.MemoryBankIdEnum;
@@ -76,7 +77,7 @@ public class CowTagsFragment extends Fragment {
 
 
     //UI
-    private AppCompatActivity mActivity;
+    private CowChronicleActivity mActivity;
     private View mMainView;
     private RecyclerView rvCowTags;
     private CowTagRowAdapter adapterCowTagRow;
@@ -115,7 +116,7 @@ public class CowTagsFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         setHasOptionsMenu(true);
-        mActivity = (AppCompatActivity)getActivity();
+        mActivity = (CowChronicleActivity)getActivity();
         mActivity.getSupportActionBar().setTitle("전자이표");
 
 
@@ -137,7 +138,7 @@ public class CowTagsFragment extends Fragment {
         btnAntennaPowerApply.setOnClickListener(v -> {
 
             if (RFIDController.mConnectedReader == null || !RFIDController.mConnectedReader.isConnected()) {
-                CustomDialog.showSimple(mActivity, "장치 연결이 끊겨있습니다.\n장치설정 화면으로 이동해서 연결후 다시 시도해 주세요.");
+                mActivity.guideDeviceConnect();
                 return;
             }
 
@@ -174,7 +175,7 @@ public class CowTagsFragment extends Fragment {
             boolean isSelected = v.isSelected();
             if(!isSelected){
                 if (RFIDController.mConnectedReader == null || !RFIDController.mConnectedReader.isConnected()) {
-                    CustomDialog.showSimple(mActivity, "장치 연결이 끊겨있습니다.\n장치설정 화면으로 이동해서 연결후 다시 시도해 주세요.");
+                    mActivity.guideDeviceConnect();
                     return;
                 }
             }
@@ -192,9 +193,19 @@ public class CowTagsFragment extends Fragment {
         adapterCowTagRow.setOnCowItemClickListener(cell -> {
 
             CustomDialog.showSelectDialog(mActivity,
-                "이력제번호 : "+cell.COW_ID_NUM, cell.toDetailString(),
-                "상세 정보 보기", (MaterialDialog.SingleButtonCallback) (dialog, which) -> goCowDetail(""+cell.COW_ID_NUM),
-                "태그 쓰기", (MaterialDialog.SingleButtonCallback) (dialog, which) -> goTagWrite(""+cell.TAGNO)
+                    "이력제번호 : "+cell.COW_ID_NUM, cell.toDetailString(),
+                    "상세 정보 보기", (MaterialDialog.SingleButtonCallback) (dialog, which) -> goCowDetail(""+cell.COW_ID_NUM),
+                    "태그 쓰기", (MaterialDialog.SingleButtonCallback) (dialog, which) -> {
+
+                        boolean enabledDevice = (RFIDController.mConnectedReader != null && RFIDController.mConnectedReader.isConnected());
+
+                        if(enabledDevice) {
+                            goTagWrite("" + cell.TAGNO);
+                        }
+                        else{
+                            mActivity.guideDeviceConnect();
+                        }
+                    }
             );
         });
 
@@ -225,6 +236,7 @@ public class CowTagsFragment extends Fragment {
         initSelectFarm();
         loadCowList();
         loadCurrentAntennaConfig();
+        enableButtonByDeviceConnection();
     }
 
     @Override
@@ -245,9 +257,17 @@ public class CowTagsFragment extends Fragment {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        boolean enabledDevice = (RFIDController.mConnectedReader != null && RFIDController.mConnectedReader.isConnected());
+
         switch (item.getItemId()){
             case R.id.action_tag_write:
-                goTagWrite("");
+                if(enabledDevice) {
+                    goTagWrite("");
+                }
+                else{
+                    mActivity.guideDeviceConnect();
+                }
                 break;
         }
         return true;
@@ -285,7 +305,7 @@ public class CowTagsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (RFIDController.mConnectedReader == null || !RFIDController.mConnectedReader.isConnected()) {
-                    CustomDialog.showSimple(mActivity, "장치 연결이 끊겨있습니다.\n장치설정 화면으로 이동해서 연결후 다시 시도해 주세요..");
+                    mActivity.guideDeviceConnect();
                     return;
                 }
 
@@ -577,6 +597,42 @@ public class CowTagsFragment extends Fragment {
         }
     }
 
+    //기기연결에 따른 버튼활성화
+    private void enableButtonByDeviceConnection(){
+
+        boolean enabledDevice = (RFIDController.mConnectedReader != null && RFIDController.mConnectedReader.isConnected());
+
+        //안테나 수신 신호세기
+        if(enabledDevice){
+            bsbDistancePower.setEnabled(true);
+            bsbDistancePower.setBubbleColor(mActivity.getColor(R.color.colorPrimary)); //클릭시 버블 색상
+            bsbDistancePower.setSecondTrackColor(mActivity.getColor(R.color.colorPrimary)); //트랙 색상
+            bsbDistancePower.setThumbColor(mActivity.getColor(R.color.colorPrimary)); //thumb 색상
+        }
+        else{
+            bsbDistancePower.setEnabled(false);
+            bsbDistancePower.setBubbleColor(mActivity.getColor(R.color.dark_grey)); //클릭시 버블 색상
+            bsbDistancePower.setSecondTrackColor(mActivity.getColor(R.color.dark_grey)); //트랙 색상
+            bsbDistancePower.setThumbColor(mActivity.getColor(R.color.dark_grey)); //thumb 색상
+        }
+
+        //안테나 수신 적용버튼
+        if(enabledDevice){
+            btnAntennaPowerApply.setBackgroundResource(R.drawable.button_default_background);
+        }
+        else{
+            btnAntennaPowerApply.setBackgroundResource(R.drawable.button_grey_background);
+        }
+
+        //스캔 버튼
+        if(enabledDevice){
+            btnScan.setBackgroundResource(R.drawable.button_default_background);
+        }
+        else{
+            btnScan.setBackgroundResource(R.drawable.button_grey_background);
+        }
+    }
+
     //RFID 리딩 값 전송.
     private void sendReadingData(){
 
@@ -630,5 +686,6 @@ public class CowTagsFragment extends Fragment {
         intent.putExtra(INTENT_NEXT_TAB, RFID_ACCESS_TAB);
         startActivity(intent);
     }
+
 
 }
