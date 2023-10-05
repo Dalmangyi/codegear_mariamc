@@ -23,7 +23,6 @@ import android.widget.CompoundButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -32,9 +31,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.codegear.mariamc_rfid.ActiveDeviceActivity;
-import com.codegear.mariamc_rfid.DeviceDiscoverActivity;
 import com.codegear.mariamc_rfid.R;
 import com.codegear.mariamc_rfid.application.Application;
+import com.codegear.mariamc_rfid.cowchronicle.consts.BottomNavEnum;
 import com.codegear.mariamc_rfid.cowchronicle.consts.MemoryBankIdEnum;
 import com.codegear.mariamc_rfid.cowchronicle.services.ReqInsertTagData;
 import com.codegear.mariamc_rfid.cowchronicle.services.ResInsertTagData;
@@ -232,6 +231,7 @@ public class CowTagsFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        UserStorage.getInstance().setBottomNavItem(BottomNavEnum.BN_COW_TAGS);
 
         initSelectFarm();
         loadCowList();
@@ -313,7 +313,7 @@ public class CowTagsFragment extends Fragment {
                     CustomDialog.showSimple(mActivity, "스캔을 정지하고 변경할 수 있습니다.");
                 }
                 else{
-                    spMemoryBankIds.showOrDismiss(0, PixelUtil.ConvertDpToPx(mActivity, 20));
+                    spMemoryBankIds.showOrDismiss(0, PixelUtil.convertDpToPx(mActivity, 20));
                 }
 
             }

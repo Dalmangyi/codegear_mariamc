@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.codegear.mariamc_rfid.R;
+import com.codegear.mariamc_rfid.cowchronicle.consts.BottomNavEnum;
 import com.codegear.mariamc_rfid.cowchronicle.storage.UserStorage;
 import com.codegear.mariamc_rfid.cowchronicle.utils.AndroidUtil;
 import com.codegear.mariamc_rfid.cowchronicle.utils.Base64Util;
@@ -33,7 +34,6 @@ public class WebviewHomeFragment extends Fragment implements AdvancedWebView.Lis
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
         activity = (AppCompatActivity)getActivity();
         activity.getSupportActionBar().setTitle("카우크로니클");
 
@@ -52,6 +52,12 @@ public class WebviewHomeFragment extends Fragment implements AdvancedWebView.Lis
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        UserStorage.getInstance().setBottomNavItem(BottomNavEnum.BN_COW_CHRONICLE_WEBVIEW);
+    }
 
     @Override
     public void onPageStarted(String url, Bitmap favicon) { }

@@ -44,11 +44,9 @@ public class CowChronicleActivity extends AppCompatActivity {
         Button btnNavigationBottom1 = findViewById(R.id.btnNavigationBottom1);
         Button btnNavigationBottom2 = findViewById(R.id.btnNavigationBottom2);
         btnNavigationBottom1.setOnClickListener(v -> {
-            UserStorage.getInstance().setBottomNavItem(BottomNavEnum.BN_COW_CHRONICLE_WEBVIEW);
             replaceFragment(new WebviewHomeFragment(), false);
         });
         btnNavigationBottom2.setOnClickListener(v -> {
-            UserStorage.getInstance().setBottomNavItem(BottomNavEnum.BN_COW_TAGS);
             replaceFragment(new FarmSelectFragment(), false);
         });
 
@@ -98,11 +96,9 @@ public class CowChronicleActivity extends AppCompatActivity {
 
             switch(fragmentEnum){
                 case WEBVIEW:
-                    UserStorage.getInstance().setBottomNavItem(BottomNavEnum.BN_COW_CHRONICLE_WEBVIEW);
                     replaceFragment(new WebviewHomeFragment(), false);
                     break;
                 case COW_TAGS:
-                    UserStorage.getInstance().setBottomNavItem(BottomNavEnum.BN_COW_TAGS);
                     replaceFragment(new CowTagsFragment(), false);
                     break;
                 case COW_TAG_DETAIL:

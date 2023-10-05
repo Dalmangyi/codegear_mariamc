@@ -1,10 +1,12 @@
 package com.codegear.mariamc_rfid.cowchronicle.ui.drawer;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -20,35 +22,88 @@ import com.codegear.mariamc_rfid.cowchronicle.consts.CowChronicleScreenEnum;
 import com.codegear.mariamc_rfid.cowchronicle.storage.UserStorage;
 import com.codegear.mariamc_rfid.cowchronicle.ui.dialog.CustomDialog;
 import com.codegear.mariamc_rfid.cowchronicle.utils.PixelUtil;
+import com.codegear.mariamc_rfid.rfidreader.rfid.RFIDController;
 import com.google.android.material.navigation.NavigationView;
 
 public class CustomDiscoverDrawer {
 
+    private final String TAG = "CustomDiscoverDrawer";
+
     private AppCompatActivity mActivity;
     private DrawerLayout mDrawerLayout;
 
-    public CustomDiscoverDrawer(AppCompatActivity activity){
+    public CustomDiscoverDrawer(AppCompatActivity activity) {
         mActivity = activity;
 
-        Toolbar toolbar = (Toolbar)mActivity.findViewById(R.id.dis_toolbar);
+        //툴바, 네비게이션바 세팅
+        Toolbar toolbar = (Toolbar) mActivity.findViewById(R.id.dis_toolbar);
         mActivity.setSupportActionBar(toolbar);
-        mDrawerLayout = (DrawerLayout)activity.findViewById(R.id.discover_drawer_layout);
+        mDrawerLayout = (DrawerLayout) mActivity.findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(mActivity, mDrawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         toggle.syncState(); //ActionBarDrawerToggle 누를때 앱 종료되는 현상 막기.
 
-        //사이즈 측정
-        View vDisMainMenu = mActivity.getLayoutInflater().inflate(R.layout.main_menu, null, false);
-        vDisMainMenu.measure(0, 0);
-        int disMainMenuHeight = vDisMainMenu.getMeasuredHeight();
-        int screenHeight = PixelUtil.getScreenHeightPx(mActivity);
-        int navigationViewMenuHeight = (int) mActivity.getResources().getDimension(R.dimen.drawer_navigationview_item_height);
+        //drawer 상태 리스너
+        mDrawerLayout.addDrawerListener(new DrawerLayout.DrawerListener() {
 
-        //NavigationView의 특정 Menu에 사이즈 적용
-        NavigationView navigationView = (NavigationView) mActivity.findViewById(R.id.disnav_view);
+
+            @Override
+            public void onDrawerSlide(@NonNull View drawerView, float slideOffset) {
+
+            }
+
+            @Override
+            public void onDrawerOpened(@NonNull View drawerView) {
+
+
+            }
+
+            @Override
+            public void onDrawerClosed(@NonNull View drawerView) {
+
+            }
+
+            @Override
+            public void onDrawerStateChanged(int newState) {
+                Log.d(TAG, "onDrawerStateChanged newState:" + newState);
+
+                if (newState == DrawerLayout.STATE_SETTLING) {
+                    if (!mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+                        // starts opening
+                        refreshDrawerLayout();
+                    }
+                }
+            }
+
+            //Drawer Layout 새로고침 (메뉴 사이즈, 연결상태, 배터리 정보, 기기 이름 등)
+            private void refreshDrawerLayout() {
+                refreshEmptyMenuItemHeight();
+            }
+        });
+    }
+
+    private void refreshEmptyMenuItemHeight(){
+
+        //네비게이션뷰
+        NavigationView navigationView = (NavigationView) mActivity.findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(mActivity::onOptionsItemSelected);
-        MenuItem menuItem = navigationView.getMenu().findItem(R.id.menu_empty);
-        final View v = mActivity.getLayoutInflater().inflate(R.layout.drawer_menu_custom_item, null);
-        v.addOnAttachStateChangeListener(new View.OnAttachStateChangeListener() {
+
+        //메뉴 정보
+        int navigationViewMenuHeight = (int) mActivity.getResources().getDimension(R.dimen.drawer_navigationview_item_height);
+        int menuCount = navigationView.getMenu().size();
+
+        //기기 화면 높이
+        int screenHeight = PixelUtil.getScreenHeightPx(mActivity);
+
+        //헤더 높이 측정
+        View headerView = mActivity.getLayoutInflater().inflate(R.layout.nav_header_layout, null, false);
+        headerView.measure(0, 0);
+        int headerViewHeight = headerView.getMeasuredHeight();
+
+
+        //메뉴에 액션뷰 세팅.
+        final View emptyView = mActivity.getLayoutInflater().inflate(R.layout.drawer_menu_custom_item, null);
+        emptyView.addOnAttachStateChangeListener(new View.OnAttachStateChangeListener() {
+
             int originalHeight = 0;
 
             @Override
@@ -59,11 +114,13 @@ public class CustomDiscoverDrawer {
                 if (parent != null) {
                     ViewGroup.LayoutParams p = parent.getLayoutParams();
                     originalHeight = p.height;
-                    int drawerMenuCustomItemHeight = screenHeight - disMainMenuHeight - (navigationViewMenuHeight * 5);
-                    if (drawerMenuCustomItemHeight < 0) {
-                        drawerMenuCustomItemHeight = 0;
+
+                    int menuHeight = screenHeight - headerViewHeight - (navigationViewMenuHeight * (menuCount-1));
+
+                    if (menuHeight < 0) {
+                        menuHeight = 0;
                     }
-                    p.height = drawerMenuCustomItemHeight;
+                    p.height = menuHeight;
                     parent.setLayoutParams(p);
                 }
             }
@@ -81,10 +138,10 @@ public class CustomDiscoverDrawer {
                 }
             }
         });
+
+        MenuItem menuItem = navigationView.getMenu().findItem(R.id.menu_empty);
         menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-        menuItem.setActionView(v);
-        menuItem.setIcon(null);
-        menuItem.setTitle(null);
+        menuItem.setActionView(emptyView);
 
     }
 
@@ -96,7 +153,6 @@ public class CustomDiscoverDrawer {
             case R.id.menu_cowchronicle:
                 mDrawerLayout.closeDrawer(GravityCompat.START);
                 if(UserStorage.getInstance().isLogin()){
-                    UserStorage.getInstance().setBottomNavItem(BottomNavEnum.BN_COW_CHRONICLE_WEBVIEW);
                     goCowChronicleWebview();
                 }else{
                     goUserLoginActivity();
@@ -105,7 +161,6 @@ public class CustomDiscoverDrawer {
             case R.id.menu_readers:
                 mDrawerLayout.closeDrawer(GravityCompat.START);
                 if(UserStorage.getInstance().isLogin()){
-                    UserStorage.getInstance().setBottomNavItem(BottomNavEnum.BN_COW_TAGS);
                     goCowChronicleFarmSelect();
                 }else{
                     goUserLoginActivity();
@@ -154,7 +209,6 @@ public class CustomDiscoverDrawer {
         Intent intent = new Intent(mActivity, UserLoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         mActivity.startActivity(intent);
-        mActivity.finishAffinity();
     }
 
     //카우크로니클 웹뷰로 이동하기

@@ -16,6 +16,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -90,7 +91,6 @@ public class UserLoginActivity extends BaseActivity {
         btnNavigationBottom1.setSelected(false);
         btnNavigationBottom2.setSelected(false);
         btnNavigationBottom1.setOnClickListener(v -> {
-            UserStorage.getInstance().setBottomNavItem(BottomNavEnum.BN_COW_CHRONICLE_WEBVIEW);
             if (btnNavigationBottom1.isSelected()) {
                 btnNavigationBottom1.setSelected(false);
                 btnNavigationBottom2.setSelected(false);
@@ -100,7 +100,6 @@ public class UserLoginActivity extends BaseActivity {
             }
         });
         btnNavigationBottom2.setOnClickListener(v -> {
-            UserStorage.getInstance().setBottomNavItem(BottomNavEnum.BN_COW_TAGS);
             if (btnNavigationBottom2.isSelected()) {
                 btnNavigationBottom1.setSelected(false);
                 btnNavigationBottom2.setSelected(false);

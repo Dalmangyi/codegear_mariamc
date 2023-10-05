@@ -1,8 +1,6 @@
 package com.codegear.mariamc_rfid.cowchronicle.ui.drawer;
 
 import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.BATTERY_STATISTICS_TAB;
-import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.RFID_ACCESS_TAB;
-import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.RFID_TAB;
 import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.SETTINGS_TAB;
 import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.UPDATE_FIRMWARE_TAB;
 import static com.codegear.mariamc_rfid.scanner.helpers.Constants.INTENT_NEXT_TAB;
@@ -39,9 +37,7 @@ import com.codegear.mariamc_rfid.cowchronicle.device.RFIDSingleton;
 import com.codegear.mariamc_rfid.cowchronicle.storage.UserStorage;
 import com.codegear.mariamc_rfid.cowchronicle.ui.dialog.CustomDialog;
 import com.codegear.mariamc_rfid.cowchronicle.utils.PixelUtil;
-import com.codegear.mariamc_rfid.rfidreader.common.Constants;
 import com.codegear.mariamc_rfid.rfidreader.rfid.RFIDController;
-import com.codegear.mariamc_rfid.rfidreader.settings.SettingsDetailActivity;
 import com.google.android.material.navigation.NavigationView;
 import com.zebra.rfid.api3.BatteryStatistics;
 import com.zebra.rfid.api3.InvalidUsageException;
@@ -55,7 +51,7 @@ public class CustomConnectedDrawer {
 
     private AppCompatActivity mActivity;
     private DrawerLayout mDrawerLayout;
-    private View rlNavigationDeviceContainer;
+    private View rlDeviceContainer;
     private TextView tvBatteryPercentage;
     private ImageView ivBatteryLevel;
     private Button btnDisconnect;
@@ -65,7 +61,7 @@ public class CustomConnectedDrawer {
     public CustomConnectedDrawer(AppCompatActivity activity){
         mActivity = activity;
 
-        rlNavigationDeviceContainer = mActivity.findViewById(R.id.rlNavigationDeviceContainer);
+        rlDeviceContainer = mActivity.findViewById(R.id.rlDeviceContainer);
         tvBatteryPercentage = mActivity.findViewById(R.id.tvBatteryPercentage);
         ivBatteryLevel = mActivity.findViewById(R.id.ivBatteryLevel);
         btnDisconnect = mActivity.findViewById(R.id.btnDisconnect);
@@ -109,13 +105,12 @@ public class CustomConnectedDrawer {
 
             @Override
             public void onDrawerStateChanged(int newState) {
-                Log.d(TAG, "onDrawerStateChanged newState:"+newState);
+                Log.d(TAG, "onDrawerStateChanged newState:"+newState+",isOpen:"+mDrawerLayout.isDrawerOpen(GravityCompat.START));
 
-                if (newState == DrawerLayout.STATE_SETTLING) {
-                    if (!mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
-                        // starts opening
-                        refreshDrawerLayout();
-                    }
+                //열기전.
+                if (newState == DrawerLayout.STATE_SETTLING && !mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+                    // starts opening
+                    refreshDrawerLayout();
                 }
             }
 
@@ -125,7 +120,7 @@ public class CustomConnectedDrawer {
 
                 //연결 상태 확인
                 if (RFIDController.mConnectedReader != null) {
-                    rlNavigationDeviceContainer.setVisibility(View.VISIBLE);
+                    rlDeviceContainer.setVisibility(View.VISIBLE);
 
                     //배터리 정보 업데이트
                     loadBatteryPercent();
@@ -136,41 +131,50 @@ public class CustomConnectedDrawer {
                     btnDisconnect.setText("연결 해제하기\n"+strDeviceHostName);
                 }
                 else {
-                    rlNavigationDeviceContainer.setVisibility(View.GONE);
+                    rlDeviceContainer.setVisibility(View.GONE);
                 }
             }
         });
     }
 
     private void refreshEmptyMenuItemHeight(){
-        //사이즈 측정
-        View vDisMainMenu = mActivity.getLayoutInflater().inflate(R.layout.main_menu, null, false);
-        vDisMainMenu.measure(0, 0);
-        int disMainMenuHeight = vDisMainMenu.getMeasuredHeight();
-        int screenHeight = PixelUtil.getScreenHeightPx(mActivity);
-        int navigationViewMenuHeight = (int) mActivity.getResources().getDimension(R.dimen.drawer_navigationview_item_height);
 
-        //하단 기기정보 사이즈 측정
-        rlNavigationDeviceContainer.measure(0, 0);
-        int rlNavigationDeviceContainerHeight = vDisMainMenu.getMeasuredHeight();
-        ViewGroup.MarginLayoutParams rlNavigationDeviceContainerMarginLayoutParams = (ViewGroup.MarginLayoutParams) rlNavigationDeviceContainer.getLayoutParams();
-        int rlNavigationDeviceContainerTotalHeight = rlNavigationDeviceContainerMarginLayoutParams.height;
-
-
-        //기기로그인이 안되어 있다면, 기기정보 사이즈를 0으로 설정.
-        if (RFIDController.mConnectedReader == null || !RFIDController.mConnectedReader.isConnected()) {
-            rlNavigationDeviceContainerTotalHeight = 0;
-        }
-
-
-        //NavigationView의 특정 Menu에 사이즈 적용
+        //네비게이션뷰
         NavigationView navigationView = (NavigationView) mActivity.findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(mActivity::onOptionsItemSelected);
-        int finalRlNavigationDeviceContainerTotalHeight = rlNavigationDeviceContainerTotalHeight;
+
+        //메뉴 정보
+        int navigationViewMenuHeight = (int) mActivity.getResources().getDimension(R.dimen.drawer_navigationview_item_height);
+        int menuCount = navigationView.getMenu().size();
+
+        //기기 화면 높이
+        int screenHeight = PixelUtil.getScreenHeightPx(mActivity);
+
+        //헤더 높이 측정
+        View headerView = mActivity.getLayoutInflater().inflate(R.layout.nav_header_layout, null, false);
+        headerView.measure(0, 0);
+        int headerViewHeight = headerView.getMeasuredHeight();
 
 
-        final View v = mActivity.getLayoutInflater().inflate(R.layout.drawer_menu_custom_item, null);
-        v.addOnAttachStateChangeListener(new View.OnAttachStateChangeListener() {
+        //하단 기기정보 사이즈 측정
+        int deviceContainerHeight = rlDeviceContainer.getMeasuredHeight();
+        if(deviceContainerHeight <= 0){
+            deviceContainerHeight = PixelUtil.convertDpToPx(mActivity, 140);
+        }
+        //기기로그인이 안되어 있다면, 기기정보 사이즈를 0으로 설정.
+        if (RFIDController.mConnectedReader == null || !RFIDController.mConnectedReader.isConnected()) {
+            deviceContainerHeight = 0;
+        }
+        final int finalDeviceContainerHeight = deviceContainerHeight;
+
+
+
+
+
+        //메뉴에 액션뷰 세팅.
+        final View emptyView = mActivity.getLayoutInflater().inflate(R.layout.drawer_menu_custom_item, null);
+        emptyView.addOnAttachStateChangeListener(new View.OnAttachStateChangeListener() {
+
             int originalHeight = 0;
 
             @Override
@@ -181,17 +185,18 @@ public class CustomConnectedDrawer {
                 if (parent != null) {
                     ViewGroup.LayoutParams p = parent.getLayoutParams();
                     originalHeight = p.height;
-                    int drawerMenuCustomItemHeight = 0;
+
+                    int menuHeight = 0;
                     if(RFIDController.mConnectedReader != null && RFIDController.mConnectedReader.isConnected()){
-                        drawerMenuCustomItemHeight = screenHeight - disMainMenuHeight - finalRlNavigationDeviceContainerTotalHeight - (navigationViewMenuHeight * 5);
+                        menuHeight = screenHeight - headerViewHeight - finalDeviceContainerHeight - (navigationViewMenuHeight * (menuCount-1));
                     }else{
-                        drawerMenuCustomItemHeight = screenHeight - disMainMenuHeight - (navigationViewMenuHeight * 5);
+                        menuHeight = screenHeight - headerViewHeight - (navigationViewMenuHeight * (menuCount-1));
                     }
 
-                    if (drawerMenuCustomItemHeight < 0) {
-                        drawerMenuCustomItemHeight = 0;
+                    if (menuHeight < 0) {
+                        menuHeight = 0;
                     }
-                    p.height = drawerMenuCustomItemHeight;
+                    p.height = menuHeight;
                     parent.setLayoutParams(p);
                 }
             }
@@ -209,11 +214,10 @@ public class CustomConnectedDrawer {
                 }
             }
         });
+
         MenuItem menuItem = navigationView.getMenu().findItem(R.id.menu_empty);
         menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-        menuItem.setActionView(v);
-        menuItem.setIcon(null);
-        menuItem.setTitle(null);
+        menuItem.setActionView(emptyView);
     }
 
 
@@ -225,8 +229,7 @@ public class CustomConnectedDrawer {
         switch (item.getItemId()) {
             case R.id.menu_cowchronicle:
                 if(UserStorage.getInstance().isLogin()){
-                    UserStorage.getInstance().setBottomNavItem(BottomNavEnum.BN_COW_CHRONICLE_WEBVIEW);
-                    goScreen(CowChronicleScreenEnum.WEBVIEW, true);
+                    goCowScreen(CowChronicleScreenEnum.WEBVIEW, true);
                 }
                 else{
                     goLoginScreen();
@@ -235,8 +238,7 @@ public class CustomConnectedDrawer {
 
             case R.id.menu_readers:
                 if(UserStorage.getInstance().isLogin()) {
-                    UserStorage.getInstance().setBottomNavItem(BottomNavEnum.BN_COW_TAGS);
-                    goScreen(CowChronicleScreenEnum.FARM_SELECT, true);
+                    goCowScreen(CowChronicleScreenEnum.FARM_SELECT, true);
                 }
                 else{
                     goLoginScreen();
@@ -245,7 +247,7 @@ public class CustomConnectedDrawer {
 
             case R.id.nav_user_info:
                 if(UserStorage.getInstance().isLogin()) {
-                    goScreen(CowChronicleScreenEnum.USER_INFO, true);
+                    goCowScreen(CowChronicleScreenEnum.USER_INFO, true);
                 }
                 else{
                     goLoginScreen();
@@ -302,7 +304,7 @@ public class CustomConnectedDrawer {
     }
 
     //화면 이동
-    private void goScreen(CowChronicleScreenEnum screenEnum, boolean needBackStack){
+    protected void goCowScreen(CowChronicleScreenEnum screenEnum, boolean needBackStack){
         if(mActivity instanceof CowChronicleActivity){
             Fragment fragment = null;
             switch (screenEnum){
@@ -343,7 +345,9 @@ public class CustomConnectedDrawer {
         return true;
     }
 
-    private void goLoginScreen(){
+
+
+    protected void goLoginScreen(){
         if(!(mActivity instanceof UserLoginActivity)){
             Intent intent = new Intent(mActivity, UserLoginActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

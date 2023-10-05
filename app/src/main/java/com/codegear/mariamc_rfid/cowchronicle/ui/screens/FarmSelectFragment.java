@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment;
 
 import com.codegear.mariamc_rfid.DeviceDiscoverActivity;
 import com.codegear.mariamc_rfid.R;
+import com.codegear.mariamc_rfid.cowchronicle.consts.BottomNavEnum;
 import com.codegear.mariamc_rfid.cowchronicle.consts.CowChronicleScreenEnum;
 import com.codegear.mariamc_rfid.cowchronicle.ui.farms.FarmSearchDialogCompat;
 import com.codegear.mariamc_rfid.cowchronicle.models.FarmModel;
@@ -39,6 +40,7 @@ public class FarmSelectFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
         mActivity = (AppCompatActivity) getActivity();
         mActivity.getSupportActionBar().setTitle("목장 선택");
 
@@ -55,8 +57,11 @@ public class FarmSelectFragment extends Fragment {
         return mRootView;
     }
 
-
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        UserStorage.getInstance().setBottomNavItem(BottomNavEnum.BN_COW_TAGS);
+    }
 
     //가입자 정보
     private void initUserInfo(){
