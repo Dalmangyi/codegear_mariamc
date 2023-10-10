@@ -79,7 +79,7 @@ public class WebviewHomeFragment extends Fragment implements AdvancedWebView.Lis
 
     private void initLoad() throws UnsupportedEncodingException {
 
-        String loadUrl = "https://marivet.co.kr/login/index.html?url=aHR0cHM6Ly9tYXJpdmV0LmNvLmtyL2FwLw==";
+        String loadUrl = "http://marivet.co.kr/_api_login.php";
 
         //로그인한 경우면, url 만들기.
         UserStorage userStorage = UserStorage.getInstance();
@@ -89,16 +89,16 @@ public class WebviewHomeFragment extends Fragment implements AdvancedWebView.Lis
             String userId = userStorage.getPrevLoginId();
             String mobile_serial = AndroidUtil.getDeviceId(activity);
             String str1 = "usr_id="+userId+"|"+"mobile_serial="+mobile_serial;
-            String base64Str1 = Base64Util.encode(str1);
+            String base64Str1 = Base64Util.encode(str1); //BASE64
 
             //검증코드 만들기 (ex.chalet2cha|09-20230914)
             SimpleDateFormat sdf = new SimpleDateFormat("hh-yyyyMMdd");
             String strCurrent = sdf.format(new Date()).toString();
             String str2 = ""+userId+"|"+strCurrent;
-            String sha256hex = Sha256Util.encode(str2);
+            String sha256hex = Sha256Util.encode(str2); //SHA256
 
             //URL만들기
-            loadUrl = "http://125.141.231.88/ap/chalet_cha.php?sub="+base64Str1+sha256hex;
+            loadUrl = "http://marivet.co.kr/_api_login.php?sub="+base64Str1+sha256hex;
         }
 
         mWebView.loadUrl(loadUrl);
