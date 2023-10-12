@@ -1,10 +1,10 @@
 package com.codegear.mariamc_rfid.cowchronicle.ui.screens;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,16 +12,14 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-import com.codegear.mariamc_rfid.DeviceDiscoverActivity;
 import com.codegear.mariamc_rfid.R;
 import com.codegear.mariamc_rfid.cowchronicle.consts.BottomNavEnum;
-import com.codegear.mariamc_rfid.cowchronicle.consts.CowChronicleScreenEnum;
+import com.codegear.mariamc_rfid.cowchronicle.ui.dialog.CustomDialog;
 import com.codegear.mariamc_rfid.cowchronicle.ui.farms.FarmSearchDialogCompat;
 import com.codegear.mariamc_rfid.cowchronicle.models.FarmModel;
 import com.codegear.mariamc_rfid.cowchronicle.services.ResLogin;
 import com.codegear.mariamc_rfid.cowchronicle.storage.UserStorage;
 import com.codegear.mariamc_rfid.cowchronicle.utils.SoundSearcher;
-import com.codegear.mariamc_rfid.rfidreader.rfid.RFIDController;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -32,9 +30,17 @@ import ir.mirrajabi.searchdialog.core.BaseFilter;
 public class FarmSelectFragment extends Fragment {
 
     private final String TAG = "FarmSelectFragment";
+
+    //Views
     private AppCompatActivity mActivity;
     private View mRootView;
     private TextView tvMemberName;
+    private Button btnFarmSelect;
+
+
+    //Data
+    private ArrayList<FarmModel> mFarmList;
+
 
 
     @Nullable
@@ -49,10 +55,11 @@ public class FarmSelectFragment extends Fragment {
 
 
         tvMemberName = mRootView.findViewById(R.id.tvMemberName);
-
-        mRootView.findViewById(R.id.btnCurrentFarm).setOnClickListener(this::showFarmSearchDialog);
+        btnFarmSelect = mRootView.findViewById(R.id.btnCurrentFarm);
+        btnFarmSelect.setOnClickListener(this::showFarmSearchDialog);
 
         initUserInfo();
+        initFarmList();
 
         return mRootView;
     }
@@ -61,6 +68,25 @@ public class FarmSelectFragment extends Fragment {
     public void onResume() {
         super.onResume();
         UserStorage.getInstance().setBottomNavItem(BottomNavEnum.BN_COW_TAGS);
+
+        initFarmList();
+    }
+
+    private void initFarmList(){
+        mFarmList = createSampleContacts();
+        if(mFarmList == null || mFarmList.size() == 0){
+            btnFarmSelect.setText("농장이 없습니다.");
+            btnFarmSelect.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
+        }
+        else if(mFarmList.size() == 1){
+            FarmModel farmModel = mFarmList.get(0);
+            String strBtnTitle = farmModel.getName() + " - " + farmModel.getOwnerName();
+            btnFarmSelect.setText(strBtnTitle);
+            btnFarmSelect.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
+        }else{
+            btnFarmSelect.setText("목장을 선택해 주세요.");
+            btnFarmSelect.setCompoundDrawablesWithIntrinsicBounds(R.drawable.baseline_arrow_drop_down_24, 0, 0, 0);
+        }
     }
 
     //가입자 정보
@@ -71,8 +97,13 @@ public class FarmSelectFragment extends Fragment {
         if(resLogin!=null){
 
             String membership = resLogin.membership_nm;
-            String company = resLogin.cmpy;
+            if(membership == null){
+                membership = "";
+            }
             String user_name = resLogin.usr_nm;
+            if(user_name == null){
+                user_name = "";
+            }
             String strMemberName = "";
             strMemberName += user_name + "\n";
             strMemberName += "("+membership+" 회원)";
@@ -84,19 +115,18 @@ public class FarmSelectFragment extends Fragment {
 
     private void showFarmSearchDialog(View v) {
 
-        //기기연결 먼저하기.
-//        if(RFIDController.mConnectedReader == null || !RFIDController.mConnectedReader.isConnected()){
-//            Intent intent = new Intent(mActivity, DeviceDiscoverActivity.class);
-//            intent.putExtra(DeviceDiscoverActivity.ENABLE_AUTO_CONNECT_DEVICE, true); //자동연결 하기.
-//            intent.putExtra(DeviceDiscoverActivity.DESTINATION_SCREEN_IS_COWCHRONICLE, true); //연결후 카우크로니클로 가게 하기.
-//            intent.putExtra(CowChronicleActivity.FLAG_FRAGMENT_START_PAGE, CowChronicleScreenEnum.FARM_SELECT.toString());
-//            mActivity.startActivity(intent);
-//            return;
-//        }
+        if(mFarmList == null || mFarmList.size() == 0){
+            CustomDialog.showSimple(mActivity, "선택할 농장이 없습니다.\n관리자에게 문의해주세요.");
+            return;
+        }
+        else if(mFarmList.size() == 1){
+            FarmModel farmModel = mFarmList.get(0);
+            goNextIntent(farmModel.getFarmCode());
+            return;
+        }
 
 
-        ArrayList<FarmModel> mFarmList = createSampleContacts();
-
+//        ArrayList<FarmModel> mFarmList = createSampleContacts();
 
         FarmSearchDialogCompat searchDialogCompat = new FarmSearchDialogCompat<FarmModel>(
             mActivity,
