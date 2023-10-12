@@ -204,11 +204,6 @@ public class AssertFragment extends Fragment {
                 Toast.makeText(((ActiveDeviceActivity) getActivity()), data, Toast.LENGTH_SHORT).show();
             }
         } else {
-            /*Intent i = new Intent(this, NotificationsService.class);
-            i.putExtra(Constants.INTENT_ACTION, action);
-            i.putExtra(Constants.INTENT_DATA, data);
-            startService(i);*/
-
             if (getActivity() != null)
                 NotificationUtil.displayNotificationforSettingsDeialActivity(getActivity(), action, data);
         }

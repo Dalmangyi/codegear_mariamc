@@ -260,15 +260,8 @@ public class Static_ipconfig extends Fragment {
     }
 
     public void sendNotification(String action, String data) {
-     {
-            /*Intent i = new Intent(this, NotificationsService.class);
-            i.putExtra(Constants.INTENT_ACTION, action);
-            i.putExtra(Constants.INTENT_DATA, data);
-            startService(i);*/
-
-            if(getActivity() != null)
-                NotificationUtil.displayNotificationforSettingsDeialActivity(getActivity(), action, data);
-        }
+        if(getActivity() != null)
+            NotificationUtil.displayNotificationforSettingsDeialActivity(getActivity(), action, data);
     }
 
 

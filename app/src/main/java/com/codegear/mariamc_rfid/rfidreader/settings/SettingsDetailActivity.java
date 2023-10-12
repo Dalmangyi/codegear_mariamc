@@ -322,11 +322,6 @@ public class SettingsDetailActivity extends AppCompatActivity implements Respons
                 Toast.makeText(getApplicationContext(), data, Toast.LENGTH_SHORT).show();
             }
         } else {
-            /*Intent i = new Intent(this, NotificationsService.class);
-            i.putExtra(Constants.INTENT_ACTION, action);
-            i.putExtra(Constants.INTENT_DATA, data);
-            startService(i);*/
-
             NotificationUtil.displayNotificationforSettingsDeialActivity(this, action, data);
         }
     }

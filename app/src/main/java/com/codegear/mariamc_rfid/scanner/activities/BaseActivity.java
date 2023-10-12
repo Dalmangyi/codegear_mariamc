@@ -14,7 +14,6 @@ import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 
 import com.codegear.mariamc_rfid.ActiveDeviceActivity;
 import com.codegear.mariamc_rfid.application.Application;
@@ -495,10 +494,12 @@ public class BaseActivity extends AppCompatActivity implements ScannerAppEngine,
      * Receiver to handle the events about RFID Reader
      */
     private BroadcastReceiver onNotification = new BroadcastReceiver() {
-        public void onReceive(Context ctxt, Intent i) {
+        public void onReceive(Context context, Intent i) {
+
+            String msg = ""+i.getStringExtra(Constants.NOTIFICATIONS_TEXT);
 
             //Since the application is in foreground, show a dialog.
-            Toast.makeText(ctxt,i.getStringExtra(Constants.NOTIFICATIONS_TEXT),Toast.LENGTH_SHORT).show();
+            Toast.makeText(context,msg,Toast.LENGTH_SHORT).show();
 
             //Abort the broadcast since it has been handled.
             abortBroadcast();
@@ -508,7 +509,7 @@ public class BaseActivity extends AppCompatActivity implements ScannerAppEngine,
 //Handler to show the data on UI
 
     protected Handler dataHandler = new Handler(){
-        boolean notificaton_processed = false;
+        boolean notification_processed = false;
         boolean result = false;
         boolean found = false;
         @Override
@@ -567,7 +568,7 @@ public class BaseActivity extends AppCompatActivity implements ScannerAppEngine,
                             delegate.scannerBarcodeEvent(barcode.getBarcodeData(), barcode.getBarcodeType(), barcode.getFromScannerID());
                         }
                     }
-                    if(Application.MOT_SETTING_NOTIFICATION_BARCODE && !notificaton_processed) {
+                    if(Application.MOT_SETTING_NOTIFICATION_BARCODE && !notification_processed) {
                         String scannerName ="";
                         if (mScannerInfoList != null) {
                             for (DCSScannerInfo ex_info : mScannerInfoList) {
@@ -606,7 +607,7 @@ public class BaseActivity extends AppCompatActivity implements ScannerAppEngine,
                     break;
                 case Constants.SESSION_ESTABLISHED:
                     DCSScannerInfo activeScanner=(DCSScannerInfo)msg.obj;
-                    notificaton_processed = false;
+                    notification_processed = false;
                     result = false;
                     ScannersActivity.curAvailableScanner = new AvailableScanner(activeScanner);
                     ScannersActivity.curAvailableScanner.setConnected(true);
@@ -621,7 +622,7 @@ public class BaseActivity extends AppCompatActivity implements ScannerAppEngine,
                                  DevConnections delegates should NOT display any UI alerts,
                                  so from UI notification side the event is not processed
                                  */
-                                    notificaton_processed = false;
+                                    notification_processed = false;
                                 }
                             }
                         }
@@ -662,7 +663,7 @@ public class BaseActivity extends AppCompatActivity implements ScannerAppEngine,
                                      DeList delegates should NOT display any UI alerts,
                                      so from UI notification side the event is not processed
                                      */
-                                    notificaton_processed = false;
+                                    notification_processed = false;
                                 }
                             }
                         }
@@ -670,7 +671,7 @@ public class BaseActivity extends AppCompatActivity implements ScannerAppEngine,
 
                     //TODO - Showing notifications in foreground and background mode
 
-                    if(Application.MOT_SETTING_NOTIFICATION_ACTIVE && !notificaton_processed) {
+                    if(Application.MOT_SETTING_NOTIFICATION_ACTIVE && !notification_processed) {
                         StringBuilder notification_Msg = new StringBuilder();
                         if (!found) {
                             notification_Msg.append(activeScanner.getScannerName()).append(" has appeared and connected");
@@ -692,7 +693,7 @@ public class BaseActivity extends AppCompatActivity implements ScannerAppEngine,
                 case Constants.SESSION_TERMINATED:
                     int scannerID=(Integer)msg.obj;
                     String scannerName = "";
-                    notificaton_processed = false;
+                    notification_processed = false;
                     result = false;
 
                     /* notify connections delegates */
@@ -704,7 +705,7 @@ public class BaseActivity extends AppCompatActivity implements ScannerAppEngine,
                              DevConnections delegates should NOT display any UI alerts,
                              so from UI notification side the event is not processed
                              */
-                                notificaton_processed = false;
+                                notification_processed = false;
                             }
                         }
                     }
@@ -726,11 +727,11 @@ public class BaseActivity extends AppCompatActivity implements ScannerAppEngine,
                                  DeList delegates should NOT display any UI alerts,
                                  so from UI notification side the event is not processed
                                  */
-                                notificaton_processed = false;
+                                notification_processed = false;
                             }
                         }
                     }
-                    if(Application.MOT_SETTING_NOTIFICATION_ACTIVE && !notificaton_processed) {
+                    if(Application.MOT_SETTING_NOTIFICATION_ACTIVE && !notification_processed) {
                         if(isInBackgroundMode(getApplicationContext())) {
                             Intent intent = new Intent();
                             intent.setAction(Constants.ACTION_SCANNER_DISCONNECTED);
@@ -745,7 +746,7 @@ public class BaseActivity extends AppCompatActivity implements ScannerAppEngine,
                     break;
                 case Constants.SCANNER_APPEARED:
                 case Constants.AUX_SCANNER_CONNECTED:
-                    notificaton_processed = false;
+                    notification_processed = false;
                     result = false;
                     DCSScannerInfo availableScanner=(DCSScannerInfo)msg.obj;
 
@@ -758,7 +759,7 @@ public class BaseActivity extends AppCompatActivity implements ScannerAppEngine,
                              DevConnections delegates should NOT display any UI alerts,
                              so from UI notification side the event is not processed
                              */
-                                notificaton_processed = false;
+                                notification_processed = false;
                             }
                         }
                     }
@@ -783,13 +784,13 @@ public class BaseActivity extends AppCompatActivity implements ScannerAppEngine,
                              so from UI notification side the event is not processed
                              */
 
-                                notificaton_processed = false;
+                                notification_processed = false;
                             }
                         }
                     }
 
                     //TODO - Showing notifications in foreground and background mode
-                    if(Application.MOT_SETTING_NOTIFICATION_AVAILABLE && !notificaton_processed){
+                    if(Application.MOT_SETTING_NOTIFICATION_AVAILABLE && !notification_processed){
                         if(isInBackgroundMode(getApplicationContext())) {
                             Intent intent = new Intent();
                             intent.setAction(Constants.ACTION_SCANNER_CONNECTED);
@@ -803,7 +804,7 @@ public class BaseActivity extends AppCompatActivity implements ScannerAppEngine,
                     }
 					break;
                 case Constants.SCANNER_DISAPPEARED:
-                    notificaton_processed = false;
+                    notification_processed = false;
                     result = false;
                     scannerID=(Integer)msg.obj;
                     scannerName = "";
@@ -816,7 +817,7 @@ public class BaseActivity extends AppCompatActivity implements ScannerAppEngine,
                              DevConnections delegates should NOT display any UI alerts,
                              so from UI notification side the event is not processed
                              */
-                                notificaton_processed = false;
+                                notification_processed = false;
                             }
                         }
                     }
@@ -852,13 +853,13 @@ public class BaseActivity extends AppCompatActivity implements ScannerAppEngine,
                              DeList delegates should NOT display any UI alerts,
                              so from UI notification side the event is not processed
                              */
-                                notificaton_processed = false;
+                                notification_processed = false;
                             }
                         }
                     }
 
                     //TODO - Showing notifications in foreground and background mode
-                    if(Application.MOT_SETTING_NOTIFICATION_AVAILABLE && !notificaton_processed) {
+                    if(Application.MOT_SETTING_NOTIFICATION_AVAILABLE && !notification_processed) {
                         StringBuilder notification_Msg = new StringBuilder();
                         notification_Msg.append(scannerName).append(" has disappeared");
                         if (isInBackgroundMode(getApplicationContext())){
