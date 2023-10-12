@@ -34,8 +34,8 @@ android {
         applicationId 'com.codegear.mariamc_rfid'
         minSdkVersion 29
         targetSdkVersion 33
-        versionCode 9
-        versionName "1.0.9"
+        versionCode 10
+        versionName "1.0.10"
         vectorDrawables.useSupportLibrary = true
         signingConfig signingConfigs.debug
     }
