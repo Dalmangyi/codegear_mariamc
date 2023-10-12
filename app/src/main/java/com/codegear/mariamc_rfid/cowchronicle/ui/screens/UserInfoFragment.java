@@ -80,9 +80,22 @@ public class UserInfoFragment extends Fragment {
 
         //가입자 정보
         String company = resLogin.cmpy;
+        if(company==null){
+            company = "";
+        }
+
         String user_name = resLogin.usr_nm;
+        if(user_name==null){
+            user_name = "";
+        }
+
         String membership = resLogin.membership_nm;
+        if(membership==null){
+            membership = "";
+        }
+
         String strMemberShipName = "("+membership+" 회원)";
+
         tvMemberName.setText(""+company+"\n"+user_name+"\n"+strMemberShipName);
     }
 
