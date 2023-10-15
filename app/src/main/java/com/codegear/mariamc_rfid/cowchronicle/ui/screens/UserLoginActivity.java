@@ -155,10 +155,10 @@ public class UserLoginActivity extends BaseActivity {
         boolean isAutoLogin = cbIsAutoLogin.isChecked();
 
 
-        if(BuildConfig.DEBUG){
-            strId = "chalet2cha";
-            strPwd = "1519";
-        }
+//        if(BuildConfig.DEBUG){
+//            strId = "chalet2cha";
+//            strPwd = "1519";
+//        }
 
         if (strId.isEmpty() || strPwd.isEmpty()) {
             dialogLoading.dismiss();

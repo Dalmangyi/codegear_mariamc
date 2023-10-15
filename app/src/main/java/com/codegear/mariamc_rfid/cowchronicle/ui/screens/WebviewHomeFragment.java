@@ -19,6 +19,7 @@ import androidx.appcompat.widget.AppCompatEditText;
 import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.codegear.mariamc_rfid.BuildConfig;
 import com.codegear.mariamc_rfid.R;
 import com.codegear.mariamc_rfid.cowchronicle.consts.BottomNavEnum;
 import com.codegear.mariamc_rfid.cowchronicle.storage.UserStorage;
@@ -48,6 +49,12 @@ public class WebviewHomeFragment extends Fragment implements AdvancedWebView.Lis
         activity.getSupportActionBar().setTitle("카우크로니클");
 
         View view = inflater.inflate(R.layout.activity_webview, null, false);
+
+        //디버그 모드일때만, 주소창 보이게 설정
+        if(BuildConfig.DEBUG){
+            View llUrlContainer = view.findViewById(R.id.llUrlContainer);
+            llUrlContainer.setVisibility(View.VISIBLE);
+        }
 
         etUrl = view.findViewById(R.id.etUrl);
         etUrl.setOnKeyListener(new View.OnKeyListener() {
