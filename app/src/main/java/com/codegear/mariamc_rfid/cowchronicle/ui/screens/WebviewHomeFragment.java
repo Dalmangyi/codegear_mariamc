@@ -1,21 +1,27 @@
 package com.codegear.mariamc_rfid.cowchronicle.ui.screens;
 
+import static android.content.Context.INPUT_METHOD_SERVICE;
+
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatEditText;
 import androidx.fragment.app.Fragment;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.codegear.mariamc_rfid.R;
 import com.codegear.mariamc_rfid.cowchronicle.consts.BottomNavEnum;
 import com.codegear.mariamc_rfid.cowchronicle.storage.UserStorage;
-import com.codegear.mariamc_rfid.cowchronicle.utils.AndroidUtil;
 import com.codegear.mariamc_rfid.cowchronicle.utils.Base64Util;
 import com.codegear.mariamc_rfid.cowchronicle.utils.Sha256Util;
 
@@ -29,7 +35,11 @@ public class WebviewHomeFragment extends Fragment implements AdvancedWebView.Lis
 
 
     private AppCompatActivity activity;
+
+    private AppCompatEditText etUrl;
     private AdvancedWebView mWebView;
+    private SwipeRefreshLayout swipeRefreshLayout;
+    private Button btnGo;
 
     @Nullable
     @Override
@@ -39,9 +49,48 @@ public class WebviewHomeFragment extends Fragment implements AdvancedWebView.Lis
 
         View view = inflater.inflate(R.layout.activity_webview, null, false);
 
+        etUrl = view.findViewById(R.id.etUrl);
+        etUrl.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+
+                if((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)){
+                    //키패드 내리기
+                    InputMethodManager imm = (InputMethodManager)activity.getSystemService(INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(etUrl.getWindowToken(), 0);
+
+                    //페이지 이동
+                    String newUrl = etUrl.getText().toString();
+                    goUrl(newUrl);
+                    return true;
+                }
+
+                return false;
+            }
+        });
+
+        btnGo = view.findViewById(R.id.btnGo);
+        btnGo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String newUrl = etUrl.getText().toString();
+                goUrl(newUrl);
+            }
+        });
+
         mWebView = view.findViewById(R.id.webview);
         mWebView.setListener(getActivity(), this);
         mWebView.setMixedContentAllowed(false);
+
+        swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mWebView.reload();
+
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
 
         try {
             initLoad();
@@ -85,14 +134,13 @@ public class WebviewHomeFragment extends Fragment implements AdvancedWebView.Lis
         UserStorage userStorage = UserStorage.getInstance();
         if(userStorage.isLogin()){
 
-            //전달인자 만들기 (ex.usr_id=chalet2cha|mobile_serial=05b136ba7aeb157d)
+            //2023.10.12 전달인자 만들기 (ex.usr_id=chalet2cha)
             String userId = userStorage.getPrevLoginId();
-            String mobile_serial = AndroidUtil.getDeviceId(activity);
-            String str1 = "usr_id="+userId+"|"+"mobile_serial="+mobile_serial;
+            String str1 = "usr_id="+userId;
             String base64Str1 = Base64Util.encode(str1); //BASE64
 
-            //검증코드 만들기 (ex.chalet2cha|09-20230914)
-            SimpleDateFormat sdf = new SimpleDateFormat("hh-yyyyMMdd");
+            //2023.10.12 검증코드 만들기 (ex.chalet2cha|21-20231012)
+            SimpleDateFormat sdf = new SimpleDateFormat("HH-yyyyMMdd");
             String strCurrent = sdf.format(new Date()).toString();
             String str2 = ""+userId+"|"+strCurrent;
             String sha256hex = Sha256Util.encode(str2); //SHA256
@@ -101,8 +149,11 @@ public class WebviewHomeFragment extends Fragment implements AdvancedWebView.Lis
             loadUrl = "http://marivet.co.kr/_api_login.php?sub="+base64Str1+sha256hex;
         }
 
-        mWebView.loadUrl(loadUrl);
+        goUrl(loadUrl);
     }
 
-
+    private void goUrl(String url){
+        etUrl.setText(url);
+        mWebView.loadUrl(url);
+    }
 }
