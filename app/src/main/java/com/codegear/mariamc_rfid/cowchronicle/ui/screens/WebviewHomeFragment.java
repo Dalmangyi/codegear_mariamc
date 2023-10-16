@@ -151,9 +151,10 @@ public class WebviewHomeFragment extends Fragment implements AdvancedWebView.Lis
             String strCurrent = sdf.format(new Date()).toString();
             String str2 = ""+userId+"|"+strCurrent;
             String sha256hex = Sha256Util.encode(str2); //SHA256
+            String sha256hexUpperCase = sha256hex.toUpperCase();
 
             //URL만들기
-            loadUrl = "http://marivet.co.kr/_api_login.php?sub="+base64Str1+sha256hex;
+            loadUrl = "http://marivet.co.kr/_api_login.php?sub="+base64Str1+sha256hexUpperCase;
         }
 
         goUrl(loadUrl);
