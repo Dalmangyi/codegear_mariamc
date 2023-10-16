@@ -11,9 +11,9 @@
       "type": "SINGLE",
       "filters": [],
       "attributes": [],
-      "versionCode": 1,
-      "versionName": "1.0.1",
-      "outputFile": "MariAMC-1.0.1.apk"
+      "versionCode": 12,
+      "versionName": "1.0.12",
+      "outputFile": "MariAMC-v1.0.12_debug.apk"
     }
   ],
   "elementType": "File"

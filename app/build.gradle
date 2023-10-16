@@ -49,13 +49,19 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
-            android.applicationVariants.all { variant ->
-                variant.outputs.all {
-                    outputFileName = "MariAMC-" + defaultConfig.versionName + ".apk"
-                }
-            }
+        }
+
+
+    }
+
+    android.applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+
+            def buildType = variant.buildType.name
+            outputFileName = "MariAMC_v${defaultConfig.versionName}_${buildType}.apk"
         }
     }
+
     compileOptions {
         sourceCompatibility = 11
         targetCompatibility = 11
@@ -65,6 +71,7 @@ android {
 }aaptOptions {
     additionalParameters =["--warn-manifest-validation"]
 }
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     api project(':RFIDAPI3Library')
