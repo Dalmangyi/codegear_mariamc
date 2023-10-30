@@ -1,11 +1,15 @@
 package com.codegear.mariamc_rfid.cowchronicle.storage;
 
 import android.content.Context;
+import android.os.Bundle;
 
+import com.codegear.mariamc_rfid.BuildConfig;
 import com.codegear.mariamc_rfid.cowchronicle.consts.BottomNavEnum;
 import com.codegear.mariamc_rfid.cowchronicle.services.ResLogin;
+import com.codegear.mariamc_rfid.cowchronicle.utils.AndroidUtil;
 import com.codegear.mariamc_rfid.cowchronicle.utils.CryptedKeys;
 import com.codegear.mariamc_rfid.cowchronicle.utils.CryptedPrefs;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 public class UserStorage {
     private static final UserStorage mInstance = new UserStorage();
@@ -38,6 +42,17 @@ public class UserStorage {
             mPrefs.setValue(CryptedKeys.LOGIN_USER_ID, userId);
             mPrefs.setValue(CryptedKeys.LOGIN_USER_PWD, userPwd);
             mPrefs.setValue(CryptedKeys.LOGIN_IS_AUTO, isAutoLogin);
+
+
+            //Analytics ( set user )
+            FirebaseAnalytics mFirebaseAnalytics = FirebaseAnalytics.getInstance(mContext);
+            mFirebaseAnalytics.setUserId(userId);
+
+            //Analytics ( login )
+            Bundle bundle = new Bundle();
+            bundle.putString("USER_ID",userId);
+            bundle.putString(FirebaseAnalytics.Param.METHOD, "login");
+            mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.LOGIN, bundle);
         }
 
         this.mResLogin = resLogin;

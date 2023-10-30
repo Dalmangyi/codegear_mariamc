@@ -18,6 +18,7 @@ import androidx.security.crypto.MasterKey;
 
 import com.codegear.mariamc_rfid.BuildConfig;
 import com.codegear.mariamc_rfid.cowchronicle.storage.UserStorage;
+import com.codegear.mariamc_rfid.cowchronicle.utils.AndroidUtil;
 import com.codegear.mariamc_rfid.rfidreader.common.PreFilters;
 import com.codegear.mariamc_rfid.rfidreader.reader_connection.ScanPair;
 import com.codegear.mariamc_rfid.rfidreader.common.MaxLimitArrayList;
@@ -289,8 +290,18 @@ public class Application extends android.app.Application {
         FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(!BuildConfig.DEBUG);
 
 
+        //Firebase Analytics
+        FirebaseAnalytics mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+        mFirebaseAnalytics.setUserProperty("APP_VER", BuildConfig.VERSION_NAME);
+        mFirebaseAnalytics.setUserProperty("IS_DEBUG", ""+BuildConfig.DEBUG);
+        mFirebaseAnalytics.setUserProperty("DEVICE_ID", AndroidUtil.getDeviceId(this));
+        mFirebaseAnalytics.setUserProperty("DEVICE_MODEL", AndroidUtil.getDeviceModel());
+        mFirebaseAnalytics.setUserProperty("DEVICE_OS", AndroidUtil.getDeviceOs());
+        mFirebaseAnalytics.setUserProperty("DEVICE_SDK", ""+AndroidUtil.getDeviceSdk());
+
+
+        //?
         Foreground.init(this);
-        //this keyword referring to Context of the sample application
         sdkHandler = new SDKHandler(this, false);
 
         //유저 저장소 초기화

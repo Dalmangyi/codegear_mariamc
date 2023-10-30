@@ -58,6 +58,7 @@ import com.codegear.mariamc_rfid.cowchronicle.utils.SoundSearcher;
 import com.codegear.mariamc_rfid.rfidreader.rfid.RFIDController;
 import com.codegear.mariamc_rfid.rfidreader.rfid.RfidListeners;
 import com.codegear.mariamc_rfid.rfidreader.settings.ProfileContent;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.skydoves.powerspinner.IconSpinnerAdapter;
 import com.skydoves.powerspinner.IconSpinnerItem;
 import com.skydoves.powerspinner.OnSpinnerItemSelectedListener;
@@ -80,7 +81,7 @@ public class CowTagsFragment extends Fragment {
 
 
     private final String TAG = "CowTagsFragment";
-
+    private FirebaseAnalytics mFirebaseAnalytics;
 
     //UI
     private CowChronicleActivity mActivity;
@@ -124,6 +125,7 @@ public class CowTagsFragment extends Fragment {
         setHasOptionsMenu(true);
         mActivity = (CowChronicleActivity)getActivity();
         mActivity.getSupportActionBar().setTitle("전자이표");
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(mActivity);
 
 
         mMainView = inflater.inflate(R.layout.fragment_cow_tags, null, false);
@@ -170,10 +172,15 @@ public class CowTagsFragment extends Fragment {
 
                     //랜덤으로 가져올 태그정보가 있으면, 임시로 태그 데이터 생성.
                     if(tempTagId != null){
+                        //임시 데이터 추가 & 리스트 갱신
                         ExTagData tagData = new ExTagData();
                         tagData.newTagId = tempTagId;
-                        cowTagsModel.appendTagData(new ExTagData[]{tagData});
-                        mAdapterHandler.sendEmptyMessage(0); //리스트 갱신
+                        ExTagData[] tagList = new ExTagData[]{tagData};
+                        cowTagsModel.appendTagData(tagList);
+                        mAdapterHandler.sendEmptyMessage(0);
+
+                        //이벤트 로깅
+                        eventLog_Tag(tagList);
                     }
                 }
             });
@@ -329,6 +336,11 @@ public class CowTagsFragment extends Fragment {
         rfidSingleton.setIRFIDSingletonTag(tagList -> {
             if(mScanRunning){
                 if (tagList != null && tagList.length > 0) {
+
+                    //이벤트 로깅
+                    eventLog_Tag(tagList);
+
+                    //스캔된 태그 데이터 갱신
                     ExTagData[] exTagList = Arrays.copyOf(tagList, tagList.length, ExTagData[].class);
                     cowTagsModel.appendTagData(exTagList); //기존 태그 리스트에 신규 태그 리스트 추가하기.
                     mAdapterHandler.sendEmptyMessage(0);
@@ -737,5 +749,34 @@ public class CowTagsFragment extends Fragment {
         startActivity(intent);
     }
 
+    //이벤트 로깅
+    private void eventLog_Tag(TagData[] tagList){
+
+
+        //이벤트 로깅
+        Bundle params = new Bundle();
+        {
+            //태그된 데이터
+            for(int i=0; i<tagList.length; i++){
+                TagData tagData = tagList[i];
+                String key = "TAG_"+String.format("%04d", i);
+                params.putString(key, tagData.getTagID());
+            }
+
+            //접속 농장 아이디
+            params.putString("FARM_CODE",""+mSelectedFarmCode);
+
+            //스캔용 기기 이름
+            String connectedReaderName = "Unknown";
+            try{
+                connectedReaderName = RFIDController.mConnectedReader.getHostName();
+            }
+            catch (Exception e){}
+            params.putString("CONNECTED_READER_NAME",connectedReaderName);
+
+            //이벤트 등록
+            mFirebaseAnalytics.logEvent("RFID_TAG_LIST", params);
+        }
+    }
 
 }
