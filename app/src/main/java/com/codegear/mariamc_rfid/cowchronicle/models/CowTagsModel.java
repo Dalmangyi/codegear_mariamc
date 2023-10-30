@@ -5,6 +5,7 @@ import androidx.annotation.NonNull;
 import com.codegear.mariamc_rfid.cowchronicle.consts.CowFilterKeyEnum;
 import com.codegear.mariamc_rfid.cowchronicle.consts.MemoryBankIdEnum;
 import com.codegear.mariamc_rfid.cowchronicle.ui.cowtags.CowTagCell;
+import com.codegear.mariamc_rfid.cowchronicle.ui.cowtags.ExTagData;
 import com.codegear.mariamc_rfid.rfidreader.rfid.RFIDController;
 import com.zebra.rfid.api3.ACCESS_OPERATION_CODE;
 import com.zebra.rfid.api3.ACCESS_OPERATION_STATUS;
@@ -94,7 +95,7 @@ public class CowTagsModel {
         }
 
         //태그 데이터 초기화
-        applyTagList(this.mTagList.toArray(new TagData[mTagList.size()]));
+        applyTagList(this.mTagList.toArray(new ExTagData[mTagList.size()]));
     }
 
 
@@ -112,8 +113,14 @@ public class CowTagsModel {
 
     }
 
+    //데이터 가져오기
+    public ArrayList<CowTagCell> getCowInfoList(){
+        return mCowInfoList;
+    }
+
+
     @NonNull
-    public void appendTagData(TagData[] tagList) {
+    public void appendTagData(ExTagData[] tagList) {
 
         try{
             //태그 데이터 반영
@@ -130,10 +137,10 @@ public class CowTagsModel {
     }
 
     //태그 데이터 적용
-    private void applyTagList(TagData[] tagList){
+    private void applyTagList(ExTagData[] tagList){
 
         //태그 데이터 추출
-        for(TagData tagData:tagList){
+        for(ExTagData tagData:tagList){
 
             //기본 데이터 조회
             String tagId = tagData.getTagID();
@@ -182,7 +189,17 @@ public class CowTagsModel {
             //태그 데이터 반영 (COUNT)
             List<CowTagCell> filteredCowTagCells = mCowInfoList.stream()
 //                    .limit(1) //소 1마리당 유니크한 1개의 전자이표를 가진다는 가정. 로직상 N개 필터링 해도되지만 속도 개선을 하려면 1개로 고정해서 사용하면 됨.
-                    .filter(item -> item.TAGNO.equals(tagId))
+                    .filter(item -> {
+
+                        //총 16자리중에 앞 자리를 0으로 채운 태그번호
+                        String zeroFilledTagId = tagId;
+                        for(int i=16-zeroFilledTagId.length(); i>0; i--){
+                            zeroFilledTagId = "0"+zeroFilledTagId;
+                        }
+
+                        //태그번호가 같거나, 0으로 채운 태그번호와 같은지 확인.
+                        return (item.TAGNO.equals(tagId) || item.TAGNO.equals(zeroFilledTagId));
+                    })
                     .collect(Collectors.toList());
 
             for(CowTagCell cell : filteredCowTagCells){

@@ -271,6 +271,8 @@ public class AccessOperationController {
                 if( e!= null && e.getStackTrace().length>0){ Log.e(TAG, e.getStackTrace()[0].toString()); }
             } catch (NullPointerException e){
                 if( e!= null && e.getStackTrace().length>0){ Log.e(TAG, e.getStackTrace()[0].toString()); }
+            } catch (IndexOutOfBoundsException e){
+                if( e!= null && e.getStackTrace().length>0){ Log.e(TAG, e.getStackTrace()[0].toString()); }
             }
         }
     }

@@ -23,6 +23,8 @@ import android.widget.CompoundButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.appcompat.widget.AppCompatEditText;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -31,6 +33,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.codegear.mariamc_rfid.ActiveDeviceActivity;
+import com.codegear.mariamc_rfid.BuildConfig;
 import com.codegear.mariamc_rfid.R;
 import com.codegear.mariamc_rfid.application.Application;
 import com.codegear.mariamc_rfid.cowchronicle.consts.BottomNavEnum;
@@ -38,6 +41,7 @@ import com.codegear.mariamc_rfid.cowchronicle.consts.MemoryBankIdEnum;
 import com.codegear.mariamc_rfid.cowchronicle.services.ReqInsertTagData;
 import com.codegear.mariamc_rfid.cowchronicle.services.ResInsertTagData;
 import com.codegear.mariamc_rfid.cowchronicle.ui.cowtags.CowTagCell;
+import com.codegear.mariamc_rfid.cowchronicle.ui.cowtags.ExTagData;
 import com.codegear.mariamc_rfid.cowchronicle.ui.farms.FarmSearchDialogCompat;
 import com.codegear.mariamc_rfid.cowchronicle.models.FarmModel;
 import com.codegear.mariamc_rfid.cowchronicle.services.ResCowList;
@@ -61,10 +65,13 @@ import com.skydoves.powerspinner.PowerSpinnerView;
 import com.xw.repo.BubbleSeekBar;
 import com.zebra.rfid.api3.InvalidUsageException;
 import com.zebra.rfid.api3.OperationFailureException;
+import com.zebra.rfid.api3.TagData;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import ir.mirrajabi.searchdialog.core.BaseFilter;
 import retrofit2.Call;
@@ -121,6 +128,7 @@ public class CowTagsFragment extends Fragment {
 
         mMainView = inflater.inflate(R.layout.fragment_cow_tags, null, false);
 
+        //농장 선택 버튼 (현재 선택된 농장 표시됨).
         btnCurrentFarm = mMainView.findViewById(R.id.btnCurrentFarm);
         btnCurrentFarm.setOnClickListener(v -> {
 
@@ -132,6 +140,46 @@ public class CowTagsFragment extends Fragment {
             showFarmSearchDialog(v);
         });
 
+        //테스트용, 임시로 태그 데이터 추가시키는 버튼
+        AppCompatEditText etScanTempData = mMainView.findViewById(R.id.etScanTempData);
+        AppCompatButton btnScanTempData = mMainView.findViewById(R.id.btnScanTempData);
+        if(BuildConfig.DEBUG){
+            etScanTempData.setVisibility(View.VISIBLE);
+            btnScanTempData.setVisibility(View.VISIBLE);
+
+            btnScanTempData.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    String etTagId = etScanTempData.getText().toString();
+                    etTagId = etTagId.strip();
+
+                    //에딧텍스트에 적힌 태그아이디를 추가하거나, 농장에서 가지고 있는 태그정보 랜덤으로 1개 가지고 오기.
+                    String tempTagId = null;
+                    if(!etTagId.equals("")){
+                        tempTagId = etTagId;
+                    }
+                    else{
+                        ArrayList<CowTagCell> cowTagCells = cowTagsModel.getCowInfoList();
+                        if(cowTagCells.size() > 0){
+                            Random rand = new Random(System.currentTimeMillis());
+                            CowTagCell tempCowTagCell = cowTagCells.get(rand.nextInt(cowTagCells.size()));
+                            tempTagId = tempCowTagCell.TAGNO;
+                        }
+                    }
+
+                    //랜덤으로 가져올 태그정보가 있으면, 임시로 태그 데이터 생성.
+                    if(tempTagId != null){
+                        ExTagData tagData = new ExTagData();
+                        tagData.newTagId = tempTagId;
+                        cowTagsModel.appendTagData(new ExTagData[]{tagData});
+                        mAdapterHandler.sendEmptyMessage(0); //리스트 갱신
+                    }
+                }
+            });
+        }
+
+        //안테나 거리 파워 설정 버튼
         bsbDistancePower = mMainView.findViewById(R.id.bsbDistancePower);
         btnAntennaPowerApply = mMainView.findViewById(R.id.btnAntennaPowerApply);
         btnAntennaPowerApply.setOnClickListener(v -> {
@@ -273,6 +321,7 @@ public class CowTagsFragment extends Fragment {
         return true;
     }
 
+    //RFID 리스너 (신규로 스캔된 태그 데이터 받아오는 곳)
     private void initRFIDListener(){
 
         Log.i(TAG,"initRFIDListener");
@@ -280,7 +329,8 @@ public class CowTagsFragment extends Fragment {
         rfidSingleton.setIRFIDSingletonTag(tagList -> {
             if(mScanRunning){
                 if (tagList != null && tagList.length > 0) {
-                    cowTagsModel.appendTagData(tagList); //기존 태그 리스트에 신규 태그 리스트 추가하기.
+                    ExTagData[] exTagList = Arrays.copyOf(tagList, tagList.length, ExTagData[].class);
+                    cowTagsModel.appendTagData(exTagList); //기존 태그 리스트에 신규 태그 리스트 추가하기.
                     mAdapterHandler.sendEmptyMessage(0);
                 }
             }
