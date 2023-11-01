@@ -139,6 +139,8 @@ public class CowTagsModel {
     //태그 데이터 적용
     private void applyTagList(ExTagData[] tagList){
 
+
+
         //태그 데이터 추출
         for(ExTagData tagData:tagList){
 
@@ -178,7 +180,7 @@ public class CowTagsModel {
             }
 
 
-            //태그 개수 세기
+            //태그 개수 세기 (기존 태그 개수 가져오기)
             Integer tagCount = mTagCountMap.get(tagId);
             if (tagCount == null){
                 tagCount = 0;
@@ -191,17 +193,38 @@ public class CowTagsModel {
 //                    .limit(1) //소 1마리당 유니크한 1개의 전자이표를 가진다는 가정. 로직상 N개 필터링 해도되지만 속도 개선을 하려면 1개로 고정해서 사용하면 됨.
                     .filter(item -> {
 
-                        //총 16자리중에 앞 자리를 0으로 채운 태그번호
-                        String zeroFilledTagId = tagId;
-                        for(int i=16-zeroFilledTagId.length(); i>0; i--){
-                            zeroFilledTagId = "0"+zeroFilledTagId;
-                        }
-
-                        //태그번호가 같거나, 0으로 채운 태그번호와 같은지 확인.
-                        return (item.TAGNO.equals(tagId) || item.TAGNO.equals(zeroFilledTagId));
+//                        //총 16자리중에 앞 자리를 0으로 채운 태그번호
+//                        String zeroFilledTagId = tagId;
+//                        for(int i=16-zeroFilledTagId.length(); i>0; i--){
+//                            zeroFilledTagId = "0"+zeroFilledTagId;
+//                        }
+//
+//                        //태그번호가 같거나, 0으로 채운 태그번호와 같은지 확인.
+//                        return (item.TAGNO.equals(tagId) || item.TAGNO.equals(zeroFilledTagId));
+                        return item.TAGNO.equals(tagId);
                     })
                     .collect(Collectors.toList());
 
+
+            //태그 아이디가 존재하지 않으면, 임시 태그 데이터로 추가.
+            if(filteredCowTagCells.size() == 0){
+
+                //임시 태그 데이터로 추가.
+                CowTagCell cell = new CowTagCell();
+                cell.COW_ID_NUM = "-";
+                cell.SNM = "-";
+                cell.SEX_AND_MONTHS = "-";
+                cell.SNM = "-";
+                cell.PRTY = "-";
+                cell.PRN_STTS = "-";
+                cell.TAGNO = tagId;
+                mCowInfoList.add(cell);
+
+                //데이터 갱신용으로 추가
+                filteredCowTagCells.add(cell);
+            }
+
+            //태그 데이터 갱신
             for(CowTagCell cell : filteredCowTagCells){
                 cell.COUNT = tagCount;
                 cell.RSSI = tagRssi;
