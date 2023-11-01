@@ -58,7 +58,7 @@ android {
         variant.outputs.all { output ->
 
             def buildType = variant.buildType.name
-            outputFileName = "MariAMC_v${defaultConfig.versionName}_${buildType}.apk"
+            outputFileName = "MariAMC_v${defaultConfig.versionName}(${defaultConfig.versionCode})_${buildType}.apk"
         }
     }
 
