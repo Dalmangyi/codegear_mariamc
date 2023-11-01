@@ -5,12 +5,15 @@ import android.util.Log;
 import com.codegear.mariamc_rfid.application.Application;
 import com.codegear.mariamc_rfid.rfidreader.rfid.RFIDController;
 import com.zebra.rfid.api3.Events;
+import com.zebra.rfid.api3.HANDHELD_TRIGGER_EVENT_TYPE;
 import com.zebra.rfid.api3.InvalidUsageException;
 import com.zebra.rfid.api3.OperationFailureException;
 import com.zebra.rfid.api3.RfidEventsListener;
 import com.zebra.rfid.api3.RfidReadEvents;
 import com.zebra.rfid.api3.RfidStatusEvents;
+import com.zebra.rfid.api3.START_TRIGGER_TYPE;
 import com.zebra.rfid.api3.STATUS_EVENT_TYPE;
+import com.zebra.rfid.api3.STOP_TRIGGER_TYPE;
 import com.zebra.rfid.api3.TagData;
 
 public class RFIDSingleton implements RfidEventsListener {
@@ -27,7 +30,7 @@ public class RFIDSingleton implements RfidEventsListener {
 
 
 
-    private IRFIDSingletonTag irfidSingletonTag = null;
+    private IRFIDSingleton irfidSingleton = null;
 
 
 
@@ -58,8 +61,8 @@ public class RFIDSingleton implements RfidEventsListener {
         }
     }
 
-    public void setIRFIDSingletonTag(IRFIDSingletonTag irfidSingletonTag){
-        this.irfidSingletonTag = irfidSingletonTag;
+    public void setIRFIDSingletonTag(IRFIDSingleton irfidSingleton){
+        this.irfidSingleton = irfidSingleton;
     }
 
 
@@ -84,8 +87,8 @@ public class RFIDSingleton implements RfidEventsListener {
 
         int tagCount = (myTags != null ? myTags.length : 0);
         Log.d(TAG, "RFIDSingleton eventReadNotify :"+tagCount);
-        if(irfidSingletonTag != null){
-            irfidSingletonTag.tags(myTags);
+        if(irfidSingleton != null){
+            irfidSingleton.tags(myTags);
         }
     }
 
@@ -97,10 +100,34 @@ public class RFIDSingleton implements RfidEventsListener {
 
     private void notificationFromGenericReader(RfidStatusEvents rfidStatusEvents) {
 
-        if (rfidStatusEvents.StatusEventData.getStatusEventType() == STATUS_EVENT_TYPE.BATTERY_EVENT) {
+        STATUS_EVENT_TYPE statusEventType = rfidStatusEvents.StatusEventData.getStatusEventType();
+
+        //배터리 이벤트
+        if (statusEventType == STATUS_EVENT_TYPE.BATTERY_EVENT) {
             final Events.BatteryData batteryData = rfidStatusEvents.StatusEventData.BatteryData;
             RFIDController.BatteryData = batteryData;
         }
+
+        //트리거 이벤트
+        else if (statusEventType == STATUS_EVENT_TYPE.HANDHELD_TRIGGER_EVENT) {
+
+            Boolean triggerPressed = false;
+            if (rfidStatusEvents.StatusEventData.HandheldTriggerEventData.getHandheldEvent() == HANDHELD_TRIGGER_EVENT_TYPE.HANDHELD_TRIGGER_PRESSED) {
+                triggerPressed = true;
+            }
+
+            if (triggerPressed && isTriggerImmediateOrRepeat(triggerPressed)) {
+                if(irfidSingleton != null){
+                    irfidSingleton.trigger(true, false);
+                }
+            } else if (!triggerPressed && isTriggerImmediateOrRepeat(triggerPressed)) {
+                if(irfidSingleton != null){
+                    irfidSingleton.trigger(false, true);
+                }
+            }
+        }
+
+
     }
 
 
@@ -115,12 +142,33 @@ public class RFIDSingleton implements RfidEventsListener {
                 RFIDController.mConnectedReader.disconnect();
                 RFIDController.mConnectedReader.Dispose();
             } catch (InvalidUsageException e) {
-                Log.d(TAG, "Returned SDK Exception");
+                Log.d(TAG, "Returned SDK InvalidUsageException");
             } catch (OperationFailureException e) {
-                Log.d(TAG, "Returned SDK Exception");
+                Log.d(TAG, "Returned SDK OperationFailureException");
             } catch (Exception e) {
+                Log.d(TAG, "Returned SDK Exception");
             }
             RFIDController.mConnectedReader = null;
+        }
+    }
+
+
+
+    public Boolean isTriggerImmediateOrRepeat(Boolean trigPress) {
+        if (trigPress
+                && RFIDController.settings_startTrigger.getTriggerType().toString().equalsIgnoreCase(START_TRIGGER_TYPE.START_TRIGGER_TYPE_IMMEDIATE.toString())
+                && (!RFIDController.settings_stopTrigger.getTriggerType().toString().equalsIgnoreCase(STOP_TRIGGER_TYPE.STOP_TRIGGER_TYPE_HANDHELD_WITH_TIMEOUT.toString())))
+        {
+            return true;
+        }
+        else if (!trigPress
+                && !RFIDController.settings_startTrigger.getTriggerType().toString().equalsIgnoreCase(START_TRIGGER_TYPE.START_TRIGGER_TYPE_HANDHELD.toString())
+                && (RFIDController.settings_stopTrigger.getTriggerType().toString().equalsIgnoreCase(STOP_TRIGGER_TYPE.STOP_TRIGGER_TYPE_IMMEDIATE.toString())))
+        {
+            return true;
+        }
+        else {
+            return false;
         }
     }
 }

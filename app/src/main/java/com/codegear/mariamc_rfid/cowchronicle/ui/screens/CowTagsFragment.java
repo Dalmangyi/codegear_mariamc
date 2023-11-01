@@ -38,6 +38,7 @@ import com.codegear.mariamc_rfid.R;
 import com.codegear.mariamc_rfid.application.Application;
 import com.codegear.mariamc_rfid.cowchronicle.consts.BottomNavEnum;
 import com.codegear.mariamc_rfid.cowchronicle.consts.MemoryBankIdEnum;
+import com.codegear.mariamc_rfid.cowchronicle.device.IRFIDSingleton;
 import com.codegear.mariamc_rfid.cowchronicle.services.ReqInsertTagData;
 import com.codegear.mariamc_rfid.cowchronicle.services.ResInsertTagData;
 import com.codegear.mariamc_rfid.cowchronicle.ui.cowtags.CowTagCell;
@@ -302,6 +303,13 @@ public class CowTagsFragment extends Fragment {
         stopScanInventory(true);
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        rfidSingleton.setIRFIDSingletonTag(null);
+
+    }
 
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
@@ -333,20 +341,36 @@ public class CowTagsFragment extends Fragment {
 
         Log.i(TAG,"initRFIDListener");
 
-        rfidSingleton.setIRFIDSingletonTag(tagList -> {
-            if(mScanRunning){
-                if (tagList != null && tagList.length > 0) {
+        rfidSingleton.setIRFIDSingletonTag(new IRFIDSingleton() {
+            @Override
+            public void tags(TagData[] tagList) {
 
-                    //이벤트 로깅
-                    eventLog_Tag(tagList);
+                if(mScanRunning){
+                    if (tagList != null && tagList.length > 0) {
 
-                    //스캔된 태그 데이터 갱신
-                    ExTagData[] exTagList = Arrays.copyOf(tagList, tagList.length, ExTagData[].class);
-                    cowTagsModel.appendTagData(exTagList); //기존 태그 리스트에 신규 태그 리스트 추가하기.
-                    mAdapterHandler.sendEmptyMessage(0);
+                        //이벤트 로깅
+                        eventLog_Tag(tagList);
+
+                        //스캔된 태그 데이터 갱신
+                        ExTagData[] exTagList = Arrays.copyOf(tagList, tagList.length, ExTagData[].class);
+                        cowTagsModel.appendTagData(exTagList); //기존 태그 리스트에 신규 태그 리스트 추가하기.
+                        mAdapterHandler.sendEmptyMessage(0);
+                    }
+                }
+            }
+
+            @Override
+            public void trigger(Boolean isPress, Boolean isRelease) {
+
+                if(isPress){
+                    setScanRunning(true);
+                }
+                else if (isRelease) {
+                    setScanRunning(false);
                 }
             }
         });
+
     }
 
     //메모리뱅크 레이아웃 초기화
