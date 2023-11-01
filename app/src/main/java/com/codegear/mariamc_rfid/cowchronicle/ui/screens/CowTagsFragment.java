@@ -69,6 +69,8 @@ import com.zebra.rfid.api3.InvalidUsageException;
 import com.zebra.rfid.api3.OperationFailureException;
 import com.zebra.rfid.api3.TagData;
 
+import org.llrp.ltk.generated.parameters.Custom;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -249,7 +251,15 @@ public class CowTagsFragment extends Fragment {
 
             CustomDialog.showSelectDialog(mActivity,
                     "이력제번호 : "+cell.COW_ID_NUM, cell.toDetailString(),
-                    "상세 정보 보기", (MaterialDialog.SingleButtonCallback) (dialog, which) -> goCowDetail(""+cell.COW_ID_NUM),
+                    "상세 정보 보기", (MaterialDialog.SingleButtonCallback) (dialog, which) -> {
+
+                        if(cell.isIncludedDataInFarm){
+                            goCowDetail(""+cell.COW_ID_NUM);
+                        }
+                        else{
+                            CustomDialog.showSimple(mActivity, "목장에 포함되지 않은 태그 정보는 자세히 볼 수 없습니다.");
+                        }
+                    },
                     "태그 쓰기", (MaterialDialog.SingleButtonCallback) (dialog, which) -> {
 
                         boolean enabledDevice = (RFIDController.mConnectedReader != null && RFIDController.mConnectedReader.isConnected());
@@ -307,8 +317,7 @@ public class CowTagsFragment extends Fragment {
     public void onDestroy() {
         super.onDestroy();
 
-        rfidSingleton.setIRFIDSingletonTag(null);
-
+        destroyRFIDListener();
     }
 
     @Override
@@ -371,6 +380,10 @@ public class CowTagsFragment extends Fragment {
             }
         });
 
+    }
+
+    private void destroyRFIDListener(){
+        rfidSingleton.setIRFIDSingletonTag(null);
     }
 
     //메모리뱅크 레이아웃 초기화
@@ -547,8 +560,8 @@ public class CowTagsFragment extends Fragment {
 
     //스캔 버튼 상태 갱신
     private void setScanRunning(boolean running){
-        mScanRunning = running;
         btnScan.setSelected(running);
+        mScanRunning = running;
 
         if(running){
             btnScan.setText("정지");
@@ -558,6 +571,7 @@ public class CowTagsFragment extends Fragment {
             btnScan.setText("스캔");
             stopScanInventory(true);
         }
+
     }
 
 

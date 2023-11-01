@@ -54,6 +54,7 @@ public class CowTagsModel {
             Map<String, String> inputResItem = mInputResList.get(i);
 
             CowTagCell cell = new CowTagCell();
+            cell.isIncludedDataInFarm = true;
             cell.rowPosition = i;
             for (String resKey : resKeyList) {
 
@@ -211,6 +212,7 @@ public class CowTagsModel {
 
                 //임시 태그 데이터로 추가.
                 CowTagCell cell = new CowTagCell();
+                cell.isIncludedDataInFarm = false;
                 cell.COW_ID_NUM = "-";
                 cell.SNM = "-";
                 cell.SEX_AND_MONTHS = "-";

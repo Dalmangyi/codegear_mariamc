@@ -23,7 +23,7 @@ public class CowTagCell {
     public String TID_VAL = EMPTY_VAL;             //메모리뱅크 TID 값
     public String OTHER_VAL = EMPTY_VAL;           //메모리뱅크 기타 값
 
-
+    public Boolean isIncludedDataInFarm = true; //목장에 포함된 데이터 여부
 
     public void setValue(String key, String value){
         switch (key){

@@ -110,7 +110,6 @@ import com.codegear.mariamc_rfid.rfidreader.common.ResponseHandlerInterfaces;
 import com.codegear.mariamc_rfid.rfidreader.common.ResponseHandlerInterfaces.BatteryNotificationHandler;
 import com.codegear.mariamc_rfid.rfidreader.common.ResponseHandlerInterfaces.ReaderDeviceFoundHandler;
 import com.codegear.mariamc_rfid.rfidreader.common.ResponseHandlerInterfaces.TriggerEventHandler;
-import com.zebra.rfid.api3.ACCESS_OPERATION_CODE;
 import com.zebra.rfid.api3.ACCESS_OPERATION_STATUS;
 import com.zebra.rfid.api3.BEEPER_VOLUME;
 import com.zebra.rfid.api3.ENUM_TRIGGER_MODE;
@@ -2439,9 +2438,9 @@ public class RFIDBase implements Readers.RFIDReaderEventHandler, NavigationView.
                 triggerPressed = true;
             Log.d(TAG, "notificationFromGenericReader " + fragment + " screen " + m_ScreenOn + "trigger type = " + rfidStatusEvents.StatusEventData.HandheldTriggerEventData.getHandheldTriggerType().ordinal);
             if (m_ScreenOn) {
-                if (triggerPressed && isTriggerImmediateorRepeat(triggerPressed) && fragment instanceof TriggerEventHandler) {
+                if (triggerPressed && isTriggerImmediateOrRepeat(triggerPressed) && fragment instanceof TriggerEventHandler) {
                     ((TriggerEventHandler) fragment).triggerPressEventRecieved();
-                } else if (!triggerPressed && isTriggerImmediateorRepeat(triggerPressed) && fragment instanceof TriggerEventHandler) {
+                } else if (!triggerPressed && isTriggerImmediateOrRepeat(triggerPressed) && fragment instanceof TriggerEventHandler) {
                     ((TriggerEventHandler) fragment).triggerReleaseEventRecieved();
                     //tagListMatchNotice = false;
                 }
@@ -2515,7 +2514,7 @@ public class RFIDBase implements Readers.RFIDReaderEventHandler, NavigationView.
     /*
      *method to check if both start and stop trigger is IMMEDIATE or repeat trigger
      */
-    public Boolean isTriggerImmediateorRepeat(Boolean trigPress) {
+    public Boolean isTriggerImmediateOrRepeat(Boolean trigPress) {
         if (trigPress && RFIDController.settings_startTrigger.getTriggerType().toString().equalsIgnoreCase(START_TRIGGER_TYPE.START_TRIGGER_TYPE_IMMEDIATE.toString()) && (!RFIDController.settings_stopTrigger.getTriggerType().toString().equalsIgnoreCase(STOP_TRIGGER_TYPE.STOP_TRIGGER_TYPE_HANDHELD_WITH_TIMEOUT.toString()))) {
             return true;
         } else if (!trigPress && !RFIDController.settings_startTrigger.getTriggerType().toString().equalsIgnoreCase(START_TRIGGER_TYPE.START_TRIGGER_TYPE_HANDHELD.toString()) && (RFIDController.settings_stopTrigger.getTriggerType().toString().equalsIgnoreCase(STOP_TRIGGER_TYPE.STOP_TRIGGER_TYPE_IMMEDIATE.toString()))) {
