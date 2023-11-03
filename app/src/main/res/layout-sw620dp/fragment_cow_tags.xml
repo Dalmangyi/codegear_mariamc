@@ -140,6 +140,22 @@
             android:orientation="horizontal"
             android:gravity="left">
 
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnScanTempData"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="scan Temp TAG"
+                android:visibility="gone"
+                tools:visibility="visible"/>
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/etScanTempData"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="541100000001143"
+                android:visibility="gone"
+                tools:visibility="visible"/>
+
         </LinearLayout>
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnClear"

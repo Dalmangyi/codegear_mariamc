@@ -71,11 +71,13 @@ import com.zebra.rfid.api3.TagData;
 
 import org.llrp.ltk.generated.parameters.Custom;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.concurrent.Semaphore;
 
 import ir.mirrajabi.searchdialog.core.BaseFilter;
 import retrofit2.Call;
@@ -86,6 +88,8 @@ public class CowTagsFragment extends Fragment {
     private final String TAG = "CowTagsFragment";
     private FirebaseAnalytics mFirebaseAnalytics;
 
+
+
     //UI
     private CowChronicleActivity mActivity;
     private View mMainView;
@@ -95,6 +99,10 @@ public class CowTagsFragment extends Fragment {
     private BubbleSeekBar bsbDistancePower;
     private PowerSpinnerView spMemoryBankIds;
     private CheckBox cbUseFilterCount;
+
+
+
+
 
     private Handler mAdapterHandler = new Handler(Looper.getMainLooper()){
         @Override
@@ -118,7 +126,10 @@ public class CowTagsFragment extends Fragment {
     private int[] antennaPowerLevels = null;
     private DeviceTaskSettings.SaveAntennaConfigurationTask antennaTask = null;
     private CowTagsModel cowTagsModel = new CowTagsModel();
-    private boolean mScanRunning = false;
+    private boolean mScanRunning = false; //스캔중
+    private boolean mCommandProcessingByRFID = false; //RFID 커맨드 진행중
+    private Semaphore mutexCommandProcessing = new Semaphore(100);
+
     private RFIDSingleton rfidSingleton = RFIDSingleton.getInstance();
 
 
@@ -299,6 +310,7 @@ public class CowTagsFragment extends Fragment {
         super.onResume();
         UserStorage.getInstance().setBottomNavItem(BottomNavEnum.BN_COW_TAGS);
 
+        initRFIDListener();
         initSelectFarm();
         loadCowList();
         loadCurrentAntennaConfig();
@@ -350,6 +362,7 @@ public class CowTagsFragment extends Fragment {
 
         Log.i(TAG,"initRFIDListener");
 
+        rfidSingleton.init();
         rfidSingleton.setIRFIDSingletonTag(new IRFIDSingleton() {
             @Override
             public void tags(TagData[] tagList) {
@@ -361,22 +374,28 @@ public class CowTagsFragment extends Fragment {
                         eventLog_Tag(tagList);
 
                         //스캔된 태그 데이터 갱신
-                        ExTagData[] exTagList = Arrays.copyOf(tagList, tagList.length, ExTagData[].class);
-                        cowTagsModel.appendTagData(exTagList); //기존 태그 리스트에 신규 태그 리스트 추가하기.
+                        ArrayList<ExTagData> exTagList = new ArrayList<>();
+                        for(int i = 0; i < tagList.length; i++) {
+                            ExTagData tempExTagData = new ExTagData();
+                            tempExTagData.setTagData(tagList[i]);
+                            exTagList.add(tempExTagData);
+                        }
+//                        ExTagData[] exTagList = Arrays.copyOf(tagList, tagList.length, ExTagData[].class);
+                        cowTagsModel.appendTagData(exTagList.toArray(new ExTagData[0])); //기존 태그 리스트에 신규 태그 리스트 추가하기.
                         mAdapterHandler.sendEmptyMessage(0);
                     }
                 }
             }
 
             @Override
-            public void trigger(Boolean isPress, Boolean isRelease) {
+            public void trigger(Boolean isPressed, Boolean isReleased) {
 
-                if(isPress){
+                if (isPressed) {
                     setScanRunning(true);
-                }
-                else if (isRelease) {
+                } else if (isReleased) {
                     setScanRunning(false);
                 }
+
             }
         });
 
@@ -559,24 +578,34 @@ public class CowTagsFragment extends Fragment {
 
 
     //스캔 버튼 상태 갱신
-    private void setScanRunning(boolean running){
+    private synchronized void setScanRunning(boolean running){
         btnScan.setSelected(running);
-        mScanRunning = running;
 
-        if(running){
-            btnScan.setText("정지");
-            initRFIDListener();
-            startScanInventory();
-        }else{
-            btnScan.setText("스캔");
-            stopScanInventory(true);
+        if(mScanRunning != running){
+            if(running){
+                mActivity.runOnUiThread(() -> {
+                    btnScan.setText("정지");
+                    startScanInventory();
+                });
+            }else{
+                mActivity.runOnUiThread(() -> {
+                    btnScan.setText("스캔");
+                    stopScanInventory(true);
+                });
+            }
         }
 
+        mScanRunning = running;
     }
 
 
     //스캔 시작
     private void startScanInventory(){
+        try {
+            mutexCommandProcessing.acquire();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
 
         Application.useCowChronicleTagging = true;
 
@@ -586,18 +615,24 @@ public class CowTagsFragment extends Fragment {
             public void onSuccess(Object object) {
                 RFIDController.tagListMatchNotice = false;
                 RFIDController.mIsInventoryRunning = true;
+
+                mutexCommandProcessing.release();
             }
 
             @Override
             public void onFailure(Exception exception) {
                 setScanRunning(false);
-                CustomDialog.showSimpleError(mActivity, "스캔 시작 에러 : "+exception.getMessage());
+                showExceptionByRfid("스캔 시작 에러 : ", exception);
+
+                mutexCommandProcessing.release();
             }
 
             @Override
             public void onFailure(String message) {
                 setScanRunning(false);
-                CustomDialog.showSimpleError(mActivity, "스캔 시작 에러 : "+message);
+                showExceptionByRfid("스캔 시작 에러 : "+"스캔 시작 에러 : ", null);
+
+                mutexCommandProcessing.release();
             }
         };
 
@@ -613,12 +648,19 @@ public class CowTagsFragment extends Fragment {
 
     //스캔 중지
     private void stopScanInventory(boolean sendData){
+        try {
+            mutexCommandProcessing.acquire();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
 
         Application.useCowChronicleTagging = false;
 
         //데이터 전송
         if(sendData) {
-            sendReadingData();
+            new Handler().post(()->{
+                sendReadingData();
+            });
         }
 
         //중지
@@ -638,16 +680,22 @@ public class CowTagsFragment extends Fragment {
                         }
                         Application.bBrandCheckStarted = false;
                         RFIDController.mIsInventoryRunning = false;
+
+                        mutexCommandProcessing.release();
                     }
 
                     @Override
                     public void onFailure(Exception exception) {
-                        CustomDialog.showSimpleError(mActivity, "스캔 정지 에러 : "+exception.getMessage());
+                        showExceptionByRfid("스캔 정지 에러 : ", exception);
+
+                        mutexCommandProcessing.release();
                     }
 
                     @Override
                     public void onFailure(String message) {
-                        CustomDialog.showSimpleError(mActivity, "스캔 정지 에러 : "+message);
+                        showExceptionByRfid("스캔 정지 에러 : "+message, null);
+
+                        mutexCommandProcessing.release();
                     }
                 });
             }
@@ -815,6 +863,26 @@ public class CowTagsFragment extends Fragment {
             //이벤트 등록
             mFirebaseAnalytics.logEvent("RFID_TAG_LIST", params);
         }
+    }
+
+    //익셉션 출력
+    private void showExceptionByRfid(String headerMessage, Exception exception){
+
+        String message = null;
+        if(exception != null){
+            if(exception instanceof OperationFailureException){
+                //message = ((OperationFailureException)exception).getVendorMessage();
+            } else if (exception instanceof InvalidUsageException) {
+                message = ((InvalidUsageException)exception).getVendorMessage();
+            } else if(exception != null){
+                message = exception.toString();
+            }
+        }
+
+        if(message != null){
+            CustomDialog.showSimpleError(mActivity, headerMessage + message);
+        }
+
     }
 
 }
