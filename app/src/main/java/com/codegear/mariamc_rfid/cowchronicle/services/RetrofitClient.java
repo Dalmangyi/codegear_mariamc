@@ -49,15 +49,17 @@ public class RetrofitClient {
                 .build();
     }
 
-    public static <E> void commonCall(Class<E>clazz, Activity mContext, Call<E> call, AlertDialog alertDialog, OnStateListener<E> onStateListener){
+    public static <E> void commonCall(Class<E>clazz, Activity mActivity, Call<E> call, AlertDialog alertDialog, OnStateListener<E> onStateListener){
 
         AlertDialog dialogLoading;
         if (alertDialog != null){
             dialogLoading = alertDialog;
         }
         else{
-            dialogLoading = new SpotsDialog.Builder().setContext(mContext).setTheme(R.style.CustomAlertDialog).build();
-            dialogLoading.show();
+            dialogLoading = new SpotsDialog.Builder().setContext(mActivity).setTheme(R.style.CustomAlertDialog).build();
+            mActivity.runOnUiThread(()->{
+                dialogLoading.show();
+            });
         }
 
 
@@ -67,7 +69,9 @@ public class RetrofitClient {
             public void onResponse(@NonNull Call<E> call, @NonNull Response<E> response) {
                 Log.e(TAG,"API success. code:"+response.code()+",res:"+response.body());
                 try{
-                    finalDialogLoading.dismiss();
+                    mActivity.runOnUiThread(()-> {
+                        finalDialogLoading.dismiss();
+                    });
 
                     if (!response.isSuccessful()) {
                         String errMessage = "";
@@ -76,7 +80,10 @@ public class RetrofitClient {
                         } catch (IOException e) {
 //                        throw new RuntimeException(e);
                         }
-                        CustomDialog.showSimpleError(mContext, "서버 담당자에게 문의해 주세요. ("+response.code()+")\n"+response.message()+"\n"+errMessage);
+                        String finalErrMessage = errMessage;
+                        mActivity.runOnUiThread(()-> {
+                            CustomDialog.showSimpleError(mActivity, "서버 담당자에게 문의해 주세요. (" + response.code() + ")\n" + response.message() + "\n" + finalErrMessage);
+                        });
                         return;
                     }
 
@@ -94,18 +101,19 @@ public class RetrofitClient {
             @Override
             public void onFailure(@NonNull Call<E> call, @NonNull Throwable t) {
                 Log.e(TAG,"API onFailure. "+t.getMessage());
-                try{
-                    finalDialogLoading.dismiss();
+                mActivity.runOnUiThread(()-> {
+                    try {
+                        finalDialogLoading.dismiss();
 
-                    if (t instanceof UnknownHostException){
-                        CustomDialog.showSimpleError(mContext, "네트워크 연결을 확인해 주세요.");
+                        if (t instanceof UnknownHostException) {
+                            CustomDialog.showSimpleError(mActivity, "네트워크 연결을 확인해 주세요.");
+                        } else {
+                            CustomDialog.showSimpleError(mActivity, t.getMessage());
+                        }
+                    } catch (Exception e) {
+                        Log.e(TAG, "RetrofitClient Exception onFailure:" + e.toString());
                     }
-                    else{
-                        CustomDialog.showSimpleError(mContext, t.getMessage());
-                    }
-                }catch(Exception e){
-                    Log.e(TAG, "RetrofitClient Exception onFailure:"+e.toString());
-                }
+                });
             }
         });
     }
