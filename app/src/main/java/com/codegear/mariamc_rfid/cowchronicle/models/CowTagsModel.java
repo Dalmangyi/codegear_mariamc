@@ -107,10 +107,23 @@ public class CowTagsModel {
         this.mTagList.clear();
         this.mTagCountMap.clear();
 
+        ArrayList<CowTagCell> delCowTagCells = new ArrayList<>();
+
         for(CowTagCell cell : mCowInfoList){
             cell.COUNT = 0;
             cell.RSSI = 0;
+
+            //목장에 포함되지 않는 임시 데이터는 삭제 대상으로 포함.
+            if(!cell.isIncludedDataInFarm){
+                delCowTagCells.add(cell);
+            }
         }
+
+        //임시 데이터 삭제
+        for(CowTagCell cell : delCowTagCells){
+            mCowInfoList.remove(cell);
+        }
+
 
     }
 

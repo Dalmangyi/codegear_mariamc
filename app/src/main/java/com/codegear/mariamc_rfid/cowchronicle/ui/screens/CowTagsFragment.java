@@ -126,9 +126,7 @@ public class CowTagsFragment extends Fragment {
     private int[] antennaPowerLevels = null;
     private DeviceTaskSettings.SaveAntennaConfigurationTask antennaTask = null;
     private CowTagsModel cowTagsModel = new CowTagsModel();
-    private boolean mScanRunning = false; //스캔중
-    private boolean mCommandProcessingByRFID = false; //RFID 커맨드 진행중
-    private Semaphore mutexCommandProcessing = new Semaphore(100);
+    private boolean mScanRunning = false; //스캔중 
 
     private RFIDSingleton rfidSingleton = RFIDSingleton.getInstance();
 
@@ -322,6 +320,7 @@ public class CowTagsFragment extends Fragment {
         super.onStop();
 
         mAdapterHandler.removeCallbacksAndMessages(0);
+        destroyRFIDListener();
         stopScanInventory(true);
     }
 
@@ -579,33 +578,28 @@ public class CowTagsFragment extends Fragment {
 
     //스캔 버튼 상태 갱신
     private synchronized void setScanRunning(boolean running){
-        btnScan.setSelected(running);
 
-        if(mScanRunning != running){
-            if(running){
-                mActivity.runOnUiThread(() -> {
-                    btnScan.setText("정지");
-                    startScanInventory();
-                });
-            }else{
-                mActivity.runOnUiThread(() -> {
-                    btnScan.setText("스캔");
-                    stopScanInventory(true);
-                });
-            }
+        if(running){
+            startScanInventory();
+        }else{
+            stopScanInventory(true);
         }
 
-        mScanRunning = running;
     }
 
 
     //스캔 시작
     private void startScanInventory(){
-        try {
-            mutexCommandProcessing.acquire();
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
+
+        if (RFIDController.mIsInventoryRunning) {
+            return;
         }
+
+
+        mActivity.runOnUiThread(() -> {
+            btnScan.setSelected(true);
+            btnScan.setText("정지");
+        });
 
         Application.useCowChronicleTagging = true;
 
@@ -615,24 +609,19 @@ public class CowTagsFragment extends Fragment {
             public void onSuccess(Object object) {
                 RFIDController.tagListMatchNotice = false;
                 RFIDController.mIsInventoryRunning = true;
-
-                mutexCommandProcessing.release();
+                mScanRunning = true;
             }
 
             @Override
             public void onFailure(Exception exception) {
                 setScanRunning(false);
                 showExceptionByRfid("스캔 시작 에러 : ", exception);
-
-                mutexCommandProcessing.release();
             }
 
             @Override
             public void onFailure(String message) {
                 setScanRunning(false);
                 showExceptionByRfid("스캔 시작 에러 : "+"스캔 시작 에러 : ", null);
-
-                mutexCommandProcessing.release();
             }
         };
 
@@ -648,19 +637,21 @@ public class CowTagsFragment extends Fragment {
 
     //스캔 중지
     private void stopScanInventory(boolean sendData){
-        try {
-            mutexCommandProcessing.acquire();
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
+
+        if (RFIDController.mConnectedReader == null || !RFIDController.mConnectedReader.isConnected()) {
+            return;
         }
+
+        mActivity.runOnUiThread(() -> {
+            btnScan.setSelected(false);
+            btnScan.setText("스캔");
+        });
 
         Application.useCowChronicleTagging = false;
 
         //데이터 전송
         if(sendData) {
-            new Handler().post(()->{
-                sendReadingData();
-            });
+            new Thread(this::sendReadingData);
         }
 
         //중지
@@ -680,22 +671,17 @@ public class CowTagsFragment extends Fragment {
                         }
                         Application.bBrandCheckStarted = false;
                         RFIDController.mIsInventoryRunning = false;
-
-                        mutexCommandProcessing.release();
+                        mScanRunning = false;
                     }
 
                     @Override
                     public void onFailure(Exception exception) {
                         showExceptionByRfid("스캔 정지 에러 : ", exception);
-
-                        mutexCommandProcessing.release();
                     }
 
                     @Override
                     public void onFailure(String message) {
                         showExceptionByRfid("스캔 정지 에러 : "+message, null);
-
-                        mutexCommandProcessing.release();
                     }
                 });
             }
@@ -880,7 +866,10 @@ public class CowTagsFragment extends Fragment {
         }
 
         if(message != null){
-            CustomDialog.showSimpleError(mActivity, headerMessage + message);
+            final String finalMessage = message;
+            mActivity.runOnUiThread(()->{
+                CustomDialog.showSimpleError(mActivity, headerMessage + finalMessage);
+            });
         }
 
     }

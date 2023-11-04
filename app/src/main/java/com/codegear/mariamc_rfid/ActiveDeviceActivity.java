@@ -642,6 +642,8 @@ public class ActiveDeviceActivity extends BaseActivity implements AdvancedOption
             Log.d(TAG, "Returned SDK Exception");
         } catch (OperationFailureException e) {
             Log.d(TAG, "Returned SDK Exception");
+        } catch (IndexOutOfBoundsException e){
+            Log.d(TAG, "Returned SDK Exception");
         }
         initScanner();
         setParentActivity(this);
