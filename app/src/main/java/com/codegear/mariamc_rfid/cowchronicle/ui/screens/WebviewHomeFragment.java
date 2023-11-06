@@ -2,13 +2,18 @@ package com.codegear.mariamc_rfid.cowchronicle.ui.screens;
 
 import static android.content.Context.INPUT_METHOD_SERVICE;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -88,6 +93,22 @@ public class WebviewHomeFragment extends Fragment implements AdvancedWebView.Lis
         mWebView = view.findViewById(R.id.webview);
         mWebView.setListener(getActivity(), this);
         mWebView.setMixedContentAllowed(false);
+
+        mWebView.setWebViewClient(new WebViewClient() {
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                // 특정 도메인에 대해서만 단말기의 기본 브라우저로 띄움
+                if (url.contains("www.aiak.or.kr") || url.contains("ct.wwsires.com") || url.contains("www.mtrace.go.kr")) {
+                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                    view.getContext().startActivity(intent);
+                    return true;
+                } else {
+                    // 특정 도메인에 해당하지 않으면 기본브라우저로 실행
+                    view.loadUrl(url);
+                    return true;
+                }
+            }
+        });
 
         swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
