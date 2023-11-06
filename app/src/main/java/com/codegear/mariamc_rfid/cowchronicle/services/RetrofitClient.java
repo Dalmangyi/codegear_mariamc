@@ -49,21 +49,14 @@ public class RetrofitClient {
                 .build();
     }
 
-    public static <E> void commonCall(Class<E>clazz, Activity mActivity, Call<E> call, AlertDialog alertDialog, OnStateListener<E> onStateListener){
+    public static <E> void commonCall(Class<E>clazz, @NonNull Activity mActivity, @NonNull Call<E> call, @NonNull AlertDialog alertDialog, OnStateListener<E> onStateListener){
 
-        AlertDialog dialogLoading;
-        if (alertDialog != null){
-            dialogLoading = alertDialog;
-        }
-        else{
-            dialogLoading = new SpotsDialog.Builder().setContext(mActivity).setTheme(R.style.CustomAlertDialog).build();
-            mActivity.runOnUiThread(()->{
-                dialogLoading.show();
-            });
-        }
+        mActivity.runOnUiThread(()->{
+            alertDialog.show();
+        });
 
 
-        AlertDialog finalDialogLoading = dialogLoading;
+        AlertDialog finalDialogLoading = alertDialog;
         call.enqueue(new Callback<E>() {
             @Override
             public void onResponse(@NonNull Call<E> call, @NonNull Response<E> response) {
@@ -94,6 +87,10 @@ public class RetrofitClient {
                     }
                 }catch (Exception e){
                     Log.e(TAG, "RetrofitClient Exception onResponse:"+e.toString());
+
+                    mActivity.runOnUiThread(()-> {
+                        finalDialogLoading.dismiss();
+                    });
                 }
 
             }

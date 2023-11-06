@@ -5,6 +5,7 @@ import static com.codegear.mariamc_rfid.scanner.helpers.ActiveDeviceAdapter.RFID
 import static com.codegear.mariamc_rfid.scanner.helpers.Constants.INTENT_NEXT_TAB;
 import static com.codegear.mariamc_rfid.scanner.helpers.Constants.INTENT_START_TAB;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -79,6 +80,7 @@ import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.Semaphore;
 
+import dmax.dialog.SpotsDialog;
 import ir.mirrajabi.searchdialog.core.BaseFilter;
 import retrofit2.Call;
 
@@ -99,6 +101,8 @@ public class CowTagsFragment extends Fragment {
     private BubbleSeekBar bsbDistancePower;
     private PowerSpinnerView spMemoryBankIds;
     private CheckBox cbUseFilterCount;
+    private AlertDialog dialogLoading;
+
 
 
 
@@ -139,6 +143,7 @@ public class CowTagsFragment extends Fragment {
         mActivity.getSupportActionBar().setTitle("전자이표");
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(mActivity);
 
+        dialogLoading = new SpotsDialog.Builder().setContext(mActivity).setTheme(R.style.CustomAlertDialog).build();
 
         mMainView = inflater.inflate(R.layout.fragment_cow_tags, null, false);
 
@@ -487,7 +492,7 @@ public class CowTagsFragment extends Fragment {
     private void loadCowList(){
 
         Call<ResCowList> call = RetrofitClient.getApiService().getCowList(mSelectedFarmCode);
-        RetrofitClient.commonCall(ResCowList.class, mActivity, call, null, new RetrofitClient.OnStateListener<ResCowList>() {
+        RetrofitClient.commonCall(ResCowList.class, mActivity, call, dialogLoading, new RetrofitClient.OnStateListener<ResCowList>() {
             @Override
             public void OnSuccess(ResCowList res) {
                 mCowList.clear();
@@ -654,7 +659,7 @@ public class CowTagsFragment extends Fragment {
 
         //데이터 전송
         if(sendData) {
-            new Thread(this::sendReadingData);
+            new Thread(this::sendReadingData).start();
         }
 
         //중지
@@ -796,7 +801,7 @@ public class CowTagsFragment extends Fragment {
 
         //데이터 전송
         Call<ResInsertTagData> call = RetrofitClient.getApiService().insertTagData(reqInsertTagList);
-        RetrofitClient.commonCall(ResInsertTagData.class, mActivity, call, null, new RetrofitClient.OnStateListener<ResInsertTagData>() {
+        RetrofitClient.commonCall(ResInsertTagData.class, mActivity, call, dialogLoading, new RetrofitClient.OnStateListener<ResInsertTagData>() {
             @Override
             public void OnSuccess(ResInsertTagData res) {
 
