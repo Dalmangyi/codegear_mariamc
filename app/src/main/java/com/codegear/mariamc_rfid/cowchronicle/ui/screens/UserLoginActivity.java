@@ -133,6 +133,10 @@ public class UserLoginActivity extends BaseActivity {
         Log.d(TAG, "DeviceId : "+deviceId);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
 
     void checkAutoLogin() {
 
@@ -239,14 +243,15 @@ public class UserLoginActivity extends BaseActivity {
                 //화면 이동
                 switch(bottomNavEnum){
                     case BN_COW_CHRONICLE_WEBVIEW:
+                        finish();
                         goIntentCowChronicle();
                         break;
                     case BN_COW_TAGS:
+                        finish();
                         goIntentFarmSelect();
                         break;
                     default:
                         CustomDialog.showSimpleError(mContext, "잘못된 접근입니다.");
-                        finish();
                         break;
                 }
             }
