@@ -126,7 +126,7 @@ public class CowTagsFragment extends Fragment {
     private int[] antennaPowerLevels = null;
     private DeviceTaskSettings.SaveAntennaConfigurationTask antennaTask = null;
     private CowTagsModel cowTagsModel = new CowTagsModel();
-    private boolean mScanRunning = false; //스캔중 
+    private boolean mScanRunning = false; //스캔중
 
     private RFIDSingleton rfidSingleton = RFIDSingleton.getInstance();
 
@@ -238,6 +238,9 @@ public class CowTagsFragment extends Fragment {
         });
         btnScan = mMainView.findViewById(R.id.btnScan);
         btnScan.setOnClickListener(v -> {
+
+            enableButtonByDeviceConnection();
+
             boolean isSelected = v.isSelected();
             if(!isSelected){
                 if (RFIDController.mConnectedReader == null || !RFIDController.mConnectedReader.isConnected()) {
