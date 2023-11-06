@@ -2348,12 +2348,14 @@ public class RFIDBase implements Readers.RFIDReaderEventHandler, NavigationView.
             String readername = rfidStatusEvents.StatusEventData.DisconnectionEventData.m_DisconnectionEvent.getreadername();
             if ((RFIDController.mConnectedReader != null) && (readername.equals(RFIDController.mConnectedDevice.getName())))
                 DisconnectTask = new UpdateDisconnectedStatusTask(RFIDController.mConnectedReader.getHostName()).execute();
-        } else if (rfidStatusEvents.StatusEventData.getStatusEventType() == STATUS_EVENT_TYPE.INVENTORY_START_EVENT) {
+        }
+        else if (rfidStatusEvents.StatusEventData.getStatusEventType() == STATUS_EVENT_TYPE.INVENTORY_START_EVENT) {
             if (!RFIDController.isAccessCriteriaRead && !RFIDController.isLocatingTag && !Application.mIsMultiTagLocatingRunning) {
                 RFIDController.mIsInventoryRunning = true;
                 InventoryTimer.getInstance().startTimer();
             }
-        } else if (rfidStatusEvents.StatusEventData.getStatusEventType() == STATUS_EVENT_TYPE.INVENTORY_STOP_EVENT) {
+        }
+        else if (rfidStatusEvents.StatusEventData.getStatusEventType() == STATUS_EVENT_TYPE.INVENTORY_STOP_EVENT) {
             if (progressDialog != null && progressDialog.isShowing()) progressDialog.dismiss();
             //tagListMatchNotice = false;
             //TODO: revisit why to clear here
@@ -2413,14 +2415,16 @@ public class RFIDBase implements Readers.RFIDReaderEventHandler, NavigationView.
                 else if (RFIDController.isLocatingTag) RFIDController.isLocationingAborted = true;
                 operationHasAborted();
             }
-        } else if (rfidStatusEvents.StatusEventData.getStatusEventType() == STATUS_EVENT_TYPE.OPERATION_END_SUMMARY_EVENT) {
+        }
+        else if (rfidStatusEvents.StatusEventData.getStatusEventType() == STATUS_EVENT_TYPE.OPERATION_END_SUMMARY_EVENT) {
             if (fragment instanceof RapidReadFragment) mActivity.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
                     ((RapidReadFragment) fragment).updateInventoryDetails();
                 }
             });
-        } else if (rfidStatusEvents.StatusEventData.getStatusEventType() == STATUS_EVENT_TYPE.HANDHELD_TRIGGER_EVENT && isActivityVisible()) {
+        }
+        else if (rfidStatusEvents.StatusEventData.getStatusEventType() == STATUS_EVENT_TYPE.HANDHELD_TRIGGER_EVENT && isActivityVisible()) {
 
             Log.d(TAG, "notificationFromGenericReader " + fragment + " screen " + m_ScreenOn + "trigger type = " + rfidStatusEvents.StatusEventData.HandheldTriggerEventData.getHandheldTriggerType().ordinal);
 
@@ -2442,10 +2446,10 @@ public class RFIDBase implements Readers.RFIDReaderEventHandler, NavigationView.
                     ((TriggerEventHandler) fragment).triggerPressEventRecieved();
                 } else if (!triggerPressed && isTriggerImmediateOrRepeat(triggerPressed) && fragment instanceof TriggerEventHandler) {
                     ((TriggerEventHandler) fragment).triggerReleaseEventRecieved();
-                    //tagListMatchNotice = false;
                 }
             }
-        } else if (rfidStatusEvents.StatusEventData.getStatusEventType() == STATUS_EVENT_TYPE.BATTERY_EVENT) {
+        }
+        else if (rfidStatusEvents.StatusEventData.getStatusEventType() == STATUS_EVENT_TYPE.BATTERY_EVENT) {
             final Events.BatteryData batteryData = rfidStatusEvents.StatusEventData.BatteryData;
             RFIDController.BatteryData = batteryData;
             setActionBarBatteryStatus(batteryData.getLevel());
@@ -2470,7 +2474,8 @@ public class RFIDBase implements Readers.RFIDReaderEventHandler, NavigationView.
                     }
                 });
             }
-        } else if (rfidStatusEvents.StatusEventData.getStatusEventType() == STATUS_EVENT_TYPE.BATCH_MODE_EVENT) {
+        }
+        else if (rfidStatusEvents.StatusEventData.getStatusEventType() == STATUS_EVENT_TYPE.BATCH_MODE_EVENT) {
             Log.d(TAG, "notify-event - Notification_BatchModeEvent");
             RFIDController.mConnectedReader.Actions.getBatchedTags();
             InventoryTimer.getInstance().startTimer();
@@ -2500,7 +2505,8 @@ public class RFIDBase implements Readers.RFIDReaderEventHandler, NavigationView.
             });
 
 
-        } else if (rfidStatusEvents.StatusEventData.getStatusEventType() == STATUS_EVENT_TYPE.WPA_EVENT) {
+        }
+        else if (rfidStatusEvents.StatusEventData.getStatusEventType() == STATUS_EVENT_TYPE.WPA_EVENT) {
             Log.d(TAG, "notificationFromGenericReader " + " WPA_EVENT " + "Type: " + rfidStatusEvents.StatusEventData.WPAEventData.getType() + " ssid :" + rfidStatusEvents.StatusEventData.WPAEventData.getssid());
 
             String scanStatus = rfidStatusEvents.StatusEventData.WPAEventData.getType();
@@ -2719,7 +2725,7 @@ public class RFIDBase implements Readers.RFIDReaderEventHandler, NavigationView.
             if (RFIDController.mConnectedReader != null) {
                 if (!RFIDController.mConnectedReader.Actions.MultiTagLocate.isMultiTagLocatePerforming()) {
                     final TagData[] myTags = RFIDController.mConnectedReader.Actions.getReadTags(100);
-                    final int tagCount = (myTags != null ? myTags.length : -1);
+                    final int tagCount = (myTags != null ? myTags.length : 0);
                     Log.d(TAG, "RFIDBase eventReadNotify tagCount:"+tagCount);
 
                     if (myTags != null) {

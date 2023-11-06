@@ -60,4 +60,9 @@ public class ExTagData extends TagData {
         return tagData.getMemoryBankData();
     }
 
+
+    @Override
+    public int getTagSeenCount() {
+        return tagData.getTagSeenCount();
+    }
 }

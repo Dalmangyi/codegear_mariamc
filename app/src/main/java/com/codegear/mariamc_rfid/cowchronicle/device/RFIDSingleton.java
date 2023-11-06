@@ -44,7 +44,11 @@ public class RFIDSingleton implements RfidEventsListener {
                 RFIDController.mConnectedReader.Events.removeEventsListener(this);
                 RFIDController.mConnectedReader.Events.addEventsListener(this);
                 RFIDController.mConnectedReader.Events.setHandheldEvent(true);
+                RFIDController.mConnectedReader.Events.setInventoryStartEvent(true);
+                RFIDController.mConnectedReader.Events.setInventoryStopEvent(true);
                 RFIDController.mConnectedReader.reinitTransport();
+                RFIDController.settings_startTrigger = RFIDController.mConnectedReader.Config.getStartTrigger();
+                RFIDController.settings_stopTrigger = RFIDController.mConnectedReader.Config.getStopTrigger();
             }
         } catch (InvalidUsageException e) {
             if (e != null && e.getStackTrace().length > 0) {
@@ -76,19 +80,21 @@ public class RFIDSingleton implements RfidEventsListener {
         }
 
         final int READ_COUNT = 100;
-        TagData[] myTags = null;
+        TagData[] myTags;
         if (RFIDController.mConnectedReader != null) {
             if (!RFIDController.mConnectedReader.Actions.MultiTagLocate.isMultiTagLocatePerforming()) {
                 myTags = RFIDController.mConnectedReader.Actions.getReadTags(READ_COUNT);
             } else {
                 myTags = RFIDController.mConnectedReader.Actions.getMultiTagLocateTagInfo(READ_COUNT);
             }
+        } else {
+            myTags = null;
         }
 
         int tagCount = (myTags != null ? myTags.length : 0);
         Log.d(TAG, "RFIDSingleton eventReadNotify :"+tagCount);
-        if(irfidSingleton != null){
-            irfidSingleton.tags(myTags);
+        if(myTags != null && irfidSingleton != null){
+            new Thread(()-> irfidSingleton.tags(myTags)).start();
         }
     }
 
@@ -101,6 +107,8 @@ public class RFIDSingleton implements RfidEventsListener {
     private void notificationFromGenericReader(RfidStatusEvents rfidStatusEvents) {
 
         STATUS_EVENT_TYPE statusEventType = rfidStatusEvents.StatusEventData.getStatusEventType();
+        Log.d(TAG, "Reader Status Event : "+statusEventType.toString());
+
 
         //배터리 이벤트
         if (statusEventType == STATUS_EVENT_TYPE.BATTERY_EVENT) {
@@ -114,12 +122,51 @@ public class RFIDSingleton implements RfidEventsListener {
             Log.d(TAG, "trigger event:"+rfidStatusEvents.StatusEventData.HandheldTriggerEventData.getHandheldEvent());
 
             if(irfidSingleton != null){
-                if (rfidStatusEvents.StatusEventData.HandheldTriggerEventData.getHandheldEvent() == HANDHELD_TRIGGER_EVENT_TYPE.HANDHELD_TRIGGER_PRESSED) {
+
+                //버튼을 눌렀는지, 땟는지 확인.
+                Boolean triggerPressed = false;
+                if (rfidStatusEvents.StatusEventData.HandheldTriggerEventData.getHandheldEvent() == HANDHELD_TRIGGER_EVENT_TYPE.HANDHELD_TRIGGER_PRESSED)
+                    triggerPressed = true;
+
+                //트리거 버튼 눌렀을때와 모드에 따른 반응.
+                if (triggerPressed && isTriggerImmediateOrRepeat(triggerPressed)) {
                     irfidSingleton.trigger(true, false);
                 }
-                else {
+                else if(!triggerPressed && isTriggerImmediateOrRepeat(triggerPressed)){
                     irfidSingleton.trigger(false, true);
                 }
+            }
+        }
+
+        //인벤토리 이벤트 (시작)
+        else if (statusEventType == STATUS_EVENT_TYPE.INVENTORY_START_EVENT) {
+            if(irfidSingleton != null){
+                irfidSingleton.inventory(true, false, false);
+            }
+        }
+        //인벤토리 이벤트 (종료)
+        else if (statusEventType == STATUS_EVENT_TYPE.INVENTORY_STOP_EVENT) {
+            if (!RFIDController.getInstance().getRepeatTriggers()) {
+                if (RFIDController.mIsInventoryRunning) RFIDController.isInventoryAborted = true;
+                else if (RFIDController.isLocatingTag) RFIDController.isLocationingAborted = true;
+
+
+                if (RFIDController.mIsInventoryRunning) {
+                    if (RFIDController.isInventoryAborted) {
+                        RFIDController.mIsInventoryRunning = false;
+                        RFIDController.isInventoryAborted = true; //false
+                        RFIDController.isTriggerRepeat = null;
+                        if(irfidSingleton != null){
+                            irfidSingleton.inventory(false, false, true);
+                            return;
+                        }
+                    }
+                }
+
+            }
+
+            if(irfidSingleton != null){
+                irfidSingleton.inventory(false, true, false);
             }
         }
     }
@@ -148,7 +195,7 @@ public class RFIDSingleton implements RfidEventsListener {
 
 
 
-    public Boolean isTriggerImmediateOrRepeat(Boolean trigPress) {
+    public Boolean isTriggerImmediateOrRepeat(Boolean triggerPress) {
 
         try{
             if(RFIDController.settings_startTrigger == null){
@@ -160,24 +207,26 @@ public class RFIDSingleton implements RfidEventsListener {
 
 
             if(RFIDController.settings_startTrigger != null && RFIDController.settings_stopTrigger != null){
-                START_TRIGGER_TYPE startTriggerType = RFIDController.settings_startTrigger.getTriggerType();
-                STOP_TRIGGER_TYPE stopTriggerType = RFIDController.settings_stopTrigger.getTriggerType();
+                String strStartTriggerType = RFIDController.settings_startTrigger.getTriggerType().toString();
+                String strStopTriggerType = RFIDController.settings_stopTrigger.getTriggerType().toString();
 
-                if (trigPress
-                        && startTriggerType.toString().equalsIgnoreCase(START_TRIGGER_TYPE.START_TRIGGER_TYPE_IMMEDIATE.toString())
-                        && (!stopTriggerType.toString().equalsIgnoreCase(STOP_TRIGGER_TYPE.STOP_TRIGGER_TYPE_HANDHELD_WITH_TIMEOUT.toString())))
-                {
-                    return true;
+                //눌렸을때,
+                if (triggerPress){
+                    if(strStartTriggerType.equalsIgnoreCase(START_TRIGGER_TYPE.START_TRIGGER_TYPE_IMMEDIATE.toString())
+                        && (!strStopTriggerType.equalsIgnoreCase(STOP_TRIGGER_TYPE.STOP_TRIGGER_TYPE_HANDHELD_WITH_TIMEOUT.toString()))
+                    ){
+                        return true;
+                    }
                 }
-                else if (!trigPress
-                        && !startTriggerType.toString().equalsIgnoreCase(START_TRIGGER_TYPE.START_TRIGGER_TYPE_HANDHELD.toString())
-                        && (stopTriggerType.toString().equalsIgnoreCase(STOP_TRIGGER_TYPE.STOP_TRIGGER_TYPE_IMMEDIATE.toString())))
-                {
-                    return true;
-                }
+                //땟을때,
                 else {
-                    return false;
+                    if(!strStartTriggerType.equalsIgnoreCase(START_TRIGGER_TYPE.START_TRIGGER_TYPE_HANDHELD.toString())
+                        && (strStopTriggerType.equalsIgnoreCase(STOP_TRIGGER_TYPE.STOP_TRIGGER_TYPE_IMMEDIATE.toString()))
+                    ){
+                        return true;
+                    }
                 }
+
             }
 
         }

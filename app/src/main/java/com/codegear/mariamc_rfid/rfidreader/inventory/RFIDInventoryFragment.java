@@ -563,6 +563,13 @@ public class RFIDInventoryFragment extends Fragment implements Spinner.OnItemSel
 
     @Override
     public void handleTagResponse(InventoryListItem inventoryListItem, boolean isAddedToList) {
+
+        int totalCount = 0;
+        for(InventoryListItem item : adapter.searchItemsList){
+            totalCount += item.getCount();
+        }
+        Log.d(TAG, "handleTagResponse searchItemsList Count:"+adapter.searchItemsList.size()+","+totalCount);
+
         if (getActivity() != null) getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {

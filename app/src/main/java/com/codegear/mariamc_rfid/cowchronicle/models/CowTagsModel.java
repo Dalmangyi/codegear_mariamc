@@ -163,9 +163,10 @@ public class CowTagsModel {
             int tagRssi = tagData.getPeakRSSI();
             int tagChannel = tagData.getChannelIndex();
             int tagPhase = tagData.getPhase();
+            int tagSeenCount = tagData.getTagSeenCount(); //태그 동시 스캔 수
 
 
-            //메모리 뱅크 데이터 조회
+                    //메모리 뱅크 데이터 조회
             MemoryBankIdEnum memoryBankIdEnum = MemoryBankIdEnum.NONE;
             String memoryBankData = "";
             ACCESS_OPERATION_CODE opCode = tagData.getOpCode();
@@ -194,12 +195,13 @@ public class CowTagsModel {
             }
 
 
+
             //태그 개수 세기 (기존 태그 개수 가져오기)
             Integer tagCount = mTagCountMap.get(tagId);
             if (tagCount == null){
                 tagCount = 0;
             }
-            tagCount++;
+            tagCount+=tagSeenCount;
             mTagCountMap.put(tagId, tagCount);
 
             //태그 데이터 반영 (COUNT)

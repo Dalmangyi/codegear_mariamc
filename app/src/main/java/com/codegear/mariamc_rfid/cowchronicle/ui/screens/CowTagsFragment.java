@@ -57,6 +57,7 @@ import com.codegear.mariamc_rfid.cowchronicle.models.CowTagsModel;
 import com.codegear.mariamc_rfid.cowchronicle.ui.dialog.CustomDialog;
 import com.codegear.mariamc_rfid.cowchronicle.utils.PixelUtil;
 import com.codegear.mariamc_rfid.cowchronicle.utils.SoundSearcher;
+import com.codegear.mariamc_rfid.rfidreader.common.InventoryTimer;
 import com.codegear.mariamc_rfid.rfidreader.rfid.RFIDController;
 import com.codegear.mariamc_rfid.rfidreader.rfid.RfidListeners;
 import com.codegear.mariamc_rfid.rfidreader.settings.ProfileContent;
@@ -193,11 +194,12 @@ public class CowTagsFragment extends Fragment {
                         ExTagData tagData = new ExTagData();
                         tagData.newTagId = tempTagId;
                         ExTagData[] tagList = new ExTagData[]{tagData};
-                        cowTagsModel.appendTagData(tagList);
-                        mAdapterHandler.sendEmptyMessage(0);
-
-                        //이벤트 로깅
-                        eventLog_Tag(tagList);
+                        new Thread(() -> {
+                            cowTagsModel.appendTagData(tagList);
+                            mAdapterHandler.sendEmptyMessage(0);
+                            //이벤트 로깅
+                            eventLog_Tag(tagList);
+                        }).start();
                     }
                 }
             });
@@ -253,7 +255,7 @@ public class CowTagsFragment extends Fragment {
                     return;
                 }
             }
-            v.setSelected(!isSelected);
+
             setScanRunning(!isSelected);
         });
 
@@ -330,6 +332,7 @@ public class CowTagsFragment extends Fragment {
         mAdapterHandler.removeCallbacksAndMessages(0);
         destroyRFIDListener();
         stopScanInventory(true);
+        Application.mIsInventoryRunning = false;
     }
 
     @Override
@@ -377,19 +380,24 @@ public class CowTagsFragment extends Fragment {
                 if(mScanRunning){
                     if (tagList != null && tagList.length > 0) {
 
-                        //이벤트 로깅
-                        eventLog_Tag(tagList);
+                        Log.d(TAG, "Status Event pure tag list count:"+tagList.length);
 
-                        //스캔된 태그 데이터 갱신
-                        ArrayList<ExTagData> exTagList = new ArrayList<>();
-                        for(int i = 0; i < tagList.length; i++) {
-                            ExTagData tempExTagData = new ExTagData();
-                            tempExTagData.setTagData(tagList[i]);
-                            exTagList.add(tempExTagData);
-                        }
-//                        ExTagData[] exTagList = Arrays.copyOf(tagList, tagList.length, ExTagData[].class);
-                        cowTagsModel.appendTagData(exTagList.toArray(new ExTagData[0])); //기존 태그 리스트에 신규 태그 리스트 추가하기.
-                        mAdapterHandler.sendEmptyMessage(0);
+                        new Thread(() -> {
+                            //이벤트 로깅
+                            eventLog_Tag(tagList);
+
+                            //스캔된 태그 데이터 갱신
+                            ArrayList<ExTagData> exTagList = new ArrayList<>();
+                            for(int i = 0; i < tagList.length; i++) {
+                                ExTagData tempExTagData = new ExTagData();
+                                tempExTagData.setTagData(tagList[i]);
+                                exTagList.add(tempExTagData);
+                            }
+
+                            cowTagsModel.appendTagData(exTagList.toArray(new ExTagData[0])); //기존 태그 리스트에 신규 태그 리스트 추가하기.
+                            mAdapterHandler.sendEmptyMessage(0);
+                        }).start();
+
                     }
                 }
             }
@@ -401,6 +409,22 @@ public class CowTagsFragment extends Fragment {
                     setScanRunning(true);
                 } else if (isReleased) {
                     setScanRunning(false);
+                }
+
+            }
+
+            @Override
+            public void inventory(Boolean isStarted, Boolean isStopped, Boolean isFinished) {
+                if (isStarted) {
+                    InventoryTimer.getInstance().startTimer();
+                } else if (isStopped) {
+                    if (RFIDController.mIsInventoryRunning || InventoryTimer.getInstance().isTimerRunning() == true) {
+                        InventoryTimer.getInstance().stopTimer();
+                    }
+                } else if (isFinished){
+                    setScanRunning(false);
+                    InventoryTimer.getInstance().stopTimer();
+                    RFIDController.mIsInventoryRunning = false;
                 }
 
             }
@@ -685,11 +709,17 @@ public class CowTagsFragment extends Fragment {
                     @Override
                     public void onFailure(Exception exception) {
                         showExceptionByRfid("스캔 정지 에러 : ", exception);
+                        Application.bBrandCheckStarted = false;
+                        RFIDController.mIsInventoryRunning = false;
+                        mScanRunning = false;
                     }
 
                     @Override
                     public void onFailure(String message) {
                         showExceptionByRfid("스캔 정지 에러 : "+message, null);
+                        Application.bBrandCheckStarted = false;
+                        RFIDController.mIsInventoryRunning = false;
+                        mScanRunning = false;
                     }
                 });
             }
@@ -797,6 +827,24 @@ public class CowTagsFragment extends Fragment {
         if(reqInsertTagList.size() == 0){
             return;
         }
+        else{
+            //총 전송 개수
+            int totalCount = 0;
+            for(ReqInsertTagData data: reqInsertTagList){
+                totalCount += data.CNT;
+            }
+            Log.d(TAG, " Status Event req unique count:"+reqInsertTagList.size() +", total count:"+totalCount);
+
+            int totalCowCount = 0;
+            for(CowTagCell cell : cowTagList){
+                totalCowCount += cell.COUNT;
+            }
+            Log.d(TAG, " Status Event req unique count:"+cowTagList.size() +", total cow count:"+totalCowCount);
+
+            Log.d(TAG, "Status Event inventory count:"+Application.tagsReadInventory.size()+","+Application.TOTAL_TAGS+","+Application.UNIQUE_TAGS);
+        }
+
+
 
 
         //데이터 전송
